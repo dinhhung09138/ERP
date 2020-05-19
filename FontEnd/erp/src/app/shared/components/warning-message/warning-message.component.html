@@ -1,0 +1,9 @@
+<div class="row" *ngIf="listMeg.length > 0">
+  <div class="col-md-12 col-xs-12 form-group">
+    <div class="p-2 border border-warning">
+      <ul *ngFor="let item of listMeg">
+        <li>{{ item }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

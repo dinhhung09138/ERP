@@ -1,0 +1,86 @@
+<div class="card shadow-sm">
+  <div class="card-header">
+    Exercise Level
+    <i class="fa fa-plus" aria-hidden="true" (click)="createLevel()"></i>
+  </div>
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row mb-1" [hidden]="!showForm">
+        <div class="col-md-7 col-xs-12 p-0">
+          <input type="text" class="form-control" />
+        </div>
+        <div class="col-md-5 col-xs-12">
+          <button class="btn btn-success">Save</button>
+          <button class="btn btn-secondary" (click)="cancelLevel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12 p-0">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+              <th scope="col" style="width: 30px;">#</th>
+              <th scope="col">Name</th>
+              <th scope="col" style="width: 50px;">Sort</th>
+              <th scope="col" style="width: 50px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              <th scope="row" class="center">1</th>
+              <td>Beginner</td>
+              <td class="center">1</td>
+              <td class="center">
+                <div class="btn-group">
+                  <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-123px, -160px, 0px);">
+                    <a href="#" class="dropdown-item text-danger">Delete</a>
+                    <a class="dropdown-item text-success" (click)="editLevel(1)">Edit</a>
+                  </div>
+                </div>
+              </td>
+              </tr>
+              <tr>
+              <th scope="row" class="center">1</th>
+              <td>Intermediate</td>
+              <td class="center">2</td>
+              <td class="center">
+                <div class="btn-group">
+                  <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-123px, -160px, 0px);">
+                    <a href="#" class="dropdown-item text-danger">Delete</a>
+                    <a class="dropdown-item text-success" (click)="editLevel(1)">Edit</a>
+                  </div>
+                </div>
+              </td>
+              </tr>
+              <tr>
+                <th scope="row" class="center">1</th>
+                <td>Advantage</td>
+                <td class="center">3</td>
+                <td class="center">
+                  <div class="btn-group">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-bars"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-123px, -160px, 0px);">
+                      <a href="#" class="dropdown-item text-danger">Delete</a>
+                      <a class="dropdown-item text-success" (click)="editLevel(1)">Edit</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+

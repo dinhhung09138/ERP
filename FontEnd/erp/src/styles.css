@@ -1,0 +1,296 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* Grid Framework */
+
+.col,
+.col-1,
+.col-10,
+.col-11,
+.col-12,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-auto,
+.col-lg,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-auto,
+.col-md,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-auto,
+.col-sm,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-auto,
+.col-xl,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-auto {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+
+/* End Grid Framework */
+
+
+/* Card */
+
+.card {
+    background-color: #fff;
+    background-clip: none;
+    border: 1px solid #8C2740;
+    border-radius: unset;
+}
+
+.card-header {
+    padding: 0.15rem .5rem;
+    border: 1px solid #8C2740;
+    font-weight: bold;
+    color: white;
+    background-color: #8C2740;
+}
+
+.card-header i {
+    float: right;
+    margin-top: .25rem;
+    margin-left: 1rem;
+}
+
+.card-header:first-child {
+    border-radius: unset;
+}
+
+.card-header:hover {
+    cursor: pointer;
+}
+
+.card-body {
+    padding: .5rem;
+}
+
+.dropdown-action-menu {
+    min-width: unset !important;
+}
+
+.dropdown-action-menu a {
+    width: 70px;
+}
+
+.dropdown-action-menu a:active {
+    background-color: #8C2740;
+    color: white !important;
+}
+
+.dropdown-item {
+    padding: .25rem .25rem;
+}
+
+
+/* End Card */
+
+
+/* Shadows */
+
+.shadow-sm {
+    box-shadow: 0 .25rem 1rem #8C2740 !important;
+}
+
+
+/* End Shadows */
+
+
+/* Dropdown */
+
+.dropdown-menu-lg {
+    max-width: 300px;
+    min-width: 280px;
+    padding: 0;
+}
+
+.dropdown-item-title {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.dropdown-footer,
+.dropdown-header {
+    display: block;
+    font-size: .875rem;
+    padding: .5rem 1rem;
+    text-align: center;
+}
+
+.dropdown-menu-lg p {
+    margin: 0;
+    white-space: normal;
+}
+
+.dropdown-item:hover {
+    color: #8C2740;
+}
+
+
+/* End Dropdown */
+
+
+/* Text */
+
+.text-sm {
+    font-size: .875rem !important;
+}
+
+.text-muted {
+    color: #8C2740 !important;
+}
+
+
+/* End Text */
+
+
+/* Image */
+
+.img-size-50 {
+    width: 50px;
+}
+
+.img-size-32,
+.img-size-50,
+.img-size-64 {
+    height: auto;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+
+/* End Image */
+
+
+/* Scrollbar */
+
+.scroll {
+    overflow-y: auto;
+}
+
+.scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #8C2740;
+    background-color: #F5F5F5;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 3px;
+    background-color: #F5F5F5;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #5E0404;
+}
+
+
+/* End Scrollbar */
+
+
+/* Table */
+
+.table td,
+.table th {
+    padding: .15rem;
+}
+
+.table td.center,
+.table th.center {
+    text-align: center;
+    ;
+}
+
+
+/* End Table */
+
+
+/* Tabs */
+
+.nav-tabs {
+    border-bottom: 1px solid #8C2740;
+}
+
+.nav-tabs .nav-item .nav-link,
+.nav-tabs .nav-link {
+    color: #000000;
+    padding: 0.2rem 1rem;
+    border-radius: unset;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    color: #5E0404;
+    background-color: #fff;
+    border-color: #8C2740 #8C2740 #fff;
+}
+
+.tab-content>.active {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+/* End Tabs */
+
+.btn {
+    padding: .2rem .75rem;
+    margin-left: .1rem;
+    margin-right: .1rem;
+}
+
+.form-control {
+    height: calc(1.2em + .75rem + 2px);
+    padding: .2rem .5rem;
+}
