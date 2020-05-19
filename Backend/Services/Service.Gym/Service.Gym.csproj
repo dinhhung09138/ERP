@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core.CommonMessage\Core.CommonMessage.csproj" />
+    <ProjectReference Include="..\..\Core\Core.CommonModel\Core.CommonModel.csproj" />
+    <ProjectReference Include="..\..\Core\Core.Utility\Core.Utility.csproj" />
+    <ProjectReference Include="..\..\DataBase\Database.Sql.Gym\Database.Sql.Gym.csproj" />
+  </ItemGroup>
+
+</Project>
