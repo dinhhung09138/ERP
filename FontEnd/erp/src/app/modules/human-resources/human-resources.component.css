@@ -1,0 +1,78 @@
+/* The sidebar menu */
+
+.module-sidebar {
+  background: greenyellow;
+  height: 100%;
+  /* 100% Full-height */
+  width: 250px;
+  /* 0 width - change this with JavaScript */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Stay on top */
+  left: 0;
+  /* Black*/
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  transition: 0.5s;
+  /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/* The sidebar links */
+
+.module-sidebar>.nav-item {
+  position: relative;
+  padding: 0px;
+  border-radius: unset;
+}
+
+.module-sidebar>.nav-item a:hover {
+  color: white;
+  background: #1A6E64;
+}
+
+.module-sidebar>.nav-item .nav-link p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.module-sidebar a {
+  text-decoration: none;
+  display: block;
+  color: #1A6E64;
+  transition: 0.3s;
+}
+
+.module-sidebar .nav-link p {
+  display: inline-block;
+}
+
+.module-sidebar .nav-link>.right, .module-sidebar .nav-link>p>.right {
+  position: absolute;
+  right: 1rem;
+  top: .7rem;
+}
+
+.module-sidebar .menu-open>p i.right {
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+
+#main {
+  transition: margin-left .5s;
+  /* If you want a transition effect */
+  padding: 20px;
+  margin-left: 250px;
+}
+
+@media screen and (max-height: 450px) {
+  .module-sidebar {
+    padding-top: 15px;
+  }
+  .module-sidebar a {
+    font-size: 18px;
+  }
+}

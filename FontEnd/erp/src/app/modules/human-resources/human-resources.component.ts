@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HumanResourcesComponent implements OnInit {
 
+  linkSelected: string;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  openSideMenu(link: string) {
+    if (link === this.linkSelected) {
+      this.linkSelected = '';
+    } else {
+      this.linkSelected = link;
+    }
   }
 
 }

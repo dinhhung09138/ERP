@@ -5,10 +5,6 @@ import { AuthenticationGuard } from './core/guards/authentication.guard';
 
 const routes: Routes = [
   {
-    path: '*',
-    loadChildren: () => import('../app/modules/login/login.module').then(m => m.LoginModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('../app/modules/login/login.module').then(m => m.LoginModule)
   },
@@ -17,6 +13,15 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard],
     loadChildren: () => import('../app/modules/dashboard/dashboard.module').then(m => m.DashboardModule),
     data: { title: 'Dashboard' }
+  },
+  {
+    path: 'hr',
+    loadChildren: () => import('../app/modules/human-resources/human-resources.module').then(m => m.HumanResourcesModule),
+    data: { title: 'Human Resources' }
+  },
+  {
+    path: '**',
+    loadChildren: () => import('../app/modules/login/login.module').then(m => m.LoginModule)
   }
 ];
 
