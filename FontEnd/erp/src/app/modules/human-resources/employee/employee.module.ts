@@ -9,13 +9,25 @@ import { EmployeeCommendationComponent } from './employee-commendation/employee-
 import { EmployeeContactComponent } from './employee-contact/employee-contact.component';
 import { EmployeeContractComponent } from './employee-contract/employee-contract.component';
 import { EmployeeDiciplineComponent } from './employee-dicipline/employee-dicipline.component';
+import { EmployeeRoutingModule } from './employee-routing.module';
 
 
 
 @NgModule({
-  declarations: [EmployeeComponent, EmployeeInfoComponent, EmployeeRelationshipComponent, EmployeeEducationComponent, EmployeeIdentificationComponent, EmployeeCommendationComponent, EmployeeContactComponent, EmployeeContractComponent, EmployeeDiciplineComponent],
+  declarations: [
+    EmployeeComponent, 
+    EmployeeInfoComponent, 
+    EmployeeRelationshipComponent, 
+    EmployeeEducationComponent, 
+    EmployeeIdentificationComponent, 
+    EmployeeCommendationComponent, 
+    EmployeeContactComponent, 
+    EmployeeContractComponent, 
+    EmployeeDiciplineComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    EmployeeRoutingModule
   ]
 })
 export class EmployeeModule { }

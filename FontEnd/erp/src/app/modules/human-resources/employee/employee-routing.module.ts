@@ -6,17 +6,17 @@ import { EmployeeInfoComponent } from './employee-info/employee-info.component';
 
 const routes: Routes = [
   {
-    path: '/contact',
+    path: 'contact',
     component: EmployeeContactComponent,
     pathMatch: 'full',
   },
   {
-    path: '/relationship',
+    path: 'relationship',
     component: EmployeeRelationshipComponent,
     pathMatch: 'full',
   },
   {
-    path: '/info',
+    path: 'info',
     component: EmployeeInfoComponent,
     pathMatch: 'full',
   },

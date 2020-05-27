@@ -36,8 +36,8 @@
           </p>
         </a>
       </li>
-      <li class="nav-item">
-        <a href="javascript: {}" class="nav-link">
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="/hr/employee" class="nav-link">
           <p>
             Employee
           </p>
@@ -110,10 +110,8 @@
         </a>
       </li>
     </ul>
-
     <div id="main">
-      <router-outlet></router-outlet>
-      <p>Place Content Here...</p>
+      <router-outlet></router-outlet> 
     </div>
   </div>
 </div>
