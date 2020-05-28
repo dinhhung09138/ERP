@@ -10,6 +10,7 @@ import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { MainMenuComponent } from './shared/components/main-menu/main-menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MainMenuComponent } from './shared/components/main-menu/main-menu.compo
     BrowserModule,
     AppRoutingModule,
     AppLoadModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     HttpClientModule,
