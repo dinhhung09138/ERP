@@ -64,7 +64,7 @@
 #main {
   transition: margin-left .5s;
   /* If you want a transition effect */
-  padding: 20px;
+  padding: 0px 10px;
   margin-left: 250px;
 }
 
@@ -75,4 +75,9 @@
   .module-sidebar a {
     font-size: 18px;
   }
+}
+.nav-item.active a{
+  color: white;
+  background-color: #1A6E64;
+  
 }
