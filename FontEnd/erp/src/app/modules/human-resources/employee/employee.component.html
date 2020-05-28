@@ -6,7 +6,7 @@
             <div class="col-md-2 pr-0">
                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link rounded-0" data-toggle="tab" role="tab" routerLink="/hr/employee/commendation">Commendation</a>
+                        <a class="nav-link rounded-0 active" data-toggle="tab" role="tab" routerLink="/hr/employee/commendation">Commendation</a>
                     </li>
                     <li class="nav-item" routerLinkActive="active">
                         <a class="nav-link rounded-0" data-toggle="tab" role="tab" routerLink="/hr/employee/contact">Contact</a>
@@ -33,9 +33,10 @@
             </div>
             <div class="col-md-10 pl-0">
                 <div class="tab-content pt-2 pl-3 h-100 border border-left-0" id="myTabContent">
-                    
+                    <router-outlet></router-outlet>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

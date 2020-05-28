@@ -8,47 +8,54 @@ import { EmployeeDiciplineComponent } from './employee-dicipline/employee-dicipl
 import { EmployeeEducationComponent } from './employee-education/employee-education.component';
 import { EmployeeIdentificationComponent } from './employee-identification/employee-identification.component';
 import { EmployeeCommendationComponent } from './employee-commendation/employee-commendation.component';
+import { EmployeeComponent } from './employee.component';
 
 const routes: Routes = [
   {
-    path: 'contact',
-    component: EmployeeContactComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'relationship',
-    component: EmployeeRelationshipComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'info',
-    component: EmployeeInfoComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'contract',
-    component: EmployeeContractComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'dicioline',
-    component: EmployeeDiciplineComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'education',
-    component: EmployeeEducationComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'indentification',
-    component: EmployeeIdentificationComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'commendation',
-    component: EmployeeCommendationComponent,
-    pathMatch: 'full',
+    path: '',
+    component: EmployeeComponent,
+    children:[
+      {
+        path: 'contact',
+        component: EmployeeContactComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'relationship',
+        component: EmployeeRelationshipComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'info',
+        component: EmployeeInfoComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'contract',
+        component: EmployeeContractComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'dicipline',
+        component: EmployeeDiciplineComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'education',
+        component: EmployeeEducationComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'identification',
+        component: EmployeeIdentificationComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'commendation',
+        component: EmployeeCommendationComponent,
+        pathMatch: 'full',
+      },
+    ]
   },
 ];
 
