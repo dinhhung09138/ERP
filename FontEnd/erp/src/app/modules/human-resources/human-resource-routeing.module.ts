@@ -7,7 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: HumanResourcesComponent,
-    children: [
+    children:[
+      {
+        path: 'employee',
+        loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
+        data: { title: 'Employee' }
+      },
       {
         path: 'commendation',
         component: CommendationComponent,

@@ -11,7 +11,7 @@ import { CommendationComponent } from './commendation/commendation.component';
   ],
   imports: [
     CommonModule,
-    HumanResourceRoutingModule
   ],
+    HumanResourceRoutingModule
 })
 export class HumanResourcesModule { }
