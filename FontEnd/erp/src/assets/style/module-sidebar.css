@@ -1,0 +1,73 @@
+.module-sidebar {
+  border: 1px solid #1A6E64;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  left: 5px;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+/* The sidebar links */
+
+.module-sidebar>.nav-item {
+  position: relative;
+  padding: 0px;
+  border-radius: unset;
+}
+
+.module-sidebar>.nav-item a:hover {
+  color: white;
+  background: #1A6E64;
+}
+
+.module-sidebar>.nav-item .nav-link p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.module-sidebar a {
+  text-decoration: none;
+  display: block;
+  color: #1A6E64;
+  transition: 0.3s;
+}
+
+.module-sidebar .nav-link p {
+  display: inline-block;
+}
+
+.module-sidebar .nav-link>.right,
+.module-sidebar .nav-link>p>.right {
+  position: absolute;
+  right: 1rem;
+  top: .7rem;
+}
+
+.module-sidebar .menu-open>p i.right {
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.module-sidebar .nav-item.active a {
+  color: white;
+  background-color: #1A6E64;
+}
+
+.content-page {
+  transition: margin-left .5s;
+  padding-left: 260px !important;
+  min-height: 768px;
+}
+
+
+@media screen and (max-height: 450px) {
+  .module-sidebar {
+    padding-top: 15px;
+  }
+
+  .module-sidebar a {
+    font-size: 18px;
+  }
+}

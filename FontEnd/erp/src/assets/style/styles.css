@@ -6,7 +6,8 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
 }
 
 /* Grid Framework */
@@ -81,48 +82,15 @@ body {
 .col-xl-8,
 .col-xl-9,
 .col-xl-auto {
-  padding-right: 5px;
-  padding-left: 5px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
+.ml-10 {
+  margin-left: 10px;
+}
 
 /* End Grid Framework */
-
-
-/* Card */
-
-.card {
-  background-color: #fff;
-  background-clip: none;
-  border: 1px solid #1A6E64;
-  border-radius: unset;
-}
-
-.card-header {
-  padding: 0.15rem .5rem;
-  border: 1px solid #1A6E64;
-  font-weight: bold;
-  color: white;
-  background-color: #1A6E64;
-}
-
-.card-header i {
-  float: right;
-  margin-top: .25rem;
-  margin-left: 1rem;
-}
-
-.card-header:first-child {
-  border-radius: unset;
-}
-
-.card-header:hover {
-  cursor: pointer;
-}
-
-.card-body {
-  padding: .5rem;
-}
 
 .dropdown-action-menu {
   min-width: unset !important;
@@ -189,20 +157,6 @@ body {
 /* End Dropdown */
 
 
-/* Text */
-
-.text-sm {
-  font-size: .875rem !important;
-}
-
-.text-muted {
-  color: #1A6E64 !important;
-}
-
-
-/* End Text */
-
-
 /* Image */
 
 .img-size-50 {
@@ -246,24 +200,6 @@ body {
 
 /* End Scrollbar */
 
-
-/* Table */
-
-.table td,
-.table th {
-  padding: .15rem;
-}
-
-.table td.center,
-.table th.center {
-  text-align: center;
-  ;
-}
-
-
-/* End Table */
-
-
 /* Tabs */
 
 .nav-tabs {
@@ -292,13 +228,18 @@ body {
 
 /* End Tabs */
 
-.btn {
-  padding: .2rem .75rem;
-  margin-left: .1rem;
-  margin-right: .1rem;
+.label-outline-danger {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  border-radius: 10%;
+  padding: 2px 4px;
+  margin: unset !important;
 }
 
-.form-control {
-  height: calc(1.2em + .75rem + 2px);
-  padding: .2rem .5rem;
+.label-outline-success {
+  color: #28a745;
+  border: 1px solid #28a745;
+  border-radius: 10%;
+  padding: 2px 4px;
+  margin: unset !important;
 }

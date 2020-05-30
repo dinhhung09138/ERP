@@ -1,24 +1,23 @@
 .header {
-    background-color: #1A6E64;
-    padding: .0rem 1rem;
-    margin: 0 5px 5px;
+  background-color: #1A6E64;
+  padding: .0rem 1rem;
 }
 
 .header a.nav-link {
-    color: White;
+  color: White;
 }
 
 .header .navbar-nav .nav-item .nav-link {
-    padding-right: 1.2rem;
-    padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  padding-left: 1.2rem;
 }
 
 .header .navbar-nav .nav-item .nav-link i {
-    font-size: 15px;
-    color: white;
+  font-size: 15px;
+  color: white;
 }
 
 .header .navbar-nav .nav-link .navbar-badge {
-    top: 4px;
-    position: absolute;
+  top: 4px;
+  position: absolute;
 }

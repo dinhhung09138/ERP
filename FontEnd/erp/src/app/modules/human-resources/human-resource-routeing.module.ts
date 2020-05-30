@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: HumanResourcesComponent,
-    children:[
+    children: [
       {
         path: 'employee',
         loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
@@ -15,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'commendation',
-        component: CommendationComponent,
+        loadChildren: () => import('./commendation/commendation.module').then(m => m.CommendationModule),
         pathMatch: 'full'
       }
     ]
