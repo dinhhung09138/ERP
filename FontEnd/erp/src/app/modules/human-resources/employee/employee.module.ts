@@ -10,7 +10,8 @@ import { EmployeeContactComponent } from './employee-contact/employee-contact.co
 import { EmployeeContractComponent } from './employee-contract/employee-contract.component';
 import { EmployeeDiciplineComponent } from './employee-dicipline/employee-dicipline.component';
 import { EmployeeRoutingModule } from './employee-routing.module';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -27,7 +28,9 @@ import { EmployeeRoutingModule } from './employee-routing.module';
   ],
   imports: [
     CommonModule,
-    EmployeeRoutingModule
+    EmployeeRoutingModule,
+    MatToolbarModule,
+    MatTabsModule
   ]
 })
 export class EmployeeModule { }
