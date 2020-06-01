@@ -9,7 +9,7 @@ export class EmployeeRelationshipComponent implements OnInit {
 
   constructor() { }
 
-  tmp: "";
+  tmp: '';
 
   ngOnInit(): void {
   }
