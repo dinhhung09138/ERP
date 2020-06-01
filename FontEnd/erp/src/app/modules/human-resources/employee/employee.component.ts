@@ -55,7 +55,7 @@ export class EmployeeComponent implements OnInit {
   }
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
-      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
+      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === this.router.url));
     });
   }
 

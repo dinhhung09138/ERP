@@ -12,7 +12,10 @@ import { EmployeeDiciplineComponent } from './employee-dicipline/employee-dicipl
 import { EmployeeRoutingModule } from './employee-routing.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,11 @@ import {MatTabsModule} from '@angular/material/tabs';
     CommonModule,
     EmployeeRoutingModule,
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatCheckboxModule
   ]
 })
 export class EmployeeModule { }
