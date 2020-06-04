@@ -9,6 +9,13 @@ input[type="text"]:focus {
   box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px #1A6E64;
 }
 
+textarea:focus {
+  border-color: #1A6E64 !important;
+  outline: 0 !important;
+  -webkit-box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px #1A6E64 !important;
+  box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px #1A6E64 !important;
+}
+
 .text-sm {
   font-size: .875rem !important;
 }
