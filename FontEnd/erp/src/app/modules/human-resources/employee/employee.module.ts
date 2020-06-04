@@ -16,6 +16,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ListCommendationComponent } from './employee-commendation/list-commendation/list-commendation.component';
+import { FormCommendationComponent } from './employee-commendation/form-commendation/form-commendation.component';
+import { ListContactComponent } from './employee-contact/list-contact/list-contact.component';
+import { FormContactComponent } from './employee-contact/form-contact/form-contact.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     EmployeeCommendationComponent, 
     EmployeeContactComponent, 
     EmployeeContractComponent, 
-    EmployeeDiciplineComponent
+    EmployeeDiciplineComponent, ListCommendationComponent, FormCommendationComponent, ListContactComponent, FormContactComponent
   ],
   imports: [
     CommonModule,
