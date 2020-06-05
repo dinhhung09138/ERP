@@ -13,12 +13,14 @@ import { MainMenuComponent } from './shared/components/main-menu/main-menu.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     MainMenuComponent,
+
   ],
   imports: [
     BrowserModule,

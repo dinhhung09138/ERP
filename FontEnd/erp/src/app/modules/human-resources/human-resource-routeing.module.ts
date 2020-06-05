@@ -14,6 +14,11 @@ const routes: Routes = [
         data: { title: 'Employee' }
       },
       {
+        path: 'contracttype',
+        loadChildren: () => import('./contracttype/contracttype.module').then(m => m.ContracttypeModule),
+        pathMatch: 'ContractType'
+      },
+      {
         path: 'modelofstudy',
         loadChildren: () => import('./modelofstudy/modelofstudy.module').then(m => m.ModelofstudyModule),
         pathMatch: 'Modelofstudy'
