@@ -1,8 +1,9 @@
-import { StudyComponent } from './study.component';
-import { Routes, RouterModule } from '@angular/router';
+
+import { ModelofstudyComponent } from './modelofstudy.component';
 import { NgModule } from '@angular/core';
-import { ListComponent } from './list/list.component';
-import { FormComponent } from './form/form.component';
+import { Routes, RouterModule } from '@angular/router';
+import { ModelofstudyFormComponent } from './modelofstudy-form/modelofstudy-form.component';
+import { ModelofstudyListComponent } from './modelofstudy-list/modelofstudy-list.component';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
@@ -12,17 +13,16 @@ import { MatTableModule } from '@angular/material/table';
 const route: Routes = [
     {
       path: '',
-      component: StudyComponent,
-      data: { title: 'Study' }
+      component: ModelofstudyComponent,
+      data: { title: 'Modelofstudy' }
     }
   ]
   
   @NgModule({
     declarations: [
-      
-      StudyComponent,
-      FormComponent,
-      ListComponent,
+      ModelofstudyComponent,
+      ModelofstudyFormComponent,
+      ModelofstudyListComponent,
     ],
     imports: [
       CommonModule,
@@ -33,4 +33,4 @@ const route: Routes = [
       RouterModule.forChild(route),
     ]
   })
-  export class StudyModule { }
+  export class ModelofstudyModule { }
