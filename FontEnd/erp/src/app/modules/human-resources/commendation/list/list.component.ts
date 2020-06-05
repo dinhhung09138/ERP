@@ -105,8 +105,16 @@ export class CommendationListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    this.paginator.length = 100;
+    this.paginator.pageSize = 5;
+    this.paginator.pageIndex = 0;
+    this.paginator.pageSizeOptions = [5, 7, 9, 11];
+    this.paginator.showFirstLastButtons = true;
+
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator.length = 100;
   }
 
   filterTable(event: Event) {
