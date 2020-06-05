@@ -4,7 +4,7 @@ import { HumanResourcesComponent } from './human-resources.component';
 import { HumanResourceRoutingModule } from './human-resource-routeing.module';
 @NgModule({
   declarations: [
-    HumanResourcesComponent,
+    HumanResourcesComponent
   ],
   imports: [
     CommonModule,

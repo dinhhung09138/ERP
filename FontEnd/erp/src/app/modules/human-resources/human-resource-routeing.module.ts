@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HumanResourcesComponent } from './human-resources.component';
-import { CommendationComponent } from './commendation/commendation.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -17,11 +15,14 @@ const routes: Routes = [
         path: 'commendation',
         loadChildren: () => import('./commendation/commendation.module').then(m => m.CommendationModule),
         pathMatch: 'full'
+      },
+      {
+        path: 'province',
+        loadChildren: () => import('./province/province.module').then(m => m.ProvinceModule)
       }
     ]
   }
 ];
-
 @NgModule({
   imports: [
     RouterModule.forChild(routes)

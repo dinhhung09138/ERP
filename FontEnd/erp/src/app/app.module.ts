@@ -12,12 +12,15 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { MainMenuComponent } from './shared/components/main-menu/main-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MainMenuComponent,
+    MainMenuComponent
+    
+   
   ],
   imports: [
     BrowserModule,
