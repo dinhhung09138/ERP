@@ -8,9 +8,19 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-lg-9 col-md-8 col-sm-6"></div>
+          <div class="col-lg-9 col-md-8 col-sm-6">
+            <button class="btn btn-outline-info"><i class="fa fa-plus"></i> Add New</button>
+            <button class="btn btn-outline-info"><i class="fa fa-paperclip"></i> Import</button>
+            <button class="btn btn-outline-info"><i class="fa fa-file-excel-o"></i> Export</button>
+          </div>
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
-            <input type="text" placeholder="Search" class="form-control" (keyup)="filterTable($event)">
+            <div class="input-group">
+              <input type="text" placeholder="Search" class="form-control" [(ngModel)]="searchText"
+                (keyup.enter)="filterTable()">
+              <div class="input-group-append">
+                <button class="btn btn-outline-info" (click)="filterTable()">Search</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -48,8 +58,8 @@
               <tr mat-header-row *matHeaderRowDef="listColumnsName"></tr>
               <tr mat-row *matRowDef="let row; columns: listColumnsName;"></tr>
             </table>
-            <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 207, 50]" [length]="100" (page)="pageChange($event)"
-              showFirstLastButtons>
+            <mat-paginator [pageSize]="paginator.pageSize" [pageSizeOptions]="paginator.pageSizeOptions"
+              [length]="paginator.length" (page)="pageChange($event)" showFirstLastButtons>
             </mat-paginator>
           </div>
         </div>

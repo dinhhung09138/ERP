@@ -3,6 +3,7 @@ import { CommendationViewModal } from '../commendation.model';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { PagingConstants } from 'src/app/core/constants/paging.constant';
 
 @Component({
   selector: 'app-commendation-list',
@@ -12,7 +13,10 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 export class CommendationListComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  searchText = '';
+  currentPageSize = PagingConstants.pageSize;
 
   listColumnsName: string[] = ['name', 'description', 'isActive', 'action'];
 
@@ -105,18 +109,25 @@ export class CommendationListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.paginator.pageSize = PagingConstants.pageSize;
+    this.paginator.pageIndex = 0;
+    this.paginator.length = 100;
+    this.paginator.pageSizeOptions = PagingConstants.pageSizeOptions;
   }
 
-  filterTable(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  filterTable() {
+    if (this.searchText.length > 0) {
+      this.dataSource.filter = this.searchText.trim().toLowerCase();
+      this.paginator.pageIndex = 0;
+    }
   }
 
-  pageChange(event: PageEvent) {
-    console.log(event);
+  pageChange(page: PageEvent) {
+    if (page.pageSize !== this.currentPageSize) {
+      this.currentPageSize = page.pageSize;
+      this.paginator.pageIndex = 0;
+    }
   }
 
 }
