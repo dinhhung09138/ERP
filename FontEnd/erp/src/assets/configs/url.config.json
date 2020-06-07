@@ -1,5 +1,0 @@
-{
-  "gymApi": "https://localhost:44337/api/gym/",
-  "marketingApi": "https://localhost:44337/api/marketing/",
-  "authenticationApi": "https://localhost:44337/api/authentication/"
-}
