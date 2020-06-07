@@ -1,27 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { ECommendationViewModel } from '../e-commendation.model';
+import { RelationshipViewModel } from '../e-relationship.model';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-list-commendation',
-  templateUrl: './list-commendation.component.html',
-  styleUrls: ['./list-commendation.component.css']
+  selector: 'app-list-relationship',
+  templateUrl: './list-relationship.component.html',
+  styleUrls: ['./list-relationship.component.css']
 })
-export class ListCommendationComponent implements OnInit {
+export class ListRelationshipComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  listColumnsName = ["title", "money", "comment", "approvedStatus", "action"];
 
-  list: ECommendationViewModel[] = [
+  listColumnsName = ["fullName", "address", "mobile", "isActive", "action"];
+  list: RelationshipViewModel[] = [
     {
       id: 1,
-      title: 'VU CHUNG DUNG',
-      money: 1,
-      comment: 'VU CHUNG DUNG',
-      approvedStatus: true,
+      fullName: "VU CHUNG DUNG",
+      address: "Ha Noi",
+      mobile: "0912345678",
       isActive: true,
       createBy: null,
       createDate: new Date(),
@@ -30,10 +29,9 @@ export class ListCommendationComponent implements OnInit {
     },
     {
       id: 2,
-      title: 'VU CHUNG DUNG',
-      money: 2,
-      comment: 'VU CHUNG DUNG',
-      approvedStatus: true,
+      fullName: "VU CHUNG DUNG",
+      address: "Ha Noi",
+      mobile: "0912345678",
       isActive: true,
       createBy: null,
       createDate: new Date(),
@@ -42,10 +40,9 @@ export class ListCommendationComponent implements OnInit {
     },
     {
       id: 3,
-      title: 'VU CHUNG DUNG',
-      money: 3,
-      comment: 'VU CHUNG DUNG',
-      approvedStatus: true,
+      fullName: "VU CHUNG DUNG",
+      address: "Ha Noi",
+      mobile: "0912345678",
       isActive: true,
       createBy: null,
       createDate: new Date(),
@@ -54,10 +51,9 @@ export class ListCommendationComponent implements OnInit {
     },
     {
       id: 4,
-      title: 'VU CHUNG DUNG',
-      money: 4,
-      comment: 'VU CHUNG DUNG',
-      approvedStatus: true,
+      fullName: "VU CHUNG DUNG",
+      address: "Ha Noi",
+      mobile: "0912345678",
       isActive: true,
       createBy: null,
       createDate: new Date(),
@@ -66,16 +62,15 @@ export class ListCommendationComponent implements OnInit {
     },
     {
       id: 5,
-      title: 'VU CHUNG DUNG',
-      money: 5,
-      comment: 'VU CHUNG DUNG',
-      approvedStatus: true,
+      fullName: "VU CHUNG DUNG",
+      address: "Ha Noi",
+      mobile: "0912345678",
       isActive: true,
       createBy: null,
       createDate: new Date(),
       updateBy: null,
       updateDate: new Date(),
-    },
+    }
   ];
   dataSource = new MatTableDataSource(this.list);
   constructor() { }
@@ -89,6 +84,5 @@ export class ListCommendationComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
 
 }

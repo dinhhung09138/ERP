@@ -12,17 +12,17 @@ import { EContactViewModel } from '../e-contact.model';
 export class ListContactComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  listColumnsName = ["phone","mobile","email","skyper","temporaryaddress","permanentaddress","isActive","action"];
+  listColumnsName = ["phone", "mobile", "email", "skyper", "temporaryAddress", "permanentAddress", "isActive", "action"];
 
   list: EContactViewModel[] = [
     {
       id: 1,
-      phone:"0987654321",
+      phone: "0987654321",
       mobile: "0987654321",
       email: "abc@gmail.com",
       skyper: "abc@gmail.com",
-      temporaryaddress:"abc@gmail.com",
-      permanentaddress:"abc@gmail.com",
+      temporaryAddress: "abc@gmail.com",
+      permanentAddress: "abc@gmail.com",
       isActive: true,
       createBy: null,
       createDate: new Date(),
@@ -31,12 +31,12 @@ export class ListContactComponent implements OnInit {
     },
     {
       id: 2,
-      phone:"0987654321",
+      phone: "0987654321",
       mobile: "0987654321",
       email: "abc@gmail.com",
       skyper: "abc@gmail.com",
-      temporaryaddress:"abc@gmail.com",
-      permanentaddress:"abc@gmail.com",
+      temporaryAddress: "abc@gmail.com",
+      permanentAddress: "abc@gmail.com",
       isActive: true,
       createBy: null,
       createDate: new Date(),
@@ -45,12 +45,12 @@ export class ListContactComponent implements OnInit {
     },
     {
       id: 3,
-      phone:"0987654321",
+      phone: "0987654321",
       mobile: "0987654321",
       email: "abc@gmail.com",
       skyper: "abc@gmail.com",
-      temporaryaddress:"abc@gmail.com",
-      permanentaddress:"abc@gmail.com",
+      temporaryAddress: "abc@gmail.com",
+      permanentAddress: "abc@gmail.com",
       isActive: true,
       createBy: null,
       createDate: new Date(),
@@ -59,12 +59,12 @@ export class ListContactComponent implements OnInit {
     },
     {
       id: 4,
-      phone:"0987654321",
+      phone: "0987654321",
       mobile: "0987654321",
       email: "abc@gmail.com",
       skyper: "abc@gmail.com",
-      temporaryaddress:"abc@gmail.com",
-      permanentaddress:"abc@gmail.com",
+      temporaryAddress: "abc@gmail.com",
+      permanentAddress: "abc@gmail.com",
       isActive: true,
       createBy: null,
       createDate: new Date(),
@@ -73,12 +73,12 @@ export class ListContactComponent implements OnInit {
     },
     {
       id: 5,
-      phone:"0987654321",
+      phone: "0987654321",
       mobile: "0987654321",
       email: "abc@gmail.com",
       skyper: "abc@gmail.com",
-      temporaryaddress:"abc@gmail.com",
-      permanentaddress:"abc@gmail.com",
+      temporaryAddress: "abc@gmail.com",
+      permanentAddress: "abc@gmail.com",
       isActive: true,
       createBy: null,
       createDate: new Date(),
