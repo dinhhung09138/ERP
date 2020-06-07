@@ -1,4 +1,4 @@
-export const ApiUrlModel = {
+export const APIUrlConstants = {
   gymApi: '',
   marketingApi: '',
   authenticationApi: '',
