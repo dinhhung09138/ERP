@@ -9,6 +9,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommendationService } from './commendation.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const route: Routes = [
   {
@@ -28,11 +30,15 @@ const route: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatCheckboxModule,
     MatSortModule,
     MatPaginatorModule,
     MatTableModule,
     RouterModule.forChild(route),
+  ],
+  providers: [
+    CommendationService,
   ]
 })
 export class CommendationModule { }

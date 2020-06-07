@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommendationService } from '../commendation.service';
+import { ResponseModel } from 'src/app/core/models/response.model';
 
 @Component({
   selector: 'app-commendation-form',
@@ -12,7 +14,7 @@ export class CommendationFormComponent implements OnInit {
   isLoading = false;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private commendationService: CommendationService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -23,11 +25,16 @@ export class CommendationFormComponent implements OnInit {
   }
 
   submit() {
-    console.log('form submit');
     this.isSubmit = true;
     if (this.form.invalid) {
       return;
     }
+    this.commendationService.save(this.form.value).subscribe((res: ResponseModel) => {
+      if (res === null) {
+        return;
+      }
+    });
+    console.log(this.form.value);
     this.isLoading = true;
   }
 

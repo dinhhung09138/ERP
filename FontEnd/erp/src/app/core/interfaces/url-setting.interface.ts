@@ -1,5 +1,5 @@
 export interface UrlSettingInterface {
-  gymApi: string;
+  hrApi: string;
   marketingApi: string;
   authenticationApi: string;
 }

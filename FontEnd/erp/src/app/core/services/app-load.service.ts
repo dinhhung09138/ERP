@@ -19,7 +19,7 @@ export class AppLoadService {
   getUrlSetting(): Promise<any> {
     return this.http.get<UrlSettingInterface>(this.configPath + 'url.config.json').toPromise().then(response => {
       APIUrlConstants.authenticationApi = response.authenticationApi;
-      APIUrlConstants.gymApi = response.gymApi;
+      APIUrlConstants.hrApi = response.hrApi;
       APIUrlConstants.marketingApi = response.marketingApi;
       console.log(response);
       return response;
