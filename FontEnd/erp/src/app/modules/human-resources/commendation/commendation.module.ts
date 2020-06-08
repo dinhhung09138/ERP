@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CommendationComponent } from './commendation.component';
 import { Routes, RouterModule } from '@angular/router';
 import { CommendationFormComponent } from './form/form.component';
-import { CommendationListComponent } from './list/list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -24,7 +23,6 @@ const route: Routes = [
   declarations: [
     CommendationComponent,
     CommendationFormComponent,
-    CommendationListComponent,
   ],
   imports: [
     CommonModule,

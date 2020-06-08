@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommendationService } from '../commendation.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
+import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 
 @Component({
   selector: 'app-commendation-form',
@@ -10,6 +11,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 })
 export class CommendationFormComponent implements OnInit {
 
+  @Input() formAction = FormActionStatus.UnKnow;
   isSubmit = false;
   isLoading = false;
   form: FormGroup;
@@ -24,7 +26,16 @@ export class CommendationFormComponent implements OnInit {
     });
   }
 
-  submit() {
+  resetForm() {
+    this.formAction = FormActionStatus.UnKnow;
+    this.form = this.fb.group({
+      name: ['', [Validators.required]],
+      description: [''],
+      isActive: [true]
+    });
+  }
+
+  submitForm() {
     this.isSubmit = true;
     if (this.form.invalid) {
       return;
@@ -34,7 +45,6 @@ export class CommendationFormComponent implements OnInit {
         return;
       }
     });
-    console.log(this.form.value);
     this.isLoading = true;
   }
 

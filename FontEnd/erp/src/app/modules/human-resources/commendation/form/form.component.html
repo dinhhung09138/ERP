@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col-lg-2"></div>
           <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <form [formGroup]="form" (submit)="!isLoading ? submit() : false">
+            <form [formGroup]="form" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <label class="label">Name</label>
@@ -37,7 +37,7 @@
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <input type="submit" class="btn btn-success" value="Save">
-                  <button type="button" class="btn btn-warning"> Reset </button>
+                  <button type="button" class="btn btn-warning" (click)="resetForm()"> Reset </button>
                   <button type="button" class="btn btn-secondary"> Close </button>
                 </div>
               </div>
