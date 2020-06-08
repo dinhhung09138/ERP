@@ -1,4 +1,5 @@
-﻿using DataBase.Sql.HR;
+﻿using Database.Sql.HR;
+using DataBase.Sql.HR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ namespace API.HR
         {
             services.AddDbContext<HRContext>(options => options.UseSqlServer(config.GetConnectionString("HRConnection")), ServiceLifetime.Scoped);
 
+            services.AddScoped<IHRUnitOfWork, HRUnitOfWork>();
             services.AddScoped<ICommendationService, CommendationService>();
             return services;
         }

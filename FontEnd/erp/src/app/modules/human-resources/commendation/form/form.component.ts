@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommendationService } from '../commendation.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 
 @Component({
   selector: 'app-commendation-form',
@@ -12,14 +13,15 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 export class CommendationFormComponent implements OnInit {
 
   @Input() formAction = FormActionStatus.UnKnow;
+
   isSubmit = false;
   isLoading = false;
-  form: FormGroup;
+  commendationForm: FormGroup;
 
   constructor(private fb: FormBuilder, private commendationService: CommendationService) { }
 
   ngOnInit(): void {
-    this.form = this.fb.group({
+    this.commendationForm = this.fb.group({
       name: ['', [Validators.required]],
       description: [''],
       isActive: [true]
@@ -28,7 +30,7 @@ export class CommendationFormComponent implements OnInit {
 
   resetForm() {
     this.formAction = FormActionStatus.UnKnow;
-    this.form = this.fb.group({
+    this.commendationForm = this.fb.group({
       name: ['', [Validators.required]],
       description: [''],
       isActive: [true]
@@ -36,13 +38,18 @@ export class CommendationFormComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.commendationForm.value);
     this.isSubmit = true;
-    if (this.form.invalid) {
+    if (this.commendationForm.invalid) {
       return;
     }
-    this.commendationService.save(this.form.value).subscribe((res: ResponseModel) => {
+    this.commendationService.save(this.commendationForm.value).subscribe((res: ResponseModel) => {
       if (res === null) {
         return;
+      } else {
+        if (res.responseStatus === ResponseStatus.success) {
+          console.log('ok");');
+        }
       }
     });
     this.isLoading = true;

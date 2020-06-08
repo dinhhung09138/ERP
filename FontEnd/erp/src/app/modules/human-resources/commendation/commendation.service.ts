@@ -11,8 +11,8 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 export class CommendationService {
 
   url = {
-    list: APIUrlConstants.hrApi + 'list',
-    save: APIUrlConstants.hrApi + 'save',
+    list: APIUrlConstants.hrApi + 'commendation/list',
+    save: APIUrlConstants.hrApi + 'commendation/save',
   };
 
 

@@ -69,8 +69,6 @@ namespace APIGateway
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             //Use http context
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //Use Data object.
-            services.AddScoped<ISecurityUnitOfWork, SecurityUnitOfWork>();
 
             //Use for logger
             services.AddScoped<ILoggerService, LoggerService>();

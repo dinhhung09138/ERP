@@ -1,4 +1,4 @@
-export interface BaseViewModel {
+export class BaseViewModel {
   id: number;
   isActive: boolean;
   createDate: Date;
