@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\API\API.HR\API.HR.csproj" />
     <ProjectReference Include="..\API\API.Security\API.Security.csproj" />
     <ProjectReference Include="..\Core\Core.CommonModel\Core.CommonModel.csproj" />
     <ProjectReference Include="..\Core\Core.DataAccess\Core.DataAccess.csproj" />
