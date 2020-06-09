@@ -4,6 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { PagingConstants } from 'src/app/core/constants/paging.constant';
 import { CommendationViewModel } from './commendation.model';
+import { CommendationService } from './commendation.service';
+import { FilterModel } from 'src/app/core/models/filter-table.model';
+import { ResponseModel } from 'src/app/core/models/response.model';
+import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 
 @Component({
   selector: 'app-commendation',
@@ -20,107 +24,26 @@ export class CommendationComponent implements OnInit {
 
   listColumnsName: string[] = ['name', 'description', 'isActive', 'action'];
 
-  list: CommendationViewModel[] = [
-    {
-      id: 1,
-      name: 'Cu ty',
-      description: 'Toi la Cu ty',
-      money: 0,
-      isActive: false,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }, {
-      id: 1,
-      name: 'Hung',
-      description: 'Tran Dinh Hung',
-      money: 0,
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }, {
-      id: 1,
-      name: 'Long',
-      description: 'Toi La Long',
-      money: 0,
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }, {
-      id: 1,
-      name: 'Nam',
-      description: 'Toi La Nam',
-      money: 0,
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }, {
-      id: 1,
-      name: 'Hung',
-      description: 'Tran Dinh Hung',
-      money: 0,
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }, {
-      id: 1,
-      name: 'Hung',
-      description: 'Tran Dinh Hung',
-      money: 0,
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }, {
-      id: 1,
-      name: 'Hung',
-      description: 'Tran Dinh Hung',
-      money: 0,
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }, {
-      id: 1,
-      name: 'Hung',
-      description: 'Tran Dinh Hung',
-      money: 0,
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }
-  ];
+  list: CommendationViewModel[] = [];
 
   dataSource = new MatTableDataSource(this.list);
 
-  constructor() { }
+  constructor(private commendationService: CommendationService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
     this.paginator.pageSize = PagingConstants.pageSize;
     this.paginator.pageIndex = 0;
-    this.paginator.length = 100;
+    this.paginator.length = 0;
     this.paginator.pageSizeOptions = PagingConstants.pageSizeOptions;
+    this.getList();
   }
 
   filterTable() {
     if (this.searchText.length > 0) {
-      this.dataSource.filter = this.searchText.trim().toLowerCase();
       this.paginator.pageIndex = 0;
     }
+    this.getList();
   }
 
   pageChange(page: PageEvent) {
@@ -128,10 +51,21 @@ export class CommendationComponent implements OnInit {
       this.currentPageSize = page.pageSize;
       this.paginator.pageIndex = 0;
     }
+    this.getList();
   }
 
   private getList() {
-
+    const filter = new FilterModel();
+    filter.text = this.searchText;
+    filter.paging.pageIndex = this.paginator.pageIndex;
+    filter.paging.pageSize = this.paginator.pageSize;
+    this.commendationService.getList(filter).subscribe((response: ResponseModel) => {
+      console.log(response);
+      if (response.responseStatus === ResponseStatus.success) {
+        this.list = response.result.items;
+        this.paginator.length = response.result.totalItems;
+      }
+    });
   }
 
 }

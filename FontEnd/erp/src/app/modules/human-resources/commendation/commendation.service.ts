@@ -11,7 +11,7 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 export class CommendationService {
 
   url = {
-    list: APIUrlConstants.hrApi + 'commendation/list',
+    list: APIUrlConstants.hrApi + 'commendation/getlist',
     save: APIUrlConstants.hrApi + 'commendation/save',
   };
 
@@ -19,6 +19,7 @@ export class CommendationService {
   constructor(private http: HttpClient) { }
 
   getList(filter: FilterModel) {
+    console.log(filter);
     return this.http.post<ResponseModel>(this.url.list, filter).pipe(
       map((data) => {
         return data;

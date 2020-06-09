@@ -9,18 +9,14 @@ namespace Core.CommonModel
         public int Precedence { get; set; } = 1;
         public bool IsActive { get; set; } = true;
 
-        public string CreatedBy { get; set; }
+        public string CreateBy { get; set; }
 
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
-        public string UpdatedBy { get; set; }
+        public string UpdateBy { get; set; }
 
-        public DateTime? UpdatedDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
 
         public bool Deleted { get; set; } = false;
-
-        public string DeletedBy { get; set; }
-
-        public DateTime? DeletedDate { get; set; }
     }
 }

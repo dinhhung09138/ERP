@@ -3,5 +3,9 @@ import { PagingModel } from './paging.model';
 export class FilterModel {
   text: string;
   paging: PagingModel;
-  sort: any;
+
+  constructor() {
+    this.text = '';
+    this.paging = new PagingModel();
+  }
 }
