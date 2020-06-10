@@ -1,3 +1,5 @@
+import { FormActionStatus } from '../enums/form-action-status.enum';
+
 export class BaseViewModel {
   id: number;
   isActive: boolean;
@@ -5,4 +7,8 @@ export class BaseViewModel {
   createBy: number;
   updateDate: Date;
   updateBy: number;
+  action: FormActionStatus;
+
+  constructor() {
+  }
 }

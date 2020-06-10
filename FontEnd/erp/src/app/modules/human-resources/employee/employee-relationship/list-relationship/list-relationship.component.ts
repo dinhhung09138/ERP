@@ -15,63 +15,7 @@ export class ListRelationshipComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   listColumnsName = ["fullName", "address", "mobile", "isActive", "action"];
-  list: RelationshipViewModel[] = [
-    {
-      id: 1,
-      fullName: "VU CHUNG DUNG",
-      address: "Ha Noi",
-      mobile: "0912345678",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id: 2,
-      fullName: "VU CHUNG DUNG",
-      address: "Ha Noi",
-      mobile: "0912345678",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id: 3,
-      fullName: "VU CHUNG DUNG",
-      address: "Ha Noi",
-      mobile: "0912345678",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id: 4,
-      fullName: "VU CHUNG DUNG",
-      address: "Ha Noi",
-      mobile: "0912345678",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id: 5,
-      fullName: "VU CHUNG DUNG",
-      address: "Ha Noi",
-      mobile: "0912345678",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }
-  ];
+  list: RelationshipViewModel[] = [];
   dataSource = new MatTableDataSource(this.list);
   constructor() { }
 

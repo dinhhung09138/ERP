@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommendationService } from '../commendation.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
+import { CommendationViewModel } from '../commendation.model';
 
 @Component({
   selector: 'app-commendation-form',
@@ -12,7 +13,9 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 })
 export class CommendationFormComponent implements OnInit {
 
-  @Input() formAction = FormActionStatus.UnKnow;
+  @Output() reloadTableEvent = new EventEmitter<boolean>();
+
+  formAction = FormActionStatus.UnKnow;
 
   isSubmit = false;
   isLoading = false;
@@ -26,33 +29,61 @@ export class CommendationFormComponent implements OnInit {
       description: [''],
       isActive: [true]
     });
+    this.initFormControl(this.formAction);
   }
 
-  resetForm() {
-    this.formAction = FormActionStatus.UnKnow;
-    this.commendationForm = this.fb.group({
-      name: ['', [Validators.required]],
-      description: [''],
-      isActive: [true]
-    });
+  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+
+    this.formAction = formStatus;
+    this.commendationForm.get('name').reset();
+    this.commendationForm.get('description').reset();
+    this.commendationForm.get('isActive').setValue(true);
+
+    if (isDisabledForm) {
+      if (formStatus === FormActionStatus.UnKnow) {
+        this.commendationForm.get('name').disable();
+        this.commendationForm.get('description').disable();
+        this.commendationForm.get('isActive').disable();
+      } else {
+        console.log('enable');
+        this.commendationForm.get('name').enable();
+        this.commendationForm.get('description').enable();
+        this.commendationForm.get('isActive').enable();
+      }
+    }
+  }
+
+  create() {
+    this.initFormControl(FormActionStatus.Create);
+  }
+
+  reset() {
+    this.initFormControl(this.formAction, false);
+  }
+
+  close() {
+    this.initFormControl(FormActionStatus.UnKnow);
   }
 
   submitForm() {
-    console.log(this.commendationForm.value);
     this.isSubmit = true;
+    this.isLoading = true;
     if (this.commendationForm.invalid) {
       return;
     }
-    this.commendationService.save(this.commendationForm.value).subscribe((res: ResponseModel) => {
-      if (res === null) {
-        return;
-      } else {
+    const model = this.commendationForm.value as CommendationViewModel;
+    model.action = this.formAction;
+    console.log(model);
+    this.commendationService.save(model).subscribe((res: ResponseModel) => {
+      if (res !== null) {
         if (res.responseStatus === ResponseStatus.success) {
-          console.log('ok");');
+          this.initFormControl(FormActionStatus.UnKnow);
+          this.reloadTableEvent.emit(true);
         }
       }
+      this.isLoading = false;
+      this.isSubmit = false;
     });
-    this.isLoading = true;
   }
 
 }

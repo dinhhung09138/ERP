@@ -12,68 +12,12 @@ import { filter } from 'rxjs/operators';
 })
 export class ListIdentificationComponent implements OnInit {
 
-  @ViewChild(MatSort,{static:true}) sort:MatSort;
-  @ViewChild(MatPaginator,{static:true})paginator:MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  listColumnsName = ["code","name","notes","isActive","action"];
-  list:IdentificationViewModel[] = [
-    {
-      id:1,
-      code:"DUNG",
-      name:"VU CHUNG DUNG",
-      notes:"VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id:2,
-      code:"DUNG",
-      name:"VU CHUNG DUNG",
-      notes:"VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id:3,
-      code:"DUNG",
-      name:"VU CHUNG DUNG",
-      notes:"VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id:4,
-      code:"DUNG",
-      name:"VU CHUNG DUNG",
-      notes:"VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id:5,
-      code:"DUNG",
-      name:"VU CHUNG DUNG",
-      notes:"VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }
-  ];
-  
+  listColumnsName = ["code", "name", "notes", "isActive", "action"];
+  list: IdentificationViewModel[] = [];
+
   dataSource = new MatTableDataSource(this.list);
   constructor() { }
 
@@ -82,7 +26,7 @@ export class ListIdentificationComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  filterTable(event:Event){
+  filterTable(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

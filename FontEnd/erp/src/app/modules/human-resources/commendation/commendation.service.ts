@@ -19,7 +19,6 @@ export class CommendationService {
   constructor(private http: HttpClient) { }
 
   getList(filter: FilterModel) {
-    console.log(filter);
     return this.http.post<ResponseModel>(this.url.list, filter).pipe(
       map((data) => {
         return data;

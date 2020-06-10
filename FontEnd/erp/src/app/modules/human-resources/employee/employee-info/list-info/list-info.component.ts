@@ -15,68 +15,7 @@ export class ListInfoComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   listColumnsName = ["lastName", "firstName", "gender", "dateOfBirth", "isActive", "action"];
-  list: InfoViewModel[] = [
-    {
-      id: 1,
-      lastName: "VU",
-      firstName: "DUNG",
-      gender: true,
-      dateOfBirth: new Date(),
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id: 2,
-      lastName: "VU",
-      firstName: "DUNG",
-      gender: true,
-      dateOfBirth: new Date(),
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id: 3,
-      lastName: "VU",
-      firstName: "DUNG",
-      gender: true,
-      dateOfBirth: new Date(),
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id: 4,
-      lastName: "VU",
-      firstName: "DUNG",
-      gender: true,
-      dateOfBirth: new Date(),
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id: 5,
-      lastName: "VU",
-      firstName: "DUNG",
-      gender: true,
-      dateOfBirth: new Date(),
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }
-  ];
+  list: InfoViewModel[] = [];
   dataSource = new MatTableDataSource(this.list);
   constructor() { }
 

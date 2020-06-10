@@ -13,59 +13,8 @@ export class ListDiciplineComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  listColumnsName = ["money","comment","isActive","action"];
-  list:DiciplineViewModel[]=[
-    {
-      id:1,
-      money:1,
-      comment: "VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id:2,
-      money:2,
-      comment: "VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id:3,
-      money:3,
-      comment: "VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id:4,
-      money:4,
-      comment: "VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    },
-    {
-      id:5,
-      money:5,
-      comment: "VU CHUNG DUNG",
-      isActive: true,
-      createBy: null,
-      createDate: new Date(),
-      updateBy: null,
-      updateDate: new Date(),
-    }
-  ];
+  listColumnsName = ["money", "comment", "isActive", "action"];
+  list: DiciplineViewModel[] = [];
   dataSource = new MatTableDataSource(this.list);
   constructor() { }
 
