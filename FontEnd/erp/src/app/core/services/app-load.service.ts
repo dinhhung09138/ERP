@@ -21,18 +21,8 @@ export class AppLoadService {
       APIUrlConstants.authenticationApi = response.authenticationApi;
       APIUrlConstants.hrApi = response.hrApi;
       APIUrlConstants.marketingApi = response.marketingApi;
-      console.log(response);
       return response;
     });
   }
 
-  /**
-   * Get server url config.
-   */
-  getUrlSetting1(): Promise<any> {
-    return this.http.get<UrlSettingInterface>(this.configPath + 'url.config.json').toPromise().then(response => {
-      console.log(response);
-      return response;
-    });
-  }
 }

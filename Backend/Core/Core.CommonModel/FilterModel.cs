@@ -19,9 +19,5 @@ namespace Core.CommonModel
         /// </summary>
         public PagingModel Paging { get; set; } = new PagingModel();
 
-        /// <summary>
-        /// Sort model.
-        /// </summary>
-        public SortModel Sort { get; set; }
     }
 }
