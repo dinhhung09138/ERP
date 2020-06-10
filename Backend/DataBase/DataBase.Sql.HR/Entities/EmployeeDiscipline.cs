@@ -18,7 +18,7 @@ namespace DataBase.Sql.HR.Entities
 
         [Column(TypeName = "money")]
         [Required]
-        public string Money { get; set; }
+        public decimal Money { get; set; }
 
         [Column(TypeName = "int")]
         [Required]

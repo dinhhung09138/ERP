@@ -33,11 +33,11 @@ namespace DataBase.Sql.HR.Entities
 
         [Column(TypeName = "money")]
         [Required]
-        public string GrossSalary { get; set; }
+        public decimal GrossSalary { get; set; }
 
         [Column(TypeName = "money")]
         [Required]
-        public string NetSalary { get; set; }
+        public decimal NetSalary { get; set; }
 
         [Column(TypeName = "datetime")]
         public DateTime? ExpirationDate { get; set; }

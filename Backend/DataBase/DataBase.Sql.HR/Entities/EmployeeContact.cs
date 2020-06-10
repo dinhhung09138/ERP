@@ -52,7 +52,7 @@ namespace DataBase.Sql.HR.Entities
         [Column(TypeName = "int")]
         public int PermanentWardId { get; set; }
 
-        [Column(TypeName = "bit")]
+        [Column(TypeName = "int")]
         public int? PermanentDistrictId { get; set; }
 
         [Column(TypeName = "int")]
