@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { CommendationService } from './commendation.service';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -17,7 +17,6 @@ import { CommendationFormComponent } from './form/form.component';
 export class CommendationComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(CommendationFormComponent) form: CommendationFormComponent;
 
   isLoading = false;

@@ -12,6 +12,7 @@ import { CommendationService } from './commendation.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { ElementLoadingComponent } from 'src/app/shared/components/element-loading/element-loading.component';
+import { NoDataAvailableComponent } from 'src/app/shared/components/no-data-available/no-data-available.component';
 
 const route: Routes = [
   {
@@ -27,6 +28,7 @@ const route: Routes = [
     CommendationFormComponent,
     FormatNumberPipe,
     ElementLoadingComponent,
+    NoDataAvailableComponent,
   ],
   imports: [
     CommonModule,
