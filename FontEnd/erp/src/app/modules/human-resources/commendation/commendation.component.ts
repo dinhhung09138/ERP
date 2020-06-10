@@ -23,7 +23,7 @@ export class CommendationComponent implements OnInit {
   paging = new PagingModel();
 
   searchText = '';
-  currentPageSize = 0;
+  currentPageSize = this.paging.pageSize;
 
   listColumnsName: string[] = ['name', 'description', 'isActive', 'action'];
 
