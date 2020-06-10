@@ -25,6 +25,7 @@ export class CommendationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.commendationForm = this.fb.group({
+      id: [0],
       name: ['', [Validators.required]],
       description: [''],
       isActive: [true]
@@ -35,6 +36,7 @@ export class CommendationFormComponent implements OnInit {
   initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
 
     this.formAction = formStatus;
+    this.commendationForm.get('id').setValue(0);
     this.commendationForm.get('name').reset();
     this.commendationForm.get('description').reset();
     this.commendationForm.get('isActive').setValue(true);
@@ -55,6 +57,11 @@ export class CommendationFormComponent implements OnInit {
 
   create() {
     this.initFormControl(FormActionStatus.Create);
+  }
+
+  update(id: number) {
+    this.initFormControl(FormActionStatus.Update);
+    this.getItem(id);
   }
 
   reset() {
@@ -83,6 +90,20 @@ export class CommendationFormComponent implements OnInit {
       }
       this.isLoading = false;
       this.isSubmit = false;
+    });
+  }
+
+  private getItem(id: number) {
+    this.isLoading = true;
+    this.commendationService.item(id).subscribe((response: ResponseModel) => {
+      if (response !== null) {
+        console.log(response);
+        this.commendationForm.get('id').setValue(response.result.id);
+        this.commendationForm.get('name').setValue(response.result.name);
+        this.commendationForm.get('description').setValue(response.result.description);
+        this.commendationForm.get('isActive').setValue(response.result.isActive);
+      }
+      this.isLoading = false;
     });
   }
 

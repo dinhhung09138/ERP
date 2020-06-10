@@ -10,6 +10,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommendationService } from './commendation.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
+import { ElementLoadingComponent } from 'src/app/shared/components/element-loading/element-loading.component';
 
 const route: Routes = [
   {
@@ -23,6 +25,8 @@ const route: Routes = [
   declarations: [
     CommendationComponent,
     CommendationFormComponent,
+    FormatNumberPipe,
+    ElementLoadingComponent,
   ],
   imports: [
     CommonModule,

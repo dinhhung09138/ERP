@@ -11,5 +11,6 @@ namespace Service.HR.Interfaces
     {
         Task<ResponseModel> GetList(FilterModel filter);
         Task<ResponseModel> Save(CommendationModel model);
+        Task<ResponseModel> Item(int id);
     }
 }

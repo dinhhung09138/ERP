@@ -20,13 +20,13 @@ export class CommendationComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(CommendationFormComponent) form: CommendationFormComponent;
 
-  paging = new PagingModel();
+  isLoading = false;
 
+  paging = new PagingModel();
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
   listColumnsName: string[] = ['name', 'description', 'isActive', 'action'];
-
   dataSource = new MatTableDataSource();
 
   constructor(private commendationService: CommendationService) { }
@@ -44,6 +44,16 @@ export class CommendationComponent implements OnInit {
 
   create() {
     this.form.create();
+  }
+
+  update(id: number) {
+    if (id !== null) {
+      this.form.update(id);
+    }
+  }
+
+  delete(id: number) {
+
   }
 
   filterTable() {
@@ -67,6 +77,9 @@ export class CommendationComponent implements OnInit {
   }
 
   private getList() {
+
+    this.isLoading = true;
+
     const filter = new FilterModel();
     filter.text = this.searchText;
     filter.paging.pageIndex = this.paging.pageIndex;
@@ -75,6 +88,7 @@ export class CommendationComponent implements OnInit {
       if (response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
+        this.isLoading = false;
       }
     });
   }

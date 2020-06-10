@@ -7,7 +7,7 @@ namespace Core.CommonModel.Enums
     public enum FormActionStatus
     {
         Insert = 1,
-        Edit = 2,
+        Update = 2,
         Delete = 3
     }
 }

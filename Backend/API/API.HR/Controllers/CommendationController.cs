@@ -30,6 +30,13 @@ namespace API.HR.Controllers
             return response;
         }
 
+        [HttpGet, Route("item")]
+        public async Task<ResponseModel> Item(int id)
+        {
+            var response = await _commendationService.Item(id);
+            return response;
+        }
+
         [HttpPost, Route("save")]
         public async Task<ResponseModel> Save(CommendationModel model)
         {

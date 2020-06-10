@@ -35,6 +35,7 @@ namespace Service.HR
                     Id = m.Id,
                     Name = m.Name,
                     Description = m.Description,
+                    IsActive = m.IsActive,
                     CreateBy = m.CreateBy.ToString(),
                     CreateDate = m.CreateDate
                 }).OrderBy(m => m.CreateDate);
@@ -53,6 +54,37 @@ namespace Service.HR
             return response;
         }
 
+        public async Task<ResponseModel> Item(int id)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Commendation md = await _context.CommendationRepository.FirstOrDefaultAsync(m => m.Id == id);
+
+                if (md == null)
+                {
+                    throw new NullParameterException();
+                }
+
+                CommendationModel model = new CommendationModel()
+                {
+                    Id = md.Id,
+                    Name = md.Name,
+                    Description = md.Description,
+                    IsActive = md.IsActive,
+                    Money = md.Money
+                };
+
+                response.Result = model;
+            }
+            catch(Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
         public async Task<ResponseModel> Save(CommendationModel model)
         {
             ResponseModel response = new ResponseModel();
@@ -61,7 +93,7 @@ namespace Service.HR
                 case Core.CommonModel.Enums.FormActionStatus.Insert:
                     response = await Insert(model);
                     break;
-                case Core.CommonModel.Enums.FormActionStatus.Edit:
+                case Core.CommonModel.Enums.FormActionStatus.Update:
                     response = await Update(model);
                     break;
                 case Core.CommonModel.Enums.FormActionStatus.Delete:

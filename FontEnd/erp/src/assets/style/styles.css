@@ -243,3 +243,7 @@ body {
   padding: 2px 4px;
   margin: unset !important;
 }
+
+.card-body {
+  position: relative;
+}

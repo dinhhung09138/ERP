@@ -24,7 +24,14 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="isLoading">
+          <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="spinner-border text-info" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="!isLoading">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="paging.length > 0; else noRecord">
             <table mat-table matSort [dataSource]="dataSource" class="table">
               <ng-container matColumnDef="name">
@@ -50,8 +57,8 @@
                       <i class="fa fa-bars"></i>
                     </a>
                     <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
+                      <a href="javascript:{}" class="dropdown-item text-success" (click)="update(element.id)">Edit</a>
                       <a href="javascript:{}" class="dropdown-item text-danger">Delete</a>
-                      <a href="javascript:{}" class="dropdown-item text-success">Edit</a>
                     </div>
                   </div>
                 </td>
