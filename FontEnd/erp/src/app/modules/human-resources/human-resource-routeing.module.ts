@@ -17,6 +17,10 @@ const routes: Routes = [
         path: 'commendation',
         loadChildren: () => import('./commendation/commendation.module').then(m => m.CommendationModule),
         pathMatch: 'full'
+      },
+      {
+        path: 'province',
+        loadChildren: () => import('./province/province.module').then(m => m.ProvinceModule)
       }
     ]
   }
