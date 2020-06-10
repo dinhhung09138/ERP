@@ -14,11 +14,20 @@ const routes: Routes = [
         data: { title: 'Employee' }
       },
       {
-        path: 'contracttype',
-        loadChildren: () => import('./contracttype/contracttype.module').then(m => m.ContracttypeModule),
-        pathMatch: 'ContractType'
+        path: 'ProfessionalQualification',
+        loadChildren: () => import('./professional-qualification/professional-qualification.module').then(m => m.ProfessionalQualificationModule),
+        data: { title: 'ProfessionalQualification' }
       },
-      
+      {
+        path: 'ContractType',
+        loadChildren: () => import('./contract-type/contract-type.module').then(m => m.ContractTypeModule),
+        data: { title: 'ContractType' }
+      },
+      {
+        path: 'ModelOfStudy',
+        loadChildren: () => import('./model-of-study/model-of-study.module').then(m => m.ModelOfStudyModule),
+        data: { title: 'ModelOfStudy' }
+      },
       {
         path: 'commendation',
         loadChildren: () => import('./commendation/commendation.module').then(m => m.CommendationModule),

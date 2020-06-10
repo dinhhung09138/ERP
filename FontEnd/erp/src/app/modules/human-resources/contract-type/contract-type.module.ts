@@ -1,28 +1,27 @@
-
-import { ContracttypeComponent } from './contracttype.component';
+import { Routes, RouterModule } from '@angular/router';
+import { ContractTypeComponent } from './contract-type.component';
 import { NgModule } from '@angular/core';
-import { ContracttypeFormComponent } from './contracttype-form/contracttype-form.component';
-import { ContracttypeListComponent } from './contracttype-list/contracttype-list.component';
+import { ContractTypeFormComponent } from './contract-type-form/contract-type-form.component';
+import { ContractTypeListComponent } from './contract-type-list/contract-type-list.component';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { RouterModule, Routes } from '@angular/router';
 
 const route: Routes = [
     {
       path: '',
-      component: ContracttypeComponent,
-      data: { title: 'Contracttype' }
+      component: ContractTypeComponent,
+      data: { title: 'ContractType' }
     }
   ]
   
   @NgModule({
     declarations: [
-      ContracttypeComponent,
-      ContracttypeFormComponent,
-      ContracttypeListComponent,
+      ContractTypeComponent,
+      ContractTypeFormComponent,
+      ContractTypeListComponent,
     ],
     imports: [
       CommonModule,
@@ -33,4 +32,4 @@ const route: Routes = [
       RouterModule.forChild(route),
     ]
   })
-  export class ContracttypeModule { }
+  export class ContractTypeModule { }

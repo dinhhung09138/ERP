@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContracttypeListComponent } from './contracttype-list.component';
+import { ModelOfStudyComponent } from './model-of-study.component';
 
-describe('ContracttypeListComponent', () => {
-  let component: ContracttypeListComponent;
-  let fixture: ComponentFixture<ContracttypeListComponent>;
+describe('ModelOfStudyComponent', () => {
+  let component: ModelOfStudyComponent;
+  let fixture: ComponentFixture<ModelOfStudyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContracttypeListComponent ]
+      declarations: [ ModelOfStudyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContracttypeListComponent);
+    fixture = TestBed.createComponent(ModelOfStudyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
