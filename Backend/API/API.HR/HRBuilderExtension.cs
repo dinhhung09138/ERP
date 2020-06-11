@@ -16,6 +16,7 @@ namespace API.HR
             services.AddDbContext<HRContext>(options => options.UseSqlServer(config.GetConnectionString("HRConnection")), ServiceLifetime.Scoped);
 
             services.AddScoped<IHRUnitOfWork, HRUnitOfWork>();
+            services.AddScoped<IDisciplineService, DisciplineService>();
             services.AddScoped<ICommendationService, CommendationService>();
             return services;
         }

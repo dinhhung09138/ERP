@@ -3,57 +3,41 @@
     <ul class="nav module-sidebar flex-column" role="menu" data-accordion="false">
       <li class="nav-item">
         <a href="javascript: {}" class="nav-link">
-          <p>
-            Dashboard
-          </p>
+          <p> Dashboard </p>
         </a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a routerLink="/hr/commendation" class="nav-link">
-          <p>
-            Commendation
-          </p>
+          <p> Commendation </p>
         </a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a routerLink="/hr/province" class="nav-link">
-          <p>
-            Province
-          </p>
+          <p> Province </p>
         </a>
-      <li class="nav-item">
-        <a href="javascript: {}" class="nav-link">
-          <p>
-            Discipline
-          </p>
+      <li class="nav-item" routerLinkActive="active">
+        <a href="javascript: {}" class="nav-link" routerLink="/hr/discipline">
+          <p> Discipline </p>
         </a>
       </li>
       <li class="nav-item">
         <a href="javascript: {}" class="nav-link">
-          <p>
-            Contract Type
-          </p>
+          <p> Contract Type </p>
         </a>
       </li>
       <li class="nav-item">
         <a href="javascript: {}" class="nav-link">
-          <p>
-            Department
-          </p>
+          <p> Department </p>
         </a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a routerLink="/hr/employee" class="nav-link">
-          <p>
-            Employee
-          </p>
+          <p> Employee </p>
         </a>
       </li>
       <li class="nav-item">
         <a (click)="openSideMenu('dashboard')" class="nav-link" [ngClass]="{'menu-open': linkSelected === 'dashboard'}">
-          <p>
-            Dashboard
-            <i class="fa fa-angle-left right"></i>
+          <p> Dashboard <i class="fa fa-angle-left right"></i>
           </p>
         </a>
         <ul class="nav" [ngStyle]="{'display' : linkSelected === 'dashboard' ? 'block' : 'none'}">
@@ -80,9 +64,7 @@
       <li class="nav-item">
         <a (click)="openSideMenu('department')" class="nav-link"
           [ngClass]="{'menu-open': linkSelected === 'department'}">
-          <p>
-            Department
-            <i class="fa fa-angle-left right"></i>
+          <p> Department <i class="fa fa-angle-left right"></i>
           </p>
         </a>
         <ul class="nav nav-treeview" [ngStyle]="{'display': linkSelected === 'department' ? 'block' : 'none'}">
@@ -109,9 +91,7 @@
       <li class="nav-item">
         <a href="javascript: {}" class="nav-link">
           <i class="nav-icon fas fa-th"></i>
-          <p>
-            Widgets
-            <span class="right badge badge-danger">New</span>
+          <p> Widgets <span class="right badge badge-danger">New</span>
           </p>
         </a>
       </li>

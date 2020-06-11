@@ -80,7 +80,7 @@ export class CommendationFormComponent implements OnInit {
     }
     const model = this.commendationForm.value as CommendationViewModel;
     model.action = this.formAction;
-    console.log(model);
+
     this.commendationService.save(model).subscribe((res: ResponseModel) => {
       if (res !== null) {
         if (res.responseStatus === ResponseStatus.success) {
