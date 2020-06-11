@@ -50,6 +50,7 @@ export class DisciplineComponent implements OnInit {
     console.log(page);
   }
 
+
   getList() {
     this.isLoading = true;
     const filter = new FilterModel();

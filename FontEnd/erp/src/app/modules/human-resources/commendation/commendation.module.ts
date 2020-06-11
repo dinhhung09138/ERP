@@ -1,18 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CommendationComponent } from './commendation.component';
 import { Routes, RouterModule } from '@angular/router';
 import { CommendationFormComponent } from './form/form.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommendationService } from './commendation.service';
-import { HttpClientModule } from '@angular/common/http';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
-import { ElementLoadingComponent } from 'src/app/shared/components/element-loading/element-loading.component';
-import { NoDataAvailableComponent } from 'src/app/shared/components/no-data-available/no-data-available.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const route: Routes = [
   {
@@ -27,18 +19,9 @@ const route: Routes = [
     CommendationComponent,
     CommendationFormComponent,
     FormatNumberPipe,
-    ElementLoadingComponent,
-    NoDataAvailableComponent,
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatCheckboxModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatTableModule,
+    SharedModule,
     RouterModule.forChild(route),
   ],
   providers: [
