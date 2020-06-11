@@ -1,10 +1,20 @@
 .overlay {
-  background-color: #dedede;
-  opacity: 0.5;
+  background-color: #afaeae;
+  opacity: 0.4;
   z-index: 999;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
   position: absolute;
+}
+
+.overlay>div {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+
+.overlay>div {
+  color: #1A6E64 !important;
 }
