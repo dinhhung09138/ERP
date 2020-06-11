@@ -21,7 +21,9 @@ export class CommendationFormComponent implements OnInit {
   isLoading = false;
   commendationForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private commendationService: CommendationService) { }
+  constructor(
+    private fb: FormBuilder,
+    private commendationService: CommendationService) { }
 
   ngOnInit(): void {
     this.commendationForm = this.fb.group({

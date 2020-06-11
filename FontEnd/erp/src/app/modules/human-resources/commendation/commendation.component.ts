@@ -63,14 +63,11 @@ export class CommendationComponent implements OnInit {
   }
 
   pageChange(page: PageEvent) {
-    console.log(page);
-    console.log(this.currentPageSize);
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
       this.currentPageSize = page.pageSize;
       this.paging.pageIndex = 0;
-      console.log('dif page size');
     }
     this.getList();
   }

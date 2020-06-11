@@ -42,7 +42,7 @@ namespace Service.HR
 
                 BaseListModel<CommendationModel> listItems = new BaseListModel<CommendationModel>();
                 listItems.TotalItems = await _context.CommendationRepository.Query().CountAsync();
-                listItems.Items = await list.Take(filter.Paging.PageSize).Skip(filter.Paging.PageIndex * filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
             }
