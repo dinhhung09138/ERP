@@ -45,7 +45,7 @@ namespace Service.HR
 
                 BaseListModel<DisciplineModel> listItems = new BaseListModel<DisciplineModel>();
                 listItems.TotalItems = await _context.DisciplineRepository.Query().CountAsync();
-                listItems.Items = await list.Take(filter.Paging.PageSize).Skip(filter.Paging.PageIndex * filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
             }
