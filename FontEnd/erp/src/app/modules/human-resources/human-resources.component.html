@@ -7,93 +7,133 @@
         </a>
       </li>
       <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/hr/department">
+          <p> Department </p>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/hr/team">
+          <p> Team </p>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/hr/position">
+          <p> Position </p>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
         <a routerLink="/hr/commendation" class="nav-link">
           <p> Commendation </p>
         </a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a routerLink="/hr/province" class="nav-link">
-          <p> Province </p>
-        </a>
-      <li class="nav-item" routerLinkActive="active">
         <a href="javascript: {}" class="nav-link" routerLink="/hr/discipline">
           <p> Discipline </p>
         </a>
       </li>
-      <li class="nav-item">
-        <a href="javascript: {}" class="nav-link">
-          <p> Contract Type </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="javascript: {}" class="nav-link">
-          <p> Department </p>
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="/hr/employee" class="nav-link">
+          <p> Employee <span class="right badge badge-danger">100</span></p>
         </a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a routerLink="/hr/employee" class="nav-link">
-          <p> Employee </p>
+        <a routerLink="/hr/leave" class="nav-link" (click)="openSideMenu('leave')"
+          [ngClass]="{'menu-open': linkSelected === 'leave'}">
+          <p> Leave Management</p>
+        </a>
+        <ul class="nav" [ngStyle]="{'display': linkSelected === 'leave' ? 'block' : 'none'}">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/leave/summary">
+              <p> Summary </p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/leave/add-leave">
+              <p> Add Leave </p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="/hr/holiday" class="nav-link">
+          <p> Holiday Management</p>
         </a>
       </li>
-      <li class="nav-item">
-        <a (click)="openSideMenu('dashboard')" class="nav-link" [ngClass]="{'menu-open': linkSelected === 'dashboard'}">
-          <p> Dashboard <i class="fa fa-angle-left right"></i>
-          </p>
+      <li class="nav-item" routerLinkActive="active">
+        <a (click)="openSideMenu('configuration')" class="nav-link"
+          [ngClass]="{'menu-open': linkSelected === 'configuration'}">
+          <p>Configuration <i class="fa fa-angle-left right"></i></p>
         </a>
-        <ul class="nav" [ngStyle]="{'display' : linkSelected === 'dashboard' ? 'block' : 'none'}">
-          <li class="nav-item">
-            <a href="./index.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v1</p>
+        <ul class="nav" [ngStyle]="{'display': linkSelected === 'configuration' ? 'block' : 'none'}">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/configuration/province">
+              <p> Province </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./index2.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v2</p>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/configuration/district">
+              <p> District </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./index3.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v3</p>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="hr/configuration/education">
+              <p> Education</p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="hr/configuration/model-of-study">
+              <p> Model Of Study</p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="hr/configuration/identification">
+              <p> Identification</p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="hr/configuration/contract-type">
+              <p> Contract Type </p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="hr/configuration/employee-status">
+              <p> Employee Status</p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="hr/configuration/education">
+              <p> Job title</p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="hr/configuration/approve-status">
+              <p> Approve Status</p>
             </a>
           </li>
         </ul>
       </li>
       <li class="nav-item">
-        <a (click)="openSideMenu('department')" class="nav-link"
-          [ngClass]="{'menu-open': linkSelected === 'department'}">
-          <p> Department <i class="fa fa-angle-left right"></i>
+        <a (click)="openSideMenu('contact')" class="nav-link" [ngClass]="{'menu-open': linkSelected === 'contact'}">
+          <p> Contacts <i class="fa fa-angle-left right"></i>
           </p>
         </a>
-        <ul class="nav nav-treeview" [ngStyle]="{'display': linkSelected === 'department' ? 'block' : 'none'}">
-          <li class="nav-item">
-            <a href="./index.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v1</p>
+        <ul class="nav" [ngStyle]="{'display': linkSelected === 'contact' ? 'block' : 'none'}">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/contacts/external-user">
+              <p>External Users</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./index2.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v2</p>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/contacts/client">
+              <p>Clients</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./index3.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v3</p>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/contacts/vendor">
+              <p>Vendors</p>
             </a>
           </li>
         </ul>
-      </li>
-      <li class="nav-item">
-        <a href="javascript: {}" class="nav-link">
-          <i class="nav-icon fas fa-th"></i>
-          <p> Widgets <span class="right badge badge-danger">New</span>
-          </p>
-        </a>
       </li>
     </ul>
     <router-outlet></router-outlet>

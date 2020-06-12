@@ -55,6 +55,10 @@
   background-color: #1A6E64;
 }
 
+.module-sidebar .nav-item ul.nav>li>a {
+  padding-left: 30px;
+}
+
 .content-page {
   transition: margin-left .5s;
   padding-left: 260px !important;
