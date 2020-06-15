@@ -8,6 +8,14 @@ CREATE TABLE [dbo].[Ward](
 	[Name] [nvarchar](100) NOT NULL,
 	[DistrictId] [int] NOT NULL,
 	[ProvinceId] [int] NOT NULL,
+	[Precedence] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[CreateDate] [datetime] NOT NULL,
+	[CreateBy] [int] NOT NULL,
+	[UpdateDate] [datetime] NULL,
+	[UpdateBy] [int] NULL,
+	[Deleted] [bit] NOT NULL,
+	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_Ward] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
