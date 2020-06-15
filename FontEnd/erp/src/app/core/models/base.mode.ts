@@ -1,6 +1,6 @@
 import { FormActionStatus } from '../enums/form-action-status.enum';
 
-export class BaseViewModel {
+export interface BaseViewModel {
   id: number;
   isActive: boolean;
   createDate: Date;
@@ -8,7 +8,4 @@ export class BaseViewModel {
   updateDate: Date;
   updateBy: number;
   action: FormActionStatus;
-
-  constructor() {
-  }
 }

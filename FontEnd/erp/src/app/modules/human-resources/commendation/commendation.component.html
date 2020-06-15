@@ -24,15 +24,9 @@
             </div>
           </div>
         </div>
-        <div class="row" *ngIf="isLoading">
-          <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-            <div class="spinner-border text-info" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-        </div>
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <app-table-loading [Show]="isLoading"></app-table-loading>
             <table mat-table matSort [dataSource]="dataSource" class="table">
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
