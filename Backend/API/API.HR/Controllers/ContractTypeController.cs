@@ -6,35 +6,35 @@ using System.Threading.Tasks;
 
 namespace API.HR.Controllers
 {
-    [Route("api/hr/approve-status")]
+    [Route("api/hr/contract-type")]
     [ApiController]
-    public class ApproveStatusController : ControllerBase
+    public class ContractTypeController : ControllerBase
     {
-        private readonly IApproveStatusService _approveStatusService;
+        private readonly IContractTypeService _contractTypeService;
 
-        public ApproveStatusController(IApproveStatusService approveStatusService)
+        public ContractTypeController(IContractTypeService contractTypeService)
         {
-            _approveStatusService = approveStatusService;
+            _contractTypeService = contractTypeService;
         }
 
         [HttpPost, Route("getlist")]
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
-            var response = await _approveStatusService.GetList(filter);
+            var response = await _contractTypeService.GetList(filter);
             return response;
         }
 
         [HttpGet, Route("item")]
         public async Task<ResponseModel> Item(int id)
         {
-            var response = await _approveStatusService.Item(id);
+            var response = await _contractTypeService.Item(id);
             return response;
         }
 
         [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(ApproveStatusModel model)
+        public async Task<ResponseModel> Save(ContractTypeModel model)
         {
-            var response = await _approveStatusService.Save(model);
+            var response = await _contractTypeService.Save(model);
             return response;
         }
     }

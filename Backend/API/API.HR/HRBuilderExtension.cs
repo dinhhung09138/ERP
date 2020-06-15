@@ -20,6 +20,7 @@ namespace API.HR
             services.AddScoped<ICommendationService, CommendationService>();
             services.AddScoped<IAcademicLevelService, AcademicLevelService>();
             services.AddScoped<IApproveStatusService, ApproveStatusService>();
+            services.AddScoped<IContractTypeService, ContractTypeService>();
             return services;
         }
     }

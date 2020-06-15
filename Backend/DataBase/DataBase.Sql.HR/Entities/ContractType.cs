@@ -13,6 +13,11 @@ namespace DataBase.Sql.HR.Entities
         [Column(TypeName = "int")]
         public int Id { get; set; }
 
+        [Column(TypeName = "varchar(10)")]
+        [Required]
+        [MaxLength(10)]
+        public string Code { get; set; }
+
         [Column(TypeName = "nvarchar(80)")]
         [Required]
         [MaxLength(80)]

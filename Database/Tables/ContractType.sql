@@ -5,6 +5,7 @@ IF OBJECT_ID('dbo.ContractType', 'u') IS NOT NULL
 GO
 CREATE TABLE [dbo].[ContractType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Code] [varchar](10) NOT NULL,
 	[Name] [nvarchar](80) NOT NULL,
 	[Description] [nvarchar](255) NULL,
 	[AllowInsurrance] [bit] NOT NULL,
