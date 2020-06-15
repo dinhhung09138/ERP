@@ -7,6 +7,13 @@ CREATE TABLE [dbo].[District](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
 	[ProvinceId] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[CreateDate] [datetime] NOT NULL,
+	[CreateBy] [int] NOT NULL,
+	[UpdateDate] [datetime] NULL,
+	[UpdateBy] [int] NULL,
+	[Deleted] [bit] NOT NULL,
+	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_District] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

@@ -21,6 +21,7 @@ namespace API.HR
             services.AddScoped<IAcademicLevelService, AcademicLevelService>();
             services.AddScoped<IApproveStatusService, ApproveStatusService>();
             services.AddScoped<IContractTypeService, ContractTypeService>();
+            services.AddScoped<IDistrictService, DistrictService>();
             return services;
         }
     }
