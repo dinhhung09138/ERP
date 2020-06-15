@@ -35,6 +35,7 @@ namespace Service.HR
                     Id = m.Id,
                     Name = m.Name,
                     Description = m.Description,
+                    Money = m.Money,
                     IsActive = m.IsActive,
                     CreateBy = m.CreateBy.ToString(),
                     CreateDate = m.CreateDate
@@ -114,6 +115,7 @@ namespace Service.HR
 
                 md.Name = model.Name;
                 md.Description = model.Description;
+                md.Money = model.Money;
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
@@ -146,6 +148,7 @@ namespace Service.HR
                 md.Name = model.Name;
                 md.Description = model.Description;
                 md.IsActive = model.IsActive;
+                md.Money = model.Money;
                 md.UpdateBy = 1; // TODO
                 md.UpdateDate = DateTime.Now;
 

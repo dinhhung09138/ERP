@@ -22,6 +22,9 @@ namespace DataBase.Sql.HR.Entities
         [MaxLength(255)]
         public string Description { get; set; }
 
+        [Column(TypeName = "money")]
+        public decimal Money { get; set; }
+
         [Column(TypeName = "bit")]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]

@@ -23,7 +23,7 @@ namespace DataBase.Sql.HR.Entities
         public string Description { get; set; }
 
         [Column(TypeName = "money")]
-        public int Money { get; set; }
+        public decimal Money { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]
