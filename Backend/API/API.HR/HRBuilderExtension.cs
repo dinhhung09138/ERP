@@ -25,6 +25,7 @@ namespace API.HR
             services.AddScoped<IIdentificationTypeService, IdentificationTypeService>();
             services.AddScoped<IWardService, WardService>();
             services.AddScoped<IProvinceService, ProvinceService>();
+            services.AddScoped<IRankingService, RankingService>();
             return services;
         }
     }
