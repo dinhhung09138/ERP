@@ -1,4 +1,5 @@
 ﻿using Core.CommonModel;
+using Core.Utility;
 using Service.HR.Models;
 using System;
 using System.Collections.Generic;
@@ -7,10 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.HR.Interfaces
 {
-    public interface IDisciplineService
+    public interface IDisciplineService : IBaseIService<DisciplineModel>
     {
-        Task<ResponseModel> GetList(FilterModel filter);
-        Task<ResponseModel> Save(DisciplineModel model);
-        Task<ResponseModel> Item(int id);
     }
 }
