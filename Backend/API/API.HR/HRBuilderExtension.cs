@@ -27,6 +27,7 @@ namespace API.HR
             services.AddScoped<IProvinceService, ProvinceService>();
             services.AddScoped<IRankingService, RankingService>();
             services.AddScoped<IProfessionalQualificationService, ProfessionalQualificationService>();
+            services.AddScoped<IModelOfStudyService, ModelOfStudyService>();
             return services;
         }
     }

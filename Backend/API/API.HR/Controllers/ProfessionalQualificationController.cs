@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace API.HR.Controllers
 {
+    [Route("api/hr/professional-qualification")]
+    [ApiController]
     public class ProfessionalQualificationController : ControllerBase
     {
         private readonly IProfessionalQualificationService _professionalQualificationService;
