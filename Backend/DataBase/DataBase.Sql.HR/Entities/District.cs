@@ -22,6 +22,10 @@ namespace DataBase.Sql.HR.Entities
         [Required]
         public int ProvinceId { get; set; }
 
+        [Column(TypeName = "int")]
+        [Required]
+        public int Precedence { get; set; }
+
         [Column(TypeName = "bit")]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]

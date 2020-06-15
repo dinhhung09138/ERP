@@ -31,6 +31,7 @@ namespace Service.HR
                                 Name = m.Name,
                                 ProvinceId = m.ProvinceId,
                                 ProvinceName = p.Name,
+                                Precedence = m.Precedence,
                                 IsActive = m.IsActive,
                                 CreateBy = m.CreateBy.ToString(),
                                 CreateDate = m.CreateDate
@@ -72,6 +73,7 @@ namespace Service.HR
                                 Name = m.Name,
                                 ProvinceId = m.ProvinceId,
                                 ProvinceName = p.Name,
+                                Precedence = m.Precedence,
                                 IsActive = m.IsActive
                             };
 
@@ -114,6 +116,7 @@ namespace Service.HR
 
                 md.Name = model.Name;
                 md.ProvinceId = model.ProvinceId;
+                md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
@@ -145,6 +148,7 @@ namespace Service.HR
 
                 md.Name = model.Name;
                 md.ProvinceId = model.ProvinceId;
+                md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
                 md.UpdateBy = 1; // TODO
                 md.UpdateDate = DateTime.Now;

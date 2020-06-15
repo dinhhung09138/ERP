@@ -6,6 +6,7 @@ GO
 CREATE TABLE [dbo].[District](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
+	[Precedence] [int] NOT NULL,
 	[ProvinceId] [int] NOT NULL,
 	[IsActive] [bit] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
