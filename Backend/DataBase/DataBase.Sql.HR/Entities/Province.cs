@@ -17,5 +17,40 @@ namespace DataBase.Sql.HR.Entities
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
+
+        [Column(TypeName = "int")]
+        [Required]
+        public int Precedence { get; set; }
+
+        [Column(TypeName = "bit")]
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DefaultValue(true)]
+        public bool IsActive { get; set; }
+
+        [Column(TypeName = "int")]
+        [Required]
+        public int CreateBy { get; set; }
+
+        [Column(TypeName = "datetime")]
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DefaultValue("getdate()")]
+        public DateTime CreateDate { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime? UpdateDate { get; set; }
+
+        [Column(TypeName = "int")]
+        public int? UpdateBy { get; set; }
+
+        [Column(TypeName = "bit")]
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DefaultValue(false)]
+        public bool Deleted { get; set; }
+
+        [Column(TypeName = "int")]
+        public int? DeletedBy { get; set; }
     }
 }
