@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utility
 {
-    public interface IBaseIService<T> where T : class
+    public interface IBaseService<T> where T : class
     {
         Task<ResponseModel> GetList(FilterModel filter);
         Task<ResponseModel> Save(T model);

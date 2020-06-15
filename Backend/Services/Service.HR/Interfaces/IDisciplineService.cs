@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.HR.Interfaces
 {
-    public interface IDisciplineService : IBaseIService<DisciplineModel>
+    public interface IDisciplineService : IBaseService<DisciplineModel>
     {
     }
 }

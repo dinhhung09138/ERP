@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Service.HR.Interfaces
 {
-    public interface IAcademicLevelService : IBaseIService<AcademicLevelModel>
+    public interface IAcademicLevelService : IBaseService<AcademicLevelModel>
     {
     }
 }

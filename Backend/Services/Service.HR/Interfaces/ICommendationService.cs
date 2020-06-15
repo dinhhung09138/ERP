@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.HR.Interfaces
 {
-    public interface ICommendationService : IBaseIService<CommendationModel>
+    public interface ICommendationService : IBaseService<CommendationModel>
     {
     }
 }
