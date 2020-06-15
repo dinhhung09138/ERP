@@ -23,6 +23,7 @@ namespace API.HR
             services.AddScoped<IContractTypeService, ContractTypeService>();
             services.AddScoped<IDistrictService, DistrictService>();
             services.AddScoped<IIdentificationTypeService, IdentificationTypeService>();
+            services.AddScoped<IWardService, WardService>();
             return services;
         }
     }
