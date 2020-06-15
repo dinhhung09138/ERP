@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace API.HR.Controllers
 {
-    [Route("api/hr/academic-level")]
+    [Route("api/hr/education")]
     [ApiController]
-    public class AcademicLevelController : ControllerBase
+    public class EducationController : ControllerBase
     {
-        private readonly IAcademicLevelService _accademicLevelService;
+        private readonly IEducationService _accademicLevelService;
 
-        public AcademicLevelController(IAcademicLevelService accademicLevelService)
+        public EducationController(IEducationService accademicLevelService)
         {
             _accademicLevelService = accademicLevelService;
         }
@@ -32,7 +32,7 @@ namespace API.HR.Controllers
         }
 
         [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(AcademicLevelModel model)
+        public async Task<ResponseModel> Save(EducationModel model)
         {
             var response = await _accademicLevelService.Save(model);
             return response;

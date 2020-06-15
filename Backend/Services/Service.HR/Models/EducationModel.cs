@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Service.HR.Models
 {
-    public class AcademicLevelModel : BaseModel
+    public class EducationModel : BaseModel
     {
         public int Id { get; set; }
 

@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace Service.HR
 {
-    public class AcademicLevelService : IAcademicLevelService
+    public class EducationService : IEducationService
     {
         private readonly IHRUnitOfWork _context;
-        public AcademicLevelService(IHRUnitOfWork context)
+        public EducationService(IHRUnitOfWork context)
         {
             _context = context;
         }
@@ -32,7 +32,7 @@ namespace Service.HR
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text));
                 }
 
-                var list = query.Select(m => new AcademicLevelModel()
+                var list = query.Select(m => new EducationModel()
                 {
                     Id = m.Id,
                     Name = m.Name,
@@ -42,7 +42,7 @@ namespace Service.HR
                     CreateDate = m.CreateDate
                 }).OrderBy(m => m.CreateDate);
 
-                BaseListModel<AcademicLevelModel> listItems = new BaseListModel<AcademicLevelModel>();
+                BaseListModel<EducationModel> listItems = new BaseListModel<EducationModel>();
                 listItems.TotalItems = await _context.AcademicLevelRepository.Query().CountAsync();
                 listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
@@ -61,14 +61,14 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                AcademicLevel md = await _context.AcademicLevelRepository.FirstOrDefaultAsync(m => m.Id == id);
+                Education md = await _context.AcademicLevelRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
 
-                AcademicLevelModel model = new AcademicLevelModel()
+                EducationModel model = new EducationModel()
                 {
                     Id = md.Id,
                     Name = md.Name,
@@ -86,7 +86,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(AcademicLevelModel model)
+        public async Task<ResponseModel> Save(EducationModel model)
         {
             ResponseModel response = new ResponseModel();
             switch (model.Action)
@@ -105,13 +105,13 @@ namespace Service.HR
         }
 
 
-        private async Task<ResponseModel> Insert(AcademicLevelModel model)
+        private async Task<ResponseModel> Insert(EducationModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                AcademicLevel md = new AcademicLevel();
+                Education md = new Education();
 
                 md.Name = model.Name;
                 md.Precedence = model.Precedence;
@@ -131,13 +131,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(AcademicLevelModel model)
+        private async Task<ResponseModel> Update(EducationModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                AcademicLevel md = await _context.AcademicLevelRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Education md = await _context.AcademicLevelRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
@@ -162,13 +162,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(AcademicLevelModel model)
+        private async Task<ResponseModel> Delete(EducationModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                AcademicLevel md = await _context.AcademicLevelRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Education md = await _context.AcademicLevelRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {

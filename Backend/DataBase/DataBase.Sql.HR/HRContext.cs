@@ -6,7 +6,7 @@ namespace DataBase.Sql.HR
 {
     public class HRContext : DbContext
     {
-        public virtual DbSet<AcademicLevel> AcademicLevel { get; set; }
+        public virtual DbSet<Education> AcademicLevel { get; set; }
 
         public virtual DbSet<ApproveStatus> ApproveStatus { get; set; }
 
@@ -69,7 +69,7 @@ namespace DataBase.Sql.HR
         {
             modelBuilder.HasAnnotation("ProductVersion", "3.1.2");
 
-            modelBuilder.Entity<AcademicLevel>();
+            modelBuilder.Entity<Education>();
             modelBuilder.Entity<ApproveStatus>();
             modelBuilder.Entity<CodeType>();
             modelBuilder.Entity<Commendation>();

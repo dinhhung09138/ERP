@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBase.Sql.HR.Entities
 {
-    [Table("AcademicLevel")]
-    public class AcademicLevel
+    [Table("Education")]
+    public class Education
     {
         [Key]
         [Column(TypeName = "int")]
