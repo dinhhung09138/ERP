@@ -18,6 +18,7 @@ namespace API.HR
             services.AddScoped<IHRUnitOfWork, HRUnitOfWork>();
             services.AddScoped<IDisciplineService, DisciplineService>();
             services.AddScoped<ICommendationService, CommendationService>();
+            services.AddScoped<IAcademicLevelService, AcademicLevelService>();
             return services;
         }
     }
