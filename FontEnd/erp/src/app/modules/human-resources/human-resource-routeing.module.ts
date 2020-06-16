@@ -25,6 +25,10 @@ const routes: Routes = [
       {
         path: 'discipline',
         loadChildren: () => import('./discipline/discipline.module').then(m => m.DisciplineModule)
+      },
+      {
+        path: 'configuration/approve-status',
+        loadChildren: () => import('./approve-status/approve-status.module').then(m => m.ApproveStatusModule)
       }
     ]
   }

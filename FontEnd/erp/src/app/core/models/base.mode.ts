@@ -8,4 +8,5 @@ export interface BaseViewModel {
   updateDate: Date;
   updateBy: number;
   action: FormActionStatus;
+  precedence: number;
 }

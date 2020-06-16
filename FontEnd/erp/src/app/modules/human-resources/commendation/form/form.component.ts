@@ -41,7 +41,7 @@ export class CommendationFormComponent implements OnInit {
     this.commendationForm.get('id').setValue(0);
     this.commendationForm.get('name').reset();
     this.commendationForm.get('description').reset();
-    this.commendationForm.get('isActive').setValue(true);
+    this.commendationForm.get('isActive').reset();
 
     if (isDisabledForm) {
       if (formStatus === FormActionStatus.UnKnow) {
@@ -49,7 +49,7 @@ export class CommendationFormComponent implements OnInit {
         this.commendationForm.get('description').disable();
         this.commendationForm.get('isActive').disable();
       } else {
-        console.log('enable');
+        this.commendationForm.get('isActive').setValue(true);
         this.commendationForm.get('name').enable();
         this.commendationForm.get('description').enable();
         this.commendationForm.get('isActive').enable();
@@ -99,7 +99,6 @@ export class CommendationFormComponent implements OnInit {
     this.isLoading = true;
     this.commendationService.item(id).subscribe((response: ResponseModel) => {
       if (response !== null) {
-        console.log(response);
         this.commendationForm.get('id').setValue(response.result.id);
         this.commendationForm.get('name').setValue(response.result.name);
         this.commendationForm.get('description').setValue(response.result.description);

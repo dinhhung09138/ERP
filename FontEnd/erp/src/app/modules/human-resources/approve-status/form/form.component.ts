@@ -85,7 +85,6 @@ export class ApproveStatusFormComponent implements OnInit {
     if (this.approveStatusForm.invalid) {
       return;
     }
-    console.log(this.approveStatusForm.value);
     const model = this.approveStatusForm.value as ApproveStatusViewModel;
     model.action = this.formAction;
 

@@ -23,7 +23,7 @@ namespace API.HR.Controllers
             _commendationService = commendationService;
         }
 
-        [HttpPost, Route("getlist")]
+        [HttpPost, Route("get-list")]
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             var response = await _commendationService.GetList(filter);

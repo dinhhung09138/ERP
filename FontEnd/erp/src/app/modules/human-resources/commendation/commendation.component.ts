@@ -10,7 +10,7 @@ import { PagingModel } from 'src/app/core/models/paging.model';
 import { CommendationFormComponent } from './form/form.component';
 
 @Component({
-  selector: 'app-commendation',
+  selector: 'app-hr-commendation',
   templateUrl: './commendation.component.html',
   styleUrls: ['./commendation.component.css']
 })
