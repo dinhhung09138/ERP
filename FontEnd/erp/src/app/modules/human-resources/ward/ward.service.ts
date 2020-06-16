@@ -12,6 +12,7 @@ export class WardService {
 
   url = {
     list: APIUrlConstants.hrApi + 'ward/get-list',
+    dropdown: APIUrlConstants.hrApi + 'ward/dropdown',
     item: APIUrlConstants.hrApi + 'ward/item',
     save: APIUrlConstants.hrApi + 'ward/save',
   };
@@ -21,6 +22,18 @@ export class WardService {
 
   getList(filter: FilterModel) {
     return this.http.post<ResponseModel>(this.url.list, filter).pipe(
+      map((data) => {
+        return data;
+      }),
+      catchError(xhr => {
+        console.log(xhr);
+        return of(null);
+      })
+    );
+  }
+
+  getDropdown() {
+    return this.http.get<ResponseModel>(this.url.dropdown).pipe(
       map((data) => {
         return data;
       }),

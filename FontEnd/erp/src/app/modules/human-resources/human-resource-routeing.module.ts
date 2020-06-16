@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HumanResourcesComponent } from './human-resources.component';
 import { CommendationComponent } from './commendation/commendation.component';
 import { DistrictResolver } from './district/district.resolver';
+import { WardResolver } from './ward/ward.resolver';
 
 const routes: Routes = [
   {
@@ -34,7 +35,33 @@ const routes: Routes = [
       },
       {
         path: 'configuration/ward',
-        loadChildren: () => import('./ward/ward.module').then(m => m.WardModule)
+        loadChildren: () => import('./ward/ward.module').then(m => m.WardModule),
+        resolve: { data: WardResolver },
+      },
+      {
+        path: 'configuration/education',
+        loadChildren: () => import('./education/education.module').then(m => m.EducationModule),
+      },
+      {
+        path: 'configuration/model-of-study',
+        loadChildren: () => import('./model-of-study/model-of-study.module').then(m => m.ModelOfStudyModule),
+      },
+      {
+        path: 'configuration/identification',
+        loadChildren: () => import('./identification-type/identification-type.module').then(m => m.IdentificationTypeModule),
+      },
+      {
+        path: 'configuration/qualification',
+        loadChildren: () => import('./professional-qualification/professional-qualification.module')
+          .then(m => m.ProfessionalQualificationModule),
+      },
+      {
+        path: 'configuration/ranking',
+        loadChildren: () => import('./ranking/ranking.module').then(m => m.RankingModule),
+      },
+      {
+        path: 'configuration/contract-type',
+        loadChildren: () => import('./contract-type/contract-type.module').then(m => m.ContractTypeModule),
       },
       {
         path: 'configuration/approve-status',

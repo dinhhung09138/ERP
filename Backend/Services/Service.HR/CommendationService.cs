@@ -36,9 +36,7 @@ namespace Service.HR
                     Name = m.Name,
                     Description = m.Description,
                     Money = m.Money,
-                    IsActive = m.IsActive,
-                    CreateBy = m.CreateBy.ToString(),
-                    CreateDate = m.CreateDate
+                    IsActive = m.IsActive
                 }).OrderBy(m => m.CreateDate);
 
                 BaseListModel<CommendationModel> listItems = new BaseListModel<CommendationModel>();
