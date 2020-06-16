@@ -35,7 +35,11 @@
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <label class="label">Precedence</label>
-                  <input type="number" formControlName="precedence" maxlength="2" class="form-control" tabindex="3" />
+                  <input type="number" formControlName="precedence" maxlength="2" class="form-control" tabindex="3"
+                    [ngClass]="{'is-invalid': isSubmit && approveStatusForm.controls['precedence'].errors}" />
+                  <div *ngIf="isSubmit && approveStatusForm.controls['precedence'].errors" class="invalid-feedback">
+                    <div *ngIf="approveStatusForm.controls['precedence'].errors.required">This field is required</div>
+                  </div>
                 </div>
               </div>
               <div class="row">

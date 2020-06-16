@@ -39,10 +39,8 @@ namespace Service.HR
                     Code = m.Code,
                     Name = m.Name,
                     Precedence = m.Precedence,
-                    IsActive = m.IsActive,
-                    CreateBy = m.CreateBy.ToString(),
-                    CreateDate = m.CreateDate
-                }).OrderBy(m => m.CreateDate);
+                    IsActive = m.IsActive
+                }).OrderBy(m => m.Precedence);
 
                 BaseListModel<ApproveStatusModel> listItems = new BaseListModel<ApproveStatusModel>();
                 listItems.TotalItems = await _context.ApproveStatusRepository.Query().CountAsync();

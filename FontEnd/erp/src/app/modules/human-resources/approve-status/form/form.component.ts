@@ -30,13 +30,14 @@ export class ApproveStatusFormComponent implements OnInit {
       id: [0],
       code: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      precedence: [1],
+      precedence: [1, [Validators.required]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);
   }
 
   initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+    this.isSubmit = false;
 
     this.formAction = formStatus;
     this.approveStatusForm.get('id').setValue(0);
@@ -81,10 +82,10 @@ export class ApproveStatusFormComponent implements OnInit {
 
   submitForm() {
     this.isSubmit = true;
-    this.isLoading = true;
     if (this.approveStatusForm.invalid) {
       return;
     }
+    this.isLoading = true;
     const model = this.approveStatusForm.value as ApproveStatusViewModel;
     model.action = this.formAction;
 
