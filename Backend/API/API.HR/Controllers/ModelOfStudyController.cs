@@ -17,10 +17,17 @@ namespace API.HR.Controllers
             _modelOfStudyService = modelOfStudyService;
         }
 
-        [HttpPost, Route("getlist")]
+        [HttpPost, Route("get-list")]
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             var response = await _modelOfStudyService.GetList(filter);
+            return response;
+        }
+
+        [HttpGet, Route("dropdown")]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _modelOfStudyService.DropDownSelection();
             return response;
         }
 
