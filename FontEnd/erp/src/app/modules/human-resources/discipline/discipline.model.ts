@@ -1,10 +1,7 @@
 import { BaseViewModel } from 'src/app/core/models/base.mode';
 
-export class DisciplineViewModel extends BaseViewModel {
+export interface DisciplineViewModel extends BaseViewModel {
   name: string;
-  description: string;
-
-  constructor() {
-    super();
-  }
+  provinceId: number;
+  provinceName: string;
 }

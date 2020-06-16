@@ -20,10 +20,17 @@ namespace API.HR.Controllers
             _disciplineService = disciplineService;
         }
 
-        [HttpPost, Route("getlist")]
+        [HttpPost, Route("get-list")]
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             var response = await _disciplineService.GetList(filter);
+            return response;
+        }
+
+        [HttpGet, Route("dropdown")]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _disciplineService.DropDownSelection();
             return response;
         }
 

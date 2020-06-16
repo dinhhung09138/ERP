@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { DisciplineComponent } from './discipline.component';
-import { FormComponent } from './form/form.component';
 import { Routes, RouterModule } from '@angular/router';
+import { DisciplineFormComponent } from './form/form.component';
 import { DisciplineService } from './discipline.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-const routes: Routes = [
+const route: Routes = [
   {
     path: '',
-    component: DisciplineComponent
+    component: DisciplineComponent,
+    data: { title: 'Discipline' }
   }
-];
-
+]
 
 @NgModule({
   declarations: [
     DisciplineComponent,
-    FormComponent,
+    DisciplineFormComponent,
   ],
   imports: [
     SharedModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(route),
   ],
   providers: [
     DisciplineService,

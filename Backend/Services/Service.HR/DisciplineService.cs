@@ -26,29 +26,54 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = _context.DisciplineRepository.Query();
+                var query = from m in _context.DisciplineRepository.Query()
+                            where !m.Deleted
+                            orderby m.CreateDate
+                            select new DisciplineModel()
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                                Description = m.Description,
+                                Money = m.Money,
+                                IsActive = m.IsActive,
+                                CreateBy = m.CreateBy.ToString(),
+                                CreateDate = m.CreateDate
+                            };
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text) || m.Description.Contains(filter.Text));
                 }
-
-                var list = query.Select(m => new DisciplineModel()
-                {
-                    Id = m.Id,
-                    Name = m.Name,
-                    Description = m.Description,
-                    Money = m.Money,
-                    IsActive = m.IsActive,
-                    CreateBy = m.CreateBy.ToString(),
-                    CreateDate = m.CreateDate
-                }).OrderBy(m => m.CreateDate);
-
                 BaseListModel<DisciplineModel> listItems = new BaseListModel<DisciplineModel>();
                 listItems.TotalItems = await _context.DisciplineRepository.Query().CountAsync();
-                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.DisciplineRepository.Query()
+                            where m.IsActive && !m.Deleted
+                            orderby m.CreateDate ascending
+                            select new DisciplineModel
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                                Money = m.Money,
+                            };
+
+                response.Result = await query.ToListAsync();
             }
             catch (Exception ex)
             {
