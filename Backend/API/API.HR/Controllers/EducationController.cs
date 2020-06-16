@@ -10,31 +10,38 @@ namespace API.HR.Controllers
     [ApiController]
     public class EducationController : ControllerBase
     {
-        private readonly IEducationService _accademicLevelService;
+        private readonly IEducationService _educationService;
 
-        public EducationController(IEducationService accademicLevelService)
+        public EducationController(IEducationService educationService)
         {
-            _accademicLevelService = accademicLevelService;
+            _educationService = educationService;
         }
 
-        [HttpPost, Route("getlist")]
+        [HttpPost, Route("get-list")]
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
-            var response = await _accademicLevelService.GetList(filter);
+            var response = await _educationService.GetList(filter);
+            return response;
+        }
+
+        [HttpGet, Route("dropdown")]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _educationService.DropDownSelection();
             return response;
         }
 
         [HttpGet, Route("item")]
         public async Task<ResponseModel> Item(int id)
         {
-            var response = await _accademicLevelService.Item(id);
+            var response = await _educationService.Item(id);
             return response;
         }
 
         [HttpPost, Route("save")]
         public async Task<ResponseModel> Save(EducationModel model)
         {
-            var response = await _accademicLevelService.Save(model);
+            var response = await _educationService.Save(model);
             return response;
         }
     }

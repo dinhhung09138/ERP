@@ -20,33 +20,57 @@ namespace Service.HR
         {
             _context = context;
         }
+
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = _context.AcademicLevelRepository.Query();
+                var query = from m in _context.EducationRepository.Query()
+                            where !m.Deleted
+                            orderby m.Precedence ascending
+                            select new EducationModel()
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                                IsActive = m.IsActive,
+                                Precedence = m.Precedence
+                            };
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text));
                 }
 
-                var list = query.Select(m => new EducationModel()
-                {
-                    Id = m.Id,
-                    Name = m.Name,
-                    Precedence = m.Precedence,
-                    IsActive = m.IsActive,
-                    CreateBy = m.CreateBy.ToString(),
-                    CreateDate = m.CreateDate
-                }).OrderBy(m => m.CreateDate);
-
                 BaseListModel<EducationModel> listItems = new BaseListModel<EducationModel>();
-                listItems.TotalItems = await _context.AcademicLevelRepository.Query().CountAsync();
-                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.TotalItems = await _context.EducationRepository.Query().CountAsync();
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.EducationRepository.Query()
+                            where m.IsActive && !m.Deleted
+                            orderby m.Precedence ascending
+                            select new EducationModel
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                            };
+
+                response.Result = await query.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -61,7 +85,7 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                Education md = await _context.AcademicLevelRepository.FirstOrDefaultAsync(m => m.Id == id);
+                Education md = await _context.EducationRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {
@@ -104,7 +128,6 @@ namespace Service.HR
             return response;
         }
 
-
         private async Task<ResponseModel> Insert(EducationModel model)
         {
             ResponseModel response = new ResponseModel();
@@ -118,8 +141,9 @@ namespace Service.HR
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
+                md.Deleted = false;
 
-                await _context.AcademicLevelRepository.AddAsync(md).ConfigureAwait(true);
+                await _context.EducationRepository.AddAsync(md).ConfigureAwait(true);
 
                 await _context.SaveChangesAsync();
             }
@@ -137,7 +161,7 @@ namespace Service.HR
 
             try
             {
-                Education md = await _context.AcademicLevelRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Education md = await _context.EducationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
@@ -150,7 +174,7 @@ namespace Service.HR
                 md.UpdateBy = 1; // TODO
                 md.UpdateDate = DateTime.Now;
 
-                _context.AcademicLevelRepository.Update(md);
+                _context.EducationRepository.Update(md);
 
                 await _context.SaveChangesAsync();
             }
@@ -168,7 +192,7 @@ namespace Service.HR
 
             try
             {
-                Education md = await _context.AcademicLevelRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Education md = await _context.EducationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
@@ -179,7 +203,7 @@ namespace Service.HR
                 md.UpdateBy = 1; // TODO
                 md.UpdateDate = DateTime.Now;
 
-                _context.AcademicLevelRepository.Update(md);
+                _context.EducationRepository.Update(md);
 
                 await _context.SaveChangesAsync();
             }

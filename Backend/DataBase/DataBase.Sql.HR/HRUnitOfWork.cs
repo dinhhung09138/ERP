@@ -14,13 +14,13 @@ namespace Database.Sql.HR
 
         private IDbContextTransaction _transaction;
 
-        private ITableGenericRepository<Education> _academicLevelRepository;
+        private ITableGenericRepository<Education> _educationRepository;
 
-        public ITableGenericRepository<Education> AcademicLevelRepository
+        public ITableGenericRepository<Education> EducationRepository
         {
             get
             {
-                return _academicLevelRepository = _academicLevelRepository ?? new TableGenericRepository<Education>(_context);
+                return _educationRepository = _educationRepository ?? new TableGenericRepository<Education>(_context);
             }
         }
 
