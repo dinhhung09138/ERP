@@ -17,7 +17,7 @@ namespace API.HR.Controllers
             _approveStatusService = approveStatusService;
         }
 
-        [HttpPost, Route("getlist")]
+        [HttpPost, Route("get-list")]
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             var response = await _approveStatusService.GetList(filter);
