@@ -30,6 +30,13 @@ namespace API.HR.Controllers
             return response;
         }
 
+        [HttpGet, Route("dropdown")]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _commendationService.DropDownSelection();
+            return response;
+        }
+
         [HttpGet, Route("item")]
         public async Task<ResponseModel> Item(int id)
         {

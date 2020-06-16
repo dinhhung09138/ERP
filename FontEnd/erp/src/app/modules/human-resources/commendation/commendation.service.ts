@@ -12,6 +12,7 @@ export class CommendationService {
 
   url = {
     list: APIUrlConstants.hrApi + 'commendation/get-list',
+    dropdown: APIUrlConstants.hrApi + 'commendation/dropdown',
     item: APIUrlConstants.hrApi + 'commendation/item',
     save: APIUrlConstants.hrApi + 'commendation/save',
   };
@@ -21,6 +22,18 @@ export class CommendationService {
 
   getList(filter: FilterModel) {
     return this.http.post<ResponseModel>(this.url.list, filter).pipe(
+      map((data) => {
+        return data;
+      }),
+      catchError(xhr => {
+        console.log(xhr);
+        return of(null);
+      })
+    );
+  }
+
+  getDropdown() {
+    return this.http.get<ResponseModel>(this.url.dropdown).pipe(
       map((data) => {
         return data;
       }),

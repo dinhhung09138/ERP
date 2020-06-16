@@ -18,34 +18,61 @@ namespace Service.HR
         {
             _context = context;
         }
+
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = _context.CommendationRepository.Query();
+                var query = from m in _context.CommendationRepository.Query()
+                            where !m.Deleted
+                            orderby m.CreateDate descending
+                            select new CommendationModel()
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                                Description = m.Description,
+                                Money = m.Money,
+                                IsActive = m.IsActive
+                            };
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text) || m.Description.Contains(filter.Text));
                 }
 
-                var list = query.Select(m => new CommendationModel()
-                {
-                    Id = m.Id,
-                    Name = m.Name,
-                    Description = m.Description,
-                    Money = m.Money,
-                    IsActive = m.IsActive
-                }).OrderBy(m => m.CreateDate);
-
                 BaseListModel<CommendationModel> listItems = new BaseListModel<CommendationModel>();
                 listItems.TotalItems = await _context.CommendationRepository.Query().CountAsync();
-                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
             }
             catch(Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.CommendationRepository.Query()
+                            where m.IsActive && !m.Deleted
+                            orderby m.CreateDate ascending
+                            select new CommendationModel
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                                Money = m.Money,
+                            };
+
+                response.Result = await query.ToListAsync();
+            }
+            catch (Exception ex)
             {
                 response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
                 response.Errors.Add(ex.Message);
@@ -117,6 +144,7 @@ namespace Service.HR
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
+                md.Deleted = false;
 
                 await _context.CommendationRepository.AddAsync(md).ConfigureAwait(true);
 

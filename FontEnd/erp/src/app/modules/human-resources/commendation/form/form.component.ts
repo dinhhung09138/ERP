@@ -36,6 +36,7 @@ export class CommendationFormComponent implements OnInit {
   }
 
   initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+    this.isSubmit = false;
 
     this.formAction = formStatus;
     this.commendationForm.get('id').setValue(0);
@@ -76,10 +77,10 @@ export class CommendationFormComponent implements OnInit {
 
   submitForm() {
     this.isSubmit = true;
-    this.isLoading = true;
     if (this.commendationForm.invalid) {
       return;
     }
+    this.isLoading = true;
     const model = this.commendationForm.value as CommendationViewModel;
     model.action = this.formAction;
 

@@ -14,7 +14,6 @@ CREATE TABLE [dbo].[Commendation](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_Commendation] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

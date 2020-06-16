@@ -25,7 +25,7 @@ export class CommendationComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName: string[] = ['name', 'description', 'isActive', 'action'];
+  listColumnsName: string[] = ['name', 'description', 'money', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
   constructor(private commendationService: CommendationService) { }
