@@ -1,15 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProvinceComponent } from './province.component';
-import { ProvinceFormComponent } from './province-form/province-form.component';
-import { ProvinceListComponent } from './province-list/province-list.component';
-
+import { Routes, RouterModule } from '@angular/router';
+import { ProvinceFormComponent } from './form/form.component';
+import { ProvinceService } from './province.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const route: Routes = [
   {
@@ -17,21 +11,19 @@ const route: Routes = [
     component: ProvinceComponent,
     data: { title: 'Province' }
   }
-];
+]
 
 @NgModule({
   declarations: [
     ProvinceComponent,
     ProvinceFormComponent,
-    ProvinceListComponent
   ],
   imports: [
-    CommonModule,
-    MatCheckboxModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatTableModule,
-    RouterModule.forChild(route)
+    SharedModule,
+    RouterModule.forChild(route),
+  ],
+  providers: [
+    ProvinceService,
   ]
 })
 export class ProvinceModule { }

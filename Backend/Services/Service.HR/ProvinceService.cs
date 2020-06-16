@@ -112,6 +112,7 @@ namespace Service.HR
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
+                md.Deleted = false;
 
                 await _context.ProvinceRepository.AddAsync(md).ConfigureAwait(true);
 
