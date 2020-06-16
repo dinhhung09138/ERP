@@ -18,20 +18,21 @@ namespace Service.HR
         {
             _context = context;
         }
+
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
             try
             {
                 var query = from m in _context.RankingRepository.Query()
+                            where !m.Deleted
+                            orderby m.Precedence ascending
                             select new RankingModel
                             {
                                 Id = m.Id,
                                 Name = m.Name,
                                 Precedence = m.Precedence,
-                                IsActive = m.IsActive,
-                                CreateBy = m.CreateBy.ToString(),
-                                CreateDate = m.CreateDate
+                                IsActive = m.IsActive
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -39,13 +40,35 @@ namespace Service.HR
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text));
                 }
 
-                var list = query.OrderBy(m => m.CreateDate);
-
                 BaseListModel<RankingModel> listItems = new BaseListModel<RankingModel>();
                 listItems.TotalItems = await _context.RankingRepository.Query().CountAsync();
-                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.RankingRepository.Query()
+                            where m.IsActive && !m.Deleted
+                            orderby m.Precedence ascending
+                            select new RankingModel
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                            };
+
+                response.Result = await query.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -98,7 +121,6 @@ namespace Service.HR
             return response;
         }
 
-
         private async Task<ResponseModel> Insert(RankingModel model)
         {
             ResponseModel response = new ResponseModel();
@@ -112,6 +134,7 @@ namespace Service.HR
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
+                md.Deleted = false;
 
                 await _context.RankingRepository.AddAsync(md).ConfigureAwait(true);
 
