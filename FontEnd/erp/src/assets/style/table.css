@@ -2,12 +2,15 @@
   border: 1px solid #0000001f;
 }
 
-.table td, .table th, .table thead th {
+.table td,
+.table th,
+.table thead th {
   vertical-align: middle;
   padding: 6px !important;
 }
 
-.table td.center, .table th.center {
+.table td.center,
+.table th.center {
   text-align: center;
 }
 
@@ -15,7 +18,8 @@ tr.mat-header-row {
   height: 32px !important;
 }
 
-tr.mat-row, tr.mat-footer-row {
+tr.mat-row,
+tr.mat-footer-row {
   height: auto !important;
 }
 
@@ -23,13 +27,23 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
-th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
   padding: 0;
   border-left: 2px solid #dee2e6;
 }
 
 .td-w-70 {
   width: 70px;
+}
+
+.td-w-100 {
+  width: 100px;
+}
+
+.td-w-120 {
+  width: 120px;
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-underline {
