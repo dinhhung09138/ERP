@@ -18,12 +18,15 @@ namespace Service.HR
         {
             _context = context;
         }
+
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
             try
             {
                 var query = from m in _context.ProfessionalQualificationRepository.Query()
+                            where !m.Deleted
+                            orderby m.Precedence ascending
                             select new ProfessionalQualificationModel
                             {
                                 Id = m.Id,
@@ -39,13 +42,35 @@ namespace Service.HR
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text));
                 }
 
-                var list = query.OrderBy(m => m.CreateDate);
-
                 BaseListModel<ProfessionalQualificationModel> listItems = new BaseListModel<ProfessionalQualificationModel>();
                 listItems.TotalItems = await _context.ProfessionalQualificationRepository.Query().CountAsync();
-                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.ProfessionalQualificationRepository.Query()
+                            where m.IsActive && !m.Deleted
+                            orderby m.Precedence ascending
+                            select new ProfessionalQualificationModel
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                            };
+
+                response.Result = await query.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -112,6 +137,7 @@ namespace Service.HR
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
+                md.Deleted = false;
 
                 await _context.ProfessionalQualificationRepository.AddAsync(md).ConfigureAwait(true);
 
