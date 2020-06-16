@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Contract Type</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <app-element-loading [Show]="isLoading"></app-element-loading>
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+            <form [formGroup]="contractTypeForm" (submit)="!isLoading ? submitForm() : false">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Code</label>
+                  <input type="text" class="form-control" formControlName="code" maxlength="10" tabindex="1"
+                    [ngClass]="{'is-invalid' : isSubmit && contractTypeForm.controls['code'].errors}">
+                  <div *ngIf="isSubmit && contractTypeForm.controls['code'].errors" class="invalid-feedback">
+                    <div *ngIf="contractTypeForm.controls['code'].errors.required">This field is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Name</label>
+                  <input type="text" class="form-control" formControlName="name" maxlength="100" tabindex="2"
+                    [ngClass]="{'is-invalid' : isSubmit && contractTypeForm.controls['name'].errors}">
+                  <div *ngIf="isSubmit && contractTypeForm.controls['name'].errors" class="invalid-feedback">
+                    <div *ngIf="contractTypeForm.controls['name'].errors.required">This field is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Description</label>
+                  <textarea rows="3" formControlName="description" maxlength="255" class="form-control"
+                    tabindex="3"></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Allow Insurance</label>
+                  <mat-checkbox class="ml-10" tabindex="4" formControlName="allowInsurance">
+                  </mat-checkbox>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Allow Leave Date</label>
+                  <mat-checkbox class="ml-10" tabindex="5" formControlName="allowLeaveDate">
+                  </mat-checkbox>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Active</label>
+                  <mat-checkbox class="ml-10" tabindex="6" formControlName="isActive">
+                  </mat-checkbox>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
+                  <input type="submit" class="btn btn-success" value="Save" tabindex="7">
+                  <button type="button" class="btn btn-warning" tabindex="8" (click)="reset()"> Reset </button>
+                  <button type="button" class="btn btn-secondary" tabindex="9" (click)="close()"> Close </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

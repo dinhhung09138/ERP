@@ -18,12 +18,25 @@ namespace Service.HR
         {
             _context = context;
         }
+
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = _context.ContractTypeRepository.Query();
+                var query = from m in _context.ContractTypeRepository.Query()
+                            where !m.Deleted
+                            orderby m.CreateDate descending
+                            select new ContractTypeModel()
+                            {
+                                Id = m.Id,
+                                Code = m.Code,
+                                Name = m.Name,
+                                Description = m.Description,
+                                AllowInsurance = m.AllowInsurance,
+                                AllowLeaveDate = m.AllowLeaveDate,
+                                IsActive = m.IsActive
+                            };
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
@@ -32,24 +45,35 @@ namespace Service.HR
                                             || m.Description.ToLower().Contains(filter.Text));
                 }
 
-                var list = query.Select(m => new ContractTypeModel()
-                {
-                    Id = m.Id,
-                    Code = m.Code,
-                    Name = m.Name,
-                    Description = m.Description,
-                    AllowInsurrance = m.AllowInsurrance,
-                    AllowLeaveDate = m.AllowLeaveDate,
-                    IsActive = m.IsActive,
-                    CreateBy = m.CreateBy.ToString(),
-                    CreateDate = m.CreateDate
-                }).OrderBy(m => m.CreateDate);
-
                 BaseListModel<ContractTypeModel> listItems = new BaseListModel<ContractTypeModel>();
                 listItems.TotalItems = await _context.ContractTypeRepository.Query().CountAsync();
-                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.ContractTypeRepository.Query()
+                            where m.IsActive && !m.Deleted
+                            orderby m.CreateDate ascending
+                            select new ContractTypeModel
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                            };
+
+                response.Result = await query.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -78,7 +102,7 @@ namespace Service.HR
                     Name = md.Name,
                     Description = md.Description,
                     AllowLeaveDate = md.AllowLeaveDate,
-                    AllowInsurrance = md.AllowInsurrance,
+                    AllowInsurance = md.AllowInsurance,
                     IsActive = md.IsActive,
                 };
 
@@ -122,11 +146,12 @@ namespace Service.HR
                 md.Code = model.Code;
                 md.Name = model.Name;
                 md.Description = model.Description;
-                md.AllowInsurrance = model.AllowInsurrance;
+                md.AllowInsurance = model.AllowInsurance;
                 md.AllowLeaveDate = model.AllowLeaveDate;
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
+                md.Deleted = false;
 
                 await _context.ContractTypeRepository.AddAsync(md).ConfigureAwait(true);
 
@@ -156,7 +181,7 @@ namespace Service.HR
                 md.Code = model.Code;
                 md.Name = model.Name;
                 md.Description = model.Description;
-                md.AllowInsurrance = model.AllowInsurrance;
+                md.AllowInsurance = model.AllowInsurance;
                 md.AllowLeaveDate = model.AllowLeaveDate;
                 md.IsActive = model.IsActive;
                 md.UpdateBy = 1; // TODO

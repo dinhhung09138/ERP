@@ -17,10 +17,17 @@ namespace API.HR.Controllers
             _contractTypeService = contractTypeService;
         }
 
-        [HttpPost, Route("getlist")]
+        [HttpPost, Route("get-list")]
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             var response = await _contractTypeService.GetList(filter);
+            return response;
+        }
+
+        [HttpGet, Route("dropdown")]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _contractTypeService.DropDownSelection();
             return response;
         }
 

@@ -19,7 +19,7 @@ namespace Service.HR.Models
         public string Description { get; set; }
 
         [Required]
-        public bool AllowInsurrance { get; set; }
+        public bool AllowInsurance { get; set; }
 
         [Required]
         public bool AllowLeaveDate { get; set; }
