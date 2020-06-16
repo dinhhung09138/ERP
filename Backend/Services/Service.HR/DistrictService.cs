@@ -32,9 +32,7 @@ namespace Service.HR
                                 ProvinceId = m.ProvinceId,
                                 ProvinceName = p.Name,
                                 Precedence = m.Precedence,
-                                IsActive = m.IsActive,
-                                CreateBy = m.CreateBy.ToString(),
-                                CreateDate = m.CreateDate
+                                IsActive = m.IsActive
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -43,7 +41,7 @@ namespace Service.HR
                                             || m.ProvinceName.ToLower().Contains(filter.Text));
                 }
 
-                var list = query.OrderBy(m => m.CreateDate);
+                var list = query.OrderBy(m => m.Precedence);
 
                 BaseListModel<DistrictModel> listItems = new BaseListModel<DistrictModel>();
                 listItems.TotalItems = await _context.DistrictRepository.Query().CountAsync();
@@ -120,6 +118,7 @@ namespace Service.HR
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
+                md.Deleted = false;
 
                 await _context.DistrictRepository.AddAsync(md).ConfigureAwait(true);
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HumanResourcesComponent } from './human-resources.component';
 import { CommendationComponent } from './commendation/commendation.component';
+import { DistrictResolver } from './district/district.resolver';
 
 const routes: Routes = [
   {
@@ -19,12 +20,21 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'province',
+        path: 'discipline',
+        loadChildren: () => import('./discipline/discipline.module').then(m => m.DisciplineModule)
+      },
+      {
+        path: 'configuration/province',
         loadChildren: () => import('./province/province.module').then(m => m.ProvinceModule)
       },
       {
-        path: 'discipline',
-        loadChildren: () => import('./discipline/discipline.module').then(m => m.DisciplineModule)
+        path: 'configuration/district',
+        loadChildren: () => import('./district/district.module').then(m => m.DistrictModule),
+        resolve: { province: DistrictResolver },
+      },
+      {
+        path: 'configuration/ward',
+        loadChildren: () => import('./ward/ward.module').then(m => m.WardModule)
       },
       {
         path: 'configuration/approve-status',

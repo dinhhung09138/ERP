@@ -18,6 +18,7 @@ namespace Service.HR
         {
             _context = context;
         }
+
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
@@ -46,6 +47,29 @@ namespace Service.HR
                 listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.ProvinceRepository.Query()
+                            orderby m.Precedence ascending
+                            select new ProvinceModel
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                            };
+
+                response.Result = await query.ToListAsync();
             }
             catch (Exception ex)
             {
