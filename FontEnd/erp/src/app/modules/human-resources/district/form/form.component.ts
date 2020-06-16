@@ -29,12 +29,12 @@ export class DistrictFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private districtService: DistrictService) {
-    this.activatedRoute.data.subscribe(res => {
-      this.provinceList = res.province.result;
-    });
   }
 
   ngOnInit(): void {
+    this.activatedRoute.data.subscribe(res => {
+      this.provinceList = res.province.result;
+    });
     this.districtForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
@@ -97,8 +97,6 @@ export class DistrictFormComponent implements OnInit {
     this.isLoading = true;
     const model = this.districtForm.value as DistrictViewModel;
     model.action = this.formAction;
-
-    console.log(this.districtForm.value);
 
     this.districtService.save(model).subscribe((res: ResponseModel) => {
       if (res !== null) {

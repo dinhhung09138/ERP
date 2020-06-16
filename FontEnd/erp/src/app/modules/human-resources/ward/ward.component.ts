@@ -2,25 +2,25 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
-import { DistrictService } from './district.service';
+import { WardService } from './ward.service';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
-import { DistrictFormComponent } from './form/form.component';
+import { WardFormComponent } from './form/form.component';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
 import { ProvinceViewModel } from '../province/province.model';
+import { DistrictViewModel } from '../district/district.model';
 
 @Component({
-  selector: 'app-hr-district',
-  templateUrl: './district.component.html',
-  styleUrls: ['./district.component.css']
+  selector: 'app-hr-ward',
+  templateUrl: './ward.component.html',
+  styleUrls: ['./ward.component.css']
 })
-export class DistrictComponent implements OnInit {
+export class WardComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(DistrictFormComponent) form: DistrictFormComponent;
+  @ViewChild(WardFormComponent) form: WardFormComponent;
 
   isLoading = false;
 
@@ -28,19 +28,21 @@ export class DistrictComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName: string[] = ['name', 'provinceName', 'precedence', 'isActive', 'action'];
+  listColumnsName: string[] = ['name', 'districtName', 'provinceName', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
   provinceList: ProvinceViewModel[] = [];
+  districtList: DistrictViewModel[] = [];
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private districtService: DistrictService) {
+    private wardService: WardService,
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe((res) => {
-      this.provinceList = res.province.result;
+    this.activatedRoute.data.subscribe(res => {
+      this.provinceList = res.data.provinces.result;
+      this.districtList = res.data.districts.result;
     });
     this.dataSource.sort = this.sort;
     this.getList();
@@ -91,7 +93,7 @@ export class DistrictComponent implements OnInit {
     filter.text = this.searchText;
     filter.paging.pageIndex = this.paging.pageIndex;
     filter.paging.pageSize = this.paging.pageSize;
-    this.districtService.getList(filter).subscribe((response: ResponseModel) => {
+    this.wardService.getList(filter).subscribe((response: ResponseModel) => {
       if (response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;

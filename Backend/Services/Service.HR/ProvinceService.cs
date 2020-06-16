@@ -25,14 +25,14 @@ namespace Service.HR
             try
             {
                 var query = from m in _context.ProvinceRepository.Query()
+                            where !m.Deleted
+                            orderby m.Precedence ascending
                             select new ProvinceModel
                             {
                                 Id = m.Id,
                                 Name = m.Name,
                                 Precedence = m.Precedence,
-                                IsActive = m.IsActive,
-                                CreateBy = m.CreateBy.ToString(),
-                                CreateDate = m.CreateDate
+                                IsActive = m.IsActive
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -40,7 +40,7 @@ namespace Service.HR
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text));
                 }
 
-                var list = query.OrderBy(m => m.CreateDate);
+                var list = query.OrderBy(m => m.Precedence);
 
                 BaseListModel<ProvinceModel> listItems = new BaseListModel<ProvinceModel>();
                 listItems.TotalItems = await _context.ProvinceRepository.Query().CountAsync();
@@ -62,6 +62,7 @@ namespace Service.HR
             try
             {
                 var query = from m in _context.ProvinceRepository.Query()
+                            where m.IsActive && !m.Deleted
                             orderby m.Precedence ascending
                             select new ProvinceModel
                             {

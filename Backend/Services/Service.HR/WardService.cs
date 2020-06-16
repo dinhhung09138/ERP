@@ -18,6 +18,7 @@ namespace Service.HR
         {
             _context = context;
         }
+
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
@@ -26,6 +27,8 @@ namespace Service.HR
                 var query = from m in _context.WardRepository.Query()
                             join d in _context.DistrictRepository.Query() on m.DistrictId equals d.Id
                             join p in _context.ProvinceRepository.Query() on m.ProvinceId equals p.Id
+                            where !m.Deleted
+                            orderby p.Precedence ascending, d.Precedence ascending, m.Precedence ascending
                             select new WardModel
                             {
                                 Id = m.Id,
@@ -36,8 +39,6 @@ namespace Service.HR
                                 ProvinceName = p.Name,
                                 Precedence = m.Precedence,
                                 IsActive = m.IsActive,
-                                CreateBy = m.CreateBy.ToString(),
-                                CreateDate = m.CreateDate
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -46,14 +47,40 @@ namespace Service.HR
                                             || m.DistrictName.ToLower().Contains(filter.Text)
                                             || m.ProvinceName.ToLower().Contains(filter.Text));
                 }
-
-                var list = query.OrderBy(m => m.CreateDate);
-
+                
                 BaseListModel<WardModel> listItems = new BaseListModel<WardModel>();
                 listItems.TotalItems = await _context.WardRepository.Query().CountAsync();
-                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.WardRepository.Query()
+                            join d in _context.DistrictRepository.Query() on m.DistrictId equals d.Id
+                            join p in _context.ProvinceRepository.Query() on m.ProvinceId equals p.Id
+                            where m.IsActive && !m.Deleted
+                            orderby p.Precedence ascending, d.Precedence ascending, m.Precedence ascending
+                            select new WardModel
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                                DistrictId = m.DistrictId,
+                                ProvinceId = m.ProvinceId,
+                            };
+
+                response.Result = await query.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -124,6 +151,7 @@ namespace Service.HR
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
+                md.Deleted = false;
 
                 await _context.WardRepository.AddAsync(md).ConfigureAwait(true);
 

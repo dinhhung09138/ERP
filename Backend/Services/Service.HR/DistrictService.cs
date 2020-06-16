@@ -18,6 +18,7 @@ namespace Service.HR
         {
             _context = context;
         }
+
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
@@ -25,6 +26,8 @@ namespace Service.HR
             {
                 var query = from m in _context.DistrictRepository.Query()
                             join p in _context.ProvinceRepository.Query() on m.ProvinceId equals p.Id
+                            where !m.Deleted
+                            orderby p.Precedence ascending, m.Precedence ascending
                             select new DistrictModel
                             {
                                 Id = m.Id,
@@ -41,13 +44,39 @@ namespace Service.HR
                                             || m.ProvinceName.ToLower().Contains(filter.Text));
                 }
 
-                var list = query.OrderBy(m => m.Precedence);
-
                 BaseListModel<DistrictModel> listItems = new BaseListModel<DistrictModel>();
                 listItems.TotalItems = await _context.DistrictRepository.Query().CountAsync();
-                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.DistrictRepository.Query()
+                            join p in _context.ProvinceRepository.Query() on m.ProvinceId equals p.Id
+                            where m.IsActive && !m.Deleted
+                            orderby p.Precedence ascending, m.Precedence ascending
+                            select new DistrictModel
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                                ProvinceId = m.ProvinceId,
+                                Precedence = m.Precedence,
+                                IsActive = m.IsActive
+                            };
+
+                response.Result = await query.ToListAsync();
             }
             catch (Exception ex)
             {
