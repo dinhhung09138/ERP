@@ -14,12 +14,12 @@ const routes: Routes = [
       },
       {
         path: 'new',
-        loadChildren: () => import('./employee-info/employee-info.module').then(m => m.EmployeeInfoModule),
+        loadChildren: () => import('./employee-detail/employee-detail.module').then(m => m.EmployeeDetailModule),
         pathMatch: 'full',
       },
       {
         path: 'edit/:id',
-        loadChildren: () => import('./employee-info/employee-info.module').then(m => m.EmployeeInfoModule),
+        loadChildren: () => import('./employee-detail/employee-detail.module').then(m => m.EmployeeDetailModule),
         pathMatch: 'full',
       },
     ]

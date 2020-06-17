@@ -53,3 +53,35 @@ button:focus {
 .is-invalid .ng-select-container {
   border-color: #dc3545;
 }
+
+.form-control .mat-form-field-flex {
+  display: inline-flex;
+  align-items: unset;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.form-control .mat-form-field-wrapper {
+  padding-bottom: 0px;
+}
+
+.form-control .mat-form-field-appearance-legacy,
+.form-control .mat-form-field-underline {
+  background-color: unset;
+}
+
+.form-control .mat-form-field-infix,
+.form-control .mat-form-field-infix:focus {
+  padding: .2375em 0;
+  border-top: unset;
+}
+
+.form-control .mat-form-field.mat-focused,
+.form-control .mat-form-field-ripple {
+  background-color: unset !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: #1A6E64;
+  color: #fff;
+}

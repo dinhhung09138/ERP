@@ -10,6 +10,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -22,6 +26,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatPaginatorModule,
     MatCheckboxModule,
     MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatIconModule,
   ],
   declarations: [
     NoDataAvailableComponent,
@@ -41,6 +49,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatPaginatorModule,
     MatCheckboxModule,
     MatTabsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
   ]
 })
 export class SharedModule { }
