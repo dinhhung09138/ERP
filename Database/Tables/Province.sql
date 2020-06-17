@@ -13,7 +13,6 @@ CREATE TABLE [dbo].[Province](
 	[UpdateBy] [int] NULL,
 	[UpdateDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_Province] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

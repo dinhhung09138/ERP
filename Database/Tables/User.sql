@@ -14,7 +14,6 @@ CREATE TABLE [dbo].[User](
 	[UpdatedBy] [int] NULL,
 	[UpdatedDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedDate] [datetime] NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

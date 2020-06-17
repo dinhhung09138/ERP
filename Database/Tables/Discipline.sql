@@ -13,7 +13,6 @@ CREATE TABLE [dbo].[Discipline](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_Discipline] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

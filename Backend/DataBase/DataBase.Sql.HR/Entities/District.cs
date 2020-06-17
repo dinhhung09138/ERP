@@ -47,8 +47,5 @@ namespace DataBase.Sql.HR.Entities
         [Column(TypeName = "bit")]
         [Required]
         public bool Deleted { get; set; }
-
-        [Column(TypeName = "int")]
-        public int? DeletedBy { get; set; }
     }
 }

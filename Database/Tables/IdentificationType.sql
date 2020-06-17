@@ -13,7 +13,6 @@ CREATE TABLE [dbo].[IdentificationType](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_IdentificationType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

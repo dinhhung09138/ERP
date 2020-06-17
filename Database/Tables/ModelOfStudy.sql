@@ -13,7 +13,6 @@ CREATE TABLE [dbo].[ModelOfStudy](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_ModelOfStudy] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

@@ -25,7 +25,6 @@ CREATE TABLE [dbo].[EmployeeContract](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_EmployeeContract] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

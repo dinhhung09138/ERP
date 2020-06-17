@@ -50,8 +50,5 @@ namespace DataBase.Sql.HR.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [DefaultValue(false)]
         public bool Deleted { get; set; }
-
-        [Column(TypeName = "int")]
-        public int? DeletedBy { get; set; }
     }
 }

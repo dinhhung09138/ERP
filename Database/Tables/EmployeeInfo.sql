@@ -23,7 +23,6 @@ CREATE TABLE [dbo].[EmployeeInfo](
 	[UpdateBy] [int] NULL,
 	[UpdateDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_EmployeeInfo] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

@@ -13,7 +13,6 @@ CREATE TABLE [dbo].[TrainingType](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_TrainingType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

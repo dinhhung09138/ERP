@@ -12,7 +12,6 @@ CREATE TABLE [dbo].[TrainingCenter](
 	[UpdateBy] [int] NULL,
 	[UpdateDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_TrainingCenter] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

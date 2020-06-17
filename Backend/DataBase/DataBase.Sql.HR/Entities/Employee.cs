@@ -54,8 +54,6 @@ namespace DataBase.Sql.HR.Entities
 
         [Column(TypeName = "bit")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue(true)]
         public bool IsActive { get; set; }
 
         [Column(TypeName = "int")]
@@ -64,8 +62,6 @@ namespace DataBase.Sql.HR.Entities
 
         [Column(TypeName = "datetime")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue("getdate()")]
         public DateTime CreateDate { get; set; }
 
         [Column(TypeName = "datetime")]
@@ -76,11 +72,6 @@ namespace DataBase.Sql.HR.Entities
 
         [Column(TypeName = "bit")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue(false)]
         public bool Deleted { get; set; }
-
-        [Column(TypeName = "int")]
-        public int? DeletedBy { get; set; }
     }
 }

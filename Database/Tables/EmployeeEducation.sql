@@ -18,7 +18,6 @@ CREATE TABLE [dbo].[EmployeeEducation](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
-	[DeletedBy] [int] NULL,
  CONSTRAINT [PK_EmployeeEducation] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
