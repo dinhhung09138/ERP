@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
+    MatTabsModule,
   ],
   declarations: [
     NoDataAvailableComponent,
@@ -38,6 +40,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
+    MatTabsModule,
   ]
 })
 export class SharedModule { }

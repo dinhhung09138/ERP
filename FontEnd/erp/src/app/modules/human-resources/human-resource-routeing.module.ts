@@ -22,50 +22,61 @@ const routes: Routes = [
       },
       {
         path: 'discipline',
-        loadChildren: () => import('./discipline/discipline.module').then(m => m.DisciplineModule)
+        loadChildren: () => import('./discipline/discipline.module').then(m => m.DisciplineModule),
+        pathMatch: 'full',
       },
       {
         path: 'configuration/province',
-        loadChildren: () => import('./province/province.module').then(m => m.ProvinceModule)
+        loadChildren: () => import('./province/province.module').then(m => m.ProvinceModule),
+        pathMatch: 'full',
       },
       {
         path: 'configuration/district',
         loadChildren: () => import('./district/district.module').then(m => m.DistrictModule),
         resolve: { province: DistrictResolver },
+        pathMatch: 'full',
       },
       {
         path: 'configuration/ward',
         loadChildren: () => import('./ward/ward.module').then(m => m.WardModule),
         resolve: { data: WardResolver },
+        pathMatch: 'full',
       },
       {
         path: 'configuration/education',
         loadChildren: () => import('./education/education.module').then(m => m.EducationModule),
+        pathMatch: 'full',
       },
       {
         path: 'configuration/model-of-study',
         loadChildren: () => import('./model-of-study/model-of-study.module').then(m => m.ModelOfStudyModule),
+        pathMatch: 'full',
       },
       {
         path: 'configuration/identification',
         loadChildren: () => import('./identification-type/identification-type.module').then(m => m.IdentificationTypeModule),
+        pathMatch: 'full',
       },
       {
         path: 'configuration/qualification',
         loadChildren: () => import('./professional-qualification/professional-qualification.module')
           .then(m => m.ProfessionalQualificationModule),
+        pathMatch: 'full',
       },
       {
         path: 'configuration/ranking',
         loadChildren: () => import('./ranking/ranking.module').then(m => m.RankingModule),
+        pathMatch: 'full',
       },
       {
         path: 'configuration/contract-type',
         loadChildren: () => import('./contract-type/contract-type.module').then(m => m.ContractTypeModule),
+        pathMatch: 'full',
       },
       {
         path: 'configuration/approve-status',
-        loadChildren: () => import('./approve-status/approve-status.module').then(m => m.ApproveStatusModule)
+        loadChildren: () => import('./approve-status/approve-status.module').then(m => m.ApproveStatusModule),
+        pathMatch: 'full',
       }
     ]
   }

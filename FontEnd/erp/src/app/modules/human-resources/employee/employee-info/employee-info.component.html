@@ -1,2 +1,94 @@
-<app-form-info></app-form-info>
-<app-list-info></app-list-info>
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+    <div class="employee-img">
+      Image
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+    <form>
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <label class="label">First Name</label>
+              <input type="text" id="firstName" class="form-control" formControlName="firstName" maxlength="50"
+                tabindex="1">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <label class="label">Last Name</label>
+              <input type="text" class="form-control" formControlName="lastName" maxlength="50" tabindex="2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <label class="label">Working Email</label>
+              <input type="text" class="form-control" formControlName="workingEmail" maxlength="50" tabindex="3">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <label class="label">Working Phone</label>
+              <input type="text" class="form-control" formControlName="workingPhone" maxlength="25" tabindex="4">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <label class="label">Card Number</label>
+              <input type="text" class="form-control" formControlName="badgeCardNumber" maxlength="10" tabindex="5">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <label class="label">Date Apply</label>
+              <input type="text" class="form-control" formControlName="dateApplyBadge" maxlength="12" tabindex="6">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <label class="label">Finger Sign Number</label>
+              <input type="text" class="form-control" formControlName="fingerSignNumber" maxlength="10" tabindex="7">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <label class="label">Apply Date</label>
+              <input type="text" class="form-control" formControlName="dateApplyFingerSign" maxlength="12" tabindex="8">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+              <label class="label">Probation Date</label>
+              <input type="text" class="form-control" formControlName="probationDate" maxlength="12" tabindex="9">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+              <label class="label">Working Date</label>
+              <input type="text" class="form-control" formControlName="startWorkingDate" maxlength="12" tabindex="10">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+              <label class="label">Employee Status</label>
+              <input type="text" class="form-control" formControlName="employeeWorkingStatusId" maxlength="10"
+                tabindex="11">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+              <label class="label">Basic Salary</label>
+              <input type="text" class="form-control" formControlName="basicSalary" maxlength="12" tabindex="12">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <input type="submit" class="btn btn-success" value="Save" tabindex="4">
+        <button type="button" class="btn btn-warning" tabindex="5" (click)="reset()"> Reset </button>
+        <button type="button" class="btn btn-secondary" tabindex="6" (click)="close()"> Close </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+  </div>
+</div>
