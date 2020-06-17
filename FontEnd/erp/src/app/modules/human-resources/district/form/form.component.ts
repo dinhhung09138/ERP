@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DistrictService } from '../district.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -26,6 +26,7 @@ export class DistrictFormComponent implements OnInit {
   provinceList: ProvinceViewModel[] = [];
 
   constructor(
+    private elm: ElementRef,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private districtService: DistrictService) {
@@ -70,6 +71,7 @@ export class DistrictFormComponent implements OnInit {
         this.districtForm.get('isActive').enable();
       }
     }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
 
   create() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RankingService } from '../ranking.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -22,6 +22,7 @@ export class RankingFormComponent implements OnInit {
   rankingForm: FormGroup;
 
   constructor(
+    private elm: ElementRef,
     private fb: FormBuilder,
     private rankingService: RankingService) { }
 
@@ -57,6 +58,7 @@ export class RankingFormComponent implements OnInit {
         this.rankingForm.get('isActive').enable();
       }
     }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
 
   create() {

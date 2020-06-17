@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProfessionalQualificationService } from '../professional-qualification.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -22,6 +22,7 @@ export class ProfessionalQualificationFormComponent implements OnInit {
   qualificationForm: FormGroup;
 
   constructor(
+    private elm: ElementRef,
     private fb: FormBuilder,
     private qualificationService: ProfessionalQualificationService) { }
 
@@ -57,6 +58,7 @@ export class ProfessionalQualificationFormComponent implements OnInit {
         this.qualificationForm.get('isActive').enable();
       }
     }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
 
   create() {

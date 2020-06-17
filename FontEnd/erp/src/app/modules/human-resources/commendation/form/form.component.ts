@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommendationService } from '../commendation.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -22,6 +22,7 @@ export class CommendationFormComponent implements OnInit {
   commendationForm: FormGroup;
 
   constructor(
+    private elm: ElementRef,
     private fb: FormBuilder,
     private commendationService: CommendationService) { }
 
@@ -56,6 +57,7 @@ export class CommendationFormComponent implements OnInit {
         this.commendationForm.get('isActive').enable();
       }
     }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
 
   create() {

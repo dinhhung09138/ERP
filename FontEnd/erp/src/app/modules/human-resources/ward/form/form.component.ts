@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { WardService } from '../ward.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -30,6 +30,7 @@ export class WardFormComponent implements OnInit {
   districtDropdown: DistrictViewModel[] = [];
 
   constructor(
+    private elm: ElementRef,
     private fb: FormBuilder,
     private wardService: WardService,
     private activatedRoute: ActivatedRoute) {
@@ -80,6 +81,7 @@ export class WardFormComponent implements OnInit {
         this.wardForm.get('isActive').enable();
       }
     }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
 
   provinceChange(province?: ProvinceViewModel) {

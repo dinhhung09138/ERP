@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApproveStatusService } from '../approve-status.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -22,6 +22,7 @@ export class ApproveStatusFormComponent implements OnInit {
   approveStatusForm: FormGroup;
 
   constructor(
+    private elm: ElementRef,
     private fb: FormBuilder,
     private approveStatusService: ApproveStatusService) { }
 
@@ -61,6 +62,7 @@ export class ApproveStatusFormComponent implements OnInit {
         this.approveStatusForm.get('isActive').enable();
       }
     }
+    this.elm.nativeElement.querySelector('#code').focus();
   }
 
   create() {

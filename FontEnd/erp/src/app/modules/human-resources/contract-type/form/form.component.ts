@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ContractTypeService } from '../contract-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -22,6 +22,7 @@ export class ContractTypeFormComponent implements OnInit {
   contractTypeForm: FormGroup;
 
   constructor(
+    private elm: ElementRef,
     private fb: FormBuilder,
     private contractTypeService: ContractTypeService) { }
 
@@ -68,6 +69,7 @@ export class ContractTypeFormComponent implements OnInit {
         this.contractTypeForm.get('isActive').enable();
       }
     }
+    this.elm.nativeElement.querySelector('#code').focus();
   }
 
   create() {

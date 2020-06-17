@@ -15,7 +15,7 @@
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <label class="label">Code</label>
-                  <input type="text" class="form-control" formControlName="code" maxlength="10" tabindex="1"
+                  <input type="text" id="code" class="form-control" formControlName="code" maxlength="10" tabindex="1"
                     [ngClass]="{'is-invalid' : isSubmit && approveStatusForm.controls['code'].errors}">
                   <div *ngIf="isSubmit && approveStatusForm.controls['code'].errors" class="invalid-feedback">
                     <div *ngIf="approveStatusForm.controls['code'].errors.required">This field is required</div>

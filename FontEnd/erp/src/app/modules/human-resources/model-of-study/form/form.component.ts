@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModelOfStudyService } from '../model-of-study.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -22,6 +22,7 @@ export class ModelOfStudyFormComponent implements OnInit {
   modelOfStudyForm: FormGroup;
 
   constructor(
+    private elm: ElementRef,
     private fb: FormBuilder,
     private modelOfStudyService: ModelOfStudyService) { }
 
@@ -57,6 +58,7 @@ export class ModelOfStudyFormComponent implements OnInit {
         this.modelOfStudyForm.get('isActive').enable();
       }
     }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
 
   create() {
