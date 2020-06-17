@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-12 col-md-12 col-xs-12 content-page">
+  <div class="col-lg-12 col-md-12 col-xs-12" style="display: flex; align-items: stretch; width: 100%;">
     <ul class="nav module-sidebar flex-column" role="menu" data-accordion="false">
       <li class="nav-item">
         <a href="javascript: {}" class="nav-link">
@@ -39,7 +39,7 @@
       <li class="nav-item" routerLinkActive="active">
         <a routerLink="/hr/leave" class="nav-link" (click)="openSideMenu('leave')"
           [ngClass]="{'menu-open': linkSelected === 'leave'}">
-          <p> Leave Management</p>
+          <p> Leave Management <i class="fa fa-angle-left right"></i></p>
         </a>
         <ul class="nav" [ngStyle]="{'display': linkSelected === 'leave' ? 'block' : 'none'}">
           <li class="nav-item" routerLinkActive="active">
@@ -59,7 +59,7 @@
           <p> Holiday Management</p>
         </a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item">
         <a (click)="openSideMenu('configuration')" class="nav-link"
           [ngClass]="{'menu-open': linkSelected === 'configuration'}">
           <p>Configuration <i class="fa fa-angle-left right"></i></p>
@@ -116,7 +116,7 @@
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/hr/configuration/education">
+            <a class="nav-link" routerLink="/hr/configuration/job-title">
               <p> Job title</p>
             </a>
           </li>
@@ -151,6 +151,10 @@
         </ul>
       </li>
     </ul>
-    <router-outlet></router-outlet>
+    <div class="row" style="width: 100%; margin-left: 1px;">
+      <div class="col-lg-12 col-md-12 col-xs-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </div>
 </div>
