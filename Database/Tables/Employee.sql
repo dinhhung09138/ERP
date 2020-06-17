@@ -6,6 +6,8 @@ GO
 CREATE TABLE [dbo].[Employee](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[EmployeeCode] [varchar](30) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
 	[ProbationDate] [datetime] NULL,
 	[StartWorkingDate] [datetime] NULL,
 	[BadgeCardNumber] [varchar](10) NULL,
