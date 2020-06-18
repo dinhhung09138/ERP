@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DateValidator } from 'src/app/core/validators/date.validator';
 
 @Component({
   selector: 'app-hr-employee-detail',
@@ -74,14 +75,14 @@ export class EmployeeDetailComponent implements OnInit {
       id: [null],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      workingEmail: [''],
+      workingEmail: ['', [Validators.required, Validators.email]],
       workingPhone: [''],
       badgeCardNumber: [''],
-      dateApplyBadge: [null],
+      dateApplyBadge: [null, [DateValidator.date]],
       fingerSignNumber: ['', [Validators.required]],
-      dateApplyFingerSign: [null],
-      probationDate: [null],
-      startWorkingDate: [null],
+      dateApplyFingerSign: [null, [DateValidator.date]],
+      probationDate: [null, [DateValidator.date]],
+      startWorkingDate: [null, [DateValidator.date]],
       employeeWorkingStatusId: [null, [Validators.required]],
       basicSalary: [null]
     });

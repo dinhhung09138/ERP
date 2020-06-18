@@ -2,6 +2,10 @@ import { Injectable } from "@angular/core";
 import { TokenModel } from './models/token.model';
 import { UserInfoModel } from './models/user-info.model';
 
+/**
+ * Processing user data into the local storage.
+ * User info such as: user info, token, session
+ */
 @Injectable()
 export class SessionContext {
 

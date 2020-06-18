@@ -9,6 +9,7 @@ input[type="text"]:focus {
   box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px #1A6E64;
 }
 
+.mat-focused,
 textarea:focus {
   border-color: #1A6E64 !important;
   outline: 0 !important;
@@ -35,11 +36,6 @@ textarea:focus {
   padding: .2rem .5rem;
 }
 
-.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
-.mat-checkbox-checked.mat-accent .mat-checkbox-background {
-  background-color: #1A6E64 !important;
-}
-
 button:focus {
   outline: unset !important;
   ;
@@ -52,36 +48,4 @@ button:focus {
 
 .is-invalid .ng-select-container {
   border-color: #dc3545;
-}
-
-.form-control .mat-form-field-flex {
-  display: inline-flex;
-  align-items: unset;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.form-control .mat-form-field-wrapper {
-  padding-bottom: 0px;
-}
-
-.form-control .mat-form-field-appearance-legacy,
-.form-control .mat-form-field-underline {
-  background-color: unset;
-}
-
-.form-control .mat-form-field-infix,
-.form-control .mat-form-field-infix:focus {
-  padding: .2375em 0;
-  border-top: unset;
-}
-
-.form-control .mat-form-field.mat-focused,
-.form-control .mat-form-field-ripple {
-  background-color: unset !important;
-}
-
-.mat-calendar-body-selected {
-  background-color: #1A6E64;
-  color: #fff;
 }

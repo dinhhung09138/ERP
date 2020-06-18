@@ -32,8 +32,15 @@
                   <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                       <label class="label">Working Email</label>
-                      <input type="text" class="form-control" formControlName="workingEmail" maxlength="50"
-                        tabindex="3">
+                      <mat-form-field class="form-control">
+                        <input matInput formControlName="workingEmail" maxlength="50" tabindex="3" required />
+                      </mat-form-field>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.required">
+                        This field is required
+                      </mat-error>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.email">
+                        Email is invalid
+                      </mat-error>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                       <label class="label">Working Phone</label>
@@ -56,8 +63,10 @@
                           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                         </mat-datepicker-toggle>
                         <mat-datepicker #dateApplyBadgeDatepicker></mat-datepicker>
-
                       </mat-form-field>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyBadge'].errors?.date">
+                        Date is invalid
+                      </mat-error>
                     </div>
                   </div>
                   <div class="row">
@@ -76,7 +85,9 @@
                         </mat-datepicker-toggle>
                         <mat-datepicker #dateApplyFingerSignDatepicker></mat-datepicker>
                       </mat-form-field>
-
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
+                        Date is invalid
+                      </mat-error>
                     </div>
                   </div>
                 </div>
@@ -92,6 +103,9 @@
                         </mat-datepicker-toggle>
                         <mat-datepicker #probationDateDatepicker></mat-datepicker>
                       </mat-form-field>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
+                        Date is invalid
+                      </mat-error>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                       <label class="label">Working Date</label>
@@ -103,6 +117,9 @@
                         </mat-datepicker-toggle>
                         <mat-datepicker #startWorkingDateDateicker></mat-datepicker>
                       </mat-form-field>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
+                        Date is invalid
+                      </mat-error>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                       <label class="label">Employee Status</label>
@@ -117,19 +134,19 @@
                   </div>
                 </div>
               </div>
-            </form>
-            <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                <input type="submit" class="btn btn-success" value="Save" tabindex="13"
-                  *ngIf="formAction === 1 || (formAction === 2 && isEditEmployee)">
-                <button type="button" class="btn btn-success" tabindex="14" *ngIf="formAction === 2 && !isEditEmployee"
-                  (click)="edit()">Edit</button>
-                <button type="button" class="btn btn-danger" tabindex="15" (click)="cancel()"
-                  *ngIf="formAction === 2 && isEditEmployee"> Cancel </button>
-                <button type="button" class="btn btn-warning" tabindex="15" (click)="reset()"> Reset </button>
-                <button type="button" class="btn btn-secondary" tabindex="16" (click)="close()"> Close </button>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                  <input type="submit" class="btn btn-success" value="Save" tabindex="13"
+                    *ngIf="formAction === 1 || (formAction === 2 && isEditEmployee)">
+                  <button type="button" class="btn btn-success" tabindex="14"
+                    *ngIf="formAction === 2 && !isEditEmployee" (click)="edit()">Edit</button>
+                  <button type="button" class="btn btn-danger" tabindex="15" (click)="cancel()"
+                    *ngIf="formAction === 2 && isEditEmployee"> Cancel </button>
+                  <button type="button" class="btn btn-warning" tabindex="15" (click)="reset()"> Reset </button>
+                  <button type="button" class="btn btn-secondary" tabindex="16" (click)="close()"> Close </button>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
         <div class="row">
