@@ -3,11 +3,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DateValidator } from 'src/app/core/validators/date.validator';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { APP_DATE_FORMATS, AppDateAdapter } from 'src/app/core/helpers/format-datepicker.helper';
 
 @Component({
   selector: 'app-hr-employee-detail',
   templateUrl: './employee-detail.component.html',
-  styleUrls: ['./employee-detail.component.css']
+  styleUrls: ['./employee-detail.component.css'],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    { provide: DateAdapter, useClass: AppDateAdapter }
+  ]
 })
 export class EmployeeDetailComponent implements OnInit {
 
@@ -93,7 +99,6 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   checkFormAction() {
-    console.log(this.router.url);
     if (this.router.url.indexOf('/employee/new') > 0) {
       this.formAction = FormActionStatus.Create;
     } else if (this.router.url.indexOf('/employee/edit/') > 0) {
@@ -118,9 +123,9 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.employeeForm.value);
     this.isSubmit = true;
     if (this.employeeForm.invalid) {
-      this.isSubmit = false;
       return;
     }
     this.isLoading = true;

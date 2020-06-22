@@ -10,9 +10,7 @@
         <app-element-loading [Show]="isLoading"></app-element-loading>
         <div class="row">
           <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
-            <div class="employee-img">
-              Image
-            </div>
+            <div class="employee-img"> Image </div>
           </div>
           <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
             <form [formGroup]="employeeForm" (submit)="!isSubmit ? submitForm() : false">
@@ -35,12 +33,10 @@
                       <mat-form-field class="form-control">
                         <input matInput formControlName="workingEmail" maxlength="50" tabindex="3" required />
                       </mat-form-field>
-                      <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.required">
-                        This field is required
-                      </mat-error>
-                      <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.email">
-                        Email is invalid
-                      </mat-error>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.required"> This field
+                        is required </mat-error>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.email"> Email is
+                        invalid </mat-error>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                       <label class="label">Working Phone</label>
@@ -64,9 +60,8 @@
                         </mat-datepicker-toggle>
                         <mat-datepicker #dateApplyBadgeDatepicker></mat-datepicker>
                       </mat-form-field>
-                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyBadge'].errors?.date">
-                        Date is invalid
-                      </mat-error>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyBadge'].errors?.date"> Date is
+                        invalid </mat-error>
                     </div>
                   </div>
                   <div class="row">
@@ -85,9 +80,8 @@
                         </mat-datepicker-toggle>
                         <mat-datepicker #dateApplyFingerSignDatepicker></mat-datepicker>
                       </mat-form-field>
-                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
-                        Date is invalid
-                      </mat-error>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date"> Date is
+                        invalid </mat-error>
                     </div>
                   </div>
                 </div>
@@ -103,9 +97,8 @@
                         </mat-datepicker-toggle>
                         <mat-datepicker #probationDateDatepicker></mat-datepicker>
                       </mat-form-field>
-                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
-                        Date is invalid
-                      </mat-error>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date"> Date is
+                        invalid </mat-error>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                       <label class="label">Working Date</label>
@@ -117,9 +110,8 @@
                         </mat-datepicker-toggle>
                         <mat-datepicker #startWorkingDateDateicker></mat-datepicker>
                       </mat-form-field>
-                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
-                        Date is invalid
-                      </mat-error>
+                      <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date"> Date is
+                        invalid </mat-error>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                       <label class="label">Employee Status</label>
@@ -128,9 +120,8 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                       <label class="label">Basic Salary</label>
-                      <input type="text" class="form-control" formControlName="basicSalary" maxlength="12"
-                        tabindex="12">
-                    </div>
+                      <input type="text" appFormatCurrency class="form-control" formControlName="basicSalary"
+                        maxlength="12" tabindex="12"> </div>
                   </div>
                 </div>
               </div>
@@ -153,15 +144,12 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <nav mat-tab-nav-bar [backgroundColor]="'primary'">
               <a mat-tab-link *ngFor="let link of employeeTabs" [routerLink]="link.link" routerLinkActive
-                #rla="routerLinkActive" [active]="rla.isActive">
-                {{link.label}}
-              </a>
+                #rla="routerLinkActive" [active]="rla.isActive"> {{link.label}} </a>
             </nav>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
           </div>
         </div>
       </div>

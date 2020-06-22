@@ -12,7 +12,8 @@ import { AppLoadService } from './services/app-load.service';
   providers: [
     AppLoadService,
     { provide: APP_INITIALIZER, useFactory: (config: AppLoadService) => () => config.getUrlSetting(), deps: [AppLoadService], multi: true }
-  ]
+  ],
+  declarations: []
 })
 
 export class AppLoadModule { }
