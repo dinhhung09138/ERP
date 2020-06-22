@@ -14,6 +14,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { FormatNumberPipe } from '../core/pipes/format-number.pipe';
+import { FormatDecimalDirective } from '../core/directives/format-decimal.directive';
+import { FormatCurrencyDirective } from '../core/directives/format-currency.directive';
 
 @NgModule({
   imports: [
@@ -34,9 +37,14 @@ import { MatIconModule } from '@angular/material/icon';
   declarations: [
     NoDataAvailableComponent,
     ElementLoadingComponent,
-    TableLoadingComponent
+    TableLoadingComponent,
+    FormatNumberPipe,
+    FormatDecimalDirective,
+    FormatCurrencyDirective,
   ],
-  providers: [],
+  providers: [
+    FormatNumberPipe,
+  ],
   exports: [
     CommonModule,
     FormsModule,
@@ -53,6 +61,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    FormatNumberPipe,
+    FormatDecimalDirective,
+    FormatCurrencyDirective,
   ]
 })
 export class SharedModule { }
