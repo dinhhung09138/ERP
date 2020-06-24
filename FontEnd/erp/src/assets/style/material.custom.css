@@ -43,3 +43,48 @@
 .mat-checkbox-checked.mat-accent .mat-checkbox-background {
   background-color: #1A6E64 !important;
 }
+
+.mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
+  background-image: unset;
+  background-size: noscript;
+  background-repeat: noscript;
+}
+
+.mat-dialog-container {
+  padding: 0px !important;
+}
+
+.mat-dialog-container .card {
+  margin-bottom: 0px;
+  border: 1px solid #721c24;
+}
+
+.mat-dialog-container .card>.card-header {
+  text-align: left;
+}
+
+.mat-dialog-container .card>.card-header h2 {
+  margin: 2px 0 0px;
+}
+
+.mat-dialog-container .card>.card-header h2 i {
+  float: left;
+  margin-top: 7px;
+  margin-left: 0px;
+  margin-right: 8px;
+}
+
+.mat-dialog-container .card>.card-body {
+  min-height: 70px;
+  text-align: center;
+}
+
+.mat-dialog-container .card>.card-footer {
+  text-align: center;
+}
+
+.mat-dialog-container .card-danger-bg {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}

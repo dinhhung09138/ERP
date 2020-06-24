@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormatNumberPipe } from '../core/pipes/format-number.pipe';
 import { FormatDecimalDirective } from '../core/directives/format-decimal.directive';
 import { FormatCurrencyDirective } from '../core/directives/format-currency.directive';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { FormatCurrencyDirective } from '../core/directives/format-currency.dire
     FormatNumberPipe,
     FormatDecimalDirective,
     FormatCurrencyDirective,
+    ConfirmDialogComponent,
   ],
   providers: [
     FormatNumberPipe,
@@ -37,6 +39,7 @@ import { FormatCurrencyDirective } from '../core/directives/format-currency.dire
     FormatNumberPipe,
     FormatDecimalDirective,
     FormatCurrencyDirective,
+    ConfirmDialogComponent,
   ]
 })
 export class SharedModule { }

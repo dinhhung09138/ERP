@@ -8,6 +8,8 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ApproveStatusFormComponent } from './form/form.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-hr-approve-status',
@@ -28,7 +30,10 @@ export class ApproveStatusComponent implements OnInit {
   listColumnsName: string[] = ['code', 'name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private approveStatusService: ApproveStatusService) { }
+  constructor(
+    public dialog: MatDialog,
+    private approveStatusService: ApproveStatusService
+  ) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
@@ -41,28 +46,41 @@ export class ApproveStatusComponent implements OnInit {
     }
   }
 
-  create() {
-    this.form.create();
+  onCreateClick() {
+    this.form.onCreateClick();
   }
 
-  update(id: number) {
+  onImportClick() {
+    console.log('click');
+    const dialofRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      disableClose: true,
+      autoFocus: true,
+      data: { title: '', animation: '' }
+    });
+  }
+
+  onUpdateClick(id: number) {
     if (id !== null) {
-      this.form.update(id);
+      this.form.onUpdateClick(id);
     }
   }
 
-  delete(id: number) {
-
+  onDeleteClick(id: number) {
+    const dialofRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { title: '', animation: '' }
+    });
   }
 
-  filterTable() {
+  onFilterChange() {
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
     this.getList();
   }
 
-  pageChange(page: PageEvent) {
+  onPageChange(page: PageEvent) {
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {

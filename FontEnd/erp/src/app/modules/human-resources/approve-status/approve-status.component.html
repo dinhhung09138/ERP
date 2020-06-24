@@ -10,16 +10,17 @@
       <div class="card-body">
         <div class="row">
           <div class="col-lg-9 col-md-8 col-sm-6">
-            <button class="btn btn-outline-info" (click)="create()"><i class="fa fa-plus"></i> Add New</button>
-            <button class="btn btn-outline-info"><i class="fa fa-paperclip"></i> Import</button>
+            <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i> Add New</button>
+            <button class="btn btn-outline-info" (click)="onImportClick()"><i class="fa fa-paperclip"></i>
+              Import</button>
             <button class="btn btn-outline-info"><i class="fa fa-file-excel-o"></i> Export</button>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
             <div class="input-group" *ngIf="paging.length > 0">
               <input type="text" placeholder="Search" class="form-control" [(ngModel)]="searchText"
-                (keyup.enter)="filterTable()">
+                (keyup.enter)="onFilterChange()">
               <div class="input-group-append">
-                <button class="btn btn-outline-info" (click)="filterTable()">Search</button>
+                <button class="btn btn-outline-info" (click)="onFilterChange()">Search</button>
               </div>
             </div>
           </div>
@@ -55,8 +56,10 @@
                       <i class="fa fa-bars"></i>
                     </a>
                     <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
-                      <a href="javascript:{}" class="dropdown-item text-success" (click)="update(element.id)">Edit</a>
-                      <a href="javascript:{}" class="dropdown-item text-danger">Delete</a>
+                      <a href="javascript:{}" class="dropdown-item text-success"
+                        (click)="onUpdateClick(element.id)">Edit</a>
+                      <a href="javascript:{}" class="dropdown-item text-danger"
+                        (click)="onDeleteClick(element.id)">Delete</a>
                     </div>
                   </div>
                 </td>
@@ -66,7 +69,7 @@
             </table>
             <app-no-data-available [Show]="paging.length === 0"></app-no-data-available>
             <mat-paginator [pageSize]="paging.pageSize" [pageSizeOptions]="paging.pageSizeOptions"
-              [length]="paging.length" (page)="pageChange($event)" showFirstLastButtons>
+              [length]="paging.length" (page)="onPageChange($event)" showFirstLastButtons>
             </mat-paginator>
           </div>
         </div>

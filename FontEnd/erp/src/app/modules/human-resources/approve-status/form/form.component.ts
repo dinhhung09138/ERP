@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ApproveStatusService } from '../approve-status.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -12,6 +12,8 @@ import { ApproveStatusViewModel } from '../approve-status.model';
   styleUrls: ['./form.component.css']
 })
 export class ApproveStatusFormComponent implements OnInit {
+
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
@@ -37,8 +39,12 @@ export class ApproveStatusFormComponent implements OnInit {
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.approveStatusForm.get('id').setValue(0);
@@ -47,42 +53,41 @@ export class ApproveStatusFormComponent implements OnInit {
     this.approveStatusForm.get('precedence').reset();
     this.approveStatusForm.get('isActive').reset();
 
-    if (isDisabledForm) {
-      if (formStatus === FormActionStatus.UnKnow) {
-        this.approveStatusForm.get('code').disable();
-        this.approveStatusForm.get('name').disable();
-        this.approveStatusForm.get('precedence').disable();
-        this.approveStatusForm.get('isActive').disable();
-      } else {
-        this.approveStatusForm.get('precedence').setValue(1);
-        this.approveStatusForm.get('isActive').setValue(true);
-        this.approveStatusForm.get('code').enable();
-        this.approveStatusForm.get('name').enable();
-        this.approveStatusForm.get('precedence').enable();
-        this.approveStatusForm.get('isActive').enable();
-      }
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.approveStatusForm.get('code').disable();
+      this.approveStatusForm.get('name').disable();
+      this.approveStatusForm.get('precedence').disable();
+      this.approveStatusForm.get('isActive').disable();
+    } else {
+      this.approveStatusForm.get('code').enable();
+      this.approveStatusForm.get('name').enable();
+      this.approveStatusForm.get('precedence').enable();
+      this.approveStatusForm.get('isActive').enable();
+      this.approveStatusForm.get('precedence').setValue(1);
+      this.approveStatusForm.get('isActive').setValue(true);
     }
+
     this.elm.nativeElement.querySelector('#code').focus();
   }
 
-  create() {
+  onCreateClick() {
     this.initFormControl(FormActionStatus.Create);
   }
 
-  update(id: number) {
+  onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
   }
 
-  reset() {
-    this.initFormControl(this.formAction, false);
+  onResetClick() {
+    this.initFormControl(this.formAction);
   }
 
-  close() {
+  onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 
-  submitForm() {
+  onSubmitForm() {
     this.isSubmit = true;
     if (this.approveStatusForm.invalid) {
       return;
