@@ -25,7 +25,17 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = _context.ApproveStatusRepository.Query();
+                var query = from m in _context.ApproveStatusRepository.Query()
+                            where !m.Deleted
+                            orderby m.Precedence
+                            select new ApproveStatusModel()
+                            {
+                                Id = m.Id,
+                                Code = m.Code,
+                                Name = m.Name,
+                                Precedence = m.Precedence,
+                                IsActive = m.IsActive
+                            };
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
@@ -33,18 +43,9 @@ namespace Service.HR
                                             || m.Name.ToLower().Contains(filter.Text));
                 }
 
-                var list = query.Select(m => new ApproveStatusModel()
-                {
-                    Id = m.Id,
-                    Code = m.Code,
-                    Name = m.Name,
-                    Precedence = m.Precedence,
-                    IsActive = m.IsActive
-                }).OrderBy(m => m.Precedence);
-
                 BaseListModel<ApproveStatusModel> listItems = new BaseListModel<ApproveStatusModel>();
                 listItems.TotalItems = await _context.ApproveStatusRepository.Query().CountAsync();
-                listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
             }

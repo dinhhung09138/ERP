@@ -23,7 +23,6 @@ export class FormatNumberPipe implements PipeTransform {
     if (value === null) {
       return '';
     }
-    console.log(value);
 
     // Separate value into 2 sections based on DECIMAL_SEPARATOR
     let [integer, fraction = ''] = (value || '').toString().split(this.DECIMAL_SEPARATOR);
