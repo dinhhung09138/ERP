@@ -48,7 +48,7 @@ namespace APIGateway
                             .AllowCredentials();
                 });
             });
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             // Add JWT Authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
