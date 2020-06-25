@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DateValidator } from 'src/app/core/validators/date.validator';
+import { AppValidator } from 'src/app/core/validators/app.validator';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from 'src/app/core/helpers/format-datepicker.helper';
 
@@ -84,11 +84,11 @@ export class EmployeeDetailComponent implements OnInit {
       workingEmail: ['', [Validators.required, Validators.email]],
       workingPhone: [''],
       badgeCardNumber: [''],
-      dateApplyBadge: [null, [DateValidator.date]],
+      dateApplyBadge: [null, [AppValidator.date]],
       fingerSignNumber: ['', [Validators.required]],
-      dateApplyFingerSign: [null, [DateValidator.date]],
-      probationDate: [null, [DateValidator.date]],
-      startWorkingDate: [null, [DateValidator.date]],
+      dateApplyFingerSign: [null, [AppValidator.date]],
+      probationDate: [null, [AppValidator.date]],
+      startWorkingDate: [null, [AppValidator.date]],
       employeeWorkingStatusId: [null, [Validators.required]],
       basicSalary: [null]
     });
