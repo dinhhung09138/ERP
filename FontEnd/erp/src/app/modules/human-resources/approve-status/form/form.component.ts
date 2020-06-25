@@ -59,19 +59,27 @@ export class ApproveStatusFormComponent implements OnInit {
       this.approveStatusForm.get('precedence').disable();
       this.approveStatusForm.get('isActive').disable();
     } else {
-      this.approveStatusForm.get('code').enable();
       this.approveStatusForm.get('name').enable();
       this.approveStatusForm.get('precedence').enable();
       this.approveStatusForm.get('isActive').enable();
       this.approveStatusForm.get('precedence').setValue(1);
       this.approveStatusForm.get('isActive').setValue(true);
+
+      if (formStatus === FormActionStatus.Create) {
+        this.elm.nativeElement.querySelector('#code').focus();
+        this.approveStatusForm.get('code').enable();
+      } else {
+        this.elm.nativeElement.querySelector('#name').focus();
+      }
     }
 
-    this.elm.nativeElement.querySelector('#code').focus();
   }
 
   onCreateClick() {
-    this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Create) {
+      this.initFormControl(FormActionStatus.Create);
+    }
+    this.elm.nativeElement.querySelector('#code').focus();
   }
 
   onUpdateClick(id: number) {
@@ -93,7 +101,7 @@ export class ApproveStatusFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.approveStatusForm.value as ApproveStatusViewModel;
+    const model = this.approveStatusForm.getRawValue() as ApproveStatusViewModel;
     model.action = this.formAction;
 
     this.approveStatusService.save(model).subscribe((res: ResponseModel) => {
@@ -110,16 +118,15 @@ export class ApproveStatusFormComponent implements OnInit {
 
   private getItem(id: number) {
     this.isLoading = true;
-    this.approveStatusService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.approveStatusForm.get('id').setValue(response.result.id);
-        this.approveStatusForm.get('code').setValue(response.result.code);
-        this.approveStatusForm.get('name').setValue(response.result.name);
-        this.approveStatusForm.get('precedence').setValue(response.result.precedence);
-        this.approveStatusForm.get('isActive').setValue(response.result.isActive);
+    this.approveStatusService.item(id).subscribe((res: ResponseModel) => {
+      if (res !== null) {
+        this.approveStatusForm.get('id').setValue(res.result.id);
+        this.approveStatusForm.get('code').setValue(res.result.code);
+        this.approveStatusForm.get('name').setValue(res.result.name);
+        this.approveStatusForm.get('precedence').setValue(res.result.precedence);
+        this.approveStatusForm.get('isActive').setValue(res.result.isActive);
       }
       this.isLoading = false;
     });
   }
-
 }

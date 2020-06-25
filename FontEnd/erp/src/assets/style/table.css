@@ -46,6 +46,10 @@ td.mat-footer-cell {
   width: 120px;
 }
 
+.td-w-200 {
+  width: 200px;
+}
+
 .mat-form-field-appearance-legacy .mat-form-field-underline {
   background-color: #1A6E64;
 }

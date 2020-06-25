@@ -10,6 +10,8 @@ import { PagingModel } from 'src/app/core/models/paging.model';
 import { ApproveStatusFormComponent } from './form/form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { ApproveStatusViewModel } from './approve-status.model';
 
 @Component({
   selector: 'app-hr-approve-status',
@@ -51,13 +53,11 @@ export class ApproveStatusComponent implements OnInit {
   }
 
   onImportClick() {
-    console.log('click');
-    const dialofRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '300px',
-      disableClose: true,
-      autoFocus: true,
-      data: { title: '', animation: '' }
-    });
+    this.form.onCloseClick();
+  }
+
+  onExportClick() {
+    this.form.onCloseClick();
   }
 
   onUpdateClick(id: number) {
@@ -67,9 +67,16 @@ export class ApproveStatusComponent implements OnInit {
   }
 
   onDeleteClick(id: number) {
+    this.form.onCloseClick();
     const dialofRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { title: '', animation: '' }
+    });
+
+    dialofRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteItem(id);
+      }
     });
   }
 
@@ -91,9 +98,7 @@ export class ApproveStatusComponent implements OnInit {
   }
 
   private getList() {
-
     this.isLoading = true;
-
     const filter = new FilterModel();
     filter.text = this.searchText;
     filter.paging.pageIndex = this.paging.pageIndex;
@@ -103,6 +108,17 @@ export class ApproveStatusComponent implements OnInit {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
         this.isLoading = false;
+      }
+    });
+  }
+
+  private deleteItem(itemId: number) {
+    this.isLoading = true;
+    const model = { action: FormActionStatus.Delete, id: itemId } as ApproveStatusViewModel;
+    this.approveStatusService.save(model).subscribe((res: ResponseModel) => {
+      this.isLoading = false;
+      if (res !== null) {
+        this.getList();
       }
     });
   }

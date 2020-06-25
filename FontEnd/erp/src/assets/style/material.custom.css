@@ -88,3 +88,11 @@
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
+
+.mat-select-arrow {
+  color: #1A6E64 !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-ripple {
+  background-color: unset !important;
+}
