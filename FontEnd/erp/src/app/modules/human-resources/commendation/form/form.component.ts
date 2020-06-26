@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { CommendationService } from '../commendation.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -15,6 +15,7 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 })
 export class CommendationFormComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
@@ -40,8 +41,12 @@ export class CommendationFormComponent implements OnInit {
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.commendationForm.get('id').setValue(0);
@@ -50,21 +55,20 @@ export class CommendationFormComponent implements OnInit {
     this.commendationForm.get('money').reset();
     this.commendationForm.get('isActive').reset();
 
-    if (isDisabledForm) {
-      if (formStatus === FormActionStatus.UnKnow) {
-        this.commendationForm.get('name').disable();
-        this.commendationForm.get('description').disable();
-        this.commendationForm.get('money').disable();
-        this.commendationForm.get('isActive').disable();
-      } else {
-        this.commendationForm.get('isActive').setValue(true);
-        this.commendationForm.get('money').setValue(0);
-        this.commendationForm.get('name').enable();
-        this.commendationForm.get('description').enable();
-        this.commendationForm.get('money').enable();
-        this.commendationForm.get('isActive').enable();
-      }
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.commendationForm.get('name').disable();
+      this.commendationForm.get('description').disable();
+      this.commendationForm.get('money').disable();
+      this.commendationForm.get('isActive').disable();
+    } else {
+      this.commendationForm.get('isActive').setValue(true);
+      this.commendationForm.get('money').setValue(0);
+      this.commendationForm.get('name').enable();
+      this.commendationForm.get('description').enable();
+      this.commendationForm.get('money').enable();
+      this.commendationForm.get('isActive').enable();
     }
+
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
@@ -81,7 +85,7 @@ export class CommendationFormComponent implements OnInit {
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction, false);
+    this.initFormControl(this.formAction);
   }
 
   onCloseClick() {

@@ -40,8 +40,6 @@ export class FormatNumberPipe implements PipeTransform {
       return '';
     }
 
-    console.log(value);
-
     // Separate value into 2 sections based on DECIMAL_SEPARATOR
     let [integer, fraction = ''] = (value || '').split(this.DECIMAL_SEPARATOR);
 
@@ -50,9 +48,6 @@ export class FormatNumberPipe implements PipeTransform {
     fraction = parseInt(fraction, 10) > 0 && fractionSize > 0
       ? this.DECIMAL_SEPARATOR + (fraction + this.PADDING).substring(0, fractionSize)
       : '';
-
-    console.log(integer);
-    console.log(fraction);
 
     return integer + fraction;
   }
