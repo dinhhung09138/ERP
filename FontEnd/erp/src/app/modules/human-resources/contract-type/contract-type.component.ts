@@ -42,12 +42,12 @@ export class ContractTypeComponent implements OnInit {
   }
 
   create() {
-    this.form.create();
+    this.form.onCreateClick();
   }
 
   update(id: number) {
     if (id !== null) {
-      this.form.update(id);
+      this.form.onUpdateClick(id);
     }
   }
 

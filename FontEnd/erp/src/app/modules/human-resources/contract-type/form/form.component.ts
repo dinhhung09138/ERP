@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ContractTypeService } from '../contract-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -13,6 +13,7 @@ import { ContractTypeViewModel } from '../contract-type.model';
 })
 export class ContractTypeFormComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
@@ -39,8 +40,12 @@ export class ContractTypeFormComponent implements OnInit {
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.contractTypeForm.get('id').setValue(0);
@@ -51,41 +56,46 @@ export class ContractTypeFormComponent implements OnInit {
     this.contractTypeForm.get('allowLeaveDate').reset();
     this.contractTypeForm.get('isActive').reset();
 
-    if (isDisabledForm) {
-      if (formStatus === FormActionStatus.UnKnow) {
-        this.contractTypeForm.get('code').disable();
-        this.contractTypeForm.get('name').disable();
-        this.contractTypeForm.get('description').disable();
-        this.contractTypeForm.get('allowInsurance').disable();
-        this.contractTypeForm.get('allowLeaveDate').disable();
-        this.contractTypeForm.get('isActive').disable();
-      } else {
-        this.contractTypeForm.get('isActive').setValue(true);
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.contractTypeForm.get('code').disable();
+      this.contractTypeForm.get('name').disable();
+      this.contractTypeForm.get('description').disable();
+      this.contractTypeForm.get('allowInsurance').disable();
+      this.contractTypeForm.get('allowLeaveDate').disable();
+      this.contractTypeForm.get('isActive').disable();
+    } else {
+      this.contractTypeForm.get('isActive').setValue(true);
+      this.contractTypeForm.get('name').enable();
+      this.contractTypeForm.get('description').enable();
+      this.contractTypeForm.get('allowInsurance').enable();
+      this.contractTypeForm.get('allowLeaveDate').enable();
+      this.contractTypeForm.get('isActive').enable();
+      if (formStatus === FormActionStatus.Create) {
         this.contractTypeForm.get('code').enable();
-        this.contractTypeForm.get('name').enable();
-        this.contractTypeForm.get('description').enable();
-        this.contractTypeForm.get('allowInsurance').enable();
-        this.contractTypeForm.get('allowLeaveDate').enable();
-        this.contractTypeForm.get('isActive').enable();
+        this.elm.nativeElement.querySelector('#code').focus();
+      } else {
+        this.elm.nativeElement.querySelector('#name').focus();
       }
+    }
+  }
+
+  onCreateClick() {
+    if (this.formAction !== FormActionStatus.Create) {
+      this.initFormControl(FormActionStatus.Create);
     }
     this.elm.nativeElement.querySelector('#code').focus();
   }
 
-  create() {
-    this.initFormControl(FormActionStatus.Create);
-  }
-
-  update(id: number) {
+  onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
   }
 
-  reset() {
-    this.initFormControl(this.formAction, false);
+  onResetClick() {
+    this.initFormControl(this.formAction);
   }
 
-  close() {
+  onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 
