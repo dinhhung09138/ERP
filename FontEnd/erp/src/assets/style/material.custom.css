@@ -96,3 +96,8 @@
 .mat-form-field-appearance-legacy .mat-form-field-ripple {
   background-color: unset !important;
 }
+
+.mat-form-field-disabled {
+  background-color: #e9ecef;
+  opacity: 1;
+}
