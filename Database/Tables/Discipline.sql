@@ -7,6 +7,7 @@ CREATE TABLE [dbo].[Discipline](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](200) NOT NULL,
 	[Description] [nvarchar](255) NULL,
+	[Money] [money] NULL,
 	[IsActive] [bit] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[CreateBy] [int] NOT NULL,
