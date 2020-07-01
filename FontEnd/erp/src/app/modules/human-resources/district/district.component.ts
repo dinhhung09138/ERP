@@ -11,6 +11,10 @@ import { DistrictFormComponent } from './form/form.component';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { ProvinceViewModel } from '../province/province.model';
+import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { DistrictViewModel } from './district.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-hr-district',
@@ -34,6 +38,7 @@ export class DistrictComponent implements OnInit {
   provinceList: ProvinceViewModel[] = [];
 
   constructor(
+    private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private districtService: DistrictService) {
   }
@@ -52,28 +57,46 @@ export class DistrictComponent implements OnInit {
     }
   }
 
-  create() {
-    this.form.create();
+  onCreateClick() {
+    this.form.onCreateClick();
   }
 
-  update(id: number) {
+  onImportClick() {
+    this.form.onCloseClick();
+  }
+
+  onExportClick() {
+    this.form.onCloseClick();
+  }
+
+  onUpdateClick(id: number) {
     if (id !== null) {
-      this.form.update(id);
+      this.form.onUpdateClick(id);
     }
   }
 
-  delete(id: number) {
+  onDeleteClick(id: number) {
+    this.form.onCloseClick();
 
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+    });
+
+    dialogRef.beforeClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteItem(id);
+      }
+    });
   }
 
-  filterTable() {
+  onFilterChange() {
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
     this.getList();
   }
 
-  pageChange(page: PageEvent) {
+  onPageChange(page: PageEvent) {
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
@@ -96,6 +119,18 @@ export class DistrictComponent implements OnInit {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
         this.isLoading = false;
+      }
+    });
+  }
+
+  private deleteItem(itemId: number) {
+    this.isLoading = true;
+    const model = { id: itemId, action: FormActionStatus.Delete } as DistrictViewModel;
+
+    this.districtService.save(model).subscribe((response: ResponseModel) => {
+      this.isLoading = false;
+      if (response) {
+        this.getList();
       }
     });
   }

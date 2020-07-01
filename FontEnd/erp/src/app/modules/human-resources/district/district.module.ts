@@ -9,6 +9,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const route: Routes = [
   {
@@ -31,6 +33,8 @@ const route: Routes = [
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
+    MatInputModule,
+    MatDialogModule,
   ],
   providers: [
     DistrictService,

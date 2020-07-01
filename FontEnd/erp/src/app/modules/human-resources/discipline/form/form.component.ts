@@ -6,6 +6,7 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { DisciplineViewModel } from '../discipline.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
+import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 
 @Component({
   selector: 'app-hr-discipline-form',
@@ -25,6 +26,7 @@ export class DisciplineFormComponent implements OnInit {
   constructor(
     private elm: ElementRef,
     private fb: FormBuilder,
+    private formatNumber: FormatNumberPipe,
     private disciplineService: DisciplineService) { }
 
   ngOnInit(): void {
@@ -112,6 +114,7 @@ export class DisciplineFormComponent implements OnInit {
         this.disciplineForm.get('id').setValue(response.result.id);
         this.disciplineForm.get('name').setValue(response.result.name);
         this.disciplineForm.get('description').setValue(response.result.description);
+        this.disciplineForm.get('money').setValue(this.formatNumber.transform(response.result.money));
         this.disciplineForm.get('isActive').setValue(response.result.isActive);
       }
       this.isLoading = false;

@@ -45,7 +45,6 @@ export class DistrictService {
   }
 
   item(id: number) {
-    console.log(id);
     return this.http.get<ResponseModel>(this.url.item + '?id=' + id).pipe(
       map((data) => {
         return data;

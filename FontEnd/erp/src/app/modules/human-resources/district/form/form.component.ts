@@ -7,6 +7,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { DistrictViewModel } from '../district.model';
 import { ProvinceViewModel } from '../../province/province.model';
 import { ActivatedRoute } from '@angular/router';
+import { AppValidator } from 'src/app/core/validators/app.validator';
 
 @Component({
   selector: 'app-hr-district-form',
@@ -40,13 +41,13 @@ export class DistrictFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       provinceId: [null, [Validators.required]],
-      precedence: [1, [Validators.required]],
+      precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
 
     this.formAction = formStatus;
@@ -56,38 +57,39 @@ export class DistrictFormComponent implements OnInit {
     this.districtForm.get('precedence').reset();
     this.districtForm.get('isActive').reset();
 
-    if (isDisabledForm) {
-      if (formStatus === FormActionStatus.UnKnow) {
-        this.districtForm.get('name').disable();
-        this.districtForm.get('provinceId').disable();
-        this.districtForm.get('precedence').disable();
-        this.districtForm.get('isActive').disable();
-      } else {
-        this.districtForm.get('isActive').setValue(true);
-        this.districtForm.get('precedence').setValue(1);
-        this.districtForm.get('name').enable();
-        this.districtForm.get('provinceId').enable();
-        this.districtForm.get('precedence').enable();
-        this.districtForm.get('isActive').enable();
-      }
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.districtForm.get('name').disable();
+      this.districtForm.get('provinceId').disable();
+      this.districtForm.get('precedence').disable();
+      this.districtForm.get('isActive').disable();
+    } else {
+      this.districtForm.get('isActive').setValue(true);
+      this.districtForm.get('precedence').setValue(1);
+      this.districtForm.get('name').enable();
+      this.districtForm.get('provinceId').enable();
+      this.districtForm.get('precedence').enable();
+      this.districtForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  create() {
-    this.initFormControl(FormActionStatus.Create);
+  onCreateClick() {
+    if (this.formAction !== FormActionStatus.Create) {
+      this.initFormControl(FormActionStatus.Create);
+    }
+    this.elm.nativeElement.querySelector('#name');
   }
 
-  update(id: number) {
+  onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
   }
 
-  reset() {
-    this.initFormControl(this.formAction, false);
+  onResetClick() {
+    this.initFormControl(this.formAction);
   }
 
-  close() {
+  onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 
