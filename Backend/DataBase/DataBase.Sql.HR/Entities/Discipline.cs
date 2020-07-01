@@ -47,8 +47,6 @@ namespace DataBase.Sql.HR.Entities
 
         [Column(TypeName = "bit")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue(false)]
         public bool Deleted { get; set; }
     }
 }

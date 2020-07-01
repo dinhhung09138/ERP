@@ -100,6 +100,7 @@ namespace Service.HR
                     Id = md.Id,
                     Name = md.Name,
                     Description = md.Description,
+                    Money = md.Money,
                     IsActive = md.IsActive,
                 };
 

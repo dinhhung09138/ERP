@@ -5,6 +5,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { DisciplineViewModel } from '../discipline.model';
+import { AppValidator } from 'src/app/core/validators/app.validator';
 
 @Component({
   selector: 'app-hr-discipline-form',
@@ -31,49 +32,55 @@ export class DisciplineFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       description: [''],
+      money: [0, [AppValidator.money]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
 
     this.formAction = formStatus;
     this.disciplineForm.get('id').setValue(0);
     this.disciplineForm.get('name').reset();
     this.disciplineForm.get('description').reset();
+    this.disciplineForm.get('money').reset();
     this.disciplineForm.get('isActive').reset();
 
-    if (isDisabledForm) {
-      if (formStatus === FormActionStatus.UnKnow) {
-        this.disciplineForm.get('name').disable();
-        this.disciplineForm.get('description').disable();
-        this.disciplineForm.get('isActive').disable();
-      } else {
-        this.disciplineForm.get('isActive').setValue(true);
-        this.disciplineForm.get('name').enable();
-        this.disciplineForm.get('description').enable();
-        this.disciplineForm.get('isActive').enable();
-      }
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.disciplineForm.get('name').disable();
+      this.disciplineForm.get('description').disable();
+      this.disciplineForm.get('money').disable();
+      this.disciplineForm.get('isActive').disable();
+    } else {
+      this.disciplineForm.get('isActive').setValue(true);
+      this.disciplineForm.get('money').setValue(0);
+      this.disciplineForm.get('name').enable();
+      this.disciplineForm.get('description').enable();
+      this.disciplineForm.get('money').enable();
+      this.disciplineForm.get('isActive').enable();
+
     }
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  create() {
-    this.initFormControl(FormActionStatus.Create);
+  onCreateClick() {
+    if (this.formAction !== FormActionStatus.Create) {
+      this.initFormControl(FormActionStatus.Create);
+    }
   }
 
-  update(id: number) {
+  onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
   }
 
-  reset() {
-    this.initFormControl(this.formAction, false);
+  onResetClick() {
+    this.initFormControl(this.formAction);
   }
 
-  close() {
+  onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 

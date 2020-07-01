@@ -8,6 +8,10 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { DisciplineFormComponent } from './form/form.component';
+import { MatDialog } from '@angular/material/dialog';
+import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { DisciplineViewModel } from './discipline.model';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-hr-discipline',
@@ -28,7 +32,9 @@ export class DisciplineComponent implements OnInit {
   listColumnsName: string[] = ['name', 'description', 'money', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private disciplineService: DisciplineService) { }
+  constructor(
+    private dialog: MatDialog,
+    private disciplineService: DisciplineService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
@@ -41,28 +47,45 @@ export class DisciplineComponent implements OnInit {
     }
   }
 
-  create() {
-    this.form.create();
+  onCreateClick() {
+    this.form.onCreateClick();
   }
 
-  update(id: number) {
+  onImportClick() {
+    this.form.onCloseClick();
+  }
+
+  onExportClick() {
+    this.form.onCloseClick();
+  }
+
+  onUpdateClick(id: number) {
     if (id !== null) {
-      this.form.update(id);
+      this.form.onUpdateClick(id);
     }
   }
 
-  delete(id: number) {
+  onDelteClick(id: number) {
+    this.form.onCloseClick();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px'
+    });
 
+    dialogRef.beforeClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteItem(id);
+      }
+    });
   }
 
-  filterTable() {
+  onFilterChange() {
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
     this.getList();
   }
 
-  pageChange(page: PageEvent) {
+  onPageChange(page: PageEvent) {
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
@@ -85,6 +108,18 @@ export class DisciplineComponent implements OnInit {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
         this.isLoading = false;
+      }
+    });
+  }
+
+  private deleteItem(itemId: number) {
+    this.isLoading = true;
+    const model = {id: itemId, action: FormActionStatus.Delete} as DisciplineViewModel;
+
+    this.disciplineService.save(model).subscribe((response: ResponseModel) => {
+      this.isLoading = false;
+      if (response) {
+        this.getList();
       }
     });
   }
