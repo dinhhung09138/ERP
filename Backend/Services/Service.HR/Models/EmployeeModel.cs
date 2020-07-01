@@ -9,15 +9,12 @@ namespace Service.HR.Models
         public int Id { get; set; }
 
         [MaxLength(30)]
-        [Required]
         public string EmployeeCode { get; set; }
 
         [MaxLength(50)]
-        [Required]
         public string FirstName { get; set; }
 
         [MaxLength(50)]
-        [Required]
         public string LastName { get; set; }
 
         public string FullName
