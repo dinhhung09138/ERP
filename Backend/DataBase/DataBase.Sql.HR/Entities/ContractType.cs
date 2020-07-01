@@ -24,7 +24,6 @@ namespace DataBase.Sql.HR.Entities
         public string Name { get; set; }
 
         [Column(TypeName = "nvarchar(255)")]
-        [Required]
         [MaxLength(250)]
         public string Description { get; set; }
 

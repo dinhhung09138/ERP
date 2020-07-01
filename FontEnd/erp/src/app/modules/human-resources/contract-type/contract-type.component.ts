@@ -8,6 +8,10 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ContractTypeFormComponent } from './form/form.component';
+import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { ContractTypeViewModel } from './contract-type.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-hr-contract-type',
@@ -28,7 +32,9 @@ export class ContractTypeComponent implements OnInit {
   listColumnsName: string[] = ['code', 'name', 'description', 'allowInsurance', 'allowLeaveDate', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private contractTypeService: ContractTypeService) { }
+  constructor(
+    private dialog: MatDialog,
+    private contractTypeService: ContractTypeService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
@@ -41,28 +47,45 @@ export class ContractTypeComponent implements OnInit {
     }
   }
 
-  create() {
+  onCreateClick() {
     this.form.onCreateClick();
   }
 
-  update(id: number) {
+  onUpdateClick(id: number) {
     if (id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
-  delete(id: number) {
+  onDeleteClick(id: number) {
+    this.form.onCloseClick();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px'
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === true) {
+        this.deleteItem(id);
+      }
+    });
   }
 
-  filterTable() {
+  onImportClick() {
+    this.form.onCloseClick();
+  }
+
+  onExportClick() {
+    this.form.onCloseClick();
+  }
+
+  onFilterChange() {
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
     this.getList();
   }
 
-  pageChange(page: PageEvent) {
+  onPageChange(page: PageEvent) {
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
@@ -85,6 +108,18 @@ export class ContractTypeComponent implements OnInit {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
         this.isLoading = false;
+      }
+    });
+  }
+
+  private deleteItem(itemId: number) {
+    this.isLoading = true;
+    const model = { id: itemId, action: FormActionStatus.Delete } as ContractTypeViewModel;
+
+    this.contractTypeService.save(model).subscribe((response: ResponseModel) => {
+      this.isLoading = false;
+      if (response) {
+        this.getList();
       }
     });
   }

@@ -105,7 +105,7 @@ export class ContractTypeFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.contractTypeForm.value as ContractTypeViewModel;
+    const model = this.contractTypeForm.getRawValue() as ContractTypeViewModel;
     model.action = this.formAction;
 
     this.contractTypeService.save(model).subscribe((res: ResponseModel) => {
