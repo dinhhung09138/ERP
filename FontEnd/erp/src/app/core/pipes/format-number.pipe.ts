@@ -25,7 +25,7 @@ export class FormatNumberPipe implements PipeTransform {
     }
 
     // Separate value into 2 sections based on DECIMAL_SEPARATOR
-    let [integer, fraction = ''] = (value || '').toString().split(this.DECIMAL_SEPARATOR);
+    let [integer, fraction = ''] = (value.toString() || '').toString().split(this.DECIMAL_SEPARATOR);
 
     fraction = fractionSize > 0 ? this.DECIMAL_SEPARATOR + (fraction + this.PADDING).substring(0, fractionSize) : '';
 
@@ -35,7 +35,7 @@ export class FormatNumberPipe implements PipeTransform {
   }
 
   parse(value: string | string, fractionSize: number = 0): string {
-
+    console.log(value);
     if (value === null) {
       return '';
     }

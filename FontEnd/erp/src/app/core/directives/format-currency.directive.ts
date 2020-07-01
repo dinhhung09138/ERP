@@ -15,7 +15,6 @@ export class FormatCurrencyDirective implements OnInit {
     private elementRef: ElementRef,
     private formatNumberPipe: FormatNumberPipe
   ) {
-    console.log(this.elementRef.nativeElement);
     this.elm = this.elementRef.nativeElement;
   }
 

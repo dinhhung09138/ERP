@@ -24,13 +24,27 @@ export class AppValidator extends Validators {
   static money(control: FormControl) {
     if (control.value) {
       const numberFormat = new FormatNumberPipe();
-      const value = numberFormat.parse(control.value);
+      const value = numberFormat.parse(control.value.toString());
       const result = Number(value);
       if (isNaN(result)) {
         return { money: true };
       }
 
       return null;
+    }
+
+    return null;
+  }
+
+  static number(control: FormControl) {
+    if (control.value) {
+      const numberFormat = new FormatNumberPipe();
+      const value = numberFormat.parse(control.value.toString());
+      const result = Number(value);
+
+      if (isNaN(result)) {
+        return { number: true };
+      }
     }
 
     return null;
