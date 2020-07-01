@@ -48,8 +48,6 @@ namespace DataBase.Sql.HR.Entities
 
         [Column(TypeName = "datetime")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue("getdate()")]
         public DateTime CreateDate { get; set; }
 
         [Column(TypeName = "datetime")]
