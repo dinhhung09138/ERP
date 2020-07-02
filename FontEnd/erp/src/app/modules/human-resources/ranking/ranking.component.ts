@@ -8,6 +8,10 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { RankingFormComponent } from './form/form.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { RankingViewModel } from './ranking.model';
 
 @Component({
   selector: 'app-hr-ranking',
@@ -28,7 +32,9 @@ export class RankingComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private rankingService: RankingService) { }
+  constructor(
+    private dialog: MatDialog,
+    private rankingService: RankingService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
@@ -41,28 +47,46 @@ export class RankingComponent implements OnInit {
     }
   }
 
-  create() {
+  onCreateClick() {
     this.form.create();
   }
 
-  update(id: number) {
+  onImportClick() {
+    this.form.close();
+  }
+
+  onExportClick() {
+    this.form.close();
+  }
+
+  onUpateClick(id: number) {
     if (id !== null) {
       this.form.update(id);
     }
   }
 
-  delete(id: number) {
+  onDeleteClick(id: number) {
+    this.form.close();
 
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+    });
+
+    dialogRef.beforeClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteItem(id);
+      }
+    });
   }
 
-  filterTable() {
+  onFilterChange() {
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
     this.getList();
   }
 
-  pageChange(page: PageEvent) {
+  onPageChange(page: PageEvent) {
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
@@ -89,4 +113,15 @@ export class RankingComponent implements OnInit {
     });
   }
 
+  private deleteItem(itemId: number) {
+    this.isLoading = true;
+    const model = { id: itemId, action: FormActionStatus.Delete } as RankingViewModel;
+
+    this.rankingService.save(model).subscribe((response: ResponseModel) => {
+      this.isLoading = false;
+      if (response) {
+        this.getList();
+      }
+    });
+  }
 }

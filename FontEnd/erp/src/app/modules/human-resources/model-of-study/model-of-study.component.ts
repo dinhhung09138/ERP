@@ -8,6 +8,10 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ModelOfStudyFormComponent } from './form/form.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { ModelOfStudyViewModel } from './model-of-study.model';
 
 @Component({
   selector: 'app-hr-model-of-study',
@@ -28,7 +32,9 @@ export class ModelOfStudyComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private modelOfStudyService: ModelOfStudyService) { }
+  constructor(
+    private dialog: MatDialog,
+    private modelOfStudyService: ModelOfStudyService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
@@ -41,28 +47,46 @@ export class ModelOfStudyComponent implements OnInit {
     }
   }
 
-  create() {
+  onCreateClick() {
     this.form.create();
   }
 
-  update(id: number) {
+  onImportClick() {
+    this.form.close();
+  }
+
+  onExportClick() {
+    this.form.close();
+  }
+
+  onUpateClick(id: number) {
     if (id !== null) {
       this.form.update(id);
     }
   }
 
-  delete(id: number) {
+  onDeleteClick(id: number) {
+    this.form.close();
 
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+    });
+
+    dialogRef.beforeClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteItem(id);
+      }
+    });
   }
 
-  filterTable() {
+  onFilterChange() {
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
     this.getList();
   }
 
-  pageChange(page: PageEvent) {
+  onPageChange(page: PageEvent) {
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
@@ -89,4 +113,15 @@ export class ModelOfStudyComponent implements OnInit {
     });
   }
 
+  private deleteItem(itemId: number) {
+    this.isLoading = true;
+    const model = { id: itemId, action: FormActionStatus.Delete } as ModelOfStudyViewModel;
+
+    this.modelOfStudyService.save(model).subscribe((response: ResponseModel) => {
+      this.isLoading = false;
+      if (response) {
+        this.getList();
+      }
+    });
+  }
 }
