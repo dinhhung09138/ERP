@@ -8,6 +8,10 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { EducationFormComponent } from './form/form.component';
+import { MatDialog } from '@angular/material/dialog';
+import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { EducationViewModel } from './education.model';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-hr-education',
@@ -28,7 +32,9 @@ export class EducationComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private educationService: EducationService) { }
+  constructor(
+    private dialog: MatDialog,
+    private educationService: EducationService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
@@ -41,28 +47,46 @@ export class EducationComponent implements OnInit {
     }
   }
 
-  create() {
-    this.form.create();
+  onCreateClick() {
+    this.form.onCreateClick();
   }
 
-  update(id: number) {
+  onImportClick() {
+    this.form.onCloseClick();
+  }
+
+  onExportClick() {
+    this.form.onCloseClick();
+  }
+
+  onUpdateClick(id: number) {
     if (id !== null) {
-      this.form.update(id);
+      this.form.onUpdateClick(id);
     }
   }
 
-  delete(id: number) {
+  onDeleteClick(id: number) {
+    this.form.onCloseClick();
 
+    const modalRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px'
+    });
+
+    modalRef.beforeClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteItem(id);
+      }
+    });
   }
 
-  filterTable() {
+  onFilterChange() {
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
     this.getList();
   }
 
-  pageChange(page: PageEvent) {
+  onPageChange(page: PageEvent) {
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
@@ -85,6 +109,18 @@ export class EducationComponent implements OnInit {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
         this.isLoading = false;
+      }
+    });
+  }
+
+  private deleteItem(itemId: number) {
+    this.isLoading = true;
+    const model = { id: itemId, action: FormActionStatus.Delete } as EducationViewModel;
+
+    this.educationService.save(model).subscribe((response: ResponseModel) => {
+      this.isLoading = false;
+      if (response) {
+        this.getList();
       }
     });
   }
