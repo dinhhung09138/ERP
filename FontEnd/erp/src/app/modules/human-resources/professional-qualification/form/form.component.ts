@@ -5,6 +5,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ProfessionalQualificationViewModel } from '../professional-qualification.model';
+import { AppValidator } from 'src/app/core/validators/app.validator';
 
 @Component({
   selector: 'app-hr-professional-qualification-form',
@@ -30,13 +31,13 @@ export class ProfessionalQualificationFormComponent implements OnInit {
     this.qualificationForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
-      precedence: [1, [Validators.required]],
+      precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
 
     this.formAction = formStatus;
@@ -45,36 +46,37 @@ export class ProfessionalQualificationFormComponent implements OnInit {
     this.qualificationForm.get('precedence').reset();
     this.qualificationForm.get('isActive').reset();
 
-    if (isDisabledForm) {
-      if (formStatus === FormActionStatus.UnKnow) {
-        this.qualificationForm.get('name').disable();
-        this.qualificationForm.get('precedence').disable();
-        this.qualificationForm.get('isActive').disable();
-      } else {
-        this.qualificationForm.get('isActive').setValue(true);
-        this.qualificationForm.get('precedence').setValue(1);
-        this.qualificationForm.get('name').enable();
-        this.qualificationForm.get('precedence').enable();
-        this.qualificationForm.get('isActive').enable();
-      }
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.qualificationForm.get('name').disable();
+      this.qualificationForm.get('precedence').disable();
+      this.qualificationForm.get('isActive').disable();
+    } else {
+      this.qualificationForm.get('isActive').setValue(true);
+      this.qualificationForm.get('precedence').setValue(1);
+      this.qualificationForm.get('name').enable();
+      this.qualificationForm.get('precedence').enable();
+      this.qualificationForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  create() {
-    this.initFormControl(FormActionStatus.Create);
+  onCreateClick() {
+    if (this.formAction !== FormActionStatus.Create) {
+      this.initFormControl(FormActionStatus.Create);
+    }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  update(id: number) {
+  onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
   }
 
-  reset() {
-    this.initFormControl(this.formAction, false);
+  onResetClick() {
+    this.initFormControl(this.formAction);
   }
 
-  close() {
+  onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 
