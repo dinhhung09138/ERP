@@ -59,7 +59,7 @@ export class IdentificationTypeComponent implements OnInit {
     this.form.onCloseClick();
   }
 
-  onUpateClick(id: number) {
+  onUpdateClick(id: number) {
     if (id !== null) {
       this.form.onUpdateClick(id);
     }
