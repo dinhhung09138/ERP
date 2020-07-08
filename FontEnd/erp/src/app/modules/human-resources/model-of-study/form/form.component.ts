@@ -5,6 +5,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ModelOfStudyViewModel } from '../model-of-study.model';
+import { AppValidator } from 'src/app/core/validators/app.validator';
 
 @Component({
   selector: 'app-hr-model-of-study-form',
@@ -30,13 +31,13 @@ export class ModelOfStudyFormComponent implements OnInit {
     this.modelOfStudyForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
-      precedence: [1, [Validators.required]],
+      precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
 
     this.formAction = formStatus;
@@ -45,36 +46,37 @@ export class ModelOfStudyFormComponent implements OnInit {
     this.modelOfStudyForm.get('precedence').reset();
     this.modelOfStudyForm.get('isActive').reset();
 
-    if (isDisabledForm) {
-      if (formStatus === FormActionStatus.UnKnow) {
-        this.modelOfStudyForm.get('name').disable();
-        this.modelOfStudyForm.get('precedence').disable();
-        this.modelOfStudyForm.get('isActive').disable();
-      } else {
-        this.modelOfStudyForm.get('isActive').setValue(true);
-        this.modelOfStudyForm.get('precedence').setValue(1);
-        this.modelOfStudyForm.get('name').enable();
-        this.modelOfStudyForm.get('precedence').enable();
-        this.modelOfStudyForm.get('isActive').enable();
-      }
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.modelOfStudyForm.get('name').disable();
+      this.modelOfStudyForm.get('precedence').disable();
+      this.modelOfStudyForm.get('isActive').disable();
+    } else {
+      this.modelOfStudyForm.get('isActive').setValue(true);
+      this.modelOfStudyForm.get('precedence').setValue(1);
+      this.modelOfStudyForm.get('name').enable();
+      this.modelOfStudyForm.get('precedence').enable();
+      this.modelOfStudyForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  create() {
-    this.initFormControl(FormActionStatus.Create);
+  onCreateClick() {
+    if (this.formAction !== FormActionStatus.Create) {
+      this.initFormControl(FormActionStatus.Create);
+    }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  update(id: number) {
+  onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
   }
 
-  reset() {
-    this.initFormControl(this.formAction, false);
+  onResetClick() {
+    this.initFormControl(this.formAction);
   }
 
-  close() {
+  onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 

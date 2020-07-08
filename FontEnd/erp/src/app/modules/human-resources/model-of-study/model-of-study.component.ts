@@ -48,25 +48,25 @@ export class ModelOfStudyComponent implements OnInit {
   }
 
   onCreateClick() {
-    this.form.create();
+    this.form.onCreateClick();
   }
 
   onImportClick() {
-    this.form.close();
+    this.form.onCloseClick();
   }
 
   onExportClick() {
-    this.form.close();
+    this.form.onCloseClick();
   }
 
-  onUpateClick(id: number) {
+  onUpdateClick(id: number) {
     if (id !== null) {
-      this.form.update(id);
+      this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number) {
-    this.form.close();
+    this.form.onCloseClick();
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
