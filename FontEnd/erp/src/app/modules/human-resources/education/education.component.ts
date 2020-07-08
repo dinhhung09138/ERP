@@ -68,11 +68,11 @@ export class EducationComponent implements OnInit {
   onDeleteClick(id: number) {
     this.form.onCloseClick();
 
-    const modalRef = this.dialog.open(ConfirmDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px'
     });
 
-    modalRef.beforeClosed().subscribe(result => {
+    dialogRef.beforeClosed().subscribe(result => {
       if (result === true) {
         this.deleteItem(id);
       }

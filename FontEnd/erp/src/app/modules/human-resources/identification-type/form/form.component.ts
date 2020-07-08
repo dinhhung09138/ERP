@@ -5,6 +5,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { IdentificationTypeViewModel } from '../identification-type.model';
+import { AppValidator } from 'src/app/core/validators/app.validator';
 
 @Component({
   selector: 'app-hr-identification-type-form',
@@ -30,13 +31,13 @@ export class IdentificationTypeFormComponent implements OnInit {
     this.identificationForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
-      precedence: [1, [Validators.required]],
+      precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
 
     this.formAction = formStatus;
@@ -45,36 +46,37 @@ export class IdentificationTypeFormComponent implements OnInit {
     this.identificationForm.get('isActive').reset();
     this.identificationForm.get('precedence').reset();
 
-    if (isDisabledForm) {
-      if (formStatus === FormActionStatus.UnKnow) {
-        this.identificationForm.get('name').disable();
-        this.identificationForm.get('precedence').disable();
-        this.identificationForm.get('isActive').disable();
-      } else {
-        this.identificationForm.get('isActive').setValue(true);
-        this.identificationForm.get('precedence').setValue(1);
-        this.identificationForm.get('name').enable();
-        this.identificationForm.get('precedence').enable();
-        this.identificationForm.get('isActive').enable();
-      }
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.identificationForm.get('name').disable();
+      this.identificationForm.get('precedence').disable();
+      this.identificationForm.get('isActive').disable();
+    } else {
+      this.identificationForm.get('isActive').setValue(true);
+      this.identificationForm.get('precedence').setValue(1);
+      this.identificationForm.get('name').enable();
+      this.identificationForm.get('precedence').enable();
+      this.identificationForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  create() {
-    this.initFormControl(FormActionStatus.Create);
+  onCreateClick() {
+    if (this.formAction !== FormActionStatus.Create) {
+      this.initFormControl(FormActionStatus.Create);
+    }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  update(id: number) {
+  onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
   }
 
-  reset() {
-    this.initFormControl(this.formAction, false);
+  onResetClick() {
+    this.initFormControl(this.formAction);
   }
 
-  close() {
+  onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 
