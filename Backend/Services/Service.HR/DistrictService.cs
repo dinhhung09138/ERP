@@ -45,7 +45,7 @@ namespace Service.HR
                 }
 
                 BaseListModel<DistrictModel> listItems = new BaseListModel<DistrictModel>();
-                listItems.TotalItems = await _context.DistrictRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.DistrictRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;

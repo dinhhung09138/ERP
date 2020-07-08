@@ -43,7 +43,7 @@ namespace Service.HR
                 }
 
                 BaseListModel<EducationModel> listItems = new BaseListModel<EducationModel>();
-                listItems.TotalItems = await _context.EducationRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.EducationRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;

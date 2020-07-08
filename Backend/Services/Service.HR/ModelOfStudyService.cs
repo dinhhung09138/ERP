@@ -40,7 +40,7 @@ namespace Service.HR
                 }
 
                 BaseListModel<ModelOfStudyModel> listItems = new BaseListModel<ModelOfStudyModel>();
-                listItems.TotalItems = await _context.ModelOfStudyRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.ModelOfStudyRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
