@@ -41,7 +41,7 @@ namespace Service.HR
                 }
 
                 BaseListModel<RankingModel> listItems = new BaseListModel<RankingModel>();
-                listItems.TotalItems = await _context.RankingRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.RankingRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;

@@ -11,8 +11,10 @@
         <div class="row">
           <div class="col-lg-9 col-md-8 col-sm-6">
             <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i> Add New</button>
-            <button class="btn btn-outline-info" (click)="onImportClick()"><i class="fa fa-paperclip"></i> Import</button>
-            <button class="btn btn-outline-info" (click)="onExportClick()"><i class="fa fa-file-excel-o"></i> Export</button>
+            <button class="btn btn-outline-info" (click)="onImportClick()"><i class="fa fa-paperclip"></i>
+              Import</button>
+            <button class="btn btn-outline-info" (click)="onExportClick()"><i class="fa fa-file-excel-o"></i>
+              Export</button>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
             <div class="input-group" *ngIf="paging.length > 0">
@@ -43,8 +45,8 @@
               <ng-container matColumnDef="isActive">
                 <th mat-header-cell *matHeaderCellDef class="td-w-70">Active</th>
                 <td mat-cell *matCellDef="let element" class="center">
-                  <label class="label label-outline-success" *ngIf="element.isActive">active</label>
-                  <label class="label label-outline-danger" *ngIf="!element.isActive">deactive</label>
+                  <label class="label label-outline-success" *ngIf="element.isActive">Active</label>
+                  <label class="label label-outline-danger" *ngIf="!element.isActive">Deactivate</label>
                 </td>
               </ng-container>
               <ng-container matColumnDef="action">
@@ -55,8 +57,10 @@
                       <i class="fa fa-bars"></i>
                     </a>
                     <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
-                      <a href="javascript:{}" class="dropdown-item text-success" (click)="onUpdateClick(element.id)">Edit</a>
-                      <a href="javascript:{}" class="dropdown-item text-danger" (click)="onDelteClick(element.id)">Delete</a>
+                      <a href="javascript:{}" class="dropdown-item text-success"
+                        (click)="onUpdateClick(element.id)">Edit</a>
+                      <a href="javascript:{}" class="dropdown-item text-danger"
+                        (click)="onDelteClick(element.id)">Delete</a>
                     </div>
                   </div>
                 </td>

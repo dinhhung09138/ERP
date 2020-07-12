@@ -43,7 +43,7 @@ namespace Service.HR
                 var list = query.OrderBy(m => m.Precedence);
 
                 BaseListModel<ProvinceModel> listItems = new BaseListModel<ProvinceModel>();
-                listItems.TotalItems = await _context.ProvinceRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.ProvinceRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await list.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;

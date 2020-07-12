@@ -41,7 +41,7 @@ namespace Service.HR
                 }
 
                 BaseListModel<IdentificationTypeModel> listItems = new BaseListModel<IdentificationTypeModel>();
-                listItems.TotalItems = await _context.IdentificationTypeRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.IdentificationTypeRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;

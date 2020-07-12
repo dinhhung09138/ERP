@@ -55,7 +55,7 @@ namespace Service.HR
                                             || m.WorkingPhone.Contains(filter.Text));
                 }
                 BaseListModel<EmployeeModel> listItems = new BaseListModel<EmployeeModel>();
-                listItems.TotalItems = await _context.EmployeeRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.EmployeeRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;

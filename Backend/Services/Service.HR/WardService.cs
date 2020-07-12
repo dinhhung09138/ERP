@@ -49,7 +49,7 @@ namespace Service.HR
                 }
                 
                 BaseListModel<WardModel> listItems = new BaseListModel<WardModel>();
-                listItems.TotalItems = await _context.WardRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.WardRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;

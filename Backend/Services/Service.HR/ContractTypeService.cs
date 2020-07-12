@@ -46,7 +46,7 @@ namespace Service.HR
                 }
 
                 BaseListModel<ContractTypeModel> listItems = new BaseListModel<ContractTypeModel>();
-                listItems.TotalItems = await _context.ContractTypeRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.ContractTypeRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;

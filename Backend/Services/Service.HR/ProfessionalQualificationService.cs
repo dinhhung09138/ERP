@@ -43,7 +43,7 @@ namespace Service.HR
                 }
 
                 BaseListModel<ProfessionalQualificationModel> listItems = new BaseListModel<ProfessionalQualificationModel>();
-                listItems.TotalItems = await _context.ProfessionalQualificationRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.ProfessionalQualificationRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;

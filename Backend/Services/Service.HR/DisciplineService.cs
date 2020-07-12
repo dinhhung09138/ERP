@@ -45,7 +45,7 @@ namespace Service.HR
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text) || m.Description.Contains(filter.Text));
                 }
                 BaseListModel<DisciplineModel> listItems = new BaseListModel<DisciplineModel>();
-                listItems.TotalItems = await _context.DisciplineRepository.Query().CountAsync();
+                listItems.TotalItems = await _context.DisciplineRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
