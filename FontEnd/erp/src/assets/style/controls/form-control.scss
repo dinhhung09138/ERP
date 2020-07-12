@@ -1,0 +1,33 @@
+.form-control {
+  border-radius: unset;
+  height: calc(1.2em + .75rem + 2px);
+  padding: .2rem .5rem;
+}
+
+input[type="text"]:focus {
+  border-color: $primary-background-color;
+  outline: 0;
+  -webkit-box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color;
+  -moz-box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color;
+  -ms-box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color;
+  -o-box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color;
+  box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color;
+}
+
+textarea:focus {
+  border-color: $primary-background-color !important;
+  outline: 0 !important;
+  -webkit-box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color !important;
+  -moz-box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color !important;
+  -ms-box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color !important;
+  -o-box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color !important;
+  box-shadow: inset 0 .5px .5px rgba(0, 0, 0, .075), 0 0 4px $primary-background-color !important;
+}
+
+.text-sm {
+  font-size: .875rem !important;
+}
+
+.text-muted {
+  color: $primary-background-color !important;
+}

@@ -1,0 +1,15 @@
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected .ng-option-label,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked .ng-option-label {
+  font-weight: 400;
+}
+
+.is-invalid .ng-select-container {
+  border-color: #dc3545;
+}
+.ng-select.ng-select-disabled>.ng-select-container {
+  background-color: #e9ecef;
+}
+
+.ng-select.ng-select-focused:not(.ng-select-option)>.ng-select-container {
+  border-color: $primary-background-color;
+}

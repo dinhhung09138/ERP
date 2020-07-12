@@ -1,0 +1,24 @@
+
+.nav-tabs {
+    border-bottom: 1px solid $primary-background-color;
+  }
+  
+  .nav-tabs .nav-item .nav-link,
+  .nav-tabs .nav-link {
+    color: #000000;
+    padding: 0.2rem 1rem;
+    border-radius: unset;
+  }
+  
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs .nav-link.active {
+    color: #0f413b;
+    background-color: #fff;
+    border-color: $primary-background-color $primary-background-color #fff;
+  }
+  
+  .tab-content>.active {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  

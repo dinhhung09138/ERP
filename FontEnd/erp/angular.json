@@ -28,12 +28,7 @@
               "node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
-              "src/assets/style/table.css",
-              "src/assets/style/card.css",
-              "src/assets/style/form-control.css",
-              "src/assets/style/module-sidebar.css",
-              "src/assets/style/material.custom.css",
-              "src/assets/style/styles.css"
+              "src/assets/style/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

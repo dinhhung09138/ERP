@@ -1,0 +1,22 @@
+
+.scroll {
+    overflow-y: auto;
+  }
+  
+  .scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px $primary-background-color;
+    -moz-box-shadow: inset 0 0 6px $primary-background-color;
+    -ms-box-shadow: inset 0 0 6px $primary-background-color;
+    box-shadow: inset 0 0 6px $primary-background-color;
+    background-color: #F5F5F5;
+  }
+  
+  .scroll::-webkit-scrollbar {
+    width: 3px;
+    background-color: #F5F5F5;
+  }
+  
+  .scroll::-webkit-scrollbar-thumb {
+    background-color: #5E0404;
+  }
+  

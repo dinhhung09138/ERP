@@ -1,17 +1,17 @@
 .card {
   background-color: #fff;
   background-clip: none;
-  border: 1px solid #1A6E64;
+  border: 1px solid $card-background-color;
   border-radius: unset;
   margin-bottom: 10px;
 }
 
 .card-header {
   padding: 0.15rem .5rem;
-  border: 1px solid #1A6E64;
+  border: 1px solid $card-background-color;
   font-weight: bold;
   color: white;
-  background-color: #1A6E64;
+  background-color: $card-background-color;
   font-family: "Helvetica Neue", sans-serif;
 }
 
@@ -31,4 +31,5 @@
 
 .card-body {
   padding: .5rem;
+  position: relative;
 }
