@@ -18,6 +18,7 @@ export class EducationFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  isShow = false;
   isSubmit = false;
   isLoading = false;
   educationForm: FormGroup;
@@ -47,10 +48,12 @@ export class EducationFormComponent implements OnInit {
     this.educationForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
+      this.isShow = false;
       this.educationForm.get('name').disable();
       this.educationForm.get('precedence').disable();
       this.educationForm.get('isActive').disable();
     } else {
+      this.isShow = true;
       this.educationForm.get('isActive').setValue(true);
       this.educationForm.get('precedence').setValue(1);
       this.educationForm.get('name').enable();

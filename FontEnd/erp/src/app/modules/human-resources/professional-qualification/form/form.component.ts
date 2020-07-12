@@ -18,6 +18,7 @@ export class ProfessionalQualificationFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  isShow = false;
   isSubmit = false;
   isLoading = false;
   qualificationForm: FormGroup;
@@ -47,10 +48,12 @@ export class ProfessionalQualificationFormComponent implements OnInit {
     this.qualificationForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
+      this.isShow = false;
       this.qualificationForm.get('name').disable();
       this.qualificationForm.get('precedence').disable();
       this.qualificationForm.get('isActive').disable();
     } else {
+      this.isShow = true;
       this.qualificationForm.get('isActive').setValue(true);
       this.qualificationForm.get('precedence').setValue(1);
       this.qualificationForm.get('name').enable();

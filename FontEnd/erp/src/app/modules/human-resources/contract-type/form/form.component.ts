@@ -18,6 +18,7 @@ export class ContractTypeFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  isShow = false;
   isSubmit = false;
   isLoading = false;
   contractTypeForm: FormGroup;
@@ -57,6 +58,7 @@ export class ContractTypeFormComponent implements OnInit {
     this.contractTypeForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
+      this.isShow = false;
       this.contractTypeForm.get('code').disable();
       this.contractTypeForm.get('name').disable();
       this.contractTypeForm.get('description').disable();
@@ -64,6 +66,7 @@ export class ContractTypeFormComponent implements OnInit {
       this.contractTypeForm.get('allowLeaveDate').disable();
       this.contractTypeForm.get('isActive').disable();
     } else {
+      this.isShow = true;
       this.contractTypeForm.get('isActive').setValue(true);
       this.contractTypeForm.get('name').enable();
       this.contractTypeForm.get('description').enable();

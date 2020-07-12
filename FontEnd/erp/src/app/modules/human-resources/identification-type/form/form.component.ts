@@ -18,6 +18,7 @@ export class IdentificationTypeFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  isShow = false;
   isSubmit = false;
   isLoading = false;
   identificationForm: FormGroup;
@@ -47,10 +48,12 @@ export class IdentificationTypeFormComponent implements OnInit {
     this.identificationForm.get('precedence').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
+      this.isShow = false;
       this.identificationForm.get('name').disable();
       this.identificationForm.get('precedence').disable();
       this.identificationForm.get('isActive').disable();
     } else {
+      this.isShow = true;
       this.identificationForm.get('isActive').setValue(true);
       this.identificationForm.get('precedence').setValue(1);
       this.identificationForm.get('name').enable();

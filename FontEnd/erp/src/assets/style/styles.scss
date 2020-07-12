@@ -111,14 +111,14 @@ body {
 }
 
 @import './controls/form-control.scss';
+@import './elements/module-sidebar.scss';
+@import './elements/tab.scss';
+@import './elements/table.scss';
 @import './controls/button.scss';
 @import './controls/dropdown.scss';
 @import './controls/label.scss';
 @import './controls/ng-select.custom.scss';
-@import './elements/box.scss';
 @import './elements/card.scss';
-@import './elements/module-sidebar.scss';
+@import './elements/box.scss';
 @import './elements/scroll.scss';
-@import './elements/tab.scss';
-@import './elements/table.scss';
 @import './controls/material.custom.scss';

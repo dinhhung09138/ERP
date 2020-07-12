@@ -20,6 +20,7 @@ export class WardFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  isShow = false;
   isSubmit = false;
   isLoading = false;
   wardForm: FormGroup;
@@ -66,12 +67,14 @@ export class WardFormComponent implements OnInit {
 
     if (isDisabledForm) {
       if (formStatus === FormActionStatus.UnKnow) {
+        this.isShow = false;
         this.wardForm.get('name').disable();
         this.wardForm.get('districtId').disable();
         this.wardForm.get('provinceId').disable();
         this.wardForm.get('precedence').disable();
         this.wardForm.get('isActive').disable();
       } else {
+        this.isShow = true;
         this.wardForm.get('isActive').setValue(true);
         this.wardForm.get('precedence').setValue(1);
         this.wardForm.get('name').enable();

@@ -68,12 +68,12 @@ export class ApproveStatusComponent implements OnInit {
 
   onDeleteClick(id: number) {
     this.form.onCloseClick();
-    const dialofRef = this.dialog.open(ConfirmDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { title: '', animation: '' }
     });
 
-    dialofRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this.deleteItem(id);
       }

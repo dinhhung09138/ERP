@@ -18,6 +18,7 @@ export class ProvinceFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  isShow = false;
   isSubmit = false;
   isLoading = false;
   provinceForm: FormGroup;
@@ -47,10 +48,12 @@ export class ProvinceFormComponent implements OnInit {
     this.provinceForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
+      this.isShow = false;
       this.provinceForm.get('name').disable();
       this.provinceForm.get('precedence').disable();
       this.provinceForm.get('isActive').disable();
     } else {
+      this.isShow = true;
       this.provinceForm.get('isActive').setValue(true);
       this.provinceForm.get('precedence').setValue(1);
       this.provinceForm.get('name').enable();

@@ -20,6 +20,7 @@ export class DistrictFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  isShow = false;
   isSubmit = false;
   isLoading = false;
   districtForm: FormGroup;
@@ -58,11 +59,13 @@ export class DistrictFormComponent implements OnInit {
     this.districtForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
+      this.isShow = false;
       this.districtForm.get('name').disable();
       this.districtForm.get('provinceId').disable();
       this.districtForm.get('precedence').disable();
       this.districtForm.get('isActive').disable();
     } else {
+      this.isShow = true;
       this.districtForm.get('isActive').setValue(true);
       this.districtForm.get('precedence').setValue(1);
       this.districtForm.get('name').enable();
