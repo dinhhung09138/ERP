@@ -1,6 +1,9 @@
+.form-group {
+  margin-bottom: .5rem;
+}
 .form-control {
   border-radius: unset;
-  height: calc(1.2em + .75rem + 2px);
+  height: calc(1em + .75rem + 2px);
   padding: .2rem .5rem;
 }
 
@@ -30,4 +33,19 @@ textarea:focus {
 
 .text-muted {
   color: $primary-background-color !important;
+}
+
+.form-disabled input[type="text"],
+.form-disabled .mat-form-field,
+.form-disabled .mat-form-field-disabled {
+  border: unset;
+  border-bottom: 1px solid #ced4da;
+  cursor: not-allowed;
+  pointer-events: none !important;
+  color: black;
+  background-color: white;
+}
+.form-disabled .mat-input-element:disabled {
+  color: black;
+  background-color: white;
 }

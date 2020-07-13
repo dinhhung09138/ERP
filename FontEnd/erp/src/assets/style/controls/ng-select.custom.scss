@@ -1,3 +1,13 @@
+
+.ng-select {
+  height: 2rem;
+}
+.ng-select.ng-select-single .ng-select-container {
+  height: 2rem;
+}
+.ng-select .ng-select-container {
+  min-height: 2rem;
+}
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected .ng-option-label,
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked .ng-option-label {
   font-weight: 400;
