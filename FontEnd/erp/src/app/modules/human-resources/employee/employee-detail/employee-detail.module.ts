@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EmployeeDetailComponent } from './employee-detail.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -12,13 +12,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { EmployeeService } from '../employee.service';
+import { DatetimePipe } from 'src/app/core/pipes/datetime.pipe';
 
 const routes: Routes = [
   {
     path: '',
     component: EmployeeDetailComponent,
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ const routes: Routes = [
   ],
   providers: [
     AppDateAdapter,
+    EmployeeService,
+    DatetimePipe,
   ]
 })
 export class EmployeeDetailModule { }

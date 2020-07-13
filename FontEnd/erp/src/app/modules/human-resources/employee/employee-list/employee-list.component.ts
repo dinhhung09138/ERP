@@ -37,28 +37,36 @@ export class EmployeeListComponent implements OnInit {
     this.getList();
   }
 
-  create() {
+  onCreateClick() {
     this.router.navigate(['/hr/employee/new']);
   }
 
-  update(id: number) {
+  onImportClick() {
+
+  }
+
+  onExportClick() {
+
+  }
+
+  onUpdateClick(id: number) {
     if (id !== null) {
-      //this.form.update(id);
+      this.router.navigate([`/hr/employee/edit/${id}`]);
     }
   }
 
-  delete(id: number) {
+  onDeleteClick(id: number) {
 
   }
 
-  filterTable() {
+  onFilterChange() {
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
     this.getList();
   }
 
-  pageChange(page: PageEvent) {
+  onPageChange(page: PageEvent) {
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {

@@ -9,6 +9,5 @@ export class AppComponent {
   title = 'cms-core';
 
   constructor() {
-    console.log('page load');
   }
 }
