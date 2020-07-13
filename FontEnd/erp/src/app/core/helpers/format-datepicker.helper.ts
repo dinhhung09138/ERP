@@ -1,10 +1,12 @@
 import { NativeDateAdapter, MatDateFormats } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { FormatConstant } from '../constants/format.constant';
+import { Injectable } from '@angular/core';
 
 /**
  * Use for format datetime picker
  */
+@Injectable()
 export class AppDateAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: object): string {
 
