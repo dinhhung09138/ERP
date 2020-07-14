@@ -57,6 +57,31 @@ namespace Service.HR
             return response;
         }
 
+        public async Task<ResponseModel> DropDownSelection()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.ApproveStatusRepository.Query()
+                            where !m.Deleted
+                            orderby m.Precedence
+                            select new ApproveStatusModel()
+                            {
+                                Id = m.Id,
+                                Name = m.Name,
+                            };
+
+
+                response.Result = await query.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
         public async Task<ResponseModel> Item(int id)
         {
             ResponseModel response = new ResponseModel();
