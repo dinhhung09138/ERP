@@ -6,6 +6,7 @@ GO
 CREATE TABLE [dbo].[SpecializedTraining](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](250) NULL,
 	[IsActive] [bit] NOT NULL,
 	[CreateBy] [int] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,

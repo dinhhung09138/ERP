@@ -1,22 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataBase.Sql.HR.Entities
+namespace Database.Sql.Training.Entities
 {
-    [Table("TrainingCenter")]
-    public class TrainingCenter
+    [Table("TrainingType")]
+    public class TrainingType
     {
         [Key]
         [Column(TypeName = "int")]
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(200)")]
+        [Column(TypeName = "nvarchar(100)")]
+        [MaxLength(100)]
         [Required]
-        [MaxLength(200)]
         public string Name { get; set; }
+
+        [Column(TypeName = "varchar(250)")]
+        [MaxLength(250)]
+        public string Description { get; set; }
+
+        [Column(TypeName = "int")]
+        [Required]
+        public int Precedence { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]

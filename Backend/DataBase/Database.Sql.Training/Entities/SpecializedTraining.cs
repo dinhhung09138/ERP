@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataBase.Sql.HR.Entities
+namespace Database.Sql.Training.Entities
 {
     [Table("SpecializedTraining")]
     public class SpecializedTraining
@@ -17,6 +15,11 @@ namespace DataBase.Sql.HR.Entities
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
+
+        [Column(TypeName = "nvarchar(255)")]
+        [Required]
+        [MaxLength(255)]
+        public string Description { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]

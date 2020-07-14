@@ -25,3 +25,7 @@ Backend/API/API.HR/bin/
 Backend/.vs/TDHCMS/v16/
 Backend/.vs/TDHCMS/v15/
 Backend/.vs/
+Backend/DataBase/Database.Sql.Training/obj/
+Backend/Services/Service.Training/bin/
+Backend/Services/Service.Training/obj/
+Backend/DataBase/Database.Sql.Training/bin/
