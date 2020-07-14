@@ -23,6 +23,10 @@ namespace DataBase.Sql.HR.Entities
         [Required]
         public string Name { get; set; }
 
+        [Column(TypeName = "nvarchar(250)")]
+        [MaxLength(250)]
+        public string Description { get; set; }
+
         [Column(TypeName = "int")]
         [Required]
         public int Precedence { get; set; }
