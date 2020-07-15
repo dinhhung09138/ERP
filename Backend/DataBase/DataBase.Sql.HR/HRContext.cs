@@ -54,12 +54,6 @@ namespace DataBase.Sql.HR
 
         public virtual DbSet<RelationshipType> RelationshipType { get; set; }
 
-        public virtual DbSet<SpecializedTraining> SpecializedTraining { get; set; }
-
-        public virtual DbSet<TrainingCenter> TrainingCenter { get; set; }
-
-        public virtual DbSet<TrainingType> TrainingType { get; set; }
-
         public virtual DbSet<Ward> Ward { get; set; }
 
         public HRContext(DbContextOptions options) : base(options)
@@ -93,9 +87,6 @@ namespace DataBase.Sql.HR
             modelBuilder.Entity<Province>();
             modelBuilder.Entity<Ranking>();
             modelBuilder.Entity<RelationshipType>();
-            modelBuilder.Entity<SpecializedTraining>();
-            modelBuilder.Entity<TrainingCenter>();
-            modelBuilder.Entity<TrainingType>();
             modelBuilder.Entity<Ward>();
 
         }

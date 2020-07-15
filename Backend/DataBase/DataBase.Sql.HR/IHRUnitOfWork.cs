@@ -33,9 +33,6 @@ namespace Database.Sql.HR
         ITableGenericRepository<Province> ProvinceRepository { get; }
         ITableGenericRepository<Ranking> RankingRepository { get; }
         ITableGenericRepository<RelationshipType> RelationshipTypeRepository { get; }
-        ITableGenericRepository<SpecializedTraining> SpecializedTrainingRepository { get; }
-        ITableGenericRepository<TrainingCenter> TrainingCenterRepository { get; }
-        ITableGenericRepository<TrainingType> TrainingTypeRepository { get; }
         ITableGenericRepository<Ward> WardRepository { get; }
     }
 }

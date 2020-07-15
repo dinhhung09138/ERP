@@ -254,36 +254,6 @@ namespace Database.Sql.HR
             }
         }
 
-        private ITableGenericRepository<SpecializedTraining> _specializedTrainingRepository;
-
-        public ITableGenericRepository<SpecializedTraining> SpecializedTrainingRepository
-        {
-            get
-            {
-                return _specializedTrainingRepository = _specializedTrainingRepository ?? new TableGenericRepository<SpecializedTraining>(_context);
-            }
-        }
-
-        private ITableGenericRepository<TrainingCenter> _trainingCenterRepository;
-
-        public ITableGenericRepository<TrainingCenter> TrainingCenterRepository
-        {
-            get
-            {
-                return _trainingCenterRepository = _trainingCenterRepository ?? new TableGenericRepository<TrainingCenter>(_context);
-            }
-        }
-
-        private ITableGenericRepository<TrainingType> _trainingTypeRepository;
-
-        public ITableGenericRepository<TrainingType> TrainingTypeRepository
-        {
-            get
-            {
-                return _trainingTypeRepository = _trainingTypeRepository ?? new TableGenericRepository<TrainingType>(_context);
-            }
-        }
-
         private ITableGenericRepository<Ward> _wardRepository;
 
         public ITableGenericRepository<Ward> WardRepository
