@@ -62,6 +62,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
     } else {
       this.isShow = true;
       this.workingStatusForm.get('isActive').setValue(true);
+      this.workingStatusForm.get('precedence').setValue(1);
       this.workingStatusForm.get('name').enable();
       this.workingStatusForm.get('description').enable();
       this.workingStatusForm.get('isActive').enable();
@@ -126,7 +127,8 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
         this.workingStatusForm.get('precedence').setValue(response.result.precedence);
         this.workingStatusForm.get('isActive').setValue(response.result.isActive);
       }
-    })
+      this.isLoading = false;
+    });
   }
 
 }

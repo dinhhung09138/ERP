@@ -32,6 +32,7 @@ namespace Service.HR
                             select new EmployeeWorkingStatusModel
                             {
                                 Id = m.Id,
+                                Code = m.Code,
                                 Name = m.Name,
                                 Description = m.Description,
                                 Precedence = m.Precedence,
@@ -40,7 +41,8 @@ namespace Service.HR
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
-                    query = query.Where(m => m.Name.ToLower().Contains(filter.Text)
+                    query = query.Where(m => m.Code.ToLower().Contains(filter.Text)
+                                            || m.Name.ToLower().Contains(filter.Text)
                                             || m.Description.ToLower().Contains(filter.Text));
                 }
 
@@ -92,6 +94,7 @@ namespace Service.HR
                             select new EmployeeWorkingStatusModel
                             {
                                 Id = m.Id,
+                                Code = m.Code,
                                 Name = m.Name,
                                 Description = m.Description,
                                 Precedence = m.Precedence,
@@ -135,6 +138,7 @@ namespace Service.HR
             {
                 EmployeeWorkingStatus md = new EmployeeWorkingStatus();
 
+                md.Code = model.Code;
                 md.Name = model.Name;
                 md.Description = model.Description;
                 md.Precedence = model.Precedence;

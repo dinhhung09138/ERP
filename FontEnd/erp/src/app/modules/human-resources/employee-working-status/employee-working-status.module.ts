@@ -13,11 +13,11 @@ import { EmployeeWorkingStatusFormComponent } from './form/form.component';
 
 const routes: Routes = [
   {
-    path: 'hr/working-status',
+    path: '',
     component: EmployeeWorkingStatusComponent,
     pathMatch: 'full'
   }
-]
+];
 
 @NgModule({
   declarations: [

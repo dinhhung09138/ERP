@@ -74,6 +74,11 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
+        path: 'configuration/employee-status',
+        loadChildren: () => import('./employee-working-status/employee-working-status.module').then(m => m.EmployeeWorkingStatusModule),
+        pathMatch: 'full'
+      },
+      {
         path: 'configuration/approve-status',
         loadChildren: () => import('./approve-status/approve-status.module').then(m => m.ApproveStatusModule),
         pathMatch: 'full',
