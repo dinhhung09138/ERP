@@ -88,8 +88,7 @@ export class EmployeeDetailComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.data.subscribe(response => {
-      console.log(response.data);
-      this.listWorkingStatus = response.data.workingStatusList.result;
+      this.listWorkingStatus = response.data?.workingStatusList?.result || [];
     });
 
     this.panelTitle = 'Create New Employee';
