@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeService } from '../employee.service';
 import { DatetimePipe } from 'src/app/core/pipes/datetime.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
+    NgSelectModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,

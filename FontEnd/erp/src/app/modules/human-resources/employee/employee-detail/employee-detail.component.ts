@@ -10,6 +10,7 @@ import { EmployeeViewModel } from '../employee.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
+import { EmployeeWorkingStatusViewModel } from '../../employee-working-status/employee-working-status.model';
 
 @Component({
   selector: 'app-hr-employee-detail',
@@ -29,6 +30,8 @@ export class EmployeeDetailComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
   isEditEmployee = false;
+
+  listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
 
   employeeTabs: any[] = [
     {
@@ -83,6 +86,12 @@ export class EmployeeDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.activatedRoute.data.subscribe(response => {
+      console.log(response.data);
+      this.listWorkingStatus = response.data.workingStatusList.result;
+    });
+
     this.panelTitle = 'Create New Employee';
     this.employeeForm = this.fb.group({
       id: [0],

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeeComponent } from './employee.component';
+import { EmployeeDetailResolver } from './employee-detail/employee-detail.resolver';
 
 const routes: Routes = [
   {
@@ -15,11 +16,13 @@ const routes: Routes = [
       {
         path: 'new',
         loadChildren: () => import('./employee-detail/employee-detail.module').then(m => m.EmployeeDetailModule),
+        resolve: { data: EmployeeDetailResolver },
         pathMatch: 'full',
       },
       {
         path: 'edit/:id',
         loadChildren: () => import('./employee-detail/employee-detail.module').then(m => m.EmployeeDetailModule),
+        resolve: { data: EmployeeDetailResolver },
         pathMatch: 'full',
       },
     ]

@@ -7,6 +7,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { EmployeeDetailResolver } from './employee-detail/employee-detail.resolver';
+import { EmployeeWorkingStatusService } from '../employee-working-status/employee-working-status.service';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatCheckboxModule,
   ],
   providers: [
-    EmployeeService
+    EmployeeService,
+    EmployeeWorkingStatusService,
+    EmployeeDetailResolver,
   ]
 })
 export class EmployeeModule { }
