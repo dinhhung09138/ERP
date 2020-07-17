@@ -30,6 +30,8 @@ export class EmployeeDetailComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
   isEditEmployee = false;
+  currentSelectedEmployeeId = 0;
+  currentSelectedEmployee: EmployeeViewModel;
 
   listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
 
@@ -171,11 +173,13 @@ export class EmployeeDetailComponent implements OnInit {
 
   checkFormAction() {
     if (this.router.url.indexOf('/employee/new') > 0) {
+      this.initFormControl(FormActionStatus.Create);
+      this.isEditEmployee = true;
     } else if (this.router.url.indexOf('/employee/edit/') > 0) {
       this.initFormControl(FormActionStatus.Update);
       const id = this.activatedRoute.snapshot.paramMap.get('id');
-      // tslint:disable-next-line:radix
-      this.getEmployeeInfo(parseInt(id));
+      this.currentSelectedEmployeeId = parseInt(id, 0);
+      this.getEmployeeInfo(this.currentSelectedEmployeeId);
     }
   }
 
@@ -184,11 +188,14 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-
+    this.isEditEmployee = false;
+    this.initFormControl(this.formAction);
+    this.setDataToFormControl(this.currentSelectedEmployee);
   }
 
   onResetClick() {
-
+    this.initFormControl(this.formAction);
+    this.setDataToFormControl(this.currentSelectedEmployee);
   }
 
   onCloseClick() {
@@ -215,37 +222,45 @@ export class EmployeeDetailComponent implements OnInit {
 
   }
 
-  getEmployeeInfo(id: number) {
+  private getEmployeeInfo(id: number) {
     this.isLoading = true;
 
     this.employeeService.item(id).subscribe((response: ResponseModel) => {
       if (response.responseStatus === ResponseStatus.success) {
-        this.employeeForm.get('id').setValue(response.result.id);
-        this.employeeForm.get('employeeCode').setValue(response.result.employeeCode);
-        this.employeeForm.get('firstName').setValue(response.result.firstName);
-        this.employeeForm.get('lastName').setValue(response.result.lastName);
-        this.employeeForm.get('workingEmail').setValue(response.result.workingEmail);
-        this.employeeForm.get('workingPhone').setValue(response.result.workingPhone);
-        this.employeeForm.get('badgeCardNumber').setValue(response.result.badgeCardNumber);
-        if (response.result.dateApplyBadge) {
-          this.employeeForm.get('dateApplyBadge').setValue(new Date(response.result.dateApplyBadge));
-        }
-        this.employeeForm.get('fingerSignNumber').setValue(response.result.fingerSignNumber);
-
-        if (response.result.dateApplyFingerSign) {
-          this.employeeForm.get('dateApplyFingerSign').setValue(new Date(response.result.dateApplyFingerSign));
-        }
-        if (response.result.probationDate) {
-          this.employeeForm.get('probationDate').setValue(new Date(response.result.probationDate));
-        }
-        if (response.result.startWorkingDate) {
-          this.employeeForm.get('startWorkingDate').setValue(new Date(response.result.startWorkingDate));
-        }
-        this.employeeForm.get('employeeWorkingStatusId').setValue(response.result.employeeWorkingStatusId);
-        this.employeeForm.get('basicSalary').setValue(this.formatNumber.transform(response.result.basicSalary));
+        this.currentSelectedEmployee = response.result;
+        this.setDataToFormControl(response.result);
       }
       this.isLoading = false;
     });
+  }
+
+  private setDataToFormControl(data?: EmployeeViewModel) {
+    if (data) {
+      this.employeeForm.get('id').setValue(data.id);
+      this.employeeForm.get('employeeCode').setValue(data.employeeCode);
+      this.employeeForm.get('firstName').setValue(data.firstName);
+      this.employeeForm.get('lastName').setValue(data.lastName);
+      this.employeeForm.get('workingEmail').setValue(data.workingEmail);
+      this.employeeForm.get('workingPhone').setValue(data.workingPhone);
+      this.employeeForm.get('badgeCardNumber').setValue(data.badgeCardNumber);
+      if (data.dateApplyBadge) {
+        this.employeeForm.get('dateApplyBadge').setValue(new Date(data.dateApplyBadge));
+      }
+      this.employeeForm.get('fingerSignNumber').setValue(data.fingerSignNumber);
+
+      if (data.dateApplyFingerSign) {
+        this.employeeForm.get('dateApplyFingerSign').setValue(new Date(data.dateApplyFingerSign));
+      }
+      if (data.probationDate) {
+        this.employeeForm.get('probationDate').setValue(new Date(data.probationDate));
+      }
+      if (data.startWorkingDate) {
+        this.employeeForm.get('startWorkingDate').setValue(new Date(data.startWorkingDate));
+      }
+      this.employeeForm.get('employeeWorkingStatusId').setValue(data.employeeWorkingStatusId);
+      this.employeeForm.get('basicSalary').setValue(this.formatNumber.transform(data.basicSalary));
+      this.elm.nativeElement.querySelector('#firstName').focus();
+    }
   }
 
 }

@@ -19,7 +19,7 @@
                   <label class="label">Employee Code</label>
                   <mat-form-field class="form-control">
                     <input matInput id="employeeCode" formControlName="employeeCode" maxlength="50"
-                    tabindex="1" />
+                    tabindex="1" [readonly]="!isEditEmployee" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['employeeCode'].errors?.required">This field is required</mat-error>
                 </div>
@@ -27,7 +27,7 @@
                   <label class="label">First Name</label>
                   <mat-form-field class="form-control">
                     <input matInput id="firstName" formControlName="firstName" maxlength="50"
-                    tabindex="2" />
+                    tabindex="2" [readonly]="!isEditEmployee" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['firstName'].errors?.required">This field is required</mat-error>
                 </div>
@@ -35,7 +35,7 @@
                   <label class="label">Last Name</label>
                   <mat-form-field class="form-control">
                     <input matInput id="lastName" formControlName="lastName" maxlength="50"
-                    tabindex="3" />
+                    tabindex="3" [readonly]="!isEditEmployee" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['lastName'].errors?.required">This field is required</mat-error>
                 </div>
@@ -44,7 +44,7 @@
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Working Email</label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="workingEmail" maxlength="50" tabindex="4" required />
+                    <input matInput formControlName="workingEmail" maxlength="50" tabindex="4" [readonly]="!isEditEmployee" required />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.required">
                     This field is required
@@ -56,13 +56,13 @@
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Working Phone</label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="workingPhone" maxlength="25" tabindex="5" />
+                    <input matInput formControlName="workingPhone" maxlength="25" tabindex="5" [readonly]="!isEditEmployee" />
                   </mat-form-field>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Employee Status</label>
                   <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'" formControlName="employeeWorkingStatusId" 
-                  [tabIndex]="6" [searchable]="true" [selectOnTab]="true"></ng-select>
+                  [tabIndex]="6" [searchable]="true" [selectOnTab]="true" [readonly]="!isEditEmployee"></ng-select>
                     <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
                       This field is required
                     </mat-error>
@@ -72,17 +72,17 @@
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Card Number</label>
                   <input type="text" class="form-control" formControlName="badgeCardNumber" maxlength="10"
-                    tabindex="6">
+                    tabindex="6" [readonly]="!isEditEmployee">
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Date Apply</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="dateApplyBadgeDatepicker" formControlName="dateApplyBadge"
-                      maxlength="10" tabindex="7">
+                      maxlength="10" tabindex="7" [readonly]="!isEditEmployee">
                     <mat-datepicker-toggle matSuffix [for]="dateApplyBadgeDatepicker">
                       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                     </mat-datepicker-toggle>
-                    <mat-datepicker #dateApplyBadgeDatepicker></mat-datepicker>
+                    <mat-datepicker #dateApplyBadgeDatepicker [disabled]="!isEditEmployee"></mat-datepicker>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyBadge'].errors?.date">
                     Date is invalid
@@ -93,17 +93,17 @@
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Finger Sign Number</label>
                   <input type="text" class="form-control" formControlName="fingerSignNumber" maxlength="10"
-                    tabindex="8">
+                    tabindex="8" [readonly]="!isEditEmployee">
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Apply Date</label>
                   <mat-form-field class="form-control">
-                    <input matInput [matDatepicker]="dateApplyFingerSignDatepicker"
+                    <input matInput [matDatepicker]="dateApplyFingerSignDatepicker" [readonly]="!isEditEmployee"
                       formControlName="dateApplyFingerSign" maxlength="10" tabindex="9">
                     <mat-datepicker-toggle matSuffix [for]="dateApplyFingerSignDatepicker">
                       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                     </mat-datepicker-toggle>
-                    <mat-datepicker #dateApplyFingerSignDatepicker></mat-datepicker>
+                    <mat-datepicker #dateApplyFingerSignDatepicker [disabled]="!isEditEmployee"></mat-datepicker>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
                     Date is invalid
@@ -115,11 +115,11 @@
                   <label class="label">Probation Date</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="probationDateDatepicker" formControlName="probationDate"
-                      maxlength="10" tabindex="10">
+                      maxlength="10" tabindex="10" [readonly]="!isEditEmployee">
                     <mat-datepicker-toggle matSuffix [for]="probationDateDatepicker">
                       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                     </mat-datepicker-toggle>
-                    <mat-datepicker #probationDateDatepicker></mat-datepicker>
+                    <mat-datepicker #probationDateDatepicker [disabled]="!isEditEmployee"></mat-datepicker>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['probationDate'].errors?.date">
                     Date is invalid
@@ -129,11 +129,11 @@
                   <label class="label">Working Date</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="startWorkingDateDateicker" formControlName="startWorkingDate"
-                      maxlength="10" tabindex="11">
+                      maxlength="10" tabindex="11" [readonly]="!isEditEmployee">
                     <mat-datepicker-toggle matSuffix [for]="startWorkingDateDateicker">
                       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                     </mat-datepicker-toggle>
-                    <mat-datepicker #startWorkingDateDateicker></mat-datepicker>
+                    <mat-datepicker #startWorkingDateDateicker [disabled]="!isEditEmployee"></mat-datepicker>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
                     Date is invalid
@@ -142,19 +142,21 @@
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Basic Salary</label>
                   <input type="text" appFormatCurrency class="form-control" formControlName="basicSalary"
-                    maxlength="12" tabindex="13">
+                    maxlength="12" tabindex="13" [readonly]="!isEditEmployee">
                   </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <input type="submit" class="btn btn-success" value="Save" tabindex="14"
-                    *ngIf="formAction === 1 || (formAction === 2 && isEditEmployee)">
+                    *ngIf="isEditEmployee">
                   <button type="button" class="btn btn-success" tabindex="15"
-                    *ngIf="formAction === 2 && !isEditEmployee" (click)="onEditClick()">Edit</button>
-                  <button type="button" class="btn btn-danger" tabindex="15" (click)="onCancelClick()"
-                    *ngIf="formAction === 2 && isEditEmployee"> Cancel </button>
-                  <button type="button" class="btn btn-warning" tabindex="16" (click)="onResetClick()"> Reset </button>
-                  <button type="button" class="btn btn-secondary" tabindex="17" (click)="onCloseClick()"> Close </button>
+                    *ngIf="!isEditEmployee" (click)="onEditClick()">Edit</button>
+                  <button type="button" class="btn btn-danger" tabindex="15"
+                    *ngIf="formAction == 2 && isEditEmployee" (click)="onCancelClick()"> Cancel </button>
+                  <button type="button" class="btn btn-warning" tabindex="16" 
+                    *ngIf="isEditEmployee" (click)="onResetClick()"> Reset </button>
+                  <button type="button" class="btn btn-secondary" tabindex="17"
+                    (click)="onCloseClick()"> Close</button>
                 </div>
               </div>
             </form>
