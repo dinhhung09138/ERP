@@ -11,7 +11,7 @@ import { IdentificationTypeFormComponent } from './form/form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
-import { IdentificationViewModel } from '../employee/employee-identification/e-identification.model';
+import { IdentificationTypeViewModel } from './identification-type.model';
 
 @Component({
   selector: 'app-hr-identification-type',
@@ -115,7 +115,7 @@ export class IdentificationTypeComponent implements OnInit {
 
   private deleteItem(itemId: number) {
     this.isLoading = true;
-    const model = { id: itemId, action: FormActionStatus.Delete } as IdentificationViewModel;
+    const model = { id: itemId, action: FormActionStatus.Delete } as IdentificationTypeViewModel;
 
     this.identififcationService.save(model).subscribe((response: ResponseModel) => {
       this.isLoading = false;
