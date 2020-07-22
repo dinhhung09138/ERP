@@ -1,9 +1,9 @@
 
-IF OBJECT_ID('dbo.SpecializedTraining', 'u') IS NOT NULL 
-  DROP TABLE [dbo].[SpecializedTraining];
+IF OBJECT_ID('dbo.Training_SpecializedTraining', 'u') IS NOT NULL 
+  DROP TABLE [dbo].[Training_SpecializedTraining];
 
 GO
-CREATE TABLE [dbo].[SpecializedTraining](
+CREATE TABLE [dbo].[Training_SpecializedTraining](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
 	[Description] [nvarchar](250) NULL,
@@ -13,7 +13,7 @@ CREATE TABLE [dbo].[SpecializedTraining](
 	[UpdateBy] [int] NULL,
 	[UpdateDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
- CONSTRAINT [PK_SpecializedTraining] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Training_SpecializedTraining] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
