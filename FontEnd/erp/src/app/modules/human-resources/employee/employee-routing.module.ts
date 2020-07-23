@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeeComponent } from './employee.component';
-import { EmployeeDetailResolver } from './employee-detail/employee-detail.resolver';
+import { EmployeeInfoResolver } from './employee-info/employee-info.resolver';
 
 const routes: Routes = [
   {
@@ -15,14 +15,14 @@ const routes: Routes = [
       },
       {
         path: 'new',
-        loadChildren: () => import('./employee-detail/employee-detail.module').then(m => m.EmployeeDetailModule),
-        resolve: { data: EmployeeDetailResolver },
+        loadChildren: () => import('./employee-info/employee-info.module').then(m => m.EmployeeInfoModule),
+        resolve: { data: EmployeeInfoResolver },
         pathMatch: 'full',
       },
       {
         path: 'edit/:id',
-        loadChildren: () => import('./employee-detail/employee-detail.module').then(m => m.EmployeeDetailModule),
-        resolve: { data: EmployeeDetailResolver },
+        loadChildren: () => import('./employee-info/employee-info.module').then(m => m.EmployeeInfoModule),
+        resolve: { data: EmployeeInfoResolver },
         pathMatch: 'full',
       },
     ]

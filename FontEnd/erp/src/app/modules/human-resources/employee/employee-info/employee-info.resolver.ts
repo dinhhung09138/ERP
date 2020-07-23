@@ -6,7 +6,7 @@ import { EmployeeWorkingStatusService } from '../../employee-working-status/empl
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class EmployeeDetailResolver implements Resolve<Observable<any>> {
+export class EmployeeInfoResolver implements Resolve<Observable<any>> {
 
     constructor(
         private workingStatusService: EmployeeWorkingStatusService
