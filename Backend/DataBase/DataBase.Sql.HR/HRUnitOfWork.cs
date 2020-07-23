@@ -264,6 +264,16 @@ namespace Database.Sql.HR
             }
         }
 
+        private ITableGenericRepository<Position> _positionRepository;
+
+        public ITableGenericRepository<Position> PositionRepository
+        {
+            get
+            {
+                return _positionRepository = _positionRepository ?? new TableGenericRepository<Position>(_context);
+            }
+        }
+
 
         public HRUnitOfWork(HRContext context)
         {
