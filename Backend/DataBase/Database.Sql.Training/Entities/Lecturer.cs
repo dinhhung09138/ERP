@@ -44,7 +44,7 @@ namespace Database.Sql.Training.Entities
         public string Email { get; set; }
 
         [Column(TypeName = "int")]
-        public int? Rating { get; set; }
+        public float? Rating { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]

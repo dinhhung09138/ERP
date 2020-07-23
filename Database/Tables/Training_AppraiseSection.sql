@@ -8,6 +8,7 @@ CREATE TABLE [dbo].[Training_AppraiseSection](
 	[AppraiseId] [int] NOT NULL,
 	[Name] [nvarchar](200) NOT NULL,
 	[Description] [nvarchar](500) NULL,
+	[Precedence] [int] NOT NULL,
 	[IsActive] [bit] NOT NULL,
 	[CreateBy] [int] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,

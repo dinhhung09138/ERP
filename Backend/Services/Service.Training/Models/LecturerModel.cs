@@ -30,7 +30,7 @@ namespace Service.Training.Models
         [MaxLength(50)]
         public string Email { get; set; }
 
-        public int? Rating { get; set; }
+        public float? Rating { get; set; }
 
         public bool IsWorkInCenter { get; set; }
 

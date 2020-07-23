@@ -24,6 +24,10 @@ namespace Database.Sql.Training.Entities
         [MaxLength(500)]
         public string Description { get; set; }
 
+        [Column(TypeName = "int")]
+        [Required]
+        public int Precedence { get; set; }
+
         [Column(TypeName = "bit")]
         [Required]
         public bool IsActive { get; set; }
