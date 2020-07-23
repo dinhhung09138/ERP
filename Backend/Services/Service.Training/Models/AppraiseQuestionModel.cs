@@ -3,14 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Service.Training.Models
 {
-    public class SpecializedTrainingModel : BaseModel
+    public class AppraiseQuestionModel : BaseModel
     {
         public int Id { get; set; }
 
-        [MaxLength(150)]
+        public int AppraiseSectionId { get; set; }
+
+        [MaxLength(200)]
         public string Name { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(500)]
         public string Description { get; set; }
+
+        public bool IsInputAnswer { get; set; }
     }
 }

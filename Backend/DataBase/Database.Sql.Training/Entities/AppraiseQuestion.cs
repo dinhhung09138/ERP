@@ -4,33 +4,33 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.Training.Entities
 {
-    [Table("Training_TrainingCenter")]
-    public class TrainingCenter
+    [Table("Training_AppraiseQuestion")]
+    public class AppraiseQuestion
     {
         [Key]
         [Column(TypeName = "int")]
         public int Id { get; set; }
+
+        [Column(TypeName = "int")]
+        [Required]
+        public int AppraiseSectionId { get; set; }
 
         [Column(TypeName = "nvarchar(200)")]
         [MaxLength(200)]
         [Required]
         public string Name { get; set; }
 
-        [Column(TypeName = "nvarchar(250)")]
-        [MaxLength(250)]
+        [Column(TypeName = "nvarchar(500)")]
+        [MaxLength(500)]
         public string Description { get; set; }
 
-        [Column(TypeName = "nvarchar(250)")]
-        [MaxLength(250)]
-        public string Avatar { get; set; }
+        [Column(TypeName = "bit")]
+        [Required]
+        public bool IsInputAnswer { get; set; }
 
-        [Column(TypeName = "varchar(20)")]
-        [MaxLength(20)]
-        public string TaxCode { get; set; }
-
-        [Column(TypeName = "varchar(20)")]
-        [MaxLength(20)]
-        public string Phone { get; set; }
+        [Column(TypeName = "int")]
+        [Required]
+        public int Precedence { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.Training.Entities
 {
-    [Table("TrainingType")]
+    [Table("Training_TrainingType")]
     public class TrainingType
     {
         [Key]
@@ -16,7 +16,7 @@ namespace Database.Sql.Training.Entities
         [Required]
         public string Name { get; set; }
 
-        [Column(TypeName = "varchar(250)")]
+        [Column(TypeName = "nvarchar(250)")]
         [MaxLength(250)]
         public string Description { get; set; }
 
