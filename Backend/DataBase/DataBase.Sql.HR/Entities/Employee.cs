@@ -18,16 +18,6 @@ namespace DataBase.Sql.HR.Entities
         [Required]
         public string EmployeeCode { get; set; }
 
-        [Column(TypeName = "nvarchar(50)")]
-        [MaxLength(50)]
-        [Required]
-        public string FirstName { get; set; }
-
-        [Column(TypeName = "nvarchar(50)")]
-        [MaxLength(50)]
-        [Required]
-        public string LastName { get; set; }
-
         [Column(TypeName = "datetime")]
         public DateTime? ProbationDate { get; set; }
 

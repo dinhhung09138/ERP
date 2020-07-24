@@ -29,6 +29,7 @@ namespace API.HR
             services.AddScoped<IProfessionalQualificationService, ProfessionalQualificationService>();
             services.AddScoped<IModelOfStudyService, ModelOfStudyService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeInfoService, EmployeeInfoService>();
             services.AddScoped<IEmployeeWorkingStatusService, EmployeeWorkingStatusService>();
             return services;
         }

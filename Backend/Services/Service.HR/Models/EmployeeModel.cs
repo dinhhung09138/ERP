@@ -25,6 +25,8 @@ namespace Service.HR.Models
             }
         }
 
+        public bool Gender { get; set; }
+
         public DateTime? ProbationDate { get; set; }
 
         public DateTime? StartWorkingDate { get; set; }

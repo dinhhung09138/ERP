@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Employee Status</label>
-                  <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'" formControlName="employeeWorkingStatusId" 
+                  <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'" formControlName="employeeWorkingStatusId"
                   [tabIndex]="6" [searchable]="true" [selectOnTab]="true" [readonly]="!isEditEmployee"></ng-select>
                     <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
                       This field is required
@@ -153,7 +153,7 @@
                     *ngIf="!isEditEmployee" (click)="onEditClick()">Edit</button>
                   <button type="button" class="btn btn-danger" tabindex="15"
                     *ngIf="formAction == 2 && isEditEmployee" (click)="onCancelClick()"> Cancel </button>
-                  <button type="button" class="btn btn-warning" tabindex="16" 
+                  <button type="button" class="btn btn-warning" tabindex="16"
                     *ngIf="isEditEmployee" (click)="onResetClick()"> Reset </button>
                   <button type="button" class="btn btn-secondary" tabindex="17"
                     (click)="onCloseClick()"> Close</button>
@@ -196,7 +196,7 @@
           <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
             <div class="tab-content">
               <div class="tab-pane active" id="personalInfo">
-                <app-hr-employee-information></app-hr-employee-information>
+                <app-hr-employee-personal-info></app-hr-employee-personal-info>
               </div>
               <article class="tab-pane" id="ipsum-left">
                 <h1>Ipsum</h1>
