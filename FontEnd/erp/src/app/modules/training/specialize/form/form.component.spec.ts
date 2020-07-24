@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpecializeComponent } from './specialize.component';
+import { SpecializeFormComponent } from './form.component';
 
-describe('SpecializeComponent', () => {
-  let component: SpecializeComponent;
-  let fixture: ComponentFixture<SpecializeComponent>;
+describe('SpecializeFormComponent', () => {
+  let component: SpecializeFormComponent;
+  let fixture: ComponentFixture<SpecializeFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SpecializeComponent]
+      declarations: [SpecializeFormComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpecializeComponent);
+    fixture = TestBed.createComponent(SpecializeFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
