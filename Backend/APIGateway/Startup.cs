@@ -21,6 +21,7 @@ using Core.Services.Interfaces;
 using APIGateway.Extensions;
 using Core.Services;
 using API.HR;
+using API.Training;
 
 namespace APIGateway
 {
@@ -78,6 +79,7 @@ namespace APIGateway
             //Use Security services
             services.AddSecurityServices(Configuration);
             services.AddHrServices(Configuration);
+            services.AddTrainingServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

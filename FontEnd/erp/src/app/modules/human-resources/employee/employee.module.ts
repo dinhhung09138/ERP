@@ -7,8 +7,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { EmployeeDetailResolver } from './employee-detail/employee-detail.resolver';
-import { EmployeeWorkingStatusService } from '../employee-working-status/employee-working-status.service';
+import { EmployeeInfoResolver } from './employee-info/employee-info.resolver';
+import { EmployeeWorkingStatusService } from '../configuration/employee-working-status/employee-working-status.service';
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import { EmployeeWorkingStatusService } from '../employee-working-status/employe
   providers: [
     EmployeeService,
     EmployeeWorkingStatusService,
-    EmployeeDetailResolver,
+    EmployeeInfoResolver,
   ]
 })
 export class EmployeeModule { }

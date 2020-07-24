@@ -14,22 +14,48 @@ namespace Database.Sql.Training
         private readonly TrainingContext _context;
         private IDbContextTransaction _transaction;
 
-        private ITableGenericRepository<TrainingCenter> _trainingCentorRepository;
-
-        public ITableGenericRepository<TrainingCenter> TrainingCenterRepository
+        private ITableGenericRepository<Appraise> _appraiseRepository;
+        public ITableGenericRepository<Appraise> AppraiseRepository
         {
             get
             {
-                return _trainingCentorRepository = _trainingCentorRepository ?? new TableGenericRepository<TrainingCenter>(_context);
+                return _appraiseRepository = _appraiseRepository ?? new TableGenericRepository<Appraise>(_context);
             }
         }
 
-        private ITableGenericRepository<TrainingType> _trainingTypeRepository;
-        public ITableGenericRepository<TrainingType> TrainingTypeRepository
+        private ITableGenericRepository<AppraiseAnswer> _appraiseAnswerRepository;
+        public ITableGenericRepository<AppraiseAnswer> AppraiseAnswerRepository
         {
             get
             {
-                return _trainingTypeRepository = _trainingTypeRepository ?? new TableGenericRepository<TrainingType>(_context);
+                return _appraiseAnswerRepository = _appraiseAnswerRepository ?? new TableGenericRepository<AppraiseAnswer>(_context);
+            }
+        }
+
+        private ITableGenericRepository<AppraiseQuestion> _appraiseQuestionRepository;
+        public ITableGenericRepository<AppraiseQuestion> AppraiseQuestionRepository
+        {
+            get
+            {
+                return _appraiseQuestionRepository = _appraiseQuestionRepository ?? new TableGenericRepository<AppraiseQuestion>(_context);
+            }
+        }
+
+        private ITableGenericRepository<AppraiseSection> _appraiseSectionRepository;
+        public ITableGenericRepository<AppraiseSection> AppraiseSectionRepository
+        {
+            get
+            {
+                return _appraiseSectionRepository = _appraiseSectionRepository ?? new TableGenericRepository<AppraiseSection>(_context);
+            }
+        }
+
+        private ITableGenericRepository<Lecturer> _lecturerRepository;
+        public ITableGenericRepository<Lecturer> LecturerRepository
+        {
+            get
+            {
+                return _lecturerRepository = _lecturerRepository ?? new TableGenericRepository<Lecturer>(_context);
             }
         }
 
@@ -39,6 +65,51 @@ namespace Database.Sql.Training
             get
             {
                 return _specializedTrainingRepository = _specializedTrainingRepository ?? new TableGenericRepository<SpecializedTraining>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingCenter> _trainingCenterRepository;
+        public ITableGenericRepository<TrainingCenter> TrainingCenterRepository
+        {
+            get
+            {
+                return _trainingCenterRepository = _trainingCenterRepository ?? new TableGenericRepository<TrainingCenter>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingCenterContact> _trainingCenterContactRepository;
+        public ITableGenericRepository<TrainingCenterContact> TrainingCenterContactRepository
+        {
+            get
+            {
+                return _trainingCenterContactRepository = _trainingCenterContactRepository ?? new TableGenericRepository<TrainingCenterContact>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingCourse> _trainingCourseRepository;
+        public ITableGenericRepository<TrainingCourse> TrainingCourseRepository
+        {
+            get
+            {
+                return _trainingCourseRepository = _trainingCourseRepository ?? new TableGenericRepository<TrainingCourse>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingCourseDocument> _trainingCourseDocumentRepository;
+        public ITableGenericRepository<TrainingCourseDocument> TrainingCourseDocumentRepository
+        {
+            get
+            {
+                return _trainingCourseDocumentRepository = _trainingCourseDocumentRepository ?? new TableGenericRepository<TrainingCourseDocument>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingType> _trainingTypeRepository;
+        public ITableGenericRepository<TrainingType> TrainingTypeRepository
+        {
+            get
+            {
+                return _trainingTypeRepository = _trainingTypeRepository ?? new TableGenericRepository<TrainingType>(_context);
             }
         }
 

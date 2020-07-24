@@ -4,20 +4,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.Training.Entities
 {
-    [Table("SpecializedTraining")]
+    [Table("Training_SpecializedTraining")]
     public class SpecializedTraining
     {
         [Key]
         [Column(TypeName = "int")]
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
+        [Column(TypeName = "nvarchar(150)")]
         [Required]
-        [MaxLength(100)]
+        [MaxLength(150)]
         public string Name { get; set; }
 
         [Column(TypeName = "nvarchar(255)")]
-        [Required]
         [MaxLength(255)]
         public string Description { get; set; }
 

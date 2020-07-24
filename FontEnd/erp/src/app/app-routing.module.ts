@@ -20,6 +20,11 @@ const routes: Routes = [
     data: { title: 'Human Resources' }
   },
   {
+    path: 'training',
+    loadChildren: () => import('../app/modules/training/training.module').then(m => m.TrainingModule),
+    data: { title: 'Training' }
+  },
+  {
     path: '**',
     loadChildren: () => import('../app/modules/login/login.module').then(m => m.LoginModule)
   }

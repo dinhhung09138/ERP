@@ -13,5 +13,13 @@ namespace Service.Training.Models
         [MaxLength(250)]
         public string Description { get; set; }
 
+        [MaxLength(250)]
+        public string Avatar { get; set; }
+
+        [MaxLength(20)]
+        public string TaxCode { get; set; }
+
+        [MaxLength(20)]
+        public string Phone { get; set; }
     }
 }
