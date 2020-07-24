@@ -1,4 +1,4 @@
-import { AppValidator } from './../../../../core/validators/app.validator';
+import { AppValidator } from 'src/app/core/validators/app.validator';
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ApproveStatusService } from '../approve-status.service';

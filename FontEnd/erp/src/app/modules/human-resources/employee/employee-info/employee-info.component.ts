@@ -1,3 +1,4 @@
+import { EmployeeWorkingStatusViewModel } from './../../configuration/employee-working-status/employee-working-status.model';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -10,7 +11,6 @@ import { EmployeeViewModel } from '../employee.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
-import { EmployeeWorkingStatusViewModel } from '../../employee-working-status/employee-working-status.model';
 
 @Component({
   selector: 'app-hr-employee-info',

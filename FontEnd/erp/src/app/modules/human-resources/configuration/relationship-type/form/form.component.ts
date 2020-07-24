@@ -1,3 +1,4 @@
+import { AppValidator } from './../../../../../core/validators/app.validator';
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { RelationshipTypeService } from '../relationship-type.service';
@@ -34,7 +35,7 @@ export class RelationshipTypeFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       description: [''],
-      precedence: [1, [Validators.required]],
+      precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);
@@ -62,11 +63,12 @@ export class RelationshipTypeFormComponent implements OnInit {
       this.relationshipTypeForm.get('isActive').disable();
     } else {
       this.isShow = true;
-      this.relationshipTypeForm.get('name').enable();
-      this.relationshipTypeForm.get('isActive').enable();
-      this.relationshipTypeForm.get('description').setValue(1);
       this.relationshipTypeForm.get('precedence').setValue(1);
       this.relationshipTypeForm.get('isActive').setValue(true);
+      this.relationshipTypeForm.get('name').enable();
+      this.relationshipTypeForm.get('description').enable();
+      this.relationshipTypeForm.get('precedence').enable();
+      this.relationshipTypeForm.get('isActive').enable();
 
       this.elm.nativeElement.querySelector('#name').focus();
     }
