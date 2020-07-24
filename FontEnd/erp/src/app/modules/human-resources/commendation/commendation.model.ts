@@ -1,4 +1,4 @@
-import { BaseViewModel } from 'src/app/core/models/base.mode';
+import { BaseViewModel } from 'src/app/core/models/base.model';
 
 export interface CommendationViewModel extends BaseViewModel {
   name: string;
