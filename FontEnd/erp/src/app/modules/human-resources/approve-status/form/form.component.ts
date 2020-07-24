@@ -1,3 +1,4 @@
+import { AppValidator } from './../../../../core/validators/app.validator';
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ApproveStatusService } from '../approve-status.service';
@@ -7,7 +8,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ApproveStatusViewModel } from '../approve-status.model';
 
 @Component({
-  selector: 'app-commendation-form',
+  selector: 'app-hr-approve-status-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
@@ -34,7 +35,7 @@ export class ApproveStatusFormComponent implements OnInit {
       id: [0],
       code: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      precedence: [1, [Validators.required]],
+      precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);

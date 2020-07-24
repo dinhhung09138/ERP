@@ -43,6 +43,9 @@
                   <mat-error *ngIf="isSubmit && approveStatusForm.controls['precedence'].errors?.required">
                     This field is required
                   </mat-error>
+                  <mat-error *ngIf="isSubmit && approveStatusForm.controls['precedence'].errors?.number">
+                    Precedence number is invalid
+                  </mat-error>
                 </div>
               </div>
               <div class="row">
