@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrainingTypeComponent } from './training-type.component';
+import { TrainingTypeFormComponent } from './form.component';
 
-describe('TrainingTypeComponent', () => {
-  let component: TrainingTypeComponent;
-  let fixture: ComponentFixture<TrainingTypeComponent>;
+describe('TrainingTypeFormComponent', () => {
+  let component: TrainingTypeFormComponent;
+  let fixture: ComponentFixture<TrainingTypeFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TrainingTypeComponent]
+      declarations: [TrainingTypeFormComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrainingTypeComponent);
+    fixture = TestBed.createComponent(TrainingTypeFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
