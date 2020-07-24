@@ -8,7 +8,6 @@ namespace Database.Sql.HR
 {
     public interface IHRUnitOfWork : IGenericUnitOfWork
     {
-
         ITableGenericRepository<Education> EducationRepository { get; }
         ITableGenericRepository<ApproveStatus> ApproveStatusRepository { get; }
         ITableGenericRepository<CodeType> CodeTypeRepository { get; }

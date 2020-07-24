@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataBase.Sql.HR.Entities
+namespace DataBase.Sql.ERP.Entities.HR
 {
     [Table("Commendation")]
     public class Commendation

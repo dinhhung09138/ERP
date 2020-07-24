@@ -22,6 +22,7 @@ using APIGateway.Extensions;
 using Core.Services;
 using API.HR;
 using API.Training;
+using Database.Sql.ERP;
 
 namespace APIGateway
 {
@@ -76,6 +77,9 @@ namespace APIGateway
             // Use filter (Not working with Cors origin)
             services.AddFilter();
 
+            // Declare connect to sql server
+            services.AddDbContext<ERPContext>(option => option.UseSqlServer(Configuration.GetConnectionString("ERPConnection")), ServiceLifetime.Scoped);
+            services.AddScoped<IERPUnitOfWork, ERPUnitOfWork>();
             //Use Security services
             services.AddSecurityServices(Configuration);
             services.AddHrServices(Configuration);

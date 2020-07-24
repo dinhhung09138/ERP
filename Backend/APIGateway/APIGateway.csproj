@@ -24,10 +24,6 @@
     <ProjectReference Include="..\API\API.HR\API.HR.csproj" />
     <ProjectReference Include="..\API\API.Security\API.Security.csproj" />
     <ProjectReference Include="..\API\API.Training\API.Training.csproj" />
-    <ProjectReference Include="..\Core\Core.CommonModel\Core.CommonModel.csproj" />
-    <ProjectReference Include="..\Core\Core.DataAccess\Core.DataAccess.csproj" />
-    <ProjectReference Include="..\Core\Core.Services\Core.Services.csproj" />
-    <ProjectReference Include="..\Database\Database.Sql.Security\Database.Sql.Security.csproj" />
   </ItemGroup>
 
 </Project>
