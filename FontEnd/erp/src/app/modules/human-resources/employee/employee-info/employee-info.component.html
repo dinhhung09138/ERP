@@ -21,7 +21,7 @@
                     <input matInput id="employeeCode" formControlName="employeeCode" maxlength="50"
                     tabindex="1" [readonly]="!isEditEmployee" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['employeeCode'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['employeeCode'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">First Name</label>
@@ -29,7 +29,7 @@
                     <input matInput id="firstName" formControlName="firstName" maxlength="50"
                     tabindex="2" [readonly]="!isEditEmployee" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['firstName'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['firstName'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Last Name</label>
@@ -37,7 +37,7 @@
                     <input matInput id="lastName" formControlName="lastName" maxlength="50"
                     tabindex="3" [readonly]="!isEditEmployee" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['lastName'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['lastName'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
               </div>
               <div class="row">
@@ -47,7 +47,7 @@
                     <input matInput formControlName="workingEmail" maxlength="50" tabindex="4" [readonly]="!isEditEmployee" required />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.required">
-                    This field is required
+                    Vui lòng điền thông tin
                   </mat-error>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.email">
                     Email is invalid
@@ -64,7 +64,7 @@
                   <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'" formControlName="employeeWorkingStatusId"
                   [tabIndex]="6" [searchable]="true" [selectOnTab]="true" [readonly]="!isEditEmployee"></ng-select>
                     <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
-                      This field is required
+                      Vui lòng điền thông tin
                     </mat-error>
                 </div>
               </div>

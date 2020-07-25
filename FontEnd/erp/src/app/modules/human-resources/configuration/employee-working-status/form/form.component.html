@@ -19,7 +19,7 @@
                     <input matInput id="code" formControlName="code" maxlength="10" tabindex="1" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && workingStatusForm.controls['code'].errors?.required">
-                    This field is required
+                    Vui lòng điền thông tin
                   </mat-error>
                 </div>
               </div>
@@ -30,7 +30,7 @@
                     <input matInput id="name" formControlName="name" maxlength="100" tabindex="2" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && workingStatusForm.controls['name'].errors?.required">
-                    This field is required
+                    Vui lòng điền thông tin
                   </mat-error>
                 </div>
               </div>
@@ -48,10 +48,10 @@
                     <input matInput formControlName="precedence" maxlength="3" tabindex="4" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && workingStatusForm.controls['precedence'].errors?.required">
-                    This field is required
+                    Vui lòng điền thông tin
                   </mat-error>
                   <mat-error *ngIf="isSubmit && workingStatusForm.controls['precedence'].errors?.number">
-                    Precedence number is invalid
+                    Số thứ tự không hợp lệ
                   </mat-error>
                 </div>
               </div>
