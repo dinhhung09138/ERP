@@ -1,3 +1,4 @@
+import { appInterceptors } from './app.interceptors';
 import { PrecedenceDirective } from './../core/directives/precedence.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,6 +11,7 @@ import { FormatNumberPipe } from '../core/pipes/format-number.pipe';
 import { FormatDecimalDirective } from '../core/directives/format-decimal.directive';
 import { FormatCurrencyDirective } from '../core/directives/format-currency.directive';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 
 @NgModule({
   imports: [
@@ -27,9 +29,11 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     FormatCurrencyDirective,
     PrecedenceDirective,
     ConfirmDialogComponent,
+    ErrorDialogComponent,
   ],
   providers: [
     FormatNumberPipe,
+    appInterceptors,
   ],
   exports: [
     CommonModule,
