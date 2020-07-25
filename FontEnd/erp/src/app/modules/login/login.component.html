@@ -17,7 +17,7 @@
                           <input type="text" formControlName="userName" class="form-control"
                                   [ngClass]="{'is-invalid': submitted && loginForm.controls['userName'].errors}" tabindex="1">
                           <div *ngIf="submitted && loginForm.controls['userName'].errors" class="invalid-feedback">
-                            <div *ngIf="loginForm.controls['userName'].errors.required">This field is required</div>
+                            <div *ngIf="loginForm.controls['userName'].errors.required">Vui lòng điền thông tin</div>
                           </div>
                         </div>
                       </div>
@@ -27,13 +27,13 @@
                           <input type="password" formControlName="password" class="form-control" tabindex="2"
                                   [ngClass]="{'is-invalid': submitted && loginForm.controls['password'].errors}">
                           <div *ngIf="submitted && loginForm.controls['password'].errors" class="invalid-feedback">
-                            <div *ngIf="loginForm.controls['password'].errors.required">This field is required</div>
+                            <div *ngIf="loginForm.controls['password'].errors.required">Vui lòng điền thông tin</div>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-12 col-xs-12 form-group">
-                          <label class="text-info"><span>Remember me</span> 
+                          <label class="text-info"><span>Remember me</span>
                             <span><input formControlName="rememberMe" type="checkbox" tabindex="3"></span></label>
                         </div>
                       </div>

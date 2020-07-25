@@ -16,9 +16,11 @@ namespace Service.HR
     public class EmployeeService : IEmployeeService
     {
         private readonly IHRUnitOfWork _context;
-        public EmployeeService(IHRUnitOfWork context)
+        private readonly IEmployeeInfoService _employeeInfoService;
+        public EmployeeService(IHRUnitOfWork context, IEmployeeInfoService employeeInfoService)
         {
             _context = context;
+            _employeeInfoService = employeeInfoService;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -27,15 +29,16 @@ namespace Service.HR
             try
             {
                 var query = from m in _context.EmployeeRepository.Query()
-                                // TODO Working status
+                            join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
                             where !m.Deleted
                             orderby m.CreateDate
                             select new EmployeeModel()
                             {
                                 Id = m.Id,
                                 EmployeeCode = m.EmployeeCode,
-                                FirstName = m.FirstName,
-                                LastName = m.LastName,
+                                FirstName = info.FirstName,
+                                LastName = info.LastName,
+                                Gender = info.Gender,
                                 ProbationDate = m.ProbationDate,
                                 StartWorkingDate = m.StartWorkingDate,
                                 BadgeCardNumber = m.BadgeCardNumber,
@@ -74,14 +77,15 @@ namespace Service.HR
             try
             {
                 var query = from m in _context.EmployeeRepository.Query()
+                            join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
                             where m.IsActive && !m.Deleted
                             orderby m.CreateDate ascending
                             select new EmployeeModel
                             {
                                 Id = m.Id,
                                 EmployeeCode = m.EmployeeCode,
-                                FirstName = m.FirstName,
-                                LastName = m.LastName,
+                                FirstName = info.FirstName,
+                                LastName = info.LastName,
                             };
 
                 response.Result = await query.ToListAsync();
@@ -99,33 +103,37 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                Employee md = await _context.EmployeeRepository.FirstOrDefaultAsync(m => m.Id == id);
+                var md = from m in _context.EmployeeRepository.Query()
+                                      join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
+                                      where m.IsActive && !m.Deleted
+                                      select new EmployeeModel()
+                                      {
+                                          Id = m.Id,
+                                          EmployeeCode = m.EmployeeCode,
+                                          FirstName = info.FirstName,
+                                          LastName = info.LastName,
+                                          Gender = info.Gender,
+                                          ProbationDate = m.ProbationDate,
+                                          StartWorkingDate = m.StartWorkingDate,
+                                          BadgeCardNumber = m.BadgeCardNumber,
+                                          DateApplyBadge = m.DateApplyBadge,
+                                          FingerSignNumber = m.FingerSignNumber,
+                                          DateApplyFingerSign = m.DateApplyFingerSign,
+                                          WorkingEmail = m.WorkingEmail,
+                                          WorkingPhone = m.WorkingPhone,
+                                          EmployeeWorkingStatusId = m.EmployeeWorkingStatusId,
+                                          BasicSalary = m.BasicSalary,
+                                          IsActive = m.IsActive,
+                                      };
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
 
-                EmployeeModel model = new EmployeeModel()
-                {
-                    Id = md.Id,
-                    EmployeeCode = md.EmployeeCode,
-                    FirstName = md.FirstName,
-                    LastName = md.LastName,
-                    ProbationDate = md.ProbationDate,
-                    StartWorkingDate = md.StartWorkingDate,
-                    BadgeCardNumber = md.BadgeCardNumber,
-                    DateApplyBadge = md.DateApplyBadge,
-                    FingerSignNumber = md.FingerSignNumber,
-                    DateApplyFingerSign = md.DateApplyFingerSign,
-                    WorkingEmail = md.WorkingEmail,
-                    WorkingPhone = md.WorkingPhone,
-                    EmployeeWorkingStatusId = md.EmployeeWorkingStatusId,
-                    BasicSalary = md.BasicSalary,
-                    IsActive = md.IsActive,
-                };
+               
 
-                response.Result = model;
+                response.Result = await md.FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
@@ -159,11 +167,12 @@ namespace Service.HR
 
             try
             {
+
+                await _context.BeginTransactionAsync();
+
                 Employee md = new Employee();
 
                 md.EmployeeCode = model.EmployeeCode;
-                md.FirstName = model.FirstName;
-                md.LastName = model.LastName;
                 md.ProbationDate = model.ProbationDate;
                 md.StartWorkingDate = model.StartWorkingDate;
                 md.BadgeCardNumber = model.BadgeCardNumber;
@@ -182,11 +191,27 @@ namespace Service.HR
                 await _context.EmployeeRepository.AddAsync(md).ConfigureAwait(true);
 
                 await _context.SaveChangesAsync();
+
+                EmployeeInfoModel info = new EmployeeInfoModel()
+                {
+                    EmployeeId = md.Id,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Gender = model.Gender,
+                    Action = Core.CommonModel.Enums.FormActionStatus.Insert
+                };
+
+                await _employeeInfoService.Save(info);
+
+
+                await _context.CommitTransactionAsync();
             }
             catch (Exception ex)
             {
                 response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
                 response.Errors.Add(ex.Message);
+
+                await _context.RollbackTransactionAsync();
             }
             return response;
         }
@@ -204,8 +229,6 @@ namespace Service.HR
                     throw new NullParameterException();
                 }
 
-                md.FirstName = model.FirstName;
-                md.LastName = model.LastName;
                 md.ProbationDate = model.ProbationDate;
                 md.StartWorkingDate = model.StartWorkingDate;
                 md.BadgeCardNumber = model.BadgeCardNumber;

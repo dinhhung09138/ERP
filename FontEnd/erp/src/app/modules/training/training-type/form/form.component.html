@@ -18,7 +18,7 @@
                   <mat-form-field class="form-control">
                     <input matInput id="name" formControlName="name" maxlength="100" tabindex="1" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && trainingTypeForm.controls['name'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && trainingTypeForm.controls['name'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
               </div>
               <div class="row">
@@ -34,8 +34,8 @@
                   <mat-form-field class="form-control">
                     <input matInput formControlName="precedence" tabindex="2" maxlength="3" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && trainingTypeForm.controls['precedence'].errors?.required">This field is required</mat-error>
-                  <mat-error *ngIf="isSubmit && trainingTypeForm.controls['precedence'].errors?.number">Precedence number is invalid</mat-error>
+                  <mat-error *ngIf="isSubmit && trainingTypeForm.controls['precedence'].errors?.required">Vui lòng điền thông tin</mat-error>
+                  <mat-error *ngIf="isSubmit && trainingTypeForm.controls['precedence'].errors?.number">Số thứ tự không hợp lệ</mat-error>
                 </div>
               </div>
               <div class="row">

@@ -1,6 +1,5 @@
 ﻿using DataBase.Sql.HR.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace DataBase.Sql.HR
 {

@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { EmployeeService } from '../employee.service';
 import { DatetimePipe } from 'src/app/core/pipes/datetime.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { EmployeeInformationComponent } from './information/information.component';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { RelationshipComponent } from './relationship/relationship.component';
 import { EducationComponent } from './education/education.component';
 import { IdentificationComponent } from './identification/identification.component';
@@ -33,7 +33,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     EmployeeInfoComponent,
-    EmployeeInformationComponent,
+    PersonalInfoComponent,
     RelationshipComponent,
     EducationComponent,
     IdentificationComponent,

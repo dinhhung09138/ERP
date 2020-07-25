@@ -35,7 +35,6 @@ export class FormatNumberPipe implements PipeTransform {
   }
 
   parse(value: string | string, fractionSize: number = 0): string {
-    console.log(value);
     if (value === null) {
       return '';
     }

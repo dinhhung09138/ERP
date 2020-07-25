@@ -4,23 +4,26 @@
     <div class="card">
       <div class="card-header">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> List of Approve Status </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> Danh sách </div>
         </div>
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-lg-9 col-md-8 col-sm-6">
-            <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i> Add New</button>
+          <div class="col-lg-9 col-md-8 col-sm-6 form-group">
+            <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i> Thêm mới</button>
             <button class="btn btn-outline-info" (click)="onImportClick()"><i class="fa fa-paperclip"></i>
-              Import</button>
-            <button class="btn btn-outline-info" (click)="onExportClick()"><i class="fa fa-file-excel-o"></i> Export</button>
+              Nhập
+            </button>
+            <button class="btn btn-outline-info" (click)="onExportClick()"><i class="fa fa-sign-in"></i>
+              Xuất file
+            </button>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
             <div class="input-group" *ngIf="paging.length > 0">
-              <input type="text" placeholder="Search" class="form-control" [(ngModel)]="searchText"
+              <input type="text" placeholder="Tìm kiếm" class="form-control" [(ngModel)]="searchText"
                 (keyup.enter)="onFilterChange()">
               <div class="input-group-append">
-                <button class="btn btn-outline-info" (click)="onFilterChange()">Search</button>
+                <button class="btn btn-outline-info" (click)="onFilterChange()">Tìm kiếm</button>
               </div>
             </div>
           </div>
@@ -30,26 +33,26 @@
             <app-table-loading [Show]="isLoading"></app-table-loading>
             <table mat-table matSort [dataSource]="dataSource" class="table">
               <ng-container matColumnDef="code">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-200">Code</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-200">Mã</th>
                 <td mat-cell *matCellDef="let element">{{ element.code }}</td>
               </ng-container>
               <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên</th>
                 <td mat-cell *matCellDef="let element"> {{ element.name }}</td>
               </ng-container>
               <ng-container matColumnDef="precedence">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-70">Precedence</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-70">Thứ tự</th>
                 <td mat-cell *matCellDef="let element">{{ element.precedence }}</td>
               </ng-container>
               <ng-container matColumnDef="isActive">
-                <th mat-header-cell *matHeaderCellDef class="td-w-70">Active</th>
+                <th mat-header-cell *matHeaderCellDef class="td-w-100">Trạng thái</th>
                 <td mat-cell *matCellDef="let element" class="center">
-                  <label class="label label-outline-success" *ngIf="element.isActive">Active</label>
-                  <label class="label label-outline-danger" *ngIf="!element.isActive">Deactivate</label>
+                  <label class="label label-outline-success" *ngIf="element.isActive">Hoạt động</label>
+                  <label class="label label-outline-danger" *ngIf="!element.isActive">Khóa</label>
                 </td>
               </ng-container>
               <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef class="td-w-70">Action</th>
+                <th mat-header-cell *matHeaderCellDef class="td-w-70">Thao tác</th>
                 <td mat-cell *matCellDef="let element" class="center">
                   <div class=" btn-group">
                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -57,9 +60,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
                       <a href="javascript:{}" class="dropdown-item text-success"
-                        (click)="onUpdateClick(element.id)">Edit</a>
+                        (click)="onUpdateClick(element.id)">Cập nhật</a>
                       <a href="javascript:{}" class="dropdown-item text-danger"
-                        (click)="onDeleteClick(element.id)">Delete</a>
+                        (click)="onDeleteClick(element.id)">Xóa</a>
                     </div>
                   </div>
                 </td>

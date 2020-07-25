@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
 import { HttpClient } from '@angular/common/http';
 import { ApproveStatusViewModel } from './approve-status.model';

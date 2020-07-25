@@ -21,7 +21,7 @@
                     <input matInput id="employeeCode" formControlName="employeeCode" maxlength="50"
                     tabindex="1" [readonly]="!isEditEmployee" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['employeeCode'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['employeeCode'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">First Name</label>
@@ -29,7 +29,7 @@
                     <input matInput id="firstName" formControlName="firstName" maxlength="50"
                     tabindex="2" [readonly]="!isEditEmployee" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['firstName'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['firstName'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Last Name</label>
@@ -37,7 +37,7 @@
                     <input matInput id="lastName" formControlName="lastName" maxlength="50"
                     tabindex="3" [readonly]="!isEditEmployee" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['lastName'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['lastName'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
               </div>
               <div class="row">
@@ -47,7 +47,7 @@
                     <input matInput formControlName="workingEmail" maxlength="50" tabindex="4" [readonly]="!isEditEmployee" required />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.required">
-                    This field is required
+                    Vui lòng điền thông tin
                   </mat-error>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.email">
                     Email is invalid
@@ -61,10 +61,10 @@
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Employee Status</label>
-                  <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'" formControlName="employeeWorkingStatusId" 
+                  <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'" formControlName="employeeWorkingStatusId"
                   [tabIndex]="6" [searchable]="true" [selectOnTab]="true" [readonly]="!isEditEmployee"></ng-select>
                     <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
-                      This field is required
+                      Vui lòng điền thông tin
                     </mat-error>
                 </div>
               </div>
@@ -153,7 +153,7 @@
                     *ngIf="!isEditEmployee" (click)="onEditClick()">Edit</button>
                   <button type="button" class="btn btn-danger" tabindex="15"
                     *ngIf="formAction == 2 && isEditEmployee" (click)="onCancelClick()"> Cancel </button>
-                  <button type="button" class="btn btn-warning" tabindex="16" 
+                  <button type="button" class="btn btn-warning" tabindex="16"
                     *ngIf="isEditEmployee" (click)="onResetClick()"> Reset </button>
                   <button type="button" class="btn btn-secondary" tabindex="17"
                     (click)="onCloseClick()"> Close</button>
@@ -196,7 +196,7 @@
           <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
             <div class="tab-content">
               <div class="tab-pane active" id="personalInfo">
-                <app-hr-employee-information></app-hr-employee-information>
+                <app-hr-employee-personal-info></app-hr-employee-personal-info>
               </div>
               <article class="tab-pane" id="ipsum-left">
                 <h1>Ipsum</h1>

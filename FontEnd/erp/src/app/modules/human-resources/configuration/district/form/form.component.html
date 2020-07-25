@@ -18,7 +18,7 @@
                   <mat-form-field class="form-control">
                     <input matInput id="name" formControlName="name" maxlength="100" tabindex="1" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && districtForm.controls['name'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && districtForm.controls['name'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
               </div>
               <div class="row">
@@ -28,7 +28,7 @@
                     formControlName="provinceId" tabindex="2" [selectOnTab]="true"
                     [ngClass]="{'is-invalid' : isSubmit && districtForm.controls['provinceId'].errors}">
                   </ng-select>
-                  <mat-error *ngIf="isSubmit && districtForm.controls['provinceId'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && districtForm.controls['provinceId'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
               </div>
               <div class="row">
@@ -37,7 +37,7 @@
                   <mat-form-field class="form-control">
                     <input matInput formControlName="precedence" maxlength="3" tabindex="3" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.required">This field is required</mat-error>
+                  <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.required">Vui lòng điền thông tin</mat-error>
                   <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.number">Precedence number is required</mat-error>
                 </div>
               </div>
