@@ -104,20 +104,20 @@ export class ApproveStatusComponent implements OnInit {
     filter.paging.pageIndex = this.paging.pageIndex;
     filter.paging.pageSize = this.paging.pageSize;
     this.approveStatusService.getList(filter).subscribe((response: ResponseModel) => {
-      if (response.responseStatus === ResponseStatus.success) {
+      if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
-        this.isLoading = false;
       }
+      this.isLoading = false;
     });
   }
 
   private deleteItem(itemId: number) {
     this.isLoading = true;
     const model = { action: FormActionStatus.Delete, id: itemId } as ApproveStatusViewModel;
-    this.approveStatusService.save(model).subscribe((res: ResponseModel) => {
+    this.approveStatusService.save(model).subscribe((response: ResponseModel) => {
       this.isLoading = false;
-      if (res !== null) {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
         this.getList();
       }
     });

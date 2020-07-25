@@ -111,12 +111,10 @@ export class ApproveStatusFormComponent implements OnInit {
     const model = this.approveStatusForm.getRawValue() as ApproveStatusViewModel;
     model.action = this.formAction;
 
-    this.approveStatusService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.approveStatusService.save(model).subscribe((response: ResponseModel) => {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -125,13 +123,13 @@ export class ApproveStatusFormComponent implements OnInit {
 
   private getItem(id: number) {
     this.isLoading = true;
-    this.approveStatusService.item(id).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        this.approveStatusForm.get('id').setValue(res.result.id);
-        this.approveStatusForm.get('code').setValue(res.result.code);
-        this.approveStatusForm.get('name').setValue(res.result.name);
-        this.approveStatusForm.get('precedence').setValue(res.result.precedence);
-        this.approveStatusForm.get('isActive').setValue(res.result.isActive);
+    this.approveStatusService.item(id).subscribe((response: ResponseModel) => {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        this.approveStatusForm.get('id').setValue(response.result.id);
+        this.approveStatusForm.get('code').setValue(response.result.code);
+        this.approveStatusForm.get('name').setValue(response.result.name);
+        this.approveStatusForm.get('precedence').setValue(response.result.precedence);
+        this.approveStatusForm.get('isActive').setValue(response.result.isActive);
       }
       this.isLoading = false;
     });
