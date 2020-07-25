@@ -1,4 +1,5 @@
-import { NgModule } from "@angular/core";
+import { PrecedenceDirective } from './../core/directives/precedence.directive';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoDataAvailableComponent } from './components/no-data-available/no-data-available.component';
 import { ElementLoadingComponent } from './components/element-loading/element-loading.component';
@@ -24,6 +25,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     FormatNumberPipe,
     FormatDecimalDirective,
     FormatCurrencyDirective,
+    PrecedenceDirective,
     ConfirmDialogComponent,
   ],
   providers: [
@@ -33,12 +35,14 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     NoDataAvailableComponent,
     ElementLoadingComponent,
     TableLoadingComponent,
     FormatNumberPipe,
     FormatDecimalDirective,
     FormatCurrencyDirective,
+    PrecedenceDirective,
     ConfirmDialogComponent,
   ]
 })
