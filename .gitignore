@@ -31,3 +31,5 @@ Backend/Services/Service.Training/obj/
 Backend/DataBase/Database.Sql.Training/bin/
 Backend/API/API.Training/obj/
 Backend/API/API.Training/bin/
+Backend/DataBase/Database.Sql.ERP/bin/
+Backend/DataBase/Database.Sql.ERP/obj/

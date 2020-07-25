@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.CommonModel\Core.CommonModel.csproj" />
     <ProjectReference Include="..\..\Core\Core.Utility\Core.Utility.csproj" />
+    <ProjectReference Include="..\..\DataBase\Database.Sql.ERP\Database.Sql.ERP.csproj" />
     <ProjectReference Include="..\..\DataBase\Database.Sql.Training\Database.Sql.Training.csproj" />
   </ItemGroup>
 

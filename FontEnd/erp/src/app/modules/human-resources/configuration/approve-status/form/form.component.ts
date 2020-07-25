@@ -20,6 +20,7 @@ export class ApproveStatusFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
@@ -84,11 +85,13 @@ export class ApproveStatusFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Create);
     }
     this.elm.nativeElement.querySelector('#code').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {

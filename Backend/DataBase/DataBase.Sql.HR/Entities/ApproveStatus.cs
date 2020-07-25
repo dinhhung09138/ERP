@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBase.Sql.HR.Entities
 {
-    [Table("ApproveStatus")]
+    [Table("HR_ApproveStatus")]
     public class ApproveStatus
     {
         [Key]

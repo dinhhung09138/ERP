@@ -16,9 +16,9 @@ const route: Routes = [
   {
     path: '',
     component: ApproveStatusComponent,
-    data: { title: 'Approve Status' }
+    data: { title: 'Trạng thái phê duyệt' }
   }
-]
+];
 
 @NgModule({
   declarations: [
