@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
+import { SessionContext } from './../session.context';
+import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHeaders, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { SessionContext } from '../sessioncontext';
+import { EMPTY, Observable } from 'rxjs';
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
@@ -23,6 +23,7 @@ export class HeaderInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     if (req.url.includes('/authentication') || req.url.includes('.json')) {
       return next.handle(req);
     }
