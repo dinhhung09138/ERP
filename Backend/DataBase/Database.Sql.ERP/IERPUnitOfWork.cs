@@ -30,5 +30,6 @@ namespace Database.Sql.ERP
         ITableGenericRepository<Ranking> RankingRepository { get; }
         ITableGenericRepository<RelationshipType> RelationshipTypeRepository { get; }
         ITableGenericRepository<Ward> WardRepository { get; }
+        ITableGenericRepository<Position> PositionRepository { get; }
     }
 }

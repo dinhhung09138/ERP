@@ -15,6 +15,11 @@ const routes: Routes = [
         data: { title: 'Employee' }
       },
       {
+        path: 'position',
+        loadChildren: () => import('./position/position.module').then(m => m.PositionModule),
+        data: { title: 'Employee' }
+      },
+      {
         path: 'commendation',
         loadChildren: () => import('./commendation/commendation.module').then(m => m.CommendationModule),
         pathMatch: 'full'
