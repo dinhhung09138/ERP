@@ -12,6 +12,9 @@ import { FormatDecimalDirective } from '../core/directives/format-decimal.direct
 import { FormatCurrencyDirective } from '../core/directives/format-currency.directive';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import { TablePaginatorComponent } from './components/table-paginator/table-paginator.component';
+import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
+import { AppMatPaginatorIntl } from './services/mat-paginator-intl.service';
 
 @NgModule({
   imports: [
@@ -19,11 +22,13 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatPaginatorModule,
   ],
   declarations: [
     NoDataAvailableComponent,
     ElementLoadingComponent,
     TableLoadingComponent,
+    TablePaginatorComponent,
     FormatNumberPipe,
     FormatDecimalDirective,
     FormatCurrencyDirective,
@@ -34,6 +39,10 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
   providers: [
     FormatNumberPipe,
     appInterceptors,
+    {
+      provide: MatPaginatorIntl,
+      useClass: AppMatPaginatorIntl
+    }
   ],
   exports: [
     CommonModule,
@@ -43,11 +52,13 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
     NoDataAvailableComponent,
     ElementLoadingComponent,
     TableLoadingComponent,
+    TablePaginatorComponent,
     FormatNumberPipe,
     FormatDecimalDirective,
     FormatCurrencyDirective,
     PrecedenceDirective,
     ConfirmDialogComponent,
+    MatPaginatorModule,
   ]
 })
 export class SharedModule { }
