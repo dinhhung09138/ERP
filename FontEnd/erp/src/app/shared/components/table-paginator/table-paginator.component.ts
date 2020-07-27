@@ -9,8 +9,8 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class TablePaginatorComponent implements OnInit {
 
-  @Input() paging: PagingModel;
-  @Input() isLoading = false;
+  @Input() Paging: PagingModel;
+  @Input() IsLoading = false;
   @Output() pageEventChange = new EventEmitter<PageEvent>();
 
   constructor() { }

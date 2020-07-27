@@ -106,6 +106,9 @@ export class ApproveStatusComponent implements OnInit {
   }
 
   onPageChange(page: PageEvent) {
+    if (this.isLoading === true) {
+      return;
+    }
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {

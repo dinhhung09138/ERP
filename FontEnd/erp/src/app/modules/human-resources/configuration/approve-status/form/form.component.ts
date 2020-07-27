@@ -25,6 +25,7 @@ export class ApproveStatusFormComponent implements OnInit {
   isSubmit = false;
   isLoading = false;
   approveStatusForm: FormGroup;
+  item: ApproveStatusViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -95,7 +96,15 @@ export class ApproveStatusFormComponent implements OnInit {
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Create:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -125,13 +134,18 @@ export class ApproveStatusFormComponent implements OnInit {
     this.isLoading = true;
     this.approveStatusService.item(id).subscribe((response: ResponseModel) => {
       if (response !== null && response.responseStatus === ResponseStatus.success) {
-        this.approveStatusForm.get('id').setValue(response.result.id);
-        this.approveStatusForm.get('code').setValue(response.result.code);
-        this.approveStatusForm.get('name').setValue(response.result.name);
-        this.approveStatusForm.get('precedence').setValue(response.result.precedence);
-        this.approveStatusForm.get('isActive').setValue(response.result.isActive);
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
+  }
+
+  private setDataToForm(data: ApproveStatusViewModel) {
+    this.approveStatusForm.get('id').setValue(data.id);
+    this.approveStatusForm.get('code').setValue(data.code);
+    this.approveStatusForm.get('name').setValue(data.name);
+    this.approveStatusForm.get('precedence').setValue(data.precedence);
+    this.approveStatusForm.get('isActive').setValue(data.isActive);
   }
 }
