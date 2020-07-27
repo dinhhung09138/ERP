@@ -1,0 +1,7 @@
+<mat-paginator [pageSize]="paging.pageSize" [pageSizeOptions]="paging.pageSizeOptions"
+  [length]="paging.length" (page)="onPageChange($event)" showFirstLastButtons
+  [disabled]="isLoading"
+  itemsPerPageLabel="Hiển thị"
+  firstPageLabel="Trang đầu tiên" lastPageLabel="Trang cuối"
+  nextPageLabel="Trang tiếp theo" previousPageLabel="Trang trước">
+</mat-paginator>
