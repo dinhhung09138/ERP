@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.HR;
-using DataBase.Sql.HR.Entities;
+using Database.Sql.ERP;
+using DataBase.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -13,8 +13,8 @@ namespace Service.HR
 {
     public class ContractTypeService : IContractTypeService
     {
-        private readonly IHRUnitOfWork _context;
-        public ContractTypeService(IHRUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public ContractTypeService(IERPUnitOfWork context)
         {
             _context = context;
         }
@@ -26,7 +26,7 @@ namespace Service.HR
             {
                 var query = from m in _context.ContractTypeRepository.Query()
                             where !m.Deleted
-                            orderby m.CreateDate descending
+                            orderby m.Precedence
                             select new ContractTypeModel()
                             {
                                 Id = m.Id,
@@ -35,6 +35,7 @@ namespace Service.HR
                                 Description = m.Description,
                                 AllowInsurance = m.AllowInsurance,
                                 AllowLeaveDate = m.AllowLeaveDate,
+                                Precedence = m.Precedence,
                                 IsActive = m.IsActive
                             };
 
@@ -103,6 +104,7 @@ namespace Service.HR
                     Description = md.Description,
                     AllowLeaveDate = md.AllowLeaveDate,
                     AllowInsurance = md.AllowInsurance,
+                    Precedence = md.Precedence,
                     IsActive = md.IsActive,
                 };
 
@@ -148,6 +150,7 @@ namespace Service.HR
                 md.Description = model.Description;
                 md.AllowInsurance = model.AllowInsurance;
                 md.AllowLeaveDate = model.AllowLeaveDate;
+                md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
@@ -183,6 +186,7 @@ namespace Service.HR
                 md.Description = model.Description;
                 md.AllowInsurance = model.AllowInsurance;
                 md.AllowLeaveDate = model.AllowLeaveDate;
+                md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
                 md.UpdateBy = 1; // TODO
                 md.UpdateDate = DateTime.Now;

@@ -3,7 +3,7 @@
     <div class="card box" [class.opened]="isShow">
       <div class="card-header">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Contract Type</div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{ formTitle }}</div>
         </div>
       </div>
       <div class="card-body">
@@ -14,53 +14,67 @@
             <form [formGroup]="contractTypeForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Code</label>
+                  <label class="label">Mã</label>
                   <mat-form-field class="form-control">
-                    <input matInput id="code" formControlName="code" maxlength="10" tabindex="1"/>
+                    <input matInput id="code" formControlName="code" maxlength="10" tabindex="1" autocomplete="off"/>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && contractTypeForm.controls['code'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Name</label>
+                  <label class="label">Tên loại hợp đồng</label>
                   <mat-form-field class="form-control">
-                    <input matInput id="name" formControlName="name" maxlength="100" tabindex="2" />
+                    <input matInput id="name" formControlName="name" maxlength="100" tabindex="2" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && contractTypeForm.controls['name'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Description</label>
+                  <label class="label">Mô tả</label>
                   <textarea rows="3" formControlName="description" maxlength="255" class="form-control"
                     tabindex="3"></textarea>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
-                  <label class="label">Allow Insurance</label>
+                  <label class="label">Được đóng bảo hiểm</label>
                   <mat-checkbox class="ml-10" tabindex="4" formControlName="allowInsurance">
                   </mat-checkbox>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
-                  <label class="label">Allow Leave Date</label>
+                  <label class="label">Được nghỉ phép</label>
                   <mat-checkbox class="ml-10" tabindex="5" formControlName="allowLeaveDate">
                   </mat-checkbox>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Active</label>
+                  <label class="label">Thứ tự</label>
+                  <mat-form-field class="form-control">
+                    <input matInput appPrecedence formControlName="precedence" maxlength="3" tabindex="6" autocomplete="off" />
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && contractTypeForm.controls['precedence'].errors?.required">
+                    Vui lòng điền thông tin
+                  </mat-error>
+                  <mat-error *ngIf="isSubmit && contractTypeForm.controls['precedence'].errors?.number">
+                    Số thứ tự không hợp lệ
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Hoạt động</label>
                   <mat-checkbox class="ml-10" tabindex="6" formControlName="isActive">
                   </mat-checkbox>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" value="Save" tabindex="7">
-                  <button type="button" class="btn btn-warning" tabindex="8" (click)="onResetClick()"> Reset </button>
-                  <button type="button" class="btn btn-secondary" tabindex="9" (click)="onCloseClick()"> Close </button>
+                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="7">
+                  <button type="button" class="btn btn-warning" tabindex="8" (click)="onResetClick()"> Đặt lại </button>
+                  <button type="button" class="btn btn-secondary" tabindex="9" (click)="onCloseClick()"> Đóng </button>
                 </div>
               </div>
             </form>

@@ -29,7 +29,7 @@ export class ContractTypeComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName: string[] = ['code', 'name', 'description', 'allowInsurance', 'allowLeaveDate', 'isActive', 'action'];
+  listColumnsName: string[] = ['code', 'name', 'description', 'allowInsurance', 'allowLeaveDate', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
   constructor(
@@ -48,37 +48,55 @@ export class ContractTypeComponent implements OnInit {
   }
 
   onCreateClick() {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCreateClick();
   }
 
   onUpdateClick(id: number) {
+    if (this.isLoading === true) {
+      return;
+    }
     if (id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number) {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCloseClick();
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result === true) {
+      if (result === true) {
         this.deleteItem(id);
       }
     });
   }
 
   onImportClick() {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCloseClick();
   }
 
   onExportClick() {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCloseClick();
   }
 
   onFilterChange() {
+    if (this.isLoading === true) {
+      return;
+    }
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
@@ -86,6 +104,9 @@ export class ContractTypeComponent implements OnInit {
   }
 
   onPageChange(page: PageEvent) {
+    if (this.isLoading === true) {
+      return;
+    }
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
