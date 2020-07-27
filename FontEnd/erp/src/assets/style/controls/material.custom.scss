@@ -109,7 +109,7 @@
 }
 
 .mat-form-field-disabled {
-  background-color: #e9ecef;
+  background-color: unset;
   opacity: 1;
 }
 .mat-icon-button[disabled][disabled] {
@@ -122,4 +122,13 @@
 
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
   color: $primary-background-color;
+}
+
+.mat-form-field-disabled .mat-form-field-flex {
+  border-bottom: 1px solid $primary-background-color;
+}
+
+.mat-paginator-container .mat-focused {
+  border-color: unset !important;
+  box-shadow: unset !important;
 }

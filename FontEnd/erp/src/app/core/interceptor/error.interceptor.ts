@@ -6,6 +6,7 @@ import { catchError, retry, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ResponseStatus } from '../enums/response-status.enum';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -18,7 +19,13 @@ export class ErrorInterceptor implements HttpInterceptor {
       map((event: HttpEvent<any>) => {
 
         if (event instanceof HttpResponse) {
-          // TODO
+          const response = event.body as ResponseModel;
+          if (response.responseStatus === ResponseStatus.error) {
+            this.dialog.open(ErrorDialogComponent, {
+              width: '300px',
+              data: { isError: true, httpError: HttpErrorStatusEnum.serverNotFound }
+            });
+          }
         }
 
         return event;
@@ -35,12 +42,18 @@ export class ErrorInterceptor implements HttpInterceptor {
               data: { isError: true, httpError: HttpErrorStatusEnum.serverNotFound }
             });
             break;
-            case 404:
-              this.dialog.open(ErrorDialogComponent, {
-                width: '300px',
-                data: { isError: true, httpError: HttpErrorStatusEnum.notFound }
-              });
-              break;
+          case 404:
+            this.dialog.open(ErrorDialogComponent, {
+              width: '300px',
+              data: { isError: true, httpError: HttpErrorStatusEnum.notFound }
+            });
+            break;
+          case 204:
+            this.dialog.open(ErrorDialogComponent, {
+              width: '300px',
+              data: { isError: true, httpError: HttpErrorStatusEnum.noContent }
+            });
+            break;
         }
         console.log(error.error);
         return throwError(error);
