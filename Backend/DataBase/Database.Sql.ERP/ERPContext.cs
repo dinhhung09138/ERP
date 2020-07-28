@@ -1,4 +1,5 @@
-﻿using DataBase.Sql.ERP.Entities.HR;
+﻿using DataBase.Sql.ERP.Entities.Common;
+using DataBase.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database.Sql.ERP
