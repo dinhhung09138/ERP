@@ -131,9 +131,9 @@ export class ContractTypeFormComponent implements OnInit {
     const model = this.contractTypeForm.getRawValue() as ContractTypeViewModel;
     model.action = this.formAction;
 
-    this.contractTypeService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
+    this.contractTypeService.save(model).subscribe((response: ResponseModel) => {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        if (response.responseStatus === ResponseStatus.success) {
           this.initFormControl(FormActionStatus.UnKnow);
           this.reloadTableEvent.emit(true);
         }
@@ -146,7 +146,7 @@ export class ContractTypeFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.contractTypeService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
         this.item = response.result;
         this.setDataToForm(this.item);
       }

@@ -139,7 +139,7 @@ export class ContractTypeComponent implements OnInit {
 
     this.contractTypeService.save(model).subscribe((response: ResponseModel) => {
       this.isLoading = false;
-      if (response) {
+      if (response && response.responseStatus === ResponseStatus.success) {
         this.getList();
       }
     });
