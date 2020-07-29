@@ -46,7 +46,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                   <label class="label">Thứ tự</label>
                   <input type="text" appPrecedence class="form-control" formControlName="precedence" maxlength="3" tabindex="4"
                     [ngClass]="{'is-invalid' : isSubmit && wardForm.controls['precedence'].errors}">
@@ -54,7 +54,7 @@
                     <div *ngIf="wardForm.controls['precedence'].errors.required">Vui lòng điền thông tin</div>
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                   <label class="label">Hoạt động</label>
                   <div class="input-group">
                     <mat-checkbox class="ml-10" tabindex="5" formControlName="isActive">
