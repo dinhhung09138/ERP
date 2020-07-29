@@ -7,8 +7,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const route: Routes = [
   {
@@ -29,8 +31,10 @@ const route: Routes = [
     NgSelectModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,
     MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
   ],
   providers: [
     WardService,

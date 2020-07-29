@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { WardService } from '../ward.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -16,14 +16,17 @@ import { DistrictViewModel } from '../../district/district.model';
 })
 export class WardFormComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   wardForm: FormGroup;
+  item: WardViewModel;
 
   provinceList: ProvinceViewModel[] = [];
   districtList: DistrictViewModel[] = [];
@@ -41,7 +44,6 @@ export class WardFormComponent implements OnInit {
     this.activatedRoute.data.subscribe(res => {
       this.provinceList = res.data.provinces.result;
       this.districtList = res.data.districts.result;
-      console.log(this.districtList);
     });
     this.wardForm = this.fb.group({
       id: [0],
@@ -54,8 +56,12 @@ export class WardFormComponent implements OnInit {
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.wardForm.get('id').setValue(0);
@@ -65,30 +71,28 @@ export class WardFormComponent implements OnInit {
     this.wardForm.get('precedence').reset();
     this.wardForm.get('isActive').reset();
 
-    if (isDisabledForm) {
-      if (formStatus === FormActionStatus.UnKnow) {
-        this.isShow = false;
-        this.wardForm.get('name').disable();
-        this.wardForm.get('districtId').disable();
-        this.wardForm.get('provinceId').disable();
-        this.wardForm.get('precedence').disable();
-        this.wardForm.get('isActive').disable();
-      } else {
-        this.isShow = true;
-        this.wardForm.get('isActive').setValue(true);
-        this.wardForm.get('precedence').setValue(1);
-        this.wardForm.get('name').enable();
-        this.wardForm.get('districtId').enable();
-        this.wardForm.get('provinceId').enable();
-        this.wardForm.get('precedence').enable();
-        this.wardForm.get('isActive').enable();
-      }
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.isShow = false;
+      this.wardForm.get('name').disable();
+      this.wardForm.get('districtId').disable();
+      this.wardForm.get('provinceId').disable();
+      this.wardForm.get('precedence').disable();
+      this.wardForm.get('isActive').disable();
+    } else {
+      this.isShow = true;
+      this.wardForm.get('isActive').setValue(true);
+      this.wardForm.get('precedence').setValue(1);
+      this.wardForm.get('name').enable();
+      this.wardForm.get('districtId').enable();
+      this.wardForm.get('provinceId').enable();
+      this.wardForm.get('precedence').enable();
+      this.wardForm.get('isActive').enable();
     }
-    this.elm.nativeElement.querySelector('#name').focus();
+
+    this.elm.nativeElement.querySelector('#provinceId').focus();
   }
 
-  provinceChange(province?: ProvinceViewModel) {
-    console.log(province);
+  onProvinceChange(province?: ProvinceViewModel) {
     this.districtDropdown = [];
     if (province) {
       this.wardForm.get('districtId').enable();
@@ -99,20 +103,33 @@ export class WardFormComponent implements OnInit {
     this.wardForm.get('districtId').setValue(null);
   }
 
-  create() {
-    this.initFormControl(FormActionStatus.Create);
+  onCreateClick() {
+    if (this.formAction !== FormActionStatus.Create) {
+      this.initFormControl(FormActionStatus.Create);
+    }
+    this.elm.nativeElement.querySelector('#provinceId').focus();
+    this.formTitle = 'Thêm mới';
   }
 
-  update(id: number) {
+  onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
-  reset() {
-    this.initFormControl(this.formAction, false);
+  onResetClick() {
+    switch(this.formAction) {
+      case FormActionStatus.Create:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#provinceId').focus();
+        break;
+    }
   }
 
-  close() {
+  onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 
@@ -125,13 +142,11 @@ export class WardFormComponent implements OnInit {
     const model = this.wardForm.value as WardViewModel;
     model.action = this.formAction;
 
-    this.wardService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
+    this.wardService.save(model).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
           this.initFormControl(FormActionStatus.UnKnow);
           this.reloadTableEvent.emit(true);
         }
-      }
       this.isLoading = false;
       this.isSubmit = false;
     });
@@ -140,16 +155,25 @@ export class WardFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.wardService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.wardForm.get('id').setValue(response.result.id);
-        this.wardForm.get('name').setValue(response.result.name);
-        this.wardForm.get('districtId').setValue(response.result.districtId);
-        this.wardForm.get('provinceId').setValue(response.result.provinceId);
-        this.wardForm.get('precedence').setValue(response.result.precedence);
-        this.wardForm.get('isActive').setValue(response.result.isActive);
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
   }
 
+  private setDataToForm(data: WardViewModel) {
+    this.districtDropdown = [];
+    this.districtDropdown = this.districtList.filter(m => m.provinceId === data.provinceId);
+    setTimeout(() => {
+      this.wardForm.get('id').setValue(data.id);
+      this.wardForm.get('name').setValue(data.name);
+      this.wardForm.get('districtId').setValue(data.districtId);
+      this.wardForm.get('provinceId').setValue(data.provinceId);
+      this.wardForm.get('precedence').setValue(data.precedence);
+      this.wardForm.get('isActive').setValue(data.isActive);
+    }, 300);
+
+  }
 }

@@ -26,7 +26,6 @@ export class WardService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -38,20 +37,17 @@ export class WardService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
   }
 
   item(id: number) {
-    console.log(id);
     return this.http.get<ResponseModel>(this.url.item + '?id=' + id).pipe(
       map((data) => {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -63,7 +59,6 @@ export class WardService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );

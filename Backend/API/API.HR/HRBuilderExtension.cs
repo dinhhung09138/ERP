@@ -19,7 +19,7 @@ namespace API.HR
             services.AddScoped<IContractTypeService, ContractTypeService>();
             services.AddScoped<IDistrictService, DistrictService>();
             //services.AddScoped<IIdentificationTypeService, IdentificationTypeService>();
-            //services.AddScoped<IWardService, WardService>();
+            services.AddScoped<IWardService, WardService>();
             services.AddScoped<IProvinceService, ProvinceService>();
             //services.AddScoped<IRankingService, RankingService>();
             //services.AddScoped<IProfessionalQualificationService, ProfessionalQualificationService>();

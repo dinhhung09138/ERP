@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataBase.Sql.ERP.Entities.HR
+namespace DataBase.Sql.ERP.Entities.Common
 {
     [Table("Ward")]
     public class Ward

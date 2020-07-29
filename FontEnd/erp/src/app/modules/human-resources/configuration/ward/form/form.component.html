@@ -13,30 +13,18 @@
           <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
             <form [formGroup]="wardForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Name</label>
-                  <input type="text" id="name" class="form-control" formControlName="name" maxlength="100" tabindex="1"
-                    [ngClass]="{'is-invalid' : isSubmit && wardForm.controls['name'].errors}">
-                  <div *ngIf="isSubmit && wardForm.controls['name'].errors" class="invalid-feedback">
-                    <div *ngIf="wardForm.controls['name'].errors.required">Vui lòng điền thông tin</div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Province</label>
-                  <ng-select [items]="provinceList" formControlName="provinceId" [bindLabel]="'name'" [bindValue]="'id'"
-                    [selectOnTab]="true" tabindex="2" (change)="provinceChange($event)"
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Tỉnh/Thành phố</label>
+                  <ng-select id="provinceId" [items]="provinceList" formControlName="provinceId" [bindLabel]="'name'" [bindValue]="'id'"
+                    [selectOnTab]="true" tabindex="1" (change)="onProvinceChange($event)"
                     [ngClass]="{'is-invalid' : isSubmit && wardForm.controls['provinceId'].errors}">
                   </ng-select>
                   <div *ngIf="isSubmit && wardForm.controls['provinceId'].errors" class="invalid-feedback">
                     <div *ngIf="wardForm.controls['provinceId'].errors.required">Vui lòng điền thông tin</div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">District</label>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Quận/Huyện</label>
                   <ng-select [items]="districtDropdown" formControlName="districtId" [bindLabel]="'name'"
                     [bindValue]="'id'" [selectOnTab]="true" tabindex="3"
                     [ngClass]="{'is-invalid' : isSubmit && wardForm.controls['districtId'].errors}">
@@ -48,26 +36,37 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Precedence</label>
-                  <input type="text" class="form-control" formControlName="precedence" maxlength="3" tabindex="4"
+                  <label class="label">Tên phường/xã</label>
+                  <mat-form-field class="form-control">
+                    <input matInput formControlName="name" maxlength="100" tabindex="3" autocomplete="off" />
+                  </mat-form-field>
+                  <div *ngIf="isSubmit && wardForm.controls['name'].errors" class="invalid-feedback">
+                    <div *ngIf="wardForm.controls['name'].errors.required">Vui lòng điền thông tin</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Thứ tự</label>
+                  <input type="text" appPrecedence class="form-control" formControlName="precedence" maxlength="3" tabindex="4"
                     [ngClass]="{'is-invalid' : isSubmit && wardForm.controls['precedence'].errors}">
                   <div *ngIf="isSubmit && wardForm.controls['precedence'].errors" class="invalid-feedback">
                     <div *ngIf="wardForm.controls['precedence'].errors.required">Vui lòng điền thông tin</div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Active</label>
-                  <mat-checkbox class="ml-10" tabindex="5" formControlName="isActive">
-                  </mat-checkbox>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Hoạt động</label>
+                  <div class="input-group">
+                    <mat-checkbox class="ml-10" tabindex="5" formControlName="isActive">
+                    </mat-checkbox>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" value="Save" tabindex="6">
-                  <button type="button" class="btn btn-warning" tabindex="7" (click)="reset()"> Reset </button>
-                  <button type="button" class="btn btn-secondary" tabindex="8" (click)="close()"> Close </button>
+                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="6">
+                  <button type="button" class="btn btn-warning" tabindex="7" (click)="onResetClick()"> Đặt lại </button>
+                  <button type="button" class="btn btn-secondary" tabindex="8" (click)="onCloseClick()"> Đóng </button>
                 </div>
               </div>
             </form>
