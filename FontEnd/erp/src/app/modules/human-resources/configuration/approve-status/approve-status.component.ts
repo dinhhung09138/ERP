@@ -49,24 +49,39 @@ export class ApproveStatusComponent implements OnInit {
   }
 
   onCreateClick() {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCreateClick();
   }
 
   onImportClick() {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCloseClick();
   }
 
   onExportClick() {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCloseClick();
   }
 
   onUpdateClick(id: number) {
+    if (this.isLoading === true) {
+      return;
+    }
     if (id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number) {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCloseClick();
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
@@ -81,6 +96,9 @@ export class ApproveStatusComponent implements OnInit {
   }
 
   onFilterChange() {
+    if (this.isLoading === true) {
+      return;
+    }
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
@@ -88,6 +106,9 @@ export class ApproveStatusComponent implements OnInit {
   }
 
   onPageChange(page: PageEvent) {
+    if (this.isLoading === true) {
+      return;
+    }
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {

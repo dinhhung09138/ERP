@@ -33,6 +33,9 @@ export class ErrorDialogComponent implements OnInit {
         case HttpErrorStatusEnum.notFound:
           this.errorMessage = 'Liên kết không tồn tại trên server';
           break;
+        case HttpErrorStatusEnum.noContent:
+          this.errorMessage = 'Không tìm thấy nội dung';
+          break;
       }
     }
   }

@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { DistrictService } from '../district.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -16,14 +16,18 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 })
 export class DistrictFormComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
+
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   districtForm: FormGroup;
+  item: DistrictViewModel;
 
   provinceList: ProvinceViewModel[] = [];
 
@@ -36,7 +40,8 @@ export class DistrictFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(res => {
-      this.provinceList = res.province.result;
+      this.provinceList = res.province.result as ProvinceViewModel[];
+      console.log(this.provinceList);
     });
     this.districtForm = this.fb.group({
       id: [0],
@@ -50,6 +55,10 @@ export class DistrictFormComponent implements OnInit {
 
   initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.districtForm.get('id').setValue(0);
@@ -81,19 +90,34 @@ export class DistrictFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Create);
     }
     this.elm.nativeElement.querySelector('#name');
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch (this.formAction) {
+      case FormActionStatus.Create:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
+  }
+
+  onProvinceSearch(term: string, item: any) {
+    term = term.toLocaleLowerCase();
+    return item.name.toLocaleLowerCase().indexOf(term) > -1 || item.name.toLocaleLowerCase().indexOf(term) > -1;
   }
 
   submitForm() {
@@ -105,12 +129,10 @@ export class DistrictFormComponent implements OnInit {
     const model = this.districtForm.value as DistrictViewModel;
     model.action = this.formAction;
 
-    this.districtService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.districtService.save(model).subscribe((response: ResponseModel) => {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -120,15 +142,20 @@ export class DistrictFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.districtService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.districtForm.get('id').setValue(response.result.id);
-        this.districtForm.get('name').setValue(response.result.name);
-        this.districtForm.get('provinceId').setValue(response.result.provinceId);
-        this.districtForm.get('precedence').setValue(response.result.precedence);
-        this.districtForm.get('isActive').setValue(response.result.isActive);
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
+  }
+
+  private setDataToForm(data: DistrictViewModel) {
+    this.districtForm.get('id').setValue(data.id);
+    this.districtForm.get('name').setValue(data.name);
+    this.districtForm.get('provinceId').setValue(data.provinceId);
+    this.districtForm.get('precedence').setValue(data.precedence);
+    this.districtForm.get('isActive').setValue(data.isActive);
   }
 
 }

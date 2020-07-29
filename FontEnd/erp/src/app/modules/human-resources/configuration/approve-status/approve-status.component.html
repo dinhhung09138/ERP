@@ -4,13 +4,15 @@
     <div class="card">
       <div class="card-header">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> Danh sách </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> Danh sách trạng thái phê duyệt</div>
         </div>
       </div>
       <div class="card-body">
         <div class="row">
           <div class="col-lg-9 col-md-8 col-sm-6 form-group">
-            <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i> Thêm mới</button>
+            <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i>
+              Thêm mới
+            </button>
             <button class="btn btn-outline-info" (click)="onImportClick()"><i class="fa fa-paperclip"></i>
               Nhập
             </button>
@@ -71,9 +73,7 @@
               <tr mat-row *matRowDef="let row; columns: listColumnsName;"></tr>
             </table>
             <app-no-data-available [Show]="paging.length === 0"></app-no-data-available>
-            <mat-paginator [pageSize]="paging.pageSize" [pageSizeOptions]="paging.pageSizeOptions"
-              [length]="paging.length" (page)="onPageChange($event)" showFirstLastButtons>
-            </mat-paginator>
+            <app-table-paginator [IsLoading]="isLoading" [Paging]="paging" (pageEventChange)="onPageChange($event)"></app-table-paginator>
           </div>
         </div>
       </div>

@@ -5,5 +5,5 @@ export interface ContractTypeViewModel extends BaseViewModel {
   name: string;
   description: number;
   allowInsurance: boolean;
-  allowLeaveDay: boolean;
+  allowLeaveDate: boolean;
 }

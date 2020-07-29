@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Core.DataAccess;
 using Core.DataAccess.Sql;
+using DataBase.Sql.ERP.Entities.Common;
 using DataBase.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore.Storage;
 

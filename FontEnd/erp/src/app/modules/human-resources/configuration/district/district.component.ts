@@ -58,24 +58,39 @@ export class DistrictComponent implements OnInit {
   }
 
   onCreateClick() {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCreateClick();
   }
 
   onImportClick() {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCloseClick();
   }
 
   onExportClick() {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCloseClick();
   }
 
   onUpdateClick(id: number) {
+    if (this.isLoading === true) {
+      return;
+    }
     if (id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number) {
+    if (this.isLoading === true) {
+      return;
+    }
     this.form.onCloseClick();
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -90,6 +105,9 @@ export class DistrictComponent implements OnInit {
   }
 
   onFilterChange() {
+    if (this.isLoading === true) {
+      return;
+    }
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
@@ -97,6 +115,9 @@ export class DistrictComponent implements OnInit {
   }
 
   onPageChange(page: PageEvent) {
+    if (this.isLoading === true) {
+      return;
+    }
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
@@ -115,21 +136,20 @@ export class DistrictComponent implements OnInit {
     filter.paging.pageIndex = this.paging.pageIndex;
     filter.paging.pageSize = this.paging.pageSize;
     this.districtService.getList(filter).subscribe((response: ResponseModel) => {
-      if (response.responseStatus === ResponseStatus.success) {
+      if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
-        this.isLoading = false;
       }
+      this.isLoading = false;
     });
   }
 
   private deleteItem(itemId: number) {
     this.isLoading = true;
     const model = { id: itemId, action: FormActionStatus.Delete } as DistrictViewModel;
-
     this.districtService.save(model).subscribe((response: ResponseModel) => {
       this.isLoading = false;
-      if (response) {
+      if (response && response.responseStatus === ResponseStatus.success) {
         this.getList();
       }
     });

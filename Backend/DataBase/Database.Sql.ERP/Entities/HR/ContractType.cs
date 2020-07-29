@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBase.Sql.ERP.Entities.HR
 {
-    [Table("ContractType")]
+    [Table("HR_ContractType")]
     public class ContractType
     {
         [Key]
@@ -34,6 +34,10 @@ namespace DataBase.Sql.ERP.Entities.HR
         [Column(TypeName = "bit")]
         [Required]
         public bool AllowLeaveDate { get; set; }
+
+        [Column(TypeName = "int")]
+        [Required]
+        public int Precedence { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]

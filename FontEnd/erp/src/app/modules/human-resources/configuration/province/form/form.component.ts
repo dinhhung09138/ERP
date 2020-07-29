@@ -18,10 +18,12 @@ export class ProvinceFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   provinceForm: FormGroup;
+  item: ProvinceViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -68,15 +70,25 @@ export class ProvinceFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Create);
     }
     this.elm.nativeElement.querySelector('#name').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Create:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -92,12 +104,10 @@ export class ProvinceFormComponent implements OnInit {
     const model = this.provinceForm.value as ProvinceViewModel;
     model.action = this.formAction;
 
-    this.provinceService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.provinceService.save(model).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -107,14 +117,19 @@ export class ProvinceFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.provinceService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.provinceForm.get('id').setValue(response.result.id);
-        this.provinceForm.get('name').setValue(response.result.name);
-        this.provinceForm.get('precedence').setValue(response.result.precedence);
-        this.provinceForm.get('isActive').setValue(response.result.isActive);
+      if (response && response.responseStatus === ResponseStatus.success) {
+       this.item = response.result;
+       this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
+  }
+
+  private setDataToForm(data: ProvinceViewModel) {
+    this.provinceForm.get('id').setValue(data.id);
+    this.provinceForm.get('name').setValue(data.name);
+    this.provinceForm.get('precedence').setValue(data.precedence);
+    this.provinceForm.get('isActive').setValue(data.isActive);
   }
 
 }

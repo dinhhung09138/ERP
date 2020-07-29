@@ -30,7 +30,6 @@ const route: Routes = [
     RouterModule.forChild(route),
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
