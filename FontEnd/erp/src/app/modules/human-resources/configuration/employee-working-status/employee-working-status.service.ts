@@ -25,7 +25,6 @@ export class EmployeeWorkingStatusService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -37,7 +36,6 @@ export class EmployeeWorkingStatusService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -49,7 +47,6 @@ export class EmployeeWorkingStatusService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -61,7 +58,6 @@ export class EmployeeWorkingStatusService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );

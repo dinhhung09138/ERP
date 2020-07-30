@@ -3,7 +3,7 @@
     <div class="card box" [class.opened]="isShow">
       <div class="card-header">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Working Status</div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{ formTitle }}</div>
         </div>
       </div>
       <div class="card-body">
@@ -14,7 +14,7 @@
             <form [formGroup]="workingStatusForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Code</label>
+                  <label class="label">Mã</label>
                   <mat-form-field class="form-control">
                     <input matInput id="code" formControlName="code" maxlength="10" tabindex="1" />
                   </mat-form-field>
@@ -25,7 +25,7 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Name</label>
+                  <label class="label">Tên</label>
                   <mat-form-field class="form-control">
                     <input matInput id="name" formControlName="name" maxlength="100" tabindex="2" />
                   </mat-form-field>
@@ -36,14 +36,14 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Description</label>
+                  <label class="label">Mô tả</label>
                   <textarea rows="2" formControlName="description" maxlength="255" class="form-control"
                     tabindex="3"></textarea>
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Precedence</label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                  <label class="label">Thứ tự</label>
                   <mat-form-field class="form-control">
                     <input matInput formControlName="precedence" maxlength="3" tabindex="4" />
                   </mat-form-field>
@@ -54,19 +54,19 @@
                     Số thứ tự không hợp lệ
                   </mat-error>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Active</label>
-                  <mat-checkbox class="ml-10" tabindex="5" formControlName="isActive">
-                  </mat-checkbox>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                  <label class="label">Hoạt động</label>
+                  <div class="input-group">
+                    <mat-checkbox class="ml-10" tabindex="5" formControlName="isActive">
+                    </mat-checkbox>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" value="Save" tabindex="6">
-                  <button type="button" class="btn btn-warning" tabindex="7" (click)="onResetClick()"> Reset </button>
-                  <button type="button" class="btn btn-secondary" tabindex="8" (click)="onCloseClick()"> Close </button>
+                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="6">
+                  <button type="button" class="btn btn-warning" tabindex="7" (click)="onResetClick()"> Đặt lại </button>
+                  <button type="button" class="btn btn-secondary" tabindex="8" (click)="onCloseClick()"> Đóng </button>
                 </div>
               </div>
             </form>
