@@ -20,10 +20,12 @@ export class RelationshipTypeFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   relationshipTypeForm: FormGroup;
+  item: RelationshipTypeViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -80,15 +82,25 @@ export class RelationshipTypeFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Create);
     }
     this.elm.nativeElement.querySelector('#name').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Create:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -104,12 +116,10 @@ export class RelationshipTypeFormComponent implements OnInit {
     const model = this.relationshipTypeForm.getRawValue() as RelationshipTypeViewModel;
     model.action = this.formAction;
 
-    this.relationshipTypeService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.relationshipTypeService.save(model).subscribe((response: ResponseModel) => {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -118,15 +128,20 @@ export class RelationshipTypeFormComponent implements OnInit {
 
   private getItem(id: number) {
     this.isLoading = true;
-    this.relationshipTypeService.item(id).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        this.relationshipTypeForm.get('id').setValue(res.result.id);
-        this.relationshipTypeForm.get('name').setValue(res.result.name);
-        this.relationshipTypeForm.get('description').setValue(res.result.description);
-        this.relationshipTypeForm.get('precedence').setValue(res.result.precedence);
-        this.relationshipTypeForm.get('isActive').setValue(res.result.isActive);
+    this.relationshipTypeService.item(id).subscribe((response: ResponseModel) => {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
+  }
+
+  private setDataToForm(data: RelationshipTypeViewModel) {
+    this.relationshipTypeForm.get('id').setValue(data.id);
+    this.relationshipTypeForm.get('name').setValue(data.name);
+    this.relationshipTypeForm.get('description').setValue(data.description);
+    this.relationshipTypeForm.get('precedence').setValue(data.precedence);
+    this.relationshipTypeForm.get('isActive').setValue(data.isActive);
   }
 }

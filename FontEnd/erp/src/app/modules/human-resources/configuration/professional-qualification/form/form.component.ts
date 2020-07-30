@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ProfessionalQualificationService } from '../professional-qualification.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -14,14 +14,17 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 })
 export class ProfessionalQualificationFormComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   qualificationForm: FormGroup;
+  item: ProfessionalQualificationViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -40,6 +43,10 @@ export class ProfessionalQualificationFormComponent implements OnInit {
 
   initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.qualificationForm.get('id').setValue(0);
@@ -68,15 +75,25 @@ export class ProfessionalQualificationFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Create);
     }
     this.elm.nativeElement.querySelector('#name').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Create:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -92,12 +109,10 @@ export class ProfessionalQualificationFormComponent implements OnInit {
     const model = this.qualificationForm.value as ProfessionalQualificationViewModel;
     model.action = this.formAction;
 
-    this.qualificationService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.qualificationService.save(model).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -107,14 +122,19 @@ export class ProfessionalQualificationFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.qualificationService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.qualificationForm.get('id').setValue(response.result.id);
-        this.qualificationForm.get('name').setValue(response.result.name);
-        this.qualificationForm.get('precedence').setValue(response.result.precedence);
-        this.qualificationForm.get('isActive').setValue(response.result.isActive);
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
+  }
+
+  private setDataToForm(data: ProfessionalQualificationViewModel) {
+    this.qualificationForm.get('id').setValue(data.id);
+    this.qualificationForm.get('name').setValue(data.name);
+    this.qualificationForm.get('precedence').setValue(data.precedence);
+    this.qualificationForm.get('isActive').setValue(data.isActive);
   }
 
 }

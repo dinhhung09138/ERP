@@ -6,7 +6,6 @@ import { RelationshipTypeService } from './relationship-type.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +17,7 @@ const route: Routes = [
     component: RelationshipTypeComponent,
     data: { title: 'Relationship' }
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ const route: Routes = [
     RouterModule.forChild(route),
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
