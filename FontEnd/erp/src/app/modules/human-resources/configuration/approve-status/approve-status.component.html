@@ -73,7 +73,8 @@
               <tr mat-row *matRowDef="let row; columns: listColumnsName;"></tr>
             </table>
             <app-no-data-available [Show]="paging.length === 0"></app-no-data-available>
-            <app-table-paginator [IsLoading]="isLoading" [Paging]="paging" (pageEventChange)="onPageChange($event)"></app-table-paginator>
+            <app-table-paginator [IsLoading]="isLoading" [Paging]="paging" (pageEventChange)="onPageChange($event)">
+            </app-table-paginator>
           </div>
         </div>
       </div>
