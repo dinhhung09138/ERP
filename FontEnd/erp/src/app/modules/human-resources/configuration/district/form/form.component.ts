@@ -82,14 +82,14 @@ export class DistrictFormComponent implements OnInit {
       this.districtForm.get('precedence').enable();
       this.districtForm.get('isActive').enable();
     }
-    this.elm.nativeElement.querySelector('#name').focus();
+    this.elm.nativeElement.querySelector('#provinceId').focus();
   }
 
   onCreateClick() {
     if (this.formAction !== FormActionStatus.Create) {
       this.initFormControl(FormActionStatus.Create);
     }
-    this.elm.nativeElement.querySelector('#name');
+    this.elm.nativeElement.querySelector('#provinceId');
     this.formTitle = 'Thêm mới';
   }
 

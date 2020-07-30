@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -14,14 +14,18 @@ import { EmployeeWorkingStatusService } from '../employee-working-status.service
 })
 export class EmployeeWorkingStatusFormComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
+
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   workingStatusForm: FormGroup;
+  item: EmployeeWorkingStatusViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -43,6 +47,10 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
 
   initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.workingStatusForm.get('id').setValue(0);
@@ -82,15 +90,25 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Create);
     }
     this.elm.nativeElement.querySelector('#code').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Create:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#code').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -107,7 +125,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
     model.action = this.formAction;
 
     this.workingStatusService.save(model).subscribe((response: ResponseModel) => {
-      if (response.responseStatus === ResponseStatus.success) {
+      if (response && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
       }
@@ -119,16 +137,21 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.workingStatusService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.workingStatusForm.get('id').setValue(response.result.id);
-        this.workingStatusForm.get('code').setValue(response.result.code);
-        this.workingStatusForm.get('name').setValue(response.result.name);
-        this.workingStatusForm.get('description').setValue(response.result.description);
-        this.workingStatusForm.get('precedence').setValue(response.result.precedence);
-        this.workingStatusForm.get('isActive').setValue(response.result.isActive);
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
+  }
+
+  private setDataToForm(data: EmployeeWorkingStatusViewModel) {
+    this.workingStatusForm.get('id').setValue(data.id);
+    this.workingStatusForm.get('code').setValue(data.code);
+    this.workingStatusForm.get('name').setValue(data.name);
+    this.workingStatusForm.get('description').setValue(data.description);
+    this.workingStatusForm.get('precedence').setValue(data.precedence);
+    this.workingStatusForm.get('isActive').setValue(data.isActive);
   }
 
 }

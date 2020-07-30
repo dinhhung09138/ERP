@@ -15,19 +15,19 @@ namespace API.HR
             //services.AddScoped<IHRUnitOfWork, HRUnitOfWork>();
             //services.AddScoped<IDisciplineService, DisciplineService>();
             //services.AddScoped<ICommendationService, CommendationService>();
-            //services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<IEducationService, EducationService>();
             //services.AddScoped<IApproveStatusService, ApproveStatusService>();
             services.AddScoped<IContractTypeService, ContractTypeService>();
             services.AddScoped<IDistrictService, DistrictService>();
             //services.AddScoped<IIdentificationTypeService, IdentificationTypeService>();
-            //services.AddScoped<IWardService, WardService>();
+            services.AddScoped<IWardService, WardService>();
             services.AddScoped<IProvinceService, ProvinceService>();
             //services.AddScoped<IRankingService, RankingService>();
             //services.AddScoped<IProfessionalQualificationService, ProfessionalQualificationService>();
             //services.AddScoped<IModelOfStudyService, ModelOfStudyService>();
             //services.AddScoped<IEmployeeService, EmployeeService>();
             //services.AddScoped<IEmployeeInfoService, EmployeeInfoService>();
-            //services.AddScoped<IEmployeeWorkingStatusService, EmployeeWorkingStatusService>();
+            services.AddScoped<IEmployeeWorkingStatusService, EmployeeWorkingStatusService>();
             return services;
         }
     }

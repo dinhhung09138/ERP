@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.HR;
-using DataBase.Sql.HR.Entities;
+using Database.Sql.ERP;
+using DataBase.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -15,8 +15,8 @@ namespace Service.HR
 {
     public class EducationService : IEducationService
     {
-        private readonly IHRUnitOfWork _context;
-        public EducationService(IHRUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public EducationService(IERPUnitOfWork context)
         {
             _context = context;
         }

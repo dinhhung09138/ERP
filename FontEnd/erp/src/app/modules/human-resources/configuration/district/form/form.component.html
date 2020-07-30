@@ -14,18 +14,9 @@
             <form [formGroup]="districtForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Tên quận/huyện</label>
-                  <mat-form-field class="form-control">
-                    <input matInput id="name" formControlName="name" maxlength="100" tabindex="1" autocomplete="off"/>
-                  </mat-form-field>
-                  <mat-error *ngIf="isSubmit && districtForm.controls['name'].errors?.required">Vui lòng điền thông tin</mat-error>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <label class="label">Tỉnh/Thành phố</label>
-                  <ng-select [items]="provinceList" [bindLabel]="'name'" [bindValue]="'id'" [appendTo]="'body'"
-                    formControlName="provinceId" tabindex="2" [selectOnTab]="true"
+                  <ng-select id="provinceId" [items]="provinceList" [bindLabel]="'name'" [bindValue]="'id'" [appendTo]="'body'"
+                    formControlName="provinceId" tabindex="1" [selectOnTab]="true"
                     [closeOnSelect]="true" [searchFn]="onProvinceSearch"
                     [ngClass]="{'is-invalid' : isSubmit && districtForm.controls['provinceId'].errors}">
                   </ng-select>
@@ -34,6 +25,15 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                  <label class="label">Tên quận/huyện</label>
+                  <mat-form-field class="form-control">
+                    <input matInput formControlName="name" maxlength="100" tabindex="2" autocomplete="off"/>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && districtForm.controls['name'].errors?.required">Vui lòng điền thông tin</mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                   <label class="label">Thứ tự</label>
                   <mat-form-field class="form-control">
                     <input matInput formControlName="precedence" maxlength="3" tabindex="3" />
@@ -41,12 +41,12 @@
                   <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.required">Vui lòng điền thông tin</mat-error>
                   <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.number">Precedence number is required</mat-error>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                   <label class="label">Hoạt động</label>
-                  <mat-checkbox class="ml-10" tabindex="4" formControlName="isActive">
-                  </mat-checkbox>
+                  <div class="input-group">
+                    <mat-checkbox class="ml-10" tabindex="4" formControlName="isActive">
+                    </mat-checkbox>
+                  </div>
                 </div>
               </div>
               <div class="row">

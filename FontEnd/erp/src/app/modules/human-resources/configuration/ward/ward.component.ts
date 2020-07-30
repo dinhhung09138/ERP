@@ -11,6 +11,10 @@ import { WardFormComponent } from './form/form.component';
 import { ActivatedRoute } from '@angular/router';
 import { ProvinceViewModel } from '../province/province.model';
 import { DistrictViewModel } from '../district/district.model';
+import { FormActionStatus } from '../../../../core/enums/form-action-status.enum';
+import { WardViewModel } from './ward.model';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-hr-ward',
@@ -35,6 +39,7 @@ export class WardComponent implements OnInit {
   districtList: DistrictViewModel[] = [];
 
   constructor(
+    public dialog: MatDialog,
     private wardService: WardService,
     private activatedRoute: ActivatedRoute) {
   }
@@ -54,28 +59,67 @@ export class WardComponent implements OnInit {
     }
   }
 
-  create() {
-    this.form.create();
+  onCreateClick() {
+    if (this.isLoading === true) {
+      return;
+    }
+    this.form.onCreateClick();
   }
 
-  update(id: number) {
+  onImportClick() {
+    if (this.isLoading === true) {
+      return;
+    }
+    this.form.onCloseClick();
+  }
+
+  onExportClick() {
+    if (this.isLoading === true) {
+      return;
+    }
+    this.form.onCloseClick();
+  }
+
+  onUpdateClick(id: number) {
+    if (this.isLoading === true) {
+      return;
+    }
     if (id !== null) {
-      this.form.update(id);
+      this.form.onUpdateClick(id);
     }
   }
 
-  delete(id: number) {
+  onDeleteClick(id: number) {
+    if (this.isLoading === true) {
+      return;
+    }
+    this.form.onCloseClick();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { title: '', animation: '' }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteItem(id);
+      }
+    });
   }
 
-  filterTable() {
+  onFilterChange() {
+    if (this.isLoading === true) {
+      return;
+    }
     if (this.searchText.length > 0) {
       this.paging.pageIndex = 0;
     }
     this.getList();
   }
 
-  pageChange(page: PageEvent) {
+  onPageChange(page: PageEvent) {
+    if (this.isLoading === true) {
+      return;
+    }
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex;
     if (page.pageSize !== this.currentPageSize) {
@@ -94,10 +138,21 @@ export class WardComponent implements OnInit {
     filter.paging.pageIndex = this.paging.pageIndex;
     filter.paging.pageSize = this.paging.pageSize;
     this.wardService.getList(filter).subscribe((response: ResponseModel) => {
-      if (response.responseStatus === ResponseStatus.success) {
+      if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
         this.isLoading = false;
+      }
+    });
+  }
+
+  private deleteItem(itemId: number) {
+    this.isLoading = true;
+    const model = { action: FormActionStatus.Delete, id: itemId } as WardViewModel;
+    this.wardService.save(model).subscribe((response: ResponseModel) => {
+      this.isLoading = false;
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        this.getList();
       }
     });
   }
