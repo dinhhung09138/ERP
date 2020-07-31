@@ -26,7 +26,6 @@ export class ModelOfStudyService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -38,7 +37,6 @@ export class ModelOfStudyService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -50,7 +48,6 @@ export class ModelOfStudyService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -62,7 +59,6 @@ export class ModelOfStudyService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );

@@ -23,7 +23,7 @@ namespace API.HR
             services.AddScoped<IProvinceService, ProvinceService>();
             //services.AddScoped<IRankingService, RankingService>();
             services.AddScoped<IProfessionalQualificationService, ProfessionalQualificationService>();
-            //services.AddScoped<IModelOfStudyService, ModelOfStudyService>();
+            services.AddScoped<IModelOfStudyService, ModelOfStudyService>();
             //services.AddScoped<IEmployeeService, EmployeeService>();
             //services.AddScoped<IEmployeeInfoService, EmployeeInfoService>();
             services.AddScoped<IEmployeeWorkingStatusService, EmployeeWorkingStatusService>();
