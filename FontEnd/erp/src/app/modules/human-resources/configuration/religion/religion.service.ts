@@ -12,7 +12,7 @@ export class ReligionService {
 
   url = {
     list: APIUrlConstants.hrApi + 'religion/get-list',
-    dropdown: APIUrlConstants.hrApi + 'ward/dropdown',
+    dropdown: APIUrlConstants.hrApi + 'religion/dropdown',
     item: APIUrlConstants.hrApi + 'religion/item',
     save: APIUrlConstants.hrApi + 'religion/save',
   };

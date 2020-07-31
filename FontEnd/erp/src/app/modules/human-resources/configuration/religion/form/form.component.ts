@@ -24,7 +24,7 @@ export class ReligionFormComponent implements OnInit {
   isShow = false;
   isSubmit = false;
   isLoading = false;
-  rankingForm: FormGroup;
+  religionForm: FormGroup;
   item: ReligionViewModel;
 
   constructor(
@@ -33,7 +33,7 @@ export class ReligionFormComponent implements OnInit {
     private religionService: ReligionService) { }
 
   ngOnInit(): void {
-    this.rankingForm = this.fb.group({
+    this.religionForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
@@ -50,23 +50,23 @@ export class ReligionFormComponent implements OnInit {
     }
 
     this.formAction = formStatus;
-    this.rankingForm.get('id').setValue(0);
-    this.rankingForm.get('name').reset();
-    this.rankingForm.get('precedence').reset();
-    this.rankingForm.get('isActive').reset();
+    this.religionForm.get('id').setValue(0);
+    this.religionForm.get('name').reset();
+    this.religionForm.get('precedence').reset();
+    this.religionForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
       this.isShow = false;
-      this.rankingForm.get('name').disable();
-      this.rankingForm.get('precedence').disable();
-      this.rankingForm.get('isActive').disable();
+      this.religionForm.get('name').disable();
+      this.religionForm.get('precedence').disable();
+      this.religionForm.get('isActive').disable();
     } else {
       this.isShow = true;
-      this.rankingForm.get('isActive').setValue(true);
-      this.rankingForm.get('precedence').setValue(1);
-      this.rankingForm.get('name').enable();
-      this.rankingForm.get('precedence').enable();
-      this.rankingForm.get('isActive').enable();
+      this.religionForm.get('isActive').setValue(true);
+      this.religionForm.get('precedence').setValue(1);
+      this.religionForm.get('name').enable();
+      this.religionForm.get('precedence').enable();
+      this.religionForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
   }
@@ -103,11 +103,11 @@ export class ReligionFormComponent implements OnInit {
 
   submitForm() {
     this.isSubmit = true;
-    if (this.rankingForm.invalid) {
+    if (this.religionForm.invalid) {
       return;
     }
     this.isLoading = true;
-    const model = this.rankingForm.value as ReligionViewModel;
+    const model = this.religionForm.value as ReligionViewModel;
     model.action = this.formAction;
 
     this.religionService.save(model).subscribe((response: ResponseModel) => {
@@ -132,10 +132,10 @@ export class ReligionFormComponent implements OnInit {
   }
 
   private setDataToForm(data: ReligionViewModel) {
-    this.rankingForm.get('id').setValue(data.id);
-    this.rankingForm.get('name').setValue(data.name);
-    this.rankingForm.get('precedence').setValue(data.precedence);
-    this.rankingForm.get('isActive').setValue(data.isActive);
+    this.religionForm.get('id').setValue(data.id);
+    this.religionForm.get('name').setValue(data.name);
+    this.religionForm.get('precedence').setValue(data.precedence);
+    this.religionForm.get('isActive').setValue(data.isActive);
   }
 
 }
