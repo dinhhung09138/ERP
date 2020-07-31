@@ -1,9 +1,9 @@
 
-IF OBJECT_ID('dbo.IdentificationType', 'u') IS NOT NULL 
-  DROP TABLE [dbo].[IdentificationType];
+IF OBJECT_ID('dbo.HR_IdentificationType', 'u') IS NOT NULL 
+  DROP TABLE [dbo].[HR_IdentificationType];
 
 GO
-CREATE TABLE [dbo].[IdentificationType](
+CREATE TABLE [dbo].[HR_IdentificationType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
 	[Precedence] [int] NOT NULL,
@@ -13,15 +13,15 @@ CREATE TABLE [dbo].[IdentificationType](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
- CONSTRAINT [PK_IdentificationType] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_HR_IdentificationType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[IdentificationType] ADD  CONSTRAINT [DF_IdentificationType_IsActive]  DEFAULT ((1)) FOR [IsActive]
+ALTER TABLE [dbo].[HR_IdentificationType] ADD  CONSTRAINT [DF_HR_IdentificationType_IsActive]  DEFAULT ((1)) FOR [IsActive]
 GO
-ALTER TABLE [dbo].[IdentificationType] ADD  CONSTRAINT [DF_IdentificationType_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
+ALTER TABLE [dbo].[HR_IdentificationType] ADD  CONSTRAINT [DF_HR_IdentificationType_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
 GO
-ALTER TABLE [dbo].[IdentificationType] ADD  CONSTRAINT [DF_IdentificationType_Deleted]  DEFAULT ((0)) FOR [Deleted]
+ALTER TABLE [dbo].[HR_IdentificationType] ADD  CONSTRAINT [DF_HR_IdentificationType_Deleted]  DEFAULT ((0)) FOR [Deleted]
 GO
