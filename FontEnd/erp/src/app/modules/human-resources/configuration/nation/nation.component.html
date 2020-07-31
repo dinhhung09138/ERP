@@ -1,0 +1,76 @@
+<app-hr-nation-form (reloadTableEvent)="reloadTableEventListener($event)"></app-hr-nation-form>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> Danh sách dân tộc </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-9 col-md-8 col-sm-6 form-group">
+            <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i>
+              Thêm mới
+            </button>
+            <button class="btn btn-outline-info"><i class="fa fa-paperclip"></i>
+              Nhập
+            </button>
+            <button class="btn btn-outline-info"><i class="fa fa-file-excel-o"></i>
+              Xuất file
+            </button>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
+            <div class="input-group" *ngIf="paging.length > 0">
+              <input type="text" placeholder="Tìm kiếm" class="form-control" [(ngModel)]="searchText"
+                (keyup.enter)="onFilterChange()">
+              <div class="input-group-append">
+                <button class="btn btn-outline-info" (click)="onFilterChange()">Tìm kiếm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <app-table-loading [Show]="isLoading"></app-table-loading>
+            <table mat-table matSort [dataSource]="dataSource" class="table">
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên phường/xã</th>
+                <td mat-cell *matCellDef="let element"> {{ element.name }}</td>
+              </ng-container>
+              <ng-container matColumnDef="precedence">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-70">Thứ tự</th>
+                <td mat-cell *matCellDef="let element" class="text-right">{{ element.precedence }}</td>
+              </ng-container>
+              <ng-container matColumnDef="isActive">
+                <th mat-header-cell *matHeaderCellDef class="td-w-100">Hoạt động</th>
+                <td mat-cell *matCellDef="let element" class="center">
+                  <label class="label label-outline-success" *ngIf="element.isActive">Hoạt động</label>
+                  <label class="label label-outline-danger" *ngIf="!element.isActive">Khóa</label>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="td-w-70">Thao tác</th>
+                <td mat-cell *matCellDef="let element" class="center">
+                  <div class=" btn-group">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-bars"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
+                      <a href="javascript:{}" class="dropdown-item text-success" (click)="onUpdateClick(element.id)">Cập nhật</a>
+                      <a href="javascript:{}" class="dropdown-item text-danger" (click)="onDeleteClick(element.id)">Xóa</a>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="listColumnsName"></tr>
+              <tr mat-row *matRowDef="let row; columns: listColumnsName;"></tr>
+            </table>
+            <app-no-data-available [Show]="paging.length === 0"></app-no-data-available>
+            <app-table-paginator [IsLoading]="isLoading" [Paging]="paging" (pageEventChange)="onPageChange($event)"></app-table-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
 using Database.Sql.ERP;
-using Database.Sql.ERP.Entities.Common;
+using Database.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Service.HR
 {
-    public class WardService : IWardService
+    public class NationService : INationService
     {
         private readonly IERPUnitOfWork _context;
-        public WardService(IERPUnitOfWork context)
+        public NationService(IERPUnitOfWork context)
         {
             _context = context;
         }
@@ -24,32 +24,24 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.WardRepository.Query()
-                            join d in _context.DistrictRepository.Query() on m.DistrictId equals d.Id
-                            join p in _context.ProvinceRepository.Query() on m.ProvinceId equals p.Id
+                var query = from m in _context.NationRepository.Query()
                             where !m.Deleted
-                            orderby p.Precedence ascending, d.Precedence ascending, m.Precedence ascending
-                            select new WardModel
+                            orderby m.Precedence ascending
+                            select new NationModel
                             {
                                 Id = m.Id,
                                 Name = m.Name,
-                                DistrictId = m.DistrictId,
-                                DistrictName = d.Name,
-                                ProvinceId = m.ProvinceId,
-                                ProvinceName = p.Name,
                                 Precedence = m.Precedence,
-                                IsActive = m.IsActive,
+                                IsActive = m.IsActive
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
-                    query = query.Where(m => m.Name.ToLower().Contains(filter.Text)
-                                            || m.DistrictName.ToLower().Contains(filter.Text)
-                                            || m.ProvinceName.ToLower().Contains(filter.Text));
+                    query = query.Where(m => m.Name.ToLower().Contains(filter.Text));
                 }
-                
-                BaseListModel<WardModel> listItems = new BaseListModel<WardModel>();
-                listItems.TotalItems = await _context.WardRepository.Query().Where(m => !m.Deleted).CountAsync();
+
+                BaseListModel<NationModel> listItems = new BaseListModel<NationModel>();
+                listItems.TotalItems = await _context.NationRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
@@ -67,17 +59,13 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.WardRepository.Query()
-                            join d in _context.DistrictRepository.Query() on m.DistrictId equals d.Id
-                            join p in _context.ProvinceRepository.Query() on m.ProvinceId equals p.Id
+                var query = from m in _context.NationRepository.Query()
                             where m.IsActive && !m.Deleted
-                            orderby p.Precedence ascending, d.Precedence ascending, m.Precedence ascending
-                            select new WardModel
+                            orderby m.Precedence ascending
+                            select new NationModel
                             {
                                 Id = m.Id,
                                 Name = m.Name,
-                                DistrictId = m.DistrictId,
-                                ProvinceId = m.ProvinceId,
                             };
 
                 response.Result = await query.ToListAsync();
@@ -95,13 +83,11 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.WardRepository.Query()
+                var query = from m in _context.NationRepository.Query()
                             where m.Id == id
-                            select new WardModel
+                            select new NationModel
                             {
                                 Id = m.Id,
-                                DistrictId = m.DistrictId,
-                                ProvinceId = m.ProvinceId,
                                 Name = m.Name,
                                 Precedence = m.Precedence,
                                 IsActive = m.IsActive
@@ -117,7 +103,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(WardModel model)
+        public async Task<ResponseModel> Save(NationModel model)
         {
             ResponseModel response = new ResponseModel();
             switch (model.Action)
@@ -135,24 +121,22 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Insert(WardModel model)
+        private async Task<ResponseModel> Insert(NationModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Ward md = new Ward();
+                Nation md = new Nation();
 
                 md.Name = model.Name;
-                md.DistrictId = model.DistrictId;
-                md.ProvinceId = model.ProvinceId;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
                 md.CreateBy = 1; // TODO
                 md.CreateDate = DateTime.Now;
                 md.Deleted = false;
 
-                await _context.WardRepository.AddAsync(md).ConfigureAwait(true);
+                await _context.NationRepository.AddAsync(md).ConfigureAwait(true);
 
                 await _context.SaveChangesAsync();
             }
@@ -164,13 +148,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(WardModel model)
+        private async Task<ResponseModel> Update(NationModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Ward md = await _context.WardRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Nation md = await _context.NationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
@@ -178,14 +162,12 @@ namespace Service.HR
                 }
 
                 md.Name = model.Name;
-                md.DistrictId = model.DistrictId;
-                md.ProvinceId = model.ProvinceId;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
                 md.UpdateBy = 1; // TODO
                 md.UpdateDate = DateTime.Now;
 
-                _context.WardRepository.Update(md);
+                _context.NationRepository.Update(md);
 
                 await _context.SaveChangesAsync();
             }
@@ -197,13 +179,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(WardModel model)
+        private async Task<ResponseModel> Delete(NationModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Ward md = await _context.WardRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Nation md = await _context.NationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
@@ -214,7 +196,7 @@ namespace Service.HR
                 md.UpdateBy = 1; // TODO
                 md.UpdateDate = DateTime.Now;
 
-                _context.WardRepository.Update(md);
+                _context.NationRepository.Update(md);
 
                 await _context.SaveChangesAsync();
             }

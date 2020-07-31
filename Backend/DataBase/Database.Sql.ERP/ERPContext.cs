@@ -91,6 +91,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<ModelOfStudy>();
             modelBuilder.Entity<ProfessionalQualification>();
             modelBuilder.Entity<Province>();
+            modelBuilder.Entity<Nation>();
             modelBuilder.Entity<Ranking>();
             modelBuilder.Entity<RelationshipType>();
             modelBuilder.Entity<Religion>();

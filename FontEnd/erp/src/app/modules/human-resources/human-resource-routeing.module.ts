@@ -92,6 +92,12 @@ const routes: Routes = [
         path: 'configuration/religion',
         loadChildren: () => import('./configuration/religion/religion.module').then(m => m.ReligionModule),
         pathMatch: 'full'
+      },
+      {
+        path: 'configuration/nation',
+        loadChildren: () => import('./configuration/nation/nation.module').then(m => m.NationModule),
+        pathMatch: 'full'
+      },
       }
     ]
   }
