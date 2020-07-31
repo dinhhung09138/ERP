@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataBase.Sql.ERP.Entities.Common
+namespace Database.Sql.ERP.Entities.Common
 {
     [Table("ProfessionalQualification")]
     public class ProfessionalQualification

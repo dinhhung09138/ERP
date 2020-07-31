@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.HR;
-using DataBase.Sql.HR.Entities;
+using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -13,8 +13,8 @@ namespace Service.HR
 {
     public class CommendationService : ICommendationService
     {
-        private readonly IHRUnitOfWork _context;
-        public CommendationService(IHRUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public CommendationService(IERPUnitOfWork context)
         {
             _context = context;
         }

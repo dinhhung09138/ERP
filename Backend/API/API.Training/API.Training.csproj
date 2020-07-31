@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DataBase\Database.Sql.Training\Database.Sql.Training.csproj" />
     <ProjectReference Include="..\..\Services\Service.Training\Service.Training.csproj" />
   </ItemGroup>
 

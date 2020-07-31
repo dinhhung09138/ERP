@@ -1,5 +1,5 @@
-﻿using DataBase.Sql.ERP.Entities.Common;
-using DataBase.Sql.ERP.Entities.HR;
+﻿using Database.Sql.ERP.Entities.HR;
+using Database.Sql.ERP.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database.Sql.ERP
@@ -49,6 +49,10 @@ namespace Database.Sql.ERP
         public virtual DbSet<ProfessionalQualification> ProfessionalQualification { get; set; }
 
         public virtual DbSet<Province> Province { get; set; }
+
+        public virtual DbSet<Nation> Nation { get; set; }
+
+        public virtual DbSet<Nationality> Nationality { get; set; }
 
         public virtual DbSet<Ranking> Ranking { get; set; }
 

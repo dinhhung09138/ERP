@@ -1,7 +1,5 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.HR;
-using DataBase.Sql.HR.Entities;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;
@@ -10,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.HR;
 
 namespace Service.HR
 {
     public class EmployeeInfoService : IEmployeeInfoService
     {
-        private readonly IHRUnitOfWork _context;
-        public EmployeeInfoService(IHRUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public EmployeeInfoService(IERPUnitOfWork context)
         {
             _context = context;
         }

@@ -1,6 +1,6 @@
 ﻿using Core.DataAccess;
-using DataBase.Sql.ERP.Entities.Common;
-using DataBase.Sql.ERP.Entities.HR;
+using Database.Sql.ERP.Entities.Common;
+using Database.Sql.ERP.Entities.HR;
 
 namespace Database.Sql.ERP
 {

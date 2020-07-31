@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataBase.Sql.ERP.Entities.HR
+namespace Database.Sql.ERP.Entities.HR
 {
     [Table("HR_ApproveStatus")]
     public class ApproveStatus
