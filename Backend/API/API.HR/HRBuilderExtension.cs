@@ -27,6 +27,7 @@ namespace API.HR
             //services.AddScoped<IEmployeeInfoService, EmployeeInfoService>();
             services.AddScoped<IEmployeeWorkingStatusService, EmployeeWorkingStatusService>();
             services.AddScoped<IRelationshipTypeService, RelationShipTypeService>();
+            services.AddScoped<IReligionService, ReligionService>();
             return services;
         }
     }

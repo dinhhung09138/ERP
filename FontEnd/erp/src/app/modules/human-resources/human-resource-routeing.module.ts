@@ -87,6 +87,11 @@ const routes: Routes = [
         path: 'configuration/approve-status',
         loadChildren: () => import('./configuration/approve-status/approve-status.module').then(m => m.ApproveStatusModule),
         pathMatch: 'full',
+      },
+      {
+        path: 'configuration/religion',
+        loadChildren: () => import('./configuration/religion/religion.module').then(m => m.ReligionModule),
+        pathMatch: 'full'
       }
     ]
   }

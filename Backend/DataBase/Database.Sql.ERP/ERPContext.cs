@@ -58,6 +58,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<RelationshipType> RelationshipType { get; set; }
 
+        public virtual DbSet<Religion> Religion { get; set; }
+
         public virtual DbSet<Ward> Ward { get; set; }
 
         public ERPContext(DbContextOptions options) : base(options)
@@ -91,6 +93,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<Province>();
             modelBuilder.Entity<Ranking>();
             modelBuilder.Entity<RelationshipType>();
+            modelBuilder.Entity<Religion>();
             modelBuilder.Entity<Ward>();
 
         }

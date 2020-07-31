@@ -254,6 +254,16 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<Religion> _religionRepository;
+
+        public ITableGenericRepository<Religion> ReligionRepository
+        {
+            get
+            {
+                return _religionRepository = _religionRepository ?? new TableGenericRepository<Religion>(_context);
+            }
+        }
+
         private ITableGenericRepository<Ward> _wardRepository;
 
         public ITableGenericRepository<Ward> WardRepository
