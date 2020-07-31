@@ -29,6 +29,7 @@ namespace Database.Sql.ERP
         ITableGenericRepository<ProfessionalQualification> ProfessionalQualificationRepository { get; }
         ITableGenericRepository<Province> ProvinceRepository { get; }
         ITableGenericRepository<Nation> NationRepository { get; }
+        ITableGenericRepository<Nationality> NationalityRepository { get; }
         ITableGenericRepository<Ranking> RankingRepository { get; }
         ITableGenericRepository<RelationshipType> RelationshipTypeRepository { get; }
         ITableGenericRepository<Religion> ReligionRepository { get; }

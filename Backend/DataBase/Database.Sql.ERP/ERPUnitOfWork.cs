@@ -244,6 +244,16 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<Nationality> _nationalityRepository;
+
+        public ITableGenericRepository<Nationality> NationalityRepository
+        {
+            get
+            {
+                return _nationalityRepository = _nationalityRepository ?? new TableGenericRepository<Nationality>(_context);
+            }
+        }
+
         private ITableGenericRepository<Ranking> _rankingRepository;
 
         public ITableGenericRepository<Ranking> RankingRepository

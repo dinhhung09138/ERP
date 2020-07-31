@@ -98,6 +98,10 @@ const routes: Routes = [
         loadChildren: () => import('./configuration/nation/nation.module').then(m => m.NationModule),
         pathMatch: 'full'
       },
+      {
+        path: 'configuration/nationality',
+        loadChildren: () => import('./configuration/nationality/nationality.module').then(m => m.NationalityModule),
+        pathMatch: 'full'
       }
     ]
   }
