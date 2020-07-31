@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { IdentificationTypeService } from '../identification-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -14,14 +14,18 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 })
 export class IdentificationTypeFormComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
+
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   identificationForm: FormGroup;
+  item: IdentificationTypeViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -40,6 +44,10 @@ export class IdentificationTypeFormComponent implements OnInit {
 
   initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.identificationForm.get('id').setValue(0);
@@ -68,15 +76,25 @@ export class IdentificationTypeFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Create);
     }
     this.elm.nativeElement.querySelector('#name').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Create:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -92,12 +110,10 @@ export class IdentificationTypeFormComponent implements OnInit {
     const model = this.identificationForm.value as IdentificationTypeViewModel;
     model.action = this.formAction;
 
-    this.identificationService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.identificationService.save(model).subscribe((response: ResponseModel) => {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -107,14 +123,18 @@ export class IdentificationTypeFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.identificationService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.identificationForm.get('id').setValue(response.result.id);
-        this.identificationForm.get('name').setValue(response.result.name);
-        this.identificationForm.get('precedence').setValue(response.result.precedence);
-        this.identificationForm.get('isActive').setValue(response.result.isActive);
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
   }
 
+  private setDataToForm(data: IdentificationTypeViewModel) {
+    this.identificationForm.get('id').setValue(data.id);
+    this.identificationForm.get('name').setValue(data.name);
+    this.identificationForm.get('precedence').setValue(data.precedence);
+    this.identificationForm.get('isActive').setValue(data.isActive);
+  }
 }
