@@ -64,7 +64,7 @@ const routes: Routes = [
       },
       {
         path: 'configuration/ranking',
-        loadChildren: () => import('./ranking/ranking.module').then(m => m.RankingModule),
+        loadChildren: () => import('./configuration/ranking/ranking.module').then(m => m.RankingModule),
         pathMatch: 'full',
       },
       {

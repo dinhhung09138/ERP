@@ -1,5 +1,4 @@
-﻿using Database.Sql.HR;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Service.HR;
 using Service.HR.Interfaces;
@@ -21,7 +20,7 @@ namespace API.HR
             services.AddScoped<IIdentificationTypeService, IdentificationTypeService>();
             services.AddScoped<IWardService, WardService>();
             services.AddScoped<IProvinceService, ProvinceService>();
-            //services.AddScoped<IRankingService, RankingService>();
+            services.AddScoped<IRankingService, RankingService>();
             services.AddScoped<IProfessionalQualificationService, ProfessionalQualificationService>();
             services.AddScoped<IModelOfStudyService, ModelOfStudyService>();
             //services.AddScoped<IEmployeeService, EmployeeService>();
