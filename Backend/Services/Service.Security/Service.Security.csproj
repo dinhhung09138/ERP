@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.Services\Core.Services.csproj" />
     <ProjectReference Include="..\..\Core\Core.Utility\Core.Utility.csproj" />
-    <ProjectReference Include="..\..\Database\Database.Sql.Security\Database.Sql.Security.csproj" />
+    <ProjectReference Include="..\..\DataBase\Database.Sql.ERP\Database.Sql.ERP.csproj" />
   </ItemGroup>
 
 </Project>

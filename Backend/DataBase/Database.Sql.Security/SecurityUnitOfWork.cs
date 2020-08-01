@@ -19,7 +19,6 @@ namespace Database.Sql.Security
         private IDbContextTransaction _transaction;
 
         private ITableGenericRepository<User> _userRepository;
-
         public ITableGenericRepository<User> UserRepository
         {
             get
@@ -29,7 +28,6 @@ namespace Database.Sql.Security
         }
 
         private ITableGenericRepository<SessionLog> _sesionLogRepository;
-
         public ITableGenericRepository<SessionLog> SessionLogRepository
         {
             get

@@ -25,7 +25,6 @@
     <ProjectReference Include="..\..\Core\Core.CommonModel\Core.CommonModel.csproj" />
     <ProjectReference Include="..\..\Core\Core.Services\Core.Services.csproj" />
     <ProjectReference Include="..\..\Core\Core.Utility\Core.Utility.csproj" />
-    <ProjectReference Include="..\..\Database\Database.Sql.Security\Database.Sql.Security.csproj" />
     <ProjectReference Include="..\..\Services\Service.Security\Service.Security.csproj" />
   </ItemGroup>
 

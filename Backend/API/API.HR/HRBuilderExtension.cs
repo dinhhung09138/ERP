@@ -11,7 +11,7 @@ namespace API.HR
         {
             services.AddScoped<IApproveStatusService, ApproveStatusService>();
             //services.AddScoped<IHRUnitOfWork, HRUnitOfWork>();
-            //services.AddScoped<IDisciplineService, DisciplineService>();
+            services.AddScoped<IDisciplineService, DisciplineService>();
             //services.AddScoped<ICommendationService, CommendationService>();
             services.AddScoped<IEducationService, EducationService>();
             //services.AddScoped<IApproveStatusService, ApproveStatusService>();

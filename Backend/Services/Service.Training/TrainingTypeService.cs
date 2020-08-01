@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.Training;
-using Database.Sql.Training.Entities;
+using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.Training;
 using Microsoft.EntityFrameworkCore;
 using Service.Training.Interfaces;
 using Service.Training.Models;
@@ -13,8 +13,8 @@ namespace Service.Training
 {
     public class TrainingTypeService : ITrainingTypeService
     {
-        private readonly ITrainingUnitOfWork _context;
-        public TrainingTypeService(ITrainingUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public TrainingTypeService(IERPUnitOfWork context)
         {
             _context = context;
         }
