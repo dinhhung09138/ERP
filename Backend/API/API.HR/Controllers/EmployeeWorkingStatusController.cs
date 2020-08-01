@@ -38,10 +38,24 @@ namespace API.HR.Controllers
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(EmployeeWorkingStatusModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert(EmployeeWorkingStatusModel model)
         {
-            var response = await _employeeWorkingStatusService.Save(model);
+            var response = await _employeeWorkingStatusService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update(EmployeeWorkingStatusModel model)
+        {
+            var response = await _employeeWorkingStatusService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete(int id)
+        {
+            var response = await _employeeWorkingStatusService.Item(id);
             return response;
         }
     }

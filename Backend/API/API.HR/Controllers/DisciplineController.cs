@@ -41,10 +41,24 @@ namespace API.HR.Controllers
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(DisciplineModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert(DisciplineModel model)
         {
-            var response = await _disciplineService.Save(model);
+            var response = await _disciplineService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update(DisciplineModel model)
+        {
+            var response = await _disciplineService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete(int id)
+        {
+            var response = await _disciplineService.Item(id);
             return response;
         }
 

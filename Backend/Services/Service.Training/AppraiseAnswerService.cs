@@ -88,25 +88,7 @@ namespace Service.Training
             return response;
         }
 
-        public async Task<ResponseModel> Save(AppraiseAnswerModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-        private async Task<ResponseModel> Insert(AppraiseAnswerModel model)
+        public async Task<ResponseModel> Insert(AppraiseAnswerModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -134,7 +116,7 @@ namespace Service.Training
             return response;
         }
 
-        private async Task<ResponseModel> Update(AppraiseAnswerModel model)
+        public async Task<ResponseModel> Update(AppraiseAnswerModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -167,13 +149,13 @@ namespace Service.Training
             return response;
         }
 
-        private async Task<ResponseModel> Delete(AppraiseAnswerModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                AppraiseAnswer md = await _context.AppraiseAnswerRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                AppraiseAnswer md = await _context.AppraiseAnswerRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

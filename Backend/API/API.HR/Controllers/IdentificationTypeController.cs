@@ -38,10 +38,24 @@ namespace API.HR.Controllers
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(IdentificationTypeModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert(IdentificationTypeModel model)
         {
-            var response = await _identificationTypeService.Save(model);
+            var response = await _identificationTypeService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update(IdentificationTypeModel model)
+        {
+            var response = await _identificationTypeService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete(int id)
+        {
+            var response = await _identificationTypeService.Item(id);
             return response;
         }
     }

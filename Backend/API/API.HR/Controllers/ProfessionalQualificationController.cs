@@ -38,10 +38,24 @@ namespace API.HR.Controllers
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(ProfessionalQualificationModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert(ProfessionalQualificationModel model)
         {
-            var response = await _professionalQualificationService.Save(model);
+            var response = await _professionalQualificationService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update(ProfessionalQualificationModel model)
+        {
+            var response = await _professionalQualificationService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete(int id)
+        {
+            var response = await _professionalQualificationService.Item(id);
             return response;
         }
     }

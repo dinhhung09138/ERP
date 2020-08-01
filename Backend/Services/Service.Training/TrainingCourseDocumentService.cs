@@ -86,25 +86,7 @@ namespace Service.Training
             return response;
         }
 
-        public async Task<ResponseModel> Save(TrainingCourseDocumentModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-        private async Task<ResponseModel> Insert(TrainingCourseDocumentModel model)
+        public async Task<ResponseModel> Insert(TrainingCourseDocumentModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -131,7 +113,7 @@ namespace Service.Training
             return response;
         }
 
-        private async Task<ResponseModel> Update(TrainingCourseDocumentModel model)
+        public async Task<ResponseModel> Update(TrainingCourseDocumentModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -163,13 +145,13 @@ namespace Service.Training
             return response;
         }
 
-        private async Task<ResponseModel> Delete(TrainingCourseDocumentModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                TrainingCourseDocument md = await _context.TrainingCourseDocumentRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                TrainingCourseDocument md = await _context.TrainingCourseDocumentRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

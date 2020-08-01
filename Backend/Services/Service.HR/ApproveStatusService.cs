@@ -113,26 +113,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(ApproveStatusModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-
-        private async Task<ResponseModel> Insert(ApproveStatusModel model)
+        public async Task<ResponseModel> Insert(ApproveStatusModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -159,7 +140,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(ApproveStatusModel model)
+        public async Task<ResponseModel> Update(ApproveStatusModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -191,13 +172,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(ApproveStatusModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                ApproveStatus md = await _context.ApproveStatusRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                ApproveStatus md = await _context.ApproveStatusRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {
@@ -219,5 +200,6 @@ namespace Service.HR
             }
             return response;
         }
+
     }
 }

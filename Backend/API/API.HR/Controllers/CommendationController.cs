@@ -44,11 +44,26 @@ namespace API.HR.Controllers
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(CommendationModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert(CommendationModel model)
         {
-            var response = await _commendationService.Save(model);
+            var response = await _commendationService.Insert(model);
             return response;
         }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update(CommendationModel model)
+        {
+            var response = await _commendationService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete(int id)
+        {
+            var response = await _commendationService.Item(id);
+            return response;
+        }
+
     }
 }

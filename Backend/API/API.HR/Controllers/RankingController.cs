@@ -38,10 +38,24 @@ namespace API.HR.Controllers
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(RankingModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert(RankingModel model)
         {
-            var response = await _rankingService.Save(model);
+            var response = await _rankingService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update(RankingModel model)
+        {
+            var response = await _rankingService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete(int id)
+        {
+            var response = await _rankingService.Item(id);
             return response;
         }
     }

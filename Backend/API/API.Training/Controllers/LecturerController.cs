@@ -10,38 +10,52 @@ namespace API.Training.Controllers
     [ApiController]
     public class LecturerController : ControllerBase
     {
-        private readonly ILecturerService _LecturerService;
+        private readonly ILecturerService _lecturerService;
 
-        public LecturerController(ILecturerService LecturerService)
+        public LecturerController(ILecturerService lecturerService)
         {
-            _LecturerService = LecturerService;
+            _lecturerService = lecturerService;
         }
 
         [HttpPost, Route("get-list")]
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
-            var response = await _LecturerService.GetList(filter);
+            var response = await _lecturerService.GetList(filter);
             return response;
         }
 
         [HttpGet, Route("dropdown")]
         public async Task<ResponseModel> Dropdown()
         {
-            var response = await _LecturerService.DropDownSelection();
+            var response = await _lecturerService.DropDownSelection();
             return response;
         }
 
         [HttpGet, Route("item")]
         public async Task<ResponseModel> Item(int id)
         {
-            var response = await _LecturerService.Item(id);
+            var response = await _lecturerService.Item(id);
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(LecturerModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert(LecturerModel model)
         {
-            var response = await _LecturerService.Save(model);
+            var response = await _lecturerService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update(LecturerModel model)
+        {
+            var response = await _lecturerService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete(int id)
+        {
+            var response = await _lecturerService.Item(id);
             return response;
         }
     }

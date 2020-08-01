@@ -118,26 +118,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(ContractTypeModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-
-        private async Task<ResponseModel> Insert(ContractTypeModel model)
+        public async Task<ResponseModel> Insert(ContractTypeModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -168,7 +149,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(ContractTypeModel model)
+        public async Task<ResponseModel> Update(ContractTypeModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -203,13 +184,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(ContractTypeModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                ContractType md = await _context.ContractTypeRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                ContractType md = await _context.ContractTypeRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

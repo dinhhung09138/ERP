@@ -105,26 +105,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(ProfessionalQualificationModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-
-        private async Task<ResponseModel> Insert(ProfessionalQualificationModel model)
+        public async Task<ResponseModel> Insert(ProfessionalQualificationModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -151,7 +132,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(ProfessionalQualificationModel model)
+        public async Task<ResponseModel> Update(ProfessionalQualificationModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -182,13 +163,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(ProfessionalQualificationModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                ProfessionalQualification md = await _context.ProfessionalQualificationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                ProfessionalQualification md = await _context.ProfessionalQualificationRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

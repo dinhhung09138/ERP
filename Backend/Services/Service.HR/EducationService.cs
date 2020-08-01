@@ -110,25 +110,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(EducationModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-        private async Task<ResponseModel> Insert(EducationModel model)
+        public async Task<ResponseModel> Insert(EducationModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -155,7 +137,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(EducationModel model)
+        public async Task<ResponseModel> Update(EducationModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -186,13 +168,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(EducationModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Education md = await _context.EducationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Education md = await _context.EducationRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {
