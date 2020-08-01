@@ -15,6 +15,7 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
 import { TablePaginatorComponent } from './components/table-paginator/table-paginator.component';
 import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
 import { AppMatPaginatorIntl } from './services/mat-paginator-intl.service';
+import { NotifyComponent } from './components/notify/notify.component';
 
 @NgModule({
   imports: [
@@ -35,14 +36,16 @@ import { AppMatPaginatorIntl } from './services/mat-paginator-intl.service';
     PrecedenceDirective,
     ConfirmDialogComponent,
     ErrorDialogComponent,
+    NotifyComponent,
   ],
   providers: [
     FormatNumberPipe,
+    // Use for change language of paginator.
     appInterceptors,
     {
       provide: MatPaginatorIntl,
       useClass: AppMatPaginatorIntl
-    }
+    },
   ],
   exports: [
     CommonModule,

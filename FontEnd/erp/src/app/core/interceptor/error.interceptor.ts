@@ -1,3 +1,4 @@
+import { NotifyService } from './../services/notify.service';
 import { DialogDataInterface } from './../interfaces/dialog-data.interface';
 import { DialogService } from './../services/dialog.service';
 import { HttpErrorStatusEnum } from './../enums/http-error.enum';
@@ -11,7 +12,9 @@ import { ResponseStatus } from '../enums/response-status.enum';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private dialogService: DialogService) {}
+  constructor(
+    private dialogService: DialogService,
+    private notifyService: NotifyService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -23,21 +26,10 @@ export class ErrorInterceptor implements HttpInterceptor {
 
           switch (response.responseStatus) {
             case ResponseStatus.error:
-              const errorModel = {
-                isError: true,
-                httpError: HttpErrorStatusEnum.serverNotFound
-              } as DialogDataInterface;
-
-              this.dialogService.openErrorDialog(errorModel);
+              this.notifyService.notifyServerError(response.errors.join(''));
               break;
             case ResponseStatus.warning:
-              const warningModel = {
-                isError: true,
-                httpError: HttpErrorStatusEnum.warningError,
-                message: response.errors.join(''),
-              } as DialogDataInterface;
-
-              this.dialogService.openErrorDialog(warningModel);
+              this.notifyService.notifyServerWarning(response.errors.join(''));
               break;
           }
         }

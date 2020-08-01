@@ -128,3 +128,35 @@
   border-color: unset !important;
   box-shadow: unset !important;
 }
+
+.mat-snack-bar-container {
+  margin: 15px !important;
+  padding: 14px 14px !important;
+  min-width: 250px !important;
+}
+
+.snack-bar-dialog-success {
+  background: transparent;
+  box-shadow:unset;
+}
+
+.snack-bar-notify-success {
+  color: white;
+  background-color: #09710d;
+  border-color: #28a745;
+  box-shadow: unset;
+}
+
+.snack-bar-notify-warning {
+  color: white;
+  background-color: #e6ad03;
+  border-color: #e6ad03;
+  box-shadow: unset;
+}
+
+.snack-bar-notify-error {
+  color: white;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  box-shadow: unset;
+}
