@@ -71,7 +71,7 @@ export class ApproveStatusFormComponent implements OnInit {
       this.approveStatusForm.get('precedence').setValue(1);
       this.approveStatusForm.get('isActive').setValue(true);
 
-      if (formStatus === FormActionStatus.Create) {
+      if (formStatus === FormActionStatus.Insert) {
         this.elm.nativeElement.querySelector('#code').focus();
         this.approveStatusForm.get('code').enable();
       } else {
@@ -82,8 +82,8 @@ export class ApproveStatusFormComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.formAction !== FormActionStatus.Create) {
-      this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Insert) {
+      this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#code').focus();
     this.formTitle = 'Thêm mới';
@@ -97,7 +97,7 @@ export class ApproveStatusFormComponent implements OnInit {
 
   onResetClick() {
     switch(this.formAction) {
-      case FormActionStatus.Create:
+      case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;
       case FormActionStatus.Update:

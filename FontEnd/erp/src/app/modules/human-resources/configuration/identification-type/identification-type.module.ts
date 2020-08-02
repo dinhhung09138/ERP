@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: IdentificationTypeComponent,
-    data: { title: 'Identification Type' }
+    data: { title: 'Giấy tờ tùy thân' }
   }
 ];
 

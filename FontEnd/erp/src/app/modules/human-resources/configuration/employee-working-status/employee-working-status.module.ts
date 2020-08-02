@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: '',
     component: EmployeeWorkingStatusComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    data: { title: 'Tình trạng làm việc' }
   }
 ];
 

@@ -42,7 +42,7 @@ export class ReligionFormComponent implements OnInit {
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
 
     if (this.formDirective) {
@@ -72,8 +72,8 @@ export class ReligionFormComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.formAction !== FormActionStatus.Create) {
-      this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Insert) {
+      this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
     this.formTitle = 'Thêm mới';
@@ -87,7 +87,7 @@ export class ReligionFormComponent implements OnInit {
 
   onResetClick() {
     switch(this.formAction) {
-      case FormActionStatus.Create:
+      case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;
       case FormActionStatus.Update:
@@ -110,7 +110,7 @@ export class ReligionFormComponent implements OnInit {
     const model = this.religionForm.value as ReligionViewModel;
     model.action = this.formAction;
 
-    this.religionService.save(model).subscribe((response: ResponseModel) => {
+    this.religionService.save(this.religionForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);

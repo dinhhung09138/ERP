@@ -14,9 +14,9 @@ const route: Routes = [
   {
     path: '',
     component: ContractTypeComponent,
-    data: { title: 'Contract Type' }
+    data: { title: 'Loại hợp đồng' }
   }
-]
+];
 
 @NgModule({
   declarations: [

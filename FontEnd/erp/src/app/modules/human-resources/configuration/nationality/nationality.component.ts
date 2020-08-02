@@ -1,13 +1,9 @@
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { NationalityFormComponent } from './form/form.component';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { NationalityService } from './nationality.service';
-import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { PageEvent } from '@angular/material/paginator';
-import { NationalityViewModel } from './nationality.model';
-import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
@@ -32,9 +28,7 @@ export class NationalityComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(
-    public dialog: MatDialog,
-    private nationalityService: NationalityService) {
+  constructor(private nationalityService: NationalityService) {
   }
 
   ngOnInit(): void {
@@ -49,84 +43,66 @@ export class NationalityComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.isLoading === true) {
-      return;
+    if (this.isLoading !== true) {
+      this.form.onCreateClick();
     }
-    this.form.onCreateClick();
   }
 
   onImportClick() {
-    if (this.isLoading === true) {
-      return;
+    if (this.isLoading !== true) {
+      this.form.onCloseClick();
     }
-    this.form.onCloseClick();
   }
 
   onExportClick() {
-    if (this.isLoading === true) {
-      return;
+    if (this.isLoading !== true) {
+      this.form.onCloseClick();
     }
-    this.form.onCloseClick();
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === true) {
-      return;
-    }
-    if (id !== null) {
+    if (this.isLoading !== true && id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number) {
-    if (this.isLoading === true) {
-      return;
-    }
-    this.form.onCloseClick();
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '300px',
-      data: { title: '', animation: '' }
-    });
+    if (this.isLoading !== true) {
+      this.form.onCloseClick();
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.deleteItem(id);
-      }
-    });
+      this.nationalityService.confirmDelete(id).subscribe((response: ResponseModel) => {
+        if (response && response.responseStatus === ResponseStatus.success) {
+          this.getList();
+        }
+      });
+    }
   }
 
   onFilterChange() {
-    if (this.isLoading === true) {
-      return;
+    if (this.isLoading !== true) {
+      if (this.searchText.length > 0) {
+        this.paging.pageIndex = 0;
+      }
+      this.getList();
     }
-    if (this.searchText.length > 0) {
-      this.paging.pageIndex = 0;
-    }
-    this.getList();
   }
 
   onPageChange(page: PageEvent) {
-    if (this.isLoading === true) {
-      return;
+    if (this.isLoading !== true) {
+      this.paging.pageSize = page.pageSize;
+      this.paging.pageIndex = page.pageIndex;
+      if (page.pageSize !== this.currentPageSize) {
+        this.currentPageSize = page.pageSize;
+        this.paging.pageIndex = 0;
+      }
+      this.getList();
     }
-    this.paging.pageSize = page.pageSize;
-    this.paging.pageIndex = page.pageIndex;
-    if (page.pageSize !== this.currentPageSize) {
-      this.currentPageSize = page.pageSize;
-      this.paging.pageIndex = 0;
-    }
-    this.getList();
   }
 
   private getList() {
 
     this.isLoading = true;
-
-    const filter = new FilterModel();
-    filter.text = this.searchText;
-    filter.paging.pageIndex = this.paging.pageIndex;
-    filter.paging.pageSize = this.paging.pageSize;
-    this.nationalityService.getList(filter).subscribe((response: ResponseModel) => {
+    this.nationalityService.getList(this.paging, this.searchText).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
@@ -134,16 +110,4 @@ export class NationalityComponent implements OnInit {
       }
     });
   }
-
-  private deleteItem(itemId: number) {
-    this.isLoading = true;
-    const model = { action: FormActionStatus.Delete, id: itemId } as NationalityViewModel;
-    this.nationalityService.save(model).subscribe((response: ResponseModel) => {
-      this.isLoading = false;
-      if (response !== null && response.responseStatus === ResponseStatus.success) {
-        this.getList();
-      }
-    });
-  }
-
 }

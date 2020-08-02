@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     component: ReligionComponent,
-    data: { title: 'Religion' }
+    data: { title: 'Tôn giáo' }
   }
 ];
 

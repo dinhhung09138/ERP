@@ -76,7 +76,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
       this.workingStatusForm.get('isActive').enable();
       this.workingStatusForm.get('precedence').enable();
 
-      if (formStatus === FormActionStatus.Create) {
+      if (formStatus === FormActionStatus.Insert) {
         this.workingStatusForm.get('code').enable();
         this.elm.nativeElement.querySelector('#code').focus();
       } else {
@@ -86,8 +86,8 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.formAction !== FormActionStatus.Create) {
-      this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Insert) {
+      this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#code').focus();
     this.formTitle = 'Thêm mới';
@@ -101,7 +101,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
 
   onResetClick() {
     switch(this.formAction) {
-      case FormActionStatus.Create:
+      case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;
       case FormActionStatus.Update:
@@ -121,10 +121,8 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.workingStatusForm.getRawValue() as EmployeeWorkingStatusViewModel;
-    model.action = this.formAction;
 
-    this.workingStatusService.save(model).subscribe((response: ResponseModel) => {
+    this.workingStatusService.save(this.workingStatusForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);

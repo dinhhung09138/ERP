@@ -78,8 +78,8 @@ export class RelationshipTypeFormComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.formAction !== FormActionStatus.Create) {
-      this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Insert) {
+      this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
     this.formTitle = 'Thêm mới';
@@ -93,7 +93,7 @@ export class RelationshipTypeFormComponent implements OnInit {
 
   onResetClick() {
     switch(this.formAction) {
-      case FormActionStatus.Create:
+      case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;
       case FormActionStatus.Update:
@@ -113,10 +113,8 @@ export class RelationshipTypeFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.relationshipTypeForm.getRawValue() as RelationshipTypeViewModel;
-    model.action = this.formAction;
 
-    this.relationshipTypeService.save(model).subscribe((response: ResponseModel) => {
+    this.relationshipTypeService.save(this.relationshipTypeForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response !== null && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);

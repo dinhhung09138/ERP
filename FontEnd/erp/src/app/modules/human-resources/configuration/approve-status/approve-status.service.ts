@@ -40,7 +40,7 @@ export class ApproveStatusService {
 
   save(model: ApproveStatusViewModel, action: FormActionStatus): Observable<ResponseModel> {
     switch (action) {
-      case FormActionStatus.Create:
+      case FormActionStatus.Insert:
         return this.api.insert(this.url.insert, model);
       default:
         return this.api.update(this.url.update, model);

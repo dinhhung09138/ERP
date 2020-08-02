@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     component: NationalityComponent,
-    data: { title: 'Nationality' }
+    data: { title: 'Quốc tịch' }
   }
 ];
 

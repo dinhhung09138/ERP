@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: ModelOfStudyComponent,
-    data: { title: 'Model Of Study' }
+    data: { title: 'Hình thức đào tạo' }
   }
 ]
 

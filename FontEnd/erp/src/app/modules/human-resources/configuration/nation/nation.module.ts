@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: '',
     component: NationComponent,
-    data: { title: 'Nation' }
+    data: { title: 'Dân tộc' }
   }
 ];
 

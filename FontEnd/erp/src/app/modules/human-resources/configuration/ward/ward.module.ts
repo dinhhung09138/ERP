@@ -16,9 +16,9 @@ const route: Routes = [
   {
     path: '',
     component: WardComponent,
-    data: { title: 'Ward' }
+    data: { title: 'Phường/Xã' }
   }
-]
+];
 
 @NgModule({
   declarations: [

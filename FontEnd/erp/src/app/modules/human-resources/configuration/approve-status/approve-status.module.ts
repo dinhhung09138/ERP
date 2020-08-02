@@ -1,4 +1,3 @@
-import { ApiService } from './../../../../core/services/api.service';
 import { NgModule } from '@angular/core';
 import { ApproveStatusComponent } from './approve-status.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -37,7 +36,6 @@ const route: Routes = [
   ],
   providers: [
     ApproveStatusService,
-    ApiService,
   ]
 })
 export class ApproveStatusModule { }

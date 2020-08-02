@@ -83,7 +83,7 @@ export class ContractTypeFormComponent implements OnInit {
       this.contractTypeForm.get('allowLeaveDate').enable();
       this.contractTypeForm.get('precedence').enable();
       this.contractTypeForm.get('isActive').enable();
-      if (formStatus === FormActionStatus.Create) {
+      if (formStatus === FormActionStatus.Insert) {
         this.contractTypeForm.get('code').enable();
         this.elm.nativeElement.querySelector('#code').focus();
       } else {
@@ -93,8 +93,8 @@ export class ContractTypeFormComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.formAction !== FormActionStatus.Create) {
-      this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Insert) {
+      this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#code').focus();
     this.formTitle = 'Thêm mới';
@@ -108,7 +108,7 @@ export class ContractTypeFormComponent implements OnInit {
 
   onResetClick() {
     switch(this.formAction) {
-      case FormActionStatus.Create:
+      case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;
       case FormActionStatus.Update:
@@ -128,15 +128,11 @@ export class ContractTypeFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.contractTypeForm.getRawValue() as ContractTypeViewModel;
-    model.action = this.formAction;
 
-    this.contractTypeService.save(model).subscribe((response: ResponseModel) => {
+    this.contractTypeService.save(this.contractTypeForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response !== null && response.responseStatus === ResponseStatus.success) {
-        if (response.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;

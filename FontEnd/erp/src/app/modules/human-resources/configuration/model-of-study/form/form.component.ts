@@ -72,8 +72,8 @@ export class ModelOfStudyFormComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.formAction !== FormActionStatus.Create) {
-      this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Insert) {
+      this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
     this.formTitle = 'Thêm mới';
@@ -87,7 +87,7 @@ export class ModelOfStudyFormComponent implements OnInit {
 
   onResetClick() {
     switch(this.formAction) {
-      case FormActionStatus.Create:
+      case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;
       case FormActionStatus.Update:
@@ -107,10 +107,8 @@ export class ModelOfStudyFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.modelOfStudyForm.value as ModelOfStudyViewModel;
-    model.action = this.formAction;
 
-    this.modelOfStudyService.save(model).subscribe((response: ResponseModel) => {
+    this.modelOfStudyService.save(this.modelOfStudyForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);

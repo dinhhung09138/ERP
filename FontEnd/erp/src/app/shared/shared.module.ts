@@ -1,3 +1,4 @@
+import { ApiService } from './../core/services/api.service';
 import { appInterceptors } from './app.interceptors';
 import { PrecedenceDirective } from './../core/directives/precedence.directive';
 import { NgModule } from '@angular/core';
@@ -46,6 +47,7 @@ import { NotifyComponent } from './components/notify/notify.component';
       provide: MatPaginatorIntl,
       useClass: AppMatPaginatorIntl
     },
+    ApiService,
   ],
   exports: [
     CommonModule,

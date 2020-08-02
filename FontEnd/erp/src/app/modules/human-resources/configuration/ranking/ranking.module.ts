@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: RankingComponent,
-    data: { title: 'Ranking' }
+    data: { title: 'Xếp hạng học tập' }
   }
 ];
 

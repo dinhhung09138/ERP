@@ -72,8 +72,8 @@ export class NationalityFormComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.formAction !== FormActionStatus.Create) {
-      this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Insert) {
+      this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
     this.formTitle = 'Thêm mới';
@@ -87,7 +87,7 @@ export class NationalityFormComponent implements OnInit {
 
   onResetClick() {
     switch(this.formAction) {
-      case FormActionStatus.Create:
+      case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;
       case FormActionStatus.Update:
@@ -107,10 +107,8 @@ export class NationalityFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.nationalityForm.value as NationalityViewModel;
-    model.action = this.formAction;
 
-    this.nationalityService.save(model).subscribe((response: ResponseModel) => {
+    this.nationalityService.save(this.nationalityForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
