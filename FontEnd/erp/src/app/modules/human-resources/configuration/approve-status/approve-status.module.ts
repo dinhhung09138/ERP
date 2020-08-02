@@ -1,3 +1,4 @@
+import { ApiService } from './../../../../core/services/api.service';
 import { NgModule } from '@angular/core';
 import { ApproveStatusComponent } from './approve-status.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -6,7 +7,6 @@ import { ApproveStatusService } from './approve-status.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -37,6 +37,7 @@ const route: Routes = [
   ],
   providers: [
     ApproveStatusService,
+    ApiService,
   ]
 })
 export class ApproveStatusModule { }

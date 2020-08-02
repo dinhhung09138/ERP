@@ -117,10 +117,8 @@ export class ApproveStatusFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.approveStatusForm.getRawValue() as ApproveStatusViewModel;
-    model.action = this.formAction;
 
-    this.approveStatusService.save(model).subscribe((response: ResponseModel) => {
+    this.approveStatusService.save(this.approveStatusForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response !== null && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);

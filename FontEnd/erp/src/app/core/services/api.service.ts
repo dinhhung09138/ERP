@@ -61,11 +61,11 @@ export class ApiService {
     );
   }
 
-  create(url: string, model: any): Observable<ResponseModel> {
+  insert(url: string, model: any): Observable<ResponseModel> {
     return this.http.post<ResponseModel>(url, model).pipe(
       map((data: ResponseModel) => {
         if (data.responseStatus === ResponseStatus.success) {
-          this.notifyService.notifyCreate(true);
+          this.notifyService.notifyInsert(true);
         }
         return data;
       })
@@ -105,6 +105,7 @@ export class ApiService {
    * @param id : Item deleted id
    */
   deleteById(url: string, id: number): Observable<ResponseModel> {
+
     return this.http.delete<ResponseModel>(url + '?id=' + id).pipe(
       map((data: ResponseModel) => {
         if (data.responseStatus === ResponseStatus.success) {

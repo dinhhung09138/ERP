@@ -11,16 +11,16 @@ export class NotifyService {
     this.snackBar.openFromComponent(NotifyComponent, {
       duration: 2500,
       horizontalPosition: 'right',
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
       panelClass: 'snack-bar-dialog-success'
     });
   }
 
   /**
-   * Show notify when user do delete create.
+   * Show notify when user do delete insert new data.
    * @param isSuccess : true: Success, false: Fail
    */
-  notifyCreate(isSuccess: boolean) {
+  notifyInsert(isSuccess: boolean) {
     if (isSuccess === true) {
       this.notifySuccess('Thêm mới dữ liệu thành công');
     } else {
@@ -76,7 +76,7 @@ export class NotifyService {
     this.snackBar.open(message, 'X', {
       duration: 2500,
       horizontalPosition: 'right',
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
       panelClass: 'snack-bar-notify-success'
     });
   }
@@ -89,7 +89,7 @@ export class NotifyService {
     this.snackBar.open(message, 'X', {
       duration: 4000,
       horizontalPosition: 'right',
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
       panelClass: 'snack-bar-notify-warning'
     });
   }
@@ -102,7 +102,7 @@ export class NotifyService {
     this.snackBar.open(message, 'X', {
       duration: 5000,
       horizontalPosition: 'right',
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
       panelClass: 'snack-bar-notify-error'
     });
   }
