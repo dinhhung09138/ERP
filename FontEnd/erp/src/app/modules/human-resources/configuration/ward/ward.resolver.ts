@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Resolve } from '@angular/router';
-import { Observable, of, forkJoin } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProvinceService } from '../province/province.service';
 import { DistrictService } from '../district/district.service';
-import { ResponseModel } from 'src/app/core/models/response.model';
 
 @Injectable()
 export class WardResolver implements Resolve<Observable<any>> {

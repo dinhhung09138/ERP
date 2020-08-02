@@ -62,7 +62,7 @@
       <li class="nav-item">
         <a (click)="openSideMenu('configuration')" class="nav-link"
           [ngClass]="{'menu-open': linkSelected === 'configuration'}">
-          <p>Configuration <i class="fa fa-angle-left right"></i></p>
+          <p>Thiết lập <i class="fa fa-angle-left right"></i></p>
         </a>
         <ul class="nav" [ngStyle]="{'display': linkSelected === 'configuration' ? 'block' : 'none'}">
           <li class="nav-item" routerLinkActive="active">
@@ -92,17 +92,17 @@
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/hr/configuration/identification">
-              <p> Identification</p>
+              <p> Giấy tờ tùy thân</p>
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/hr/configuration/qualification">
-              <p> Qualification</p>
+              <p> Trình độ chuyên môn</p>
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/hr/configuration/ranking">
-              <p> Ranking</p>
+              <p> Xếp hạng học tập</p>
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
@@ -112,12 +112,27 @@
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/hr/configuration/employee-status">
-              <p> Employee Status</p>
+              <p> Tình trạng nhân viên</p>
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/hr/configuration/relationship-type">
-              <p> Relationship Type</p>
+              <p> Quan hệ gia đình</p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/configuration/religion">
+              <p> Tôn giáo</p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/configuration/nation">
+              <p> Dân tộc</p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/configuration/nationality">
+              <p> Quốc tịch</p>
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">

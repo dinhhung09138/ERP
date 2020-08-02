@@ -2,8 +2,10 @@
 using System.Threading.Tasks;
 using Core.DataAccess;
 using Core.DataAccess.Sql;
-using DataBase.Sql.ERP.Entities.Common;
-using DataBase.Sql.ERP.Entities.HR;
+using Database.Sql.ERP.Entities.Common;
+using Database.Sql.ERP.Entities.HR;
+using Database.Sql.ERP.Entities.Security;
+using Database.Sql.ERP.Entities.Training;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Database.Sql.ERP
@@ -14,18 +16,52 @@ namespace Database.Sql.ERP
 
         private IDbContextTransaction _transaction;
 
-        private ITableGenericRepository<Education> _educationRepository;
+        #region " [ Common ] "
 
-        public ITableGenericRepository<Education> EducationRepository
+        private ITableGenericRepository<District> _districtRepository;
+        public ITableGenericRepository<District> DistrictRepository
         {
             get
             {
-                return _educationRepository = _educationRepository ?? new TableGenericRepository<Education>(_context);
+                return _districtRepository = _districtRepository ?? new TableGenericRepository<District>(_context);
             }
         }
 
-        private ITableGenericRepository<ApproveStatus> _approveStatusRepository;
 
+        private ITableGenericRepository<ProfessionalQualification> _professionalQualificationRepository;
+        public ITableGenericRepository<ProfessionalQualification> ProfessionalQualificationRepository
+        {
+            get
+            {
+                return _professionalQualificationRepository = _professionalQualificationRepository ?? new TableGenericRepository<ProfessionalQualification>(_context);
+            }
+        }
+
+
+        private ITableGenericRepository<Province> _provinceRepository;
+        public ITableGenericRepository<Province> ProvinceRepository
+        {
+            get
+            {
+                return _provinceRepository = _provinceRepository ?? new TableGenericRepository<Province>(_context);
+            }
+        }
+
+
+        private ITableGenericRepository<Ward> _wardRepository;
+        public ITableGenericRepository<Ward> WardRepository
+        {
+            get
+            {
+                return _wardRepository = _wardRepository ?? new TableGenericRepository<Ward>(_context);
+            }
+        }
+
+        #endregion
+
+        #region " [ HR ] "
+
+        private ITableGenericRepository<ApproveStatus> _approveStatusRepository;
         public ITableGenericRepository<ApproveStatus> ApproveStatusRepository
         {
             get
@@ -34,18 +70,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<CodeType> _codeTypeRepository;
-
-        public ITableGenericRepository<CodeType> CodeTypeRepository
-        {
-            get
-            {
-                return _codeTypeRepository = _codeTypeRepository ?? new TableGenericRepository<CodeType>(_context);
-            }
-        }
 
         private ITableGenericRepository<Commendation> _commendationRepository;
-
         public ITableGenericRepository<Commendation> CommendationRepository
         {
             get
@@ -54,8 +80,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<ContractType> _contractTypeRepository;
 
+        private ITableGenericRepository<ContractType> _contractTypeRepository;
         public ITableGenericRepository<ContractType> ContractTypeRepository
         {
             get
@@ -65,7 +91,6 @@ namespace Database.Sql.ERP
         }
 
         private ITableGenericRepository<Discipline> _disciplineRepository;
-
         public ITableGenericRepository<Discipline> DisciplineRepository
         {
             get
@@ -74,18 +99,17 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<District> _districtRepository;
-
-        public ITableGenericRepository<District> DistrictRepository
+        private ITableGenericRepository<Education> _educationRepository;
+        public ITableGenericRepository<Education> EducationRepository
         {
             get
             {
-                return _districtRepository = _districtRepository ?? new TableGenericRepository<District>(_context);
+                return _educationRepository = _educationRepository ?? new TableGenericRepository<Education>(_context);
             }
         }
 
-        private ITableGenericRepository<Employee> _employeeRepository;
 
+        private ITableGenericRepository<Employee> _employeeRepository;
         public ITableGenericRepository<Employee> EmployeeRepository
         {
             get
@@ -94,8 +118,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeCommendation> _employeeCommendationRepository;
 
+        private ITableGenericRepository<EmployeeCommendation> _employeeCommendationRepository;
         public ITableGenericRepository<EmployeeCommendation> EmployeeCommendationRepository
         {
             get
@@ -104,8 +128,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeContact> _employeeContactRepository;
 
+        private ITableGenericRepository<EmployeeContact> _employeeContactRepository;
         public ITableGenericRepository<EmployeeContact> EmployeeContactRepository
         {
             get
@@ -114,8 +138,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeContract> _employeeContractRepository;
 
+        private ITableGenericRepository<EmployeeContract> _employeeContractRepository;
         public ITableGenericRepository<EmployeeContract> EmployeeContractRepository
         {
             get
@@ -124,8 +148,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeContractStatusHistory> _employeeContractStatusHistoryRepository;
 
+        private ITableGenericRepository<EmployeeContractStatusHistory> _employeeContractStatusHistoryRepository;
         public ITableGenericRepository<EmployeeContractStatusHistory> EmployeeContractStatusHistoryRepository
         {
             get
@@ -134,8 +158,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeDiscipline> _employeeDisciplineRepository;
 
+        private ITableGenericRepository<EmployeeDiscipline> _employeeDisciplineRepository;
         public ITableGenericRepository<EmployeeDiscipline> EmployeeDisciplineRepository
         {
             get
@@ -144,8 +168,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeEducation> _employeeEducationRepository;
 
+        private ITableGenericRepository<EmployeeEducation> _employeeEducationRepository;
         public ITableGenericRepository<EmployeeEducation> EmployeeEducationRepository
         {
             get
@@ -154,8 +178,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeIdentification> _employeeIdentificationRepository;
 
+        private ITableGenericRepository<EmployeeIdentification> _employeeIdentificationRepository;
         public ITableGenericRepository<EmployeeIdentification> EmployeeIdentificationRepository
         {
             get
@@ -164,8 +188,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeInfo> _employeeInfoRepository;
 
+        private ITableGenericRepository<EmployeeInfo> _employeeInfoRepository;
         public ITableGenericRepository<EmployeeInfo> EmployeeInfoRepository
         {
             get
@@ -174,8 +198,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeRelationship> _employeeRelationshipRepository;
 
+        private ITableGenericRepository<EmployeeRelationship> _employeeRelationshipRepository;
         public ITableGenericRepository<EmployeeRelationship> EmployeeRelationshipRepository
         {
             get
@@ -184,8 +208,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<EmployeeWorkingStatus> _employeeWorkingStatusRepository;
 
+        private ITableGenericRepository<EmployeeWorkingStatus> _employeeWorkingStatusRepository;
         public ITableGenericRepository<EmployeeWorkingStatus> EmployeeWorkingStatusRepository
         {
             get
@@ -194,8 +218,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<IdentificationType> _identificationTypeRepository;
 
+        private ITableGenericRepository<IdentificationType> _identificationTypeRepository;
         public ITableGenericRepository<IdentificationType> IdentificationTypeRepository
         {
             get
@@ -204,8 +228,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<ModelOfStudy> _modelOfStudyRepository;
 
+        private ITableGenericRepository<ModelOfStudy> _modelOfStudyRepository;
         public ITableGenericRepository<ModelOfStudy> ModelOfStudyRepository
         {
             get
@@ -214,28 +238,28 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<ProfessionalQualification> _professionalQualificationRepository;
 
-        public ITableGenericRepository<ProfessionalQualification> ProfessionalQualificationRepository
+        private ITableGenericRepository<Nation> _nationRepository;
+        public ITableGenericRepository<Nation> NationRepository
         {
             get
             {
-                return _professionalQualificationRepository = _professionalQualificationRepository ?? new TableGenericRepository<ProfessionalQualification>(_context);
+                return _nationRepository = _nationRepository ?? new TableGenericRepository<Nation>(_context);
             }
         }
 
-        private ITableGenericRepository<Province> _provinceRepository;
 
-        public ITableGenericRepository<Province> ProvinceRepository
+        private ITableGenericRepository<Nationality> _nationalityRepository;
+        public ITableGenericRepository<Nationality> NationalityRepository
         {
             get
             {
-                return _provinceRepository = _provinceRepository ?? new TableGenericRepository<Province>(_context);
+                return _nationalityRepository = _nationalityRepository ?? new TableGenericRepository<Nationality>(_context);
             }
         }
+
 
         private ITableGenericRepository<Ranking> _rankingRepository;
-
         public ITableGenericRepository<Ranking> RankingRepository
         {
             get
@@ -244,8 +268,8 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<RelationshipType> _relationshipTypeRepository;
 
+        private ITableGenericRepository<RelationshipType> _relationshipTypeRepository;
         public ITableGenericRepository<RelationshipType> RelationshipTypeRepository
         {
             get
@@ -254,13 +278,151 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<Ward> _wardRepository;
 
-        public ITableGenericRepository<Ward> WardRepository
+        private ITableGenericRepository<Religion> _religionRepository;
+        public ITableGenericRepository<Religion> ReligionRepository
         {
             get
             {
-                return _wardRepository = _wardRepository ?? new TableGenericRepository<Ward>(_context);
+                return _religionRepository = _religionRepository ?? new TableGenericRepository<Religion>(_context);
+            }
+        }
+
+        #endregion
+
+        #region " [ Training ] "
+
+        private ITableGenericRepository<Appraise> _appraiseRepository;
+        public ITableGenericRepository<Appraise> AppraiseRepository
+        {
+            get
+            {
+                return _appraiseRepository = _appraiseRepository ?? new TableGenericRepository<Appraise>(_context);
+            }
+        }
+
+        private ITableGenericRepository<AppraiseAnswer> _appraiseAnswerRepository;
+        public ITableGenericRepository<AppraiseAnswer> AppraiseAnswerRepository
+        {
+            get
+            {
+                return _appraiseAnswerRepository = _appraiseAnswerRepository ?? new TableGenericRepository<AppraiseAnswer>(_context);
+            }
+        }
+
+        private ITableGenericRepository<AppraiseQuestion> _appraiseQuestionRepository;
+        public ITableGenericRepository<AppraiseQuestion> AppraiseQuestionRepository
+        {
+            get
+            {
+                return _appraiseQuestionRepository = _appraiseQuestionRepository ?? new TableGenericRepository<AppraiseQuestion>(_context);
+            }
+        }
+
+        private ITableGenericRepository<AppraiseSection> _appraiseSectionRepository;
+        public ITableGenericRepository<AppraiseSection> AppraiseSectionRepository
+        {
+            get
+            {
+                return _appraiseSectionRepository = _appraiseSectionRepository ?? new TableGenericRepository<AppraiseSection>(_context);
+            }
+        }
+
+        private ITableGenericRepository<Lecturer> _lecturerRepository;
+        public ITableGenericRepository<Lecturer> LecturerRepository
+        {
+            get
+            {
+                return _lecturerRepository = _lecturerRepository ?? new TableGenericRepository<Lecturer>(_context);
+            }
+        }
+
+        private ITableGenericRepository<SpecializedTraining> _specializedTrainingRepository;
+        public ITableGenericRepository<SpecializedTraining> SpecializedTrainingRepository
+        {
+            get
+            {
+                return _specializedTrainingRepository = _specializedTrainingRepository ?? new TableGenericRepository<SpecializedTraining>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingCenter> _trainingCenterRepository;
+        public ITableGenericRepository<TrainingCenter> TrainingCenterRepository
+        {
+            get
+            {
+                return _trainingCenterRepository = _trainingCenterRepository ?? new TableGenericRepository<TrainingCenter>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingCenterContact> _trainingCenterContactRepository;
+        public ITableGenericRepository<TrainingCenterContact> TrainingCenterContactRepository
+        {
+            get
+            {
+                return _trainingCenterContactRepository = _trainingCenterContactRepository ?? new TableGenericRepository<TrainingCenterContact>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingCourse> _trainingCourseRepository;
+        public ITableGenericRepository<TrainingCourse> TrainingCourseRepository
+        {
+            get
+            {
+                return _trainingCourseRepository = _trainingCourseRepository ?? new TableGenericRepository<TrainingCourse>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingCourseDocument> _trainingCourseDocumentRepository;
+        public ITableGenericRepository<TrainingCourseDocument> TrainingCourseDocumentRepository
+        {
+            get
+            {
+                return _trainingCourseDocumentRepository = _trainingCourseDocumentRepository ?? new TableGenericRepository<TrainingCourseDocument>(_context);
+            }
+        }
+
+        private ITableGenericRepository<TrainingType> _trainingTypeRepository;
+        public ITableGenericRepository<TrainingType> TrainingTypeRepository
+        {
+            get
+            {
+                return _trainingTypeRepository = _trainingTypeRepository ?? new TableGenericRepository<TrainingType>(_context);
+            }
+        }
+
+        #endregion
+
+        #region " [ Security ] "
+
+        private ITableGenericRepository<User> _userRepository;
+        public ITableGenericRepository<User> UserRepository
+        {
+            get
+            {
+                return _userRepository = _userRepository ?? new TableGenericRepository<User>(_context);
+            }
+        }
+
+        private ITableGenericRepository<SessionLog> _sesionLogRepository;
+        public ITableGenericRepository<SessionLog> SessionLogRepository
+        {
+            get
+            {
+                return _sesionLogRepository = _sesionLogRepository ?? new TableGenericRepository<SessionLog>(_context);
+            }
+        }
+
+        #endregion
+
+
+        private ITableGenericRepository<CodeType> _codeTypeRepository;
+
+        public ITableGenericRepository<CodeType> CodeTypeRepository
+        {
+            get
+            {
+                return _codeTypeRepository = _codeTypeRepository ?? new TableGenericRepository<CodeType>(_context);
             }
         }
         private ITableGenericRepository<Position> _positionRepository;

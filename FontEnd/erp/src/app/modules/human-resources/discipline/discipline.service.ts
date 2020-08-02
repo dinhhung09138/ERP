@@ -12,6 +12,7 @@ export class DisciplineService {
 
   url = {
     list: APIUrlConstants.hrApi + 'discipline/get-list',
+    dropdown: APIUrlConstants.hrApi + 'discipline/dropdown',
     item: APIUrlConstants.hrApi + 'discipline/item',
     save: APIUrlConstants.hrApi + 'discipline/save',
   };
@@ -25,7 +26,17 @@ export class DisciplineService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
+        return of(null);
+      })
+    );
+  }
+
+  getDropdown() {
+    return this.http.get<ResponseModel>(this.url.dropdown).pipe(
+      map((data) => {
+        return data;
+      }),
+      catchError(xhr => {
         return of(null);
       })
     );
@@ -37,7 +48,6 @@ export class DisciplineService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -49,7 +59,6 @@ export class DisciplineService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );

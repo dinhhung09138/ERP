@@ -69,7 +69,7 @@ const routes: Routes = [
       },
       {
         path: 'configuration/ranking',
-        loadChildren: () => import('./ranking/ranking.module').then(m => m.RankingModule),
+        loadChildren: () => import('./configuration/ranking/ranking.module').then(m => m.RankingModule),
         pathMatch: 'full',
       },
       {
@@ -92,6 +92,21 @@ const routes: Routes = [
         path: 'configuration/approve-status',
         loadChildren: () => import('./configuration/approve-status/approve-status.module').then(m => m.ApproveStatusModule),
         pathMatch: 'full',
+      },
+      {
+        path: 'configuration/religion',
+        loadChildren: () => import('./configuration/religion/religion.module').then(m => m.ReligionModule),
+        pathMatch: 'full'
+      },
+      {
+        path: 'configuration/nation',
+        loadChildren: () => import('./configuration/nation/nation.module').then(m => m.NationModule),
+        pathMatch: 'full'
+      },
+      {
+        path: 'configuration/nationality',
+        loadChildren: () => import('./configuration/nationality/nationality.module').then(m => m.NationalityModule),
+        pathMatch: 'full'
       }
     ]
   }

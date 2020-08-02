@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataBase.Sql.ERP.Entities.HR
+namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("RelationshipType")]
+    [Table("HR_RelationshipType")]
     public class RelationshipType
     {
         [Key]
@@ -17,6 +17,10 @@ namespace DataBase.Sql.ERP.Entities.HR
         [MaxLength(100)]
         [Required]
         public string Name { get; set; }
+
+        [Column(TypeName = "nvarchar(250)")]
+        [MaxLength(250)]
+        public string Description { get; set; }
 
         [Column(TypeName = "int")]
         [Required]

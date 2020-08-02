@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataBase.Sql.ERP.Entities.HR
+namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("Ranking")]
+    [Table("HR_Ranking")]
     public class Ranking
     {
         [Key]

@@ -3,15 +3,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 import { IdentificationTypeService } from './identification-type.service';
-import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { IdentificationTypeFormComponent } from './form/form.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
-import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
-import { IdentificationTypeViewModel } from './identification-type.model';
 
 @Component({
   selector: 'app-hr-identification-type',
@@ -32,9 +27,7 @@ export class IdentificationTypeComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(
-    private dialog: MatDialog,
-    private identififcationService: IdentificationTypeService) { }
+  constructor(private identificationService: IdentificationTypeService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
@@ -48,81 +41,71 @@ export class IdentificationTypeComponent implements OnInit {
   }
 
   onCreateClick() {
-    this.form.onCreateClick();
+    if (this.isLoading !== true) {
+      this.form.onCreateClick();
+    }
   }
 
   onImportClick() {
-    this.form.onCloseClick();
+    if (this.isLoading !== true) {
+      this.form.onCloseClick();
+    }
   }
 
   onExportClick() {
-    this.form.onCloseClick();
+    if (this.isLoading !== true) {
+      this.form.onCloseClick();
+    }
   }
 
   onUpdateClick(id: number) {
-    if (id !== null) {
+    if (this.isLoading !== true && id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number) {
-    this.form.onCloseClick();
+    if (this.isLoading !== true) {
+      this.form.onCloseClick();
 
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '300px',
-    });
-
-    dialogRef.beforeClosed().subscribe(result => {
-      if (result === true) {
-        this.deleteItem(id);
-      }
-    });
+      this.identificationService.confirmDelete(id).subscribe((response: ResponseModel) => {
+        if (response && response.responseStatus === ResponseStatus.success) {
+          this.getList();
+        }
+      });
+    }
   }
 
   onFilterChange() {
-    if (this.searchText.length > 0) {
-      this.paging.pageIndex = 0;
+    if (this.isLoading !== true) {
+      if (this.searchText.length > 0) {
+        this.paging.pageIndex = 0;
+      }
+      this.getList();
     }
-    this.getList();
   }
 
   onPageChange(page: PageEvent) {
-    this.paging.pageSize = page.pageSize;
-    this.paging.pageIndex = page.pageIndex;
-    if (page.pageSize !== this.currentPageSize) {
-      this.currentPageSize = page.pageSize;
-      this.paging.pageIndex = 0;
+    if (this.isLoading !== true) {
+      this.paging.pageSize = page.pageSize;
+      this.paging.pageIndex = page.pageIndex;
+      if (page.pageSize !== this.currentPageSize) {
+        this.currentPageSize = page.pageSize;
+        this.paging.pageIndex = 0;
+      }
+      this.getList();
     }
-    this.getList();
   }
 
   private getList() {
 
     this.isLoading = true;
-
-    const filter = new FilterModel();
-    filter.text = this.searchText;
-    filter.paging.pageIndex = this.paging.pageIndex;
-    filter.paging.pageSize = this.paging.pageSize;
-    this.identififcationService.getList(filter).subscribe((response: ResponseModel) => {
-      if (response.responseStatus === ResponseStatus.success) {
+    this.identificationService.getList(this.paging, this.searchText).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
-        this.isLoading = false;
       }
-    });
-  }
-
-  private deleteItem(itemId: number) {
-    this.isLoading = true;
-    const model = { id: itemId, action: FormActionStatus.Delete } as IdentificationTypeViewModel;
-
-    this.identififcationService.save(model).subscribe((response: ResponseModel) => {
       this.isLoading = false;
-      if (response) {
-        this.getList();
-      }
     });
   }
-
 }

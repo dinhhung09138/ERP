@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
 using Database.Sql.ERP;
-using DataBase.Sql.ERP.Entities.HR;
+using Database.Sql.ERP.Entities.HR;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;
@@ -111,26 +111,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(EmployeeWorkingStatusModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-
-        private async Task<ResponseModel> Insert(EmployeeWorkingStatusModel model)
+        public async Task<ResponseModel> Insert(EmployeeWorkingStatusModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -159,7 +140,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(EmployeeWorkingStatusModel model)
+        public async Task<ResponseModel> Update(EmployeeWorkingStatusModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -191,13 +172,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(EmployeeWorkingStatusModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                EmployeeWorkingStatus md = await _context.EmployeeWorkingStatusRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                EmployeeWorkingStatus md = await _context.EmployeeWorkingStatusRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

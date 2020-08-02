@@ -1,0 +1,14 @@
+
+
+.alert {
+  padding: .75rem 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0rem;
+}
+
+.alert-success {
+  color: #09710d;
+  background-color: #adefbd;
+  border-color: #adefbd;
+}

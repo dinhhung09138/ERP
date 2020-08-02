@@ -10,31 +10,45 @@ namespace API.Training.Controllers
     [ApiController]
     public class TrainingCenterContactController : ControllerBase
     {
-        private readonly ITrainingCenterContactService _TrainingCenterContactService;
+        private readonly ITrainingCenterContactService _trainingCenterContactService;
 
-        public TrainingCenterContactController(ITrainingCenterContactService TrainingCenterContactService)
+        public TrainingCenterContactController(ITrainingCenterContactService trainingCenterContactService)
         {
-            _TrainingCenterContactService = TrainingCenterContactService;
+            _trainingCenterContactService = trainingCenterContactService;
         }
 
         [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
         {
-            var response = await _TrainingCenterContactService.GetList(filter);
+            var response = await _trainingCenterContactService.GetList(filter);
             return response;
         }
 
         [HttpGet, Route("item")]
-        public async Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item([FromQuery] int id)
         {
-            var response = await _TrainingCenterContactService.Item(id);
+            var response = await _trainingCenterContactService.Item(id);
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(TrainingCenterContactModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert([FromBody] TrainingCenterContactModel model)
         {
-            var response = await _TrainingCenterContactService.Save(model);
+            var response = await _trainingCenterContactService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update([FromBody] TrainingCenterContactModel model)
+        {
+            var response = await _trainingCenterContactService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete([FromQuery] int id)
+        {
+            var response = await _trainingCenterContactService.Delete(id);
             return response;
         }
     }

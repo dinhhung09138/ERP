@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.HR;
-using DataBase.Sql.HR.Entities;
+using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -13,8 +13,8 @@ namespace Service.HR
 {
     public class CommendationService : ICommendationService
     {
-        private readonly IHRUnitOfWork _context;
-        public CommendationService(IHRUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public CommendationService(IERPUnitOfWork context)
         {
             _context = context;
         }
@@ -111,26 +111,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(CommendationModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch(model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-
-        private async Task<ResponseModel> Insert(CommendationModel model)
+        public async Task<ResponseModel> Insert(CommendationModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -158,7 +139,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(CommendationModel model)
+        public async Task<ResponseModel> Update(CommendationModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -190,13 +171,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(CommendationModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Commendation md = await _context.CommendationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Commendation md = await _context.CommendationRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

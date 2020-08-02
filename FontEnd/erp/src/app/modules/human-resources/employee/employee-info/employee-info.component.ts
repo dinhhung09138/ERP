@@ -160,7 +160,7 @@ export class EmployeeInfoComponent implements OnInit {
       this.employeeForm.get('employeeWorkingStatusId').enable();
       this.employeeForm.get('basicSalary').enable();
 
-      if (this.formAction === FormActionStatus.Create) {
+      if (this.formAction === FormActionStatus.Insert) {
         this.employeeForm.get('employeeCode').enable();
         this.elm.nativeElement.querySelector('#employeeCode').focus();
       } else {
@@ -173,7 +173,7 @@ export class EmployeeInfoComponent implements OnInit {
 
   checkFormAction() {
     if (this.router.url.indexOf('/employee/new') > 0) {
-      this.initFormControl(FormActionStatus.Create);
+      this.initFormControl(FormActionStatus.Insert);
       this.isEditEmployee = true;
     } else if (this.router.url.indexOf('/employee/edit/') > 0) {
       this.initFormControl(FormActionStatus.Update);

@@ -9,10 +9,16 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-lg-9 col-md-8 col-sm-6">
-            <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i> Thêm mới</button>
-            <button class="btn btn-outline-info" (click)="onImportClick()"><i class="fa fa-paperclip"></i> Nhập</button>
-            <button class="btn btn-outline-info" (click)="onExportClick()"><i class="fa fa-sign-in"></i> Xuất file</button>
+          <div class="col-lg-9 col-md-8 col-sm-6 form-group">
+            <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i>
+              Thêm mới
+            </button>
+            <button class="btn btn-outline-info" (click)="onImportClick()"><i class="fa fa-paperclip"></i>
+              Nhập
+            </button>
+            <button class="btn btn-outline-info" (click)="onExportClick()"><i class="fa fa-sign-in"></i>
+              Xuất file
+            </button>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
             <div class="input-group" *ngIf="paging.length > 0">

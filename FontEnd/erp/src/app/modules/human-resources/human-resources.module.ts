@@ -1,3 +1,4 @@
+import { ApiService } from './../../core/services/api.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HumanResourcesComponent } from './human-resources.component';
@@ -15,6 +16,7 @@ import { WardResolver } from './configuration/ward/ward.resolver';
     HumanResourceRoutingModule,
   ],
   providers: [
+    ApiService,
     DistrictResolver,
     WardResolver,
     ProvinceService,

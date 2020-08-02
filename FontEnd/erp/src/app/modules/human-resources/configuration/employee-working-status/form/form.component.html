@@ -16,7 +16,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <label class="label">Mã</label>
                   <mat-form-field class="form-control">
-                    <input matInput id="code" formControlName="code" maxlength="10" tabindex="1" />
+                    <input matInput id="code" formControlName="code" maxlength="10" tabindex="1" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && workingStatusForm.controls['code'].errors?.required">
                     Vui lòng điền thông tin
@@ -27,7 +27,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <label class="label">Tên</label>
                   <mat-form-field class="form-control">
-                    <input matInput id="name" formControlName="name" maxlength="100" tabindex="2" />
+                    <input matInput id="name" formControlName="name" maxlength="100" tabindex="2" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && workingStatusForm.controls['name'].errors?.required">
                     Vui lòng điền thông tin
@@ -45,7 +45,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                   <label class="label">Thứ tự</label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="precedence" maxlength="3" tabindex="4" />
+                    <input matInput appPrecedence formControlName="precedence" maxlength="3" tabindex="4" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && workingStatusForm.controls['precedence'].errors?.required">
                     Vui lòng điền thông tin

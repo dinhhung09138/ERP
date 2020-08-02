@@ -3,7 +3,7 @@
     <div class="card box" [class.opened]="isShow">
       <div class="card-header">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Relationship Type</div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{ formTitle }} Type</div>
         </div>
       </div>
       <div class="card-body">
@@ -14,7 +14,7 @@
             <form [formGroup]="relationshipTypeForm" (submit)="!isLoading ? onSubmitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Name</label>
+                  <label class="label">Tên</label>
                   <mat-form-field class="form-control">
                     <input matInput id="name" formControlName="name" maxlength="100" tabindex="1" autocomplete="off"/>
                   </mat-form-field>
@@ -25,16 +25,14 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Description</label>
+                  <label class="label">Mô tả</label>
                   <textarea rows="3" formControlName="description" maxlength="255" class="form-control"
                     tabindex="2"></textarea>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Precedence</label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                  <label class="label">Thứ tự</label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="precedence" maxlength="3" tabindex="3" autocomplete="off" />
+                    <input matInput appPrecedence formControlName="precedence" maxlength="3" tabindex="3" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && relationshipTypeForm.controls['precedence'].errors?.required">
                     Vui lòng điền thông tin
@@ -43,19 +41,19 @@
                     Số thứ tự không hợp lệ
                   </mat-error>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                   <label class="label">Active</label>
-                  <mat-checkbox class="ml-10" tabindex="3" formControlName="isActive">
-                  </mat-checkbox>
+                  <div class="input-group">
+                    <mat-checkbox class="ml-10" tabindex="4" formControlName="isActive">
+                    </mat-checkbox>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" value="Save" tabindex="4">
-                  <button type="button" class="btn btn-warning" tabindex="5" (click)="onResetClick()"> Reset </button>
-                  <button type="button" class="btn btn-secondary" tabindex="6" (click)="onCloseClick()"> Close </button>
+                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="5">
+                  <button type="button" class="btn btn-warning" tabindex="6" (click)="onResetClick()"> Đặt lại </button>
+                  <button type="button" class="btn btn-secondary" tabindex="7" (click)="onCloseClick()"> Đóng </button>
                 </div>
               </div>
             </form>

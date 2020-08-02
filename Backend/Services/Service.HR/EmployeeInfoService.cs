@@ -1,7 +1,5 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.HR;
-using DataBase.Sql.HR.Entities;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;
@@ -10,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.HR;
 
 namespace Service.HR
 {
     public class EmployeeInfoService : IEmployeeInfoService
     {
-        private readonly IHRUnitOfWork _context;
-        public EmployeeInfoService(IHRUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public EmployeeInfoService(IERPUnitOfWork context)
         {
             _context = context;
         }
@@ -91,41 +91,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(EmployeeInfoModel model)
-        {
-            ResponseModel response = new ResponseModel();
-
-            if (model.Action != Core.CommonModel.Enums.FormActionStatus.Delete)
-            {
-                var employeeInfo = await _context.EmployeeInfoRepository.FirstOrDefaultAsync(m => m.EmployeeId == model.EmployeeId);
-
-                if (employeeInfo != null)
-                {
-                    model.Action = Core.CommonModel.Enums.FormActionStatus.Update;
-                }
-                else
-                {
-                    model.Action = Core.CommonModel.Enums.FormActionStatus.Insert;
-                }
-            }
-            
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-
-        private async Task<ResponseModel> Insert(EmployeeInfoModel model)
+        public async Task<ResponseModel> Insert(EmployeeInfoModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -161,7 +127,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(EmployeeInfoModel model)
+        public async Task<ResponseModel> Update(EmployeeInfoModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -201,13 +167,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(EmployeeInfoModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                EmployeeInfo md = await _context.EmployeeInfoRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                EmployeeInfo md = await _context.EmployeeInfoRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

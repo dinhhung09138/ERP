@@ -1,6 +1,7 @@
+import { NotifyService } from './../services/notify.service';
+import { DialogDataInterface } from './../interfaces/dialog-data.interface';
+import { DialogService } from './../services/dialog.service';
 import { HttpErrorStatusEnum } from './../enums/http-error.enum';
-import { ErrorDialogComponent } from './../../shared/components/error-dialog/error-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { catchError, retry, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -11,7 +12,9 @@ import { ResponseStatus } from '../enums/response-status.enum';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialogService: DialogService,
+    private notifyService: NotifyService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -20,11 +23,14 @@ export class ErrorInterceptor implements HttpInterceptor {
 
         if (event instanceof HttpResponse) {
           const response = event.body as ResponseModel;
-          if (response.responseStatus === ResponseStatus.error) {
-            this.dialog.open(ErrorDialogComponent, {
-              width: '300px',
-              data: { isError: true, httpError: HttpErrorStatusEnum.serverNotFound }
-            });
+
+          switch (response.responseStatus) {
+            case ResponseStatus.error:
+              this.notifyService.notifyServerError(response.errors.join(''));
+              break;
+            case ResponseStatus.warning:
+              this.notifyService.notifyServerWarning(response.errors.join(''));
+              break;
           }
         }
 
@@ -37,22 +43,25 @@ export class ErrorInterceptor implements HttpInterceptor {
 
         switch(error.status) {
           case 500:
-            this.dialog.open(ErrorDialogComponent, {
-              width: '300px',
-              data: { isError: true, httpError: HttpErrorStatusEnum.serverNotFound }
-            });
+            const error500 = {
+              isError: true,
+              httpError: HttpErrorStatusEnum.serverNotFound
+            } as DialogDataInterface;
+            this.dialogService.openErrorDialog(error500);
             break;
           case 404:
-            this.dialog.open(ErrorDialogComponent, {
-              width: '300px',
-              data: { isError: true, httpError: HttpErrorStatusEnum.notFound }
-            });
+            const error404 = {
+              isError: true,
+              httpError: HttpErrorStatusEnum.notFound
+            } as DialogDataInterface;
+            this.dialogService.openErrorDialog(error404);
             break;
           case 204:
-            this.dialog.open(ErrorDialogComponent, {
-              width: '300px',
-              data: { isError: true, httpError: HttpErrorStatusEnum.noContent }
-            });
+            const error204 = {
+              isError: true,
+              httpError: HttpErrorStatusEnum.noContent
+            } as DialogDataInterface;
+            this.dialogService.openErrorDialog(error204);
             break;
         }
         console.log(error.error);

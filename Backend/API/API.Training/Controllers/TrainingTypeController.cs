@@ -10,38 +10,52 @@ namespace API.Training.Controllers
     [ApiController]
     public class TrainingTypeController : ControllerBase
     {
-        private readonly ITrainingTypeService _TrainingTypeService;
+        private readonly ITrainingTypeService _trainingTypeService;
 
-        public TrainingTypeController(ITrainingTypeService TrainingTypeService)
+        public TrainingTypeController(ITrainingTypeService trainingTypeService)
         {
-            _TrainingTypeService = TrainingTypeService;
+            _trainingTypeService = trainingTypeService;
         }
 
         [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
         {
-            var response = await _TrainingTypeService.GetList(filter);
+            var response = await _trainingTypeService.GetList(filter);
             return response;
         }
 
         [HttpGet, Route("dropdown")]
         public async Task<ResponseModel> Dropdown()
         {
-            var response = await _TrainingTypeService.DropDownSelection();
+            var response = await _trainingTypeService.DropDownSelection();
             return response;
         }
 
         [HttpGet, Route("item")]
-        public async Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item([FromQuery] int id)
         {
-            var response = await _TrainingTypeService.Item(id);
+            var response = await _trainingTypeService.Item(id);
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(TrainingTypeModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert([FromBody] TrainingTypeModel model)
         {
-            var response = await _TrainingTypeService.Save(model);
+            var response = await _trainingTypeService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update([FromBody] TrainingTypeModel model)
+        {
+            var response = await _trainingTypeService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete([FromQuery] int id)
+        {
+            var response = await _trainingTypeService.Delete(id);
             return response;
         }
     }

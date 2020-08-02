@@ -10,31 +10,45 @@ namespace API.Training.Controllers
     [ApiController]
     public class TrainingCourseDocumentController : ControllerBase
     {
-        private readonly ITrainingCourseDocumentService _TrainingCourseDocumentService;
+        private readonly ITrainingCourseDocumentService _trainingCourseDocumentService;
 
-        public TrainingCourseDocumentController(ITrainingCourseDocumentService TrainingCourseDocumentService)
+        public TrainingCourseDocumentController(ITrainingCourseDocumentService trainingCourseDocumentService)
         {
-            _TrainingCourseDocumentService = TrainingCourseDocumentService;
+            _trainingCourseDocumentService = trainingCourseDocumentService;
         }
 
         [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
         {
-            var response = await _TrainingCourseDocumentService.GetList(filter);
+            var response = await _trainingCourseDocumentService.GetList(filter);
             return response;
         }
 
         [HttpGet, Route("item")]
-        public async Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item([FromQuery] int id)
         {
-            var response = await _TrainingCourseDocumentService.Item(id);
+            var response = await _trainingCourseDocumentService.Item(id);
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(TrainingCourseDocumentModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert([FromBody] TrainingCourseDocumentModel model)
         {
-            var response = await _TrainingCourseDocumentService.Save(model);
+            var response = await _trainingCourseDocumentService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update([FromBody] TrainingCourseDocumentModel model)
+        {
+            var response = await _trainingCourseDocumentService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete([FromQuery] int id)
+        {
+            var response = await _trainingCourseDocumentService.Delete(id);
             return response;
         }
     }

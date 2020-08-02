@@ -21,6 +21,9 @@ export class ErrorDialogComponent implements OnInit {
     this.errorMessage = '';
     if (this.data.isError === true) {
       switch(this.data.httpError) {
+        case HttpErrorStatusEnum.warningError:
+          this.errorMessage = this.data.message;
+          break;
         case HttpErrorStatusEnum.noInternet:
           this.errorMessage = 'Vui lòng kiểm tra đường truyền internet';
           break;

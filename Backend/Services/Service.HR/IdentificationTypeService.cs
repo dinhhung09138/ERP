@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.HR;
-using DataBase.Sql.HR.Entities;
+using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -13,8 +13,8 @@ namespace Service.HR
 {
     public class IdentificationTypeService : IIdentificationTypeService
     {
-        private readonly IHRUnitOfWork _context;
-        public IdentificationTypeService(IHRUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public IdentificationTypeService(IERPUnitOfWork context)
         {
             _context = context;
         }
@@ -103,26 +103,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(IdentificationTypeModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-
-        private async Task<ResponseModel> Insert(IdentificationTypeModel model)
+        public async Task<ResponseModel> Insert(IdentificationTypeModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -149,7 +130,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(IdentificationTypeModel model)
+        public async Task<ResponseModel> Update(IdentificationTypeModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -180,13 +161,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(IdentificationTypeModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                IdentificationType md = await _context.IdentificationTypeRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                IdentificationType md = await _context.IdentificationTypeRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

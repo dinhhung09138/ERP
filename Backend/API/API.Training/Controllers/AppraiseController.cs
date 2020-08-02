@@ -10,38 +10,52 @@ namespace API.Training.Controllers
     [ApiController]
     public class AppraiseController : ControllerBase
     {
-        private readonly IAppraiseService _AppraiseService;
+        private readonly IAppraiseService _appraiseService;
 
-        public AppraiseController(IAppraiseService AppraiseService)
+        public AppraiseController(IAppraiseService appraiseService)
         {
-            _AppraiseService = AppraiseService;
+            _appraiseService = appraiseService;
         }
 
         [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
         {
-            var response = await _AppraiseService.GetList(filter);
+            var response = await _appraiseService.GetList(filter);
             return response;
         }
 
         [HttpGet, Route("dropdown")]
         public async Task<ResponseModel> Dropdown()
         {
-            var response = await _AppraiseService.DropDownSelection();
+            var response = await _appraiseService.DropDownSelection();
             return response;
         }
 
         [HttpGet, Route("item")]
-        public async Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item([FromQuery] int id)
         {
-            var response = await _AppraiseService.Item(id);
+            var response = await _appraiseService.Item(id);
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(AppraiseModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert([FromBody] AppraiseModel model)
         {
-            var response = await _AppraiseService.Save(model);
+            var response = await _appraiseService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update([FromBody] AppraiseModel model)
+        {
+            var response = await _appraiseService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete([FromQuery] int id)
+        {
+            var response = await _appraiseService.Delete(id);
             return response;
         }
     }

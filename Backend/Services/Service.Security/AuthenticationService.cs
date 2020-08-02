@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.Services.Interfaces;
 using Core.Utility.Security;
-using Database.Sql.Security;
+using Database.Sql.ERP;
 using Service.Security.Interfaces;
 using System;
 using System.Threading.Tasks;
@@ -11,8 +11,8 @@ namespace Service.Security
     public class AuthenticationService : IAuthenticationService
     {
         private IJwtTokenSecurityService _tokenService;
-        private ISecurityUnitOfWork _context;
-        public AuthenticationService(IJwtTokenSecurityService tokenService, ISecurityUnitOfWork context)
+        private IERPUnitOfWork _context;
+        public AuthenticationService(IJwtTokenSecurityService tokenService, IERPUnitOfWork context)
         {
             _tokenService = tokenService;
             _context = context;

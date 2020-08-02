@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: ProvinceComponent,
-    data: { title: 'Province' }
+    data: { title: 'Tỉnh/Thành phố' }
   }
 ];
 

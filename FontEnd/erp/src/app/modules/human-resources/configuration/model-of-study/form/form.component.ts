@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ModelOfStudyService } from '../model-of-study.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -14,14 +14,18 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 })
 export class ModelOfStudyFormComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
+
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   modelOfStudyForm: FormGroup;
+  item: ModelOfStudyViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -40,6 +44,10 @@ export class ModelOfStudyFormComponent implements OnInit {
 
   initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.modelOfStudyForm.get('id').setValue(0);
@@ -64,19 +72,29 @@ export class ModelOfStudyFormComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.formAction !== FormActionStatus.Create) {
-      this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Insert) {
+      this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Insert:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -89,15 +107,11 @@ export class ModelOfStudyFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.modelOfStudyForm.value as ModelOfStudyViewModel;
-    model.action = this.formAction;
 
-    this.modelOfStudyService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.modelOfStudyService.save(this.modelOfStudyForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -107,14 +121,18 @@ export class ModelOfStudyFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.modelOfStudyService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.modelOfStudyForm.get('id').setValue(response.result.id);
-        this.modelOfStudyForm.get('name').setValue(response.result.name);
-        this.modelOfStudyForm.get('precedence').setValue(response.result.precedence);
-        this.modelOfStudyForm.get('isActive').setValue(response.result.isActive);
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
   }
 
+  private setDataToForm(data: ModelOfStudyViewModel) {
+    this.modelOfStudyForm.get('id').setValue(data.id);
+    this.modelOfStudyForm.get('name').setValue(data.name);
+    this.modelOfStudyForm.get('precedence').setValue(data.precedence);
+    this.modelOfStudyForm.get('isActive').setValue(data.isActive);
+  }
 }

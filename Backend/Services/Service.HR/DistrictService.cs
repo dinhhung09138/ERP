@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
 using Database.Sql.ERP;
-using DataBase.Sql.ERP.Entities.Common;
+using Database.Sql.ERP.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -114,26 +114,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(DistrictModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-
-        private async Task<ResponseModel> Insert(DistrictModel model)
+        public async Task<ResponseModel> Insert(DistrictModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -161,7 +142,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(DistrictModel model)
+        public async Task<ResponseModel> Update(DistrictModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -193,13 +174,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(DistrictModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                District md = await _context.DistrictRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                District md = await _context.DistrictRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

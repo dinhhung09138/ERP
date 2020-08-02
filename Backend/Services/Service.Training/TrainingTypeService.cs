@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.Training;
-using Database.Sql.Training.Entities;
+using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.Training;
 using Microsoft.EntityFrameworkCore;
 using Service.Training.Interfaces;
 using Service.Training.Models;
@@ -13,8 +13,8 @@ namespace Service.Training
 {
     public class TrainingTypeService : ITrainingTypeService
     {
-        private readonly ITrainingUnitOfWork _context;
-        public TrainingTypeService(ITrainingUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public TrainingTypeService(IERPUnitOfWork context)
         {
             _context = context;
         }
@@ -112,26 +112,7 @@ namespace Service.Training
             return response;
         }
 
-        public async Task<ResponseModel> Save(TrainingTypeModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-
-        private async Task<ResponseModel> Insert(TrainingTypeModel model)
+        public async Task<ResponseModel> Insert(TrainingTypeModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -158,7 +139,7 @@ namespace Service.Training
             return response;
         }
 
-        private async Task<ResponseModel> Update(TrainingTypeModel model)
+        public async Task<ResponseModel> Update(TrainingTypeModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -190,13 +171,13 @@ namespace Service.Training
             return response;
         }
 
-        private async Task<ResponseModel> Delete(TrainingTypeModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                TrainingType md = await _context.TrainingTypeRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                TrainingType md = await _context.TrainingTypeRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {

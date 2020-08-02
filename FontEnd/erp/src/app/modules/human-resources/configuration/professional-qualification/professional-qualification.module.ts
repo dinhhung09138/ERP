@@ -6,7 +6,6 @@ import { ProfessionalQualificationService } from './professional-qualification.s
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -15,9 +14,9 @@ const route: Routes = [
   {
     path: '',
     component: ProfessionalQualificationComponent,
-    data: { title: 'Professional Qualification' }
+    data: { title: 'Trình độ chuyên môn' }
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -29,7 +28,6 @@ const route: Routes = [
     RouterModule.forChild(route),
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,
     MatCheckboxModule,
     MatInputModule,
     MatDialogModule,

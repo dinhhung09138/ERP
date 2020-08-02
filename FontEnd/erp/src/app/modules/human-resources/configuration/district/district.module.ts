@@ -15,9 +15,9 @@ const route: Routes = [
   {
     path: '',
     component: DistrictComponent,
-    data: { title: 'District' }
+    data: { title: 'Quận/Huyện' }
   }
-]
+];
 
 @NgModule({
   declarations: [

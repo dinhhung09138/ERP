@@ -1,1 +1,9 @@
 
+.card {
+  border: 1px solid #bd2130;
+}
+
+.card-header {
+  background: #bd2130;
+  border: 1px solid #bd2130;
+}

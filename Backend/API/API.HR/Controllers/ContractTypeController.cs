@@ -18,7 +18,7 @@ namespace API.HR.Controllers
         }
 
         [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
         {
             var response = await _contractTypeService.GetList(filter);
             return response;
@@ -32,16 +32,30 @@ namespace API.HR.Controllers
         }
 
         [HttpGet, Route("item")]
-        public async Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item([FromQuery] int id)
         {
             var response = await _contractTypeService.Item(id);
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(ContractTypeModel model)
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert([FromBody] ContractTypeModel model)
         {
-            var response = await _contractTypeService.Save(model);
+            var response = await _contractTypeService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update([FromBody] ContractTypeModel model)
+        {
+            var response = await _contractTypeService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete([FromQuery] int id)
+        {
+            var response = await _contractTypeService.Delete(id);
             return response;
         }
     }

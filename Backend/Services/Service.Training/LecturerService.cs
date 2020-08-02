@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Database.Sql.Training;
-using Database.Sql.Training.Entities;
+using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.Training;
 using Microsoft.EntityFrameworkCore;
 using Service.Training.Interfaces;
 using Service.Training.Models;
@@ -13,8 +13,8 @@ namespace Service.Training
 {
     public class LecturerService : ILecturerService
     {
-        private readonly ITrainingUnitOfWork _context;
-        public LecturerService(ITrainingUnitOfWork context)
+        private readonly IERPUnitOfWork _context;
+        public LecturerService(IERPUnitOfWork context)
         {
             _context = context;
         }
@@ -130,25 +130,7 @@ namespace Service.Training
             return response;
         }
 
-        public async Task<ResponseModel> Save(LecturerModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-
-        private async Task<ResponseModel> Insert(LecturerModel model)
+        public async Task<ResponseModel> Insert(LecturerModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -183,7 +165,7 @@ namespace Service.Training
             return response;
         }
 
-        private async Task<ResponseModel> Update(LecturerModel model)
+        public async Task<ResponseModel> Update(LecturerModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -223,13 +205,13 @@ namespace Service.Training
             return response;
         }
 
-        private async Task<ResponseModel> Delete(LecturerModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Lecturer md = await _context.LecturerRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Lecturer md = await _context.LecturerRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {
