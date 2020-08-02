@@ -1,5 +1,5 @@
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +30,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
   ],
   providers: [
+    Title,
     HttpClientModule,
     SessionContext,
     AuthenticationGuard,
