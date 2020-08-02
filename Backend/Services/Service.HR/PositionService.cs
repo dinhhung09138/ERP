@@ -110,24 +110,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Save(PositionModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            switch (model.Action)
-            {
-                case Core.CommonModel.Enums.FormActionStatus.Insert:
-                    response = await Insert(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Update:
-                    response = await Update(model);
-                    break;
-                case Core.CommonModel.Enums.FormActionStatus.Delete:
-                    response = await Delete(model);
-                    break;
-            }
-            return response;
-        }
-        private async Task<ResponseModel> Insert(PositionModel model)
+        public async Task<ResponseModel> Insert(PositionModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -140,7 +123,7 @@ namespace Service.HR
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
                 //Khi nào có chức năng login rồi thêm CreateBy
-               // md.CreateBy = 
+                // md.CreateBy = 
                 md.CreateDate = DateTime.Now;
                 md.Deleted = false;
 
@@ -156,7 +139,7 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Update(PositionModel model)
+        public async Task<ResponseModel> Update(PositionModel model)
         {
             ResponseModel response = new ResponseModel();
 
@@ -188,13 +171,13 @@ namespace Service.HR
             return response;
         }
 
-        private async Task<ResponseModel> Delete(PositionModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Position md = await _context.PositionRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Position md = await _context.PositionRepository.FirstOrDefaultAsync(m => m.Id == id);
 
                 if (md == null)
                 {
@@ -202,7 +185,7 @@ namespace Service.HR
                 }
 
                 md.Deleted = true;
-               // md.UpdateBy = ;
+                // md.UpdateBy = ;
                 md.UpdateDate = DateTime.Now;
 
                 _context.PositionRepository.Update(md);

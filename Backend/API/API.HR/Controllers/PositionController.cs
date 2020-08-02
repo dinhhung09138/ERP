@@ -44,11 +44,5 @@ namespace API.HR.Controllers
             return response;
         }
 
-        [HttpPost, Route("save")]
-        public async Task<ResponseModel> Save(PositionModel model)
-        {
-            var response = await _positionService.Save(model);
-            return response;
-        }
     }
 }

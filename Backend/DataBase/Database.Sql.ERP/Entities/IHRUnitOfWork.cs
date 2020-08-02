@@ -1,5 +1,6 @@
 ﻿using Core.DataAccess;
 using Database.Sql.ERP.Entities.HR;
+using DataBase.Sql.ERP.Entities.HR;
 
 namespace Database.Sql.ERP.Entities
 {
@@ -29,5 +30,6 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<Ranking> RankingRepository { get; }
         ITableGenericRepository<RelationshipType> RelationshipTypeRepository { get; }
         ITableGenericRepository<Religion> ReligionRepository { get; }
+        ITableGenericRepository<Position> PositionRepository { get; }
     }
 }

@@ -70,7 +70,7 @@ export class PositionFormComponent implements OnInit {
       this.PositionForm.get('precedence').setValue(1);
       this.PositionForm.get('isActive').setValue(true);
 
-      if (formStatus === FormActionStatus.Create) {
+      if (formStatus === FormActionStatus.Insert) {
         this.elm.nativeElement.querySelector('#code').focus();
         this.PositionForm.get('code').enable();
       } else {
@@ -81,8 +81,8 @@ export class PositionFormComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.formAction !== FormActionStatus.Create) {
-      this.initFormControl(FormActionStatus.Create);
+    if (this.formAction !== FormActionStatus.Insert) {
+      this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#code').focus();
     this.formTitle = 'Thêm mới';
