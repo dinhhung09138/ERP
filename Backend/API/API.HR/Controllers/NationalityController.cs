@@ -18,7 +18,7 @@ namespace API.HR.Controllers
         }
 
         [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
         {
             var response = await _nationalityService.GetList(filter);
             return response;
@@ -32,30 +32,30 @@ namespace API.HR.Controllers
         }
 
         [HttpGet, Route("item")]
-        public async Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item([FromQuery] int id)
         {
             var response = await _nationalityService.Item(id);
             return response;
         }
 
         [HttpPost, Route("insert")]
-        public async Task<ResponseModel> Insert(NationalityModel model)
+        public async Task<ResponseModel> Insert([FromBody] NationalityModel model)
         {
             var response = await _nationalityService.Insert(model);
             return response;
         }
 
         [HttpPut, Route("update")]
-        public async Task<ResponseModel> Update(NationalityModel model)
+        public async Task<ResponseModel> Update([FromBody] NationalityModel model)
         {
             var response = await _nationalityService.Update(model);
             return response;
         }
 
         [HttpDelete, Route("delete")]
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete([FromQuery] int id)
         {
-            var response = await _nationalityService.Item(id);
+            var response = await _nationalityService.Delete(id);
             return response;
         }
     }

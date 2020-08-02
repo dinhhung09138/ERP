@@ -18,37 +18,37 @@ namespace API.Training.Controllers
         }
 
         [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
         {
             var response = await _appraiseSectionService.GetList(filter);
             return response;
         }
 
         [HttpGet, Route("item")]
-        public async Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item([FromQuery] int id)
         {
             var response = await _appraiseSectionService.Item(id);
             return response;
         }
 
         [HttpPost, Route("insert")]
-        public async Task<ResponseModel> Insert(AppraiseSectionModel model)
+        public async Task<ResponseModel> Insert([FromBody] AppraiseSectionModel model)
         {
             var response = await _appraiseSectionService.Insert(model);
             return response;
         }
 
         [HttpPut, Route("update")]
-        public async Task<ResponseModel> Update(AppraiseSectionModel model)
+        public async Task<ResponseModel> Update([FromBody] AppraiseSectionModel model)
         {
             var response = await _appraiseSectionService.Update(model);
             return response;
         }
 
         [HttpDelete, Route("delete")]
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete([FromQuery] int id)
         {
-            var response = await _appraiseSectionService.Item(id);
+            var response = await _appraiseSectionService.Delete(id);
             return response;
         }
     }
