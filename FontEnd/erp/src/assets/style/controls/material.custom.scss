@@ -160,3 +160,7 @@
   border-color: #dc3545;
   box-shadow: unset;
 }
+
+.mat-progress-spinner.mat-accent circle, .mat-spinner.mat-accent circle {
+  stroke: $primary-background-color !important;
+}

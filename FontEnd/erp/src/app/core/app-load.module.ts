@@ -1,3 +1,4 @@
+import { LoadingService } from './services/loading.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotifyService } from './services/notify.service';
@@ -20,6 +21,7 @@ import { AppLoadService } from './services/app-load.service';
     AppLoadService,
     DialogService,
     NotifyService,
+    LoadingService,
     { provide: APP_INITIALIZER, useFactory: (config: AppLoadService) => () => config.getUrlSetting(), deps: [AppLoadService], multi: true },
   ],
   declarations: []
