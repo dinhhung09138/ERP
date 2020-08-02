@@ -3,7 +3,7 @@
     <div class="card box" [class.opened]="isShow">
       <div class="card-header">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Discipline</div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{ formTitle }}</div>
         </div>
       </div>
       <div class="card-body">
@@ -14,41 +14,42 @@
             <form [formGroup]="disciplineForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Name</label>
+                  <label class="label">Tên</label>
                   <mat-form-field class="form-control">
-                    <input matInput id="name" formControlName="name" maxlength="200" tabindex="1" />
+                    <input matInput id="name" formControlName="name" maxlength="200" tabindex="1" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && disciplineForm.controls['name'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Description</label>
+                  <label class="label">Mô tả</label>
                   <textarea rows="3" formControlName="description" maxlength="255" class="form-control"
                     tabindex="2"></textarea>
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Money</label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                  <label class="label">Số tiền</label>
                   <mat-form-field class="form-control">
-                    <input matInput appFormatCurrency formControlName="money" tabindex="4" maxlength="15" />
+                    <input matInput appFormatCurrency formControlName="money" tabindex="4" maxlength="15" autocomplete="off" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && disciplineForm.controls['money'].errors?.money">Money is invalid</mat-error>
+                  <mat-error *ngIf="isSubmit && disciplineForm.controls['money'].errors?.required">Vui lòng điền thông tin</mat-error>
+                  <mat-error *ngIf="isSubmit && disciplineForm.controls['money'].errors?.money">Số tiền không hợp lệ</mat-error>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Active</label>
-                  <mat-checkbox class="ml-10" tabindex="4" formControlName="isActive">
-                  </mat-checkbox>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                  <label class="label">Hoạt động</label>
+                  <div class="input-group">
+                    <mat-checkbox class="ml-10" tabindex="4" formControlName="isActive">
+                    </mat-checkbox>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" value="Save" tabindex="5">
-                  <button type="button" class="btn btn-warning" tabindex="6" (click)="onResetClick()"> Reset </button>
-                  <button type="button" class="btn btn-secondary" tabindex="7" (click)="onCloseClick()"> Close </button>
+                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="5">
+                  <button type="button" class="btn btn-warning" tabindex="6" (click)="onResetClick()"> Đặt lại </button>
+                  <button type="button" class="btn btn-secondary" tabindex="7" (click)="onCloseClick()"> Đóng </button>
                 </div>
               </div>
             </form>

@@ -22,7 +22,18 @@ import { AppLoadService } from './services/app-load.service';
     DialogService,
     NotifyService,
     LoadingService,
-    { provide: APP_INITIALIZER, useFactory: (config: AppLoadService) => () => config.getUrlSetting(), deps: [AppLoadService], multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (config: AppLoadService) => () => config.getUrlSetting(),
+      deps: [AppLoadService],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (config: AppLoadService) => () => config.getApplicationConfig(),
+      deps: [AppLoadService],
+      multi: true
+    },
   ],
   declarations: []
 })

@@ -172,6 +172,5 @@ export class WardFormComponent implements OnInit {
       this.wardForm.get('precedence').setValue(data.precedence);
       this.wardForm.get('isActive').setValue(data.isActive);
     }, 300);
-
   }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { DisciplineService } from '../discipline.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -15,14 +15,18 @@ import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 })
 export class DisciplineFormComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
+
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   disciplineForm: FormGroup;
+  item: DisciplineViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -35,7 +39,7 @@ export class DisciplineFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       description: [''],
-      money: [0, [AppValidator.money]],
+      money: [0, [Validators.required, AppValidator.money]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);
@@ -43,6 +47,10 @@ export class DisciplineFormComponent implements OnInit {
 
   initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.disciplineForm.get('id').setValue(0);
@@ -74,15 +82,26 @@ export class DisciplineFormComponent implements OnInit {
     if (this.formAction !== FormActionStatus.Insert) {
       this.initFormControl(FormActionStatus.Insert);
     }
+    this.elm.nativeElement.querySelector('#name').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Insert:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -95,15 +114,11 @@ export class DisciplineFormComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    const model = this.disciplineForm.value as DisciplineViewModel;
-    model.action = this.formAction;
 
-    this.disciplineService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.disciplineService.save(this.disciplineForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -113,15 +128,19 @@ export class DisciplineFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.disciplineService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.disciplineForm.get('id').setValue(response.result.id);
-        this.disciplineForm.get('name').setValue(response.result.name);
-        this.disciplineForm.get('description').setValue(response.result.description);
-        this.disciplineForm.get('money').setValue(this.formatNumber.transform(response.result.money));
-        this.disciplineForm.get('isActive').setValue(response.result.isActive);
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
   }
 
+  private setDataToForm(data: DisciplineViewModel) {
+    this.disciplineForm.get('id').setValue(data.id);
+    this.disciplineForm.get('name').setValue(data.name);
+    this.disciplineForm.get('description').setValue(data.description);
+    this.disciplineForm.get('money').setValue(this.formatNumber.transform(data.money));
+    this.disciplineForm.get('isActive').setValue(data.isActive);
+  }
 }
