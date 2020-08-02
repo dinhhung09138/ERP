@@ -15,9 +15,9 @@ const route: Routes = [
   {
     path: '',
     component: DisciplineComponent,
-    data: { title: 'Discipline' }
+    data: { title: 'Hình thức kỉ luật' }
   }
-]
+];
 
 @NgModule({
   declarations: [
