@@ -3,6 +3,7 @@ using Database.Sql.ERP.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Database.Sql.ERP.Entities.Training;
 using Database.Sql.ERP.Entities.Security;
+using DataBase.Sql.ERP.Entities.HR;
 
 namespace Database.Sql.ERP
 {
@@ -69,6 +70,7 @@ namespace Database.Sql.ERP
         public virtual DbSet<RelationshipType> RelationshipType { get; set; }
 
         public virtual DbSet<Religion> Religion { get; set; }
+        public virtual DbSet<Position> Position { get; set; }
 
         #endregion
 
@@ -138,6 +140,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<Ranking>();
             modelBuilder.Entity<RelationshipType>();
             modelBuilder.Entity<Religion>();
+            modelBuilder.Entity<Position>();
 
             #endregion
 
