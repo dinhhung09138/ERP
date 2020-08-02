@@ -20,10 +20,12 @@ export class CommendationFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isShow = false;
   isSubmit = false;
   isLoading = false;
   commendationForm: FormGroup;
+  item: CommendationViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -36,7 +38,7 @@ export class CommendationFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       description: [''],
-      money: ['0', [AppValidator.money]],
+      money: ['0', [Validators.required, AppValidator.money]],
       isActive: [true]
     });
     this.initFormControl(this.formAction);
@@ -80,15 +82,25 @@ export class CommendationFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Insert:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -100,17 +112,12 @@ export class CommendationFormComponent implements OnInit {
     if (this.commendationForm.invalid) {
       return;
     }
-    console.log(this.commendationForm.value);
     this.isLoading = true;
-    const model = this.commendationForm.value as CommendationViewModel;
-    model.action = this.formAction;
 
-    this.commendationService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.commendationService.save(this.commendationForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -120,15 +127,19 @@ export class CommendationFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.commendationService.item(id).subscribe((response: ResponseModel) => {
-      if (response !== null) {
-        this.commendationForm.get('id').setValue(response.result.id);
-        this.commendationForm.get('name').setValue(response.result.name);
-        this.commendationForm.get('description').setValue(response.result.description);
-        this.commendationForm.get('money').setValue(this.formatNumber.transform(response.result.money));
-        this.commendationForm.get('isActive').setValue(response.result.isActive);
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
   }
 
+  private setDataToForm(data: CommendationViewModel) {
+    this.commendationForm.get('id').setValue(data.id);
+    this.commendationForm.get('name').setValue(data.name);
+    this.commendationForm.get('description').setValue(data.description);
+    this.commendationForm.get('money').setValue(this.formatNumber.transform(data.money));
+    this.commendationForm.get('isActive').setValue(data.isActive);
+  }
 }
