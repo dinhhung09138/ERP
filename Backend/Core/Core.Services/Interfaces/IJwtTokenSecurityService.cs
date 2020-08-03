@@ -14,6 +14,10 @@ namespace Core.Services.Interfaces
         /// <returns>JwtTokenModel.</returns>
         JwtTokenModel CreateToken(UserModel user);
 
+        TokenModel CheckRefreshToken(TokenModel refreshTokenModel);
+
+        bool RevokeToken(TokenModel token);
+
         bool ValidateToken(string token);
     }
 }

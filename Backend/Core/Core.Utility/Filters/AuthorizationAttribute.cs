@@ -13,8 +13,7 @@ namespace Core.Utility.Filters
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            bool isValidToken = (bool)context.HttpContext.Items["isValidToken"];
-            if (isValidToken == false)
+            if (context.HttpContext.Items["isValidToken"] == null || (bool)context.HttpContext.Items["isValidToken"] == false)
             {
                 context.Result = new UnauthorizedResult();
             }

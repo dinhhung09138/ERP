@@ -33,9 +33,9 @@ namespace Core.Services
         /// <param name="logger">ILogger.</param>
         public JwtTokenSecurityService(IConfiguration configuration, IMemoryCache cache, ILoggerService logger)
         {
-            this._configuration = configuration;
-            this._cache = cache;
-            this._logger = logger;
+            _configuration = configuration;
+            _cache = cache;
+            _logger = logger;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Core.Services
                     throw new Exception(ParameterMsg.ParameterInvalid);
                 }
 
-                var jwtSecurityToken = this.GetJwtSecurityToken(user);
+                var jwtSecurityToken = GetJwtSecurityToken(user);
 
                 var token = new JwtTokenModel
                 {
@@ -65,7 +65,7 @@ namespace Core.Services
                 var refreshTokenData = new TokenModel
                 {
                     Token = token.RefreshToken,
-                    UserId = user.Id.ToString(),
+                    UserId = user.Id,
                 };
 
                 var cacheEntryOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(jwtSecurityToken.ValidTo.ToLocalTime());
@@ -80,11 +80,57 @@ namespace Core.Services
             }
         }
 
+        public TokenModel CheckRefreshToken(TokenModel refreshTokenModel)
+        {
+            try
+            {
+                if (refreshTokenModel == null)
+                {
+                    throw new Exception(ParameterMsg.ParameterInvalid);
+                }
+
+                var cacheTokenModel = _cache.Get(refreshTokenModel.Token) as TokenModel;
+
+                // Remove current cache
+                _cache.Remove(refreshTokenModel.Token);
+
+                if (cacheTokenModel != null && cacheTokenModel.UserId == refreshTokenModel.UserId)
+                {
+                    return cacheTokenModel;
+                }
+                return null;
+                
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public bool RevokeToken(TokenModel token)
+        {
+            try
+            {
+                if (token == null)
+                {
+                    throw new Exception(ParameterMsg.ParameterInvalid);
+                }
+
+                _cache.Remove(token.Token);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool ValidateToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             // Get security key from app config
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configuration[JwtConstant.SECRET_KEY]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration[JwtConstant.SECRET_KEY]));
             try
             {
                 tokenHandler.ValidateToken(token, new TokenValidationParameters()
@@ -111,7 +157,7 @@ namespace Core.Services
 
         private JwtSecurityToken GetJwtSecurityToken(UserModel user)
         {
-            var accessTokenLifeTimeValue = double.Parse(this._configuration[JwtConstant.TOKEN_LIFE_TIME]);
+            var accessTokenLifeTimeValue = double.Parse(_configuration[JwtConstant.TOKEN_LIFE_TIME]);
 
             var now = DateTime.UtcNow;
             var accessTokenLifetime = now.AddMinutes(accessTokenLifeTimeValue);

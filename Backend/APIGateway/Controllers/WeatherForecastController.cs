@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Utility.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -9,6 +10,7 @@ namespace APIGateway.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorization]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

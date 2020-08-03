@@ -105,7 +105,7 @@ namespace APIGateway
 
             app.UseMiddleware<JwtMiddleware>();
             //Use Authentication
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

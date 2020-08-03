@@ -9,10 +9,10 @@ CREATE TABLE [dbo].[Security_User](
 	[Password] [varchar](255) NOT NULL,
 	[LastLogin] [datetime] NULL,
 	[IsActive] [bit] NOT NULL,
-	[CreatedBy] [int] NOT NULL,
-	[CreatedDate] [datetime] NOT NULL,
-	[UpdatedBy] [int] NULL,
-	[UpdatedDate] [datetime] NULL,
+	[CreateBy] [int] NOT NULL,
+	[CreateDate] [datetime] NOT NULL,
+	[UpdateBy] [int] NULL,
+	[UpdateDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
  CONSTRAINT [PK_Security_User] PRIMARY KEY CLUSTERED 
 (
@@ -22,7 +22,7 @@ CREATE TABLE [dbo].[Security_User](
 GO
 ALTER TABLE [dbo].[Security_User] ADD  CONSTRAINT [Security_User_DF_IsActive]  DEFAULT ((1)) FOR [IsActive]
 GO
-ALTER TABLE [dbo].[Security_User] ADD  CONSTRAINT [Security_User_DF_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
+ALTER TABLE [dbo].[Security_User] ADD  CONSTRAINT [Security_User_DF_CreatedDate]  DEFAULT (getdate()) FOR [CreateDate]
 GO
 ALTER TABLE [dbo].[Security_User] ADD  CONSTRAINT [Security_User_DF_Deleted]  DEFAULT ((0)) FOR [Deleted]
 GO

@@ -34,21 +34,29 @@ namespace API.Security.Controllers
             return response;
         }
 
+        [HttpPost("refresh-token")]
+        [AllowAnonymous]
+        public async Task<ResponseModel> RefreshToken([FromBody] TokenModel model)
+        {
+            var response = await _authenService.RefreshToken(model);
+            return response;
+        }
+
+        [HttpPost("revoke-token")]
         [Authorization]
-        [HttpPost("Post")]
+        public ResponseModel RevokeToken([FromBody] TokenModel model)
+        {
+            var response = _authenService.RevokeToken(model);
+            return response;
+        }
+
+        [HttpPost("post")]
         public string Post()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             IList<Claim> claim = identity.Claims.ToList();
 
-            var userName = claim[0].Value;
-            return "Welcome To: " + userName;
-        }
-
-        [HttpGet("Getvalue")]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "Value 1", "Value 2" };
+            return "Welcome To: ";
         }
 
     }
