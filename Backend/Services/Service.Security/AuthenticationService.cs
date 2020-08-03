@@ -25,20 +25,30 @@ namespace Service.Security
             //
             var password = PasswordSecurityHelper.GetHashedPassword(model.Password);
             //
-            var md = await _context.UserRepository.FirstOrDefaultAsync(m => m.UserName == model.UserName && m.Password == password).ConfigureAwait(false);
-            if (md != null)
+            //var md = await _context.UserRepository.FirstOrDefaultAsync(m => m.UserName == model.UserName && m.Password == password).ConfigureAwait(false);
+            //if (md != null)
+            //{
+            //    UserModel user = new UserModel()
+            //    {
+            //        Id = md.Id,
+            //        UserName = md.UserName,
+            //        FullName = string.Empty,
+            //        Email = string.Empty
+            //    };
+            //    JwtTokenModel token = _tokenService.CreateToken(user);
+            //    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Success;
+            //    response.Result = token;
+            //}
+            UserModel user = new UserModel()
             {
-                UserModel user = new UserModel()
-                {
-                    Id = md.Id,
-                    UserName = md.UserName,
-                    FullName = string.Empty,
-                    Email = string.Empty
-                };
-                JwtTokenModel token = _tokenService.CreateToken(user);
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Success;
-                response.Result = token;
-            }
+                Id = 1,
+                UserName = model.UserName,
+                FullName = string.Empty,
+                Email = "hung@gmail.com"
+            };
+            JwtTokenModel token = _tokenService.CreateToken(user);
+            response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Success;
+            response.Result = token;
             return response;
         }
     }

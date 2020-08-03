@@ -5,13 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.Security
 {
+    [Table("Security_User")]
     public class User
     {
         [Key]
         [Column(TypeName = "int")]
         public int Id { get; set; }
 
-        [Column(TypeName = "varchar(40)")]
+        [Column(TypeName = "varchar(50)")]
         [Required]
         [MaxLength(40)]
         public string UserName { get; set; }
@@ -22,39 +23,24 @@ namespace Database.Sql.ERP.Entities.Security
 
         [Column(TypeName = "bit")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue(true)]
         public bool IsActive { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime? LastLogin { get; set; }
-
-        [Column(TypeName = "varchar(40)")]
+        [Column(TypeName = "int")]
         [Required]
-        public string CreatedBy { get; set; }
+        public int CreateBy { get; set; }
 
         [Column(TypeName = "datetime")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue("getdate()")]
-        public DateTime CreatedDate { get; set; }
-
-        [Column(TypeName = "varchar(40)")]
-        public string UpdatedBy { get; set; }
+        public DateTime CreateDate { get; set; }
 
         [Column(TypeName = "datetime")]
-        public DateTime? UpdatedDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+
+        [Column(TypeName = "int")]
+        public int? UpdateBy { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue(false)]
         public bool Deleted { get; set; }
-
-        [Column(TypeName = "varchar(40)")]
-        public string DeletedBy { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? DeletedDate { get; set; }
     }
 }

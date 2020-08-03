@@ -1,5 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.Services.Interfaces;
+using Core.Utility.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -26,13 +27,14 @@ namespace API.Security.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ResponseModel> Login(LoginModel login)
+        [AllowAnonymous]
+        public async Task<ResponseModel> Login([FromBody] LoginModel login)
         {
             var response = await _authenService.AuthencitateUser(login);
             return response;
         }
 
-        [Authorize]
+        [Authorization]
         [HttpPost("Post")]
         public string Post()
         {
@@ -43,8 +45,6 @@ namespace API.Security.Controllers
             return "Welcome To: " + userName;
         }
 
-
-        [Authorize]
         [HttpGet("Getvalue")]
         public ActionResult<IEnumerable<string>> Get()
         {

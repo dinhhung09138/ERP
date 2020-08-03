@@ -22,6 +22,7 @@ using Core.Services;
 using API.HR;
 using API.Training;
 using Database.Sql.ERP;
+using Core.Utility.Middlewares;
 
 namespace APIGateway
 {
@@ -38,31 +39,32 @@ namespace APIGateway
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Polity
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy", builder =>
-                {
-                    builder.WithOrigins("http://localhost:4200")
-                            //.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials();
-                });
-            });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy", builder =>
+            //    {
+            //        builder.WithOrigins(Configuration["AllowedHosts"])
+            //                //.AllowAnyOrigin()
+            //                .AllowAnyMethod()
+            //                .AllowAnyHeader()
+            //                .AllowCredentials();
+            //    });
+            //});
             services.AddControllers().AddNewtonsoftJson();
 
             // Add JWT Authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
+                    // Gets or Sets the parameters used to validate identity token.
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
+                        ValidateIssuer = true,  // Will be validated during token validation
+                        ValidateAudience = true,    // To  control if the audience will be validated during token validation.
+                        ValidateLifetime = true,    // To control if the lifetime will be validated during token validation
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Audience"],
+                        ValidIssuer = Configuration["Jwt:Issuer"], // Represents a valid issuer that will be used to check against the token's issuer
+                        ValidAudience = Configuration["Jwt:Audience"], //Represents a valid audience that will be used to check against the token's audience.
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
                     };
                 });
@@ -88,6 +90,7 @@ namespace APIGateway
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -100,8 +103,9 @@ namespace APIGateway
 
             app.UseRouting();
 
+            app.UseMiddleware<JwtMiddleware>();
             //Use Authentication
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseAuthorization();
 

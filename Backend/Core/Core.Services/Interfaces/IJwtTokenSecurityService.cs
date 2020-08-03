@@ -13,5 +13,7 @@ namespace Core.Services.Interfaces
         /// <param name="user">UserModel object.</param>
         /// <returns>JwtTokenModel.</returns>
         JwtTokenModel CreateToken(UserModel user);
+
+        bool ValidateToken(string token);
     }
 }

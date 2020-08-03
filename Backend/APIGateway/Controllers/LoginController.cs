@@ -16,6 +16,5 @@ namespace APIGateway.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        
     }
 }

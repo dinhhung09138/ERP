@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Core.Services
@@ -57,7 +58,7 @@ namespace Core.Services
                 {
                     AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                     Expiration = jwtSecurityToken.ValidTo.ToLocalTime().Ticks,
-                    RefreshToken = Guid.NewGuid().ToString("N"),
+                    RefreshToken = GenerateRefreshToken(),
                     UserInfo = user,
                 };
 
@@ -76,6 +77,35 @@ namespace Core.Services
             {
                 _logger.AddErrorLog(this.GetType().Name, MethodBase.GetCurrentMethod().Name, user, ex);
                 return null;
+            }
+        }
+
+        public bool ValidateToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            // Get security key from app config
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configuration[JwtConstant.SECRET_KEY]));
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = key,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+
+                Console.WriteLine(jwtToken);
+
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
@@ -106,6 +136,16 @@ namespace Core.Services
                                         notBefore: now,
                                         expires: accessTokenLifetime,
                                         signingCredentials: creds);
+        }
+
+        private string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
         }
     }
 }
