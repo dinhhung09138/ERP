@@ -9,7 +9,6 @@ const routes: Routes = [
   {
     path: '',
     component: HumanResourcesComponent,
-    canActivateChild: [AuthenticationGuard],
     children: [
       {
         path: 'employee',

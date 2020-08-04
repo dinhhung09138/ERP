@@ -17,6 +17,9 @@ import { TablePaginatorComponent } from './components/table-paginator/table-pagi
 import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
 import { AppMatPaginatorIntl } from './services/mat-paginator-intl.service';
 import { NotifyComponent } from './components/notify/notify.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   imports: [
@@ -27,6 +30,9 @@ import { NotifyComponent } from './components/notify/notify.component';
     MatPaginatorModule,
   ],
   declarations: [
+    HeaderComponent,
+    MainMenuComponent,
+    FooterComponent,
     NoDataAvailableComponent,
     ElementLoadingComponent,
     TableLoadingComponent,
@@ -50,6 +56,9 @@ import { NotifyComponent } from './components/notify/notify.component';
     ApiService,
   ],
   exports: [
+    HeaderComponent,
+    MainMenuComponent,
+    FooterComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

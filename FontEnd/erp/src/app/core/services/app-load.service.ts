@@ -18,22 +18,20 @@ export class AppLoadService {
   /**
    * Get server url config.
    */
-  getUrlSetting(): Promise<any> {
+  getUrlSetting() {
     return this.http.get<UrlSettingInterface>(this.configPath + 'url.config.json').toPromise().then(response => {
       APIUrlConstants.authenticationApi = response.authenticationApi;
       APIUrlConstants.hrApi = response.hrApi;
       APIUrlConstants.marketingApi = response.marketingApi;
-      return response;
     });
   }
 
   /**
    * Get application config
    */
-  getApplicationConfig(): Promise<any> {
+  getApplicationConfig() {
     return this.http.get<ApplicationSettingInterface>(this.configPath + 'application.config.json').toPromise().then(response => {
       ApplicationConstant.siteTitle = response.siteTitle;
-      return response;
     });
   }
 

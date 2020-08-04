@@ -27,19 +27,19 @@ import { AppLoadService } from './services/app-load.service';
     {
       provide: APP_INITIALIZER,
       useFactory: (config: AppLoadService) => () => config.getUrlSetting(),
-      deps: [AppLoadService],
+      deps: [AppLoadService, HttpClientModule],
       multi: true
     },
     {
       provide: APP_INITIALIZER,
       useFactory: (config: AppLoadService) => () => config.getApplicationConfig(),
-      deps: [AppLoadService],
+      deps: [AppLoadService, HttpClientModule],
       multi: true
     },
     {
       provide: APP_INITIALIZER,
-      useFactory: (authenticationService: AuthenticationService) => () => authenticationService.refreshToken(),
-      deps: [AuthenticationService],
+      useFactory: (authenticationService: AuthenticationService) => () => authenticationService.refreshToken(1000),
+      deps: [AuthenticationService, HttpClientModule],
       multi: true,
     }
   ],

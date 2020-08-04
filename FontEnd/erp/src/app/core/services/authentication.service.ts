@@ -32,22 +32,23 @@ export class AuthenticationService {
     );
   }
 
-  refreshToken() {
-    if (this.context.isAuthenticated() === true && this.context.isTokenExpired(false) === false) {
-      const refreshTokenModel = this.context.getRefreshToken();
-
-      if (refreshTokenModel) {
-        this.http.post<ResponseModel>(this.url.refreshToken, refreshTokenModel).toPromise().then(
-          (response: ResponseModel) => {
-            if (response && response.responseStatus === ResponseStatus.success) {
-              this.context.saveToken(response.result);
-            } else {
-              this.context.clearToken();
+  refreshToken(delayTime: number = 0) {
+    setTimeout(() => {
+      if (this.context.isAuthenticated() === true && this.context.isTokenExpired(false) === false) {
+        const refreshTokenModel = this.context.getRefreshToken();
+        if (refreshTokenModel) {
+          this.http.post<ResponseModel>(APIUrlConstants.authenticationApi + 'refresh-token', refreshTokenModel).toPromise().then(
+            (response: ResponseModel) => {
+              if (response && response.responseStatus === ResponseStatus.success) {
+                this.context.saveToken(response.result);
+              } else {
+                this.context.clearToken();
+              }
             }
-          }
-        );
+          );
+        }
       }
-    }
+    }, delayTime);
   }
 
   revokeToken() {

@@ -72,7 +72,7 @@ export class SessionContext {
     const user = this.getUser();
     if (context) {
       const token = new RefreshTokenModel();
-      token.userId = user.userId;
+      token.userId = user.id;
       token.token = context.refreshToken;
       return token;
     }
