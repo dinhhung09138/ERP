@@ -44,5 +44,25 @@ namespace API.HR.Controllers
             return response;
         }
 
+        [HttpPost, Route("insert")]
+        public async Task<ResponseModel> Insert([FromBody] PositionModel model)
+        {
+            var response = await _positionService.Insert(model);
+            return response;
+        }
+
+        [HttpPut, Route("update")]
+        public async Task<ResponseModel> Update([FromBody] PositionModel model)
+        {
+            var response = await _positionService.Update(model);
+            return response;
+        }
+
+        [HttpDelete, Route("delete")]
+        public async Task<ResponseModel> Delete([FromQuery] int id)
+        {
+            var response = await _positionService.Delete(id);
+            return response;
+        }
     }
 }

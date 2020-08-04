@@ -40,6 +40,10 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên</th>
                 <td mat-cell *matCellDef="let element"> {{ element.name }}</td>
               </ng-container>
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-90">Mô tả</th>
+                <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+              </ng-container>
               <ng-container matColumnDef="precedence">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-70">Thứ tự</th>
                 <td mat-cell *matCellDef="let element">{{ element.precedence }}</td>

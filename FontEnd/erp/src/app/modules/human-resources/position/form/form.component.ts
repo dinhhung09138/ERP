@@ -36,6 +36,7 @@ export class PositionFormComponent implements OnInit {
       id: [0],
       code: ['', [Validators.required]],
       name: ['', [Validators.required]],
+      description: [''],
       precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
@@ -53,6 +54,7 @@ export class PositionFormComponent implements OnInit {
     this.PositionForm.get('id').setValue(0);
     this.PositionForm.get('code').reset();
     this.PositionForm.get('name').reset();
+    this.PositionForm.get('description').reset();
     this.PositionForm.get('precedence').reset();
     this.PositionForm.get('isActive').reset();
 
@@ -60,20 +62,20 @@ export class PositionFormComponent implements OnInit {
       this.isShow = false;
       this.PositionForm.get('code').disable();
       this.PositionForm.get('name').disable();
+      this.PositionForm.get('description').disable();
       this.PositionForm.get('precedence').disable();
       this.PositionForm.get('isActive').disable();
     } else {
       this.isShow = true;
       this.PositionForm.get('name').enable();
+      this.PositionForm.get('description').enable();
       this.PositionForm.get('precedence').enable();
       this.PositionForm.get('isActive').enable();
       this.PositionForm.get('precedence').setValue(1);
       this.PositionForm.get('isActive').setValue(true);
 
       if (formStatus === FormActionStatus.Insert) {
-        this.elm.nativeElement.querySelector('#code').focus();
-        this.PositionForm.get('code').enable();
-      } else {
+        
         this.elm.nativeElement.querySelector('#name').focus();
       }
     }
@@ -84,7 +86,7 @@ export class PositionFormComponent implements OnInit {
     if (this.formAction !== FormActionStatus.Insert) {
       this.initFormControl(FormActionStatus.Insert);
     }
-    this.elm.nativeElement.querySelector('#code').focus();
+    this.elm.nativeElement.querySelector('#name').focus();
     this.formTitle = 'Thêm mới';
   }
 
@@ -102,21 +104,17 @@ export class PositionFormComponent implements OnInit {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 
-  onSubmitForm() {
+  submitForm() {
     this.isSubmit = true;
     if (this.PositionForm.invalid) {
       return;
     }
     this.isLoading = true;
-    const model = this.PositionForm.getRawValue() as PositionViewModel;
-    model.action = this.formAction;
 
-    this.PositionService.save(model).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        if (res.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
-        }
+    this.PositionService.save(this.PositionForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -130,6 +128,7 @@ export class PositionFormComponent implements OnInit {
         this.PositionForm.get('id').setValue(res.result.id);
         this.PositionForm.get('code').setValue(res.result.code);
         this.PositionForm.get('name').setValue(res.result.name);
+        this.PositionForm.get('description').setValue(res.result.description);
         this.PositionForm.get('precedence').setValue(res.result.precedence);
         this.PositionForm.get('isActive').setValue(res.result.isActive);
       }
