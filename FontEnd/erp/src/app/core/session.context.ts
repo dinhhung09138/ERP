@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { TokenModel } from './models/token.model';
 import { UserInfoModel } from './models/user-info.model';
 
@@ -68,8 +68,15 @@ export class SessionContext {
         }
       }
     }
-
     return false;
+  }
+
+  getRefreshToken() {
+    const context = JSON.parse(sessionStorage.getItem('token'));
+    if (context) {
+      return context.refreshToken;
+    }
+    return '';
   }
 
 }

@@ -10,7 +10,6 @@ namespace APIGateway.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorization]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

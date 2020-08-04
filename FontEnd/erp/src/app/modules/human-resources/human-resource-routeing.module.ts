@@ -1,3 +1,4 @@
+import { AuthenticationGuard } from './../../core/guards/authentication.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HumanResourcesComponent } from './human-resources.component';
@@ -8,16 +9,17 @@ const routes: Routes = [
   {
     path: '',
     component: HumanResourcesComponent,
+    canActivateChild: [AuthenticationGuard],
     children: [
       {
         path: 'employee',
         loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
-        data: { title: 'Employee' }
+        pathMatch: 'full',
       },
       {
         path: 'commendation',
         loadChildren: () => import('./commendation/commendation.module').then(m => m.CommendationModule),
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'discipline',

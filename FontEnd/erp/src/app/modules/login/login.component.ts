@@ -29,18 +29,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.returnUrl = this.activeRoute.snapshot.queryParams.returnUrl;
     this.loginForm = this.fb.group({
-      userName: [localStorage.getItem('username'), [Validators.required, Validators.maxLength(50)]],
+      userName: [localStorage.getItem('userName'), [Validators.required, Validators.maxLength(50)]],
       password: [localStorage.getItem('password'), [Validators.required, Validators.maxLength(50)]],
       rememberMe: [localStorage.getItem('rememberMe') ? localStorage.getItem('rememberMe') : false],
     });
 
     if (this.context.isAuthenticated()) {
-      this.router.navigate(['/'], {});
+      this.router.navigate(['/dashboard'], {});
       return;
     }
   }
-
-  get f() { return this.loginForm.controls; }
 
   onSubmitForm() {
     this.warningMessage = [];
@@ -48,17 +46,22 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
     this.isLoading = true;
 
-    this.loginService.login(this.loginForm.value).subscribe((res: ResponseModel) => {
-      if (res) {
-        if (res.responseStatus === ResponseStatus.success) {
-          console.log(res.result);
-          this.context.saveToken(res.result);
-          this.router.navigate([this.returnUrl ? this.returnUrl : '/'], {});
+    if (this.loginForm.get('rememberMe').value === true) {
+      localStorage.setItem('userName', this.loginForm.get('userName').value);
+      localStorage.setItem('password', this.loginForm.get('password').value);
+      localStorage.setItem('rememberMe', this.loginForm.get('rememberMe').value);
+    }
+
+    this.loginService.login(this.loginForm.value).subscribe((response: ResponseModel) => {
+      if (response) {
+        if (response.responseStatus === ResponseStatus.success) {
+          console.log(response.result);
+          this.context.saveToken(response.result);
+          this.router.navigate([this.returnUrl ? this.returnUrl : '/dashboard'], {});
         } else {
-          this.warningMessage.push('User name or password incorrect');
+          this.warningMessage.push('Tên đăng nhập hoặc mật khẩu không đúng');
           this.isLoading = false;
           this.submitted = false;
         }

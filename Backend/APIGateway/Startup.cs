@@ -39,17 +39,16 @@ namespace APIGateway
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Polity
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("CorsPolicy", builder =>
-            //    {
-            //        builder.WithOrigins(Configuration["AllowedHosts"])
-            //                //.AllowAnyOrigin()
-            //                .AllowAnyMethod()
-            //                .AllowAnyHeader()
-            //                .AllowCredentials();
-            //    });
-            //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.WithOrigins(Configuration["Cors"])
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials();
+                });
+            });
             services.AddControllers().AddNewtonsoftJson();
 
             // Add JWT Authentication
@@ -96,18 +95,19 @@ namespace APIGateway
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseRouting();
+
             //Use cors
             app.UseCors("CorsPolicy");
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
             app.UseMiddleware<JwtMiddleware>();
+
             //Use Authentication
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseHttpsRedirection();
 
             app.UseEndpoints(endpoints =>
             {

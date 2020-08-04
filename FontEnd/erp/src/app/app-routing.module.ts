@@ -16,11 +16,13 @@ const routes: Routes = [
   },
   {
     path: 'hr',
+    canActivate: [AuthenticationGuard],
     loadChildren: () => import('../app/modules/human-resources/human-resources.module').then(m => m.HumanResourcesModule),
     data: { title: 'Human Resources' }
   },
   {
     path: 'training',
+    canActivate: [AuthenticationGuard],
     loadChildren: () => import('../app/modules/training/training.module').then(m => m.TrainingModule),
     data: { title: 'Training' }
   },
