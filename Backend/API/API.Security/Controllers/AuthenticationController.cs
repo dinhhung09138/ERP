@@ -43,7 +43,7 @@ namespace API.Security.Controllers
         }
 
         [HttpPost("revoke-token")]
-        [Authorization]
+        [Authentication]
         public ResponseModel RevokeToken([FromBody] TokenModel model)
         {
             var response = _authenService.RevokeToken(model);

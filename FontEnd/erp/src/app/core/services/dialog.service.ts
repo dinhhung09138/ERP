@@ -29,7 +29,10 @@ export class DialogService {
 
   openErrorDialog(errorModel: DialogDataInterface) {
 
-    const disableClosed = errorModel.isError === true && errorModel.httpError === HttpErrorStatusEnum.noInternet;
+    const disableClosed = errorModel.isError === true
+                          && (errorModel.httpError === HttpErrorStatusEnum.noInternet
+                            || errorModel.httpError === HttpErrorStatusEnum.timeOut
+                            || errorModel.httpError === HttpErrorStatusEnum.unauthorized);
 
     this.dialog.open(ErrorDialogComponent, {
       width: '300px',

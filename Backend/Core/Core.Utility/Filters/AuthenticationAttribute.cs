@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Core.Utility.Filters
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class AuthorizationAttribute : Attribute, IAuthorizationFilter
+    public class AuthenticationAttribute : Attribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {

@@ -1,16 +1,15 @@
 ﻿using Core.CommonModel;
+using Core.Utility.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace API.HR.Controllers
 {
     [Route("api/hr/discipline")]
     [ApiController]
+    [Authentication]
     public class DisciplineController : ControllerBase
     {
         private readonly IDisciplineService _disciplineService;

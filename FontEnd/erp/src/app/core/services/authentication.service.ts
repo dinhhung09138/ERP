@@ -34,7 +34,7 @@ export class AuthenticationService {
 
   refreshToken(delayTime: number = 0) {
     setTimeout(() => {
-      if (this.context.isAuthenticated() === true && this.context.isTokenExpired(false) === false) {
+      if (this.context.isAuthenticated() === true) {
         const refreshTokenModel = this.context.getRefreshToken();
         if (refreshTokenModel) {
           this.http.post<ResponseModel>(APIUrlConstants.authenticationApi + 'refresh-token', refreshTokenModel).toPromise().then(
@@ -52,7 +52,7 @@ export class AuthenticationService {
   }
 
   revokeToken() {
-    if (this.context.isAuthenticated() === true && this.context.isTokenExpired(false) === false) {
+    if (this.context.isAuthenticated() === true) {
       const refreshTokenModel = this.context.getRefreshToken();
 
       if (refreshTokenModel) {

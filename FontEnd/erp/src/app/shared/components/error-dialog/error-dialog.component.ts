@@ -24,6 +24,9 @@ export class ErrorDialogComponent implements OnInit {
         case HttpErrorStatusEnum.warningError:
           this.errorMessage = this.data.message;
           break;
+        case HttpErrorStatusEnum.timeOut:
+          this.errorMessage = 'Phiên đăng nhập đã hết hạn';
+          break;
         case HttpErrorStatusEnum.noInternet:
           this.errorMessage = 'Vui lòng kiểm tra đường truyền internet';
           break;
