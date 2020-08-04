@@ -14,6 +14,7 @@ export class AuthenticationService {
   url = {
     login: APIUrlConstants.authenticationApi + 'login',
     refreshToken: APIUrlConstants.authenticationApi + 'refresh-token',
+    revokeToken: APIUrlConstants.authenticationApi + 'revoke-token',
   };
 
   constructor(
@@ -45,6 +46,16 @@ export class AuthenticationService {
             }
           }
         );
+      }
+    }
+  }
+
+  revokeToken() {
+    if (this.context.isAuthenticated() === true && this.context.isTokenExpired(false) === false) {
+      const refreshTokenModel = this.context.getRefreshToken();
+
+      if (refreshTokenModel) {
+        this.http.post<ResponseModel>(this.url.revokeToken, refreshTokenModel).toPromise();
       }
     }
   }

@@ -35,8 +35,8 @@ namespace Service.Security
                 {
                     Id = md.Id,
                     UserName = md.UserName,
-                    FullName = string.Empty,
-                    Email = string.Empty
+                    FullName = string.Empty, // TODO
+                    Email = string.Empty // TODO
                 };
                 JwtTokenModel token = _tokenService.CreateToken(user);
                 response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Success;
@@ -61,8 +61,8 @@ namespace Service.Security
                 {
                     Id = md.Id,
                     UserName = md.UserName,
-                    FullName = string.Empty,
-                    Email = string.Empty
+                    FullName = string.Empty, // TODO
+                    Email = string.Empty // TODO
                 };
                 JwtTokenModel token = _tokenService.CreateToken(user);
                 response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Success;
