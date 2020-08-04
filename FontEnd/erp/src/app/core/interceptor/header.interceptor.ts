@@ -28,7 +28,7 @@ export class HeaderInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    const token = this.context.getContext();
+    const token = this.context.getAccessToken();
 
     const modified = this.setHeaders(req, this.jwtToken(token));
     return next.handle(modified);

@@ -1,3 +1,4 @@
+import { RefreshTokenModel } from './models/refresh-token.model';
 import { Injectable } from '@angular/core';
 import { TokenModel } from './models/token.model';
 import { UserInfoModel } from './models/user-info.model';
@@ -34,12 +35,7 @@ export class SessionContext {
     return false;
   }
 
-  getContext(): any {
-    const context = JSON.parse(sessionStorage.getItem('token'));
-    return context;
-  }
-
-  getToken(): string {
+  getAccessToken(): string {
     const context = JSON.parse(sessionStorage.getItem('token'));
     if (context != null) {
       return context.accessToken;
@@ -71,12 +67,21 @@ export class SessionContext {
     return false;
   }
 
-  getRefreshToken() {
+  getRefreshToken(): RefreshTokenModel {
     const context = JSON.parse(sessionStorage.getItem('token'));
+    const user = this.getUser();
     if (context) {
-      return context.refreshToken;
+      const token = new RefreshTokenModel();
+      token.userId = user.userId;
+      token.token = context.refreshToken;
+      return token;
     }
-    return '';
+    return null;
+  }
+
+  clearToken() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userInfo');
   }
 
 }

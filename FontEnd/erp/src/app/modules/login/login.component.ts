@@ -1,8 +1,8 @@
+import { AuthenticationService } from './../../core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SessionContext } from 'src/app/core/session.context';
-import { LoginService } from './login.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private context: SessionContext,
-    private loginService: LoginService) { }
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.returnUrl = this.activeRoute.snapshot.queryParams.returnUrl;
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('rememberMe', this.loginForm.get('rememberMe').value);
     }
 
-    this.loginService.login(this.loginForm.value).subscribe((response: ResponseModel) => {
+    this.authenticationService.login(this.loginForm.value).subscribe((response: ResponseModel) => {
       if (response) {
         if (response.responseStatus === ResponseStatus.success) {
           console.log(response.result);

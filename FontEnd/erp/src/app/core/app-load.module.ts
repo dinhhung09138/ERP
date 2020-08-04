@@ -1,3 +1,4 @@
+import { AuthenticationService } from './services/authentication.service';
 import { LoadingService } from './services/loading.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -22,6 +23,7 @@ import { AppLoadService } from './services/app-load.service';
     DialogService,
     NotifyService,
     LoadingService,
+    AuthenticationService,
     {
       provide: APP_INITIALIZER,
       useFactory: (config: AppLoadService) => () => config.getUrlSetting(),
@@ -34,6 +36,12 @@ import { AppLoadService } from './services/app-load.service';
       deps: [AppLoadService],
       multi: true
     },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authenticationService: AuthenticationService) => () => authenticationService.refreshToken(),
+      deps: [AuthenticationService],
+      multi: true,
+    }
   ],
   declarations: []
 })
