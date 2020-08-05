@@ -4,12 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { HumanResourcesComponent } from './human-resources.component';
 import { DistrictResolver } from './configuration/district/district.resolver';
 import { WardResolver } from './configuration/ward/ward.resolver';
+import { PageNotFoundComponent } from '../../shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HumanResourcesComponent,
     children: [
+      {
+        path: '',
+        loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
+        pathMatch: 'full',
+      },
       {
         path: 'employee',
         loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
@@ -103,6 +109,10 @@ const routes: Routes = [
         path: 'configuration/nationality',
         loadChildren: () => import('./configuration/nationality/nationality.module').then(m => m.NationalityModule),
         pathMatch: 'full'
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent,
       }
     ]
   }

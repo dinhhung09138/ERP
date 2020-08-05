@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light main-menu">
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/hr">Nhân sự</a>
+      <li class="nav-item" [routerLinkActive]="'active'">
+        <a class="nav-link" [routerLink]="['/hr']">Nhân sự</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/training">Training</a>
+      <li class="nav-item" [routerLinkActive]="'active'">
+        <a class="nav-link" [routerLink]="['/training']">Training</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" [routerLinkActive]="'active'">
         <a class="nav-link" href="javascript:{}">Recruiting</a>
       </li>
       <li class="nav-item">

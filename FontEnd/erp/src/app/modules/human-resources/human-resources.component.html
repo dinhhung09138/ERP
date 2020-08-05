@@ -7,185 +7,181 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-xs-12" style="display: flex; align-items: stretch; width: 100%;">
-            <ul class="nav module-sidebar flex-column" role="menu" data-accordion="false">
-              <li class="nav-item">
-                <a href="javascript: {}" class="nav-link">
-                  <p> Dashboard </p>
+      <div class="col-lg-12 col-md-12 col-xs-12" style="display: flex; align-items: stretch; width: 100%;">
+        <ul class="nav module-sidebar flex-column" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="javascript: {}" class="nav-link">
+              <p> Dashboard </p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/department">
+              <p> Department </p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/team">
+              <p> Team </p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/hr/position">
+              <p> Position </p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a routerLink="/hr/commendation" class="nav-link">
+              <p> Hình thức khen thưởng </p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a href="javascript: {}" class="nav-link" routerLink="/hr/discipline">
+              <p> Hình thức kỉ luật </p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a routerLink="/hr/employee" class="nav-link">
+              <p> Employee <span class="right badge badge-danger">100</span></p>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a routerLink="/hr/leave" class="nav-link" (click)="openSideMenu('leave')"
+              [ngClass]="{'menu-open': linkSelected === 'leave'}">
+              <p> Leave Management <i class="fa fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav" [ngStyle]="{'display': linkSelected === 'leave' ? 'block' : 'none'}">
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/leave/summary">
+                  <p> Summary </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/department">
-                  <p> Department </p>
+                <a class="nav-link" routerLink="/hr/leave/add-leave">
+                  <p> Add Leave </p>
                 </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/team">
-                  <p> Team </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/position">
-                  <p> Position </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a routerLink="/hr/commendation" class="nav-link">
-                  <p> Hình thức khen thưởng </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a href="javascript: {}" class="nav-link" routerLink="/hr/discipline">
-                  <p> Hình thức kỉ luật </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a routerLink="/hr/employee" class="nav-link">
-                  <p> Employee <span class="right badge badge-danger">100</span></p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a routerLink="/hr/leave" class="nav-link" (click)="openSideMenu('leave')"
-                  [ngClass]="{'menu-open': linkSelected === 'leave'}">
-                  <p> Leave Management <i class="fa fa-angle-left right"></i></p>
-                </a>
-                <ul class="nav" [ngStyle]="{'display': linkSelected === 'leave' ? 'block' : 'none'}">
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/leave/summary">
-                      <p> Summary </p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/leave/add-leave">
-                      <p> Add Leave </p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a routerLink="/hr/holiday" class="nav-link">
-                  <p> Holiday Management</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a (click)="openSideMenu('configuration')" class="nav-link"
-                  [ngClass]="{'menu-open': linkSelected === 'configuration'}">
-                  <p>Thiết lập <i class="fa fa-angle-left right"></i></p>
-                </a>
-                <ul class="nav" [ngStyle]="{'display': linkSelected === 'configuration' ? 'block' : 'none'}">
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/province">
-                      <p> Tỉnh/Thành phố </p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/district">
-                      <p> Quận/Huyện </p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/ward">
-                      <p> Phường/Xã </p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/education">
-                      <p> Trình độ học vấn</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/model-of-study">
-                      <p> Hình thức đào tạo</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/identification">
-                      <p> Giấy tờ tùy thân</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/qualification">
-                      <p> Trình độ chuyên môn</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/ranking">
-                      <p> Xếp hạng học tập</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/contract-type">
-                      <p> Loại hợp đồng </p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/employee-status">
-                      <p> Tình trạng nhân viên</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/relationship-type">
-                      <p> Quan hệ gia đình</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/religion">
-                      <p> Tôn giáo</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/nation">
-                      <p> Dân tộc</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/nationality">
-                      <p> Quốc tịch</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/job-title">
-                      <p> Job title</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/configuration/approve-status">
-                      <p> Trạng thái phê duyệt</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a (click)="openSideMenu('contact')" class="nav-link" [ngClass]="{'menu-open': linkSelected === 'contact'}">
-                  <p> Contacts <i class="fa fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav" [ngStyle]="{'display': linkSelected === 'contact' ? 'block' : 'none'}">
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/contacts/external-user">
-                      <p>External Users</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/contacts/client">
-                      <p>Clients</p>
-                    </a>
-                  </li>
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/hr/contacts/vendor">
-                      <p>Vendors</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
             </ul>
-            <div class="row" style="width: 100%; margin-left: 1px;">
-              <div class="col-lg-12 col-md-12 col-xs-12 main-page-contain">
-                <router-outlet></router-outlet>
-              </div>
-            </div>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a routerLink="/hr/holiday" class="nav-link">
+              <p> Holiday Management</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a (click)="openSideMenu('configuration')" class="nav-link"
+              [ngClass]="{'menu-open': linkSelected === 'configuration'}">
+              <p>Thiết lập <i class="fa fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav" [ngStyle]="{'display': linkSelected === 'configuration' ? 'block' : 'none'}">
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/province">
+                  <p> Tỉnh/Thành phố </p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/district">
+                  <p> Quận/Huyện </p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/ward">
+                  <p> Phường/Xã </p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/education">
+                  <p> Trình độ học vấn</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/model-of-study">
+                  <p> Hình thức đào tạo</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/identification">
+                  <p> Giấy tờ tùy thân</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/qualification">
+                  <p> Trình độ chuyên môn</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/ranking">
+                  <p> Xếp hạng học tập</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/contract-type">
+                  <p> Loại hợp đồng </p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/employee-status">
+                  <p> Tình trạng nhân viên</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/relationship-type">
+                  <p> Quan hệ gia đình</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/religion">
+                  <p> Tôn giáo</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/nation">
+                  <p> Dân tộc</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/nationality">
+                  <p> Quốc tịch</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/job-title">
+                  <p> Job title</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/configuration/approve-status">
+                  <p> Trạng thái phê duyệt</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a (click)="openSideMenu('contact')" class="nav-link" [ngClass]="{'menu-open': linkSelected === 'contact'}">
+              <p> Contacts <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav" [ngStyle]="{'display': linkSelected === 'contact' ? 'block' : 'none'}">
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/contacts/external-user">
+                  <p>External Users</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/contacts/client">
+                  <p>Clients</p>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/contacts/vendor">
+                  <p>Vendors</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="row" style="width: 100%; margin-left: 1px;">
+          <div class="col-lg-12 col-md-12 col-xs-12 main-page-contain">
+            <router-outlet></router-outlet>
           </div>
         </div>
       </div>

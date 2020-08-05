@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationGuard } from './core/guards/authentication.guard';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -12,25 +13,23 @@ const routes: Routes = [
     path: 'dashboard',
     canActivate: [AuthenticationGuard],
     loadChildren: () => import('../app/modules/dashboard/dashboard.module').then(m => m.DashboardModule),
-    data: { title: 'Dashboard' }
   },
   {
     path: 'hr',
     canActivate: [AuthenticationGuard],
     canActivateChild: [AuthenticationGuard],
     loadChildren: () => import('../app/modules/human-resources/human-resources.module').then(m => m.HumanResourcesModule),
-    data: { title: 'Human Resources' }
   },
   {
     path: 'training',
     canActivate: [AuthenticationGuard],
     canActivateChild: [AuthenticationGuard],
     loadChildren: () => import('../app/modules/training/training.module').then(m => m.TrainingModule),
-    data: { title: 'Training' }
   },
   {
     path: '**',
-    loadChildren: () => import('../app/modules/login/login.module').then(m => m.LoginModule)
+    component: PageNotFoundComponent,
+    canActivate: [AuthenticationGuard],
   }
 ];
 

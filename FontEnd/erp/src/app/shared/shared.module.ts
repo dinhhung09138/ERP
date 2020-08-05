@@ -20,6 +20,8 @@ import { NotifyComponent } from './components/notify/notify.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   imports: [
@@ -28,6 +30,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
+    RouterModule,
   ],
   declarations: [
     HeaderComponent,
@@ -44,6 +47,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ConfirmDialogComponent,
     ErrorDialogComponent,
     NotifyComponent,
+    PageNotFoundComponent,
   ],
   providers: [
     FormatNumberPipe,
@@ -73,6 +77,7 @@ import { FooterComponent } from './components/footer/footer.component';
     PrecedenceDirective,
     ConfirmDialogComponent,
     MatPaginatorModule,
+    PageNotFoundComponent,
   ]
 })
 export class SharedModule { }

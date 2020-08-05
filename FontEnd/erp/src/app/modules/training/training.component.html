@@ -1,56 +1,67 @@
-<div class="row">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: flex; align-items: stretch; width: 100%;">
-    <ul class="nav module-sidebar flex-column" role="menu" data-accordion="false">
-      <li class="nav-item">
-        <a href="/training/dashboard" class="nav-link">
-          <p> Thống kê </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/training/center" class="nav-link">
-          <p> Trung tâm </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/training/lecturer" class="nav-link">
-          <p> Giảng viên </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/training/specialize" class="nav-link">
-          <p> Chuyên ngành </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/training/type" class="nav-link">
-          <p> Loại hình đào tạo</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/training/course" class="nav-link">
-          <p> Khóa đào tạo </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/training/appraise" class="nav-link">
-          <p> Tiêu chí đánh giá </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="javascript: {}" class="nav-link">
-          <p> Kế hoạch đào tạo </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="javascript: {}" class="nav-link">
-          <p> Lịch sử đào tạo </p>
-        </a>
-      </li>
-    </ul>
-    <div class="row" style="width: 100%; margin-left: 1px;">
-      <div class="col-lg-12 col-md-12 col-xs-12 main-page-contain">
-        <router-outlet></router-outlet>
+<div class="wrapper">
+  <app-header></app-header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <app-main-menu></app-main-menu>
       </div>
     </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: flex; align-items: stretch; width: 100%;">
+        <ul class="nav module-sidebar flex-column" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="/training/dashboard" class="nav-link">
+              <p> Thống kê </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/training/center" class="nav-link">
+              <p> Trung tâm </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/training/lecturer" class="nav-link">
+              <p> Giảng viên </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/training/specialize" class="nav-link">
+              <p> Chuyên ngành </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/training/type" class="nav-link">
+              <p> Loại hình đào tạo</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/training/course" class="nav-link">
+              <p> Khóa đào tạo </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/training/appraise" class="nav-link">
+              <p> Tiêu chí đánh giá </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript: {}" class="nav-link">
+              <p> Kế hoạch đào tạo </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript: {}" class="nav-link">
+              <p> Lịch sử đào tạo </p>
+            </a>
+          </li>
+        </ul>
+        <div class="row" style="width: 100%; margin-left: 1px;">
+          <div class="col-lg-12 col-md-12 col-xs-12 main-page-contain">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
   </div>
 </div>
