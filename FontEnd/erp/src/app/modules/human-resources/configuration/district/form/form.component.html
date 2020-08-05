@@ -15,11 +15,16 @@
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <label class="label">Tỉnh/Thành phố</label>
-                  <ng-select id="provinceId" [items]="provinceList" [bindLabel]="'name'" [bindValue]="'id'" [appendTo]="'body'"
-                    formControlName="provinceId" tabindex="1" [selectOnTab]="true"
-                    [closeOnSelect]="true" [searchFn]="onProvinceSearch"
-                    [ngClass]="{'is-invalid' : isSubmit && districtForm.controls['provinceId'].errors}">
-                  </ng-select>
+                  <div class="input-group">
+                    <ng-select id="provinceId" [items]="provinceList" [bindLabel]="'name'" [bindValue]="'id'" [appendTo]="'body'"
+                      formControlName="provinceId" tabindex="1" [selectOnTab]="true"
+                      [closeOnSelect]="true" [searchFn]="onProvinceSearch" class="form-control"
+                      [ngClass]="{'is-invalid' : isSubmit && districtForm.controls['provinceId'].errors}">
+                    </ng-select>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-info" type="button" tabindex="2" (click)="onAddNewProvince()">+</button>
+                    </div>
+                  </div>
                   <mat-error *ngIf="isSubmit && districtForm.controls['provinceId'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
               </div>
@@ -27,7 +32,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                   <label class="label">Tên quận/huyện</label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="name" maxlength="100" tabindex="2" autocomplete="off"/>
+                    <input matInput formControlName="name" maxlength="100" tabindex="3" autocomplete="off"/>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && districtForm.controls['name'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
@@ -36,7 +41,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                   <label class="label">Thứ tự</label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="precedence" maxlength="3" tabindex="3" />
+                    <input matInput formControlName="precedence" maxlength="3" tabindex="4" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.required">Vui lòng điền thông tin</mat-error>
                   <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.number">Precedence number is required</mat-error>
@@ -44,16 +49,16 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                   <label class="label">Hoạt động</label>
                   <div class="input-group">
-                    <mat-checkbox class="ml-10" tabindex="4" formControlName="isActive">
+                    <mat-checkbox class="ml-10" tabindex="5" formControlName="isActive">
                     </mat-checkbox>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="5">
-                  <button type="button" class="btn btn-warning" tabindex="6" (click)="onResetClick()"> Đặt lại </button>
-                  <button type="button" class="btn btn-secondary" tabindex="7" (click)="onCloseClick()"> Đóng </button>
+                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="6">
+                  <button type="button" class="btn btn-warning" tabindex="7" (click)="onResetClick()"> Đặt lại </button>
+                  <button type="button" class="btn btn-secondary" tabindex="8" (click)="onCloseClick()"> Đóng </button>
                 </div>
               </div>
             </form>

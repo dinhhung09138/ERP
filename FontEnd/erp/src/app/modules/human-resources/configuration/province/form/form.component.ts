@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProvinceService } from '../province.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -6,6 +6,8 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ProvinceViewModel } from '../province.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-province-form',
@@ -20,12 +22,15 @@ export class ProvinceFormComponent implements OnInit {
 
   formTitle = '';
   isShow = false;
+  isPopup = false;
   isSubmit = false;
   isLoading = false;
   provinceForm: FormGroup;
   item: ProvinceViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface,
+    public dialogRef: MatDialogRef<ProvinceFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,
     private provinceService: ProvinceService) { }
@@ -37,7 +42,21 @@ export class ProvinceFormComponent implements OnInit {
       precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
+
+    if (this.data && this.data.isPopup === true) {
+      this.isPopup = true;
+      this.formAction = FormActionStatus.Insert;
+      this.formTitle = 'Thêm mới';
+    }
+
     this.initFormControl(this.formAction);
+  }
+
+  getClassByFormOrPopup() {
+    if (this.isPopup === true) {
+      return 'col-12';
+    }
+    return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -93,6 +112,10 @@ export class ProvinceFormComponent implements OnInit {
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
+
+    if (this.isPopup === true) {
+      this.dialogRef.close(false);
+    }
   }
 
   submitForm() {
@@ -109,6 +132,10 @@ export class ProvinceFormComponent implements OnInit {
       }
       this.isLoading = false;
       this.isSubmit = false;
+
+      if (this.isPopup === true) {
+        this.dialogRef.close(true);
+      }
     });
   }
 

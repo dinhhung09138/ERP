@@ -8,6 +8,9 @@ import { DistrictViewModel } from '../district.model';
 import { ProvinceViewModel } from '../../province/province.model';
 import { ActivatedRoute } from '@angular/router';
 import { AppValidator } from 'src/app/core/validators/app.validator';
+import { MatDialog } from '@angular/material/dialog';
+import { ProvinceFormComponent } from '../../province/form/form.component';
+import { ProvinceService } from '../../province/province.service';
 
 @Component({
   selector: 'app-hr-district-form',
@@ -33,9 +36,11 @@ export class DistrictFormComponent implements OnInit {
 
   constructor(
     private elm: ElementRef,
+    private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private districtService: DistrictService) {
+    private districtService: DistrictService,
+    private proviceService: ProvinceService) {
   }
 
   ngOnInit(): void {
@@ -82,6 +87,24 @@ export class DistrictFormComponent implements OnInit {
       this.districtForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#provinceId').focus();
+  }
+
+  onAddNewProvince() {
+    const provinceRef = this.dialog.open(ProvinceFormComponent, {
+      disableClose: true,
+      data: { isPopup: true }
+    });
+
+    provinceRef.beforeClosed().subscribe(data => {
+      if (data === true) {
+        this.proviceService.getDropdown().subscribe((response: ResponseModel) => {
+          if (response && response.responseStatus === ResponseStatus.success) {
+            this.provinceList = response.result;
+          }
+        });
+      }
+    });
+
   }
 
   onCreateClick() {
