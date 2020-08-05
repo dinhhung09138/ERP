@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="card box" [class.opened]="isShow">
+    <div class="card box" [class.opened]="showFormStatus()">
       <div class="card-header">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{ formTitle }}</div>
@@ -10,7 +10,7 @@
         <app-element-loading [Show]="isLoading"></app-element-loading>
         <div class="row">
           <div class="col-lg-2"></div>
-          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+          <div [class]="getClassByFormOrPopup()">
             <form [formGroup]="districtForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
@@ -22,7 +22,7 @@
                       [ngClass]="{'is-invalid' : isSubmit && districtForm.controls['provinceId'].errors}">
                     </ng-select>
                     <div class="input-group-append">
-                      <button class="btn btn-outline-info" type="button" tabindex="2" (click)="onAddNewProvince()">+</button>
+                      <button class="btn btn-outline-info" type="button" tabindex="2" (click)="onAddNewProvinceClick()">+</button>
                     </div>
                   </div>
                   <mat-error *ngIf="isSubmit && districtForm.controls['provinceId'].errors?.required">Vui lòng điền thông tin</mat-error>

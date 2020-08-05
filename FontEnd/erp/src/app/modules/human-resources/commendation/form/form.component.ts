@@ -21,7 +21,6 @@ export class CommendationFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   commendationForm: FormGroup;
@@ -63,7 +62,6 @@ export class CommendationFormComponent implements OnInit {
       this.commendationForm.get('description').disable();
       this.commendationForm.get('money').disable();
       this.commendationForm.get('isActive').disable();
-      this.isShow = false;
     } else {
       this.commendationForm.get('isActive').setValue(true);
       this.commendationForm.get('money').setValue(0);
@@ -71,10 +69,15 @@ export class CommendationFormComponent implements OnInit {
       this.commendationForm.get('description').enable();
       this.commendationForm.get('money').enable();
       this.commendationForm.get('isActive').enable();
-      this.isShow = true;
     }
-
     this.elm.nativeElement.querySelector('#name').focus();
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

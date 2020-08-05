@@ -21,7 +21,6 @@ export class NationFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   nationForm: FormGroup;
@@ -56,12 +55,10 @@ export class NationFormComponent implements OnInit {
     this.nationForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.nationForm.get('name').disable();
       this.nationForm.get('precedence').disable();
       this.nationForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.nationForm.get('isActive').setValue(true);
       this.nationForm.get('precedence').setValue(1);
       this.nationForm.get('name').enable();
@@ -69,6 +66,13 @@ export class NationFormComponent implements OnInit {
       this.nationForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

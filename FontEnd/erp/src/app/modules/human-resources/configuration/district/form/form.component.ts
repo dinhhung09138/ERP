@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { DistrictService } from '../district.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -8,9 +8,10 @@ import { DistrictViewModel } from '../district.model';
 import { ProvinceViewModel } from '../../province/province.model';
 import { ActivatedRoute } from '@angular/router';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProvinceFormComponent } from '../../province/form/form.component';
 import { ProvinceService } from '../../province/province.service';
+import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-district-form',
@@ -26,8 +27,8 @@ export class DistrictFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
+  // Show loading when the form have a action call to server
   isLoading = false;
   districtForm: FormGroup;
   item: DistrictViewModel;
@@ -35,6 +36,8 @@ export class DistrictFormComponent implements OnInit {
   provinceList: ProvinceViewModel[] = [];
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<DistrictFormComponent>,
     private elm: ElementRef,
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
@@ -54,6 +57,12 @@ export class DistrictFormComponent implements OnInit {
       precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
+
+    if (this.dialogData && this.dialogData.isPopup === true) {
+      this.formTitle = 'Thêm mới';
+      this.formAction = FormActionStatus.Insert;
+    }
+
     this.initFormControl(this.formAction);
   }
 
@@ -72,13 +81,11 @@ export class DistrictFormComponent implements OnInit {
     this.districtForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.districtForm.get('name').disable();
       this.districtForm.get('provinceId').disable();
       this.districtForm.get('precedence').disable();
       this.districtForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.districtForm.get('isActive').setValue(true);
       this.districtForm.get('precedence').setValue(1);
       this.districtForm.get('name').enable();
@@ -89,22 +96,26 @@ export class DistrictFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#provinceId').focus();
   }
 
-  onAddNewProvince() {
-    const provinceRef = this.dialog.open(ProvinceFormComponent, {
-      disableClose: true,
-      data: { isPopup: true }
-    });
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
+  }
 
-    provinceRef.beforeClosed().subscribe(data => {
-      if (data === true) {
-        this.proviceService.getDropdown().subscribe((response: ResponseModel) => {
-          if (response && response.responseStatus === ResponseStatus.success) {
-            this.provinceList = response.result;
-          }
-        });
+  getClassByFormOrPopup() {
+    if (this.dialogData?.isPopup === true) {
+      return 'col-12';
+    }
+    return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
+  }
+
+  onAddNewProvinceClick() {
+    this.proviceService.openPopupForm().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.provinceList = response.result;
       }
     });
-
   }
 
   onCreateClick() {
@@ -135,6 +146,9 @@ export class DistrictFormComponent implements OnInit {
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
+    if (this.dialogData?.isPopup === true) {
+      this.dialogRef.close(false);
+    }
   }
 
   onProvinceSearch(term: string, item: any) {
@@ -156,6 +170,10 @@ export class DistrictFormComponent implements OnInit {
       }
       this.isLoading = false;
       this.isSubmit = false;
+
+      if (this.dialogData?.isPopup === true) {
+        this.dialogRef.close(true);
+      }
     });
   }
 

@@ -21,7 +21,6 @@ export class ModelOfStudyFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   modelOfStudyForm: FormGroup;
@@ -56,12 +55,10 @@ export class ModelOfStudyFormComponent implements OnInit {
     this.modelOfStudyForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.modelOfStudyForm.get('name').disable();
       this.modelOfStudyForm.get('precedence').disable();
       this.modelOfStudyForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.modelOfStudyForm.get('isActive').setValue(true);
       this.modelOfStudyForm.get('precedence').setValue(1);
       this.modelOfStudyForm.get('name').enable();
@@ -69,6 +66,13 @@ export class ModelOfStudyFormComponent implements OnInit {
       this.modelOfStudyForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

@@ -21,7 +21,6 @@ export class ApproveStatusFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   approveStatusForm: FormGroup;
@@ -58,13 +57,11 @@ export class ApproveStatusFormComponent implements OnInit {
     this.approveStatusForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.approveStatusForm.get('code').disable();
       this.approveStatusForm.get('name').disable();
       this.approveStatusForm.get('precedence').disable();
       this.approveStatusForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.approveStatusForm.get('name').enable();
       this.approveStatusForm.get('precedence').enable();
       this.approveStatusForm.get('isActive').enable();
@@ -78,7 +75,13 @@ export class ApproveStatusFormComponent implements OnInit {
         this.elm.nativeElement.querySelector('#name').focus();
       }
     }
+  }
 
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

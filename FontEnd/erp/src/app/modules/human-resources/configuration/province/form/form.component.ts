@@ -21,16 +21,15 @@ export class ProvinceFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
-  isPopup = false;
   isSubmit = false;
+  // Show loading when the form have a action call to server
   isLoading = false;
   provinceForm: FormGroup;
   item: ProvinceViewModel;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface,
-    public dialogRef: MatDialogRef<ProvinceFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<ProvinceFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,
     private provinceService: ProvinceService) { }
@@ -43,8 +42,7 @@ export class ProvinceFormComponent implements OnInit {
       isActive: [true]
     });
 
-    if (this.data && this.data.isPopup === true) {
-      this.isPopup = true;
+    if (this.dialogData && this.dialogData.isPopup === true) {
       this.formAction = FormActionStatus.Insert;
       this.formTitle = 'Thêm mới';
     }
@@ -53,10 +51,17 @@ export class ProvinceFormComponent implements OnInit {
   }
 
   getClassByFormOrPopup() {
-    if (this.isPopup === true) {
+    if (this.dialogData?.isPopup === true) {
       return 'col-12';
     }
     return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -69,12 +74,10 @@ export class ProvinceFormComponent implements OnInit {
     this.provinceForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.provinceForm.get('name').disable();
       this.provinceForm.get('precedence').disable();
       this.provinceForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.provinceForm.get('isActive').setValue(true);
       this.provinceForm.get('precedence').setValue(1);
       this.provinceForm.get('name').enable();
@@ -113,7 +116,7 @@ export class ProvinceFormComponent implements OnInit {
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
 
-    if (this.isPopup === true) {
+    if (this.dialogData?.isPopup === true) {
       this.dialogRef.close(false);
     }
   }
@@ -133,7 +136,7 @@ export class ProvinceFormComponent implements OnInit {
       this.isLoading = false;
       this.isSubmit = false;
 
-      if (this.isPopup === true) {
+      if (this.dialogData?.isPopup === true) {
         this.dialogRef.close(true);
       }
     });

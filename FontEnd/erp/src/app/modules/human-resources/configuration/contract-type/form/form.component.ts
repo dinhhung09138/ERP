@@ -20,7 +20,6 @@ export class ContractTypeFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   contractTypeForm: FormGroup;
@@ -63,7 +62,6 @@ export class ContractTypeFormComponent implements OnInit {
     this.contractTypeForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.contractTypeForm.get('code').disable();
       this.contractTypeForm.get('name').disable();
       this.contractTypeForm.get('description').disable();
@@ -72,7 +70,6 @@ export class ContractTypeFormComponent implements OnInit {
       this.contractTypeForm.get('precedence').disable();
       this.contractTypeForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.contractTypeForm.get('allowInsurance').setValue(false);
       this.contractTypeForm.get('allowLeaveDate').setValue(false);
       this.contractTypeForm.get('precedence').setValue(1);
@@ -90,6 +87,13 @@ export class ContractTypeFormComponent implements OnInit {
         this.elm.nativeElement.querySelector('#name').focus();
       }
     }
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

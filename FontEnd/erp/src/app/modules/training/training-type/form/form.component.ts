@@ -19,7 +19,6 @@ export class TrainingTypeFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   trainingTypeForm: FormGroup;
@@ -55,21 +54,26 @@ export class TrainingTypeFormComponent implements OnInit {
     this.trainingTypeForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.trainingTypeForm.get('name').disable();
       this.trainingTypeForm.get('description').disable();
       this.trainingTypeForm.get('precedence').disable();
       this.trainingTypeForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.trainingTypeForm.get('isActive').setValue(true);
-    this.trainingTypeForm.get('precedence').setValue(1);
+      this.trainingTypeForm.get('precedence').setValue(1);
       this.trainingTypeForm.get('name').enable();
       this.trainingTypeForm.get('description').enable();
       this.trainingTypeForm.get('precedence').enable();
       this.trainingTypeForm.get('isActive').enable();
-	  this.elm.nativeElement.querySelector('#name').focus();
+	    this.elm.nativeElement.querySelector('#name').focus();
     }
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

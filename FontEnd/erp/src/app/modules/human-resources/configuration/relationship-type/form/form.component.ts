@@ -21,7 +21,6 @@ export class RelationshipTypeFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   relationshipTypeForm: FormGroup;
@@ -58,13 +57,11 @@ export class RelationshipTypeFormComponent implements OnInit {
     this.relationshipTypeForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.relationshipTypeForm.get('name').disable();
       this.relationshipTypeForm.get('description').disable();
       this.relationshipTypeForm.get('precedence').disable();
       this.relationshipTypeForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.relationshipTypeForm.get('precedence').setValue(1);
       this.relationshipTypeForm.get('isActive').setValue(true);
       this.relationshipTypeForm.get('name').enable();
@@ -74,7 +71,13 @@ export class RelationshipTypeFormComponent implements OnInit {
 
       this.elm.nativeElement.querySelector('#name').focus();
     }
+  }
 
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {
