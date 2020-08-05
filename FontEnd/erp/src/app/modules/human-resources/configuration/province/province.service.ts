@@ -9,6 +9,9 @@ import { Observable, of } from 'rxjs';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { switchMap } from 'rxjs/operators';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ProvinceFormComponent } from './form/form.component';
+import { ResponseStatus } from '../../../../core/enums/response-status.enum';
 
 @Injectable()
 export class ProvinceService {
@@ -24,6 +27,7 @@ export class ProvinceService {
 
   constructor(
     private api: ApiService,
+    private dialog: MatDialog,
     private dialogService: DialogService) { }
 
   getList(paging: PagingModel, searchText: string) {
@@ -66,5 +70,22 @@ export class ProvinceService {
 
   delete(itemId: number): Observable<ResponseModel> {
     return this.api.deleteById(this.url.delete, itemId);
+  }
+
+  openPopupForm(): Observable<ResponseModel> {
+    const dialogRef = this.dialog.open(ProvinceFormComponent, {
+      disableClose: true,
+      data: { isPopup: true }
+    });
+
+    return dialogRef.beforeClosed().pipe(
+      switchMap((data: boolean) => {
+      if (data === true) {
+        return this.getDropdown();
+      } else {
+        return of(null);
+      }
+    })
+    );
   }
 }
