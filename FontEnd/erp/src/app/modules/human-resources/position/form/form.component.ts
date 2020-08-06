@@ -25,6 +25,7 @@ export class PositionFormComponent implements OnInit {
   isSubmit = false;
   isLoading = false;
   PositionForm: FormGroup;
+  item: PositionViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -75,7 +76,6 @@ export class PositionFormComponent implements OnInit {
       this.PositionForm.get('isActive').setValue(true);
 
       if (formStatus === FormActionStatus.Insert) {
-        
         this.elm.nativeElement.querySelector('#name').focus();
       }
     }
@@ -97,7 +97,15 @@ export class PositionFormComponent implements OnInit {
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Insert:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    }
   }
 
   onCloseClick() {
@@ -124,15 +132,16 @@ export class PositionFormComponent implements OnInit {
   private getItem(id: number) {
     this.isLoading = true;
     this.PositionService.item(id).subscribe((res: ResponseModel) => {
-      if (res !== null) {
-        this.PositionForm.get('id').setValue(res.result.id);
-        this.PositionForm.get('code').setValue(res.result.code);
-        this.PositionForm.get('name').setValue(res.result.name);
-        this.PositionForm.get('description').setValue(res.result.description);
-        this.PositionForm.get('precedence').setValue(res.result.precedence);
-        this.PositionForm.get('isActive').setValue(res.result.isActive);
+      if (res && res.responseStatus === ResponseStatus.success) {
+        this.item = res.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
+  }
+  private setDataToForm(data: PositionViewModel) {
+    this.PositionForm.get('name').setValue(data.name);
+    this.PositionForm.get('description').setValue(data.description);
+    this.PositionForm.get('isActive').setValue(data.isActive);
   }
 }

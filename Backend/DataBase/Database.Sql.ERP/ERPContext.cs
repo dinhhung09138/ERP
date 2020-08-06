@@ -3,7 +3,6 @@ using Database.Sql.ERP.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Database.Sql.ERP.Entities.Training;
 using Database.Sql.ERP.Entities.Security;
-using DataBase.Sql.ERP.Entities.HR;
 
 namespace Database.Sql.ERP
 {

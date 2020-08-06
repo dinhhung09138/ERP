@@ -6,7 +6,6 @@ using Database.Sql.ERP.Entities.Common;
 using Database.Sql.ERP.Entities.HR;
 using Database.Sql.ERP.Entities.Security;
 using Database.Sql.ERP.Entities.Training;
-using DataBase.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Database.Sql.ERP

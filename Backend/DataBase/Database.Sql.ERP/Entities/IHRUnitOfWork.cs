@@ -1,7 +1,5 @@
 ﻿using Core.DataAccess;
 using Database.Sql.ERP.Entities.HR;
-using DataBase.Sql.ERP.Entities.HR;
-
 namespace Database.Sql.ERP.Entities
 {
     public interface IHRUnitOfWork
