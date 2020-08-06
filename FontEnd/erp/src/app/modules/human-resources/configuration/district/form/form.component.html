@@ -21,7 +21,7 @@
                       [closeOnSelect]="true" [searchFn]="onProvinceSearch" class="form-control"
                       [ngClass]="{'is-invalid' : isSubmit && districtForm.controls['provinceId'].errors}">
                     </ng-select>
-                    <div class="input-group-append">
+                    <div class="input-group-append" *ngIf="allowAddProvince()">
                       <button class="btn btn-outline-info" type="button" tabindex="2" (click)="onAddNewProvinceClick()">+</button>
                     </div>
                   </div>

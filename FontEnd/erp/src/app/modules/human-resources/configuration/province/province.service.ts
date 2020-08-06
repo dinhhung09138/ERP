@@ -75,7 +75,10 @@ export class ProvinceService {
   openPopupForm(): Observable<ResponseModel> {
     const dialogRef = this.dialog.open(ProvinceFormComponent, {
       disableClose: true,
-      data: { isPopup: true }
+      data: {
+        isPopup: true,
+        title: 'Thêm mới Tỉnh/Thành phố'
+      }
     });
 
     return dialogRef.beforeClosed().pipe(

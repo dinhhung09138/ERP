@@ -8,6 +8,8 @@ import { WardViewModel } from '../ward.model';
 import { ActivatedRoute } from '@angular/router';
 import { ProvinceViewModel } from '../../province/province.model';
 import { DistrictViewModel } from '../../district/district.model';
+import { ProvinceService } from '../../province/province.service';
+import { DistrictService } from '../../district/district.service';
 
 @Component({
   selector: 'app-hr-ward-form',
@@ -36,6 +38,8 @@ export class WardFormComponent implements OnInit {
     private elm: ElementRef,
     private fb: FormBuilder,
     private wardService: WardService,
+    private provinceService: ProvinceService,
+    private districtService: DistrictService,
     private activatedRoute: ActivatedRoute) {
   }
 
@@ -94,6 +98,22 @@ export class WardFormComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  onAddNewProvinceClick() {
+    this.provinceService.openPopupForm().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.provinceList = response.result;
+      }
+    });
+  }
+
+  onAddNewDistrictClick() {
+    this.districtService.openPopupForm().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.districtList = response.result;
+      }
+    });
   }
 
   onProvinceChange(province?: ProvinceViewModel) {

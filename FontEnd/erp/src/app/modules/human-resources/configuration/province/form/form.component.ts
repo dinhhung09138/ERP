@@ -44,7 +44,7 @@ export class ProvinceFormComponent implements OnInit {
 
     if (this.dialogData && this.dialogData.isPopup === true) {
       this.formAction = FormActionStatus.Insert;
-      this.formTitle = 'Thêm mới';
+      this.formTitle = this.dialogData?.title;
     }
 
     this.initFormControl(this.formAction);

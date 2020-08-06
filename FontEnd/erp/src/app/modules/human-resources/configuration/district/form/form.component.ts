@@ -39,11 +39,10 @@ export class DistrictFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
     private dialogRef: MatDialogRef<DistrictFormComponent>,
     private elm: ElementRef,
-    private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private districtService: DistrictService,
-    private proviceService: ProvinceService) {
+    private provinceService: ProvinceService) {
   }
 
   ngOnInit(): void {
@@ -59,8 +58,9 @@ export class DistrictFormComponent implements OnInit {
     });
 
     if (this.dialogData && this.dialogData.isPopup === true) {
-      this.formTitle = 'Thêm mới';
+      this.formTitle = this.dialogData?.title;
       this.formAction = FormActionStatus.Insert;
+      this.getListProvince();
     }
 
     this.initFormControl(this.formAction);
@@ -110,8 +110,18 @@ export class DistrictFormComponent implements OnInit {
     return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
   }
 
+  allowAddProvince() {
+    if (Object.prototype.hasOwnProperty.call(this.dialogData, 'isPopup') === false) {
+      return true;
+    }
+    if (this.dialogData.isPopup === false) {
+      return true;
+    }
+    return false;
+  }
+
   onAddNewProvinceClick() {
-    this.proviceService.openPopupForm().subscribe((response: ResponseModel) => {
+    this.provinceService.openPopupForm().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.provinceList = response.result;
       }
@@ -194,6 +204,14 @@ export class DistrictFormComponent implements OnInit {
     this.districtForm.get('provinceId').setValue(data.provinceId);
     this.districtForm.get('precedence').setValue(data.precedence);
     this.districtForm.get('isActive').setValue(data.isActive);
+  }
+
+  private getListProvince() {
+    this.provinceService.getDropdown().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.provinceList = response.result;
+      }
+    });
   }
 
 }
