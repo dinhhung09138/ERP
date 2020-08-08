@@ -26,7 +26,6 @@ export class EmployeeService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -38,7 +37,6 @@ export class EmployeeService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -51,7 +49,6 @@ export class EmployeeService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );
@@ -63,7 +60,6 @@ export class EmployeeService {
         return data;
       }),
       catchError(xhr => {
-        console.log(xhr);
         return of(null);
       })
     );

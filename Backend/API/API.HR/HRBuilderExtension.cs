@@ -21,8 +21,8 @@ namespace API.HR
             services.AddScoped<IRankingService, RankingService>();
             services.AddScoped<IProfessionalQualificationService, ProfessionalQualificationService>();
             services.AddScoped<IModelOfStudyService, ModelOfStudyService>();
-            //services.AddScoped<IEmployeeService, EmployeeService>();
-            //services.AddScoped<IEmployeeInfoService, EmployeeInfoService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeInfoService, EmployeeInfoService>();
             services.AddScoped<IEmployeeWorkingStatusService, EmployeeWorkingStatusService>();
             services.AddScoped<IRelationshipTypeService, RelationShipTypeService>();
             services.AddScoped<INationService, NationService>();

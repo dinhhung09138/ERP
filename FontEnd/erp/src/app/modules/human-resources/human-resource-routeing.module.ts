@@ -14,12 +14,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
-        pathMatch: 'full',
       },
       {
         path: 'employee',
         loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
-        pathMatch: 'full',
       },
       {
         path: 'commendation',
