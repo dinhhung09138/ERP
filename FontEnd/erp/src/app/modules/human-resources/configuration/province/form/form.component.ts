@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProvinceService } from '../province.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -6,6 +6,8 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ProvinceViewModel } from '../province.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-province-form',
@@ -19,13 +21,15 @@ export class ProvinceFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
+  // Show loading when the form have a action call to server
   isLoading = false;
   provinceForm: FormGroup;
   item: ProvinceViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<ProvinceFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,
     private provinceService: ProvinceService) { }
@@ -37,7 +41,27 @@ export class ProvinceFormComponent implements OnInit {
       precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
+
+    if (this.dialogData && this.dialogData.isPopup === true) {
+      this.formAction = FormActionStatus.Insert;
+      this.formTitle = this.dialogData?.title;
+    }
+
     this.initFormControl(this.formAction);
+  }
+
+  getClassByFormOrPopup() {
+    if (this.dialogData?.isPopup === true) {
+      return 'col-12';
+    }
+    return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -50,12 +74,10 @@ export class ProvinceFormComponent implements OnInit {
     this.provinceForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.provinceForm.get('name').disable();
       this.provinceForm.get('precedence').disable();
       this.provinceForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.provinceForm.get('isActive').setValue(true);
       this.provinceForm.get('precedence').setValue(1);
       this.provinceForm.get('name').enable();
@@ -93,6 +115,10 @@ export class ProvinceFormComponent implements OnInit {
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
+
+    if (this.dialogData?.isPopup === true) {
+      this.dialogRef.close(false);
+    }
   }
 
   submitForm() {
@@ -109,6 +135,10 @@ export class ProvinceFormComponent implements OnInit {
       }
       this.isLoading = false;
       this.isSubmit = false;
+
+      if (this.dialogData?.isPopup === true) {
+        this.dialogRef.close(true);
+      }
     });
   }
 

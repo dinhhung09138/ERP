@@ -22,7 +22,6 @@ export class DisciplineFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   disciplineForm: FormGroup;
@@ -60,13 +59,11 @@ export class DisciplineFormComponent implements OnInit {
     this.disciplineForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.disciplineForm.get('name').disable();
       this.disciplineForm.get('description').disable();
       this.disciplineForm.get('money').disable();
       this.disciplineForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.disciplineForm.get('isActive').setValue(true);
       this.disciplineForm.get('money').setValue(0);
       this.disciplineForm.get('name').enable();
@@ -76,6 +73,13 @@ export class DisciplineFormComponent implements OnInit {
 
     }
     this.elm.nativeElement.querySelector('#name').focus();
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

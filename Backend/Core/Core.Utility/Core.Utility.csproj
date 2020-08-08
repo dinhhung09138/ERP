@@ -5,12 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core.CommonMessage\Core.CommonMessage.csproj" />
     <ProjectReference Include="..\Core.CommonModel\Core.CommonModel.csproj" />
+    <ProjectReference Include="..\Core.Services\Core.Services.csproj" />
   </ItemGroup>
 
 </Project>

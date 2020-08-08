@@ -25,20 +25,60 @@ namespace Service.Security
             //
             var password = PasswordSecurityHelper.GetHashedPassword(model.Password);
             //
-            var md = await _context.UserRepository.FirstOrDefaultAsync(m => m.UserName == model.UserName && m.Password == password).ConfigureAwait(false);
+            var md = await _context.UserRepository.FirstOrDefaultAsync(m => m.UserName == model.UserName 
+                                                                        && m.Password == password 
+                                                                        && m.IsActive 
+                                                                        && !m.Deleted).ConfigureAwait(false);
             if (md != null)
             {
                 UserModel user = new UserModel()
                 {
                     Id = md.Id,
                     UserName = md.UserName,
-                    FullName = string.Empty,
-                    Email = string.Empty
+                    FullName = string.Empty, // TODO
+                    Email = string.Empty // TODO
                 };
                 JwtTokenModel token = _tokenService.CreateToken(user);
                 response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Success;
                 response.Result = token;
             }
+            return response;
+        }
+
+        public async Task<ResponseModel> RefreshToken(TokenModel model)
+        {
+            ResponseModel response = new ResponseModel();
+            response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+
+            var refreshToken = _tokenService.CheckRefreshToken(model);
+
+            if (refreshToken != null)
+            {
+                var md = await _context.UserRepository.FirstOrDefaultAsync(m => m.Id == model.UserId
+                                                                            && m.IsActive
+                                                                            && !m.Deleted).ConfigureAwait(false);
+                UserModel user = new UserModel()
+                {
+                    Id = md.Id,
+                    UserName = md.UserName,
+                    FullName = string.Empty, // TODO
+                    Email = string.Empty // TODO
+                };
+                JwtTokenModel token = _tokenService.CreateToken(user);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Success;
+                response.Result = token;
+            }
+
+            return response;
+        }
+
+        public ResponseModel RevokeToken(TokenModel model)
+        {
+            ResponseModel response = new ResponseModel();
+            response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Success;
+
+            _tokenService.RevokeToken(model);
+
             return response;
         }
     }

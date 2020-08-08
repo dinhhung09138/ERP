@@ -10,7 +10,7 @@ namespace Core.CommonModel
         /// <summary>
         /// Gets or sets user id.
         /// </summary>
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Gets or sets token string.

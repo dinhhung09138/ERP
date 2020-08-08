@@ -110,6 +110,10 @@ body {
   min-height: 768px;
 }
 
+.main-page-contain {
+  min-height: 500px;
+}
+
 @import './controls/form-control.scss';
 @import './elements/module-sidebar.scss';
 @import './elements/tab.scss';

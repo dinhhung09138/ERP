@@ -11,7 +11,7 @@ export class HeaderInterceptor implements HttpInterceptor {
   setHeaders(request, token) {
     let headers = new HttpHeaders();
 
-    headers = headers.append('Authentication', token);
+    headers = headers.append('Authorization', token);
     if (request.url.includes('/authentication') || request.url.includes('.json')) {
     } else {
       headers = headers.append('Content-Type', 'application/json');
@@ -28,7 +28,7 @@ export class HeaderInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    const token = this.context.getContext();
+    const token = this.context.getAccessToken();
 
     const modified = this.setHeaders(req, this.jwtToken(token));
     return next.handle(modified);

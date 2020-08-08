@@ -10,7 +10,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ProvinceService } from '../province/province.service';
+import { DistrictService } from '../district/district.service';
 
 const route: Routes = [
   {
@@ -38,6 +40,10 @@ const route: Routes = [
   ],
   providers: [
     WardService,
+    ProvinceService,
+    DistrictService,
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ]
 })
 export class WardModule { }

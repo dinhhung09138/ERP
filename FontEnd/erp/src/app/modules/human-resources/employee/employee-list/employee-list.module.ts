@@ -7,13 +7,15 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { EmployeeService } from '../employee.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: EmployeeListComponent
-  }
-]
+    component: EmployeeListComponent,
+    data: { title: 'Danh sách nhân viên' }
+  },
+];
 
 @NgModule({
   declarations: [
@@ -26,6 +28,9 @@ const routes: Routes = [
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
+  ],
+  providers: [
+    EmployeeService,
   ]
 })
 export class EmployeeListModule { }

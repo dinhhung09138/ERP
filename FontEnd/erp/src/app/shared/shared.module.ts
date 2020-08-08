@@ -17,6 +17,11 @@ import { TablePaginatorComponent } from './components/table-paginator/table-pagi
 import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
 import { AppMatPaginatorIntl } from './services/mat-paginator-intl.service';
 import { NotifyComponent } from './components/notify/notify.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   imports: [
@@ -25,8 +30,12 @@ import { NotifyComponent } from './components/notify/notify.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
+    RouterModule,
   ],
   declarations: [
+    HeaderComponent,
+    MainMenuComponent,
+    FooterComponent,
     NoDataAvailableComponent,
     ElementLoadingComponent,
     TableLoadingComponent,
@@ -38,6 +47,7 @@ import { NotifyComponent } from './components/notify/notify.component';
     ConfirmDialogComponent,
     ErrorDialogComponent,
     NotifyComponent,
+    PageNotFoundComponent,
   ],
   providers: [
     FormatNumberPipe,
@@ -50,6 +60,9 @@ import { NotifyComponent } from './components/notify/notify.component';
     ApiService,
   ],
   exports: [
+    HeaderComponent,
+    MainMenuComponent,
+    FooterComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -64,6 +77,7 @@ import { NotifyComponent } from './components/notify/notify.component';
     PrecedenceDirective,
     ConfirmDialogComponent,
     MatPaginatorModule,
+    PageNotFoundComponent,
   ]
 })
 export class SharedModule { }

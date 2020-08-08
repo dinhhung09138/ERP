@@ -21,7 +21,6 @@ export class ReligionFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   religionForm: FormGroup;
@@ -56,12 +55,10 @@ export class ReligionFormComponent implements OnInit {
     this.religionForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.religionForm.get('name').disable();
       this.religionForm.get('precedence').disable();
       this.religionForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.religionForm.get('isActive').setValue(true);
       this.religionForm.get('precedence').setValue(1);
       this.religionForm.get('name').enable();
@@ -69,6 +66,13 @@ export class ReligionFormComponent implements OnInit {
       this.religionForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

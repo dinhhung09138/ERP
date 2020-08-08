@@ -1,4 +1,5 @@
 ﻿using Core.CommonModel;
+using Core.Utility.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -8,6 +9,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/ward")]
     [ApiController]
+    [Authentication]
     public class WardController : ControllerBase
     {
         private readonly IWardService _wardService;

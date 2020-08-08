@@ -18,7 +18,6 @@ export class SpecializeFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   specializeForm: FormGroup;
@@ -52,18 +51,23 @@ export class SpecializeFormComponent implements OnInit {
     this.specializeForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.specializeForm.get('name').disable();
       this.specializeForm.get('description').disable();
       this.specializeForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.specializeForm.get('isActive').setValue(true);
       this.specializeForm.get('name').enable();
       this.specializeForm.get('description').enable();
       this.specializeForm.get('isActive').enable();
       this.elm.nativeElement.querySelector('#name').focus();
     }
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

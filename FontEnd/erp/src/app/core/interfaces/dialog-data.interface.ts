@@ -5,4 +5,5 @@ export interface DialogDataInterface {
   message: string;
   isError: boolean;
   httpError: HttpErrorStatusEnum;
+  isPopup: boolean;
 }

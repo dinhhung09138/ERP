@@ -1,8 +1,10 @@
+import { AuthenticationGuard } from './../../core/guards/authentication.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HumanResourcesComponent } from './human-resources.component';
 import { DistrictResolver } from './configuration/district/district.resolver';
 import { WardResolver } from './configuration/ward/ward.resolver';
+import { PageNotFoundComponent } from '../../shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -10,9 +12,12 @@ const routes: Routes = [
     component: HumanResourcesComponent,
     children: [
       {
+        path: '',
+        loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
+      },
+      {
         path: 'employee',
         loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
-        data: { title: 'Employee' }
       },
       {
         path: 'position',
@@ -22,7 +27,7 @@ const routes: Routes = [
       {
         path: 'commendation',
         loadChildren: () => import('./commendation/commendation.module').then(m => m.CommendationModule),
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'discipline',
@@ -107,6 +112,10 @@ const routes: Routes = [
         path: 'configuration/nationality',
         loadChildren: () => import('./configuration/nationality/nationality.module').then(m => m.NationalityModule),
         pathMatch: 'full'
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent,
       }
     ]
   }

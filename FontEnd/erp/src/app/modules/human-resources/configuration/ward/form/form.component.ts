@@ -8,6 +8,8 @@ import { WardViewModel } from '../ward.model';
 import { ActivatedRoute } from '@angular/router';
 import { ProvinceViewModel } from '../../province/province.model';
 import { DistrictViewModel } from '../../district/district.model';
+import { ProvinceService } from '../../province/province.service';
+import { DistrictService } from '../../district/district.service';
 
 @Component({
   selector: 'app-hr-ward-form',
@@ -22,7 +24,6 @@ export class WardFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   wardForm: FormGroup;
@@ -37,6 +38,8 @@ export class WardFormComponent implements OnInit {
     private elm: ElementRef,
     private fb: FormBuilder,
     private wardService: WardService,
+    private provinceService: ProvinceService,
+    private districtService: DistrictService,
     private activatedRoute: ActivatedRoute) {
   }
 
@@ -72,14 +75,12 @@ export class WardFormComponent implements OnInit {
     this.wardForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.wardForm.get('name').disable();
       this.wardForm.get('districtId').disable();
       this.wardForm.get('provinceId').disable();
       this.wardForm.get('precedence').disable();
       this.wardForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.wardForm.get('isActive').setValue(true);
       this.wardForm.get('precedence').setValue(1);
       this.wardForm.get('name').enable();
@@ -90,6 +91,29 @@ export class WardFormComponent implements OnInit {
     }
 
     this.elm.nativeElement.querySelector('#provinceId').focus();
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
+  }
+
+  onAddNewProvinceClick() {
+    this.provinceService.openPopupForm().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.provinceList = response.result;
+      }
+    });
+  }
+
+  onAddNewDistrictClick() {
+    this.districtService.openPopupForm().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.districtList = response.result;
+      }
+    });
   }
 
   onProvinceChange(province?: ProvinceViewModel) {

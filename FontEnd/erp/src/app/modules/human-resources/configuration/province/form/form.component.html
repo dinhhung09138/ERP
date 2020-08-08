@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="card box" [class.opened]="isShow">
+    <div class="card box" [class.opened]="showFormStatus()">
       <div class="card-header">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{ formTitle }}</div>
@@ -10,7 +10,7 @@
         <app-element-loading [Show]="isLoading"></app-element-loading>
         <div class="row">
           <div class="col-lg-2"></div>
-          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+          <div [class]="getClassByFormOrPopup()">
             <form [formGroup]="provinceForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">

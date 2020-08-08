@@ -1,4 +1,5 @@
-import { Injectable } from "@angular/core";
+import { RefreshTokenModel } from './models/refresh-token.model';
+import { Injectable } from '@angular/core';
 import { TokenModel } from './models/token.model';
 import { UserInfoModel } from './models/user-info.model';
 
@@ -28,18 +29,15 @@ export class SessionContext {
   }
 
   isAuthenticated(): boolean {
+
     if (sessionStorage.getItem('token')) {
       return true;
     }
     return false;
   }
 
-  getContext(): any {
-    const context = JSON.parse(sessionStorage.getItem('token'));
-    return context;
-  }
+  getAccessToken(): string {
 
-  getToken(): string {
     const context = JSON.parse(sessionStorage.getItem('token'));
     if (context != null) {
       return context.accessToken;
@@ -53,23 +51,23 @@ export class SessionContext {
     return user;
   }
 
-  isTokenExpired(needToLogout: boolean): boolean {
-    const context = JSON.parse(sessionStorage.getItem('token'));
-    if (context) {
-      const time = Math.round((new Date()).getTime() / 1000);
-      const expireDate = parseInt(context.expiration, null);
-      if (needToLogout) {
-        if (time >= expireDate) {
-          return true;
-        }
-      } else {
-        if (time + 300 >= expireDate) {
-          return true;
-        }
+  getRefreshToken(): RefreshTokenModel {
+    if (this.isAuthenticated() === true) {
+      const context = JSON.parse(sessionStorage.getItem('token'));
+      const user = this.getUser();
+      if (context) {
+        const token = new RefreshTokenModel();
+        token.userId = user.id;
+        token.token = context.refreshToken;
+        return token;
       }
     }
+    return null;
+  }
 
-    return false;
+  clearToken() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userInfo');
   }
 
 }

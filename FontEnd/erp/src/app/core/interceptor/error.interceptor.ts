@@ -8,13 +8,15 @@ import { Observable, throwError } from 'rxjs';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseStatus } from '../enums/response-status.enum';
+import { SessionContext } from '../session.context';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(
     private dialogService: DialogService,
-    private notifyService: NotifyService) {}
+    private notifyService: NotifyService,
+    private context: SessionContext) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -56,13 +58,21 @@ export class ErrorInterceptor implements HttpInterceptor {
             } as DialogDataInterface;
             this.dialogService.openErrorDialog(error404);
             break;
-          case 204:
-            const error204 = {
+          case 401:
+            const error401 = {
               isError: true,
-              httpError: HttpErrorStatusEnum.noContent
+              httpError: HttpErrorStatusEnum.timeOut
             } as DialogDataInterface;
-            this.dialogService.openErrorDialog(error204);
+            this.dialogService.openErrorDialog(error401);
+            this.context.clearToken();
             break;
+            case 204:
+              const error204 = {
+                isError: true,
+                httpError: HttpErrorStatusEnum.noContent
+              } as DialogDataInterface;
+              this.dialogService.openErrorDialog(error204);
+              break;
         }
         console.log(error.error);
         return throwError(error);

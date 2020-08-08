@@ -21,7 +21,6 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   workingStatusForm: FormGroup;
@@ -61,14 +60,12 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
     this.workingStatusForm.get('precedence').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.workingStatusForm.get('code').disable();
       this.workingStatusForm.get('name').disable();
       this.workingStatusForm.get('description').disable();
       this.workingStatusForm.get('isActive').disable();
       this.workingStatusForm.get('precedence').disable();
     } else {
-      this.isShow = true;
       this.workingStatusForm.get('isActive').setValue(true);
       this.workingStatusForm.get('precedence').setValue(1);
       this.workingStatusForm.get('name').enable();
@@ -83,6 +80,13 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
         this.elm.nativeElement.querySelector('#name').focus();
       }
     }
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

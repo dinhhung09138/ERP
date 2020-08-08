@@ -62,7 +62,10 @@
 }
 
 .mat-dialog-container {
-  padding: 0px !important;
+  border-radius: 0px !important;
+  box-shadow: unset !important;
+  background: unset !important;
+  color: unset !important;
 }
 
 .mat-dialog-container .card {
@@ -87,14 +90,15 @@
 
 .mat-dialog-container .card>.card-body {
   min-height: 70px;
+}
+
+.mat-dialog-container .card.box-confirm>.card-body {
   text-align: center;
 }
 
-.mat-dialog-container .card>.card-footer {
+.mat-dialog-container .card.box-confirm>.card-footer {
   text-align: center;
 }
-
-
 
 .mat-select-arrow {
   color: $primary-background-color !important;

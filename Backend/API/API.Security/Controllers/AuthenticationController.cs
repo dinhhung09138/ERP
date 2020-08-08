@@ -1,5 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.Services.Interfaces;
+using Core.Utility.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -26,29 +27,36 @@ namespace API.Security.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ResponseModel> Login(LoginModel login)
+        [AllowAnonymous]
+        public async Task<ResponseModel> Login([FromBody] LoginModel login)
         {
             var response = await _authenService.AuthencitateUser(login);
             return response;
         }
 
-        [Authorize]
-        [HttpPost("Post")]
+        [HttpPost("refresh-token")]
+        [AllowAnonymous]
+        public async Task<ResponseModel> RefreshToken([FromBody] TokenModel model)
+        {
+            var response = await _authenService.RefreshToken(model);
+            return response;
+        }
+
+        [HttpPost("revoke-token")]
+        [Authentication]
+        public ResponseModel RevokeToken([FromBody] TokenModel model)
+        {
+            var response = _authenService.RevokeToken(model);
+            return response;
+        }
+
+        [HttpPost("post")]
         public string Post()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             IList<Claim> claim = identity.Claims.ToList();
 
-            var userName = claim[0].Value;
-            return "Welcome To: " + userName;
-        }
-
-
-        [Authorize]
-        [HttpGet("Getvalue")]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "Value 1", "Value 2" };
+            return "Welcome To: ";
         }
 
     }

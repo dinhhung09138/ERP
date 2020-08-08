@@ -18,7 +18,6 @@ export class TrainingCenterFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   trainingCenterForm: FormGroup;
@@ -60,7 +59,6 @@ export class TrainingCenterFormComponent implements OnInit {
     this.trainingCenterForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.trainingCenterForm.get('avatar').disable();
       this.trainingCenterForm.get('name').disable();
       this.trainingCenterForm.get('description').disable();
@@ -68,7 +66,6 @@ export class TrainingCenterFormComponent implements OnInit {
       this.trainingCenterForm.get('taxCode').disable();
       this.trainingCenterForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.trainingCenterForm.get('isActive').setValue(true);
       this.trainingCenterForm.get('name').enable();
       this.trainingCenterForm.get('description').enable();
@@ -78,6 +75,13 @@ export class TrainingCenterFormComponent implements OnInit {
 
       this.elm.nativeElement.querySelector('#name').focus();
     }
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {

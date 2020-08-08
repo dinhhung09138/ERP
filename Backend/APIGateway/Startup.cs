@@ -22,6 +22,7 @@ using Core.Services;
 using API.HR;
 using API.Training;
 using Database.Sql.ERP;
+using Core.Utility.Middlewares;
 
 namespace APIGateway
 {
@@ -42,8 +43,7 @@ namespace APIGateway
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200")
-                            //.AllowAnyOrigin()
+                    builder.WithOrigins(Configuration["Cors"])
                             .AllowAnyMethod()
                             .AllowAnyHeader()
                             .AllowCredentials();
@@ -55,14 +55,15 @@ namespace APIGateway
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
+                    // Gets or Sets the parameters used to validate identity token.
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
+                        ValidateIssuer = true,  // Will be validated during token validation
+                        ValidateAudience = true,    // To  control if the audience will be validated during token validation.
+                        ValidateLifetime = true,    // To control if the lifetime will be validated during token validation
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Audience"],
+                        ValidIssuer = Configuration["Jwt:Issuer"], // Represents a valid issuer that will be used to check against the token's issuer
+                        ValidAudience = Configuration["Jwt:Audience"], //Represents a valid audience that will be used to check against the token's audience.
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
                     };
                 });
@@ -88,22 +89,25 @@ namespace APIGateway
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseRouting();
+
             //Use cors
             app.UseCors("CorsPolicy");
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
+            app.UseMiddleware<JwtMiddleware>();
 
             //Use Authentication
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseHttpsRedirection();
 
             app.UseEndpoints(endpoints =>
             {

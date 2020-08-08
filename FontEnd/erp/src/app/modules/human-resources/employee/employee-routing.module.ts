@@ -11,19 +11,17 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./employee-list/employee-list.module').then(m => m.EmployeeListModule),
-        data: { title: 'Employee List' },
+        data: { title: 'Danh sách nhân viên' },
       },
       {
         path: 'new',
         loadChildren: () => import('./employee-info/employee-info.module').then(m => m.EmployeeInfoModule),
         resolve: { data: EmployeeInfoResolver },
-        pathMatch: 'full',
       },
       {
         path: 'edit/:id',
         loadChildren: () => import('./employee-info/employee-info.module').then(m => m.EmployeeInfoModule),
         resolve: { data: EmployeeInfoResolver },
-        pathMatch: 'full',
       },
     ]
   },

@@ -21,7 +21,6 @@ export class RankingFormComponent implements OnInit {
   formAction = FormActionStatus.UnKnow;
 
   formTitle = '';
-  isShow = false;
   isSubmit = false;
   isLoading = false;
   rankingForm: FormGroup;
@@ -56,12 +55,10 @@ export class RankingFormComponent implements OnInit {
     this.rankingForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.isShow = false;
       this.rankingForm.get('name').disable();
       this.rankingForm.get('precedence').disable();
       this.rankingForm.get('isActive').disable();
     } else {
-      this.isShow = true;
       this.rankingForm.get('isActive').setValue(true);
       this.rankingForm.get('precedence').setValue(1);
       this.rankingForm.get('name').enable();
@@ -69,6 +66,13 @@ export class RankingFormComponent implements OnInit {
       this.rankingForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
+  }
+
+  showFormStatus() {
+    if (this.formAction === FormActionStatus.UnKnow) {
+      return false;
+    }
+    return true;
   }
 
   onCreateClick() {
