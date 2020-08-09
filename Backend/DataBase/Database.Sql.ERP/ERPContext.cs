@@ -69,6 +69,7 @@ namespace Database.Sql.ERP
         public virtual DbSet<RelationshipType> RelationshipType { get; set; }
 
         public virtual DbSet<Religion> Religion { get; set; }
+        public virtual DbSet<Position> Position { get; set; }
 
         #endregion
 
@@ -138,6 +139,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<Ranking>();
             modelBuilder.Entity<RelationshipType>();
             modelBuilder.Entity<Religion>();
+            modelBuilder.Entity<Position>();
 
             #endregion
 

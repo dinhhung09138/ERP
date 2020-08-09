@@ -415,6 +415,7 @@ namespace Database.Sql.ERP
 
         #endregion
 
+
         private ITableGenericRepository<CodeType> _codeTypeRepository;
 
         public ITableGenericRepository<CodeType> CodeTypeRepository
@@ -422,6 +423,14 @@ namespace Database.Sql.ERP
             get
             {
                 return _codeTypeRepository = _codeTypeRepository ?? new TableGenericRepository<CodeType>(_context);
+            }
+        }
+        private ITableGenericRepository<Position> _positionRepository;
+        public ITableGenericRepository<Position> PositionRepository
+        {
+            get
+            {
+                return _positionRepository = _positionRepository ?? new TableGenericRepository<Position>(_context);
             }
         }
 

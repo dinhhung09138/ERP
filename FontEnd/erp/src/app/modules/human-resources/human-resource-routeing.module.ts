@@ -20,6 +20,11 @@ const routes: Routes = [
         loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
       },
       {
+        path: 'position',
+        loadChildren: () => import('./position/position.module').then(m => m.PositionModule),
+        data: { title: 'Employee' }
+      },
+      {
         path: 'commendation',
         loadChildren: () => import('./commendation/commendation.module').then(m => m.CommendationModule),
         pathMatch: 'full',

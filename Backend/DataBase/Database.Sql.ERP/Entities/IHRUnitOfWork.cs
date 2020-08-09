@@ -1,6 +1,5 @@
 ﻿using Core.DataAccess;
 using Database.Sql.ERP.Entities.HR;
-
 namespace Database.Sql.ERP.Entities
 {
     public interface IHRUnitOfWork
@@ -29,5 +28,6 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<Ranking> RankingRepository { get; }
         ITableGenericRepository<RelationshipType> RelationshipTypeRepository { get; }
         ITableGenericRepository<Religion> ReligionRepository { get; }
+        ITableGenericRepository<Position> PositionRepository { get; }
     }
 }
