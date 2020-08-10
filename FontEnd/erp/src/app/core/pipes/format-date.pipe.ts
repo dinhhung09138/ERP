@@ -3,9 +3,9 @@ import { DatePipe } from '@angular/common';
 import { FormatConstant } from '../constants/format.constant';
 
 @Pipe({
-  name: 'appDateTimePipe'
+  name: 'appDatePipe'
 })
-export class DatetimePipe extends DatePipe implements PipeTransform {
+export class FormatDatePipe extends DatePipe implements PipeTransform {
 
   transform(value?: Date, ...args: unknown[]): string {
     if (value) {
