@@ -1,6 +1,6 @@
 import { EmployeeWorkingStatusViewModel } from './../../configuration/employee-working-status/employee-working-status.model';
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppValidator } from 'src/app/core/validators/app.validator';
@@ -22,6 +22,8 @@ import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
   ]
 })
 export class EmployeeInfoComponent implements OnInit {
+
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
   employeeForm: FormGroup;
   isLoading = false;
@@ -88,7 +90,6 @@ export class EmployeeInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.activatedRoute.data.subscribe(response => {
       this.listWorkingStatus = response.data?.workingStatusList?.result || [];
     });
@@ -109,11 +110,16 @@ export class EmployeeInfoComponent implements OnInit {
       employeeWorkingStatusId: [null, [Validators.required]],
       basicSalary: [0, [AppValidator.money, Validators.required]]
     });
+    this.initFormControl(this.formAction);
     this.checkFormAction();
   }
 
   initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
+
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+    }
 
     this.formAction = formStatus;
     this.employeeForm.get('id').setValue(0);
@@ -170,6 +176,9 @@ export class EmployeeInfoComponent implements OnInit {
     }
   }
 
+  /**
+   * Checking when user add new or update employee
+   */
   checkFormAction() {
     if (this.router.url.indexOf('/employee/new') > 0) {
       this.initFormControl(FormActionStatus.Insert);
@@ -204,28 +213,29 @@ export class EmployeeInfoComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.employeeForm.getRawValue());
     this.isSubmit = true;
     if (this.employeeForm.invalid) {
-      this.isSubmit = false;
       return;
     }
     this.isLoading = true;
 
     this.employeeService.save(this.employeeForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
-      if (response) {
-        this.isLoading = false;
-        this.isSubmit = false;
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.currentSelectedEmployee = response.result;
+        this.currentSelectedEmployeeId = response.result.id;
+        this.setDataToFormControl(this.currentSelectedEmployee);
+        this.isEditEmployee = false;
       }
+      this.isSubmit = false;
+      this.isLoading = false;
     });
-
   }
 
   private getEmployeeInfo(id: number) {
     this.isLoading = true;
 
     this.employeeService.item(id).subscribe((response: ResponseModel) => {
-      if (response.responseStatus === ResponseStatus.success) {
+      if (response && response.responseStatus === ResponseStatus.success) {
         this.currentSelectedEmployee = response.result;
         this.setDataToFormControl(response.result);
       }
@@ -261,5 +271,4 @@ export class EmployeeInfoComponent implements OnInit {
       this.elm.nativeElement.querySelector('#firstName').focus();
     }
   }
-
 }

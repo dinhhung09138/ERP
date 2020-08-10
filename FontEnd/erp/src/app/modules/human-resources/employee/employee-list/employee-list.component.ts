@@ -61,7 +61,6 @@ export class EmployeeListComponent implements OnInit {
 
   onDeleteClick(id: number) {
     if (this.isLoading !== true) {
-
       this.employeeService.confirmDelete(id).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
           this.getList();
@@ -92,9 +91,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   private getList() {
-
     this.isLoading = true;
-
     this.employeeService.getList(this.paging, this.searchText).subscribe((response: ResponseModel) => {
       if (response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;

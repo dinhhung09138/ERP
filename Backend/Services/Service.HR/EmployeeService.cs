@@ -197,6 +197,8 @@ namespace Service.HR
                 }
 
                 await _context.CommitTransactionAsync();
+
+                response = await Item(md.Id);
             }
             catch (Exception ex)
             {
@@ -238,6 +240,8 @@ namespace Service.HR
                 _context.EmployeeRepository.Update(md);
 
                 await _context.SaveChangesAsync();
+
+                response = await Item(model.Id);
             }
             catch (Exception ex)
             {

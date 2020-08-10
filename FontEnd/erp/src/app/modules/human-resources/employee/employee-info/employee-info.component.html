@@ -57,7 +57,7 @@
                     Vui lòng điền thông tin
                   </mat-error>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.email">
-                    Email is invalid
+                    Email không hợp lệ
                   </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
@@ -191,10 +191,10 @@
           <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             <ul class="nav nav-tabs left-tabs">
               <li class="nav-item">
-                <a class="nav-link active" href="#personalInfo" data-toggle="tab">Thông tin cá nhân</a>
+                <a class="nav-link active" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#personalInfo" data-toggle="tab">Thông tin cá nhân</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#ipsum-left" data-toggle="tab">Ipsum</a>
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#ipsum-left" data-toggle="tab">Ipsum</a>
               </li>
               <li class="nav-item">
                 <!-- use the title attribute to show a tooltip with the full long name
