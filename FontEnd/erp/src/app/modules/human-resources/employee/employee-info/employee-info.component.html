@@ -16,7 +16,7 @@
             <form [formGroup]="employeeForm" (submit)="!isSubmit ? submitForm() : false">
               <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12 form-group">
-                  <label class="label">Employee Code</label>
+                  <label class="label">Mã NV</label>
                   <mat-form-field class="form-control">
                     <input matInput id="employeeCode" formControlName="employeeCode" maxlength="50"
                     tabindex="1" [readonly]="!isEditEmployee" />
@@ -24,7 +24,7 @@
                   <mat-error *ngIf="isSubmit && employeeForm.controls['employeeCode'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">First Name</label>
+                  <label class="label">Họ</label>
                   <mat-form-field class="form-control">
                     <input matInput id="firstName" formControlName="firstName" maxlength="50"
                     tabindex="2" [readonly]="!isEditEmployee" />
@@ -32,7 +32,7 @@
                   <mat-error *ngIf="isSubmit && employeeForm.controls['firstName'].errors?.required">Vui lòng điền thông tin</mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Last Name</label>
+                  <label class="label">Tên</label>
                   <mat-form-field class="form-control">
                     <input matInput id="lastName" formControlName="lastName" maxlength="50"
                     tabindex="3" [readonly]="!isEditEmployee" />
@@ -42,7 +42,7 @@
               </div>
               <div class="row">
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Working Email</label>
+                  <label class="label">Email</label>
                   <mat-form-field class="form-control">
                     <input matInput formControlName="workingEmail" maxlength="50" tabindex="4" [readonly]="!isEditEmployee" required />
                   </mat-form-field>
@@ -54,13 +54,13 @@
                   </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Working Phone</label>
+                  <label class="label">Điện thoại</label>
                   <mat-form-field class="form-control">
                     <input matInput formControlName="workingPhone" maxlength="25" tabindex="5" [readonly]="!isEditEmployee" />
                   </mat-form-field>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Employee Status</label>
+                  <label class="label">Tình trạng nhân viên</label>
                   <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'" formControlName="employeeWorkingStatusId"
                   [tabIndex]="6" [searchable]="true" [selectOnTab]="true" [readonly]="!isEditEmployee"></ng-select>
                     <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
@@ -70,12 +70,12 @@
               </div>
               <div class="row">
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Card Number</label>
+                  <label class="label">Mã số thẻ</label>
                   <input type="text" class="form-control" formControlName="badgeCardNumber" maxlength="10"
                     tabindex="6" [readonly]="!isEditEmployee">
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Date Apply</label>
+                  <label class="label">Ngày cấp</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="dateApplyBadgeDatepicker" formControlName="dateApplyBadge"
                       maxlength="10" tabindex="7" [readonly]="!isEditEmployee">
@@ -91,12 +91,12 @@
               </div>
               <div class="row">
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Finger Sign Number</label>
+                  <label class="label">Mã vân tay</label>
                   <input type="text" class="form-control" formControlName="fingerSignNumber" maxlength="10"
                     tabindex="8" [readonly]="!isEditEmployee">
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Apply Date</label>
+                  <label class="label">Ngày cấp</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="dateApplyFingerSignDatepicker" [readonly]="!isEditEmployee"
                       formControlName="dateApplyFingerSign" maxlength="10" tabindex="9">
@@ -112,7 +112,7 @@
               </div>
               <div class="row">
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Probation Date</label>
+                  <label class="label">Ngày thử việc</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="probationDateDatepicker" formControlName="probationDate"
                       maxlength="10" tabindex="10" [readonly]="!isEditEmployee">
@@ -126,7 +126,7 @@
                   </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Working Date</label>
+                  <label class="label">Ngày làm việc chính thức</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="startWorkingDateDateicker" formControlName="startWorkingDate"
                       maxlength="10" tabindex="11" [readonly]="!isEditEmployee">
@@ -140,23 +140,23 @@
                   </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
-                  <label class="label">Basic Salary</label>
+                  <label class="label">Lương cơ bản</label>
                   <input type="text" appFormatCurrency class="form-control" formControlName="basicSalary"
                     maxlength="12" tabindex="13" [readonly]="!isEditEmployee">
                   </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <input type="submit" class="btn btn-success" value="Save" tabindex="14"
+                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="14"
                     *ngIf="isEditEmployee">
                   <button type="button" class="btn btn-success" tabindex="15"
-                    *ngIf="!isEditEmployee" (click)="onEditClick()">Edit</button>
+                    *ngIf="!isEditEmployee" (click)="onEditClick()">Cập nhật</button>
                   <button type="button" class="btn btn-danger" tabindex="15"
-                    *ngIf="formAction == 2 && isEditEmployee" (click)="onCancelClick()"> Cancel </button>
+                    *ngIf="formAction == 2 && isEditEmployee" (click)="onCancelClick()"> Hủy </button>
                   <button type="button" class="btn btn-warning" tabindex="16"
-                    *ngIf="isEditEmployee" (click)="onResetClick()"> Reset </button>
+                    *ngIf="isEditEmployee" (click)="onResetClick()"> Đặt lại </button>
                   <button type="button" class="btn btn-secondary" tabindex="17"
-                    (click)="onCloseClick()"> Close</button>
+                    (click)="onCloseClick()"> Đóng</button>
                 </div>
               </div>
             </form>
