@@ -52,6 +52,8 @@ namespace Service.HR.Models
 
         public int EmployeeWorkingStatusId { get; set; }
 
+        public string EmployeeWorkingStatusName { get; set; }
+
         public double BasicSalary { get; set; }
     }
 }

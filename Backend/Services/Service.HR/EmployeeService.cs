@@ -30,6 +30,7 @@ namespace Service.HR
             {
                 var query = from m in _context.EmployeeRepository.Query()
                             join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
+                            join status in _context.EmployeeWorkingStatusRepository.Query() on m.EmployeeWorkingStatusId equals status.Id
                             where !m.Deleted
                             orderby m.CreateDate
                             select new EmployeeModel()
@@ -46,6 +47,7 @@ namespace Service.HR
                                 WorkingEmail = m.WorkingEmail,
                                 WorkingPhone = m.WorkingPhone,
                                 EmployeeWorkingStatusId = m.EmployeeWorkingStatusId,
+                                EmployeeWorkingStatusName = status.Name,
                                 IsActive = m.IsActive
                             };
 
@@ -55,7 +57,8 @@ namespace Service.HR
                                             || m.FirstName.Contains(filter.Text)
                                             || m.LastName.Contains(filter.Text)
                                             || m.WorkingEmail.Contains(filter.Text)
-                                            || m.WorkingPhone.Contains(filter.Text));
+                                            || m.WorkingPhone.Contains(filter.Text)
+                                            || m.EmployeeWorkingStatusName.Contains(filter.Text));
                 }
                 BaseListModel<EmployeeModel> listItems = new BaseListModel<EmployeeModel>();
                 listItems.TotalItems = await _context.EmployeeRepository.Query().Where(m => !m.Deleted).CountAsync();
@@ -105,6 +108,7 @@ namespace Service.HR
             {
                 var md = from m in _context.EmployeeRepository.Query()
                                       join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
+                                      join status in _context.EmployeeWorkingStatusRepository.Query() on m.EmployeeWorkingStatusId equals status.Id
                                       where m.IsActive && !m.Deleted
                                       select new EmployeeModel()
                                       {
@@ -122,6 +126,7 @@ namespace Service.HR
                                           WorkingEmail = m.WorkingEmail,
                                           WorkingPhone = m.WorkingPhone,
                                           EmployeeWorkingStatusId = m.EmployeeWorkingStatusId,
+                                          EmployeeWorkingStatusName = status.Name,
                                           BasicSalary = m.BasicSalary,
                                           IsActive = m.IsActive,
                                       };

@@ -24,7 +24,7 @@ export class EmployeeListComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName = ['employeeCode', 'fullName', 'action'];
+  listColumnsName = ['employeeCode', 'fullName', 'workingEmail', 'workingPhone', 'employeeWorkingStatusName', 'startWorkingDate', 'action'];
   dataSource = new MatTableDataSource();
 
   constructor(

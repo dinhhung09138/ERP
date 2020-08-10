@@ -13,5 +13,6 @@ export interface EmployeeViewModel extends BaseViewModel {
   workingEmail: string;
   workingPhone: string;
   employeeWorkingStatusId: number;
+  employeeWorkingStatusName: string;
   basicSalary: number;
 }

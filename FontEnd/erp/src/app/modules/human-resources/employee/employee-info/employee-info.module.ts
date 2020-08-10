@@ -21,7 +21,7 @@ import { ContactComponent } from './contact/contact.component';
 import { FormComponent } from './contact/form/form.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { AppDateAdapter } from '../../../../core/helpers/format-datepicker.helper';
-import { DatetimePipe } from '../../../../core/pipes/datetime.pipe';
+import { FormatDatePipe } from '../../../../core/pipes/format-date.pipe';
 
 const routes: Routes = [
   {
@@ -59,7 +59,7 @@ const routes: Routes = [
   providers: [
     AppDateAdapter,
     EmployeeService,
-    DatetimePipe,
+    FormatDatePipe,
   ]
 })
 

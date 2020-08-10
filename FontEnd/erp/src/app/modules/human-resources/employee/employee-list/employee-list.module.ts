@@ -8,6 +8,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EmployeeService } from '../employee.service';
+import { FormatDatePipe } from '../../../../core/pipes/format-date.pipe';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    EmployeeListComponent
+    EmployeeListComponent,
+    FormatDatePipe,
   ],
   imports: [
     SharedModule,
