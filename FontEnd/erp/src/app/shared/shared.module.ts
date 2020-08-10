@@ -33,6 +33,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     RouterModule,
   ],
   declarations: [
+    // Components
     HeaderComponent,
     MainMenuComponent,
     FooterComponent,
@@ -40,16 +41,19 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ElementLoadingComponent,
     TableLoadingComponent,
     TablePaginatorComponent,
-    FormatNumberPipe,
-    FormatDecimalDirective,
-    FormatCurrencyDirective,
-    PrecedenceDirective,
     ConfirmDialogComponent,
     ErrorDialogComponent,
     NotifyComponent,
     PageNotFoundComponent,
+    // Pipes
+    FormatNumberPipe,
+    // Directives
+    FormatDecimalDirective,
+    FormatCurrencyDirective,
+    PrecedenceDirective,
   ],
   providers: [
+    // Directives
     FormatNumberPipe,
     // Use for change language of paginator.
     appInterceptors,
@@ -57,27 +61,32 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
       provide: MatPaginatorIntl,
       useClass: AppMatPaginatorIntl
     },
+    // Services
     ApiService,
   ],
   exports: [
-    HeaderComponent,
-    MainMenuComponent,
-    FooterComponent,
+    // Modules
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    // Components
+    HeaderComponent,
+    MainMenuComponent,
+    FooterComponent,
     NoDataAvailableComponent,
     ElementLoadingComponent,
     TableLoadingComponent,
     TablePaginatorComponent,
-    FormatNumberPipe,
-    FormatDecimalDirective,
-    FormatCurrencyDirective,
-    PrecedenceDirective,
     ConfirmDialogComponent,
     MatPaginatorModule,
     PageNotFoundComponent,
+    // Pipes
+    FormatNumberPipe,
+    // Directives
+    FormatDecimalDirective,
+    FormatCurrencyDirective,
+    PrecedenceDirective,
   ]
 })
 export class SharedModule { }
