@@ -22,7 +22,6 @@ const routes: Routes = [
       {
         path: 'position',
         loadChildren: () => import('./position/position.module').then(m => m.PositionModule),
-        data: { title: 'Employee' }
       },
       {
         path: 'commendation',

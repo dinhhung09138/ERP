@@ -1,11 +1,14 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ApiService } from 'src/app/core/services/api.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
-import { catchError, map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
 import { EmployeeViewModel } from './employee.model';
+import { PagingModel } from '../../../core/models/paging.model';
+import { FormActionStatus } from '../../../core/enums/form-action-status.enum';
+import { DialogService } from '../../../core/services/dialog.service';
 
 @Injectable()
 export class EmployeeService {
@@ -14,54 +17,55 @@ export class EmployeeService {
     list: APIUrlConstants.hrApi + 'employee/get-list',
     dropdown: APIUrlConstants.hrApi + 'employee/dropdown',
     item: APIUrlConstants.hrApi + 'employee/item',
-    save: APIUrlConstants.hrApi + 'employee/save',
+    insert: APIUrlConstants.hrApi + 'employee/insert',
+    update: APIUrlConstants.hrApi + 'employee/update',
+    delete: APIUrlConstants.hrApi + 'employee/delete',
   };
 
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private dialogService: DialogService,
+    private api: ApiService) { }
 
-  getList(filter: FilterModel) {
-    return this.http.post<ResponseModel>(this.url.list, filter).pipe(
-      map((data) => {
-        return data;
-      }),
-      catchError(xhr => {
-        return of(null);
-      })
-    );
-  }
+    getList(paging: PagingModel, searchText: string) {
+      const filter = new FilterModel();
+      filter.text = searchText;
+      filter.paging.pageIndex = paging.pageIndex;
+      filter.paging.pageSize = paging.pageSize;
 
-  getDropdown() {
-    return this.http.get<ResponseModel>(this.url.dropdown).pipe(
-      map((data) => {
-        return data;
-      }),
-      catchError(xhr => {
-        return of(null);
-      })
-    );
-  }
+      return this.api.getList(this.url.list, filter);
+    }
 
-  item(id: number) {
-    console.log(id);
-    return this.http.get<ResponseModel>(this.url.item + '?id=' + id).pipe(
-      map((data) => {
-        return data;
-      }),
-      catchError(xhr => {
-        return of(null);
-      })
-    );
-  }
+    item(id: number) {
+      return this.api.item(this.url.item, id);
+    }
 
-  save(model: EmployeeViewModel): Observable<ResponseModel> {
-    return this.http.post<ResponseModel>(this.url.save, model).pipe(
-      map((data) => {
-        return data;
-      }),
-      catchError(xhr => {
-        return of(null);
-      })
-    );
-  }
+    getDropdown() {
+      return this.api.getDropdown(this.url.dropdown);
+    }
+
+    save(model: EmployeeViewModel, action: FormActionStatus): Observable<ResponseModel> {
+      switch (action) {
+        case FormActionStatus.Insert:
+          return this.api.insert(this.url.insert, model);
+        default:
+          return this.api.update(this.url.update, model);
+      }
+    }
+
+    confirmDelete(itemId: number): Observable<ResponseModel> {
+      return this.dialogService.openConfirmDeleteDialog().pipe(
+        switchMap((confirmResponse: boolean) => {
+          if (confirmResponse === true) {
+            return this.delete(itemId);
+          } else {
+            return of(null);
+          }
+        })
+      );
+    }
+
+    delete(itemId: number): Observable<ResponseModel> {
+      return this.api.deleteById(this.url.delete, itemId);
+    }
 }

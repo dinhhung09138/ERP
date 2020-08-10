@@ -93,7 +93,6 @@ export class EmployeeInfoComponent implements OnInit {
       this.listWorkingStatus = response.data?.workingStatusList?.result || [];
     });
 
-    this.panelTitle = 'Create New Employee';
     this.employeeForm = this.fb.group({
       id: [0],
       employeeCode: ['', [Validators.required]],
@@ -175,11 +174,13 @@ export class EmployeeInfoComponent implements OnInit {
     if (this.router.url.indexOf('/employee/new') > 0) {
       this.initFormControl(FormActionStatus.Insert);
       this.isEditEmployee = true;
+      this.panelTitle = 'Thên nhân viên mới';
     } else if (this.router.url.indexOf('/employee/edit/') > 0) {
       this.initFormControl(FormActionStatus.Update);
       const id = this.activatedRoute.snapshot.paramMap.get('id');
       this.currentSelectedEmployeeId = parseInt(id, 0);
       this.getEmployeeInfo(this.currentSelectedEmployeeId);
+      this.panelTitle = 'Nhân viên: ';
     }
   }
 
@@ -210,10 +211,7 @@ export class EmployeeInfoComponent implements OnInit {
     }
     this.isLoading = true;
 
-    const model = this.employeeForm.getRawValue() as EmployeeViewModel;
-    model.action = this.formAction;
-
-    this.employeeService.save(model).subscribe((response: ResponseModel) => {
+    this.employeeService.save(this.employeeForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response) {
         this.isLoading = false;
         this.isSubmit = false;

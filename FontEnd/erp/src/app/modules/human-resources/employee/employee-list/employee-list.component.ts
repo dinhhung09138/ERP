@@ -38,58 +38,69 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onCreateClick() {
-    this.router.navigate(['/hr/employee/new']);
+    if (this.isLoading !== true) {
+      this.router.navigate(['/hr/employee/new']);
+    }
   }
 
   onImportClick() {
-
+    if (this.isLoading !== true) {
+    }
   }
 
   onExportClick() {
-
+    if (this.isLoading !== true) {
+    }
   }
 
   onUpdateClick(id: number) {
-    if (id !== null) {
+    if (this.isLoading !== true && id !== null) {
       this.router.navigate([`/hr/employee/edit/${id}`]);
     }
   }
 
   onDeleteClick(id: number) {
+    if (this.isLoading !== true) {
 
+      this.employeeService.confirmDelete(id).subscribe((response: ResponseModel) => {
+        if (response && response.responseStatus === ResponseStatus.success) {
+          this.getList();
+        }
+      });
+    }
   }
 
   onFilterChange() {
-    if (this.searchText.length > 0) {
-      this.paging.pageIndex = 0;
+    if (this.isLoading !== true) {
+      if (this.searchText.length > 0) {
+        this.paging.pageIndex = 0;
+      }
+      this.getList();
     }
-    this.getList();
   }
 
   onPageChange(page: PageEvent) {
-    this.paging.pageSize = page.pageSize;
-    this.paging.pageIndex = page.pageIndex;
-    if (page.pageSize !== this.currentPageSize) {
-      this.currentPageSize = page.pageSize;
-      this.paging.pageIndex = 0;
+    if (this.isLoading !== true) {
+      this.paging.pageSize = page.pageSize;
+      this.paging.pageIndex = page.pageIndex;
+      if (page.pageSize !== this.currentPageSize) {
+        this.currentPageSize = page.pageSize;
+        this.paging.pageIndex = 0;
+      }
+      this.getList();
     }
-    this.getList();
   }
 
   private getList() {
 
     this.isLoading = true;
 
-    const filter = new FilterModel();
-    filter.text = this.searchText;
-    filter.paging.pageIndex = this.paging.pageIndex;
-    filter.paging.pageSize = this.paging.pageSize;
-    this.employeeService.getList(filter).subscribe((response: ResponseModel) => {
+    this.employeeService.getList(this.paging, this.searchText).subscribe((response: ResponseModel) => {
       if (response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
-        this.isLoading = false;
       }
+      this.isLoading = false;
     });
   }
 }
