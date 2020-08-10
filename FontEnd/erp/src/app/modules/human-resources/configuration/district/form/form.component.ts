@@ -8,10 +8,10 @@ import { DistrictViewModel } from '../district.model';
 import { ProvinceViewModel } from '../../province/province.model';
 import { ActivatedRoute } from '@angular/router';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProvinceFormComponent } from '../../province/form/form.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProvinceService } from '../../province/province.service';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { ProvinceFormComponent } from '../../province/form/form.component';
 
 @Component({
   selector: 'app-hr-district-form',
@@ -46,9 +46,6 @@ export class DistrictFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(res => {
-      this.provinceList = res.province.result as ProvinceViewModel[];
-    });
     this.districtForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
@@ -61,6 +58,10 @@ export class DistrictFormComponent implements OnInit {
       this.formTitle = this.dialogData?.title;
       this.formAction = FormActionStatus.Insert;
       this.getListProvince();
+    } else {
+      this.activatedRoute.data.subscribe(res => {
+        this.provinceList = res.province.result as ProvinceViewModel[];
+      });
     }
 
     this.initFormControl(this.formAction);
@@ -121,7 +122,7 @@ export class DistrictFormComponent implements OnInit {
   }
 
   onAddNewProvinceClick() {
-    this.provinceService.openPopupForm().subscribe((response: ResponseModel) => {
+    this.provinceService.openPopupForm(ProvinceFormComponent).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.provinceList = response.result;
       }

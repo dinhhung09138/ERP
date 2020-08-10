@@ -10,8 +10,6 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { switchMap } from 'rxjs/operators';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { MatDialog } from '@angular/material/dialog';
-import { ProvinceFormComponent } from './form/form.component';
-import { ResponseStatus } from '../../../../core/enums/response-status.enum';
 
 @Injectable()
 export class ProvinceService {
@@ -72,8 +70,8 @@ export class ProvinceService {
     return this.api.deleteById(this.url.delete, itemId);
   }
 
-  openPopupForm(): Observable<ResponseModel> {
-    const dialogRef = this.dialog.open(ProvinceFormComponent, {
+  openPopupForm(form: any): Observable<ResponseModel> {
+    const dialogRef = this.dialog.open(form, {
       disableClose: true,
       data: {
         isPopup: true,

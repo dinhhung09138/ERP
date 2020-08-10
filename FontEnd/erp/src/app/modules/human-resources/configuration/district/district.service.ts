@@ -2,7 +2,7 @@ import { FormActionStatus } from './../../../../core/enums/form-action-status.en
 import { PagingModel } from './../../../../core/models/paging.model';
 import { ApiService } from './../../../../core/services/api.service';
 import { DialogService } from './../../../../core/services/dialog.service';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
 import { DistrictViewModel } from './district.model';
 import { Observable, of } from 'rxjs';
@@ -10,7 +10,6 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { switchMap } from 'rxjs/operators';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { MatDialog } from '@angular/material/dialog';
-import { DistrictFormComponent } from './form/form.component';
 
 @Injectable()
 export class DistrictService {
@@ -71,8 +70,8 @@ export class DistrictService {
     return this.api.deleteById(this.url.delete, itemId);
   }
 
-  openPopupForm(): Observable<ResponseModel> {
-    const dialogRef = this.dialog.open(DistrictFormComponent, {
+  openPopupForm(form: any): Observable<ResponseModel> {
+    const dialogRef = this.dialog.open(form, {
       disableClose: true,
       data: {
         isPopup: true,

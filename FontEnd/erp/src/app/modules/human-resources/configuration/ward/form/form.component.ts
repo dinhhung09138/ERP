@@ -10,6 +10,8 @@ import { ProvinceViewModel } from '../../province/province.model';
 import { DistrictViewModel } from '../../district/district.model';
 import { ProvinceService } from '../../province/province.service';
 import { DistrictService } from '../../district/district.service';
+import { DistrictFormComponent } from '../../district/form/form.component';
+import { ProvinceFormComponent } from '../../province/form/form.component';
 
 @Component({
   selector: 'app-hr-ward-form',
@@ -101,7 +103,7 @@ export class WardFormComponent implements OnInit {
   }
 
   onAddNewProvinceClick() {
-    this.provinceService.openPopupForm().subscribe((response: ResponseModel) => {
+    this.provinceService.openPopupForm(ProvinceFormComponent).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.provinceList = response.result;
       }
@@ -109,7 +111,7 @@ export class WardFormComponent implements OnInit {
   }
 
   onAddNewDistrictClick() {
-    this.districtService.openPopupForm().subscribe((response: ResponseModel) => {
+    this.districtService.openPopupForm(DistrictFormComponent).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.districtList = response.result;
       }
