@@ -25,7 +25,7 @@ export class FormatCurrencyDirective implements OnInit {
   @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
 
-    if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Backspace', 'Enter', 'Tab', '.', ','].indexOf(event.key) !== -1) {
+    if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Backspace', 'Delete', 'Enter', 'Tab', '.', ','].indexOf(event.key) !== -1) {
       return;
     }
 
