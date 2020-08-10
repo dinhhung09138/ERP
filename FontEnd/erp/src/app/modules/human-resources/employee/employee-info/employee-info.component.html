@@ -19,32 +19,39 @@
                   <label class="label">Mã NV</label>
                   <mat-form-field class="form-control">
                     <input matInput id="employeeCode" formControlName="employeeCode" maxlength="50"
-                    tabindex="1" [readonly]="!isEditEmployee" />
+                          tabindex="1" [readonly]="!isEditEmployee" autocomplete="off" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['employeeCode'].errors?.required">Vui lòng điền thông tin</mat-error>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['employeeCode'].errors?.required">
+                    Vui lòng điền thông tin
+                  </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Họ</label>
                   <mat-form-field class="form-control">
                     <input matInput id="firstName" formControlName="firstName" maxlength="50"
-                    tabindex="2" [readonly]="!isEditEmployee" />
+                          tabindex="2" [readonly]="!isEditEmployee" autocomplete="off"  />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['firstName'].errors?.required">Vui lòng điền thông tin</mat-error>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['firstName'].errors?.required">
+                    Vui lòng điền thông tin
+                  </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Tên</label>
                   <mat-form-field class="form-control">
                     <input matInput id="lastName" formControlName="lastName" maxlength="50"
-                    tabindex="3" [readonly]="!isEditEmployee" />
+                          tabindex="3" [readonly]="!isEditEmployee"  autocomplete="off" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['lastName'].errors?.required">Vui lòng điền thông tin</mat-error>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['lastName'].errors?.required">
+                    Vui lòng điền thông tin
+                  </mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Email</label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="workingEmail" maxlength="50" tabindex="4" [readonly]="!isEditEmployee" required />
+                    <input matInput formControlName="workingEmail" maxlength="50" tabindex="4"
+                          [readonly]="!isEditEmployee" required autocomplete="off"  />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.required">
                     Vui lòng điền thông tin
@@ -56,57 +63,64 @@
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Điện thoại</label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="workingPhone" maxlength="25" tabindex="5" [readonly]="!isEditEmployee" />
+                    <input matInput formControlName="workingPhone" maxlength="20" tabindex="5"
+                          [readonly]="!isEditEmployee" autocomplete="off"  />
                   </mat-form-field>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Tình trạng nhân viên</label>
-                  <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'" formControlName="employeeWorkingStatusId"
-                  [tabIndex]="6" [searchable]="true" [selectOnTab]="true" [readonly]="!isEditEmployee"></ng-select>
-                    <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
-                      Vui lòng điền thông tin
-                    </mat-error>
+                  <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'"
+                            formControlName="employeeWorkingStatusId" autocomplete="off"
+                            [tabIndex]="6" [searchable]="true" [selectOnTab]="true"
+                            [readonly]="!isEditEmployee"></ng-select>
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
+                    Vui lòng điền thông tin
+                  </mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Mã số thẻ</label>
-                  <input type="text" class="form-control" formControlName="badgeCardNumber" maxlength="10"
-                    tabindex="6" [readonly]="!isEditEmployee">
+                  <mat-form-field class="form-control">
+                    <input matInput formControlName="badgeCardNumber" maxlength="10"
+                          tabindex="6" [readonly]="!isEditEmployee" autocomplete="off" >
+                  </mat-form-field>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Ngày cấp</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="dateApplyBadgeDatepicker" formControlName="dateApplyBadge"
-                      maxlength="10" tabindex="7" [readonly]="!isEditEmployee">
+                            maxlength="10" tabindex="7" [readonly]="!isEditEmployee" autocomplete="off">
                     <mat-datepicker-toggle matSuffix [for]="dateApplyBadgeDatepicker">
                       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                     </mat-datepicker-toggle>
                     <mat-datepicker #dateApplyBadgeDatepicker [disabled]="!isEditEmployee"></mat-datepicker>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyBadge'].errors?.date">
-                    Date is invalid
+                    Ngày nhập vào không hợp lệ
                   </mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Mã vân tay</label>
-                  <input type="text" class="form-control" formControlName="fingerSignNumber" maxlength="10"
-                    tabindex="8" [readonly]="!isEditEmployee">
+                  <mat-form-field class="form-control">
+                    <input matInput formControlName="fingerSignNumber" maxlength="10"
+                          tabindex="8" [readonly]="!isEditEmployee" autocomplete="off">
+                  </mat-form-field>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Ngày cấp</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="dateApplyFingerSignDatepicker" [readonly]="!isEditEmployee"
-                      formControlName="dateApplyFingerSign" maxlength="10" tabindex="9">
+                      formControlName="dateApplyFingerSign" maxlength="10" tabindex="9" autocomplete="off">
                     <mat-datepicker-toggle matSuffix [for]="dateApplyFingerSignDatepicker">
                       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                     </mat-datepicker-toggle>
                     <mat-datepicker #dateApplyFingerSignDatepicker [disabled]="!isEditEmployee"></mat-datepicker>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
-                    Date is invalid
+                    Ngày nhập vào không hợp lệ
                   </mat-error>
                 </div>
               </div>
@@ -115,34 +129,36 @@
                   <label class="label">Ngày thử việc</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="probationDateDatepicker" formControlName="probationDate"
-                      maxlength="10" tabindex="10" [readonly]="!isEditEmployee">
+                      maxlength="10" tabindex="10" [readonly]="!isEditEmployee" autocomplete="off">
                     <mat-datepicker-toggle matSuffix [for]="probationDateDatepicker">
                       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                     </mat-datepicker-toggle>
                     <mat-datepicker #probationDateDatepicker [disabled]="!isEditEmployee"></mat-datepicker>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['probationDate'].errors?.date">
-                    Date is invalid
+                    Ngày nhập vào không hợp lệ
                   </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Ngày làm việc chính thức</label>
                   <mat-form-field class="form-control">
                     <input matInput [matDatepicker]="startWorkingDateDateicker" formControlName="startWorkingDate"
-                      maxlength="10" tabindex="11" [readonly]="!isEditEmployee">
+                      maxlength="10" tabindex="11" [readonly]="!isEditEmployee" autocomplete="off">
                     <mat-datepicker-toggle matSuffix [for]="startWorkingDateDateicker">
                       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                     </mat-datepicker-toggle>
                     <mat-datepicker #startWorkingDateDateicker [disabled]="!isEditEmployee"></mat-datepicker>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
-                    Date is invalid
+                    Ngày nhập vào không hợp lệ
                   </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
                   <label class="label">Lương cơ bản</label>
-                  <input type="text" appFormatCurrency class="form-control" formControlName="basicSalary"
-                    maxlength="12" tabindex="13" [readonly]="!isEditEmployee">
+                  <mat-form-field class="form-control">
+                    <input matInput appFormatCurrency formControlName="basicSalary"
+                          maxlength="12" tabindex="13" [readonly]="!isEditEmployee" autocomplete="off">
+                  </mat-form-field>
                   </div>
               </div>
               <div class="row">

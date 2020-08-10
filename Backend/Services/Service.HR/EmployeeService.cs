@@ -154,15 +154,15 @@ namespace Service.HR
 
                 Employee md = new Employee();
 
-                md.EmployeeCode = model.EmployeeCode;
+                md.EmployeeCode = model.EmployeeCode.Trim();
                 md.ProbationDate = model.ProbationDate;
                 md.StartWorkingDate = model.StartWorkingDate;
-                md.BadgeCardNumber = model.BadgeCardNumber;
+                md.BadgeCardNumber = model.BadgeCardNumber.Trim();
                 md.DateApplyBadge = model.DateApplyBadge;
-                md.FingerSignNumber = model.FingerSignNumber;
+                md.FingerSignNumber = model.FingerSignNumber.Trim();
                 md.DateApplyFingerSign = model.DateApplyFingerSign;
-                md.WorkingEmail = model.WorkingEmail;
-                md.WorkingPhone = model.WorkingPhone;
+                md.WorkingEmail = model.WorkingEmail.Trim();
+                md.WorkingPhone = model.WorkingPhone.Trim();
                 md.EmployeeWorkingStatusId = model.EmployeeWorkingStatusId;
                 md.BasicSalary = model.BasicSalary;
                 md.IsActive = model.IsActive;
@@ -177,14 +177,19 @@ namespace Service.HR
                 EmployeeInfoModel info = new EmployeeInfoModel()
                 {
                     EmployeeId = md.Id,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
+                    FirstName = model.FirstName.Trim(),
+                    LastName = model.LastName.Trim(),
                     Gender = model.Gender,
                     Action = Core.CommonModel.Enums.FormActionStatus.Insert
                 };
 
-                await _employeeInfoService.Insert(info);
+                response = await _employeeInfoService.Insert(info);
 
+                if (response.ResponseStatus != Core.CommonModel.Enums.ResponseStatus.Success)
+                {
+                    await _context.RollbackTransactionAsync();
+                    return response;
+                }
 
                 await _context.CommitTransactionAsync();
             }

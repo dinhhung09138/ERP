@@ -207,6 +207,7 @@ export class EmployeeInfoComponent implements OnInit {
     console.log(this.employeeForm.getRawValue());
     this.isSubmit = true;
     if (this.employeeForm.invalid) {
+      this.isSubmit = false;
       return;
     }
     this.isLoading = true;

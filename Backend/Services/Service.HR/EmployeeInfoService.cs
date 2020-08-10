@@ -100,8 +100,8 @@ namespace Service.HR
                 EmployeeInfo md = new EmployeeInfo();
 
                 md.EmployeeId = model.EmployeeId;
-                md.FirstName = model.FirstName;
-                md.LastName = model.LastName;
+                md.FirstName = model.FirstName.Trim();
+                md.LastName = model.LastName.Trim();
                 md.Gender = model.Gender;
                 md.DateOfBirth = model.DateOfBirth;
                 md.MaterialStatusId = model.MaterialStatusId;
@@ -141,8 +141,8 @@ namespace Service.HR
                 }
 
                 md.EmployeeId = model.EmployeeId;
-                md.FirstName = model.FirstName;
-                md.LastName = model.LastName;
+                md.FirstName = model.FirstName.Trim();
+                md.LastName = model.LastName.Trim();
                 md.Gender = model.Gender;
                 md.DateOfBirth = model.DateOfBirth;
                 md.MaterialStatusId = model.MaterialStatusId;

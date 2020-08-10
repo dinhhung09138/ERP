@@ -6,15 +6,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("Employee")]
+    [Table("HR_Employee")]
     public class Employee
     {
         [Key]
         [Column(TypeName = "int")]
         public int Id { get; set; }
 
-        [Column(TypeName = "varchar(30)")]
-        [MaxLength(30)]
+        [Column(TypeName = "varchar(15)")]
+        [MaxLength(15)]
         [Required]
         public string EmployeeCode { get; set; }
 
@@ -42,8 +42,8 @@ namespace Database.Sql.ERP.Entities.HR
         [MaxLength(50)]
         public string WorkingEmail { get; set; }
 
-        [Column(TypeName = "nvarchar(25)")]
-        [MaxLength(25)]
+        [Column(TypeName = "varchar(20)")]
+        [MaxLength(20)]
         public string WorkingPhone { get; set; }
 
         [Column(TypeName = "int")]

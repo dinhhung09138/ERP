@@ -19,9 +19,9 @@ namespace Service.HR.Models
         [MaxLength(50)]
         public string LastName { get; set; }
 
-        public bool Gender { get; set; }
+        public bool? Gender { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public int? MaterialStatusId { get; set; }
 

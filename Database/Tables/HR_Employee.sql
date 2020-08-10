@@ -1,11 +1,11 @@
 ﻿
-IF OBJECT_ID('dbo.Employee', 'u') IS NOT NULL 
-  DROP TABLE [dbo].[Employee];
+IF OBJECT_ID('dbo.HR_Employee', 'u') IS NOT NULL 
+  DROP TABLE [dbo].[HR_Employee];
 
 GO
-CREATE TABLE [dbo].[Employee](
+CREATE TABLE [dbo].[HR_Employee](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[EmployeeCode] [varchar](30) NOT NULL,
+	[EmployeeCode] [varchar](15) NOT NULL,
 	[ProbationDate] [datetime] NULL,
 	[StartWorkingDate] [datetime] NULL,
 	[BadgeCardNumber] [varchar](10) NULL,
@@ -22,17 +22,17 @@ CREATE TABLE [dbo].[Employee](
 	[UpdateBy] [int] NULL,
 	[UpdateDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
- CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_HR_Employee] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[Employee] ADD  CONSTRAINT [Employee_DF_IsActive]  DEFAULT ((1)) FOR [IsActive]
+ALTER TABLE [dbo].[HR_Employee] ADD  CONSTRAINT [HR_Employee_DF_IsActive]  DEFAULT ((1)) FOR [IsActive]
 GO
-ALTER TABLE [dbo].[Employee] ADD  CONSTRAINT [Employee_DF_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
+ALTER TABLE [dbo].[HR_Employee] ADD  CONSTRAINT [HR_Employee_DF_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
 GO
-ALTER TABLE [dbo].[Employee] ADD  CONSTRAINT [Employee_DF_Deleted]  DEFAULT ((0)) FOR [Deleted]
+ALTER TABLE [dbo].[HR_Employee] ADD  CONSTRAINT [HR_Employee_DF_Deleted]  DEFAULT ((0)) FOR [Deleted]
 GO
 EXEC sys.sp_addextendedproperty 
 @name=N'MS_Description', 
@@ -40,7 +40,7 @@ EXEC sys.sp_addextendedproperty
 @level0type=N'SCHEMA',
 @level0name=N'dbo', 
 @level1type=N'TABLE',
-@level1name=N'Employee', 
+@level1name=N'HR_Employee', 
 @level2type=N'COLUMN',
 @level2name=N'BadgeCardNumber'
 GO

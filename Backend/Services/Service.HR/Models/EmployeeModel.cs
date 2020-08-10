@@ -8,13 +8,16 @@ namespace Service.HR.Models
     {
         public int Id { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(15)]
+        [Required]
         public string EmployeeCode { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string FirstName { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string LastName { get; set; }
 
         public string FullName
@@ -25,7 +28,7 @@ namespace Service.HR.Models
             }
         }
 
-        public bool Gender { get; set; }
+        public bool? Gender { get; set; }
 
         public DateTime? ProbationDate { get; set; }
 
@@ -44,7 +47,7 @@ namespace Service.HR.Models
         [MaxLength(50)]
         public string WorkingEmail { get; set; }
 
-        [MaxLength(25)]
+        [MaxLength(20)]
         public string WorkingPhone { get; set; }
 
         public int EmployeeWorkingStatusId { get; set; }

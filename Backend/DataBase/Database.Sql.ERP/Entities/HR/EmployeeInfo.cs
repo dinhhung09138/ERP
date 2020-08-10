@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("EmployeeInfo")]
+    [Table("HR_EmployeeInfo")]
     public class EmployeeInfo
     {
         [Key]
@@ -25,12 +25,10 @@ namespace Database.Sql.ERP.Entities.HR
         public string LastName { get; set; }
 
         [Column(TypeName = "bit")]
-        [Required]
-        public bool Gender { get; set; }
+        public bool? Gender { get; set; }
 
         [Column(TypeName = "datetime")]
-        [Required]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [Column(TypeName = "int")]
         public int? MaterialStatusId { get; set; }
