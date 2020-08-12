@@ -23,6 +23,8 @@ using API.HR;
 using API.Training;
 using Database.Sql.ERP;
 using Core.Utility.Middlewares;
+using Core.Utility.Caching.Interfaces;
+using Core.Utility.Caching;
 
 namespace APIGateway
 {
@@ -74,6 +76,8 @@ namespace APIGateway
 
             //Use for logger
             services.AddScoped<ILoggerService, LoggerService>();
+            // Caching
+            services.AddScoped<IMemoryCachingService, MemoryCachingService>();
             // Use filter (Not working with Cors origin)
             services.AddFilter();
 
