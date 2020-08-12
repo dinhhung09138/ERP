@@ -10,6 +10,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 import { EmployeeService } from '../employee.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
@@ -22,6 +23,12 @@ import { FormComponent } from './contact/form/form.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { AppDateAdapter } from '../../../../core/helpers/format-datepicker.helper';
 import { FormatDatePipe } from '../../../../core/pipes/format-date.pipe';
+import { PersonalInfoService } from './personal-info/personal-info.service';
+import { NationService } from '../../configuration/nation/nation.service';
+import { NationalityService } from '../../configuration/nationality/nationality.service';
+import { EducationService } from '../../configuration/education/education.service';
+import { ProfessionalQualificationService } from '../../configuration/professional-qualification/professional-qualification.service';
+import { ReligionService } from '../../configuration/religion/religion.service';
 
 const routes: Routes = [
   {
@@ -50,6 +57,7 @@ const routes: Routes = [
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
+    MatRadioModule,
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -59,7 +67,13 @@ const routes: Routes = [
   providers: [
     AppDateAdapter,
     EmployeeService,
+    PersonalInfoService,
     FormatDatePipe,
+    ReligionService,
+    NationService,
+    NationalityService,
+    EducationService,
+    ProfessionalQualificationService,
   ]
 })
 

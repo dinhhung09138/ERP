@@ -22,12 +22,11 @@ export class EmployeeService {
     delete: APIUrlConstants.hrApi + 'employee/delete',
   };
 
-
   constructor(
     private dialogService: DialogService,
     private api: ApiService) { }
 
-    getList(paging: PagingModel, searchText: string) {
+    getList(paging: PagingModel, searchText: string): Observable<ResponseModel> {
       const filter = new FilterModel();
       filter.text = searchText;
       filter.paging.pageIndex = paging.pageIndex;
@@ -36,11 +35,11 @@ export class EmployeeService {
       return this.api.getList(this.url.list, filter);
     }
 
-    item(id: number) {
+    item(id: number): Observable<ResponseModel> {
       return this.api.item(this.url.item, id);
     }
 
-    getDropdown() {
+    getDropdown(): Observable<ResponseModel> {
       return this.api.getDropdown(this.url.dropdown);
     }
 

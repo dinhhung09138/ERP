@@ -1,1 +1,106 @@
-<p>personal-info works!</p>
+<div class="row">
+    <div class="col-12">
+    <form [formGroup]="personalInfoForm">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <h1>Nhân viên: {{ personalInfo?.firstName }} {{ personalInfo?.lastName }}</h1>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+          <input type="submit" class="btn btn-success" value="Lưu" tabindex="14"
+          *ngIf="isEdit">
+        <button type="button" class="btn btn-success" tabindex="15"
+          *ngIf="!isEdit" (click)="onEditClick()">Cập nhật</button>
+        <button type="button" class="btn btn-danger" tabindex="15"
+          *ngIf="isEdit" (click)="onCancelClick()"> Hủy </button>
+        <button type="button" class="btn btn-warning" tabindex="16"
+          *ngIf="isEdit" (click)="onResetClick()"> Đặt lại </button>
+        </div>
+        <div class="col-12">
+          <hr/>
+        </div>
+      </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label class="label">Ngày sinh</label>
+                    <mat-form-field class="form-control">
+                      <input matInput [matDatepicker]="dateOfBirthDatepicker" formControlName="dateOfBirth"
+                      maxlength="10" tabindex="1" autocomplete="off" />
+                      <mat-datepicker-toggle matSuffix [for]="dateOfBirthDatepicker">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                      </mat-datepicker-toggle>
+                      <mat-datepicker #dateOfBirthDatepicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label class="label">Giới tính</label>
+                    <div class="input-group">
+                      <mat-radio-button [checked]="true" (change)="onGenderChange(true)">Nam</mat-radio-button>
+                      &nbsp;&nbsp;&nbsp;
+                      <mat-radio-button (change)="onGenderChange(false)">Nữ</mat-radio-button>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label class="label">Tình trạng hôn nhân</label>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label class="label">Quốc tịch</label>
+                    <ng-select [items]="nationalityList" [bindLabel]="'name'" [bindValue]="'id'"
+                              formControlName="nationalityId" [searchable]="true" [selectOnTab]="true">
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label class="label">Dân tộc</label>
+                    <ng-select [items]="nationList" [bindValue]="'id'" [bindLabel]="'name'"
+                              formControlName="nationId" [selectOnTab]="true" [searchable]="true">
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label class="label">Tôn giáo</label>
+                    <ng-select [items]="religionList" [bindValue]="'id'" [bindLabel]="'name'"
+                              formControlName="religionId" [selectOnTab]="true" [searchable]="true">
+                    </ng-select>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label class="label">Trình độ học vấn</label>
+                    <ng-select [items]="educationList" [bindValue]="'id'" [bindLabel]="'name'"
+                              formControlName="academicLevelId" [selectOnTab]="true" [searchable]="true">
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label class="label">Trình độ chuyên môn</label>
+                    <ng-select [items]="qualificationList" [bindValue]="'id'" [bindLabel]="'name'"
+                              formControlName="professionalQualificationId" [selectOnTab]="true" [searchable]="true">
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
