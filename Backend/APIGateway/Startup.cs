@@ -25,6 +25,7 @@ using Database.Sql.ERP;
 using Core.Utility.Middlewares;
 using Core.Utility.Caching.Interfaces;
 using Core.Utility.Caching;
+using Core.Utility.Filters;
 
 namespace APIGateway
 {
@@ -77,8 +78,6 @@ namespace APIGateway
             //Use http context
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            //Use for logger
-            services.AddScoped<ILoggerService, LoggerService>();
             // Caching
             services.AddScoped<IMemoryCachingService, MemoryCachingService>();
             // Use filter (Not working with Cors origin)
@@ -87,6 +86,7 @@ namespace APIGateway
             // Declare connect to sql server
             services.AddDbContext<ERPContext>(option => option.UseSqlServer(Configuration.GetConnectionString("ERPConnection")), ServiceLifetime.Scoped);
             services.AddScoped<IERPUnitOfWork, ERPUnitOfWork>();
+
             //Use Security services
             services.AddSecurityServices(Configuration);
             services.AddHrServices(Configuration);

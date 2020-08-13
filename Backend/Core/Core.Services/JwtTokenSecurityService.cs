@@ -22,7 +22,6 @@ namespace Core.Services
     {
         private readonly IConfiguration _configuration;
         private readonly IMemoryCache _cache;
-        private readonly ILoggerService _logger;
 
         /// <summary>
         /// Initializes a new instance of the class.
@@ -31,11 +30,10 @@ namespace Core.Services
         /// <param name="configuration">IConfiguration.</param>
         /// <param name="cache">IMemoryCache.</param>
         /// <param name="logger">ILogger.</param>
-        public JwtTokenSecurityService(IConfiguration configuration, IMemoryCache cache, ILoggerService logger)
+        public JwtTokenSecurityService(IConfiguration configuration, IMemoryCache cache)
         {
             _configuration = configuration;
             _cache = cache;
-            _logger = logger;
         }
 
         /// <summary>
@@ -75,7 +73,6 @@ namespace Core.Services
             }
             catch (Exception ex)
             {
-                _logger.AddErrorLog(this.GetType().Name, MethodBase.GetCurrentMethod().Name, user, ex);
                 return null;
             }
         }
