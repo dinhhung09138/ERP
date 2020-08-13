@@ -23,8 +23,6 @@ using API.HR;
 using API.Training;
 using Database.Sql.ERP;
 using Core.Utility.Middlewares;
-using Core.Utility.Caching.Interfaces;
-using Core.Utility.Caching;
 using Core.Utility.Filters;
 
 namespace APIGateway

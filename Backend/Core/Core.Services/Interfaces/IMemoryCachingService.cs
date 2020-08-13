@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Core.Utility.Caching.Interfaces
+namespace Core.Services.Interfaces
 {
     /// <summary>
     /// Memory caching service
@@ -88,7 +86,7 @@ namespace Core.Utility.Caching.Interfaces
         /// <summary>
         /// Remove cache by key
         /// </summary>
-        /// <param name="key">key</param>
+        /// <param name="key"></param>
         void Remove(string key);
     }
 }

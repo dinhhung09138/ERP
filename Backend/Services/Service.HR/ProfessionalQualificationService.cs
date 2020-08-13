@@ -1,6 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
-using Core.Utility.Caching.Interfaces;
+using Core.Services.Interfaces;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Common;
 using Microsoft.EntityFrameworkCore;

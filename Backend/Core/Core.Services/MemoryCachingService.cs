@@ -1,10 +1,10 @@
-﻿using Core.Utility.Caching.Interfaces;
+﻿using Core.Services.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Core.Utility.Caching
+namespace Core.Services
 {
     public class MemoryCachingService : IMemoryCachingService
     {
