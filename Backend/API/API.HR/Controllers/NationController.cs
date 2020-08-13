@@ -1,5 +1,4 @@
 ﻿using Core.CommonModel;
-using Core.Utility.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -9,7 +8,6 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/nation")]
     [ApiController]
-    [Authentication]
     public class NationController : ControllerBase
     {
         private readonly INationService _nationService;

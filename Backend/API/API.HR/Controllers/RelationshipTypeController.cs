@@ -1,5 +1,4 @@
 ﻿using Core.CommonModel;
-using Core.Utility.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -9,7 +8,6 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/relationship-type")]
     [ApiController]
-    [Authentication]
     public class RelationshipTypeController : ControllerBase
     {
         private readonly IRelationshipTypeService _relationshipTypeService;

@@ -1,5 +1,4 @@
 ﻿using Core.CommonModel;
-using Core.Utility.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -9,7 +8,6 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/professional-qualification")]
     [ApiController]
-    [Authentication]
     public class ProfessionalQualificationController : ControllerBase
     {
         private readonly IProfessionalQualificationService _professionalQualificationService;

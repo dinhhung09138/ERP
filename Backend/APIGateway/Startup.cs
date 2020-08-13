@@ -70,7 +70,10 @@ namespace APIGateway
                     };
                 });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthenticationFilter());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             //Use http context
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

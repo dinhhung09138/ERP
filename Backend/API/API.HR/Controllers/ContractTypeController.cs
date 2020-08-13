@@ -1,5 +1,4 @@
 ﻿using Core.CommonModel;
-using Core.Utility.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -9,7 +8,6 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/contract-type")]
     [ApiController]
-    [Authentication]
     public class ContractTypeController : ControllerBase
     {
         private readonly IContractTypeService _contractTypeService;

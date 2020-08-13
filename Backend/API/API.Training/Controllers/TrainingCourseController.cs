@@ -1,5 +1,4 @@
 ﻿using Core.CommonModel;
-using Core.Utility.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Service.Training.Interfaces;
 using Service.Training.Models;
@@ -9,7 +8,6 @@ namespace API.Training.Controllers
 {
     [Route("api/training/course")]
     [ApiController]
-    [Authentication]
     public class TrainingCourseController : ControllerBase
     {
         private readonly ITrainingCourseService _trainingCourseService;
