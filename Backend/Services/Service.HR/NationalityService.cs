@@ -1,5 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Exceptions;
+using Core.Utility.Caching.Interfaces;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,14 @@ namespace Service.HR
 {
     public class NationalityService : INationalityService
     {
+        private readonly string cacheKey = "nationality_data";
+
         private readonly IERPUnitOfWork _context;
-        public NationalityService(IERPUnitOfWork context)
+        private readonly IMemoryCachingService _memoryCachingService;
+        public NationalityService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService)
         {
             _context = context;
+            _memoryCachingService = memoryCachingService;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -59,16 +64,29 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.NationalityRepository.Query()
-                            where m.IsActive && !m.Deleted
-                            orderby m.Precedence ascending
-                            select new NationalityModel
-                            {
-                                Id = m.Id,
-                                Name = m.Name,
-                            };
+                var cacheData = _memoryCachingService.GetList<NationalityModel>(cacheKey);
 
-                response.Result = await query.ToListAsync();
+                if (cacheData != null)
+                {
+                    response.Result = cacheData;
+                }
+                else
+                {
+                    var query = from m in _context.NationalityRepository.Query()
+                                where m.IsActive && !m.Deleted
+                                orderby m.Precedence ascending
+                                select new NationalityModel
+                                {
+                                    Id = m.Id,
+                                    Name = m.Name,
+                                };
+
+                    var list = await query.ToListAsync();
+                    response.Result = list;
+
+                    _memoryCachingService.Set<NationalityModel>(list, cacheKey, 60, 0, 0);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -121,6 +139,8 @@ namespace Service.HR
                 await _context.NationalityRepository.AddAsync(md).ConfigureAwait(true);
 
                 await _context.SaveChangesAsync();
+
+                _memoryCachingService.Remove(cacheKey);
             }
             catch (Exception ex)
             {
@@ -152,6 +172,8 @@ namespace Service.HR
                 _context.NationalityRepository.Update(md);
 
                 await _context.SaveChangesAsync();
+
+                _memoryCachingService.Remove(cacheKey);
             }
             catch (Exception ex)
             {
@@ -181,6 +203,8 @@ namespace Service.HR
                 _context.NationalityRepository.Update(md);
 
                 await _context.SaveChangesAsync();
+
+                _memoryCachingService.Remove(cacheKey);
             }
             catch (Exception ex)
             {

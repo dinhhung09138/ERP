@@ -17,13 +17,13 @@ namespace Core.Utility.Caching
             _cache = cache;
         }
 
-        public void SetValue<T>(T data, string key, int minutes)
+        public void Set<T>(T data, string key, int minutes)
         {
             try
             {
                 _pool.WaitOne(1);
 
-                RemoveCache(key);
+                Remove(key);
 
                 var cacheOption = new MemoryCacheEntryOptions();
                 cacheOption.SetAbsoluteExpiration(DateTime.Now.AddMinutes(minutes));
@@ -41,13 +41,13 @@ namespace Core.Utility.Caching
             }
         }
 
-        public void SetValue<T>(List<T> data, string key, int minutes)
+        public void Set<T>(List<T> data, string key, int minutes)
         {
             try
             {
                 _pool.WaitOne(1);
 
-                RemoveCache(key);
+                Remove(key);
 
                 var cacheOption = new MemoryCacheEntryOptions();
                 cacheOption.SetAbsoluteExpiration(DateTime.Now.AddMinutes(minutes));
@@ -65,13 +65,13 @@ namespace Core.Utility.Caching
             }
         }
 
-        public void SetValue<T>(T data, string key, int hours, int minutes)
+        public void Set<T>(T data, string key, int hours, int minutes)
         {
             try
             {
                 _pool.WaitOne(1);
 
-                RemoveCache(key);
+                Remove(key);
 
                 var cacheOption = new MemoryCacheEntryOptions();
                 cacheOption.SetAbsoluteExpiration(DateTime.Now.AddHours(hours).AddMinutes(minutes));
@@ -89,13 +89,13 @@ namespace Core.Utility.Caching
             }
         }
 
-        public void SetValue<T>(List<T> data, string key, int hours, int minutes)
+        public void Set<T>(List<T> data, string key, int hours, int minutes)
         {
             try
             {
                 _pool.WaitOne(1);
 
-                RemoveCache(key);
+                Remove(key);
 
                 var cacheOption = new MemoryCacheEntryOptions();
                 cacheOption.SetAbsoluteExpiration(DateTime.Now.AddHours(hours).AddMinutes(minutes));
@@ -113,13 +113,13 @@ namespace Core.Utility.Caching
             }
         }
 
-        public void SetValue<T>(T data, string key, int days, int hours, int minutes)
+        public void Set<T>(T data, string key, int days, int hours, int minutes)
         {
             try
             {
                 _pool.WaitOne(1);
 
-                RemoveCache(key);
+                Remove(key);
 
                 var cacheOption = new MemoryCacheEntryOptions();
                 cacheOption.SetAbsoluteExpiration(DateTime.Now.AddDays(days).AddHours(hours).AddMinutes(minutes));
@@ -137,13 +137,13 @@ namespace Core.Utility.Caching
             }
         }
 
-        public void SetValue<T>(List<T> data, string key, int days, int hours, int minutes)
+        public void Set<T>(List<T> data, string key, int days, int hours, int minutes)
         {
             try
             {
                 _pool.WaitOne(1);
 
-                RemoveCache(key);
+                Remove(key);
 
                 var cacheOption = new MemoryCacheEntryOptions();
                 cacheOption.SetAbsoluteExpiration(DateTime.Now.AddDays(days).AddHours(hours).AddMinutes(minutes));
@@ -171,7 +171,7 @@ namespace Core.Utility.Caching
             return _cache.Get<List<T>>(key);
         }
 
-        public void RemoveCache(string key)
+        public void Remove(string key)
         {
             _cache.Remove(key);
         }

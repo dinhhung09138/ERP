@@ -10,15 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Core.Utility.Caching.Interfaces;
 
 namespace Service.HR
 {
     public class EmployeeWorkingStatusService : IEmployeeWorkingStatusService
     {
+        private readonly string cacheKey = "working_status_data";
+
         private readonly IERPUnitOfWork _context;
-        public EmployeeWorkingStatusService(IERPUnitOfWork context)
+        private readonly IMemoryCachingService _memoryCachingService;
+        public EmployeeWorkingStatusService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService)
         {
             _context = context;
+            _memoryCachingService = memoryCachingService;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -65,16 +70,29 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.EmployeeWorkingStatusRepository.Query()
-                            where m.IsActive && !m.Deleted
-                            orderby m.Precedence ascending
-                            select new EmployeeWorkingStatusModel
-                            {
-                                Id = m.Id,
-                                Name = m.Name
-                            };
+                var cacheData = _memoryCachingService.GetList<EmployeeWorkingStatusModel>(cacheKey);
 
-                response.Result = await query.ToListAsync();
+                if (cacheData != null)
+                {
+                    response.Result = cacheData;
+                }
+                else
+                {
+                    var query = from m in _context.EmployeeWorkingStatusRepository.Query()
+                                where m.IsActive && !m.Deleted
+                                orderby m.Precedence ascending
+                                select new EmployeeWorkingStatusModel
+                                {
+                                    Id = m.Id,
+                                    Name = m.Name
+                                };
+
+                    var list = await query.ToListAsync();
+
+                    _memoryCachingService.Set<EmployeeWorkingStatusModel>(list, cacheKey, 30, 0, 0);
+
+                    response.Result = list;
+                }
             }
             catch (Exception ex)
             {
@@ -131,6 +149,8 @@ namespace Service.HR
                 await _context.EmployeeWorkingStatusRepository.AddAsync(md).ConfigureAwait(true);
 
                 await _context.SaveChangesAsync();
+
+                _memoryCachingService.Remove(cacheKey);
             }
             catch (Exception ex)
             {
@@ -163,6 +183,8 @@ namespace Service.HR
                 _context.EmployeeWorkingStatusRepository.Update(md);
 
                 await _context.SaveChangesAsync();
+
+                _memoryCachingService.Remove(cacheKey);
             }
             catch (Exception ex)
             {
@@ -192,6 +214,8 @@ namespace Service.HR
                 _context.EmployeeWorkingStatusRepository.Update(md);
 
                 await _context.SaveChangesAsync();
+
+                _memoryCachingService.Remove(cacheKey);
             }
             catch (Exception ex)
             {

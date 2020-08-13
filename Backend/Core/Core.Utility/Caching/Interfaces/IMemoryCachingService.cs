@@ -16,7 +16,7 @@ namespace Core.Utility.Caching.Interfaces
         /// <param name="data">data</param>
         /// <param name="key">key</param>
         /// <param name="minutes">minutes</param>
-        void SetValue<T>(T data, string key, int minutes);
+        void Set<T>(T data, string key, int minutes);
 
         /// <summary>
         /// Caching list of object with expiration time as minutes.
@@ -25,7 +25,7 @@ namespace Core.Utility.Caching.Interfaces
         /// <param name="data">data</param>
         /// <param name="key">key</param>
         /// <param name="minutes">minutes</param>
-        void SetValue<T>(List<T> data, string key, int minutes);
+        void Set<T>(List<T> data, string key, int minutes);
 
         /// <summary>
         /// Caching object with expiration time as hour and minutes.
@@ -35,7 +35,7 @@ namespace Core.Utility.Caching.Interfaces
         /// <param name="key">key</param>
         /// <param name="hours">hours</param>
         /// <param name="minutes">minutes</param>
-        void SetValue<T>(T data, string key, int hours, int minutes);
+        void Set<T>(T data, string key, int hours, int minutes);
 
         /// <summary>
         /// Caching list of object with expiration time as hour and minutes.
@@ -45,7 +45,7 @@ namespace Core.Utility.Caching.Interfaces
         /// <param name="key">key</param>
         /// <param name="hours">hours</param>
         /// <param name="minutes">minutes</param>
-        void SetValue<T>(List<T> data, string key, int hours, int minutes);
+        void Set<T>(List<T> data, string key, int hours, int minutes);
 
         /// <summary>
         /// Caching object with expiration time as days, hour and minutes.
@@ -56,7 +56,7 @@ namespace Core.Utility.Caching.Interfaces
         /// <param name="days">days</param>
         /// <param name="hours">hours</param>
         /// <param name="minutes">minutes</param>
-        void SetValue<T>(T data, string key, int days, int hours, int minutes);
+        void Set<T>(T data, string key, int days, int hours, int minutes);
 
         /// <summary>
         /// Caching list of object with expiration time as days, hour and minutes.
@@ -67,7 +67,7 @@ namespace Core.Utility.Caching.Interfaces
         /// <param name="days">days</param>
         /// <param name="hours">hours</param>
         /// <param name="minutes">minutes</param>
-        void SetValue<T>(List<T> data, string key, int days, int hours, int minutes);
+        void Set<T>(List<T> data, string key, int days, int hours, int minutes);
 
         /// <summary>
         /// Get object from cache
@@ -84,5 +84,11 @@ namespace Core.Utility.Caching.Interfaces
         /// <param name="key">key</param>
         /// <returns>List<T></returns>
         List<T> GetList<T>(string key);
+
+        /// <summary>
+        /// Remove cache by key
+        /// </summary>
+        /// <param name="key">key</param>
+        void Remove(string key);
     }
 }
