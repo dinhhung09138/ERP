@@ -51,11 +51,8 @@
                   <label class="label">Email</label>
                   <mat-form-field class="form-control">
                     <input matInput formControlName="workingEmail" maxlength="50" tabindex="4"
-                          [readonly]="!isEditEmployee" required autocomplete="off"  />
+                          [readonly]="!isEditEmployee" autocomplete="off"  />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.required">
-                    Vui lòng điền thông tin
-                  </mat-error>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['workingEmail'].errors?.email">
                     Email không hợp lệ
                   </mat-error>
@@ -72,7 +69,7 @@
                   <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'"
                             formControlName="employeeWorkingStatusId" autocomplete="off"
                             [tabIndex]="6" [searchable]="true" [selectOnTab]="true"
-                            [readonly]="!isEditEmployee"></ng-select>
+                            placeholder="Chọn" [readonly]="!isEditEmployee"></ng-select>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
                     Vui lòng điền thông tin
                   </mat-error>
@@ -100,6 +97,9 @@
                     Ngày nhập vào không hợp lệ
                   </mat-error>
                 </div>
+                <div class="col-sm-4 col-xs-12 form-group">
+                  <label class="label">Phòng ban</label>
+                </div>
               </div>
               <div class="row">
                 <div class="col-sm-4 col-xs-12 form-group">
@@ -122,6 +122,9 @@
                   <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
                     Ngày nhập vào không hợp lệ
                   </mat-error>
+                </div>
+                <div class="col-sm-4 col-xs-12 form-group">
+                  <label class="label">Chức vụ</label>
                 </div>
               </div>
               <div class="row">
@@ -159,7 +162,7 @@
                     <input matInput appFormatCurrency formControlName="basicSalary"
                           maxlength="12" tabindex="13" [readonly]="!isEditEmployee" autocomplete="off">
                   </mat-form-field>
-                  </div>
+                </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
@@ -187,7 +190,7 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="formAction === 2">
           <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             <ul class="nav nav-tabs left-tabs">
               <li class="nav-item">
@@ -212,7 +215,7 @@
           <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
             <div class="tab-content">
               <div class="tab-pane active" id="personalInfo">
-                <app-hr-employee-personal-info></app-hr-employee-personal-info>
+                <app-hr-employee-personal-info [Employee]="currentSelectedEmployee"></app-hr-employee-personal-info>
               </div>
               <article class="tab-pane" id="ipsum-left">
                 <h1>Ipsum</h1>

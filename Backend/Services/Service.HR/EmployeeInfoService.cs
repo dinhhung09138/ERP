@@ -141,8 +141,6 @@ namespace Service.HR
                 }
 
                 md.EmployeeId = model.EmployeeId;
-                md.FirstName = model.FirstName.Trim();
-                md.LastName = model.LastName.Trim();
                 md.Gender = model.Gender;
                 md.DateOfBirth = model.DateOfBirth;
                 md.MaterialStatusId = model.MaterialStatusId;
@@ -152,6 +150,36 @@ namespace Service.HR
                 md.AcademicLevelId = model.AcademicLevelId;
                 md.ProfessionalQualificationId = model.ProfessionalQualificationId;
                 md.IsActive = model.IsActive;
+                md.UpdateBy = 1; // TODO
+                md.UpdateDate = DateTime.Now;
+
+                _context.EmployeeInfoRepository.Update(md);
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
+                response.Errors.Add(ex.Message);
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> UpdateName(int employeeId, string firstName, string lastName)
+        {
+            ResponseModel response = new ResponseModel();
+
+            try
+            {
+                EmployeeInfo md = await _context.EmployeeInfoRepository.FirstOrDefaultAsync(m => m.EmployeeId == employeeId);
+
+                if (md == null)
+                {
+                    throw new NullParameterException();
+                }
+
+                md.FirstName = firstName;
+                md.LastName = lastName;
                 md.UpdateBy = 1; // TODO
                 md.UpdateDate = DateTime.Now;
 

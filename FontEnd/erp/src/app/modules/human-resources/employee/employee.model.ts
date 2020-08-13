@@ -4,6 +4,7 @@ export interface EmployeeViewModel extends BaseViewModel {
   employeeCode: string;
   firstName: string;
   lastName: string;
+  fullName: string;
   probationDate: Date;
   startWorkingDate: Date;
   badgeCardNumber: string;

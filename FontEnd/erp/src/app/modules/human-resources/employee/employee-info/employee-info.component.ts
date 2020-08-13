@@ -11,6 +11,8 @@ import { EmployeeViewModel } from '../employee.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
+import { Title } from '@angular/platform-browser';
+import { ApplicationConstant } from '../../../../core/constants/app.constant';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -84,6 +86,7 @@ export class EmployeeInfoComponent implements OnInit {
     private fb: FormBuilder,
     private elm: ElementRef,
     private router: Router,
+    private titleService: Title,
     private activatedRoute: ActivatedRoute,
     private formatNumber: FormatNumberPipe,
     private employeeService: EmployeeService,
@@ -99,7 +102,7 @@ export class EmployeeInfoComponent implements OnInit {
       employeeCode: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      workingEmail: ['', [Validators.required, Validators.email]],
+      workingEmail: ['', [Validators.email]],
       workingPhone: [''],
       badgeCardNumber: [''],
       dateApplyBadge: [null, [AppValidator.date]],
@@ -183,13 +186,12 @@ export class EmployeeInfoComponent implements OnInit {
     if (this.router.url.indexOf('/employee/new') > 0) {
       this.initFormControl(FormActionStatus.Insert);
       this.isEditEmployee = true;
-      this.panelTitle = 'Thên nhân viên mới';
+      this.setTitle();
     } else if (this.router.url.indexOf('/employee/edit/') > 0) {
       this.initFormControl(FormActionStatus.Update);
       const id = this.activatedRoute.snapshot.paramMap.get('id');
       this.currentSelectedEmployeeId = parseInt(id, 0);
       this.getEmployeeInfo(this.currentSelectedEmployeeId);
-      this.panelTitle = 'Nhân viên: ';
     }
   }
 
@@ -225,10 +227,21 @@ export class EmployeeInfoComponent implements OnInit {
         this.currentSelectedEmployeeId = response.result.id;
         this.setDataToFormControl(this.currentSelectedEmployee);
         this.isEditEmployee = false;
+        this.formAction = FormActionStatus.Update;
       }
       this.isSubmit = false;
       this.isLoading = false;
     });
+  }
+
+  private setTitle(name?: string) {
+    if (name) {
+      this.panelTitle = 'Nhân viên: ' + name;
+      this.titleService.setTitle(name + ' | ' + ApplicationConstant.siteTitle);
+    } else {
+      this.panelTitle = 'Thên nhân viên mới';
+      this.titleService.setTitle('Thên nhân viên mới' + ' | ' + ApplicationConstant.siteTitle);
+    }
   }
 
   private getEmployeeInfo(id: number) {
@@ -245,6 +258,7 @@ export class EmployeeInfoComponent implements OnInit {
 
   private setDataToFormControl(data?: EmployeeViewModel) {
     if (data) {
+      this.setTitle(data.fullName);
       this.employeeForm.get('id').setValue(data.id);
       this.employeeForm.get('employeeCode').setValue(data.employeeCode);
       this.employeeForm.get('firstName').setValue(data.firstName);

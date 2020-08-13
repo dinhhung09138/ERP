@@ -23,8 +23,8 @@ export class PersonalInfoService {
     private qualificationService: ProfessionalQualificationService) { }
 
   url = {
-    item: APIUrlConstants.hrApi + 'employee/item',
-    update: APIUrlConstants.hrApi + 'employee/update',
+    item: APIUrlConstants.hrApi + 'employee-info/item',
+    update: APIUrlConstants.hrApi + 'employee-info/update',
   };
 
   item(id: number): Observable<ResponseModel> {
@@ -32,7 +32,7 @@ export class PersonalInfoService {
   }
 
   save(model: PersonalInfoViewModel): Observable<ResponseModel> {
-    return this.api.insert(this.url.update, model);
+    return this.api.update(this.url.update, model);
   }
 
   getSelection(): Observable<any> {

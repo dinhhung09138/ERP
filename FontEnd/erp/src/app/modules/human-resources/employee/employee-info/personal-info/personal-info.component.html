@@ -1,19 +1,19 @@
 <div class="row">
     <div class="col-12">
-    <form [formGroup]="personalInfoForm">
+    <form [formGroup]="personalInfoForm" (submit)="!isLoading ? onSubmit() : false">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-          <h1>Nhân viên: {{ personalInfo?.firstName }} {{ personalInfo?.lastName }}</h1>
+          <h1>Nhân viên: {{ Employee?.fullName }}</h1>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right" *ngIf="Employee">
           <input type="submit" class="btn btn-success" value="Lưu" tabindex="14"
-          *ngIf="isEdit">
-        <button type="button" class="btn btn-success" tabindex="15"
-          *ngIf="!isEdit" (click)="onEditClick()">Cập nhật</button>
-        <button type="button" class="btn btn-danger" tabindex="15"
-          *ngIf="isEdit" (click)="onCancelClick()"> Hủy </button>
-        <button type="button" class="btn btn-warning" tabindex="16"
-          *ngIf="isEdit" (click)="onResetClick()"> Đặt lại </button>
+            *ngIf="isEdit">
+          <button type="button" class="btn btn-success" tabindex="15"
+            *ngIf="!isEdit" (click)="onEditClick()">Cập nhật</button>
+          <button type="button" class="btn btn-danger" tabindex="15"
+            *ngIf="isEdit" (click)="onCancelClick()"> Hủy </button>
+          <button type="button" class="btn btn-warning" tabindex="16"
+            *ngIf="isEdit" (click)="onResetClick()"> Đặt lại </button>
         </div>
         <div class="col-12">
           <hr/>
@@ -26,19 +26,22 @@
                     <label class="label">Ngày sinh</label>
                     <mat-form-field class="form-control">
                       <input matInput [matDatepicker]="dateOfBirthDatepicker" formControlName="dateOfBirth"
-                      maxlength="10" tabindex="1" autocomplete="off" />
+                        maxlength="10" tabindex="1" autocomplete="off" [readonly]="!isEdit" />
                       <mat-datepicker-toggle matSuffix [for]="dateOfBirthDatepicker">
                         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                       </mat-datepicker-toggle>
-                      <mat-datepicker #dateOfBirthDatepicker></mat-datepicker>
+                      <mat-datepicker #dateOfBirthDatepicker [disabled]="!isEdit"></mat-datepicker>
                     </mat-form-field>
+                    <mat-error *ngIf="isSubmit && personalInfoForm.controls['dateOfBirth'].errors?.date">
+                      Ngày nhập vào không hợp lệ
+                    </mat-error>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Giới tính</label>
                     <div class="input-group">
-                      <mat-radio-button [checked]="true" (change)="onGenderChange(true)">Nam</mat-radio-button>
+                      <mat-radio-button [checked]="gender === 1" [disabled]="!isEdit" (change)="onGenderChange(1)">Nam</mat-radio-button>
                       &nbsp;&nbsp;&nbsp;
-                      <mat-radio-button (change)="onGenderChange(false)">Nữ</mat-radio-button>
+                      <mat-radio-button [checked]="gender === 0" [disabled]="!isEdit" (change)="onGenderChange(0)">Nữ</mat-radio-button>
                     </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
@@ -53,19 +56,22 @@
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Quốc tịch</label>
                     <ng-select [items]="nationalityList" [bindLabel]="'name'" [bindValue]="'id'"
-                              formControlName="nationalityId" [searchable]="true" [selectOnTab]="true">
+                              formControlName="nationalityId" [searchable]="true" [selectOnTab]="true"
+                              placeholder="Chọn" [readonly]="!isEdit">
                     </ng-select>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Dân tộc</label>
                     <ng-select [items]="nationList" [bindValue]="'id'" [bindLabel]="'name'"
-                              formControlName="nationId" [selectOnTab]="true" [searchable]="true">
+                              formControlName="nationId" [selectOnTab]="true" [searchable]="true"
+                              placeholder="Chọn" [readonly]="!isEdit">
                     </ng-select>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Tôn giáo</label>
                     <ng-select [items]="religionList" [bindValue]="'id'" [bindLabel]="'name'"
-                              formControlName="religionId" [selectOnTab]="true" [searchable]="true">
+                              formControlName="religionId" [selectOnTab]="true" [searchable]="true"
+                              placeholder="Chọn" [readonly]="!isEdit">
                     </ng-select>
                   </div>
                 </div>
@@ -77,13 +83,15 @@
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Trình độ học vấn</label>
                     <ng-select [items]="educationList" [bindValue]="'id'" [bindLabel]="'name'"
-                              formControlName="academicLevelId" [selectOnTab]="true" [searchable]="true">
+                              formControlName="academicLevelId" [selectOnTab]="true" [searchable]="true"
+                              placeholder="Chọn" [readonly]="!isEdit">
                     </ng-select>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Trình độ chuyên môn</label>
                     <ng-select [items]="qualificationList" [bindValue]="'id'" [bindLabel]="'name'"
-                              formControlName="professionalQualificationId" [selectOnTab]="true" [searchable]="true">
+                              formControlName="professionalQualificationId" [selectOnTab]="true" [searchable]="true"
+                              placeholder="Chọn" [readonly]="!isEdit">
                     </ng-select>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">

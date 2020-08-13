@@ -109,7 +109,7 @@ namespace Service.HR
                 var md = from m in _context.EmployeeRepository.Query()
                                       join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
                                       join status in _context.EmployeeWorkingStatusRepository.Query() on m.EmployeeWorkingStatusId equals status.Id
-                                      where m.IsActive && !m.Deleted
+                                      where m.IsActive && !m.Deleted && m.Id == id
                                       select new EmployeeModel()
                                       {
                                           Id = m.Id,
@@ -216,6 +216,9 @@ namespace Service.HR
 
             try
             {
+
+                await _context.BeginTransactionAsync().ConfigureAwait(true);
+
                 Employee md = await _context.EmployeeRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
@@ -241,12 +244,23 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
+                response = await _employeeInfoService.UpdateName(model.Id, model.FirstName, model.LastName);
+
+                if (response.ResponseStatus != Core.CommonModel.Enums.ResponseStatus.Success)
+                {
+                    await _context.RollbackTransactionAsync();
+                    return response;
+                }
+
                 response = await Item(model.Id);
+
+                await _context.CommitTransactionAsync();
             }
             catch (Exception ex)
             {
                 response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
                 response.Errors.Add(ex.Message);
+                await _context.RollbackTransactionAsync();
             }
             return response;
         }
