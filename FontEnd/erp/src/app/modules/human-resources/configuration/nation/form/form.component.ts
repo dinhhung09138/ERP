@@ -5,7 +5,9 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { NationViewModel } from './../nation.model';
-import { Component, OnInit, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, EventEmitter, Output, ViewChild, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-nation-form',
@@ -27,6 +29,8 @@ export class NationFormComponent implements OnInit {
   item: NationViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<NationFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,
     private nationService: NationService) { }
@@ -38,6 +42,12 @@ export class NationFormComponent implements OnInit {
       precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
+
+    if (this.dialogData?.isPopup === true) {
+      this.formAction = FormActionStatus.Insert;
+      this.formTitle = this.dialogData?.title;
+    }
+
     this.initFormControl(this.formAction);
   }
 
@@ -68,6 +78,14 @@ export class NationFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
+  getClassByFormOrPopup() {
+    if (this.dialogData?.isPopup === true) {
+      return 'col-12';
+    } else {
+      return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
+    }
+  }
+
   showFormStatus() {
     if (this.formAction === FormActionStatus.UnKnow) {
       return false;
@@ -90,7 +108,7 @@ export class NationFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;
@@ -103,6 +121,10 @@ export class NationFormComponent implements OnInit {
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
+
+    if (this.dialogData?.isPopup === true) {
+      this.dialogRef.close(false);
+    }
   }
 
   submitForm() {
@@ -114,6 +136,11 @@ export class NationFormComponent implements OnInit {
 
     this.nationService.save(this.nationForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
+
+        if (this.dialogData?.isPopup === true) {
+          this.dialogRef.close(true);
+        }
+
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
       }

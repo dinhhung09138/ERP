@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
 export class NationService {
@@ -24,6 +25,7 @@ export class NationService {
 
   constructor(
     private api: ApiService,
+    private dialog: MatDialog,
     private dialogService: DialogService) { }
 
   getList(paging: PagingModel, searchText: string) {
@@ -33,6 +35,27 @@ export class NationService {
     filter.paging.pageSize = paging.pageSize;
 
     return this.api.getList(this.url.list, filter);
+  }
+
+  openPopup(form: any): Observable<ResponseModel> {
+    const dialogRef = this.dialog.open(form, {
+      width: '500px',
+      disableClose: true,
+      data: {
+        isPopup: true,
+        title: 'Thêm dân tộc mới'
+      },
+    });
+
+    return dialogRef.beforeClosed().pipe(
+      switchMap((result: boolean) => {
+        if (result === true) {
+          return this.getDropdown();
+        } else {
+          return of(null);
+        }
+      })
+    )
   }
 
   item(id: number) {

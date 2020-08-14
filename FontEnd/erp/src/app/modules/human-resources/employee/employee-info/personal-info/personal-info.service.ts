@@ -10,6 +10,7 @@ import { NationalityService } from '../../../configuration/nationality/nationali
 import { EducationService } from '../../../configuration/education/education.service';
 import { ProfessionalQualificationService } from '../../../configuration/professional-qualification/professional-qualification.service';
 import { map } from 'rxjs/operators';
+import { NationFormComponent } from '../../../configuration/nation/form/form.component';
 
 @Injectable()
 export class PersonalInfoService {
@@ -55,6 +56,10 @@ export class PersonalInfoService {
         }
       )
     );
+  }
+
+  addNewNation(): Observable<ResponseModel> {
+    return this.nationService.openPopup(NationFormComponent);
   }
 
 }
