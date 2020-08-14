@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { switchMap } from 'rxjs/operators';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
 export class EducationService {
@@ -24,7 +25,29 @@ export class EducationService {
 
   constructor(
     private api: ApiService,
+    private dialog: MatDialog,
     private dialogService: DialogService) { }
+
+    openPopupForm(form: any): Observable<ResponseModel> {
+      const dialogRef = this.dialog.open(form, {
+        width: '500px',
+        disableClose: true,
+        data: {
+          isPopup: true,
+          title: 'Thêm mới trình độ học vấn',
+        }
+      });
+
+      return dialogRef.beforeClosed().pipe(
+        switchMap((data: boolean) => {
+          if (data === true) {
+            return this.getDropdown();
+          } else {
+            return of(null);
+          }
+        })
+      );
+    }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();

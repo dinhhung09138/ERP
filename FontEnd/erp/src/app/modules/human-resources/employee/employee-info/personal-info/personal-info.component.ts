@@ -33,6 +33,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   nationList: NationViewModel[];
   nationalityList: NationalityViewModel[];
+  educationLoading = false;
   educationList: EducationViewModel[];
   religionList: ReligionViewModel[];
   qualificationList: ProfessionalQualificationViewModel[];
@@ -115,6 +116,17 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   onGenderChange(isMale: number) {
     this.personalInfoForm.get('gender').setValue(isMale === 1 ? true : false);
+  }
+
+  onAddNewEducationClick() {
+    this.educationLoading = true;
+    this.personalInfoService.addNewEducation().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.personalInfoForm.get('academicLevelId').setValue(null);
+        this.educationList = response.result;
+      }
+      this.educationLoading = false;
+    });
   }
 
   onSubmit() {
