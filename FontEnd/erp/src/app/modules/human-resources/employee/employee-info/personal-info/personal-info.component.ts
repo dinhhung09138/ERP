@@ -33,6 +33,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   nationLoading = false;
   nationList: NationViewModel[];
+  nationalityLoading = false;
   nationalityList: NationalityViewModel[];
   educationLoading = false;
   educationList: EducationViewModel[];
@@ -129,6 +130,17 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
         this.nationList = response.result;
       }
       this.nationLoading = false;
+    });
+  }
+
+  onAddNewNationalityClick() {
+    this.nationalityLoading = true;
+    this.personalInfoService.addNewNationality().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.personalInfoForm.get('nationalityId').setValue(null);
+        this.nationalityList = response.result;
+      }
+      this.nationalityLoading = false;
     });
   }
 

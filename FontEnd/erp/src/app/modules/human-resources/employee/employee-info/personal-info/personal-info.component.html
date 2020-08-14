@@ -55,10 +55,16 @@
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Quốc tịch</label>
-                    <ng-select [items]="nationalityList" [bindLabel]="'name'" [bindValue]="'id'"
-                              formControlName="nationalityId" [searchable]="true" [selectOnTab]="true"
-                              placeholder="Chọn" [readonly]="!isEdit">
-                    </ng-select>
+                    <div class="input-group">
+                      <ng-select [items]="nationalityList" [bindLabel]="'name'" [bindValue]="'id'"
+                                formControlName="nationalityId" [searchable]="true" [selectOnTab]="true"
+                                placeholder="Chọn" [readonly]="!isEdit" class="form-control" [loading]="nationalityLoading">
+                      </ng-select>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="4" (click)="onAddNewNationalityClick()">+</button>
+                      </div>
+                    </div>
+
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Dân tộc</label>
