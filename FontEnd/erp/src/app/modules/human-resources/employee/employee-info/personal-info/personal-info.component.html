@@ -74,10 +74,15 @@
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Tôn giáo</label>
-                    <ng-select [items]="religionList" [bindValue]="'id'" [bindLabel]="'name'"
-                              formControlName="religionId" [selectOnTab]="true" [searchable]="true"
-                              placeholder="Chọn" [readonly]="!isEdit">
-                    </ng-select>
+                    <div class="input-group">
+                      <ng-select [items]="religionList" [bindValue]="'id'" [bindLabel]="'name'"
+                                formControlName="religionId" [selectOnTab]="true" [searchable]="true"
+                                placeholder="Chọn" [readonly]="!isEdit" class="form-control" [loading]="religionLoading">
+                      </ng-select>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="4" (click)="onAddNewReligionClick()">+</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
             </div>

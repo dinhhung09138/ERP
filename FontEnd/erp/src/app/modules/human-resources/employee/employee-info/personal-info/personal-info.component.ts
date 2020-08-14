@@ -36,6 +36,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   nationalityList: NationalityViewModel[];
   educationLoading = false;
   educationList: EducationViewModel[];
+  religionLoading = false;
   religionList: ReligionViewModel[];
   qualificationList: ProfessionalQualificationViewModel[];
 
@@ -127,6 +128,17 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
         this.nationList = response.result;
       }
       this.nationLoading = false;
+    });
+  }
+
+  onAddNewReligionClick() {
+    this.religionLoading = true;
+    this.personalInfoService.addNewReligion().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.personalInfoForm.get('religionId').setValue(null);
+        this.religionList = response.result;
+      }
+      this.religionLoading = false;
     });
   }
 

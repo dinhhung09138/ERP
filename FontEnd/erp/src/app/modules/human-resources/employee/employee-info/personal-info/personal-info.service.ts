@@ -13,6 +13,7 @@ import { map } from 'rxjs/operators';
 import { NationFormComponent } from '../../../configuration/nation/form/form.component';
 import { NationalityFormComponent } from '../../../configuration/nationality/form/form.component';
 import { EducationFormComponent } from '../../../configuration/education/form/form.component';
+import { ReligionFormComponent } from '../../../configuration/religion/form/form.component';
 
 @Injectable()
 export class PersonalInfoService {
@@ -70,6 +71,10 @@ export class PersonalInfoService {
 
   addNewEducation(): Observable<ResponseModel> {
     return this.educationService.openPopupForm(EducationFormComponent);
+  }
+
+  addNewReligion(): Observable<ResponseModel> {
+    return this.religionService.openPopupForm(ReligionFormComponent);
   }
 
 }
