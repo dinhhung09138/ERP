@@ -5,7 +5,9 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { NationalityViewModel } from './../nationality.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
-import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-nationality-form',
@@ -27,6 +29,8 @@ export class NationalityFormComponent implements OnInit {
   item: NationalityViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<NationalityFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,
     private nationalityService: NationalityService) { }
@@ -38,6 +42,12 @@ export class NationalityFormComponent implements OnInit {
       precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
+
+    if (this.dialogData?.isPopup === true) {
+      this.formAction = FormActionStatus.Insert;
+      this.formTitle = this.dialogData?.title;
+    }
+
     this.initFormControl(this.formAction);
   }
 
@@ -66,6 +76,13 @@ export class NationalityFormComponent implements OnInit {
       this.nationalityForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
+  }
+
+  getClassByFormOrPopup() {
+    if (this.dialogData?.isPopup === true) {
+      return 'col-12';
+    }
+    return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
   }
 
   showFormStatus() {
@@ -103,6 +120,10 @@ export class NationalityFormComponent implements OnInit {
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
+
+    if (this.dialogData?.isPopup === true) {
+      this.dialogRef.close(false);
+    }
   }
 
   submitForm() {
@@ -114,6 +135,11 @@ export class NationalityFormComponent implements OnInit {
 
     this.nationalityService.save(this.nationalityForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
+
+        if (this.dialogData?.isPopup === true) {
+          this.dialogRef.close(true);
+        }
+
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
       }
