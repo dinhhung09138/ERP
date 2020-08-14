@@ -31,6 +31,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   personalInfo: PersonalInfoViewModel;
   personalInfoForm: FormGroup;
 
+  nationLoading = false;
   nationList: NationViewModel[];
   nationalityList: NationalityViewModel[];
   educationLoading = false;
@@ -116,6 +117,17 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   onGenderChange(isMale: number) {
     this.personalInfoForm.get('gender').setValue(isMale === 1 ? true : false);
+  }
+
+  onAddNewNationClick() {
+    this.nationLoading = true;
+    this.personalInfoService.addNewNation().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.personalInfoForm.get('nationId').setValue(null);
+        this.nationList = response.result;
+      }
+      this.nationLoading = false;
+    });
   }
 
   onAddNewEducationClick() {

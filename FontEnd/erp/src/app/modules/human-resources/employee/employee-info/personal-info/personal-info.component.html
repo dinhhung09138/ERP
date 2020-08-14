@@ -62,10 +62,15 @@
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Dân tộc</label>
-                    <ng-select [items]="nationList" [bindValue]="'id'" [bindLabel]="'name'"
-                              formControlName="nationId" [selectOnTab]="true" [searchable]="true"
-                              placeholder="Chọn" [readonly]="!isEdit">
-                    </ng-select>
+                    <div class="input-group">
+                      <ng-select [items]="nationList" [bindValue]="'id'" [bindLabel]="'name'"
+                                formControlName="nationId" [selectOnTab]="true" [searchable]="true"
+                                placeholder="Chọn" [readonly]="!isEdit" class="form-control" [loading]="nationLoading">
+                      </ng-select>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="4" (click)="onAddNewNationClick()" >+</button>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Tôn giáo</label>
