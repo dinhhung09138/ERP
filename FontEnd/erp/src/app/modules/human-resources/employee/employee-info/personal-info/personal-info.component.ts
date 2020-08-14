@@ -25,7 +25,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   isInitData = false; // Set true after get all init data in the first time.
   isEdit = false; // If true, enable control for editing
-  gender = -1; // -1: Unknow, 1: Male, 2: Female
+  gender = -1; // -1: Un-know, 1: Male, 2: Female
   isLoading = false;
   isSubmit = false;
   personalInfo: PersonalInfoViewModel;
@@ -69,7 +69,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
         this.isInitData = true;
       }
       this.initFormControl();
-      this.item();
+      this.getItem();
     }
   }
 
@@ -105,7 +105,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.setDataToForm(this.personalInfo);
   }
 
-  item() {
+  private getItem() {
     if (this.Employee) {
       this.isLoading = true;
       this.personalInfoService.item(this.Employee.id).subscribe((response: ResponseModel) => {

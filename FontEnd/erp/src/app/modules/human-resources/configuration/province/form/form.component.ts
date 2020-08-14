@@ -130,15 +130,17 @@ export class ProvinceFormComponent implements OnInit {
 
     this.provinceService.save(this.provinceForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
+
+        if (this.dialogData?.isPopup === true) {
+          this.dialogRef.close(true);
+        }
+
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
 
-      if (this.dialogData?.isPopup === true) {
-        this.dialogRef.close(true);
-      }
     });
   }
 

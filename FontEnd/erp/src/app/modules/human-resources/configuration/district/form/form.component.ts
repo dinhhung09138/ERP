@@ -157,9 +157,11 @@ export class DistrictFormComponent implements OnInit {
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
+
     if (this.dialogData?.isPopup === true) {
       this.dialogRef.close(false);
     }
+
   }
 
   onProvinceSearch(term: string, item: any) {
@@ -176,15 +178,16 @@ export class DistrictFormComponent implements OnInit {
 
     this.districtService.save(this.districtForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response !== null && response.responseStatus === ResponseStatus.success) {
+
+        if (this.dialogData?.isPopup === true) {
+          this.dialogRef.close(true);
+        }
+
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
-
-      if (this.dialogData?.isPopup === true) {
-        this.dialogRef.close(true);
-      }
     });
   }
 

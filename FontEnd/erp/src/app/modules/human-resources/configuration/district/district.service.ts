@@ -72,6 +72,7 @@ export class DistrictService {
 
   openPopupForm(form: any): Observable<ResponseModel> {
     const dialogRef = this.dialog.open(form, {
+      width: '500px',
       disableClose: true,
       data: {
         isPopup: true,

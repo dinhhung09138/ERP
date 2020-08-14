@@ -72,6 +72,7 @@ export class ProvinceService {
 
   openPopupForm(form: any): Observable<ResponseModel> {
     const dialogRef = this.dialog.open(form, {
+      width: '500px',
       disableClose: true,
       data: {
         isPopup: true,
@@ -81,12 +82,12 @@ export class ProvinceService {
 
     return dialogRef.beforeClosed().pipe(
       switchMap((data: boolean) => {
-      if (data === true) {
-        return this.getDropdown();
-      } else {
-        return of(null);
-      }
-    })
+        if (data === true) {
+          return this.getDropdown();
+        } else {
+          return of(null);
+        }
+      })
     );
   }
 }
