@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ProfessionalQualificationService } from '../professional-qualification.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -6,6 +6,8 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ProfessionalQualificationViewModel } from '../professional-qualification.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-professional-qualification-form',
@@ -26,6 +28,8 @@ export class ProfessionalQualificationFormComponent implements OnInit {
   item: ProfessionalQualificationViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<ProfessionalQualificationFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,
     private qualificationService: ProfessionalQualificationService) { }
@@ -37,6 +41,12 @@ export class ProfessionalQualificationFormComponent implements OnInit {
       precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true]
     });
+
+    if (this.dialogData && this.dialogData.isPopup === true) {
+      this.formAction = FormActionStatus.Insert;
+      this.formTitle = this.dialogData?.title;
+    }
+
     this.initFormControl(this.formAction);
   }
 
@@ -65,6 +75,13 @@ export class ProfessionalQualificationFormComponent implements OnInit {
       this.qualificationForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
+  }
+
+  getClassByFormOrPopup() {
+    if (this.dialogData?.isPopup === true) {
+      return 'col-12';
+    }
+    return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
   }
 
   showFormStatus() {
@@ -102,6 +119,10 @@ export class ProfessionalQualificationFormComponent implements OnInit {
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
+
+    if (this.dialogData?.isPopup === true) {
+      this.dialogRef.close(false);
+    }
   }
 
   submitForm() {
@@ -113,6 +134,11 @@ export class ProfessionalQualificationFormComponent implements OnInit {
 
     this.qualificationService.save(this.qualificationForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
+
+        if (this.dialogData?.isPopup === true) {
+          this.dialogRef.close(true);
+        }
+
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
       }

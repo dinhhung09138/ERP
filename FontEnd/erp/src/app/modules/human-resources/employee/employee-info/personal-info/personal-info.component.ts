@@ -38,6 +38,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   educationList: EducationViewModel[];
   religionLoading = false;
   religionList: ReligionViewModel[];
+  qualificationLoading = false;
   qualificationList: ProfessionalQualificationViewModel[];
 
   constructor(
@@ -150,6 +151,17 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
         this.educationList = response.result;
       }
       this.educationLoading = false;
+    });
+  }
+
+  onAddNewQualificationClick() {
+    this.qualificationLoading = true;
+    this.personalInfoService.addNewQualification().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.personalInfoForm.get('professionalQualificationId').setValue(null);
+        this.qualificationList = response.result;
+      }
+      this.qualificationLoading = false;
     });
   }
 

@@ -104,10 +104,15 @@
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Trình độ chuyên môn</label>
-                    <ng-select [items]="qualificationList" [bindValue]="'id'" [bindLabel]="'name'"
-                              formControlName="professionalQualificationId" [selectOnTab]="true" [searchable]="true"
-                              placeholder="Chọn" [readonly]="!isEdit">
-                    </ng-select>
+                    <div class="input-group">
+                      <ng-select [items]="qualificationList" [bindValue]="'id'" [bindLabel]="'name'"
+                                formControlName="professionalQualificationId" [selectOnTab]="true" [searchable]="true"
+                                placeholder="Chọn" [readonly]="!isEdit" class="form-control" [loading]="qualificationLoading">
+                      </ng-select>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="4" (click)="onAddNewQualificationClick()">+</button>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
 
