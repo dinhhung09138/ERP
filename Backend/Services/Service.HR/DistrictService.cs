@@ -3,6 +3,7 @@ using Core.CommonModel.Exceptions;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;
@@ -14,9 +15,14 @@ namespace Service.HR
     public class DistrictService : IDistrictService
     {
         private readonly IERPUnitOfWork _context;
-        public DistrictService(IERPUnitOfWork context)
+        private readonly ILogger<DistrictService> _logger;
+
+        private readonly string ErrorDropdown = "Không thể lấy danh sách quận huyện";
+
+        public DistrictService(IERPUnitOfWork context, ILogger<DistrictService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -52,8 +58,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -80,8 +85,9 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                response.Errors.Add(ErrorDropdown);
+                _logger.LogError(ex.Message, ex);
             }
             return response;
         }
@@ -108,8 +114,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -136,8 +141,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -168,8 +172,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -197,8 +200,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }

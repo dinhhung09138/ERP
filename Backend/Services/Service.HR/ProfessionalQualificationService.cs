@@ -4,6 +4,7 @@ using Core.Services.Interfaces;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;
@@ -14,13 +15,18 @@ namespace Service.HR
 {
     public class ProfessionalQualificationService : IProfessionalQualificationService
     {
-        private readonly string cacheKey = "qualification_data";
 
         private readonly IERPUnitOfWork _context;
         private readonly IMemoryCachingService _memoryCachingService;
-        public ProfessionalQualificationService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService)
+        private readonly ILogger<ProfessionalQualificationService> _logger;
+
+        private readonly string CacheKey = "qualification_data";
+        private readonly string ErrorDropdown = "Không thể lấy danh sách trình độ chuyên môn";
+
+        public ProfessionalQualificationService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService, ILogger<ProfessionalQualificationService> logger)
         {
             _context = context;
+            _logger = logger;
             _memoryCachingService = memoryCachingService;
         }
 
@@ -55,8 +61,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -66,7 +71,7 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var cacheData = _memoryCachingService.GetList<ProfessionalQualificationModel>(cacheKey);
+                var cacheData = _memoryCachingService.GetList<ProfessionalQualificationModel>(CacheKey);
 
                 if (cacheData != null)
                 {
@@ -86,13 +91,14 @@ namespace Service.HR
                     var list = await query.ToListAsync();
                     response.Result = list;
 
-                    _memoryCachingService.Set<ProfessionalQualificationModel>(list, cacheKey, 60, 0, 0);
+                    _memoryCachingService.Set<ProfessionalQualificationModel>(list, CacheKey, 60, 0, 0);
                 }
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                response.Errors.Add(ErrorDropdown);
+                _logger.LogError(ex.Message, ex);
             }
             return response;
         }
@@ -116,8 +122,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -141,12 +146,11 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
-                _memoryCachingService.Remove(cacheKey);
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -174,12 +178,11 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
-                _memoryCachingService.Remove(cacheKey);
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -205,12 +208,11 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
-                _memoryCachingService.Remove(cacheKey);
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }

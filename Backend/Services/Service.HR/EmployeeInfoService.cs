@@ -3,22 +3,24 @@ using Core.CommonModel.Exceptions;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
+using Microsoft.Extensions.Logging;
 
 namespace Service.HR
 {
     public class EmployeeInfoService : IEmployeeInfoService
     {
         private readonly IERPUnitOfWork _context;
-        public EmployeeInfoService(IERPUnitOfWork context)
+        private readonly ILogger<EmployeeInfoService> _logger;
+
+        public EmployeeInfoService(IERPUnitOfWork context, ILogger<EmployeeInfoService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -51,8 +53,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -85,8 +86,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -159,8 +159,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -191,6 +190,7 @@ namespace Service.HR
             {
                 response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
                 response.Errors.Add(ex.Message);
+                _logger.LogError(ex.Message, ex);
             }
             return response;
         }
@@ -218,8 +218,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }

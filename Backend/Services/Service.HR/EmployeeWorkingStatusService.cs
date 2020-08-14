@@ -11,19 +11,25 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Core.Services.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Service.HR
 {
     public class EmployeeWorkingStatusService : IEmployeeWorkingStatusService
     {
-        private readonly string cacheKey = "working_status_data";
 
         private readonly IERPUnitOfWork _context;
         private readonly IMemoryCachingService _memoryCachingService;
-        public EmployeeWorkingStatusService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService)
+        private readonly ILogger<EmployeeWorkingStatusService> _logger;
+
+        private readonly string CacheKey = "working_status_data";
+        private readonly string ErrorDropdown = "Không thể lấy danh sách tình trạng nhân viên";
+
+        public EmployeeWorkingStatusService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService, ILogger<EmployeeWorkingStatusService> logger)
         {
             _context = context;
             _memoryCachingService = memoryCachingService;
+            _logger = logger;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -59,8 +65,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -70,7 +75,7 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var cacheData = _memoryCachingService.GetList<EmployeeWorkingStatusModel>(cacheKey);
+                var cacheData = _memoryCachingService.GetList<EmployeeWorkingStatusModel>(CacheKey);
 
                 if (cacheData != null)
                 {
@@ -89,15 +94,16 @@ namespace Service.HR
 
                     var list = await query.ToListAsync();
 
-                    _memoryCachingService.Set<EmployeeWorkingStatusModel>(list, cacheKey, 30, 0, 0);
+                    _memoryCachingService.Set<EmployeeWorkingStatusModel>(list, CacheKey, 30, 0, 0);
 
                     response.Result = list;
                 }
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                response.Errors.Add(ErrorDropdown);
+                _logger.LogError(ex.Message, ex);
             }
             return response;
         }
@@ -123,8 +129,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -150,12 +155,11 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
-                _memoryCachingService.Remove(cacheKey);
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -184,12 +188,11 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
-                _memoryCachingService.Remove(cacheKey);
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -215,12 +218,11 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
-                _memoryCachingService.Remove(cacheKey);
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }

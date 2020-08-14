@@ -3,6 +3,7 @@ using Core.CommonModel.Exceptions;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Training;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Service.Training.Interfaces;
 using Service.Training.Models;
 using System;
@@ -14,9 +15,11 @@ namespace Service.Training
     public class AppraiseSectionService : IAppraiseSectionService
     {
         private readonly IERPUnitOfWork _context;
-        public AppraiseSectionService(IERPUnitOfWork context)
+        private readonly ILogger<AppraiseSectionService> _logger;
+        public AppraiseSectionService(IERPUnitOfWork context, ILogger<AppraiseSectionService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -50,8 +53,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -82,8 +84,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -110,8 +111,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -143,8 +143,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -172,8 +171,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }

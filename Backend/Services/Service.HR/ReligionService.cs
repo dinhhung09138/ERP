@@ -4,6 +4,7 @@ using Core.Services.Interfaces;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;
@@ -14,13 +15,18 @@ namespace Service.HR
 {
     public class ReligionService : IReligionService
     {
-        private readonly string cacheKey = "religion_data";
 
         private readonly IERPUnitOfWork _context;
         private readonly IMemoryCachingService _memoryCachingService;
-        public ReligionService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService)
+        private readonly ILogger<ReligionService> _logger;
+
+        private readonly string CacheKey = "religion_data";
+        private readonly string ErrorDropdown = "Không thể lấy danh sách tôn giáo";
+
+        public ReligionService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService, ILogger<ReligionService> logger)
         {
             _context = context;
+            _logger = logger;
             _memoryCachingService = memoryCachingService;
         }
 
@@ -53,8 +59,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -64,7 +69,7 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var cacheData = _memoryCachingService.GetList<ReligionModel>(cacheKey);
+                var cacheData = _memoryCachingService.GetList<ReligionModel>(CacheKey);
 
                 if (cacheData != null)
                 {
@@ -84,13 +89,14 @@ namespace Service.HR
                     var list = await query.ToListAsync();
                     response.Result = list;
 
-                    _memoryCachingService.Set<ReligionModel>(list, cacheKey, 60, 0, 0);
+                    _memoryCachingService.Set<ReligionModel>(list, CacheKey, 60, 0, 0);
                 }
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                response.Errors.Add(ErrorDropdown);
+                _logger.LogError(ex.Message, ex);
             }
             return response;
         }
@@ -114,8 +120,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -139,12 +144,11 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
-                _memoryCachingService.Remove(cacheKey);
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -172,12 +176,11 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
-                _memoryCachingService.Remove(cacheKey);
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -203,12 +206,11 @@ namespace Service.HR
 
                 await _context.SaveChangesAsync();
 
-                _memoryCachingService.Remove(cacheKey);
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }

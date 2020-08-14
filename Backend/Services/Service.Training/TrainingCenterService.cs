@@ -3,6 +3,7 @@ using Core.CommonModel.Exceptions;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Training;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Service.Training.Interfaces;
 using Service.Training.Models;
 using System;
@@ -14,9 +15,13 @@ namespace Service.Training
     public class TrainingCenterService : ITrainingCenterService
     {
         private readonly IERPUnitOfWork _context;
-        public TrainingCenterService(IERPUnitOfWork context)
+        private readonly ILogger<TrainingCenterService> _logger;
+
+        private readonly string ErrorDropdown = "Không thể lấy danh sách trung tâm đào tạo";
+        public TrainingCenterService(IERPUnitOfWork context, ILogger<TrainingCenterService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -49,8 +54,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -74,8 +78,9 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                response.Errors.Add(ErrorDropdown);
+                _logger.LogError(ex.Message, ex);
             }
             return response;
         }
@@ -104,8 +109,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -130,8 +134,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -161,8 +164,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
@@ -190,8 +192,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ex.Message);
+                throw ex;
             }
             return response;
         }
