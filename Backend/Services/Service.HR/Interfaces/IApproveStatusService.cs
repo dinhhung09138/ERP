@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Service.HR.Interfaces
 {
-    public interface IApproveStatusService : IBaseService<ApproveStatusModel>
+    public interface IApproveStatusService : IBaseInterfaceService<ApproveStatusModel>
     {
         Task<ResponseModel> DropDownSelection();
     }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Service.HR.Interfaces
 {
-    public interface IRankingService : IBaseService<RankingModel>
+    public interface IRankingService : IBaseInterfaceService<RankingModel>
     {
         Task<ResponseModel> DropDownSelection();
     }

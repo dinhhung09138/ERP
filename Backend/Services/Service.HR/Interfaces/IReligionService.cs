@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Service.HR.Interfaces
 {
-    public interface IReligionService : IBaseService<ReligionModel>
+    public interface IReligionService : IBaseInterfaceService<ReligionModel>
     {
         Task<ResponseModel> DropDownSelection();
     }

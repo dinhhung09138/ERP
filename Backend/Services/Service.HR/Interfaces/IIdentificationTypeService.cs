@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Service.HR.Interfaces
 {
-    public interface IIdentificationTypeService : IBaseService<IdentificationTypeModel>
+    public interface IIdentificationTypeService : IBaseInterfaceService<IdentificationTypeModel>
     {
         Task<ResponseModel> DropDownSelection();
     }

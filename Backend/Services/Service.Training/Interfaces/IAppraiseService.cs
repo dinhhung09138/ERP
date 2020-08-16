@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Service.Training.Interfaces
 {
-    public interface IAppraiseService : IBaseService<AppraiseModel>
+    public interface IAppraiseService : IBaseInterfaceService<AppraiseModel>
     {
         Task<ResponseModel> DropDownSelection();
     }

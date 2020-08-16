@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Service.HR.Interfaces
 {
-    public interface IEmployeeInfoService : IBaseService<EmployeeInfoModel>
+    public interface IEmployeeInfoService : IBaseInterfaceService<EmployeeInfoModel>
     {
         Task<ResponseModel> UpdateName(int employeeId, string firstName, string lastName);
     }

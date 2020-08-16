@@ -3,7 +3,7 @@ using Service.Training.Models;
 
 namespace Service.Training.Interfaces
 {
-    public interface ITrainingCourseDocumentService : IBaseService<TrainingCourseDocumentModel>
+    public interface ITrainingCourseDocumentService : IBaseInterfaceService<TrainingCourseDocumentModel>
     {
     }
 }

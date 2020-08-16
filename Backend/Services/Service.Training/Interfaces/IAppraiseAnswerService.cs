@@ -3,7 +3,7 @@ using Service.Training.Models;
 
 namespace Service.Training.Interfaces
 {
-    public interface IAppraiseAnswerService : IBaseService<AppraiseAnswerModel>
+    public interface IAppraiseAnswerService : IBaseInterfaceService<AppraiseAnswerModel>
     {
     }
 }
