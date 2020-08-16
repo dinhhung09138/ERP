@@ -52,10 +52,10 @@ namespace API.HR.Controllers
             return response;
         }
 
-        [HttpDelete, Route("delete")]
-        public async Task<ResponseModel> Delete([FromQuery] int id)
+        [HttpPut, Route("delete")]
+        public async Task<ResponseModel> Delete([FromBody] DisciplineModel model)
         {
-            var response = await _disciplineService.Delete(id);
+            var response = await _disciplineService.Delete(model);
             return response;
         }
 

@@ -1,7 +1,10 @@
-﻿using Core.CommonModel;
+﻿using Core.CommonMessage;
+using Core.CommonModel;
 using Core.CommonModel.Exceptions;
+using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service.HR.Interfaces;
@@ -12,18 +15,21 @@ using System.Threading.Tasks;
 
 namespace Service.HR
 {
-    public class PositionService : IPositionService
+    public class PositionService : BaseService, IPositionService
     {
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<PositionService> _logger;
 
         private readonly string ErrorDropdown = "Không thể lấy danh sách chức vụ";
 
-        public PositionService(IERPUnitOfWork context, ILogger<PositionService> logger)
+        public PositionService(
+            IERPUnitOfWork context,
+            ILogger<PositionService> logger,
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _logger = logger;
-            _context = context;
+            base._httpContext = httpContext;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -40,7 +46,8 @@ namespace Service.HR
                                 Name = p.Name,
                                 Description = p.Description,
                                 Precedence = p.Precedence,
-                                IsActive = p.IsActive
+                                IsActive = p.IsActive,
+                                RowVersion = p.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -104,7 +111,8 @@ namespace Service.HR
                     Name = md.Name,
                     Description = md.Description,
                     IsActive = md.IsActive,
-                    Precedence = md.Precedence
+                    Precedence = md.Precedence,
+                    RowVersion = md.RowVersion,
                 };
 
                 response.Result = model;
@@ -128,8 +136,7 @@ namespace Service.HR
                 md.Description = model.Description;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
-                //Khi nào có chức năng login rồi thêm CreateBy
-                // md.CreateBy = 
+                md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
                 md.Deleted = false;
 
@@ -156,12 +163,18 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Name = model.Name;
                 md.Description = model.Description;
                 md.IsActive = model.IsActive;
                 md.Precedence = model.Precedence;
-                //md.UpdateBy = ; 
+                md.UpdateBy = base.UserId; 
                 md.UpdateDate = DateTime.Now;
 
                 _context.PositionRepository.Update(md);
@@ -175,21 +188,27 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete(PositionModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Position md = await _context.PositionRepository.FirstOrDefaultAsync(m => m.Id == id);
+                Position md = await _context.PositionRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Deleted = true;
-                // md.UpdateBy = ;
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.PositionRepository.Update(md);

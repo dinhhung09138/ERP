@@ -1,8 +1,11 @@
-﻿using Core.CommonModel;
+﻿using Core.CommonMessage;
+using Core.CommonModel;
 using Core.CommonModel.Exceptions;
+using Core.Services;
 using Core.Services.Interfaces;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service.HR.Interfaces;
@@ -13,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Service.HR
 {
-    public class NationalityService : INationalityService
+    public class NationalityService : BaseService, INationalityService
     {
 
         private readonly IERPUnitOfWork _context;
@@ -23,11 +26,16 @@ namespace Service.HR
         private readonly string CacheKey = "nationality_data";
         private readonly string ErrorDropdown = "Không thể lấy danh sách quốc tịch";
 
-        public NationalityService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService, ILogger<NationalityService> logger)
+        public NationalityService(
+            IERPUnitOfWork context,
+            IMemoryCachingService memoryCachingService,
+            ILogger<NationalityService> logger,
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _logger = logger;
             _memoryCachingService = memoryCachingService;
+            base._httpContext = httpContext;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -43,7 +51,8 @@ namespace Service.HR
                                 Id = m.Id,
                                 Name = m.Name,
                                 Precedence = m.Precedence,
-                                IsActive = m.IsActive
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -114,7 +123,8 @@ namespace Service.HR
                                 Id = m.Id,
                                 Name = m.Name,
                                 Precedence = m.Precedence,
-                                IsActive = m.IsActive
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
                             };
 
                 response.Result = await query.FirstOrDefaultAsync();
@@ -137,7 +147,7 @@ namespace Service.HR
                 md.Name = model.Name;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
-                md.CreateBy = 1; // TODO
+                md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
                 md.Deleted = false;
 
@@ -166,11 +176,17 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Name = model.Name;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.NationalityRepository.Update(md);
@@ -186,21 +202,27 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete(NationalityModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Nationality md = await _context.NationalityRepository.FirstOrDefaultAsync(m => m.Id == id);
+                Nationality md = await _context.NationalityRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Deleted = true;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.NationalityRepository.Update(md);

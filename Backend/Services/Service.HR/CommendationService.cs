@@ -1,7 +1,10 @@
-﻿using Core.CommonModel;
+﻿using Core.CommonMessage;
+using Core.CommonModel;
 using Core.CommonModel.Exceptions;
+using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service.HR.Interfaces;
@@ -12,17 +15,21 @@ using System.Threading.Tasks;
 
 namespace Service.HR
 {
-    public class CommendationService : ICommendationService
+    public class CommendationService : BaseService, ICommendationService
     {
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<CommendationService> _logger;
 
         private readonly string ErrorDropdown = "Không thể lấy danh sách khen thưởng";
 
-        public CommendationService(IERPUnitOfWork context, ILogger<CommendationService> logger)
+        public CommendationService(
+            IERPUnitOfWork context,
+            ILogger<CommendationService> logger,
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _logger = logger;
+            base._httpContext = httpContext;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -39,7 +46,8 @@ namespace Service.HR
                                 Name = m.Name,
                                 Description = m.Description,
                                 Money = m.Money,
-                                IsActive = m.IsActive
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -104,7 +112,8 @@ namespace Service.HR
                     Name = md.Name,
                     Description = md.Description,
                     IsActive = md.IsActive,
-                    Money = md.Money
+                    Money = md.Money,
+                    RowVersion = md.RowVersion,
                 };
 
                 response.Result = model;
@@ -128,7 +137,7 @@ namespace Service.HR
                 md.Description = model.Description;
                 md.Money = model.Money;
                 md.IsActive = model.IsActive;
-                md.CreateBy = 1; // TODO
+                md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
                 md.Deleted = false;
 
@@ -155,12 +164,18 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Name = model.Name;
                 md.Description = model.Description;
                 md.IsActive = model.IsActive;
                 md.Money = model.Money;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.CommendationRepository.Update(md);
@@ -174,21 +189,27 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete(CommendationModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Commendation md = await _context.CommendationRepository.FirstOrDefaultAsync(m => m.Id == id);
+                Commendation md = await _context.CommendationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Deleted = true;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.CommendationRepository.Update(md);

@@ -18,5 +18,7 @@ namespace Core.CommonModel
         public DateTime? UpdateDate { get; set; }
 
         public bool Deleted { get; set; } = false;
+
+        public byte[] RowVersion { get; set; }
     }
 }

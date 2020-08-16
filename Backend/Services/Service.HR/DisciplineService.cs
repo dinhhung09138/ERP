@@ -1,7 +1,10 @@
-﻿using Core.CommonModel;
+﻿using Core.CommonMessage;
+using Core.CommonModel;
 using Core.CommonModel.Exceptions;
+using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service.HR.Interfaces;
@@ -12,17 +15,21 @@ using System.Threading.Tasks;
 
 namespace Service.HR
 {
-    public class DisciplineService : IDisciplineService
+    public class DisciplineService : BaseService, IDisciplineService
     {
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<DisciplineService> _logger;
 
         private readonly string ErrorDropdown = "Không thể lấy danh sách kỷ luật";
 
-        public DisciplineService(IERPUnitOfWork context, ILogger<DisciplineService> logger)
+        public DisciplineService(
+            IERPUnitOfWork context,
+            ILogger<DisciplineService> logger,
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _logger = logger;
+            base._httpContext = httpContext;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -41,7 +48,8 @@ namespace Service.HR
                                 Money = m.Money,
                                 IsActive = m.IsActive,
                                 CreateBy = m.CreateBy.ToString(),
-                                CreateDate = m.CreateDate
+                                CreateDate = m.CreateDate,
+                                RowVersion = m.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -106,6 +114,7 @@ namespace Service.HR
                     Description = md.Description,
                     Money = md.Money,
                     IsActive = md.IsActive,
+                    RowVersion = md.RowVersion,
                 };
 
                 response.Result = model;
@@ -129,7 +138,7 @@ namespace Service.HR
                 md.Description = model.Description;
                 md.Money = model.Money;
                 md.IsActive = model.IsActive;
-                md.CreateBy = 1; // TODO
+                md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
 
                 await _context.DisciplineRepository.AddAsync(md).ConfigureAwait(true);
@@ -155,12 +164,18 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Name = model.Name;
                 md.Description = model.Description;
                 md.Money = model.Money;
                 md.IsActive = model.IsActive;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.DisciplineRepository.Update(md);
@@ -174,21 +189,27 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete(DisciplineModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Discipline md = await _context.DisciplineRepository.FirstOrDefaultAsync(m => m.Id == id);
+                Discipline md = await _context.DisciplineRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Deleted = true;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.DisciplineRepository.Update(md);

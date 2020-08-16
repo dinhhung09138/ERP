@@ -14,6 +14,7 @@ CREATE TABLE [dbo].[HR_ApproveStatus](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_HR_ApproveStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -26,3 +27,4 @@ ALTER TABLE [dbo].[HR_ApproveStatus] ADD  CONSTRAINT [DF_HR_ApproveStatus_Create
 GO
 ALTER TABLE [dbo].[HR_ApproveStatus] ADD  CONSTRAINT [DF_HR_ApproveStatus_Deleted]  DEFAULT ((0)) FOR [Deleted]
 GO
+CREATE UNIQUE INDEX HR_ApproveStatus_Uidx_Code ON [dbo].[HR_ApproveStatus]([Code])

@@ -5,17 +5,18 @@ using Database.Sql.ERP.Entities.HR;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Core.Services.Interfaces;
 using Microsoft.Extensions.Logging;
+using Core.Services;
+using Microsoft.AspNetCore.Http;
+using Core.CommonMessage;
 
 namespace Service.HR
 {
-    public class EmployeeWorkingStatusService : IEmployeeWorkingStatusService
+    public class EmployeeWorkingStatusService : BaseService, IEmployeeWorkingStatusService
     {
 
         private readonly IERPUnitOfWork _context;
@@ -24,12 +25,18 @@ namespace Service.HR
 
         private readonly string CacheKey = "working_status_data";
         private readonly string ErrorDropdown = "Không thể lấy danh sách tình trạng nhân viên";
+        private readonly string CodeExist = "Mã trạng thái nhân viên đã tồn tại";
 
-        public EmployeeWorkingStatusService(IERPUnitOfWork context, IMemoryCachingService memoryCachingService, ILogger<EmployeeWorkingStatusService> logger)
+        public EmployeeWorkingStatusService(
+            IERPUnitOfWork context, 
+            IMemoryCachingService memoryCachingService, 
+            ILogger<EmployeeWorkingStatusService> logger, 
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _memoryCachingService = memoryCachingService;
             _logger = logger;
+            base._httpContext = httpContext;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -48,6 +55,7 @@ namespace Service.HR
                                 Description = m.Description,
                                 Precedence = m.Precedence,
                                 IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -122,7 +130,8 @@ namespace Service.HR
                                 Name = m.Name,
                                 Description = m.Description,
                                 Precedence = m.Precedence,
-                                IsActive = m.IsActive
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
                             };
 
                 response.Result = await query.FirstOrDefaultAsync();
@@ -140,6 +149,13 @@ namespace Service.HR
 
             try
             {
+                if (await _context.EmployeeWorkingStatusRepository.CountAsync(m => m.Code == model.Code) > 0)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(CodeExist);
+                    return response;
+                }
+
                 EmployeeWorkingStatus md = new EmployeeWorkingStatus();
 
                 md.Code = model.Code;
@@ -147,7 +163,7 @@ namespace Service.HR
                 md.Description = model.Description;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
-                md.CreateBy = 1; // TODO
+                md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
                 md.Deleted = false;
 
@@ -176,12 +192,18 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Name = model.Name;
                 md.Description = model.Description;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.EmployeeWorkingStatusRepository.Update(md);
@@ -197,21 +219,27 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete(EmployeeWorkingStatusModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                EmployeeWorkingStatus md = await _context.EmployeeWorkingStatusRepository.FirstOrDefaultAsync(m => m.Id == id);
+                EmployeeWorkingStatus md = await _context.EmployeeWorkingStatusRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Deleted = true;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.EmployeeWorkingStatusRepository.Update(md);

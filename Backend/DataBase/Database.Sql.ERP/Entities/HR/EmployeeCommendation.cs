@@ -59,5 +59,8 @@ namespace Database.Sql.ERP.Entities.HR
 
         [Column(TypeName = "datetime")]
         public DateTime ExpirationDate { get; set; }
+
+        [Column(TypeName = "timestamp")]
+        public byte[] RowVersion { get; set; }
     }
 }

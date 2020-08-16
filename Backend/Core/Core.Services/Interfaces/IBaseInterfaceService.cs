@@ -9,6 +9,6 @@ namespace Core.Services.Interfaces
         Task<ResponseModel> Item(int id);
         Task<ResponseModel> Insert(T model);
         Task<ResponseModel> Update(T model);
-        Task<ResponseModel> Delete(int id);
+        Task<ResponseModel> Delete(T model);
     }
 }

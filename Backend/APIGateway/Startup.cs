@@ -73,7 +73,9 @@ namespace APIGateway
             {
                 options.Filters.Add(new AuthenticationFilter());
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            //Use http context
+
+            // Use http context
+            // Omitted for clarity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Caching

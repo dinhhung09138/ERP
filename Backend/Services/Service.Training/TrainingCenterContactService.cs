@@ -1,7 +1,10 @@
-﻿using Core.CommonModel;
+﻿using Core.CommonMessage;
+using Core.CommonModel;
 using Core.CommonModel.Exceptions;
+using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Training;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service.Training.Interfaces;
@@ -12,15 +15,19 @@ using System.Threading.Tasks;
 
 namespace Service.Training
 {
-    public class TrainingCenterContactService : ITrainingCenterContactService
+    public class TrainingCenterContactService : BaseService, ITrainingCenterContactService
     {
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<TrainingCenterContactService> _logger;
 
-        public TrainingCenterContactService(IERPUnitOfWork context, ILogger<TrainingCenterContactService> logger)
+        public TrainingCenterContactService(
+            IERPUnitOfWork context, 
+            ILogger<TrainingCenterContactService> logger,
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _logger = logger;
+            base._httpContext = httpContext;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -39,7 +46,8 @@ namespace Service.Training
                                 Phone = m.Phone,
                                 Fax = m.Fax,
                                 Email = m.Email,
-                                IsActive = m.IsActive
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -86,6 +94,7 @@ namespace Service.Training
                     Email = md.Email,
                     TrainingCenterId = md.TrainingCenterId,
                     IsActive = md.IsActive,
+                    RowVersion = md.RowVersion,
                 };
 
                 response.Result = model;
@@ -112,7 +121,7 @@ namespace Service.Training
                 md.Email = model.Email;
                 md.TrainingCenterId = model.TrainingCenterId;
                 md.IsActive = model.IsActive;
-                md.CreateBy = 1; // TODO
+                md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
 
                 await _context.TrainingCenterContactRepository.AddAsync(md).ConfigureAwait(true);
@@ -138,6 +147,12 @@ namespace Service.Training
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Name = model.Name;
                 md.Position = model.Position;
@@ -146,7 +161,7 @@ namespace Service.Training
                 md.Email = model.Email;
                 md.TrainingCenterId = model.TrainingCenterId;
                 md.IsActive = model.IsActive;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.TrainingCenterContactRepository.Update(md);
@@ -160,21 +175,27 @@ namespace Service.Training
             return response;
         }
 
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete(TrainingCenterContactModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                TrainingCenterContact md = await _context.TrainingCenterContactRepository.FirstOrDefaultAsync(m => m.Id == id);
+                TrainingCenterContact md = await _context.TrainingCenterContactRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Deleted = true;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.TrainingCenterContactRepository.Update(md);

@@ -106,56 +106,137 @@ namespace Database.Sql.ERP
 
             #region " [ Common ] "
 
-            modelBuilder.Entity<District>();
-            modelBuilder.Entity<ProfessionalQualification>();
-            modelBuilder.Entity<Province>();
-            modelBuilder.Entity<Ward>();
+            modelBuilder.Entity<District>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<ProfessionalQualification>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Province>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Ward>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
 
             #endregion
 
             #region " [ HR ] "
 
-            modelBuilder.Entity<Education>();
-            modelBuilder.Entity<ApproveStatus>();
+            modelBuilder.Entity<Education>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<ApproveStatus>(entity => {
+                entity.HasIndex(m => m.Code).IsUnique(true);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
             modelBuilder.Entity<CodeType>();
-            modelBuilder.Entity<Commendation>();
-            modelBuilder.Entity<ContractType>();
-            modelBuilder.Entity<Discipline>();
-            modelBuilder.Entity<Employee>();
-            modelBuilder.Entity<EmployeeCommendation>();
-            modelBuilder.Entity<EmployeeContact>();
-            modelBuilder.Entity<EmployeeContract>();
-            modelBuilder.Entity<EmployeeContractStatusHistory>();
-            modelBuilder.Entity<EmployeeDiscipline>();
-            modelBuilder.Entity<EmployeeEducation>();
-            modelBuilder.Entity<EmployeeIdentification>();
-            modelBuilder.Entity<EmployeeInfo>();
-            modelBuilder.Entity<EmployeeRelationship>();
-            modelBuilder.Entity<EmployeeWorkingStatus>();
-            modelBuilder.Entity<IdentificationType>();
-            modelBuilder.Entity<ModelOfStudy>();
-            modelBuilder.Entity<Nation>();
-            modelBuilder.Entity<Nationality>();
-            modelBuilder.Entity<Ranking>();
-            modelBuilder.Entity<RelationshipType>();
-            modelBuilder.Entity<Religion>();
-            modelBuilder.Entity<Position>();
+            modelBuilder.Entity<Commendation>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<ContractType>(entity => {
+                entity.HasIndex(m => m.Code).IsUnique(true);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Discipline>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Employee>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeCommendation>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeContact>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeContract>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeContractStatusHistory>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeDiscipline>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeEducation>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeIdentification>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeInfo>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeRelationship>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<EmployeeWorkingStatus>(entity => {
+                entity.HasIndex(m => m.Code).IsUnique(true);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<IdentificationType>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<ModelOfStudy>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Nation>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Nationality>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Ranking>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<RelationshipType>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Religion>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Position>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
 
             #endregion
 
             #region " [ Training ]
 
-            modelBuilder.Entity<Appraise>();
-            modelBuilder.Entity<AppraiseAnswer>();
-            modelBuilder.Entity<AppraiseQuestion>();
-            modelBuilder.Entity<AppraiseSection>();
-            modelBuilder.Entity<Lecturer>();
-            modelBuilder.Entity<SpecializedTraining>();
-            modelBuilder.Entity<TrainingCenter>();
-            modelBuilder.Entity<TrainingCenterContact>();
-            modelBuilder.Entity<TrainingCourse>();
-            modelBuilder.Entity<TrainingCourseDocument>();
-            modelBuilder.Entity<TrainingType>();
+            modelBuilder.Entity<Appraise>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<AppraiseAnswer>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<AppraiseQuestion>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<AppraiseSection>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<Lecturer>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<SpecializedTraining>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<TrainingCenter>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<TrainingCenterContact>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<TrainingCourse>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<TrainingCourseDocument>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<TrainingType>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
 
             #endregion
 

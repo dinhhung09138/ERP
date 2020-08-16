@@ -27,3 +27,4 @@ ALTER TABLE [dbo].[HR_EmployeeWorkingStatus] ADD  CONSTRAINT [DF_HR_EmployeeWork
 GO
 ALTER TABLE [dbo].[HR_EmployeeWorkingStatus] ADD  CONSTRAINT [DF_HR_EmployeeWorkingStatus_Deleted]  DEFAULT ((0)) FOR [Deleted]
 GO
+CREATE UNIQUE INDEX HR_EmployeeWorkingStatus_Uidx_Code ON [dbo].[HR_EmployeeWorkingStatus]([Code])

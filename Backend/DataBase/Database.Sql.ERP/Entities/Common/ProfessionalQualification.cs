@@ -43,5 +43,8 @@ namespace Database.Sql.ERP.Entities.Common
         [Column(TypeName = "bit")]
         [Required]
         public bool Deleted { get; set; }
+
+        [Column(TypeName = "timestamp")]
+        public byte[] RowVersion { get; set; }
     }
 }

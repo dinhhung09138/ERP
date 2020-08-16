@@ -1,7 +1,10 @@
-﻿using Core.CommonModel;
+﻿using Core.CommonMessage;
+using Core.CommonModel;
 using Core.CommonModel.Exceptions;
+using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service.HR.Interfaces;
@@ -12,17 +15,22 @@ using System.Threading.Tasks;
 
 namespace Service.HR
 {
-    public class ContractTypeService : IContractTypeService
+    public class ContractTypeService : BaseService, IContractTypeService
     {
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<ContractTypeService> _logger;
 
         private readonly string ErrorDropdown = "Không thể lấy danh sách loại quan hệ gia đình";
+        private readonly string CodeExist = "Mã loại hợp đồng đã tồn tại";
 
-        public ContractTypeService(IERPUnitOfWork context, ILogger<ContractTypeService> logger)
+        public ContractTypeService(
+            IERPUnitOfWork context,
+            ILogger<ContractTypeService> logger,
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _logger = logger;
+            base._httpContext = httpContext;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -42,7 +50,8 @@ namespace Service.HR
                                 AllowInsurance = m.AllowInsurance,
                                 AllowLeaveDate = m.AllowLeaveDate,
                                 Precedence = m.Precedence,
-                                IsActive = m.IsActive
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -112,6 +121,7 @@ namespace Service.HR
                     AllowInsurance = md.AllowInsurance,
                     Precedence = md.Precedence,
                     IsActive = md.IsActive,
+                    RowVersion = md.RowVersion,
                 };
 
                 response.Result = model;
@@ -129,6 +139,13 @@ namespace Service.HR
 
             try
             {
+                if (await _context.ContractTypeRepository.CountAsync(m => m.Code == model.Code) > 0)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(CodeExist);
+                    return response;
+                }
+
                 ContractType md = new ContractType();
 
                 md.Code = model.Code;
@@ -138,7 +155,7 @@ namespace Service.HR
                 md.AllowLeaveDate = model.AllowLeaveDate;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
-                md.CreateBy = 1; // TODO
+                md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
                 md.Deleted = false;
 
@@ -165,15 +182,20 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
-                md.Code = model.Code;
                 md.Name = model.Name;
                 md.Description = model.Description;
                 md.AllowInsurance = model.AllowInsurance;
                 md.AllowLeaveDate = model.AllowLeaveDate;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.ContractTypeRepository.Update(md);
@@ -187,21 +209,27 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete(ContractTypeModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                ContractType md = await _context.ContractTypeRepository.FirstOrDefaultAsync(m => m.Id == id);
+                ContractType md = await _context.ContractTypeRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Deleted = true;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.ContractTypeRepository.Update(md);

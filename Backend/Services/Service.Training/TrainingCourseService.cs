@@ -1,7 +1,10 @@
-﻿using Core.CommonModel;
+﻿using Core.CommonMessage;
+using Core.CommonModel;
 using Core.CommonModel.Exceptions;
+using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Training;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service.Training.Interfaces;
@@ -12,16 +15,20 @@ using System.Threading.Tasks;
 
 namespace Service.Training
 {
-    public class TrainingCourseService : ITrainingCourseService
+    public class TrainingCourseService : BaseService, ITrainingCourseService
     {
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<TrainingCourseService> _logger;
 
         private readonly string ErrorDropdown = "Không thể lấy danh sách khóa đào tạo";
-        public TrainingCourseService(IERPUnitOfWork context, ILogger<TrainingCourseService> logger)
+        public TrainingCourseService(
+            IERPUnitOfWork context,
+            ILogger<TrainingCourseService> logger,
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _logger = logger;
+            base._httpContext = httpContext;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -39,7 +46,8 @@ namespace Service.Training
                                 Description = m.Description,
                                 StartDate = m.StartDate,
                                 CompleteDate = m.CompleteDate,
-                                IsActive = m.IsActive
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -110,6 +118,7 @@ namespace Service.Training
                     CompleteDate = md.CompleteDate,
                     LecturerId = md.LecturerId,
                     IsActive = md.IsActive,
+                    RowVersion = md.RowVersion,
                 };
 
                 response.Result = model;
@@ -135,7 +144,7 @@ namespace Service.Training
                 md.CompleteDate = model.CompleteDate;
                 md.LecturerId = model.LecturerId;
                 md.IsActive = model.IsActive;
-                md.CreateBy = 1; // TODO
+                md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
 
                 await _context.TrainingCourseRepository.AddAsync(md).ConfigureAwait(true);
@@ -161,6 +170,12 @@ namespace Service.Training
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Name = model.Name;
                 md.Description = model.Description;
@@ -168,7 +183,7 @@ namespace Service.Training
                 md.CompleteDate = model.CompleteDate;
                 md.LecturerId = model.LecturerId;
                 md.IsActive = model.IsActive;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.TrainingCourseRepository.Update(md);
@@ -182,21 +197,27 @@ namespace Service.Training
             return response;
         }
 
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete(TrainingCourseModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                TrainingCourse md = await _context.TrainingCourseRepository.FirstOrDefaultAsync(m => m.Id == id);
+                TrainingCourse md = await _context.TrainingCourseRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Deleted = true;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.TrainingCourseRepository.Update(md);

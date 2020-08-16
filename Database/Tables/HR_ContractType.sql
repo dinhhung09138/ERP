@@ -29,3 +29,4 @@ ALTER TABLE [dbo].[HR_ContractType] ADD  CONSTRAINT [HR_ContractType_DF_CreateDa
 GO
 ALTER TABLE [dbo].[HR_ContractType] ADD  CONSTRAINT [HR_ContractType_DF_Deleted]  DEFAULT ((0)) FOR [Deleted]
 GO
+CREATE UNIQUE INDEX HR_ContractType_Uidx_Code ON [dbo].[HR_ContractType]([Code])

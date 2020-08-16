@@ -45,10 +45,10 @@ namespace API.Training.Controllers
             return response;
         }
 
-        [HttpDelete, Route("delete")]
-        public async Task<ResponseModel> Delete([FromQuery] int id)
+        [HttpPut, Route("delete")]
+        public async Task<ResponseModel> Delete([FromBody] TrainingCourseDocumentModel model)
         {
-            var response = await _trainingCourseDocumentService.Delete(id);
+            var response = await _trainingCourseDocumentService.Delete(model);
             return response;
         }
     }

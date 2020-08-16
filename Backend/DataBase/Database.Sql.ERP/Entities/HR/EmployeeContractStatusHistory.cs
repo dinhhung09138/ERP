@@ -55,5 +55,8 @@ namespace Database.Sql.ERP.Entities.HR
 
         [Column(TypeName = "int")]
         public int? UpdateBy { get; set; }
+
+        [Column(TypeName = "timestamp")]
+        public byte[] RowVersion { get; set; }
     }
 }

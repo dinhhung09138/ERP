@@ -1,7 +1,10 @@
-﻿using Core.CommonModel;
+﻿using Core.CommonMessage;
+using Core.CommonModel;
 using Core.CommonModel.Exceptions;
+using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service.HR.Interfaces;
@@ -12,17 +15,23 @@ using System.Threading.Tasks;
 
 namespace Service.HR
 {
-    public class ApproveStatusService : IApproveStatusService
+    public class ApproveStatusService : BaseService, IApproveStatusService
     {
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<ApproveStatusService> _logger;
 
-        private readonly string ErrorDropdown = "Không thể lấy danh sách trạng thái";
 
-        public ApproveStatusService(IERPUnitOfWork context, ILogger<ApproveStatusService> logger)
+        private readonly string ErrorDropdown = "Không thể lấy danh sách trạng thái";
+        private readonly string CodeExist = "Mã trạng thái đã tồn tại";
+
+        public ApproveStatusService(
+            IERPUnitOfWork context,
+            ILogger<ApproveStatusService> logger,
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _logger = logger;
+            base._httpContext = httpContext;
         }
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
@@ -38,7 +47,8 @@ namespace Service.HR
                                 Code = m.Code,
                                 Name = m.Name,
                                 Precedence = m.Precedence,
-                                IsActive = m.IsActive
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -105,6 +115,7 @@ namespace Service.HR
                     Name = md.Name,
                     Precedence = md.Precedence,
                     IsActive = md.IsActive,
+                    RowVersion = md.RowVersion,
                 };
 
                 response.Result = model;
@@ -122,13 +133,20 @@ namespace Service.HR
 
             try
             {
+                if (await _context.ApproveStatusRepository.CountAsync(m => m.Code == model.Code) > 0)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(CodeExist);
+                    return response;
+                }
+
                 ApproveStatus md = new ApproveStatus();
 
                 md.Code = model.Code;
                 md.Name = model.Name;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
-                md.CreateBy = 1; // TODO
+                md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
 
                 await _context.ApproveStatusRepository.AddAsync(md).ConfigureAwait(true);
@@ -154,13 +172,20 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Code = model.Code;
                 md.Name = model.Name;
                 md.Precedence = model.Precedence;
                 md.IsActive = model.IsActive;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
+                
 
                 _context.ApproveStatusRepository.Update(md);
 
@@ -173,21 +198,27 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(int id)
+        public async Task<ResponseModel> Delete(ApproveStatusModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                ApproveStatus md = await _context.ApproveStatusRepository.FirstOrDefaultAsync(m => m.Id == id);
+                ApproveStatus md = await _context.ApproveStatusRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (md == null)
                 {
                     throw new NullParameterException();
                 }
+                if (md.RowVersion != model.RowVersion)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
+                }
 
                 md.Deleted = true;
-                md.UpdateBy = 1; // TODO
+                md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
                 _context.ApproveStatusRepository.Update(md);
