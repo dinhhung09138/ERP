@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[Ward](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_Ward] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

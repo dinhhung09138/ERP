@@ -39,7 +39,8 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
       name: ['', [Validators.required]],
       description: [''],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -154,6 +155,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
     this.workingStatusForm.get('description').setValue(data.description);
     this.workingStatusForm.get('precedence').setValue(data.precedence);
     this.workingStatusForm.get('isActive').setValue(data.isActive);
+    this.workingStatusForm.get('rowVersion').setValue(data.rowVersion);
   }
 
 }

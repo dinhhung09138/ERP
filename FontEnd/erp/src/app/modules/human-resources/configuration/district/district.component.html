@@ -61,8 +61,10 @@
                       <i class="fa fa-bars"></i>
                     </a>
                     <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
-                      <a href="javascript:{}" class="dropdown-item text-success" (click)="onUpdateClick(element.id)">Cập nhật</a>
-                      <a href="javascript:{}" class="dropdown-item text-danger" (click)="onDeleteClick(element.id)">Xóa</a>
+                      <a href="javascript:{}" class="dropdown-item text-success"
+                          (click)="onUpdateClick(element.id)">Cập nhật</a>
+                      <a href="javascript:{}" class="dropdown-item text-danger"
+                          (click)="onDeleteClick(element.id, element.rowVersion)">Xóa</a>
                     </div>
                   </div>
                 </td>

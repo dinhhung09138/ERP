@@ -36,7 +36,8 @@ export class ModelOfStudyFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -138,5 +139,6 @@ export class ModelOfStudyFormComponent implements OnInit {
     this.modelOfStudyForm.get('name').setValue(data.name);
     this.modelOfStudyForm.get('precedence').setValue(data.precedence);
     this.modelOfStudyForm.get('isActive').setValue(data.isActive);
+    this.modelOfStudyForm.get('rowVersion').setValue(data.rowVersion);
   }
 }

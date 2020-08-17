@@ -39,7 +39,8 @@ export class ProfessionalQualificationFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
 
     if (this.dialogData && this.dialogData.isPopup === true) {
@@ -163,6 +164,7 @@ export class ProfessionalQualificationFormComponent implements OnInit {
     this.qualificationForm.get('name').setValue(data.name);
     this.qualificationForm.get('precedence').setValue(data.precedence);
     this.qualificationForm.get('isActive').setValue(data.isActive);
+    this.qualificationForm.get('rowVersion').setValue(data.rowVersion);
   }
 
 }

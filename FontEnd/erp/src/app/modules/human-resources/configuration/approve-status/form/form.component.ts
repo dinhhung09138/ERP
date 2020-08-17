@@ -37,7 +37,8 @@ export class ApproveStatusFormComponent implements OnInit {
       code: ['', [Validators.required]],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -148,5 +149,6 @@ export class ApproveStatusFormComponent implements OnInit {
     this.approveStatusForm.get('name').setValue(data.name);
     this.approveStatusForm.get('precedence').setValue(data.precedence);
     this.approveStatusForm.get('isActive').setValue(data.isActive);
+    this.approveStatusForm.get('rowVersion').setValue(data.rowVersion);
   }
 }

@@ -172,7 +172,7 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
-                if (md.RowVersion != model.RowVersion)
+                if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
                     response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
                     response.Errors.Add(ParameterMsg.OutOfDateData);
@@ -186,7 +186,6 @@ namespace Service.HR
                 md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
                 
-
                 _context.ApproveStatusRepository.Update(md);
 
                 await _context.SaveChangesAsync();
@@ -210,7 +209,7 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
-                if (md.RowVersion != model.RowVersion)
+                if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
                     response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
                     response.Errors.Add(ParameterMsg.OutOfDateData);

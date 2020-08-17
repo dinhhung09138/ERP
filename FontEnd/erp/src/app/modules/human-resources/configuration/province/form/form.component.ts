@@ -39,7 +39,8 @@ export class ProvinceFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
 
     if (this.dialogData && this.dialogData.isPopup === true) {
@@ -160,6 +161,7 @@ export class ProvinceFormComponent implements OnInit {
     this.provinceForm.get('name').setValue(data.name);
     this.provinceForm.get('precedence').setValue(data.precedence);
     this.provinceForm.get('isActive').setValue(data.isActive);
+    this.provinceForm.get('rowVersion').setValue(data.rowVersion);
   }
 
 }

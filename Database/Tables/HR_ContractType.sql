@@ -17,6 +17,7 @@ CREATE TABLE [dbo].[HR_ContractType](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_HR_ContractType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

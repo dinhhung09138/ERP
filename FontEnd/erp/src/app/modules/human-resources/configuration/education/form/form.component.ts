@@ -38,7 +38,8 @@ export class EducationFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
 
     if (this.dialogData?.isPopup === true) {
@@ -159,6 +160,7 @@ export class EducationFormComponent implements OnInit {
     this.educationForm.get('name').setValue(data.name);
     this.educationForm.get('precedence').setValue(data.precedence);
     this.educationForm.get('isActive').setValue(data.isActive);
+    this.educationForm.get('rowVersion').setValue(data.rowVersion);
   }
 
 }

@@ -74,11 +74,11 @@ export class DistrictComponent implements OnInit {
     }
   }
 
-  onDeleteClick(id: number) {
+  onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading !== true) {
       this.form.onCloseClick();
 
-      this.districtService.confirmDelete(id).subscribe((response: ResponseModel) => {
+      this.districtService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
           this.getList();
         }

@@ -14,6 +14,7 @@ CREATE TABLE [dbo].[District](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_District] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

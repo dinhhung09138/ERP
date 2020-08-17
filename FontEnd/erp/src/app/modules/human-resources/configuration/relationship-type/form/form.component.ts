@@ -37,7 +37,8 @@ export class RelationshipTypeFormComponent implements OnInit {
       name: ['', [Validators.required]],
       description: [''],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -144,5 +145,6 @@ export class RelationshipTypeFormComponent implements OnInit {
     this.relationshipTypeForm.get('description').setValue(data.description);
     this.relationshipTypeForm.get('precedence').setValue(data.precedence);
     this.relationshipTypeForm.get('isActive').setValue(data.isActive);
+    this.relationshipTypeForm.get('rowVersion').setValue(data.rowVersion);
   }
 }

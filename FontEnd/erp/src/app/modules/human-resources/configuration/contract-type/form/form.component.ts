@@ -39,7 +39,8 @@ export class ContractTypeFormComponent implements OnInit {
       allowInsurance: [true],
       allowLeaveDate: [true],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -163,5 +164,6 @@ export class ContractTypeFormComponent implements OnInit {
     this.contractTypeForm.get('allowLeaveDate').setValue(data.allowLeaveDate);
     this.contractTypeForm.get('precedence').setValue(data.precedence);
     this.contractTypeForm.get('isActive').setValue(data.isActive);
+    this.contractTypeForm.get('rowVersion').setValue(data.rowVersion);
   }
 }

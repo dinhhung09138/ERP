@@ -24,22 +24,23 @@ export class PositionFormComponent implements OnInit {
   isShow = false;
   isSubmit = false;
   isLoading = false;
-  PositionForm: FormGroup;
+  positionForm: FormGroup;
   item: PositionViewModel;
 
   constructor(
     private elm: ElementRef,
     private fb: FormBuilder,
-    private PositionService: PositionService) { }
+    private positionService: PositionService) { }
 
   ngOnInit(): void {
-    this.PositionForm = this.fb.group({
+    this.positionForm = this.fb.group({
       id: [0],
       code: ['', [Validators.required]],
       name: ['', [Validators.required]],
       description: [''],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -52,28 +53,28 @@ export class PositionFormComponent implements OnInit {
     }
 
     this.formAction = formStatus;
-    this.PositionForm.get('id').setValue(0);
-    this.PositionForm.get('code').reset();
-    this.PositionForm.get('name').reset();
-    this.PositionForm.get('description').reset();
-    this.PositionForm.get('precedence').reset();
-    this.PositionForm.get('isActive').reset();
+    this.positionForm.get('id').setValue(0);
+    this.positionForm.get('code').reset();
+    this.positionForm.get('name').reset();
+    this.positionForm.get('description').reset();
+    this.positionForm.get('precedence').reset();
+    this.positionForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
       this.isShow = false;
-      this.PositionForm.get('code').disable();
-      this.PositionForm.get('name').disable();
-      this.PositionForm.get('description').disable();
-      this.PositionForm.get('precedence').disable();
-      this.PositionForm.get('isActive').disable();
+      this.positionForm.get('code').disable();
+      this.positionForm.get('name').disable();
+      this.positionForm.get('description').disable();
+      this.positionForm.get('precedence').disable();
+      this.positionForm.get('isActive').disable();
     } else {
       this.isShow = true;
-      this.PositionForm.get('name').enable();
-      this.PositionForm.get('description').enable();
-      this.PositionForm.get('precedence').enable();
-      this.PositionForm.get('isActive').enable();
-      this.PositionForm.get('precedence').setValue(1);
-      this.PositionForm.get('isActive').setValue(true);
+      this.positionForm.get('name').enable();
+      this.positionForm.get('description').enable();
+      this.positionForm.get('precedence').enable();
+      this.positionForm.get('isActive').enable();
+      this.positionForm.get('precedence').setValue(1);
+      this.positionForm.get('isActive').setValue(true);
 
       if (formStatus === FormActionStatus.Insert) {
         this.elm.nativeElement.querySelector('#name').focus();
@@ -114,12 +115,12 @@ export class PositionFormComponent implements OnInit {
 
   submitForm() {
     this.isSubmit = true;
-    if (this.PositionForm.invalid) {
+    if (this.positionForm.invalid) {
       return;
     }
     this.isLoading = true;
 
-    this.PositionService.save(this.PositionForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+    this.positionService.save(this.positionForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
@@ -131,7 +132,7 @@ export class PositionFormComponent implements OnInit {
 
   private getItem(id: number) {
     this.isLoading = true;
-    this.PositionService.item(id).subscribe((res: ResponseModel) => {
+    this.positionService.item(id).subscribe((res: ResponseModel) => {
       if (res && res.responseStatus === ResponseStatus.success) {
         this.item = res.result;
         this.setDataToForm(this.item);
@@ -140,8 +141,10 @@ export class PositionFormComponent implements OnInit {
     });
   }
   private setDataToForm(data: PositionViewModel) {
-    this.PositionForm.get('name').setValue(data.name);
-    this.PositionForm.get('description').setValue(data.description);
-    this.PositionForm.get('isActive').setValue(data.isActive);
+    this.positionForm.get('id').setValue(data.id);
+    this.positionForm.get('name').setValue(data.name);
+    this.positionForm.get('description').setValue(data.description);
+    this.positionForm.get('isActive').setValue(data.isActive);
+    this.positionForm.get('rowVersion').setValue(data.rowVersion);
   }
 }

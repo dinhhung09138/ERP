@@ -64,11 +64,11 @@ export class EmployeeWorkingStatusComponent implements OnInit {
     }
   }
 
-  onDeleteClick(id: number) {
+  onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading !== true) {
       this.form.onCloseClick();
 
-      this.workingStatusService.confirmDelete(id).subscribe((response: ResponseModel) => {
+      this.workingStatusService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
           this.getList();
         }

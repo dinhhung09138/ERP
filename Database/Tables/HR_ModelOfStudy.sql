@@ -1,9 +1,9 @@
 
-IF OBJECT_ID('dbo.ModelOfStudy', 'u') IS NOT NULL 
-  DROP TABLE [dbo].[ModelOfStudy];
+IF OBJECT_ID('dbo.HR_ModelOfStudy', 'u') IS NOT NULL 
+  DROP TABLE [dbo].[HR_ModelOfStudy];
 
 GO
-CREATE TABLE [dbo].[ModelOfStudy](
+CREATE TABLE [dbo].[HR_ModelOfStudy](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
 	[Precedence] [int] NOT NULL,
@@ -13,15 +13,16 @@ CREATE TABLE [dbo].[ModelOfStudy](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
- CONSTRAINT [PK_ModelOfStudy] PRIMARY KEY CLUSTERED 
+	[RowVersion] [timestamp] NOT NULL,
+ CONSTRAINT [PK_HR_ModelOfStudy] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[ModelOfStudy] ADD  CONSTRAINT [DF_ModelOfStudy_IsActive]  DEFAULT ((1)) FOR [IsActive]
+ALTER TABLE [dbo].[HR_ModelOfStudy] ADD  CONSTRAINT [DF_HR_ModelOfStudy_IsActive]  DEFAULT ((1)) FOR [IsActive]
 GO
-ALTER TABLE [dbo].[ModelOfStudy] ADD  CONSTRAINT [DF_ModelOfStudy_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
+ALTER TABLE [dbo].[HR_ModelOfStudy] ADD  CONSTRAINT [DF_HR_ModelOfStudy_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
 GO
-ALTER TABLE [dbo].[ModelOfStudy] ADD  CONSTRAINT [DF_ModelOfStudy_Deleted]  DEFAULT ((0)) FOR [Deleted]
+ALTER TABLE [dbo].[HR_ModelOfStudy] ADD  CONSTRAINT [DF_HR_ModelOfStudy_Deleted]  DEFAULT ((0)) FOR [Deleted]
 GO

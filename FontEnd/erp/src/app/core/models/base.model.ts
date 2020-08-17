@@ -9,4 +9,5 @@ export interface BaseViewModel {
   updateBy: number;
   action: FormActionStatus;
   precedence: number;
+  rowVersion: any;
 }

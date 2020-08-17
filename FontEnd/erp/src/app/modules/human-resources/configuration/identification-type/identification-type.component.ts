@@ -64,11 +64,11 @@ export class IdentificationTypeComponent implements OnInit {
     }
   }
 
-  onDeleteClick(id: number) {
+  onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading !== true) {
       this.form.onCloseClick();
 
-      this.identificationService.confirmDelete(id).subscribe((response: ResponseModel) => {
+      this.identificationService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
           this.getList();
         }

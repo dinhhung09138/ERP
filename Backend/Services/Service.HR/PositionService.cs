@@ -163,7 +163,7 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
-                if (md.RowVersion != model.RowVersion)
+                if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
                     response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
                     response.Errors.Add(ParameterMsg.OutOfDateData);
@@ -200,7 +200,7 @@ namespace Service.HR
                 {
                     throw new NullParameterException();
                 }
-                if (md.RowVersion != model.RowVersion)
+                if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
                     response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
                     response.Errors.Add(ParameterMsg.OutOfDateData);

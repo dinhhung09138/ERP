@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("Commendation")]
+    [Table("HR_Commendation")]
     public class Commendation
     {
         [Key]

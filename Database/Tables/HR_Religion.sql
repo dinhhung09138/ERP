@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[HR_Religion](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_HR_Religion] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

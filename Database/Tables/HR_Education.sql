@@ -14,6 +14,7 @@ CREATE TABLE [dbo].[HR_Education](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_AcademicLevel] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

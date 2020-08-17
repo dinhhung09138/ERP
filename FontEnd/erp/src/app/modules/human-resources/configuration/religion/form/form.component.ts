@@ -40,7 +40,8 @@ export class ReligionFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
 
     if (this.dialogData?.isPopup === true) {
@@ -165,6 +166,7 @@ export class ReligionFormComponent implements OnInit {
     this.religionForm.get('name').setValue(data.name);
     this.religionForm.get('precedence').setValue(data.precedence);
     this.religionForm.get('isActive').setValue(data.isActive);
+    this.religionForm.get('rowVersion').setValue(data.rowVersion);
   }
 
 }

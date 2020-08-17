@@ -39,7 +39,8 @@ export class DisciplineFormComponent implements OnInit {
       name: ['', [Validators.required]],
       description: [''],
       money: [0, [Validators.required, AppValidator.money]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -146,5 +147,6 @@ export class DisciplineFormComponent implements OnInit {
     this.disciplineForm.get('description').setValue(data.description);
     this.disciplineForm.get('money').setValue(this.formatNumber.transform(data.money));
     this.disciplineForm.get('isActive').setValue(data.isActive);
+    this.disciplineForm.get('rowVersion').setValue(data.rowVersion);
   }
 }

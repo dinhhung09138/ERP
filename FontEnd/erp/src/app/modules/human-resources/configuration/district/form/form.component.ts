@@ -51,7 +51,8 @@ export class DistrictFormComponent implements OnInit {
       name: ['', [Validators.required]],
       provinceId: [null, [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
 
     if (this.dialogData && this.dialogData.isPopup === true) {
@@ -208,6 +209,7 @@ export class DistrictFormComponent implements OnInit {
     this.districtForm.get('provinceId').setValue(data.provinceId);
     this.districtForm.get('precedence').setValue(data.precedence);
     this.districtForm.get('isActive').setValue(data.isActive);
+    this.districtForm.get('rowVersion').setValue(data.rowVersion);
   }
 
   private getListProvince() {

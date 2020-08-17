@@ -52,11 +52,11 @@ export class WardService {
     }
   }
 
-  confirmDelete(itemId: number): Observable<ResponseModel> {
+  confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
     return this.dialogService.openConfirmDeleteDialog().pipe(
       switchMap((confirmResponse: boolean) => {
         if (confirmResponse === true) {
-          return this.delete(itemId);
+          return this.delete(itemId, version);
         } else {
           return of(null);
         }
@@ -64,7 +64,7 @@ export class WardService {
     );
   }
 
-  delete(itemId: number): Observable<ResponseModel> {
-    return this.api.deleteById(this.url.delete, itemId);
+  delete(itemId: number, version: any): Observable<ResponseModel> {
+    return this.api.delete(this.url.delete, {id: itemId, rowVersion: version });
   }
 }

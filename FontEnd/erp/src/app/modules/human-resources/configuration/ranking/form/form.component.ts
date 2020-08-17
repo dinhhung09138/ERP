@@ -36,7 +36,8 @@ export class RankingFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -138,6 +139,7 @@ export class RankingFormComponent implements OnInit {
     this.rankingForm.get('name').setValue(data.name);
     this.rankingForm.get('precedence').setValue(data.precedence);
     this.rankingForm.get('isActive').setValue(data.isActive);
+    this.rankingForm.get('rowVersion').setValue(data.rowVersion);
   }
 
 }

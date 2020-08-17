@@ -38,7 +38,8 @@ export class CommendationFormComponent implements OnInit {
       name: ['', [Validators.required]],
       description: [''],
       money: ['0', [Validators.required, AppValidator.money]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -144,5 +145,6 @@ export class CommendationFormComponent implements OnInit {
     this.commendationForm.get('description').setValue(data.description);
     this.commendationForm.get('money').setValue(this.formatNumber.transform(data.money));
     this.commendationForm.get('isActive').setValue(data.isActive);
+    this.commendationForm.get('rowVersion').setValue(data.rowVersion);
   }
 }

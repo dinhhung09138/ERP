@@ -36,7 +36,8 @@ export class IdentificationTypeFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -138,5 +139,6 @@ export class IdentificationTypeFormComponent implements OnInit {
     this.identificationForm.get('name').setValue(data.name);
     this.identificationForm.get('precedence').setValue(data.precedence);
     this.identificationForm.get('isActive').setValue(data.isActive);
+    this.identificationForm.get('rowVersion').setValue(data.rowVersion);
   }
 }

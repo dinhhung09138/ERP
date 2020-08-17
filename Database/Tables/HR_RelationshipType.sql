@@ -14,6 +14,7 @@ CREATE TABLE [dbo].[HR_RelationshipType](
 	[UpdateDate] [datetime] NULL,
 	[UpdateBy] [int] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_HR_RelationshipType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

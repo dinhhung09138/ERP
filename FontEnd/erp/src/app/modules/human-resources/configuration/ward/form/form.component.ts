@@ -56,7 +56,8 @@ export class WardFormComponent implements OnInit {
       districtId: [null, [Validators.required]],
       provinceId: [null, [Validators.required]],
       precedence: [1, [Validators.required]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
   }
@@ -197,6 +198,7 @@ export class WardFormComponent implements OnInit {
       this.wardForm.get('provinceId').setValue(data.provinceId);
       this.wardForm.get('precedence').setValue(data.precedence);
       this.wardForm.get('isActive').setValue(data.isActive);
+      this.wardForm.get('rowVersion').setValue(data.rowVersion);
     }, 300);
   }
 }

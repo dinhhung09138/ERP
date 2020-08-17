@@ -40,7 +40,8 @@ export class NationFormComponent implements OnInit {
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
-      isActive: [true]
+      isActive: [true],
+      rowVersion: [null],
     });
 
     if (this.dialogData?.isPopup === true) {
@@ -165,6 +166,7 @@ export class NationFormComponent implements OnInit {
     this.nationForm.get('name').setValue(data.name);
     this.nationForm.get('precedence').setValue(data.precedence);
     this.nationForm.get('isActive').setValue(data.isActive);
+    this.nationForm.get('rowVersion').setValue(data.rowVersion);
   }
 
 }
