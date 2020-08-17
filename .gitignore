@@ -33,3 +33,6 @@ Backend/API/API.Training/obj/
 Backend/API/API.Training/bin/
 Backend/DataBase/Database.Sql.ERP/bin/
 Backend/DataBase/Database.Sql.ERP/obj/
+Backend/API/API.System/bin/
+Backend/API/API.System/obj/
+Backend/Services/Services.System/obj/
