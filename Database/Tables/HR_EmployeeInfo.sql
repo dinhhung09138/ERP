@@ -23,6 +23,7 @@ CREATE TABLE [dbo].[HR_EmployeeInfo](
 	[UpdateBy] [int] NULL,
 	[UpdateDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_HR_EmployeeInfo] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

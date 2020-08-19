@@ -39,9 +39,11 @@
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">Giới tính</label>
                     <div class="input-group">
-                      <mat-radio-button [checked]="gender === 1" [disabled]="!isEdit" (change)="onGenderChange(1)">Nam</mat-radio-button>
-                      &nbsp;&nbsp;&nbsp;
-                      <mat-radio-button [checked]="gender === 0" [disabled]="!isEdit" (change)="onGenderChange(0)">Nữ</mat-radio-button>
+                      <mat-radio-group formControlName="gender" [disabled]="!isEdit" aria-label="Giới tính">
+                        <mat-radio-button ngDefaultControl [value]="true" >Nam</mat-radio-button>
+                        &nbsp;&nbsp;&nbsp;
+                        <mat-radio-button ngDefaultControl [value]="false">Nữ</mat-radio-button>
+                      </mat-radio-group>
                     </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">

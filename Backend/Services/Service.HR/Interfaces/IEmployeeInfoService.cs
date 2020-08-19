@@ -7,6 +7,7 @@ namespace Service.HR.Interfaces
 {
     public interface IEmployeeInfoService : IBaseInterfaceService<EmployeeInfoModel>
     {
+        Task<ResponseModel> ItemByEmployeeId(int employeeId);
         Task<ResponseModel> UpdateName(int employeeId, string firstName, string lastName);
     }
 }

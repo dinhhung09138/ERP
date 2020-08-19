@@ -13,6 +13,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { Title } from '@angular/platform-browser';
 import { ApplicationConstant } from '../../../../core/constants/app.constant';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -111,7 +112,8 @@ export class EmployeeInfoComponent implements OnInit {
       probationDate: [null, [AppValidator.date]],
       startWorkingDate: [null, [AppValidator.date]],
       employeeWorkingStatusId: [null, [Validators.required]],
-      basicSalary: [0, [AppValidator.money, Validators.required]]
+      basicSalary: [0, [AppValidator.money, Validators.required]],
+      rowVersion: [null],
     });
     this.initFormControl(this.formAction);
     this.checkFormAction();
@@ -282,6 +284,7 @@ export class EmployeeInfoComponent implements OnInit {
       }
       this.employeeForm.get('employeeWorkingStatusId').setValue(data.employeeWorkingStatusId);
       this.employeeForm.get('basicSalary').setValue(this.formatNumber.transform(data.basicSalary));
+      this.employeeForm.get('rowVersion').setValue(data.rowVersion);
       this.elm.nativeElement.querySelector('#firstName').focus();
     }
   }

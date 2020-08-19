@@ -100,6 +100,40 @@ namespace Service.HR
             return response;
         }
 
+        public async Task<ResponseModel> ItemByEmployeeId(int employeeId)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.EmployeeInfoRepository.Query()
+                            where m.EmployeeId == employeeId
+                            select new EmployeeInfoModel
+                            {
+                                Id = m.Id,
+                                EmployeeId = m.EmployeeId,
+                                FirstName = m.FirstName,
+                                LastName = m.LastName,
+                                Gender = m.Gender,
+                                DateOfBirth = m.DateOfBirth,
+                                ReligionId = m.ReligionId,
+                                MaterialStatusId = m.MaterialStatusId,
+                                NationId = m.NationId,
+                                NationalityId = m.NationalityId,
+                                AcademicLevelId = m.AcademicLevelId,
+                                ProfessionalQualificationId = m.ProfessionalQualificationId,
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion,
+                            };
+
+                response.Result = await query.FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+
         public async Task<ResponseModel> Insert(EmployeeInfoModel model)
         {
             ResponseModel response = new ResponseModel();
