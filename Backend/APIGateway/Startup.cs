@@ -69,6 +69,11 @@ namespace APIGateway
                     };
                 });
 
+            services.AddResponseCaching(options =>
+            {
+                options.SizeLimit = (1024 *1024);
+                options.UseCaseSensitivePaths = true;
+            });
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AuthenticationFilter());
@@ -115,6 +120,8 @@ namespace APIGateway
             app.UseAuthorization();
 
             app.UseHttpsRedirection();
+
+            app.UseResponseCaching();
 
             app.UseEndpoints(endpoints =>
             {
