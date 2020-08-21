@@ -7,6 +7,7 @@ using Database.Sql.ERP.Entities.HR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Service.Common.Interfaces;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;
@@ -20,6 +21,7 @@ namespace Service.HR
         private readonly IERPUnitOfWork _context;
         private readonly IEmployeeInfoService _employeeInfoService;
         private readonly ILogger<EmployeeService> _logger;
+        private readonly IImageServerService _imageServerService;
 
         private readonly string ErrorDropdown = "Không thể lấy danh sách nhân viên";
         private readonly string CodeExist = "Mã nhân viên đã tồn tại";
@@ -28,16 +30,20 @@ namespace Service.HR
             IERPUnitOfWork context,
             IEmployeeInfoService employeeInfoService,
             ILogger<EmployeeService> logger,
-            IHttpContextAccessor httpContext)
+            IHttpContextAccessor httpContext,
+            IImageServerService imageServerService)
         {
             _context = context;
             _employeeInfoService = employeeInfoService;
             _logger = logger;
             base._httpContext = httpContext;
+            _imageServerService = imageServerService;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
+            await _imageServerService.Insert(new Common.Models.FileModel());
+
             ResponseModel response = new ResponseModel();
             try
             {
@@ -163,6 +169,8 @@ namespace Service.HR
         public async Task<ResponseModel> Insert(EmployeeModel model)
         {
             ResponseModel response = new ResponseModel();
+
+            return response;
 
             try
             {

@@ -1,4 +1,6 @@
 ﻿using Core.CommonModel;
+using Microsoft.AspNetCore.Http;
+using Service.Common.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,15 +11,12 @@ namespace Service.HR.Models
         public int Id { get; set; }
 
         [MaxLength(15)]
-        [Required]
         public string EmployeeCode { get; set; }
 
         [MaxLength(50)]
-        [Required]
         public string FirstName { get; set; }
 
         [MaxLength(50)]
-        [Required]
         public string LastName { get; set; }
 
         public string FullName
@@ -55,5 +54,9 @@ namespace Service.HR.Models
         public string EmployeeWorkingStatusName { get; set; }
 
         public double BasicSalary { get; set; }
+
+        public FileModel? Avatar { get; set; }
+
+        public IFormFile? File { get; set; }
     }
 }

@@ -24,6 +24,7 @@ using API.Training;
 using Database.Sql.ERP;
 using Core.Utility.Middlewares;
 using Core.Utility.Filters;
+using API.Common;
 
 namespace APIGateway
 {
@@ -93,6 +94,7 @@ namespace APIGateway
             services.AddScoped<IERPUnitOfWork, ERPUnitOfWork>();
 
             //Use Security services
+            services.AddCommonService(Configuration);
             services.AddSecurityServices(Configuration);
             services.AddHrServices(Configuration);
             services.AddTrainingServices(Configuration);

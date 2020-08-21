@@ -38,6 +38,9 @@ export class EmployeeInfoComponent implements OnInit {
   currentSelectedEmployeeId = 0;
   currentSelectedEmployee: EmployeeViewModel;
 
+  fileToUpload: any;
+  fileUrl: string;
+
   listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
 
   employeeTabs: any[] = [
@@ -125,6 +128,9 @@ export class EmployeeInfoComponent implements OnInit {
     if (this.formDirective) {
       this.formDirective.resetForm();
     }
+
+    this.fileToUpload = null;
+    this.fileUrl = null;
 
     this.formAction = formStatus;
     this.employeeForm.get('id').setValue(0);
@@ -216,6 +222,26 @@ export class EmployeeInfoComponent implements OnInit {
     this.router.navigate(['/hr/employee']);
   }
 
+  onSelectFile(files: FileList) {
+    if (files.length === 0) {
+      return;
+    }
+    if (files.item(0).size > (2 * 1024 * 1024)) {
+      alert(files.item(0).size);
+      return;
+    }
+    this.fileToUpload = files.item(0);
+    console.log(this.fileToUpload);
+
+    const fileReader: FileReader = new FileReader();
+    fileReader.readAsDataURL(this.fileToUpload);
+    fileReader.onload = (event: any) => {
+      this.fileUrl = event.target.result;
+      console.log(this.fileUrl);
+    };
+
+  }
+
   submitForm() {
     this.isSubmit = true;
     if (this.employeeForm.invalid) {
@@ -223,7 +249,7 @@ export class EmployeeInfoComponent implements OnInit {
     }
     this.isLoading = true;
 
-    this.employeeService.save(this.employeeForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+    this.employeeService.save(this.employeeForm.getRawValue(), this.formAction, this.fileToUpload).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.currentSelectedEmployee = response.result;
         this.currentSelectedEmployeeId = response.result.id;

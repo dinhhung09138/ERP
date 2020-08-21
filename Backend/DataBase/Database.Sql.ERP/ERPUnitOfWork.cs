@@ -57,6 +57,15 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<File> _fileRepository;
+        public ITableGenericRepository<File> FileRepository
+        {
+            get
+            {
+                return _fileRepository = _fileRepository ?? new TableGenericRepository<File>(_context);
+            }
+        }
+
         #endregion
 
         #region " [ HR ] "

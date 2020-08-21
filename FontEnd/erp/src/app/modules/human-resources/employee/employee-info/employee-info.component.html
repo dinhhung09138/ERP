@@ -10,10 +10,16 @@
         <app-element-loading [Show]="isLoading"></app-element-loading>
         <div class="row">
           <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-            <div class="employee-img"> Image </div>
+            <div class="employee-img"> 
+              <img [src]="fileUrl" />
+              <div class="upload-btn-wrapper">
+                <button class="btn btn-file"><i class="fa fa-upload" aria-hidden="true"></i></button>
+                <input type="file" (change)="onSelectFile($event.target.files)" />
+              </div>
+            </div>
           </div>
           <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
-            <form [formGroup]="employeeForm" (submit)="!isSubmit ? submitForm() : false">
+            <form [formGroup]="employeeForm" (submit)="!isSubmit ? submitForm() : false" enctype="multipart/form-data">
               <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                   <label class="label">Mã NV</label>
@@ -39,7 +45,7 @@
                   <label class="label">Tên</label>
                   <mat-form-field class="form-control">
                     <input matInput id="lastName" formControlName="lastName" maxlength="50"
-                          tabindex="3" [readonly]="!isEditEmployee"  autocomplete="off" />
+                          tabindex="3" [readonly]="!isEditEmployee" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['lastName'].errors?.required">
                     Vui lòng điền thông tin

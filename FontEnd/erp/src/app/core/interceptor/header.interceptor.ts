@@ -14,9 +14,12 @@ export class HeaderInterceptor implements HttpInterceptor {
     headers = headers.append('Authorization', token);
     if (request.url.includes('/authentication') || request.url.includes('.json')) {
     } else {
-      headers = headers.append('Content-Type', 'application/json');
+      //headers = headers.append('Content-Type', 'application/json');
       headers = headers.append('Cache-Control', 'no-cache');
       headers = headers.append('Pragma', 'no-cache');
+      if (!request.url.includes('/employee/update')) {
+        headers = headers.append('Content-Type', 'application/json');
+      }
     }
 
     return request.clone( {headers });

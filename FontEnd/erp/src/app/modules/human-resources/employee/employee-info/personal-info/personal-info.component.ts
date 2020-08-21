@@ -219,7 +219,6 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   private setDataToForm(data?: PersonalInfoViewModel) {
     if (data) {
-      console.log(data);
       this.personalInfoForm.get('id').setValue(data.id);
       this.personalInfoForm.get('employeeId').setValue(this.Employee.id);
       if (data.dateOfBirth) {
