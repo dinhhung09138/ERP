@@ -12,11 +12,13 @@ namespace Service.Common.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [MaxLength(15)]
+        public string EmployeeCode { get; set; }
+
         [MaxLength(250)]
         public string FileName { get; set; }
 
-        public string Size { get; set; }
+        public decimal Size { get; set; }
 
         public string MineType { get; set; }
 
@@ -32,6 +34,6 @@ namespace Service.Common.Models
 
         public string FilePath128 { get; set; }
 
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
     }
 }
