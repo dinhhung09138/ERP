@@ -13,6 +13,9 @@ namespace Database.Sql.ERP.Entities.HR
         [Column(TypeName = "int")]
         public int Id { get; set; }
 
+        [Column(TypeName = "int")]
+        public int? AvatarFileId { get; set; }
+
         [Column(TypeName = "varchar(15)")]
         [MaxLength(15)]
         [Required]

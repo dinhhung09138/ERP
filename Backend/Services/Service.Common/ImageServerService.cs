@@ -63,7 +63,7 @@ namespace Service.Common
 
                 if (md == null)
                 {
-                    throw new NullParameterException();
+                    return response;
                 }
 
                 FileModel model = new FileModel()
@@ -94,6 +94,8 @@ namespace Service.Common
                 throw new NullParameterException();
             }
 
+            ResponseModel response = new ResponseModel();
+
             try
             {
                 var filePath = Path.Combine(configPath);
@@ -101,6 +103,11 @@ namespace Service.Common
 
                 string fileName = Guid.NewGuid().ToString().Replace("-", "").ToLower();
                 string ext = Path.GetExtension(model.File.FileName);
+
+                if (!Directory.Exists(Path.Combine(filePath, model.EmployeeCode)))
+                {
+                    Directory.CreateDirectory(Path.Combine(filePath, model.EmployeeCode));
+                }
 
                 string fullPath = Path.Combine(filePath, model.EmployeeCode, $"{fileName}{ext}");
 
@@ -119,6 +126,8 @@ namespace Service.Common
                 await _context.FileRepository.AddAsync(md);
                 await _context.SaveChangesAsync();
 
+                response.Result = md.Id;
+
             }
             catch(Exception ex)
             {
@@ -127,7 +136,7 @@ namespace Service.Common
                 response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
             }
 
-            throw new NotImplementedException();
+            return response;
         }
 
         public Task<ResponseModel> Update(FileModel model)
@@ -183,7 +192,7 @@ namespace Service.Common
             try
             {
                 await file.CopyToAsync(new FileStream(fullPath, FileMode.CreateNew, FileAccess.Write));
-                return $"{configPath}{fileName}";
+                return $"{configPath}/{fileName}";
             }
             catch (Exception ex)
             {
@@ -205,7 +214,7 @@ namespace Service.Common
 
                 using (var source = new Bitmap(file.OpenReadStream()))
                 {
-                    using (var result = source.ResizeImageKeepAspectRatio(width, height))
+                    using (var result = source.resizeImage(width, height))
                     {
                         result.Save(fullPath);
                     }

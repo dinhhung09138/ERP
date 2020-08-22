@@ -312,6 +312,10 @@ export class EmployeeInfoComponent implements OnInit {
       this.employeeForm.get('basicSalary').setValue(this.formatNumber.transform(data.basicSalary));
       this.employeeForm.get('rowVersion').setValue(data.rowVersion);
       this.elm.nativeElement.querySelector('#firstName').focus();
+
+      if (data.avatar) {
+        this.fileUrl = data.avatar.filePath;
+      }
     }
   }
 }

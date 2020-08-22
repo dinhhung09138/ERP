@@ -76,7 +76,7 @@ export class EmployeeService {
         formData.append('file', file, file.name);
       }
 
-      console.log(formData);
+      formData.append('rowVersion', model.rowVersion);
 
       switch (action) {
         case FormActionStatus.Insert:

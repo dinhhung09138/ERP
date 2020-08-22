@@ -25,6 +25,8 @@ using Database.Sql.ERP;
 using Core.Utility.Middlewares;
 using Core.Utility.Filters;
 using API.Common;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace APIGateway
 {
@@ -52,7 +54,11 @@ namespace APIGateway
                 });
             });
             services.AddControllers().AddNewtonsoftJson();
-
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthenticationFilter());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+           
             // Add JWT Authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -72,13 +78,12 @@ namespace APIGateway
 
             services.AddResponseCaching(options =>
             {
-                options.SizeLimit = (1024 *1024);
+                options.SizeLimit = (1024 * 1024);
                 options.UseCaseSensitivePaths = true;
             });
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(new AuthenticationFilter());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            // Staic file
+            services.AddDirectoryBrowser();
 
             // Use http context
             // Omitted for clarity
@@ -118,6 +123,27 @@ namespace APIGateway
 
             //Use Authentication
             app.UseAuthentication();
+
+            // Staic file
+            app.UseDefaultFiles();
+            string path = env.WebRootPath;
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(path, "File")
+                    ),
+                RequestPath = new PathString("/File"),
+            });
+
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(path, "File")
+                    //Path.Combine(env.WebRootPath, "File")
+                    ),
+                RequestPath = new PathString("/File"),
+            });
 
             app.UseAuthorization();
 

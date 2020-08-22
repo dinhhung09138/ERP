@@ -81,5 +81,10 @@ namespace Core.Utility.Extensions
 
             return result;
         }
+
+        public static Image resizeImage(this Image imgToResize, int width, int height)
+        {
+            return (Image)(new Bitmap(imgToResize, new Size(width, height)));
+        }
     }
 }

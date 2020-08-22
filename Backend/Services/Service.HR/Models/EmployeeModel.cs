@@ -9,6 +9,7 @@ namespace Service.HR.Models
     public class EmployeeModel : BaseModel
     {
         public int Id { get; set; }
+        public int? AvatarFileId { get; set; }
 
         [MaxLength(15)]
         public string EmployeeCode { get; set; }

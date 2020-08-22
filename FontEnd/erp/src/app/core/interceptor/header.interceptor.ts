@@ -14,10 +14,9 @@ export class HeaderInterceptor implements HttpInterceptor {
     headers = headers.append('Authorization', token);
     if (request.url.includes('/authentication') || request.url.includes('.json')) {
     } else {
-      //headers = headers.append('Content-Type', 'application/json');
       headers = headers.append('Cache-Control', 'no-cache');
       headers = headers.append('Pragma', 'no-cache');
-      if (!request.url.includes('/employee/update')) {
+      if (this.routeWithFormData(request) === false) {
         headers = headers.append('Content-Type', 'application/json');
       }
     }
@@ -37,8 +36,18 @@ export class HeaderInterceptor implements HttpInterceptor {
     return next.handle(modified);
   }
 
-  jwtToken(token): string {
+  private jwtToken(token): string {
     return 'bearer ' + token;
+  }
+
+  private routeWithFormData(request: any): boolean {
+    if (request.url.includes('/employee/insert')) {
+      return true;
+    }
+    if (request.url.includes('/employee/update')) {
+      return true;
+    }
+    return false;
   }
 
 }
