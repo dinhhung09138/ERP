@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[Security_Role](
 	[UpdateBy] [int] NULL,
 	[UpdateDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_Security_Role] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
