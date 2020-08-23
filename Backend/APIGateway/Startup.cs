@@ -24,13 +24,10 @@ using API.Training;
 using Database.Sql.ERP;
 using Core.Utility.Middlewares;
 using Core.Utility.Filters;
-<<<<<<< HEAD
 using API.System;
-=======
 using API.Common;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
->>>>>>> develop
 
 namespace APIGateway
 {
