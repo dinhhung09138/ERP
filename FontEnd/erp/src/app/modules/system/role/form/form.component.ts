@@ -4,6 +4,7 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { RoleService } from '../role.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
+import { RoleViewModel } from '../role.model';
 
 @Component({
   selector: 'app-role-form',
@@ -17,9 +18,11 @@ export class RoleFormComponent implements OnInit {
 
   formAction = FormActionStatus.UnKnow;
 
+  formTitle = '';
   isSubmit = false;
   isLoading = false;
   roleForm : FormGroup;
+  item: RoleViewModel;
 
   constructor(
     private elm: ElementRef,
@@ -38,14 +41,17 @@ export class RoleFormComponent implements OnInit {
   }
   initFormControl(formStatus: FormActionStatus){
     this.isSubmit = false;
+
     if(this.formDirective){
       this.formDirective.resetForm();
     }
+
     this.formAction = formStatus;
     this.roleForm.get('id').setValue(0);
     this.roleForm.get('name').reset();
     this.roleForm.get('description').reset();
     this.roleForm.get('isActive').reset();
+
     if (formStatus === FormActionStatus.UnKnow) {
       this.roleForm.get('name').disable();
       this.roleForm.get('description').disable();
@@ -57,6 +63,7 @@ export class RoleFormComponent implements OnInit {
       this.roleForm.get('isActive').enable();
 	    this.elm.nativeElement.querySelector('#name').focus();
     }
+    this.elm.nativeElement.querySelector('#name').focus();
   }
   showFormStatus(){
     if(this.formAction == FormActionStatus.UnKnow){
@@ -69,15 +76,25 @@ export class RoleFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
+    this.formTitle = 'Thêm mới';
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
+    this.formTitle = 'Cập nhật';
   }
 
   onResetClick() {
-    this.initFormControl(this.formAction);
+    switch(this.formAction) {
+      case FormActionStatus.Insert:
+        this.initFormControl(this.formAction);
+        break;
+      case FormActionStatus.Update:
+        this.setDataToForm(this.item);
+        this.elm.nativeElement.querySelector('#name').focus();
+        break;
+    };
   }
 
   onCloseClick() {
@@ -88,11 +105,8 @@ export class RoleFormComponent implements OnInit {
     this.isLoading = true;
     this.roleService.item(id).subscribe((response: ResponseModel)=>{
       if (response !== null && response.responseStatus == ResponseStatus.success) {
-        this.roleForm.get('id').setValue(response.result.id);
-        this.roleForm.get('name').setValue(response.result.name);
-        this.roleForm.get('description').setValue(response.result.description);
-        this.roleForm.get('rowVersion').setValue(response.result.rowVersion);
-        this.roleForm.get('isActive').setValue(response.result.isActive);
+        this.item = response.result;
+        this.setDataToForm(this.item);
       }
       this.isLoading = false;
     });
@@ -114,5 +128,11 @@ export class RoleFormComponent implements OnInit {
       this.isSubmit = false;
     });  
   }
-
+  private setDataToForm(data: RoleViewModel) {
+    this.roleForm.get('id').setValue(data.id);
+    this.roleForm.get('name').setValue(data.name);
+    this.roleForm.get('description').setValue(data.description);
+    this.roleForm.get('isActive').setValue(data.isActive);
+    this.roleForm.get('rowVersion').setValue(data.rowVersion);
+  }
 }

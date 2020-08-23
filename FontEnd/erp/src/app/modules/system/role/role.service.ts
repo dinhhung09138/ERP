@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { APIUrlConstants } from '../../../core/constants/api-url.constant';
 import { FilterModel } from '../../../core/models/filter-table.model';
 import { ResponseModel } from '../../../core/models/response.model';
-import { of, Observable } from "rxjs";
-import { RoleViewModel } from "./role.model";
+import { of, Observable } from 'rxjs';
+import { RoleViewModel } from './role.model';
 import { ApiService } from 'src/app/core/services/api.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { PagingModel } from 'src/app/core/models/paging.model';
@@ -14,12 +14,12 @@ import { switchMap } from 'rxjs/operators';
 @Injectable()
 export class RoleService {
     url={
-        list: APIUrlConstants.system + 'role/get-list',
-        dropdown: APIUrlConstants.system + 'role/dropdown',
-        item: APIUrlConstants.system + 'role/item',
-        insert: APIUrlConstants.system + 'role/insert',
-        update: APIUrlConstants.system + 'role/update',
-        delete: APIUrlConstants.system + 'role/delete',
+        list: APIUrlConstants.systemApi + 'role/get-list',
+        dropdown: APIUrlConstants.systemApi + 'role/dropdown',
+        item: APIUrlConstants.systemApi + 'role/item',
+        insert: APIUrlConstants.systemApi + 'role/insert',
+        update: APIUrlConstants.systemApi + 'role/update',
+        delete: APIUrlConstants.systemApi + 'role/delete',
     };
     constructor(
         private api: ApiService,

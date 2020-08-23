@@ -16,6 +16,7 @@ const routes: Routes = [
   {
     path: '',
     component: RoleComponent,
+    data: { title: 'Nhóm người dùng' }
   }
 ];
 

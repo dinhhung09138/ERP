@@ -42,15 +42,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database.Sql.ERP", "DataBas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Training", "Services\Service.Training\Service.Training.csproj", "{862D451B-70F7-4CCB-85EF-0AA44EB114E7}"
 EndProject
-<<<<<<< HEAD
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.System", "Services\Services.System\Services.System.csproj", "{779F97BB-407F-4418-AD73-D958B6593305}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.System", "Services\Services.System\Services.System.csproj", "{779F97BB-407F-4418-AD73-D958B6593305}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.System", "API\API.System\API.System.csproj", "{8E2D6A2B-5141-4A7E-A645-46936C1C896B}"
-=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.System", "API\API.System\API.System.csproj", "{8E2D6A2B-5141-4A7E-A645-46936C1C896B}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Common", "Services\Service.Common\Service.Common.csproj", "{C4C9FD7F-02F2-4036-8734-6C8CE7E3A7E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Common", "API\API.Common\API.Common.csproj", "{95EF8CCA-F346-42E4-8BF5-F83D91A700DE}"
->>>>>>> develop
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Common", "API\API.Common\API.Common.csproj", "{95EF8CCA-F346-42E4-8BF5-F83D91A700DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

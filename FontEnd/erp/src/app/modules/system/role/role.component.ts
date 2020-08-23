@@ -56,7 +56,6 @@ export class RoleComponent implements OnInit {
   onDeleteClick(id: number,rowVersion: any) {
     if (this.isLoading !== true) {
       this.form.onCloseClick();      
-      console.log(rowVersion);
       this.roleService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
           this.getList();

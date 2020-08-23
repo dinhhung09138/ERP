@@ -18,7 +18,7 @@ namespace Services.System
     public class RoleService : BaseService, IRoleService
     {
         private readonly IERPUnitOfWork _context;
-        private readonly ILogger<Role> _logger;
+        private readonly ILogger<RoleService> _logger;
 
         private readonly string ErrorDropdown = "Không thể lấy danh sách nhóm quyền";
 
@@ -26,7 +26,7 @@ namespace Services.System
 
         public RoleService(
             IERPUnitOfWork context,
-            ILogger<Role> logger,
+            ILogger<RoleService> logger,
             IHttpContextAccessor httpContext)
         {
             _context = context;
