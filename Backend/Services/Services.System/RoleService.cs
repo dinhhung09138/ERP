@@ -1,4 +1,5 @@
-﻿using Core.CommonModel;
+﻿using Core.CommonMessage;
+using Core.CommonModel;
 using Core.CommonModel.Exceptions;
 using Core.Services;
 using Database.Sql.ERP;
@@ -41,6 +42,13 @@ namespace Services.System
                 if (md == null)
                 {
                     throw new NullParameterException();
+                }
+
+                if (!md.RowVersion.SequenceEqual(model.RowVersion))
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
                 }
                 md.Deleted = true;
                 md.UpdateBy = base.UserId;
@@ -93,7 +101,8 @@ namespace Services.System
                                 Id = m.Id,
                                 Name = m.Name,
                                 Description = m.Description,
-                                IsActive = m.IsActive
+                                IsActive = m.IsActive,
+                                RowVersion = m.RowVersion
                             };
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
@@ -161,7 +170,8 @@ namespace Services.System
                     Id = md.Id,
                     Name = md.Name,
                     Description = md.Description,
-                    IsActive = md.IsActive
+                    IsActive = md.IsActive,
+                    RowVersion = md.RowVersion
                 };
 
                 response.Result = model;
@@ -183,6 +193,13 @@ namespace Services.System
                 if (md == null)
                 {
                     throw new NullParameterException();
+                }
+
+                if (!md.RowVersion.SequenceEqual(model.RowVersion))
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    return response;
                 }
 
                 md.Name = model.Name;

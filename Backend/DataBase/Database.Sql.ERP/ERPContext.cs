@@ -246,7 +246,10 @@ namespace Database.Sql.ERP
 
             modelBuilder.Entity<User>();
             modelBuilder.Entity<SessionLog>();
-            modelBuilder.Entity<Role>();
+
+            modelBuilder.Entity<Role>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
 
             #endregion
 

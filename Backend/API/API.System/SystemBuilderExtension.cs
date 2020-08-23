@@ -10,7 +10,7 @@ namespace API.System
 {
     public static class SystemBuilderExtension
     {
-        public static IServiceCollection AddHrServices(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddRoleServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<IRoleService, RoleService>();
             return services;

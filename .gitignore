@@ -36,3 +36,5 @@ Backend/DataBase/Database.Sql.ERP/obj/
 Backend/API/API.System/bin/
 Backend/API/API.System/obj/
 Backend/Services/Services.System/obj/
+Backend/debug.log
+Backend/Services/Services.System/bin/
