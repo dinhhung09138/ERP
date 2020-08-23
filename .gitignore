@@ -33,8 +33,15 @@ Backend/API/API.Training/obj/
 Backend/API/API.Training/bin/
 Backend/DataBase/Database.Sql.ERP/bin/
 Backend/DataBase/Database.Sql.ERP/obj/
+<<<<<<< HEAD
 Backend/API/API.System/bin/
 Backend/API/API.System/obj/
 Backend/Services/Services.System/obj/
 Backend/debug.log
 Backend/Services/Services.System/bin/
+=======
+Backend/Services/Service.Common/obj/
+Backend/Services/Service.Common/bin/
+Backend/API/API.Common/bin/
+Backend/API/API.Common/obj/
+>>>>>>> develop

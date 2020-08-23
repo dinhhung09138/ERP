@@ -43,12 +43,47 @@ export class EmployeeService {
       return this.api.getDropdown(this.url.dropdown);
     }
 
-    save(model: EmployeeViewModel, action: FormActionStatus): Observable<ResponseModel> {
+    save(model: EmployeeViewModel, action: FormActionStatus, file?: any): Observable<ResponseModel> {
+      const formData = new FormData();
+
+      formData.append('employeeCode', model.employeeCode);
+      formData.append('firstName', model.firstName);
+      formData.append('lastName', model.lastName);
+      if (model.probationDate) {
+        formData.append('probationDate', model.probationDate.toUTCString());
+      }
+      if (model.startWorkingDate) {
+        formData.append('startWorkingDate', model.startWorkingDate.toUTCString());
+      }
+      formData.append('badgeCardNumber', model.badgeCardNumber);
+      if (model.dateApplyBadge) {
+        formData.append('dateApplyBadge', model.dateApplyBadge.toUTCString());
+      }
+      formData.append('fingerSignNumber', model.fingerSignNumber);
+      if (model.dateApplyFingerSign) {
+        formData.append('dateApplyFingerSign', model.dateApplyFingerSign.toUTCString());
+      }
+      formData.append('workingEmail', model.workingEmail);
+      formData.append('workingPhone', model.workingPhone);
+      if (model.employeeWorkingStatusId) {
+        formData.append('employeeWorkingStatusId', model.employeeWorkingStatusId.toString());
+      }
+      if (model.basicSalary) {
+        formData.append('basicSalary', model.basicSalary.toString());
+      }
+
+      if (file) {
+        formData.append('file', file, file.name);
+      }
+
+      formData.append('rowVersion', model.rowVersion);
+
       switch (action) {
         case FormActionStatus.Insert:
-          return this.api.insert(this.url.insert, model);
+          return this.api.insert(this.url.insert, formData);
         default:
-          return this.api.update(this.url.update, model);
+          formData.append('id', model.id.toString());
+          return this.api.updateFormData(this.url.update, formData);
       }
     }
 

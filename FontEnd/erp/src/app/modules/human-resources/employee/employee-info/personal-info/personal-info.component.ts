@@ -25,7 +25,6 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   isInitData = false; // Set true after get all init data in the first time.
   isEdit = false; // If true, enable control for editing
-  gender = -1; // -1: Un-know, 1: Male, 2: Female
   isLoading = false;
   isSubmit = false;
   personalInfo: PersonalInfoViewModel;
@@ -50,16 +49,18 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.personalInfoForm = this.fb.group({
       id: [0],
-      employeeId: [0, [Validators.required]],
-      dateOfBirth: [0],
-      gender: [true],
+      employeeId: [0],
+      dateOfBirth: [null],
+      gender: [true, [Validators.required]],
       materialStatusId: [null],
       religionId: [null],
       nationId: [null],
       nationalityId: [null],
       academicLevelId: [null],
       professionalQualificationId: [null],
+      rowVersion: [null],
     });
+    this.initFormControl();
   }
 
   ngOnChanges(data: SimpleChanges) {
@@ -68,18 +69,18 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
         this.getSelection();
         this.isInitData = true;
       }
-      this.initFormControl();
-      this.getItem();
+      this.getInfoByEmployeeId(data.Employee.currentValue.id);
     }
   }
 
   initFormControl() {
+
     if (this.formDirective) {
       this.formDirective.resetForm();
     }
 
     this.personalInfoForm.get('id').setValue(0);
-    this.personalInfoForm.get('employeeId').setValue(this.Employee.id);
+    this.personalInfoForm.get('employeeId').setValue(null);
     this.personalInfoForm.get('dateOfBirth').setValue(null);
     this.personalInfoForm.get('gender').setValue(true);
     this.personalInfoForm.get('materialStatusId').setValue(null);
@@ -88,6 +89,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.personalInfoForm.get('nationalityId').setValue(null);
     this.personalInfoForm.get('academicLevelId').setValue(null);
     this.personalInfoForm.get('professionalQualificationId').setValue(null);
+
   }
 
   onEditClick() {
@@ -105,10 +107,10 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.setDataToForm(this.personalInfo);
   }
 
-  private getItem() {
+  private getInfoByEmployeeId(employeeId: number) {
     if (this.Employee) {
       this.isLoading = true;
-      this.personalInfoService.item(this.Employee.id).subscribe((response: ResponseModel) => {
+      this.personalInfoService.getInfoByEmployeeId(employeeId).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
           this.personalInfo = response.result;
           this.setDataToForm(this.personalInfo);
@@ -116,10 +118,6 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
         this.isLoading = false;
       });
     }
-  }
-
-  onGenderChange(isMale: number) {
-    this.personalInfoForm.get('gender').setValue(isMale === 1 ? true : false);
   }
 
   onAddNewNationClick() {
@@ -180,7 +178,6 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   onSubmit() {
 
     this.isSubmit = true;
-    console.log(this.personalInfoForm.getRawValue());
 
     if (this.personalInfoForm.invalid) {
       this.isSubmit = false;
@@ -228,13 +225,13 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
         this.personalInfoForm.get('dateOfBirth').setValue(new Date(data.dateOfBirth));
       }
       this.personalInfoForm.get('gender').setValue(data.gender);
-      this.gender = data.gender === null ? -1 : data.gender === true ? 1 : 0;
       this.personalInfoForm.get('materialStatusId').setValue(data.materialStatusId);
       this.personalInfoForm.get('religionId').setValue(data.religionId);
       this.personalInfoForm.get('nationId').setValue(data.nationId);
       this.personalInfoForm.get('nationalityId').setValue(data.nationalityId);
       this.personalInfoForm.get('academicLevelId').setValue(data.academicLevelId);
       this.personalInfoForm.get('professionalQualificationId').setValue(data.professionalQualificationId);
+      this.personalInfoForm.get('rowVersion').setValue(data.rowVersion);
     }
   }
 

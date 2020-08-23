@@ -6,6 +6,7 @@ GO
 CREATE TABLE [dbo].[HR_Employee](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[EmployeeCode] [varchar](15) NOT NULL,
+	[AvatarFileId] [int] NULL,
 	[ProbationDate] [datetime] NULL,
 	[StartWorkingDate] [datetime] NULL,
 	[BadgeCardNumber] [varchar](10) NULL,
@@ -22,6 +23,7 @@ CREATE TABLE [dbo].[HR_Employee](
 	[UpdateBy] [int] NULL,
 	[UpdateDate] [datetime] NULL,
 	[Deleted] [bit] NOT NULL,
+	[RowVersion] [timestamp] NOT NULL,
  CONSTRAINT [PK_HR_Employee] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -44,3 +46,4 @@ EXEC sys.sp_addextendedproperty
 @level2type=N'COLUMN',
 @level2name=N'BadgeCardNumber'
 GO
+CREATE UNIQUE INDEX HR_Employee_Uidx_Code ON [dbo].[HR_Employee]([EmployeeCode])

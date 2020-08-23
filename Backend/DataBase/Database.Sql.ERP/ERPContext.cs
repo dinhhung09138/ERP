@@ -18,6 +18,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<Ward> Ward { get; set; }
 
+        public virtual DbSet<File> File { get; set; }
+
         #endregion
 
         #region " [ HR ] "
@@ -120,6 +122,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<Ward>(entity => {
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+            modelBuilder.Entity<File>();
 
             #endregion
 

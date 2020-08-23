@@ -24,7 +24,13 @@ using API.Training;
 using Database.Sql.ERP;
 using Core.Utility.Middlewares;
 using Core.Utility.Filters;
+<<<<<<< HEAD
 using API.System;
+=======
+using API.Common;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+>>>>>>> develop
 
 namespace APIGateway
 {
@@ -52,7 +58,11 @@ namespace APIGateway
                 });
             });
             services.AddControllers().AddNewtonsoftJson();
-
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthenticationFilter());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+           
             // Add JWT Authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -70,10 +80,14 @@ namespace APIGateway
                     };
                 });
 
-            services.AddMvc(options =>
+            services.AddResponseCaching(options =>
             {
-                options.Filters.Add(new AuthenticationFilter());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                options.SizeLimit = (1024 * 1024);
+                options.UseCaseSensitivePaths = true;
+            });
+
+            // Staic file
+            services.AddDirectoryBrowser();
 
             // Use http context
             // Omitted for clarity
@@ -89,6 +103,7 @@ namespace APIGateway
             services.AddScoped<IERPUnitOfWork, ERPUnitOfWork>();
 
             //Use Security services
+            services.AddCommonService(Configuration);
             services.AddSecurityServices(Configuration);
             services.AddHrServices(Configuration);
             services.AddTrainingServices(Configuration);
@@ -115,9 +130,32 @@ namespace APIGateway
             //Use Authentication
             app.UseAuthentication();
 
+            // Staic file
+            app.UseDefaultFiles();
+            string path = env.WebRootPath;
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(path, "File")
+                    ),
+                RequestPath = new PathString("/File"),
+            });
+
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(path, "File")
+                    //Path.Combine(env.WebRootPath, "File")
+                    ),
+                RequestPath = new PathString("/File"),
+            });
+
             app.UseAuthorization();
 
             app.UseHttpsRedirection();
+
+            app.UseResponseCaching();
 
             app.UseEndpoints(endpoints =>
             {

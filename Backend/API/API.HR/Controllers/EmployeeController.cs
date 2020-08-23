@@ -39,14 +39,14 @@ namespace API.HR.Controllers
         }
 
         [HttpPost, Route("insert")]
-        public async Task<ResponseModel> Insert([FromBody] EmployeeModel model)
+        public async Task<ResponseModel> Insert([FromForm] EmployeeModel model)
         {
             var response = await _employeeService.Insert(model);
             return response;
         }
 
-        [HttpPut, Route("update")]
-        public async Task<ResponseModel> Update([FromBody] EmployeeModel model)
+        [HttpPost, Route("update")]
+        public async Task<ResponseModel> Update([FromForm] EmployeeModel model)
         {
             var response = await _employeeService.Update(model);
             return response;

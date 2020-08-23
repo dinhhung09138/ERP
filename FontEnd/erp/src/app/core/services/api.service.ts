@@ -83,6 +83,17 @@ export class ApiService {
     );
   }
 
+  updateFormData(url: string, model: FormData): Observable<ResponseModel> {
+    return this.http.post<ResponseModel>(url, model).pipe(
+      map((data: ResponseModel) => {
+        if (data.responseStatus === ResponseStatus.success) {
+          this.notifyService.notifyUpdate(true);
+        }
+        return data;
+      })
+    );
+  }
+
   /**
    * Delete item by push object model
    * @param url : String
