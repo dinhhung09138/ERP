@@ -21,7 +21,6 @@ namespace Services.System
         private readonly ILogger<RoleService> _logger;
 
         private readonly string ErrorDropdown = "Không thể lấy danh sách nhóm quyền";
-
         private readonly string IdExist = "Không thể lấy danh sách nhóm quyền";
 
         public RoleService(
@@ -38,12 +37,7 @@ namespace Services.System
             ResponseModel response = new ResponseModel();
             try
             {
-                Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
-
+                Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == model.Id);              
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
                     response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
@@ -62,6 +56,7 @@ namespace Services.System
             {
                 throw ex;
             }
+
             return response;
         }
 
@@ -111,7 +106,8 @@ namespace Services.System
                 }
                 BaseListModel<RoleModel> listItems = new BaseListModel<RoleModel>();
                 listItems.TotalItems = await _context.ReligionRepository.Query().Where(m => !m.Deleted).CountAsync();
-                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize)
+                    .Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
             }
@@ -144,6 +140,7 @@ namespace Services.System
                 md.CreateBy = base.UserId;
 
                 await _context.RoleRepository.AddAsync(md).ConfigureAwait(true);
+
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -159,12 +156,6 @@ namespace Services.System
             try
             {
                 Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
-
                 RoleModel model = new RoleModel()
                 {
                     Id = md.Id,
@@ -173,7 +164,6 @@ namespace Services.System
                     IsActive = md.IsActive,
                     RowVersion = md.RowVersion
                 };
-
                 response.Result = model;
             }
             catch (Exception ex)
@@ -189,19 +179,12 @@ namespace Services.System
             try
             {
                 Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
-
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
                     response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
                     response.Errors.Add(ParameterMsg.OutOfDateData);
                     return response;
                 }
-
                 md.Name = model.Name;
                 md.Description = model.Description;
                 md.IsActive = model.IsActive;

@@ -12,13 +12,16 @@ namespace Database.Sql.ERP.Entities.Security
         [Key]
         [Column(TypeName = "int")]
         public int Id { get; set; }
+
         [Column(TypeName = "nvarchar(50)")]
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
+
         [Column(TypeName = "nvarchar(256)")]
         [MaxLength(256)]
         public string Description { get; set; }
+
         [Column(TypeName = "bit")]
         [Required]
         public bool IsActive { get; set; }

@@ -10,7 +10,6 @@ import { PagingModel } from 'src/app/core/models/paging.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { switchMap } from 'rxjs/operators';
 
-
 @Injectable()
 export class RoleService {
     url={
@@ -21,6 +20,7 @@ export class RoleService {
         update: APIUrlConstants.systemApi + 'role/update',
         delete: APIUrlConstants.systemApi + 'role/delete',
     };
+
     constructor(
         private api: ApiService,
         private dialogService: DialogService){}
@@ -32,12 +32,15 @@ export class RoleService {
         filter.paging.pageSize = paging.pageSize;
         return this.api.getList(this.url.list, filter);
     }
+
     getDropdown(){
         return this.api.getDropdown(this.url.dropdown);
     }
+
     item(id:number){
         return this.api.item(this.url.item,id);
     }
+
     save(model: RoleViewModel, action: FormActionStatus): Observable<ResponseModel> {
         switch (action) {
             case FormActionStatus.Insert:
@@ -46,6 +49,7 @@ export class RoleService {
                 return this.api.update(this.url.update, model);
         }
     }
+    
     confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
         return this.dialogService.openConfirmDeleteDialog().pipe(           
             switchMap((confirmResponse: boolean) => {
@@ -56,7 +60,7 @@ export class RoleService {
                 }
             })
         );
-      }
+    }
   
     delete(itemId: number, version: any): Observable<ResponseModel> {
         return this.api.delete(this.url.delete, { id: itemId, rowVersion: version });
