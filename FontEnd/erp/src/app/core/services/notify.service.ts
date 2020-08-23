@@ -71,6 +71,39 @@ export class NotifyService {
   }
 
   /**
+   * Show warning when out of date data.
+   */
+  notifyDataOutOfDate() {
+    this.translate.get('MESSAGE.OUT_OF_DATE_DATA').subscribe(message => {
+      this.notifyWarning(message);
+    });
+  }
+
+  /**
+   * Show warning when code is exists.
+   */
+  notifyCodeExists() {
+    this.translate.get('MESSAGE.CODE_EXISTS').subscribe(message => {
+      this.notifyWarning(message);
+    });
+  }
+
+  /**
+   * Show warning when code is exists.
+   */
+  notifyCannotGetDropdown(url: string) {
+    if (url.includes('/hr/approve-status/dropdown')) {
+      this.translate.get('SCREEN.HR.CONFIGURATION.APPROVE_STATUS.ERROR.DROPDOWN').subscribe(message => {
+        this.notifyWarning(message);
+      });
+    } else if (url.includes('/system')) {
+
+    } else if (url.includes('/common')) {
+
+    }
+  }
+
+  /**
    * Show warning when server response warning status.
    * @param message : String
    */

@@ -27,7 +27,8 @@
     "DELETE_SUCCESS": "Đữ liệu bạn chọn đã được xóa",
     "DELETE_ERROR": "Lỗi khi xóa dữ liệu",
     "PAGE_NOT_FOUND": "Không tìm thấy liên kết",
-    "OUT_OF_DATE_DATA": "Dữ liệu đã được thay đổi trước đó, vui lòng cập nhật trước khi tiến hành thao tác mới"
+    "OUT_OF_DATE_DATA": "Dữ liệu đã được thay đổi trước đó, vui lòng cập nhật trước khi tiến hành thao tác mới",
+    "CODE_EXISTS": "Mã đã tồn tại"
   },
   "DIALOG": {
     "CONFIRM": "Xác nhận",
@@ -82,8 +83,7 @@
             "STATUS": "Hoạt động"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách trạng thái",
-            "CODE_EXISTS": "Mã trạng thái đã tồn tại"
+            "DROPDOWN": "Không thể lấy danh sách trạng thái"
           }
         }
       }

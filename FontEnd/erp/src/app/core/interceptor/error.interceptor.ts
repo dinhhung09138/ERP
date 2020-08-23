@@ -33,6 +33,15 @@ export class ErrorInterceptor implements HttpInterceptor {
             case ResponseStatus.warning:
               this.notifyService.notifyServerWarning(response.errors.join(''));
               break;
+            case ResponseStatus.outOfDateData:
+              this.notifyService.notifyDataOutOfDate();
+              break;
+            case ResponseStatus.codeExists:
+              this.notifyService.notifyCodeExists();
+              break;
+            case ResponseStatus.getDropDownError:
+              this.notifyService.notifyCannotGetDropdown(req.url);
+              break;
           }
         }
 
