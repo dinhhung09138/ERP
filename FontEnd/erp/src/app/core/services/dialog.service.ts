@@ -10,7 +10,9 @@ import { HttpErrorStatusEnum } from '../enums/http-error.enum';
 @Injectable()
 export class DialogService {
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+  ) {}
 
   openConfirmDeleteDialog(): Observable<boolean> {
     const modalRef = this.dialog.open(ConfirmDialogComponent, {

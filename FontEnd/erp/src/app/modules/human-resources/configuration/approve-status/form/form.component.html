@@ -14,41 +14,41 @@
             <form [formGroup]="approveStatusForm" (submit)="!isLoading ? onSubmitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Mã</label>
+                  <label class="label">{{ 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.CODE' | translate }}</label>
                   <mat-form-field class="form-control">
                     <input matInput id="code" formControlName="code" maxlength="10" tabindex="1" autocomplete="off">
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && approveStatusForm.controls['code'].errors?.required">
-                    Vui lòng điền thông tin
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Tên</label>
+                  <label class="label">{{ 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.NAME' | translate }}</label>
                   <mat-form-field class="form-control">
                     <input matInput id="name" formControlName="name" maxlength="100" tabindex="2" autocomplete="off"/>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && approveStatusForm.controls['name'].errors?.required">
-                    Vui lòng điền thông tin
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-162 col-md-6 col-sm-6 col-xs-12 form-group">
-                  <label class="label">Thứ tự</label>
+                  <label class="label">{{ 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.PRECEDENCE' | translate }}</label>
                   <mat-form-field class="form-control">
                     <input matInput appPrecedence formControlName="precedence" maxlength="3" tabindex="3" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && approveStatusForm.controls['precedence'].errors?.required">
-                    Vui lòng điền thông tin
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                   <mat-error *ngIf="isSubmit && approveStatusForm.controls['precedence'].errors?.number">
-                    Số thứ tự không hợp lệ
+                    {{ 'VALIDATION_MESSAGE.PRECEDENCE_INVALID' | translate }}
                   </mat-error>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                  <label class="label">Hoạt động</label>
+                  <label class="label">{{ 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.STATUS' | translate }}</label>
                   <div class="input-group">
                     <mat-checkbox class="ml-10" tabindex="4" formControlName="isActive">
                     </mat-checkbox>
@@ -57,9 +57,9 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="5">
-                  <button type="button" class="btn btn-warning" tabindex="6" (click)="onResetClick()"> Đặt lại </button>
-                  <button type="button" class="btn btn-secondary" tabindex="7" (click)="onCloseClick()"> Đóng </button>
+                  <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="5">
+                  <button type="button" class="btn btn-warning" tabindex="6" (click)="onResetClick()"> {{ 'BUTTON.RESET' | translate }} </button>
+                  <button type="button" class="btn btn-secondary" tabindex="7" (click)="onCloseClick()"> {{ 'BUTTON.CLOSE' | translate }} </button>
                 </div>
               </div>
             </form>

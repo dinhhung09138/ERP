@@ -89,8 +89,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                response.Errors.Add(ErrorDropdown);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
                 _logger.LogError(ex.Message, ex);
             }
             return response;
@@ -102,11 +101,6 @@ namespace Service.HR
             try
             {
                 ApproveStatus md = await _context.ApproveStatusRepository.FirstOrDefaultAsync(m => m.Id == id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
 
                 ApproveStatusModel model = new ApproveStatusModel()
                 {
@@ -135,8 +129,7 @@ namespace Service.HR
             {
                 if (await _context.ApproveStatusRepository.CountAsync(m => m.Code == model.Code) > 0)
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(CodeExist);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.CodeExists;
                     return response;
                 }
 
@@ -168,14 +161,9 @@ namespace Service.HR
             {
                 ApproveStatus md = await _context.ApproveStatusRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -205,14 +193,9 @@ namespace Service.HR
             {
                 ApproveStatus md = await _context.ApproveStatusRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 

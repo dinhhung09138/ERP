@@ -9,6 +9,8 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ApproveStatusFormComponent } from './form/form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
+import { ApplicationConstant } from '../../../../core/constants/app.constant';
 
 @Component({
   selector: 'app-hr-approve-status',
@@ -30,9 +32,12 @@ export class ApproveStatusComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   constructor(
+    public translate: TranslateService,
     public dialog: MatDialog,
-    private approveStatusService: ApproveStatusService
-  ) { }
+    private approveStatusService: ApproveStatusService,
+  ) {
+    this.translate.use(ApplicationConstant.defaultLanguage);
+  }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;

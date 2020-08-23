@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { map, catchError, filter } from 'rxjs/operators';
 import { Observable, of, pipe } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,15 @@ import { Observable, of, pipe } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ERP';
 
   constructor(
+    private translate: TranslateService,
     private router: Router,
     private titleService: Title,
     private activatedRoute: ActivatedRoute,
     private loadingService: LoadingService) {
+      translate.use(ApplicationConstant.defaultLanguage);
+
       this.router.events.subscribe((e: RouterEvent) => {
         this.navigationInterceptor(e);
       });
@@ -45,7 +48,9 @@ export class AppComponent implements OnInit {
     .subscribe(() => {
       const routeObject = this.getChild(this.activatedRoute);
       routeObject.data.subscribe(data => {
-        this.titleService.setTitle((data.title || '') + ' | ' + ApplicationConstant.siteTitle);
+        this.translate.get(data.title).subscribe(message => {
+          this.titleService.setTitle(message + ApplicationConstant.siteTitle);
+        });
       });
     });
   }

@@ -1,0 +1,25 @@
+{
+  "ERROR": {
+
+  },
+  "NOTIFICATION": {
+
+  },
+  "BUTTON": {
+    "ADD": "Thêm mới"
+  },
+  "SCREEN": {
+    "HR": {
+      "CONFIGURATION": {
+        "APPROVE_STATUS": {
+          "LIST": {
+
+          },
+          "FORM": {
+
+          }
+        }
+      }
+    }
+  }
+}

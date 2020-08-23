@@ -1,0 +1,92 @@
+{
+  "SITE_TITLE": " | Trần Đình Hưng",
+  "ERROR": {
+
+  },
+  "NOTIFICATION": {
+
+  },
+  "VALIDATION_MESSAGE": {
+    "EMPTY": "Vui lòng điền thông tin",
+    "DATE_INVALID": "",
+    "PRECEDENCE_INVALID": "Số thứ tự không hợp lệ"
+  },
+  "MESSAGE": {
+    "LOADING": "Đang tải...",
+    "TOKEN_TIMEOUT": "Phiên đăng nhập đã hết hạn",
+    "INTERNET_CONNECTION": "Vui lòng kiểm tra đường truyền internet",
+    "SERVER_NOTFOUND": "Không thể kết nối tới server",
+    "UNAUTHORIZE": "Bạn không có quyền thao tác trên tính năng này",
+    "URL_NOTFOUND": "Liên kết không tồn tại trên server",
+    "CONTENT_NOTFOUND": "Không tìm thấy nội dung",
+    "NO_DATA": "Không tìm thấy dữ liệu",
+    "SAVE_SUCCESS": "Thêm mới dữ liệu thành công",
+    "SAVE_ERROR": "Thêm mới dữ liệu thất bại",
+    "EDIT_SUCCESS": "Cập nhật dữ liệu thành công",
+    "EDIT_ERROR": "Cập nhật dữ liệu thất bại",
+    "DELETE_SUCCESS": "Đữ liệu bạn chọn đã được xóa",
+    "DELETE_ERROR": "Lỗi khi xóa dữ liệu",
+    "PAGE_NOT_FOUND": "Không tìm thấy liên kết",
+    "OUT_OF_DATE_DATA": "Dữ liệu đã được thay đổi trước đó, vui lòng cập nhật trước khi tiến hành thao tác mới"
+  },
+  "DIALOG": {
+    "CONFIRM": "Xác nhận",
+    "NOTIFY": "Thông báo",
+    "CONFIRM_DELETE": "Bạn có muốn xóa dòng dữ liệu đang chọn?"
+  },
+  "BUTTON": {
+    "ADD": "Thêm mới",
+    "EDIT": "Cập nhật",
+    "DELETE": "Xóa",
+    "IMPORT": "Nhập",
+    "EXPORT": "Xuất file",
+    "SAVE": "Lưu",
+    "RESET": "Đặt lại",
+    "CLOSE": "Đóng",
+    "CANCEL": "Hủy",
+    "CONFIRM_AGREE": "Đồng ý",
+    "CONFIRM_CANCEL": "Hủy bỏ"
+  },
+  "TABLE": {
+    "SEARCH": "Tìm kiếm",
+    "NAVIGATOR": {
+      "DISPLAY": "Hiển thị",
+      "NEXT": "Trang tiếp theo",
+      "PREVIOUS": "Trang trước",
+      "FIRST": "Trang đầu",
+      "LAST": "Trang cuối"
+    },
+    "LIST": {
+      "CODE": "Mã",
+      "NAME": "Tên",
+      "PRECEDENCE": "Thứ tự",
+      "ACTIVE": "Hoạt động",
+      "DEACTIVATION" : "Khóa",
+      "STATUS": "Trạng thái",
+      "ACTION": "Thao tác"
+    }
+  },
+  "SCREEN": {
+    "HR": {
+      "CONFIGURATION": {
+        "APPROVE_STATUS": {
+          "TITLE": "Trạng thái phê duyệt",
+          "TABLE": {
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "CODE": "Mã",
+            "NAME": "Tên trạng thái",
+            "PRECEDENCE": "Thứ tự",
+            "STATUS": "Hoạt động"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách trạng thái",
+            "CODE_EXISTS": "Mã trạng thái đã tồn tại"
+          }
+        }
+      }
+    }
+  }
+}

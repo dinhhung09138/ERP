@@ -1,12 +1,12 @@
 <div class="card box-confirm">
   <div class="card-header">
-    <h2><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Xác nhận</h2>
+    <h2><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ 'DIALOG.CONFIRM' | translate }}</h2>
   </div>
   <div class="card-body pt-4">
-    Bạn có muốn xóa dòng dữ liệu đang chọn?
+    {{ 'DIALOG.CONFIRM_DELETE' | translate }}
   </div>
   <div class="card-footer">
-    <button class="btn btn-danger" tabindex="2" (click)="onYesClick()">Đồng ý</button>
-    <button class="btn btn-secondary" (click)="onNoClick()" tabindex="1">Hủy bỏ</button>
+    <button class="btn btn-danger" tabindex="2" (click)="onYesClick()">{{ 'BUTTON.CONFIRM_AGREE' | translate }}</button>
+    <button class="btn btn-secondary" (click)="onNoClick()" tabindex="1">{{ 'BUTTON.CONFIRM_CANCEL' | translate }}</button>
   </div>
 </div>

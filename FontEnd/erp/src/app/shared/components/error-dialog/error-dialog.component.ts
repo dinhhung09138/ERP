@@ -1,7 +1,9 @@
 import { DialogDataInterface } from './../../../core/interfaces/dialog-data.interface';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpErrorStatusEnum } from 'src/app/core/enums/http-error.enum';
+import { TranslateService } from '@ngx-translate/core';
+import { ApplicationConstant } from '../../../core/constants/app.constant';
 
 @Component({
   selector: 'app-error-dialog',
@@ -13,36 +15,45 @@ export class ErrorDialogComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private dialogRef: MatDialogRef<ErrorDialogComponent>,
+    public translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface
-  ) { }
+  ) {
+    translate.use(ApplicationConstant.defaultLanguage);
+   }
 
   ngOnInit(): void {
     this.errorMessage = '';
     if (this.data.isError === true) {
-      switch(this.data.httpError) {
+
+      let key = '';
+
+      switch (this.data.httpError) {
         case HttpErrorStatusEnum.warningError:
           this.errorMessage = this.data.message;
           break;
         case HttpErrorStatusEnum.timeOut:
-          this.errorMessage = 'Phiên đăng nhập đã hết hạn';
+          key = 'MESSAGE.TOKEN_TIMEOUT';
           break;
         case HttpErrorStatusEnum.noInternet:
-          this.errorMessage = 'Vui lòng kiểm tra đường truyền internet';
+          key = 'MESSAGE.INTERNET_CONNECTION';
           break;
         case HttpErrorStatusEnum.serverNotFound:
-          this.errorMessage = 'Không thể kết nối tới server';
+          key = 'MESSAGE.SERVER_NOTFOUND';
           break;
         case HttpErrorStatusEnum.unauthorized:
-          this.errorMessage = 'Bạn không có quyền thao tác trên tính năng này';
+          key = 'MESSAGE.UNAUTHORIZE';
           break;
         case HttpErrorStatusEnum.notFound:
-          this.errorMessage = 'Liên kết không tồn tại trên server';
+          key = 'MESSAGE.URL_NOTFOUND';
           break;
         case HttpErrorStatusEnum.noContent:
-          this.errorMessage = 'Không tìm thấy nội dung';
+          key = 'MESSAGE.CONTENT_NOTFOUND';
           break;
       }
+
+      this.translate.get(key).subscribe(msg => {
+        this.errorMessage = msg;
+      });
     }
   }
 

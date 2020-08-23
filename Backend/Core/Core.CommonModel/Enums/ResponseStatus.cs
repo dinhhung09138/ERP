@@ -15,13 +15,29 @@ namespace Core.CommonModel.Enums
         Success = 1,
 
         /// <summary>
+        /// Warning response.
+        /// </summary>
+        Warning = 0,
+
+        /// <summary>
         /// Error response.
         /// </summary>
         Error = -1,
 
         /// <summary>
-        /// Warning response.
+        /// Show when code is exists
         /// </summary>
-        Warning = 0,
+        CodeExists = -2,
+
+        /// <summary>
+        /// Error when get dropdown data
+        /// </summary>
+        GetDropDownError = -3,
+
+        /// <summary>
+        /// Version is not map. Data was changed before
+        /// </summary>
+        OutOfDateData = -4,
+
     }
 }

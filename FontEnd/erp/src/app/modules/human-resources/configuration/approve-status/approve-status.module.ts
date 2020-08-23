@@ -15,7 +15,7 @@ const route: Routes = [
   {
     path: '',
     component: ApproveStatusComponent,
-    data: { title: 'Trạng thái phê duyệt' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.TITLE' }
   }
 ];
 

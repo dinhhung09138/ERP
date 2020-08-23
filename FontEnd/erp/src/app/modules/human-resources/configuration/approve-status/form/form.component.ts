@@ -6,6 +6,8 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ApproveStatusViewModel } from '../approve-status.model';
+import { TranslateService } from '@ngx-translate/core';
+import { ApplicationConstant } from '../../../../../core/constants/app.constant';
 
 @Component({
   selector: 'app-hr-approve-status-form',
@@ -27,9 +29,12 @@ export class ApproveStatusFormComponent implements OnInit {
   item: ApproveStatusViewModel;
 
   constructor(
+    public translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
-    private approveStatusService: ApproveStatusService) { }
+    private approveStatusService: ApproveStatusService) {
+      translate.use(ApplicationConstant.defaultLanguage);
+    }
 
   ngOnInit(): void {
     this.approveStatusForm = this.fb.group({
@@ -90,13 +95,18 @@ export class ApproveStatusFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#code').focus();
-    this.formTitle = 'Thêm mới';
+
+    this.translate.get('SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

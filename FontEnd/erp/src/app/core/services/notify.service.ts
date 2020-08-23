@@ -1,11 +1,17 @@
 import { NotifyComponent } from './../../shared/components/notify/notify.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ApplicationConstant } from '../constants/app.constant';
 
 @Injectable()
 export class NotifyService {
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(
+    private snackBar: MatSnackBar,
+    private translate: TranslateService) {
+      translate.use(ApplicationConstant.defaultLanguage);
+    }
 
   openDialogSuccess() {
     this.snackBar.openFromComponent(NotifyComponent, {
@@ -22,9 +28,13 @@ export class NotifyService {
    */
   notifyInsert(isSuccess: boolean) {
     if (isSuccess === true) {
-      this.notifySuccess('Thêm mới dữ liệu thành công');
+      this.translate.get('MESSAGE.SAVE_SUCCESS').subscribe(mesage => {
+        this.notifySuccess(mesage);
+      });
     } else {
-      this.notifyWarning('Thêm mới dữ liệu thất bại');
+      this.translate.get('MESSAGE.SAVE_ERROR').subscribe(mesage => {
+        this.notifyWarning(mesage);
+      });
     }
   }
 
@@ -34,9 +44,13 @@ export class NotifyService {
    */
   notifyUpdate(isSuccess: boolean) {
     if (isSuccess === true) {
-      this.notifySuccess('Cập nhật dữ liệu thành công');
+      this.translate.get('MESSAGE.EDIT_SUCCESS').subscribe(mesage => {
+        this.notifySuccess(mesage);
+      });
     } else {
-      this.notifyWarning('Cập nhật dữ liệu thất bại');
+      this.translate.get('MESSAGE.EDIT_ERROR').subscribe(mesage => {
+        this.notifyWarning(mesage);
+      });
     }
   }
 
@@ -46,9 +60,13 @@ export class NotifyService {
    */
   notifyDelete(isSuccess: boolean) {
     if (isSuccess === true) {
-      this.notifySuccess('Đữ liệu bạn chọn đã được xóa');
+      this.translate.get('MESSAGE.DELETE_SUCCESS').subscribe(mesage => {
+        this.notifySuccess(mesage);
+      });
     } else {
-      this.notifyWarning('Lỗi khi xóa dữ liệu');
+      this.translate.get('MESSAGE.DELETE_ERROR').subscribe(mesage => {
+        this.notifyWarning(mesage);
+      });
     }
   }
 

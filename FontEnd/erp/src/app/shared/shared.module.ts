@@ -7,7 +7,7 @@ import { NoDataAvailableComponent } from './components/no-data-available/no-data
 import { ElementLoadingComponent } from './components/element-loading/element-loading.component';
 import { TableLoadingComponent } from './components/table-loading/table-loading.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormatNumberPipe } from '../core/pipes/format-number.pipe';
 import { FormatDecimalDirective } from '../core/directives/format-decimal.directive';
 import { FormatCurrencyDirective } from '../core/directives/format-currency.directive';
@@ -22,6 +22,8 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../core/factories/http.loader.factory';
 
 @NgModule({
   imports: [
@@ -31,6 +33,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     HttpClientModule,
     MatPaginatorModule,
     RouterModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      }
+    }),
   ],
   declarations: [
     // Components
@@ -70,6 +79,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    TranslateModule,
     // Components
     HeaderComponent,
     MainMenuComponent,
