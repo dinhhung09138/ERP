@@ -10,6 +10,7 @@ import { WardFormComponent } from './form/form.component';
 import { ActivatedRoute } from '@angular/router';
 import { ProvinceViewModel } from '../province/province.model';
 import { DistrictViewModel } from '../district/district.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-ward',
@@ -34,6 +35,7 @@ export class WardComponent implements OnInit {
   districtList: DistrictViewModel[] = [];
 
   constructor(
+    public translate: TranslateService,
     private wardService: WardService,
     private activatedRoute: ActivatedRoute) {
   }

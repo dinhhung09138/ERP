@@ -12,6 +12,7 @@ import { ProvinceService } from '../../province/province.service';
 import { DistrictService } from '../../district/district.service';
 import { DistrictFormComponent } from '../../district/form/form.component';
 import { ProvinceFormComponent } from '../../province/form/form.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-ward-form',
@@ -37,6 +38,7 @@ export class WardFormComponent implements OnInit {
   districtDropdown: DistrictViewModel[] = [];
 
   constructor(
+    public translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private wardService: WardService,
@@ -135,13 +137,17 @@ export class WardFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#provinceId').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.WARD.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.WARD.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {
