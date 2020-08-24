@@ -20,10 +20,6 @@ namespace Service.HR
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<ApproveStatusService> _logger;
 
-
-        private readonly string ErrorDropdown = "Không thể lấy danh sách trạng thái";
-        private readonly string CodeExist = "Mã trạng thái đã tồn tại";
-
         public ApproveStatusService(
             IERPUnitOfWork context,
             ILogger<ApproveStatusService> logger,

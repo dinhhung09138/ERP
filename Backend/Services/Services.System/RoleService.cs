@@ -21,7 +21,6 @@ namespace Services.System
         private readonly ILogger<RoleService> _logger;
 
         private readonly string ErrorDropdown = "Không thể lấy danh sách nhóm quyền";
-        private readonly string IdExist = "Không thể lấy danh sách nhóm quyền";
 
         public RoleService(
             IERPUnitOfWork context,
@@ -107,7 +106,8 @@ namespace Services.System
                 BaseListModel<RoleModel> listItems = new BaseListModel<RoleModel>();
                 listItems.TotalItems = await _context.ReligionRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize)
-                    .Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
+                                             .Take(filter.Paging.PageSize).ToListAsync()
+                                             .ConfigureAwait(false);
 
                 response.Result = listItems;
             }
@@ -123,13 +123,6 @@ namespace Services.System
             ResponseModel response = new ResponseModel();
             try
             {
-                if(await _context.RoleRepository.CountAsync(m=>m.Id == model.Id) > 0)
-                {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(IdExist);
-                    return response;
-                }
-
                 Role md = new Role();
 
                 md.Name = model.Name;
