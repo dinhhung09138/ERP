@@ -7,6 +7,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-religion',
@@ -27,7 +28,10 @@ export class ReligionComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private religionService: ReligionService) {
+  constructor(
+    public translate: TranslateService,
+    private religionService: ReligionService
+    ) {
   }
 
   ngOnInit(): void {

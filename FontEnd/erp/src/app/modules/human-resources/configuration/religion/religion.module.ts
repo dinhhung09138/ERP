@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     component: ReligionComponent,
-    data: { title: 'Tôn giáo' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.RELIGION.TITLE' }
   }
 ];
 

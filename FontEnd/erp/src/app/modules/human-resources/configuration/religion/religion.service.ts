@@ -34,7 +34,7 @@ export class ReligionService {
       disableClose: true,
       data: {
         isPopup: true,
-        title: 'Thêm tôn giáo mới',
+        title: 'SCREEN.HR.CONFIGURATION.RELIGION.POPUP_TITLE',
       }
     });
 
