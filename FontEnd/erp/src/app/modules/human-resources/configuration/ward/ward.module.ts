@@ -18,7 +18,7 @@ const route: Routes = [
   {
     path: '',
     component: WardComponent,
-    data: { title: 'Phường/Xã' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.WARD.TITLE' }
   }
 ];
 
