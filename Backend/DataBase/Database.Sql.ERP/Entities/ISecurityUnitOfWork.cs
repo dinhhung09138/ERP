@@ -10,5 +10,7 @@ namespace Database.Sql.ERP.Entities
     {
         ITableGenericRepository<User> UserRepository { get; }
         ITableGenericRepository<SessionLog> SessionLogRepository { get; }
+        ITableGenericRepository<Role> RoleRepository { get; }
+
     }
 }

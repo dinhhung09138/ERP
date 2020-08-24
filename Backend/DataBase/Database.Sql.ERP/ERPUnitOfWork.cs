@@ -422,6 +422,14 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<Role> _roleRepository;
+        public ITableGenericRepository<Role> RoleRepository
+        {
+            get
+            {
+                return _roleRepository = _roleRepository ?? new TableGenericRepository<Role>(_context);
+            }
+        }
         #endregion
 
 
