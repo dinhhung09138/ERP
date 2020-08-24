@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SystemComponent } from './system.component';
-
+import { SystemRouterModule } from './system-routing.module';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -8,7 +9,8 @@ import { SystemComponent } from './system.component';
     SystemComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    SystemRouterModule
   ]
 })
 export class SystemModule { }

@@ -24,6 +24,7 @@ using API.Training;
 using Database.Sql.ERP;
 using Core.Utility.Middlewares;
 using Core.Utility.Filters;
+using API.System;
 using API.Common;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
@@ -103,6 +104,8 @@ namespace APIGateway
             services.AddSecurityServices(Configuration);
             services.AddHrServices(Configuration);
             services.AddTrainingServices(Configuration);
+            services.AddRoleServices(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

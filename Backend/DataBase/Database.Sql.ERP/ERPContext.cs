@@ -95,6 +95,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<SessionLog> SessionLog { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+
 
         #endregion
 
@@ -247,6 +249,10 @@ namespace Database.Sql.ERP
 
             modelBuilder.Entity<User>();
             modelBuilder.Entity<SessionLog>();
+
+            modelBuilder.Entity<Role>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
 
             #endregion
 

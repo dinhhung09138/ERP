@@ -33,11 +33,12 @@
     <ProjectReference Include="..\API\API.Common\API.Common.csproj" />
     <ProjectReference Include="..\API\API.HR\API.HR.csproj" />
     <ProjectReference Include="..\API\API.Security\API.Security.csproj" />
+    <ProjectReference Include="..\API\API.System\API.System.csproj" />
     <ProjectReference Include="..\API\API.Training\API.Training.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\File\" />
   </ItemGroup>
 
 </Project>

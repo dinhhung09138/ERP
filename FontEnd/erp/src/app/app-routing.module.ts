@@ -32,6 +32,12 @@ const routes: Routes = [
     loadChildren: () => import('../app/modules/training/training.module').then(m => m.TrainingModule),
   },
   {
+    path: 'system',
+    canActivate: [AuthenticationGuard],
+    canActivateChild: [AuthenticationGuard],
+    loadChildren: () => import('../app/modules/system/system.module').then(m => m.SystemModule),
+  },
+  {
     path: '**',
     component: PageNotFoundComponent,
     canActivate: [AuthenticationGuard],

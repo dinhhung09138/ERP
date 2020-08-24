@@ -27,6 +27,7 @@ export class AppLoadService {
       APIUrlConstants.authenticationApi = response.authenticationApi;
       APIUrlConstants.hrApi = response.hrApi;
       APIUrlConstants.marketingApi = response.marketingApi;
+      APIUrlConstants.systemApi = response.systemApi;
     });
   }
 
