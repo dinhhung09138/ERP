@@ -15,7 +15,7 @@ const route: Routes = [
   {
     path: '',
     component: RelationshipTypeComponent,
-    data: { title: 'Quan hệ gia đình' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.RELATIONSHIP_TYPE.TITLE' }
   }
 ];
 

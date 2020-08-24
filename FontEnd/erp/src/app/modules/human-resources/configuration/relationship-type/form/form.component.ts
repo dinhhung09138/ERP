@@ -6,6 +6,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { RelationshipTypeViewModel } from '../relationship-type.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-relationship-type-form',
@@ -27,6 +28,7 @@ export class RelationshipTypeFormComponent implements OnInit {
   item: RelationshipTypeViewModel;
 
   constructor(
+    public translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private relationshipTypeService: RelationshipTypeService) { }
@@ -86,13 +88,17 @@ export class RelationshipTypeFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.RELATIONSHIP_TYPE.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.RELATIONSHIP_TYPE.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

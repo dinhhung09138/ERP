@@ -7,6 +7,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { RelationshipTypeFormComponent } from './form/form.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-relationship-type',
@@ -27,7 +28,9 @@ export class RelationshipTypeComponent implements OnInit {
   listColumnsName: string[] = ['name', 'description', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private relationshipTypeService: RelationshipTypeService) { }
+  constructor(
+    public translate: TranslateService,
+    private relationshipTypeService: RelationshipTypeService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
