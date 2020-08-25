@@ -85,6 +85,24 @@
             "DROPDOWN": "Không thể lấy danh sách trạng thái"
           }
         },
+        "DISTRICT": {
+          "TITLE": "Quận/Huyện",
+          "LIST_TITLE": "Danh sách quận/huyện",
+          "POPUP_TITLE": "Thêm mới quận/huyện",
+          "TABLE": {
+            "NAME": "Tên quận/huyện",
+            "PROVINCE": "Tỉnh/Thành phố"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên quận/huyện",
+            "PROVINCE": "Tỉnh/Thành phố"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách quận/huyện"
+          }
+        },
         "EDUCATION": {
           "TITLE": "Trình độ học vấn",
           "LIST_TITLE": "Danh sách trình độ học vấn",

@@ -12,6 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProvinceService } from '../../province/province.service';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 import { ProvinceFormComponent } from '../../province/form/form.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-district-form',
@@ -36,6 +37,7 @@ export class DistrictFormComponent implements OnInit {
   provinceList: ProvinceViewModel[] = [];
 
   constructor(
+    private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
     private dialogRef: MatDialogRef<DistrictFormComponent>,
     private elm: ElementRef,
@@ -56,7 +58,9 @@ export class DistrictFormComponent implements OnInit {
     });
 
     if (this.dialogData && this.dialogData.isPopup === true) {
-      this.formTitle = this.dialogData?.title;
+      this.translate.get(this.dialogData?.title).subscribe(message => {
+        this.formTitle = message;
+      });
       this.formAction = FormActionStatus.Insert;
       this.getListProvince();
     } else {
@@ -135,13 +139,17 @@ export class DistrictFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#provinceId');
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.DISTRICT.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.DISTRICT.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {
