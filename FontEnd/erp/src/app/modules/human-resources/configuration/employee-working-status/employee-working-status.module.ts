@@ -15,7 +15,7 @@ const routes: Routes = [
     path: '',
     component: EmployeeWorkingStatusComponent,
     pathMatch: 'full',
-    data: { title: 'Tình trạng làm việc' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.WORKING_STATUS.TITLE' }
   }
 ];
 

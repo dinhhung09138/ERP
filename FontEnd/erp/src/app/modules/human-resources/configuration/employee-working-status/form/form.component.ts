@@ -6,6 +6,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { EmployeeWorkingStatusViewModel } from '../employee-working-status.model';
 import { EmployeeWorkingStatusService } from '../employee-working-status.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-employee-working-status-form',
@@ -27,6 +28,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
   item: EmployeeWorkingStatusViewModel;
 
   constructor(
+    private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private workingStatusService: EmployeeWorkingStatusService
@@ -95,13 +97,17 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#code').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.WORKING_STATUS.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.WORKING_STATUS.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

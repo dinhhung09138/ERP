@@ -85,6 +85,24 @@
             "DROPDOWN": "Không thể lấy danh sách trạng thái"
           }
         },
+        "WORKING_STATUS": {
+          "TITLE": "Trạng thái nhân viên",
+          "LIST_TITLE": "Danh sách trạng thái nhân viên",
+          "POPUP_TITLE": "Thêm mới trạng thái nhân viên",
+          "TABLE": {
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách trạng thái nhân viên"
+          }
+        },
         "IDENTIFICATION": {
           "TITLE": "Giấy tờ tùy thân",
           "LIST_TITLE": "Danh sách giấy tờ tùy thân",
