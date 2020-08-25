@@ -8,6 +8,7 @@ import { ProfessionalQualificationViewModel } from '../professional-qualificatio
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-professional-qualification-form',
@@ -28,6 +29,7 @@ export class ProfessionalQualificationFormComponent implements OnInit {
   item: ProfessionalQualificationViewModel;
 
   constructor(
+    public translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
     private dialogRef: MatDialogRef<ProfessionalQualificationFormComponent>,
     private elm: ElementRef,
@@ -97,13 +99,17 @@ export class ProfessionalQualificationFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.QUALIFICATION.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.QUALIFICATION.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

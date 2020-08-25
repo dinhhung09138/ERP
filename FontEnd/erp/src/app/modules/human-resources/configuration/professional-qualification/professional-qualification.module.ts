@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: ProfessionalQualificationComponent,
-    data: { title: 'Trình độ chuyên môn' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.QUALIFICATION.TITLE' }
   }
 ];
 

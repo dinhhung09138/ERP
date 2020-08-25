@@ -34,7 +34,7 @@ export class ProfessionalQualificationService {
         disableClose: true,
         data: {
           isPopup: true,
-          title: 'Thêm chứng chỉ mới',
+          title: 'SCREEN.HR.CONFIGURATION.QUALIFICATION.POPUP_TITLE',
         },
       });
 
