@@ -72,6 +72,7 @@
       "CONFIGURATION": {
         "APPROVE_STATUS": {
           "TITLE": "Trạng thái phê duyệt",
+          "LIST_TITLE": "Danh sách trạng thái phê duyệt",
           "TABLE": {
           },
           "FORM": {
@@ -84,6 +85,120 @@
           },
           "ERROR": {
             "DROPDOWN": "Không thể lấy danh sách trạng thái"
+          }
+        },
+        "NATIONALITY": {
+          "TITLE": "Quốc tịch",
+          "LIST_TITLE": "Danh sách quốc tịch",
+          "POPUP_TITLE": "Thêm mới quốc tịch",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách quốc tịch"
+          }
+        },
+        "QUALIFICATION": {
+          "TITLE": "Trình độ chuyên môn",
+          "LIST_TITLE": "Danh sách trình độ chuyên môn",
+          "POPUP_TITLE": "Thêm mới trình độ chuyên môn",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách trình độ chuyên môn"
+          }
+        },
+        "PROVINCE": {
+          "TITLE": "Tỉnh/Thành phố",
+          "LIST_TITLE": "Danh sách Tỉnh/Thành phố",
+          "POPUP_TITLE": "Thêm mới Tỉnh/Thành phố",
+          "TABLE": {
+            "NAME": "Tên tỉnh/thành phố"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên tỉnh/thành phố"        },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách Tỉnh/Thành phố"
+          }
+        },
+        "RANKING": {
+          "TITLE": "Xếp hạng học tập",
+          "LIST_TITLE": "Danh sách xếp hạng học tập",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách xếp hạng học tập"
+          }
+        },
+        "RELATIONSHIP_TYPE": {
+          "TITLE": "Tôn giáo",
+          "LIST_TITLE": "Danh sách quan hệ gia đình",
+          "TABLE": {
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách mối quan hệ gia đình"
+          }
+        },
+        "RELIGION": {
+          "TITLE": "Tôn giáo",
+          "POPUP_TITLE": "Thêm mới tôn giáo",
+          "LIST_TITLE": "Danh sách tôn giáo",
+          "TABLE": {
+            "NAME": "Tên tôn giáo"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách tôn giáo"
+          }
+        },
+        "WARD": {
+          "TITLE": "Phường/Xã",
+          "LIST_TITLE": "Danh sách phường xã",
+          "TABLE": {
+            "NAME": "Tên phường/xã",
+            "DISTRICT_NAME": "Quận/Huyện",
+            "PROVINCE_NAME": "Tỉnh/Thành phố"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên phường/xã",
+            "DISTRICT_NAME": "Quận/Huyện",
+            "PROVINCE_NAME": "Tỉnh/Thành phố"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách phường/xã"
           }
         }
       }

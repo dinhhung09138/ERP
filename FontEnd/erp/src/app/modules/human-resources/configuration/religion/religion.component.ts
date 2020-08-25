@@ -7,7 +7,6 @@ import { PageEvent } from '@angular/material/paginator';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-religion',
@@ -29,7 +28,6 @@ export class ReligionComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   constructor(
-    public translate: TranslateService,
     private religionService: ReligionService
     ) {
   }

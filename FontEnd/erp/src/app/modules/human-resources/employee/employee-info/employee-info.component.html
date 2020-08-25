@@ -28,7 +28,7 @@
                           tabindex="1" [readonly]="!isEditEmployee" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['employeeCode'].errors?.required">
-                    Vui lòng điền thông tin
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
@@ -38,7 +38,7 @@
                           tabindex="2" [readonly]="!isEditEmployee" autocomplete="off"  />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['firstName'].errors?.required">
-                    Vui lòng điền thông tin
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>
                 <div class="col-sm-4 col-xs-12 form-group">
@@ -48,7 +48,7 @@
                           tabindex="3" [readonly]="!isEditEmployee" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['lastName'].errors?.required">
-                    Vui lòng điền thông tin
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>
               </div>
@@ -77,7 +77,7 @@
                             [tabIndex]="6" [searchable]="true" [selectOnTab]="true"
                             placeholder="Chọn" [readonly]="!isEditEmployee"></ng-select>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
-                    Vui lòng điền thông tin
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>
               </div>
@@ -172,16 +172,16 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <input type="submit" class="btn btn-success" value="Lưu" tabindex="14"
+                  <input type="submit" class="btn btn-success" value="'BUTTON.SAVE' | translate" tabindex="14"
                     *ngIf="isEditEmployee">
                   <button type="button" class="btn btn-success" tabindex="15"
                     *ngIf="!isEditEmployee" (click)="onEditClick()">Cập nhật</button>
                   <button type="button" class="btn btn-danger" tabindex="15"
                     *ngIf="formAction == 2 && isEditEmployee" (click)="onCancelClick()"> Hủy </button>
                   <button type="button" class="btn btn-warning" tabindex="16"
-                    *ngIf="isEditEmployee" (click)="onResetClick()"> Đặt lại </button>
+                    *ngIf="isEditEmployee" (click)="onResetClick()"> {{ 'BUTTON.RESET' | translate }} </button>
                   <button type="button" class="btn btn-secondary" tabindex="17"
-                    (click)="onCloseClick()"> Đóng</button>
+                    (click)="onCloseClick()"> {{ 'BUTTON.CLOSE' | translate }}</button>
                 </div>
               </div>
             </form>
