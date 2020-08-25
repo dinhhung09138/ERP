@@ -15,7 +15,7 @@ const route: Routes = [
   {
     path: '',
     component: CommendationComponent,
-    data: { title: 'Hình thức khen thưởng' }
+    data: { title: 'SCREEN.HR.COMMENDATION.TITLE' }
   }
 ];
 

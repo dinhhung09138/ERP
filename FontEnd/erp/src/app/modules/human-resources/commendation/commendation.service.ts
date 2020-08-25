@@ -2,7 +2,7 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { PagingModel } from './../../../core/models/paging.model';
 import { DialogService } from './../../../core/services/dialog.service';
 import { ApiService } from './../../../core/services/api.service';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
 import { CommendationViewModel } from './commendation.model';
 import { Observable, of } from 'rxjs';

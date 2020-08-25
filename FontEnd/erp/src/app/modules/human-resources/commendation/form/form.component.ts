@@ -7,6 +7,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { CommendationViewModel } from '../commendation.model';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { AppValidator } from 'src/app/core/validators/app.validator';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-commendation-form',
@@ -27,6 +28,7 @@ export class CommendationFormComponent implements OnInit {
   item: CommendationViewModel;
 
   constructor(
+    private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private formatNumber: FormatNumberPipe,
@@ -86,13 +88,17 @@ export class CommendationFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.COMMENDATION.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.COMMENDATION.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {
