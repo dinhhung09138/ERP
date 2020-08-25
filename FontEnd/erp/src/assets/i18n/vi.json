@@ -26,7 +26,7 @@
     "EDIT_ERROR": "Cập nhật dữ liệu thất bại",
     "DELETE_SUCCESS": "Đữ liệu bạn chọn đã được xóa",
     "DELETE_ERROR": "Lỗi khi xóa dữ liệu",
-    "PAGE_NOT_FOUND": "Không tìm thấy liên kết",
+    "PAGE_NOT_FOUND": "Chức năng đang cập nhật",
     "OUT_OF_DATE_DATA": "Dữ liệu đã được thay đổi trước đó, vui lòng cập nhật trước khi tiến hành thao tác mới",
     "CODE_EXISTS": "Mã đã tồn tại"
   },
