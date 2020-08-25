@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: RankingComponent,
-    data: { title: 'Xếp hạng học tập' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.RANKING.TITLE' }
   }
 ];
 

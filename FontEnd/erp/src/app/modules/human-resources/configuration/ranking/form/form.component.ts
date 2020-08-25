@@ -6,6 +6,7 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { RankingViewModel } from '../ranking.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-ranking-form',
@@ -27,6 +28,7 @@ export class RankingFormComponent implements OnInit {
   item: RankingViewModel;
 
   constructor(
+    public translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private rankingService: RankingService) { }
@@ -81,13 +83,17 @@ export class RankingFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.RANKING.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.RANKING.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

@@ -27,7 +27,8 @@ export class RankingComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private rankingService: RankingService) { }
+  constructor(
+    private rankingService: RankingService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
