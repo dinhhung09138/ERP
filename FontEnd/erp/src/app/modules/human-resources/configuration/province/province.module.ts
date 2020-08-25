@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: ProvinceComponent,
-    data: { title: 'Tỉnh/Thành phố' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.PROVINCE.TITLE' }
   }
 ];
 

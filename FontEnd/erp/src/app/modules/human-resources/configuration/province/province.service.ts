@@ -76,7 +76,7 @@ export class ProvinceService {
       disableClose: true,
       data: {
         isPopup: true,
-        title: 'Thêm mới Tỉnh/Thành phố'
+        title: 'SCREEN.HR.CONFIGURATION.PROVINCE.POPUP_TITLE'
       }
     });
 
