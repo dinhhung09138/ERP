@@ -34,7 +34,7 @@ export class EducationService {
         disableClose: true,
         data: {
           isPopup: true,
-          title: 'Thêm mới trình độ học vấn',
+          title: 'SCREEN.HR.CONFIGURATION.EDUCATION.POPUP_TITLE',
         }
       });
 

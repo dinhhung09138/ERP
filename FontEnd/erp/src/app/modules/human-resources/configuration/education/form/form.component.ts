@@ -8,6 +8,7 @@ import { EducationViewModel } from '../education.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-education-form',
@@ -27,6 +28,7 @@ export class EducationFormComponent implements OnInit {
   item: EducationViewModel;
 
   constructor(
+    private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
     private dialogRef: MatDialogRef<EducationFormComponent>,
     private elm: ElementRef,
@@ -93,13 +95,17 @@ export class EducationFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.EDUCATION.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.EDUCATION.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

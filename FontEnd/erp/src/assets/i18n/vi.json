@@ -85,6 +85,24 @@
             "DROPDOWN": "Không thể lấy danh sách trạng thái"
           }
         },
+        "EDUCATION": {
+          "TITLE": "Trình độ học vấn",
+          "LIST_TITLE": "Danh sách trình độ học vấn",
+          "POPUP_TITLE": "Thêm mới trình độ học vấn",
+          "TABLE": {
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách trình độ học vấn"
+          }
+        },
         "WORKING_STATUS": {
           "TITLE": "Trạng thái nhân viên",
           "LIST_TITLE": "Danh sách trạng thái nhân viên",
