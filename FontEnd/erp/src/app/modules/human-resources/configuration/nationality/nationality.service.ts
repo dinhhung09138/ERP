@@ -34,7 +34,7 @@ export class NationalityService {
         disableClose: true,
         data: {
           isPopup: true,
-          title: 'Thêm quốc tịch mới',
+          title: 'SCREEN.HR.CONFIGURATION.NATIONALITY.POPUP_TITLE',
         },
       });
 

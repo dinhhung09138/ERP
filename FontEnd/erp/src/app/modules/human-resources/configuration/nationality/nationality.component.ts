@@ -6,7 +6,6 @@ import { NationalityService } from './nationality.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
-import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
@@ -28,7 +27,8 @@ export class NationalityComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private nationalityService: NationalityService) {
+  constructor(
+    private nationalityService: NationalityService) {
   }
 
   ngOnInit(): void {
