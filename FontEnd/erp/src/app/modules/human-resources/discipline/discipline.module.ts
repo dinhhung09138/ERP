@@ -15,7 +15,7 @@ const route: Routes = [
   {
     path: '',
     component: DisciplineComponent,
-    data: { title: 'Hình thức kỉ luật' }
+    data: { title: 'SCREEN.HR.DISCIPLINE.TITLE' }
   }
 ];
 

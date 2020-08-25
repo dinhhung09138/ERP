@@ -90,6 +90,26 @@
           "DROPDOWN": "Không thể lấy danh sách hình thức khen thưởng"
         }
       },
+      "DISCIPLINE": {
+        "TITLE": "Hình thức kỷ luật",
+        "LIST_TITLE": "Danh sách hình thức kỷ luật",
+        "POPUP_TITLE": "Thêm mới hình thức kỷ luật",
+        "TABLE": {
+          "NAME": "Tên",
+          "MONEY": "Số tiền",
+          "DESCRIPTION": "Mô tả"
+        },
+        "FORM": {
+          "TITLE_NEW": "Thêm mới",
+          "TITLE_EDIT": "Cập nhật",
+          "NAME": "Tên",
+          "MONEY": "Số tiền",
+          "DESCRIPTION": "Mô tả"
+        },
+        "ERROR": {
+          "DROPDOWN": "Không thể lấy danh sách hình thức kỷ luật"
+        }
+      },
       "CONFIGURATION": {
         "APPROVE_STATUS": {
           "TITLE": "Trạng thái phê duyệt",

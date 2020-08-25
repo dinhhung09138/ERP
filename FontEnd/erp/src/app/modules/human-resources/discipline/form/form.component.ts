@@ -7,6 +7,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { DisciplineViewModel } from '../discipline.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-discipline-form',
@@ -28,6 +29,7 @@ export class DisciplineFormComponent implements OnInit {
   item: DisciplineViewModel;
 
   constructor(
+    private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private formatNumber: FormatNumberPipe,
@@ -88,13 +90,17 @@ export class DisciplineFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.DISCIPLINE.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.DISCIPLINE.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {
