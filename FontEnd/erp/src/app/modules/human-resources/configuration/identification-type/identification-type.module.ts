@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: IdentificationTypeComponent,
-    data: { title: 'Giấy tờ tùy thân' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.IDENTIFICATION.TITLE' }
   }
 ];
 

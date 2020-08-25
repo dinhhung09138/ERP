@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { IdentificationTypeService } from '../identification-type.service';
@@ -27,6 +28,7 @@ export class IdentificationTypeFormComponent implements OnInit {
   item: IdentificationTypeViewModel;
 
   constructor(
+    public translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private identificationService: IdentificationTypeService) { }
@@ -81,13 +83,17 @@ export class IdentificationTypeFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.IDENTIFICATION.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.IDENTIFICATION.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

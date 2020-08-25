@@ -87,6 +87,22 @@
             "DROPDOWN": "Không thể lấy danh sách trạng thái"
           }
         },
+        "IDENTIFICATION": {
+          "TITLE": "Giấy tờ tùy thân",
+          "LIST_TITLE": "Danh sách giấy tờ tùy thân",
+          "POPUP_TITLE": "Thêm mới giấy tờ tùy thân",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách giấy tờ tùy thân"
+          }
+        },
         "MODEL_OF_STUDY": {
           "TITLE": "Hình thức đào tạo",
           "LIST_TITLE": "Danh sách hình thức đào tạo",
