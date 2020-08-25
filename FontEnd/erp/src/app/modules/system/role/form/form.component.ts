@@ -5,6 +5,8 @@ import { RoleService } from '../role.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { RoleViewModel } from '../role.model';
+import { TranslateService } from '@ngx-translate/core';
+import { ApplicationConstant } from 'src/app/core/constants/app.constant';
 
 @Component({
   selector: 'app-role-form',
@@ -25,9 +27,12 @@ export class RoleFormComponent implements OnInit {
   item: RoleViewModel;
 
   constructor(
+    private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
-    private roleService: RoleService) {}
+    private roleService: RoleService) {
+      translate.use(ApplicationConstant.defaultLanguage);
+    }
 
   ngOnInit(): void {
     this.roleForm = this.fb.group({
@@ -76,13 +81,17 @@ export class RoleFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.SYSTEM.ROLE.FORM.TITLE_NEW').subscribe(message =>{
+      this.formTitle = message;
+    })
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.SYSTEM.ROLE.FORM.TITLE_EDIT').subscribe(message =>{
+      this.formTitle = message;
+    })
   }
 
   onResetClick() {

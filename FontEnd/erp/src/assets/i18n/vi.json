@@ -250,6 +250,26 @@
           }
         }
       }
+    },
+    "SYSTEM":{
+      "ROLE":{
+        "TITLE":"Nhóm người dùng",
+        "LIST_TITLE":"Danh sách nhóm người dùng",
+        "POPUP_TITLE":"Thêm mới nhóm người dùng",
+        "TABLE":{
+          "NAME":"Tên",
+          "DESCRIPTION":"Mô tả"
+        },
+        "FORM":{
+          "TITLE_NEW":"Thêm mới",
+          "TITLE_EDIT":"Cập nhật",
+          "NAME":"Tên",
+          "DESCRIPTION":"Mô tả"
+        },
+        "ERROR":{
+          "DROPDOWN":"Không thể lấy danh sách nhóm người dùng"
+        }
+      }
     }
   }
 }

@@ -20,8 +20,6 @@ namespace Services.System
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<RoleService> _logger;
 
-        private readonly string ErrorDropdown = "Không thể lấy danh sách nhóm quyền";
-
         public RoleService(
             IERPUnitOfWork context,
             ILogger<RoleService> logger,
@@ -36,13 +34,15 @@ namespace Services.System
             ResponseModel response = new ResponseModel();
             try
             {
-                Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == model.Id);              
+                Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == model.Id);       
+                
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     response.Errors.Add(ParameterMsg.OutOfDateData);
                     return response;
                 }
+
                 md.Deleted = true;
                 md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
@@ -75,8 +75,7 @@ namespace Services.System
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
-                response.Errors.Add(ErrorDropdown);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
                 _logger.LogError(ex.Message, ex);
             }
             return response;
@@ -123,6 +122,12 @@ namespace Services.System
             ResponseModel response = new ResponseModel();
             try
             {
+                if (await _context.RoleRepository.CountAsync(m => m.Id == model.Id) > 0)
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.CodeExists;
+                    return response;
+                }
+
                 Role md = new Role();
 
                 md.Name = model.Name;
@@ -172,12 +177,13 @@ namespace Services.System
             try
             {
                 Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
+
                 md.Name = model.Name;
                 md.Description = model.Description;
                 md.IsActive = model.IsActive;

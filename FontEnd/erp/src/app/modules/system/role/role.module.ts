@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: '',
     component: RoleComponent,
-    data: { title: 'Nhóm người dùng' }
+    data: { title: 'SCREEN.SYSTEM.ROLE.TITLE' }
   }
 ];
 
