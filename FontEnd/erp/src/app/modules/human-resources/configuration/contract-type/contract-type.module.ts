@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: ContractTypeComponent,
-    data: { title: 'Loại hợp đồng' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.TITLE' }
   }
 ];
 
