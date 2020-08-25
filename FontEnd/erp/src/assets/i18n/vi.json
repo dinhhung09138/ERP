@@ -79,9 +79,7 @@
             "TITLE_NEW": "Thêm mới",
             "TITLE_EDIT": "Cập nhật",
             "CODE": "Mã",
-            "NAME": "Tên trạng thái",
-            "PRECEDENCE": "Thứ tự",
-            "STATUS": "Hoạt động"
+            "NAME": "Tên trạng thái"
           },
           "ERROR": {
             "DROPDOWN": "Không thể lấy danh sách trạng thái"
