@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ModelOfStudyService } from '../model-of-study.service';
@@ -27,6 +28,7 @@ export class ModelOfStudyFormComponent implements OnInit {
   item: ModelOfStudyViewModel;
 
   constructor(
+    public translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private modelOfStudyService: ModelOfStudyService) { }
@@ -81,13 +83,17 @@ export class ModelOfStudyFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.MODEL_OF_STUDY.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.MODEL_OF_STUDY.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

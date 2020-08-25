@@ -14,9 +14,9 @@ const route: Routes = [
   {
     path: '',
     component: ModelOfStudyComponent,
-    data: { title: 'Hình thức đào tạo' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.MODEL_OF_STUDY.TITLE' }
   }
-]
+];
 
 @NgModule({
   declarations: [

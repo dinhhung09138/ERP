@@ -87,6 +87,22 @@
             "DROPDOWN": "Không thể lấy danh sách trạng thái"
           }
         },
+        "MODEL_OF_STUDY": {
+          "TITLE": "Hình thức đào tạo",
+          "LIST_TITLE": "Danh sách hình thức đào tạo",
+          "POPUP_TITLE": "Thêm mới hình thức đào tạo",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách hình thức đào tạo"
+          }
+        },
         "NATIONALITY": {
           "TITLE": "Quốc tịch",
           "LIST_TITLE": "Danh sách quốc tịch",
