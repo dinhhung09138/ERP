@@ -76,7 +76,7 @@ export class DistrictService {
       disableClose: true,
       data: {
         isPopup: true,
-        title: 'Thêm mới Quận/Huyện'
+        title: 'SCREEN.HR.CONFIGURATION.DISTRICT.POPUP_TITLE'
       }
     });
 

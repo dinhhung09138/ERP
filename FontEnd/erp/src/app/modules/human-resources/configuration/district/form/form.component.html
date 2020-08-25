@@ -14,7 +14,9 @@
             <form [formGroup]="districtForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Tỉnh/Thành phố</label>
+                  <label class="label">
+                    {{ 'SCREEN.HR.CONFIGURATION.DISTRICT.TABLE.PROVINCE' | translate}}
+                  </label>
                   <div class="input-group">
                     <ng-select id="provinceId" [items]="provinceList" [bindLabel]="'name'" [bindValue]="'id'" [appendTo]="'body'"
                       formControlName="provinceId" tabindex="1" [selectOnTab]="true"
@@ -25,29 +27,43 @@
                       <button class="btn btn-outline-info" type="button" tabindex="2" (click)="onAddNewProvinceClick()">+</button>
                     </div>
                   </div>
-                  <mat-error *ngIf="isSubmit && districtForm.controls['provinceId'].errors?.required">{{ 'VALIDATION_MESSAGE.EMPTY' | translate }}</mat-error>
+                  <mat-error *ngIf="isSubmit && districtForm.controls['provinceId'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Tên quận/huyện</label>
+                  <label class="label">
+                    {{ 'SCREEN.HR.CONFIGURATION.DISTRICT.FORM.NAME' | translate}}
+                  </label>
                   <mat-form-field class="form-control">
                     <input matInput formControlName="name" maxlength="100" tabindex="3" autocomplete="off"/>
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && districtForm.controls['name'].errors?.required">{{ 'VALIDATION_MESSAGE.EMPTY' | translate }}</mat-error>
+                  <mat-error *ngIf="isSubmit && districtForm.controls['name'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                  <label class="label">Thứ tự</label>
+                  <label class="label">
+                    {{ 'TABLE.LIST.PRECEDENCE' | translate }}
+                  </label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="precedence" maxlength="3" tabindex="4" />
+                    <input matInput appPrecedence formControlName="precedence" maxlength="3" tabindex="4" />
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.required">{{ 'VALIDATION_MESSAGE.EMPTY' | translate }}</mat-error>
-                  <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.number">Precedence number is required</mat-error>
+                  <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="isSubmit && districtForm.controls['precedence'].errors?.number">
+                    {{ 'VALIDATION_MESSAGE.PRECEDENCE_INVALID' | translate }}
+                  </mat-error>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                  <label class="label">Hoạt động</label>
+                  <label class="label">
+                    {{ 'TABLE.LIST.STATUS' | translate }}
+                  </label>
                   <div class="input-group">
                     <mat-checkbox class="ml-10" tabindex="5" formControlName="isActive">
                     </mat-checkbox>
@@ -56,9 +72,13 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" value="'BUTTON.SAVE' | translate" tabindex="6">
-                  <button type="button" class="btn btn-warning" tabindex="7" (click)="onResetClick()"> {{ 'BUTTON.RESET' | translate }} </button>
-                  <button type="button" class="btn btn-secondary" tabindex="8" (click)="onCloseClick()"> {{ 'BUTTON.CLOSE' | translate }} </button>
+                  <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="6">
+                  <button type="button" class="btn btn-warning" tabindex="7" (click)="onResetClick()">
+                    {{ 'BUTTON.RESET' | translate }}
+                  </button>
+                  <button type="button" class="btn btn-secondary" tabindex="8" (click)="onCloseClick()">
+                    {{ 'BUTTON.CLOSE' | translate }}
+                  </button>
                 </div>
               </div>
             </form>

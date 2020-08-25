@@ -14,7 +14,7 @@ const route: Routes = [
   {
     path: '',
     component: EducationComponent,
-    data: { title: 'Trình độ chuyên môn' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.EDUCATION.TITLE' }
   }
 ];
 

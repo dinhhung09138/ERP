@@ -16,7 +16,7 @@ const route: Routes = [
   {
     path: '',
     component: DistrictComponent,
-    data: { title: 'Quận/Huyện' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.DISTRICT.TITLE' }
   }
 ];
 
