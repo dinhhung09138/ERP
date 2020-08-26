@@ -14,7 +14,7 @@
             <form [formGroup]="roleForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Tên</label>
+                  <label class="label">{{'SCREEN.SYSTEM.ROLE.FORM.NAME'| translate}}</label>
                   <mat-form-field class="form-control">
                     <input matInput id="name" formControlName="name" maxlength="50" tabindex="1" autocomplete="off" />
                   </mat-form-field>
@@ -23,14 +23,14 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label class="label">Mô tả</label>
+                  <label class="label">{{'SCREEN.SYSTEM.ROLE.FORM.DESCRIPTION'| translate}}</label>
                   <textarea rows="3" formControlName="description" maxlength="255" class="form-control"
                     tabindex="2"></textarea>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                  <label class="label">Hoạt động</label>
+                  <label class="label">{{ 'TABLE.LIST.STATUS' | translate }}</label>
                   <div class="input-group">
                     <mat-checkbox class="ml-10" tabindex="4" formControlName="isActive">
                     </mat-checkbox>
@@ -39,7 +39,7 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" value="'BUTTON.SAVE' | translate" tabindex="5">
+                  <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="5">
                   <button type="button" class="btn btn-warning" tabindex="6" (click)="onResetClick()"> {{ 'BUTTON.RESET' | translate }} </button>
                   <button type="button" class="btn btn-secondary" tabindex="7" (click)="onCloseClick()"> {{ 'BUTTON.CLOSE' | translate }} </button>
                 </div>

@@ -6,6 +6,8 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ContractTypeViewModel } from '../contract-type.model';
 import { AppValidator } from '../../../../../core/validators/app.validator';
+import { TranslateService } from '@ngx-translate/core';
+import { ApplicationConstant } from 'src/app/core/constants/app.constant';
 
 @Component({
   selector: 'app-hr-contract-type-form',
@@ -26,9 +28,13 @@ export class ContractTypeFormComponent implements OnInit {
   item: ContractTypeViewModel;
 
   constructor(
+    private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
-    private contractTypeService: ContractTypeService) { }
+    private contractTypeService: ContractTypeService) 
+    {
+      translate.use(ApplicationConstant.defaultLanguage);
+    }
 
   ngOnInit(): void {
     this.contractTypeForm = this.fb.group({
@@ -102,13 +108,17 @@ export class ContractTypeFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#code').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_NEW').subscribe(message =>{
+      this.formTitle = message;
+    })
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_EDIT').subscribe(message =>{
+      this.formTitle = message;
+    })
   }
 
   onResetClick() {

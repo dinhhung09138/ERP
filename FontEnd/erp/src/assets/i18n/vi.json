@@ -362,6 +362,47 @@
           "ERROR": {
             "DROPDOWN": "Không thể lấy danh sách phường/xã"
           }
+        },
+        "CONTRACT_TYPE":{
+          "TITLE":"Loại hợp đồng",
+          "LIST_TITLE":"Danh sách loại hợp đồng",
+          "TABLE":{
+            "NAME":"Tên",
+            "DESCRIPTION":"Mô tả",
+            "INSURANCE":"Đóng bảo hiểm",
+            "LEAVEDATE":"Được nghỉ phép"
+          },
+          "FORM":{
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME":"Tên loại hợp đồng",
+            "DESCRIPTION":"Mô tả",
+            "INSURANCE":"Đóng bảo hiểm",
+            "LEAVEDATE":"Được nghỉ phép"
+          },
+          "ERROR":{
+            "DROPDOWN": "Không thể lấy danh sách hợp đồng"
+          }
+        }
+      }
+    },
+    "SYSTEM":{
+      "ROLE":{
+        "TITLE":"Nhóm người dùng",
+        "LIST_TITLE":"Danh sách nhóm người dùng",
+        "POPUP_TITLE":"Thêm mới nhóm người dùng",
+        "TABLE":{
+          "NAME":"Tên",
+          "DESCRIPTION":"Mô tả"
+        },
+        "FORM":{
+          "TITLE_NEW":"Thêm mới",
+          "TITLE_EDIT":"Cập nhật",
+          "NAME":"Tên",
+          "DESCRIPTION":"Mô tả"
+        },
+        "ERROR":{
+          "DROPDOWN":"Không thể lấy danh sách nhóm người dùng"
         }
       }
     }
