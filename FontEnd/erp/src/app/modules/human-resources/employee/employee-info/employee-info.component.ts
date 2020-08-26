@@ -13,7 +13,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { Title } from '@angular/platform-browser';
 import { ApplicationConstant } from '../../../../core/constants/app.constant';
-import { PersonalInfoComponent } from './personal-info/personal-info.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -87,6 +87,7 @@ export class EmployeeInfoComponent implements OnInit {
   ];
 
   constructor(
+    public translate: TranslateService,
     private fb: FormBuilder,
     private elm: ElementRef,
     private router: Router,
@@ -231,13 +232,11 @@ export class EmployeeInfoComponent implements OnInit {
       return;
     }
     this.fileToUpload = files.item(0);
-    console.log(this.fileToUpload);
 
     const fileReader: FileReader = new FileReader();
     fileReader.readAsDataURL(this.fileToUpload);
     fileReader.onload = (event: any) => {
       this.fileUrl = event.target.result;
-      console.log(this.fileUrl);
     };
 
   }
@@ -264,11 +263,15 @@ export class EmployeeInfoComponent implements OnInit {
 
   private setTitle(name?: string) {
     if (name) {
-      this.panelTitle = 'Nhân viên: ' + name;
-      this.titleService.setTitle(name + ' | ' + ApplicationConstant.siteTitle);
+      this.translate.get('SCREEN.HR.EMPLOYEE.TITLE').subscribe(message => {
+        this.panelTitle = message + ': ' + name;
+        this.titleService.setTitle(name + ' | ' + ApplicationConstant.siteTitle);
+      });
     } else {
-      this.panelTitle = 'Thên nhân viên mới';
-      this.titleService.setTitle('Thên nhân viên mới' + ' | ' + ApplicationConstant.siteTitle);
+      this.translate.get('SCREEN.HR.EMPLOYEE.FORM.TITLE_NEW').subscribe(message => {
+        this.panelTitle = message;
+        this.titleService.setTitle(message + ' | ' + ApplicationConstant.siteTitle);
+      });
     }
   }
 

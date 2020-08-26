@@ -34,7 +34,6 @@ const routes: Routes = [
   {
     path: '',
     component: EmployeeInfoComponent,
-    pathMatch: 'Thông tin nhân viên',
   }
 ];
 

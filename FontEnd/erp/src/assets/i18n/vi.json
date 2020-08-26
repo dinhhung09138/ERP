@@ -8,7 +8,8 @@
   },
   "VALIDATION_MESSAGE": {
     "EMPTY": "Vui lòng điền thông tin",
-    "DATE_INVALID": "",
+    "DATE_INVALID": "Ngày nhập vào không hợp lệ",
+    "EMAIL_INVALID": "Email không hợp lệ",
     "MONEY_INVALID": "Số tiền không hợp lệ",
     "PRECEDENCE_INVALID": "Số thứ tự không hợp lệ"
   },
@@ -108,6 +109,42 @@
         },
         "ERROR": {
           "DROPDOWN": "Không thể lấy danh sách hình thức kỷ luật"
+        }
+      },
+      "EMPLOYEE": {
+        "TITLE": "Nhân viên",
+        "LIST_TITLE": "Danh sách nhân viên",
+        "POPUP_TITLE": "Thêm nhân viên mới",
+        "TABLE": {
+          "CODE": "Mã NV",
+          "NAME": "Họ tên",
+          "EMAIL": "Email",
+          "PHONE": "SDT",
+          "STATUS": "Trạng thái nhân viên",
+          "WORKING_DATE": "Ngày làm việc chính thức"
+        },
+        "FORM": {
+          "TITLE_NEW": "Thêm nhân viên mới",
+          "TITLE_EDIT": "Cập nhật",
+          "CODE": "Mã NV",
+          "FIRST_NAME": "Họ",
+          "LAST_NAME": "Tên",
+          "NAME": "Họ tên",
+          "EMAIL": "Email",
+          "BADGE_CARD_NUMBER": "Mã số thẻ",
+          "BADGE_CARD_DATE": "Ngày cấp thẻ",
+          "POSITION": "Vị trí công việc",
+          "FINGER_SIGN_NUMBER": "Mã vân tay",
+          "FINGER_SIGN_DATE": "Ngày cấp",
+          "DEPARTMENT": "Phòng ban",
+          "PHONE": "Số điện thoại",
+          "PROBATION_DATE": "Ngày thử việc",
+          "BASIC_SALARY": "Lương cơ bản",
+          "STATUS": "Trạng thái nhân viên",
+          "WORKING_DATE": "Ngày làm việc chính thức"
+        },
+        "ERROR": {
+          "DROPDOWN": "Không thể lấy danh sách nhân viên"
         }
       },
       "CONFIGURATION": {

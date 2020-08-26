@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: '',
     component: EmployeeListComponent,
-    data: { title: 'Danh sách nhân viên' }
+    data: { title: 'SCREEN.HR.EMPLOYEE.TITLE' }
   },
 ];
 

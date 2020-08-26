@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { PageEvent } from '@angular/material/paginator';
@@ -24,7 +23,15 @@ export class EmployeeListComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName = ['employeeCode', 'fullName', 'workingEmail', 'workingPhone', 'employeeWorkingStatusName', 'startWorkingDate', 'action'];
+  listColumnsName = [
+    'employeeCode',
+    'fullName',
+    'workingEmail',
+    'workingPhone',
+    'employeeWorkingStatusName',
+    'startWorkingDate',
+    'isActive',
+    'action'];
   dataSource = new MatTableDataSource();
 
   constructor(

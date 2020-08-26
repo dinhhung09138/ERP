@@ -11,7 +11,6 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./employee-list/employee-list.module').then(m => m.EmployeeListModule),
-        data: { title: 'Danh sách nhân viên' },
       },
       {
         path: 'new',
