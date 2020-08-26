@@ -122,12 +122,6 @@ namespace Services.System
             ResponseModel response = new ResponseModel();
             try
             {
-                if (await _context.RoleRepository.CountAsync(m => m.Id == model.Id) > 0)
-                {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.CodeExists;
-                    return response;
-                }
-
                 Role md = new Role();
 
                 md.Name = model.Name;
