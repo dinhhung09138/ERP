@@ -20,7 +20,6 @@ namespace Service.Training
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<TrainingCourseService> _logger;
 
-        private readonly string ErrorDropdown = "Không thể lấy danh sách khóa đào tạo";
         public TrainingCourseService(
             IERPUnitOfWork context,
             ILogger<TrainingCourseService> logger,
@@ -90,8 +89,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                response.Errors.Add(ErrorDropdown);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
                 _logger.LogError(ex.Message, ex);
             }
             return response;
@@ -103,11 +101,6 @@ namespace Service.Training
             try
             {
                 TrainingCourse md = await _context.TrainingCourseRepository.FirstOrDefaultAsync(m => m.Id == id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
 
                 TrainingCourseModel model = new TrainingCourseModel()
                 {
@@ -166,14 +159,9 @@ namespace Service.Training
             {
                 TrainingCourse md = await _context.TrainingCourseRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -205,14 +193,9 @@ namespace Service.Training
             {
                 TrainingCourse md = await _context.TrainingCourseRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 

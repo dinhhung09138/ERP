@@ -133,14 +133,9 @@ namespace Service.Training
             {
                 AppraiseSection md = await _context.AppraiseSectionRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -171,14 +166,9 @@ namespace Service.Training
             {
                 AppraiseSection md = await _context.AppraiseSectionRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 

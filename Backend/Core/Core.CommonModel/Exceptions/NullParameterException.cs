@@ -7,7 +7,7 @@ namespace Core.CommonModel.Exceptions
 {
     public class NullParameterException : Exception
     {
-        public NullParameterException() : base(ParameterMsg.ParameterInvalid)
+        public NullParameterException() : base()
         {
 
         }

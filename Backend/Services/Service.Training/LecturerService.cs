@@ -19,8 +19,7 @@ namespace Service.Training
     {
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<LecturerService> _logger;
-
-        private readonly string ErrorDropdown = "Không thể lấy danh sách giảng viên";
+        
         public LecturerService(
             IERPUnitOfWork context,
             ILogger<LecturerService> logger,
@@ -97,8 +96,7 @@ namespace Service.Training
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                response.Errors.Add(ErrorDropdown);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
                 _logger.LogError(ex.Message, ex);
             }
             return response;
@@ -185,14 +183,9 @@ namespace Service.Training
             {
                 Lecturer md = await _context.LecturerRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -230,14 +223,9 @@ namespace Service.Training
             {
                 Lecturer md = await _context.LecturerRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 

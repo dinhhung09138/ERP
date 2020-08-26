@@ -20,8 +20,6 @@ namespace Service.HR
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<DisciplineService> _logger;
 
-        private readonly string ErrorDropdown = "Không thể lấy danh sách kỷ luật";
-
         public DisciplineService(
             IERPUnitOfWork context,
             ILogger<DisciplineService> logger,
@@ -88,8 +86,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                response.Errors.Add(ErrorDropdown);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
                 _logger.LogError(ex.Message, ex);
             }
             return response;
@@ -101,11 +98,6 @@ namespace Service.HR
             try
             {
                 Discipline md = await _context.DisciplineRepository.FirstOrDefaultAsync(m => m.Id == id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
 
                 DisciplineModel model = new DisciplineModel()
                 {
@@ -160,14 +152,9 @@ namespace Service.HR
             {
                 Discipline md = await _context.DisciplineRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -197,14 +184,9 @@ namespace Service.HR
             {
                 Discipline md = await _context.DisciplineRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 

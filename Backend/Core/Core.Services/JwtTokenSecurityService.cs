@@ -45,11 +45,6 @@ namespace Core.Services
         {
             try
             {
-                if (user == null)
-                {
-                    throw new Exception(ParameterMsg.ParameterInvalid);
-                }
-
                 var jwtSecurityToken = GetJwtSecurityToken(user);
 
                 var token = new JwtTokenModel
@@ -81,11 +76,6 @@ namespace Core.Services
         {
             try
             {
-                if (refreshTokenModel == null)
-                {
-                    throw new Exception(ParameterMsg.ParameterInvalid);
-                }
-
                 var cacheTokenModel = _cache.Get(refreshTokenModel.Token) as TokenModel;
 
                 // Remove current cache
@@ -108,11 +98,6 @@ namespace Core.Services
         {
             try
             {
-                if (token == null)
-                {
-                    throw new Exception(ParameterMsg.ParameterInvalid);
-                }
-
                 _cache.Remove(token.Token);
 
                 return true;

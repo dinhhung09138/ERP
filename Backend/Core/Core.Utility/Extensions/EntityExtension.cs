@@ -27,11 +27,7 @@ namespace Core.Utility.Extensions
         {
             IOrderedQueryable<T> result = null;
             var firstSort = sorts.FirstOrDefault(s => !s.IsMultiOrder);
-            if (firstSort == null)
-            {
-                throw new NullReferenceException(ParameterMsg.ParameterInvalid);
-            }
-
+            
             result = SortBy(source, firstSort);
 
             foreach (var sort in sorts.Where(s => s.IsMultiOrder))

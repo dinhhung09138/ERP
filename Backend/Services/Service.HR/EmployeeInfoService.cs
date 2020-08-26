@@ -178,14 +178,9 @@ namespace Service.HR
             {
                 EmployeeInfo md = await _context.EmployeeInfoRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -221,11 +216,6 @@ namespace Service.HR
             {
                 EmployeeInfo md = await _context.EmployeeInfoRepository.FirstOrDefaultAsync(m => m.EmployeeId == employeeId);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
-
                 md.FirstName = firstName;
                 md.LastName = lastName;
                 md.UpdateBy = base.UserId;
@@ -252,14 +242,9 @@ namespace Service.HR
             {
                 EmployeeInfo md = await _context.EmployeeInfoRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 

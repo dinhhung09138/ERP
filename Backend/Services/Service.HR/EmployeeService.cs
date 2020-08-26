@@ -25,9 +25,6 @@ namespace Service.HR
         private readonly ILogger<EmployeeService> _logger;
         private readonly IImageServerService _imageServerService;
 
-        private readonly string ErrorDropdown = "Không thể lấy danh sách nhân viên";
-        private readonly string CodeExist = "Mã nhân viên đã tồn tại";
-
         public EmployeeService(
             IERPUnitOfWork context,
             IEmployeeInfoService employeeInfoService,
@@ -114,8 +111,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                response.Errors.Add(ErrorDropdown);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
                 _logger.LogError(ex.Message, ex);
             }
             return response;
@@ -187,8 +183,7 @@ namespace Service.HR
             {
                 if (await _context.EmployeeRepository.CountAsync(m => m.EmployeeCode == model.EmployeeCode) > 0)
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(CodeExist);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.CodeExists;
                     return response;
                 }
 
@@ -274,14 +269,9 @@ namespace Service.HR
 
                 Employee md = await _context.EmployeeRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -350,14 +340,9 @@ namespace Service.HR
             {
                 Employee md = await _context.EmployeeRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 

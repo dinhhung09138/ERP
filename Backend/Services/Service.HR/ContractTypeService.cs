@@ -20,9 +20,6 @@ namespace Service.HR
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<ContractTypeService> _logger;
 
-        private readonly string ErrorDropdown = "Không thể lấy danh sách loại quan hệ gia đình";
-        private readonly string CodeExist = "Mã loại hợp đồng đã tồn tại";
-
         public ContractTypeService(
             IERPUnitOfWork context,
             ILogger<ContractTypeService> logger,
@@ -92,8 +89,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                response.Errors.Add(ErrorDropdown);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
                 _logger.LogError(ex.Message, ex);
             }
             return response;
@@ -105,11 +101,6 @@ namespace Service.HR
             try
             {
                 ContractType md = await _context.ContractTypeRepository.FirstOrDefaultAsync(m => m.Id == id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
 
                 ContractTypeModel model = new ContractTypeModel()
                 {
@@ -141,8 +132,7 @@ namespace Service.HR
             {
                 if (await _context.ContractTypeRepository.CountAsync(m => m.Code == model.Code) > 0)
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(CodeExist);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.CodeExists;
                     return response;
                 }
 
@@ -178,14 +168,9 @@ namespace Service.HR
             {
                 ContractType md = await _context.ContractTypeRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -217,14 +202,9 @@ namespace Service.HR
             {
                 ContractType md = await _context.ContractTypeRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 

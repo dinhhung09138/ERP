@@ -7,7 +7,7 @@ namespace Core.CommonModel.Exceptions
 {
     public class ItemNotFoundException : Exception
     {
-        public ItemNotFoundException() : base(ParameterMsg.ItemNotFound)
+        public ItemNotFoundException() : base()
         {
 
         }

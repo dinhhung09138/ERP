@@ -24,7 +24,6 @@ namespace Service.HR
         private readonly ILogger<ProfessionalQualificationService> _logger;
 
         private readonly string CacheKey = "qualification_data";
-        private readonly string ErrorDropdown = "Không thể lấy danh sách trình độ chuyên môn";
 
         public ProfessionalQualificationService(
             IERPUnitOfWork context,
@@ -105,8 +104,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                response.Errors.Add(ErrorDropdown);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
                 _logger.LogError(ex.Message, ex);
             }
             return response;
@@ -173,14 +171,9 @@ namespace Service.HR
             {
                 ProfessionalQualification md = await _context.ProfessionalQualificationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -211,14 +204,9 @@ namespace Service.HR
             {
                 ProfessionalQualification md = await _context.ProfessionalQualificationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 

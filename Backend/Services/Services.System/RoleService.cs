@@ -39,7 +39,6 @@ namespace Services.System
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
                     response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
                     return response;
                 }
 

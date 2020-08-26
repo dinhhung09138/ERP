@@ -24,8 +24,6 @@ namespace Service.HR
         private readonly ILogger<EmployeeWorkingStatusService> _logger;
 
         private readonly string CacheKey = "working_status_data";
-        private readonly string ErrorDropdown = "Không thể lấy danh sách tình trạng nhân viên";
-        private readonly string CodeExist = "Mã trạng thái nhân viên đã tồn tại";
 
         public EmployeeWorkingStatusService(
             IERPUnitOfWork context, 
@@ -109,8 +107,7 @@ namespace Service.HR
             }
             catch (Exception ex)
             {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                response.Errors.Add(ErrorDropdown);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
                 _logger.LogError(ex.Message, ex);
             }
             return response;
@@ -149,13 +146,6 @@ namespace Service.HR
 
             try
             {
-                if (await _context.EmployeeWorkingStatusRepository.CountAsync(m => m.Code == model.Code) > 0)
-                {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(CodeExist);
-                    return response;
-                }
-
                 EmployeeWorkingStatus md = new EmployeeWorkingStatus();
 
                 md.Code = model.Code;
@@ -188,14 +178,9 @@ namespace Service.HR
             {
                 EmployeeWorkingStatus md = await _context.EmployeeWorkingStatusRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
@@ -227,14 +212,9 @@ namespace Service.HR
             {
                 EmployeeWorkingStatus md = await _context.EmployeeWorkingStatusRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-                    response.Errors.Add(ParameterMsg.OutOfDateData);
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
                     return response;
                 }
 
