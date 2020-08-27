@@ -312,7 +312,7 @@
           }
         },
         "RELATIONSHIP_TYPE": {
-          "TITLE": "Tôn giáo",
+          "TITLE": "Quan hệ gia đình",
           "LIST_TITLE": "Danh sách quan hệ gia đình",
           "TABLE": {
             "NAME": "Tên",
