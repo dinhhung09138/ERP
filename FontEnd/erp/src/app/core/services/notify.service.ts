@@ -2,7 +2,6 @@ import { NotifyComponent } from './../../shared/components/notify/notify.compone
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ApplicationConstant } from '../constants/app.constant';
 
 @Injectable()
 export class NotifyService {
@@ -10,7 +9,6 @@ export class NotifyService {
   constructor(
     private snackBar: MatSnackBar,
     private translate: TranslateService) {
-      translate.use(ApplicationConstant.defaultLanguage);
     }
 
   openDialogSuccess() {

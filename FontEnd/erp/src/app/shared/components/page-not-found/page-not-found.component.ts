@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { ApplicationConstant } from '../../../core/constants/app.constant';
 
 @Component({
   selector: 'app-page-not-found',
@@ -9,8 +7,7 @@ import { ApplicationConstant } from '../../../core/constants/app.constant';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor(public translate: TranslateService) {
-    translate.use(ApplicationConstant.defaultLanguage);
+  constructor() {
   }
 
   ngOnInit(): void {

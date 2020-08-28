@@ -23,7 +23,7 @@ export class RoleFormComponent implements OnInit {
   formTitle = '';
   isSubmit = false;
   isLoading = false;
-  roleForm : FormGroup;
+  roleForm: FormGroup;
   item: RoleViewModel;
 
   constructor(
@@ -31,7 +31,6 @@ export class RoleFormComponent implements OnInit {
     private elm: ElementRef,
     private fb: FormBuilder,
     private roleService: RoleService) {
-      translate.use(ApplicationConstant.defaultLanguage);
     }
 
   ngOnInit(): void {
@@ -126,7 +125,7 @@ export class RoleFormComponent implements OnInit {
     if(this.roleForm.invalid){
       return;
     }
-    this.isLoading = true;  
+    this.isLoading = true;
 
     this.roleService.save(this.roleForm.getRawValue(), this.formAction).subscribe((res:ResponseModel)=>{
       if(res.responseStatus == ResponseStatus.success){
@@ -135,7 +134,7 @@ export class RoleFormComponent implements OnInit {
       }
       this.isLoading = false;
       this.isSubmit = false;
-    });  
+    });
   }
   private setDataToForm(data: RoleViewModel) {
     this.roleForm.get('id').setValue(data.id);

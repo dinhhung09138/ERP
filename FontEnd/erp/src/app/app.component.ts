@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private activatedRoute: ActivatedRoute,
     private loadingService: LoadingService) {
-      translate.use(ApplicationConstant.defaultLanguage);
+
 
       this.router.events.subscribe((e: RouterEvent) => {
         this.navigationInterceptor(e);

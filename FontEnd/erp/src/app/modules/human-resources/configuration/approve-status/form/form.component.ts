@@ -33,7 +33,6 @@ export class ApproveStatusFormComponent implements OnInit {
     private elm: ElementRef,
     private fb: FormBuilder,
     private approveStatusService: ApproveStatusService) {
-      translate.use(ApplicationConstant.defaultLanguage);
     }
 
   ngOnInit(): void {

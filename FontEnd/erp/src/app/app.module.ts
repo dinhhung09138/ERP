@@ -10,6 +10,7 @@ import { SessionContext } from './core/session.context';
 import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AppLoadModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
+    SharedModule,
   ],
   providers: [
     Title,

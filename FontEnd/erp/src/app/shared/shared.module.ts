@@ -22,8 +22,9 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../core/factories/http.loader.factory';
+import { ApplicationConstant } from '../core/constants/app.constant';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import { HttpLoaderFactory } from '../core/factories/http.loader.factory';
     },
     // Services
     ApiService,
+    TranslateService,
   ],
   exports: [
     // Modules
@@ -99,4 +101,12 @@ import { HttpLoaderFactory } from '../core/factories/http.loader.factory';
     PrecedenceDirective,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+
+  constructor(private translate: TranslateService) {
+    if (ApplicationConstant.defaultLanguage) {
+      translate.use(ApplicationConstant.defaultLanguage);
+      console.log(ApplicationConstant.defaultLanguage);
+    }
+  }
+ }

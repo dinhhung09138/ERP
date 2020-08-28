@@ -1,7 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
-import { ApplicationConstant } from '../../core/constants/app.constant';
 
 
 @Injectable()
@@ -9,7 +8,6 @@ export class AppMatPaginatorIntl extends MatPaginatorIntl{
 
   constructor(private translate: TranslateService) {
     super();
-    translate.use(ApplicationConstant.defaultLanguage);
     this.initMessage();
   }
 

@@ -7,8 +7,7 @@ import { DialogService } from './services/dialog.service';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppLoadService } from './services/app-load.service';
-import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from './factories/http.loader.factory';
+
 
 
 /**
@@ -19,16 +18,8 @@ import { HttpLoaderFactory } from './factories/http.loader.factory';
     HttpClientModule,
     MatSnackBarModule,
     MatDialogModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      }
-    }),
   ],
   providers: [
-    TranslateService,
     AppLoadService,
     DialogService,
     NotifyService,

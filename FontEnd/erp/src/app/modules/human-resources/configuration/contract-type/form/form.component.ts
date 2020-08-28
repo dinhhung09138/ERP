@@ -31,9 +31,7 @@ export class ContractTypeFormComponent implements OnInit {
     private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
-    private contractTypeService: ContractTypeService) 
-    {
-      translate.use(ApplicationConstant.defaultLanguage);
+    private contractTypeService: ContractTypeService) {
     }
 
   ngOnInit(): void {

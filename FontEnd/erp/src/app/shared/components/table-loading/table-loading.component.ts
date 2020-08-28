@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { ApplicationConstant } from '../../../core/constants/app.constant';
 
 @Component({
   selector: 'app-table-loading',
@@ -10,8 +8,7 @@ import { ApplicationConstant } from '../../../core/constants/app.constant';
 export class TableLoadingComponent implements OnInit {
 
   @Input() Show = false;
-  constructor(public translate: TranslateService) {
-    translate.use(ApplicationConstant.defaultLanguage);
+  constructor() {
   }
 
   ngOnInit(): void {

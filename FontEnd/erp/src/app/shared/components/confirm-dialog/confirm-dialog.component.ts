@@ -14,11 +14,9 @@ import { ApplicationConstant } from '../../../core/constants/app.constant';
 export class ConfirmDialogComponent implements OnInit {
 
   constructor(
-    public translate: TranslateService,
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface
   ) {
-    translate.use(ApplicationConstant.defaultLanguage);
   }
 
   ngOnInit(): void {
