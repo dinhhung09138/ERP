@@ -29,56 +29,6 @@ namespace Services.System
             _logger = logger;
             base._httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(RoleModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            try
-            {
-                Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == model.Id);       
-                
-                if (!md.RowVersion.SequenceEqual(model.RowVersion))
-                {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
-                    return response;
-                }
-
-                md.Deleted = true;
-                md.UpdateBy = base.UserId;
-                md.UpdateDate = DateTime.Now;
-
-                _context.RoleRepository.Update(md);
-
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return response;
-        }
-
-        public async Task<ResponseModel> DropDownSelection()
-        {
-            ResponseModel response = new ResponseModel();
-            try
-            {
-                var query = from m in _context.RoleRepository.Query()
-                            where !m.Deleted && m.IsActive
-                            select new RoleModel()
-                            {
-                                Id = m.Id,
-                                Name = m.Name
-                            };
-                response.Result = await query.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
-                _logger.LogError(ex.Message, ex);
-            }
-            return response;
-        }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
@@ -116,27 +66,24 @@ namespace Services.System
             return response;
         }
 
-        public async Task<ResponseModel> Insert(RoleModel model)
+        public async Task<ResponseModel> DropDownSelection()
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Role md = new Role();
-
-                md.Name = model.Name;
-                md.Description = model.Description;
-                md.CreateDate = DateTime.Now;
-                md.Deleted = false;
-                md.IsActive = model.IsActive;
-                md.CreateBy = base.UserId;
-
-                await _context.RoleRepository.AddAsync(md).ConfigureAwait(true);
-
-                await _context.SaveChangesAsync();
+                var query = from m in _context.RoleRepository.Query()
+                            where !m.Deleted && m.IsActive
+                            select new RoleModel()
+                            {
+                                Id = m.Id,
+                                Name = m.Name
+                            };
+                response.Result = await query.ToListAsync();
             }
             catch (Exception ex)
             {
-                throw ex;
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
+                _logger.LogError(ex.Message, ex);
             }
             return response;
         }
@@ -156,6 +103,31 @@ namespace Services.System
                     RowVersion = md.RowVersion
                 };
                 response.Result = model;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> Insert(RoleModel model)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Role md = new Role();
+
+                md.Name = model.Name;
+                md.Description = model.Description;
+                md.CreateDate = DateTime.Now;
+                md.Deleted = false;
+                md.IsActive = model.IsActive;
+                md.CreateBy = base.UserId;
+
+                await _context.RoleRepository.AddAsync(md).ConfigureAwait(true);
+
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -193,5 +165,35 @@ namespace Services.System
             }
             return response;
         }
+
+        public async Task<ResponseModel> Delete(RoleModel model)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+
+                if (!md.RowVersion.SequenceEqual(model.RowVersion))
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.OutOfDateData;
+                    return response;
+                }
+
+                md.Deleted = true;
+                md.UpdateBy = base.UserId;
+                md.UpdateDate = DateTime.Now;
+
+                _context.RoleRepository.Update(md);
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return response;
+        }
+
     }
 }
