@@ -1,5 +1,9 @@
 ﻿using APIGateway.Fliters;
+using Core.Services;
+using Core.Services.Interfaces;
+using Database.Sql.ERP;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -43,6 +47,24 @@ namespace APIGateway.Extensions
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:SecretKey"])),
                     };
                 });
+            return services;
+        }
+
+        public static IServiceCollection AddCaching(this IServiceCollection services)
+        {
+            services.AddScoped<IMemoryCachingService, MemoryCachingService>();
+            services.AddResponseCaching(options =>
+            {
+                options.SizeLimit = (1024 * 1024);
+                options.UseCaseSensitivePaths = true;
+            });
+            return services;
+        }
+
+        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration config)
+        {
+            services.AddDbContext<ERPContext>(option => option.UseSqlServer(config.GetConnectionString("ERPConnection")), ServiceLifetime.Scoped);
+            services.AddScoped<IERPUnitOfWork, ERPUnitOfWork>();
             return services;
         }
     }

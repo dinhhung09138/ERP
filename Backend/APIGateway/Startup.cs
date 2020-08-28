@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,22 +7,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using API.Security;
-using Core.Services.Interfaces;
 using APIGateway.Extensions;
-using Core.Services;
 using API.HR;
 using API.Training;
-using Database.Sql.ERP;
 using Core.Utility.Middlewares;
 using Core.Utility.Filters;
 using API.System;
 using API.Common;
-using Microsoft.Extensions.FileProviders;
-using System.IO;
 
 namespace APIGateway
 {
@@ -57,15 +47,10 @@ namespace APIGateway
             {
                 options.Filters.Add(new AuthenticationFilter());
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-           
+
             // Add JWT Authentication
             services.AddJwtToken(Configuration);
 
-            services.AddResponseCaching(options =>
-            {
-                options.SizeLimit = (1024 * 1024);
-                options.UseCaseSensitivePaths = true;
-            });
 
             // Staic file
             services.AddDirectoryBrowser();
@@ -75,13 +60,12 @@ namespace APIGateway
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Caching
-            services.AddScoped<IMemoryCachingService, MemoryCachingService>();
+            services.AddCaching();
             // Use filter (Not working with Cors origin)
             services.AddFilter();
 
             // Declare connect to sql server
-            services.AddDbContext<ERPContext>(option => option.UseSqlServer(Configuration.GetConnectionString("ERPConnection")), ServiceLifetime.Scoped);
-            services.AddScoped<IERPUnitOfWork, ERPUnitOfWork>();
+            services.AddDatabase(Configuration);
 
             //Use Security services
             services.AddCommonService(Configuration);
