@@ -32,16 +32,8 @@ namespace APIGateway
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Polity
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy", builder =>
-                {
-                    builder.WithOrigins(Configuration["Cors"])
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials();
-                });
-            });
+            services.AddCrossOriginResourceSharing(Configuration);
+
             services.AddControllers().AddNewtonsoftJson();
             services.AddMvc(options =>
             {
@@ -94,11 +86,10 @@ namespace APIGateway
 
             //Use Authentication
             app.UseAuthentication();
+            app.UseAuthorization();
 
             // Staic file
             app.UseStaticFilesFromCustomLocation(Configuration);
-
-            app.UseAuthorization();
 
             app.UseHttpsRedirection();
 

@@ -67,5 +67,20 @@ namespace APIGateway.Extensions
             services.AddScoped<IERPUnitOfWork, ERPUnitOfWork>();
             return services;
         }
+
+        public static IServiceCollection AddCrossOriginResourceSharing(this IServiceCollection services, IConfiguration config)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.WithOrigins(config["Cors"])
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials();
+                });
+            });
+            return services;
+        }
     }
 }
