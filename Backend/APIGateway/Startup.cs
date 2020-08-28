@@ -128,25 +128,7 @@ namespace APIGateway
             app.UseAuthentication();
 
             // Staic file
-            app.UseDefaultFiles();
-            string path = env.WebRootPath;
-            app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(path, "File")
-                    ),
-                RequestPath = new PathString("/File"),
-            });
-
-            app.UseDirectoryBrowser(new DirectoryBrowserOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(path, "File")
-                    //Path.Combine(env.WebRootPath, "File")
-                    ),
-                RequestPath = new PathString("/File"),
-            });
+            app.UseStaticFilesFromCustomLocation(Configuration);
 
             app.UseAuthorization();
 
