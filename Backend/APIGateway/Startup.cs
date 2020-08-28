@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -61,21 +59,7 @@ namespace APIGateway
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
            
             // Add JWT Authentication
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    // Gets or Sets the parameters used to validate identity token.
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,  // Will be validated during token validation
-                        ValidateAudience = true,    // To  control if the audience will be validated during token validation.
-                        ValidateLifetime = true,    // To control if the lifetime will be validated during token validation
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"], // Represents a valid issuer that will be used to check against the token's issuer
-                        ValidAudience = Configuration["Jwt:Audience"], //Represents a valid audience that will be used to check against the token's audience.
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
-                    };
-                });
+            services.AddJwtToken(Configuration);
 
             services.AddResponseCaching(options =>
             {
