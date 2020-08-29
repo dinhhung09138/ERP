@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[HR_EmployeeInfo](
 	[DateOfBirth] [datetime] NULL,
 	[MaterialStatusId] [int] NULL,
 	[ReligionId] [int] NULL,
-	[NationId] [int] NULL,
+	[EthnicityId] [int] NULL,
 	[NationalityId] [int] NULL,
 	[AcademicLevelId] [int] NULL,
 	[ProfessionalQualificationId] [int] NULL,

@@ -83,7 +83,7 @@ namespace Service.HR
                                 DateOfBirth = m.DateOfBirth,
                                 ReligionId = m.ReligionId,
                                 MaterialStatusId = m.MaterialStatusId,
-                                NationId = m.NationId,
+                                EthnicityId = m.EthnicityId,
                                 NationalityId = m.NationalityId,
                                 AcademicLevelId = m.AcademicLevelId,
                                 ProfessionalQualificationId = m.ProfessionalQualificationId,
@@ -117,7 +117,7 @@ namespace Service.HR
                                 DateOfBirth = m.DateOfBirth,
                                 ReligionId = m.ReligionId,
                                 MaterialStatusId = m.MaterialStatusId,
-                                NationId = m.NationId,
+                                EthnicityId = m.EthnicityId,
                                 NationalityId = m.NationalityId,
                                 AcademicLevelId = m.AcademicLevelId,
                                 ProfessionalQualificationId = m.ProfessionalQualificationId,
@@ -149,7 +149,7 @@ namespace Service.HR
                 md.DateOfBirth = model.DateOfBirth;
                 md.MaterialStatusId = model.MaterialStatusId;
                 md.ReligionId = model.ReligionId;
-                md.NationId = model.NationId;
+                md.EthnicityId = model.EthnicityId;
                 md.NationalityId = model.NationalityId;
                 md.AcademicLevelId = model.AcademicLevelId;
                 md.ProfessionalQualificationId = model.ProfessionalQualificationId;
@@ -189,7 +189,7 @@ namespace Service.HR
                 md.DateOfBirth = model.DateOfBirth;
                 md.MaterialStatusId = model.MaterialStatusId;
                 md.ReligionId = model.ReligionId;
-                md.NationId = model.NationId;
+                md.EthnicityId = model.EthnicityId;
                 md.NationalityId = model.NationalityId;
                 md.AcademicLevelId = model.AcademicLevelId;
                 md.ProfessionalQualificationId = model.ProfessionalQualificationId;

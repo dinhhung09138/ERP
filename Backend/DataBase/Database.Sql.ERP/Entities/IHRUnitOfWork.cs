@@ -23,7 +23,7 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<EmployeeWorkingStatus> EmployeeWorkingStatusRepository { get; }
         ITableGenericRepository<IdentificationType> IdentificationTypeRepository { get; }
         ITableGenericRepository<ModelOfStudy> ModelOfStudyRepository { get; }
-        ITableGenericRepository<Nation> NationRepository { get; }
+        ITableGenericRepository<Ethnicity> NationRepository { get; }
         ITableGenericRepository<Nationality> NationalityRepository { get; }
         ITableGenericRepository<Ranking> RankingRepository { get; }
         ITableGenericRepository<RelationshipType> RelationshipTypeRepository { get; }

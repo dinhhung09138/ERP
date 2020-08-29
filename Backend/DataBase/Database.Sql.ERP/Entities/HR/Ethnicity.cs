@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("HR_Nation")]
-    public class Nation
+    [Table("HR_Ethnicity")]
+    public class Ethnicity
     {
         [Key]
         [Column(TypeName = "int")]

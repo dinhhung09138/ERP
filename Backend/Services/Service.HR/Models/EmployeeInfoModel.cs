@@ -27,7 +27,7 @@ namespace Service.HR.Models
 
         public int? ReligionId { get; set; }
 
-        public int? NationId { get; set; }
+        public int? EthnicityId { get; set; }
 
         public int? NationalityId { get; set; }
 

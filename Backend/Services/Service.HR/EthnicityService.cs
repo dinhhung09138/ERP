@@ -1,6 +1,4 @@
-﻿using Core.CommonMessage;
-using Core.CommonModel;
-using Core.CommonModel.Exceptions;
+﻿using Core.CommonModel;
 using Core.Services;
 using Core.Services.Interfaces;
 using Database.Sql.ERP;
@@ -16,19 +14,19 @@ using System.Threading.Tasks;
 
 namespace Service.HR
 {
-    public class NationService : BaseService, INationService
+    public class EthnicityService : BaseService, IEthnicityService
     {
 
         private readonly IERPUnitOfWork _context;
         private readonly IMemoryCachingService _memoryCachingService;
-        private readonly ILogger<NationService> _logger;
+        private readonly ILogger<EthnicityService> _logger;
 
-        private readonly string CacheKey = "nation_data";
+        private readonly string CacheKey = "ethnicity_data";
 
-        public NationService(
+        public EthnicityService(
             IERPUnitOfWork context,
             IMemoryCachingService memoryCachingService,
-            ILogger<NationService> logger,
+            ILogger<EthnicityService> logger,
             IHttpContextAccessor httpContext)
         {
             _context = context;
@@ -45,7 +43,7 @@ namespace Service.HR
                 var query = from m in _context.NationRepository.Query()
                             where !m.Deleted
                             orderby m.Precedence ascending
-                            select new NationModel
+                            select new EthnicityModel
                             {
                                 Id = m.Id,
                                 Name = m.Name,
@@ -59,7 +57,7 @@ namespace Service.HR
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text));
                 }
 
-                BaseListModel<NationModel> listItems = new BaseListModel<NationModel>();
+                BaseListModel<EthnicityModel> listItems = new BaseListModel<EthnicityModel>();
                 listItems.TotalItems = await _context.NationRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
@@ -77,7 +75,7 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var cacheData = _memoryCachingService.GetList<NationModel>(CacheKey);
+                var cacheData = _memoryCachingService.GetList<EthnicityModel>(CacheKey);
 
                 if (cacheData != null)
                 {
@@ -88,7 +86,7 @@ namespace Service.HR
                     var query = from m in _context.NationRepository.Query()
                                 where m.IsActive && !m.Deleted
                                 orderby m.Precedence ascending
-                                select new NationModel
+                                select new EthnicityModel
                                 {
                                     Id = m.Id,
                                     Name = m.Name,
@@ -97,7 +95,7 @@ namespace Service.HR
                     var list = await query.ToListAsync();
                     response.Result = list;
 
-                    _memoryCachingService.Set<NationModel>(list, CacheKey, 60, 0, 0);
+                    _memoryCachingService.Set<EthnicityModel>(list, CacheKey, 60, 0, 0);
                 }
                     
             }
@@ -116,7 +114,7 @@ namespace Service.HR
             {
                 var query = from m in _context.NationRepository.Query()
                             where m.Id == id
-                            select new NationModel
+                            select new EthnicityModel
                             {
                                 Id = m.Id,
                                 Name = m.Name,
@@ -134,13 +132,13 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Insert(NationModel model)
+        public async Task<ResponseModel> Insert(EthnicityModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Nation md = new Nation();
+                Ethnicity md = new Ethnicity();
 
                 md.Name = model.Name;
                 md.Precedence = model.Precedence;
@@ -162,13 +160,13 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Update(NationModel model)
+        public async Task<ResponseModel> Update(EthnicityModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Nation md = await _context.NationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Ethnicity md = await _context.NationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
@@ -195,13 +193,13 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(NationModel model)
+        public async Task<ResponseModel> Delete(EthnicityModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                Nation md = await _context.NationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Ethnicity md = await _context.NationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {

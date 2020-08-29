@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Service.HR.Models
 {
-    public class NationModel : BaseModel
+    public class EthnicityModel : BaseModel
     {
         public int Id { get; set; }
 

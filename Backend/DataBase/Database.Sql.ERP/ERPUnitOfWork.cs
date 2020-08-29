@@ -248,12 +248,12 @@ namespace Database.Sql.ERP
         }
 
 
-        private ITableGenericRepository<Nation> _nationRepository;
-        public ITableGenericRepository<Nation> NationRepository
+        private ITableGenericRepository<Ethnicity> _nationRepository;
+        public ITableGenericRepository<Ethnicity> NationRepository
         {
             get
             {
-                return _nationRepository = _nationRepository ?? new TableGenericRepository<Nation>(_context);
+                return _nationRepository = _nationRepository ?? new TableGenericRepository<Ethnicity>(_context);
             }
         }
 

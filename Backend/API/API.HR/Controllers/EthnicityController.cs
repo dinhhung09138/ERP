@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace API.HR.Controllers
 {
-    [Route("api/hr/nation")]
+    [Route("api/hr/ethnicity")]
     [ApiController]
-    public class NationController : ControllerBase
+    public class EthnicityController : ControllerBase
     {
-        private readonly INationService _nationService;
+        private readonly IEthnicityService _nationService;
 
-        public NationController(INationService nationService)
+        public EthnicityController(IEthnicityService nationService)
         {
             _nationService = nationService;
         }
@@ -39,21 +39,21 @@ namespace API.HR.Controllers
         }
 
         [HttpPost, Route("insert")]
-        public async Task<ResponseModel> Insert([FromBody] NationModel model)
+        public async Task<ResponseModel> Insert([FromBody] EthnicityModel model)
         {
             var response = await _nationService.Insert(model);
             return response;
         }
 
         [HttpPut, Route("update")]
-        public async Task<ResponseModel> Update([FromBody] NationModel model)
+        public async Task<ResponseModel> Update([FromBody] EthnicityModel model)
         {
             var response = await _nationService.Update(model);
             return response;
         }
 
         [HttpPut, Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] NationModel model)
+        public async Task<ResponseModel> Delete([FromBody] EthnicityModel model)
         {
             var response = await _nationService.Delete(model);
             return response;

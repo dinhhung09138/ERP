@@ -62,7 +62,7 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<ModelOfStudy> ModelOfStudy { get; set; }
 
-        public virtual DbSet<Nation> Nation { get; set; }
+        public virtual DbSet<Ethnicity> Nation { get; set; }
 
         public virtual DbSet<Nationality> Nationality { get; set; }
 
@@ -186,7 +186,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<ModelOfStudy>(entity => {
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
-            modelBuilder.Entity<Nation>(entity => {
+            modelBuilder.Entity<Ethnicity>(entity => {
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Nationality>(entity => {

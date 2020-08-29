@@ -37,7 +37,7 @@ namespace Database.Sql.ERP.Entities.HR
         public int? ReligionId { get; set; }
 
         [Column(TypeName = "int")]
-        public int? NationId { get; set; }
+        public int? EthnicityId { get; set; }
 
         [Column(TypeName = "int")]
         public int? NationalityId { get; set; }
