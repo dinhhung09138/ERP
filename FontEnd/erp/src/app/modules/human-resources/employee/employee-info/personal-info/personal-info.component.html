@@ -6,14 +6,16 @@
           <h1>Nhân viên: {{ Employee?.fullName }}</h1>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right" *ngIf="Employee">
-          <input type="submit" class="btn btn-success" value="'BUTTON.SAVE' | translate" tabindex="14"
-            *ngIf="isEdit">
-          <button type="button" class="btn btn-success" tabindex="15"
-            *ngIf="!isEdit" (click)="onEditClick()">Cập nhật</button>
-          <button type="button" class="btn btn-danger" tabindex="15"
-            *ngIf="isEdit" (click)="onCancelClick()"> Hủy </button>
-          <button type="button" class="btn btn-warning" tabindex="16"
-            *ngIf="isEdit" (click)="onResetClick()"> {{ 'BUTTON.RESET' | translate }} </button>
+          <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="14" *ngIf="isEdit">
+          <button type="button" class="btn btn-success" tabindex="15" *ngIf="!isEdit" (click)="onEditClick()">
+          {{ 'BUTTON.EDIT' | translate }}
+          </button>
+          <button type="button" class="btn btn-danger" tabindex="15" *ngIf="isEdit" (click)="onCancelClick()">
+          {{ 'BUTTON.CANCEL' | translate }}
+          </button>
+          <button type="button" class="btn btn-warning" tabindex="16" *ngIf="isEdit" (click)="onResetClick()">
+          {{ 'BUTTON.RESET' | translate }}
+          </button>
         </div>
         <div class="col-12">
           <hr/>

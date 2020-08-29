@@ -58,5 +58,12 @@ namespace Database.Sql.ERP.Entities.Common
         [Column(TypeName = "datetime")]
         [Required]
         public DateTime CreateDate { get; set; }
+
+        [Column(TypeName = "bit")]
+        [Required]
+        public bool WaitForDeleted { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime? DeletedDate { get; set; }
     }
 }

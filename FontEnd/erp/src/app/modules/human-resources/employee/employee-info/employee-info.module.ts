@@ -34,6 +34,7 @@ const routes: Routes = [
   {
     path: '',
     component: EmployeeInfoComponent,
+    data: { title: 'SCREEN.HR.EMPLOYEE.FORM.TITLE' }
   }
 ];
 

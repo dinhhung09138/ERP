@@ -50,55 +50,6 @@ namespace Service.Common
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseModel> SaveEmployeeAvatar(FileModel model)
-        {
-            ResponseModel response = new ResponseModel();
-
-            try
-            {
-                var filePath = Path.Combine(configPath).ToLower();
-                Database.Sql.ERP.Entities.Common.File md = new Database.Sql.ERP.Entities.Common.File();
-
-                string fileName = Guid.NewGuid().ToString().Replace("-", "").ToLower();
-                string ext = Path.GetExtension(model.File.FileName);
-
-                string folderPath = Path.Combine(filePath, model.EmployeeCode).ToLower();
-
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-
-                string fullPath = Path.Combine(filePath, model.EmployeeCode, $"{fileName}{ext}").ToLower();
-
-                md.FileName = model.File.FileName;
-                md.FilePath = await Save(model.File, fullPath);
-                md.FilePath128 = ResizeAndSave(model.File, fullPath, 128, 128);
-                md.FilePath64 = ResizeAndSave(model.File, fullPath, 64, 64);
-                md.FilePath32 = ResizeAndSave(model.File, fullPath, 32, 32);
-                md.Extension = ext;
-                md.MineType = model.File.ContentType;
-                md.Size = model.File.Length;
-                md.SystemFileName = $"{fileName}{ext}";
-                md.CreateBy = base.UserId;
-                md.CreateDate = DateTime.Now;
-
-                await _context.FileRepository.AddAsync(md);
-                await _context.SaveChangesAsync();
-
-                response.Result = md.Id;
-
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message, ex);
-                response.Errors.Add(ex.Message);
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-            }
-
-            return response;
-        }
-
         public async Task<ResponseModel> Item(int id)
         {
             ResponseModel response = new ResponseModel();
@@ -134,12 +85,112 @@ namespace Service.Common
 
         public async Task<ResponseModel> Insert(FileModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+
+            try
+            {
+                var filePath = Path.Combine(configPath).ToLower();
+                Database.Sql.ERP.Entities.Common.File md = new Database.Sql.ERP.Entities.Common.File();
+
+                string fileName = Guid.NewGuid().ToString().Replace("-", "").ToLower();
+                string ext = Path.GetExtension(model.File.FileName);
+
+                string folderPath = Path.Combine(filePath, model.EmployeeCode).ToLower();
+
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                string fullPath = Path.Combine(filePath, model.EmployeeCode, $"{fileName}{ext}").ToLower();
+
+                md.FileName = model.File.FileName;
+                md.FilePath = await Save(model.File, fullPath);
+                md.FilePath128 = ResizeAndSave(model.File, fullPath, 128, 128);
+                md.FilePath64 = ResizeAndSave(model.File, fullPath, 64, 64);
+                md.FilePath32 = ResizeAndSave(model.File, fullPath, 32, 32);
+                md.Extension = ext;
+                md.MineType = model.File.ContentType;
+                md.Size = model.File.Length;
+                md.SystemFileName = $"{fileName}{ext}";
+                md.CreateBy = base.UserId;
+                md.CreateDate = DateTime.Now;
+                md.WaitForDeleted = false;
+
+                await _context.FileRepository.AddAsync(md);
+                await _context.SaveChangesAsync();
+
+                response.Result = md.Id;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                response.Errors.Add(ex.Message);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+            }
+
+            return response;
         }
 
-        public Task<ResponseModel> Update(FileModel model)
+        public async Task<ResponseModel> Update(FileModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+
+            try
+            {
+
+                var filePath = Path.Combine(configPath).ToLower();
+                Database.Sql.ERP.Entities.Common.File md = new Database.Sql.ERP.Entities.Common.File();
+
+                string fileName = Guid.NewGuid().ToString().Replace("-", "").ToLower();
+                string ext = Path.GetExtension(model.File.FileName);
+
+                string folderPath = Path.Combine(filePath, model.EmployeeCode).ToLower();
+
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                string fullPath = Path.Combine(filePath, model.EmployeeCode, $"{fileName}{ext}").ToLower();
+
+                md.FileName = model.File.FileName;
+                md.FilePath = await Save(model.File, fullPath);
+                md.FilePath128 = ResizeAndSave(model.File, fullPath, 128, 128);
+                md.FilePath64 = ResizeAndSave(model.File, fullPath, 64, 64);
+                md.FilePath32 = ResizeAndSave(model.File, fullPath, 32, 32);
+                md.Extension = ext;
+                md.MineType = model.File.ContentType;
+                md.Size = model.File.Length;
+                md.SystemFileName = $"{fileName}{ext}";
+                md.CreateBy = base.UserId;
+                md.CreateDate = DateTime.Now;
+
+                await _context.FileRepository.AddAsync(md);
+                await _context.SaveChangesAsync();
+
+                response.Result = md.Id;
+
+                // Delete current file
+                if (model.Id > 0)
+                {
+                    Database.Sql.ERP.Entities.Common.File currentFile = await _context.FileRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+
+                    currentFile.WaitForDeleted = true;
+
+                    _context.FileRepository.Update(currentFile);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                response.Errors.Add(ex.Message);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+            }
+
+            return response;
         }
 
         public async Task<ResponseModel> Delete(FileModel model)
@@ -225,5 +276,6 @@ namespace Service.Common
                 return string.Empty;
             }
         }
+
     }
 }

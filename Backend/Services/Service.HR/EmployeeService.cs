@@ -215,7 +215,7 @@ namespace Service.HR
                         EmployeeCode = model.EmployeeCode
                     };
 
-                    response = await _imageServerService.SaveEmployeeAvatar(fileModel);
+                    response = await _imageServerService.Insert(fileModel);
 
                     if (response.ResponseStatus != Core.CommonModel.Enums.ResponseStatus.Success)
                     {
@@ -294,10 +294,11 @@ namespace Service.HR
                     FileModel fileModel = new FileModel()
                     {
                         File = model.File,
-                        EmployeeCode = model.EmployeeCode
+                        EmployeeCode = model.EmployeeCode,
+                        Id = md.AvatarFileId.HasValue ? md.AvatarFileId.Value : 0
                     };
 
-                    response = await _imageServerService.Insert(fileModel);
+                    response = await _imageServerService.Update(fileModel);
 
                     if (response.ResponseStatus != Core.CommonModel.Enums.ResponseStatus.Success)
                     {

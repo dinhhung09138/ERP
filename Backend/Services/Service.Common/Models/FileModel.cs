@@ -34,6 +34,10 @@ namespace Service.Common.Models
 
         public string FilePath128 { get; set; }
 
+        public bool WaitForDeleted { get; set; }
+
+        public DateTime? DeletedDate { get; set; }
+
         public IFormFile? File { get; set; }
     }
 }

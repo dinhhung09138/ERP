@@ -265,12 +265,12 @@ export class EmployeeInfoComponent implements OnInit {
     if (name) {
       this.translate.get('SCREEN.HR.EMPLOYEE.TITLE').subscribe(message => {
         this.panelTitle = message + ': ' + name;
-        this.titleService.setTitle(name + ' | ' + ApplicationConstant.siteTitle);
+        this.titleService.setTitle(name + ApplicationConstant.siteTitle);
       });
     } else {
       this.translate.get('SCREEN.HR.EMPLOYEE.FORM.TITLE_NEW').subscribe(message => {
         this.panelTitle = message;
-        this.titleService.setTitle(message + ' | ' + ApplicationConstant.siteTitle);
+        this.titleService.setTitle(message + ApplicationConstant.siteTitle);
       });
     }
   }

@@ -16,6 +16,8 @@ CREATE TABLE [dbo].[Common_File](
 	[FilePath128] [varchar](300) NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[CreateBy] [int] NOT NULL,
+	[WaitForDeleted] [bit] NOT NULL,
+	[DeletedDate] [datetime] NULL,
  CONSTRAINT [PK_Common_File] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
