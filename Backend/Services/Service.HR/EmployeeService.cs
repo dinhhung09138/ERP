@@ -215,7 +215,7 @@ namespace Service.HR
                         EmployeeCode = model.EmployeeCode
                     };
 
-                    response = await _imageServerService.Insert(fileModel);
+                    response = await _imageServerService.SaveEmployeeAvatar(fileModel);
 
                     if (response.ResponseStatus != Core.CommonModel.Enums.ResponseStatus.Success)
                     {

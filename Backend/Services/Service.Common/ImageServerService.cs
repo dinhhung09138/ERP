@@ -7,15 +7,11 @@ using Service.Common.Interfaces;
 using Service.Common.Models;
 using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Core.CommonModel.Exceptions;
 using Core.Utility.Extensions;
 using System.IO;
 using System.Drawing;
-using Database.Sql.ERP.Entities.Common;
-using Microsoft.VisualBasic;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Service.Common
 {
@@ -39,8 +35,8 @@ namespace Service.Common
             _logger = logger;
             base._httpContext = httpContext;
 
-            serverPath = _config["FileUpload:ServerFile:ServerPath"];
-            configPath = _config["FileUpload:ServerFile:ImagePath"];
+            serverPath = _config["FileUpload:ServerFile:ServerPath"].ToLower();
+            configPath = _config["FileUpload:ServerFile:ImagePath"].ToLower();
 
             if (!Directory.Exists(Path.Combine(configPath)))
             {
@@ -52,6 +48,55 @@ namespace Service.Common
         public Task<ResponseModel> GetList(FilterModel filter)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<ResponseModel> SaveEmployeeAvatar(FileModel model)
+        {
+            ResponseModel response = new ResponseModel();
+
+            try
+            {
+                var filePath = Path.Combine(configPath).ToLower();
+                Database.Sql.ERP.Entities.Common.File md = new Database.Sql.ERP.Entities.Common.File();
+
+                string fileName = Guid.NewGuid().ToString().Replace("-", "").ToLower();
+                string ext = Path.GetExtension(model.File.FileName);
+
+                string folderPath = Path.Combine(filePath, model.EmployeeCode).ToLower();
+
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                string fullPath = Path.Combine(filePath, model.EmployeeCode, $"{fileName}{ext}").ToLower();
+
+                md.FileName = model.File.FileName;
+                md.FilePath = await Save(model.File, fullPath);
+                md.FilePath128 = ResizeAndSave(model.File, fullPath, 128, 128);
+                md.FilePath64 = ResizeAndSave(model.File, fullPath, 64, 64);
+                md.FilePath32 = ResizeAndSave(model.File, fullPath, 32, 32);
+                md.Extension = ext;
+                md.MineType = model.File.ContentType;
+                md.Size = model.File.Length;
+                md.SystemFileName = $"{fileName}{ext}";
+                md.CreateBy = base.UserId;
+                md.CreateDate = DateTime.Now;
+
+                await _context.FileRepository.AddAsync(md);
+                await _context.SaveChangesAsync();
+
+                response.Result = md.Id;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                response.Errors.Add(ex.Message);
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
+            }
+
+            return response;
         }
 
         public async Task<ResponseModel> Item(int id)
@@ -89,54 +134,7 @@ namespace Service.Common
 
         public async Task<ResponseModel> Insert(FileModel model)
         {
-            if (model.File == null)
-            {
-                throw new NullParameterException();
-            }
-
-            ResponseModel response = new ResponseModel();
-
-            try
-            {
-                var filePath = Path.Combine(configPath);
-                Database.Sql.ERP.Entities.Common.File md = new Database.Sql.ERP.Entities.Common.File();
-
-                string fileName = Guid.NewGuid().ToString().Replace("-", "").ToLower();
-                string ext = Path.GetExtension(model.File.FileName);
-
-                if (!Directory.Exists(Path.Combine(filePath, model.EmployeeCode)))
-                {
-                    Directory.CreateDirectory(Path.Combine(filePath, model.EmployeeCode));
-                }
-
-                string fullPath = Path.Combine(filePath, model.EmployeeCode, $"{fileName}{ext}");
-
-                md.FileName = model.File.Name;
-                md.FilePath = await Save(model.File, fullPath, $"{fileName}{ext}");
-                md.FilePath128 = ResizeAndSave(model.File, fullPath, 128, 128);
-                md.FilePath64 = ResizeAndSave(model.File, fullPath, 64, 64);
-                md.FilePath32 = ResizeAndSave(model.File, fullPath, 32, 32);
-                md.Extension = ext;
-                md.MineType = model.File.ContentType;
-                md.Size = model.File.Length;
-                md.SystemFileName = $"{fileName}{ext}";
-                md.CreateBy = base.UserId;
-                md.CreateDate = DateTime.Now;
-
-                await _context.FileRepository.AddAsync(md);
-                await _context.SaveChangesAsync();
-
-                response.Result = md.Id;
-
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError(ex.Message, ex);
-                response.Errors.Add(ex.Message);
-                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Warning;
-            }
-
-            return response;
+            throw new NotImplementedException();
         }
 
         public Task<ResponseModel> Update(FileModel model)
@@ -187,12 +185,12 @@ namespace Service.Common
             return response;
         }
 
-        private async Task<string> Save(IFormFile file, string fullPath, string fileName)
+        private async Task<string> Save(IFormFile file, string fullPath)
         {
             try
             {
                 await file.CopyToAsync(new FileStream(fullPath, FileMode.CreateNew, FileAccess.Write));
-                return $"{configPath}/{fileName}";
+                return fullPath.Replace(@"\", @"/");
             }
             catch (Exception ex)
             {
@@ -208,7 +206,7 @@ namespace Service.Common
                 string fileName = Guid.NewGuid().ToString().Replace("-", "").ToLower();
                 string ext = Path.GetExtension(file.FileName);
 
-                string fullPath = Path.Combine(path, $"{fileName}{ext}");
+                string fullPath = Path.Combine(path, $"{fileName}{ext}").ToLower();
 
                 Image pic = new Bitmap(file.OpenReadStream());
 
@@ -219,7 +217,7 @@ namespace Service.Common
                         result.Save(fullPath);
                     }
                 }
-                return $"{configPath}{fileName}{ext}";
+                return fullPath.Replace(@"\", @"/");
             }
             catch (Exception ex)
             {
