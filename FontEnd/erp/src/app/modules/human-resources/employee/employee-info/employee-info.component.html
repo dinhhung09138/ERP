@@ -11,8 +11,8 @@
         <div class="row">
           <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             <div class="employee-img">
-              <img [src]="fileUrl" />
-              <div class="upload-btn-wrapper">
+              <img [src]="fileUrl || '/assets/images/no-image.png'" />
+              <div class="upload-btn-wrapper" *ngIf="isEditEmployee">
                 <button class="btn btn-file"><i class="fa fa-upload" aria-hidden="true"></i></button>
                 <input type="file" (change)="onSelectFile($event.target.files)" />
               </div>

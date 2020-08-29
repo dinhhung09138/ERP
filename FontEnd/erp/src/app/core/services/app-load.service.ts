@@ -37,10 +37,10 @@ export class AppLoadService {
   getApplicationConfig() {
     return this.http.get<ApplicationSettingInterface>(this.configPath + 'application.config.json').toPromise().then(response => {
       ApplicationConstant.defaultLanguage = response.defaultLanguage;
+      this.translate.use(ApplicationConstant.defaultLanguage);
       this.translate.get('SITE_TITLE').subscribe(message => {
         ApplicationConstant.siteTitle = message;
       });
-      this.translate.use(ApplicationConstant.defaultLanguage);
     });
   }
 

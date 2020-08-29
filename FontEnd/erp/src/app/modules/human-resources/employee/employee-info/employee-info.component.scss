@@ -3,17 +3,16 @@ $primary-background-color: #1A6E64;
 @import '../../../../../assets/style/plugins/vtabs/b4vtabs.scss';
 
 .employee-img {
-  background-color: aquamarine;
   width: 200px;
   height: 200px;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 5px;
   position: relative;
 }
 
 .employee-img img {
-  max-width: 190px;
-  max-height: 190px;
+  max-width: 200px;
+  max-height: 200px;
   margin: 0 auto;
   display: block;
 }
