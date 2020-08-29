@@ -8,6 +8,7 @@ import { EthnicityViewModel } from './../ethnicity.model';
 import { Component, OnInit, ElementRef, EventEmitter, Output, ViewChild, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-ethnicity-form',
@@ -29,6 +30,7 @@ export class EthnicityFormComponent implements OnInit {
   item: EthnicityViewModel;
 
   constructor(
+    private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
     private dialogRef: MatDialogRef<EthnicityFormComponent>,
     private elm: ElementRef,
@@ -46,7 +48,9 @@ export class EthnicityFormComponent implements OnInit {
 
     if (this.dialogData?.isPopup === true) {
       this.formAction = FormActionStatus.Insert;
-      this.formTitle = this.dialogData?.title;
+      this.translate.get(this.dialogData?.title).subscribe(message => {
+        this.formTitle = message;
+      });
     }
 
     this.initFormControl(this.formAction);
@@ -99,13 +103,17 @@ export class EthnicityFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.CONFIGURATION.ETHNICITY.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.CONFIGURATION.ETHNICITY.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: '',
     component: EthnicityComponent,
-    data: { title: 'Dân tộc' }
+    data: { title: 'SCREEN.HR.CONFIGURATION.ETHNICITY.TITLE' }
   }
 ];
 

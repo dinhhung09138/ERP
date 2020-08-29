@@ -43,7 +43,7 @@ export class EthnicityService {
       disableClose: true,
       data: {
         isPopup: true,
-        title: 'Thêm dân tộc mới'
+        title: 'SCREEN.HR.CONFIGURATION.ETHNICITY.POPUP_TITLE'
       },
     });
 

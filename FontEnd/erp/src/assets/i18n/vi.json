@@ -67,6 +67,9 @@
     }
   },
   "SCREEN": {
+    "SIDEBAR": {
+
+    },
     "HR": {
       "COMMENDATION": {
         "TITLE": "Hình thức khen thưởng",
@@ -145,6 +148,7 @@
         }
       },
       "CONFIGURATION": {
+        "TITLE": "Thiết lập",
         "APPROVE_STATUS": {
           "TITLE": "Trạng thái phê duyệt",
           "LIST_TITLE": "Danh sách trạng thái phê duyệt",
@@ -323,6 +327,22 @@
           },
           "ERROR": {
             "DROPDOWN": "Không thể lấy danh sách mối quan hệ gia đình"
+          }
+        },
+        "ETHNICITY": {
+          "TITLE": "Dân tộc",
+          "POPUP_TITLE": "Thêm mới dân tộc",
+          "LIST_TITLE": "Danh sách dân tộc",
+          "TABLE": {
+            "NAME": "Tên dân tộc"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách dân tộc"
           }
         },
         "RELIGION": {
