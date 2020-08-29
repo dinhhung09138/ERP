@@ -1,22 +1,22 @@
-import { NationFormComponent } from './form/form.component';
+import { EthnicityFormComponent } from './form/form.component';
 import { MatSort } from '@angular/material/sort';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { NationService } from './nation.service';
+import { EthnicityService } from './ethnicity.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-hr-nation',
-  templateUrl: './nation.component.html',
-  styleUrls: ['./nation.component.css']
+  selector: 'app-hr-ethnicity',
+  templateUrl: './ethnicity.component.html',
+  styleUrls: ['./ethnicity.component.css']
 })
-export class NationComponent implements OnInit {
+export class EthnicityComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(NationFormComponent) form: NationFormComponent;
+  @ViewChild(EthnicityFormComponent) form: EthnicityFormComponent;
 
   isLoading = false;
 
@@ -27,7 +27,7 @@ export class NationComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private nationService: NationService) {
+  constructor(private ethnicityService: EthnicityService) {
   }
 
   ngOnInit(): void {
@@ -69,7 +69,7 @@ export class NationComponent implements OnInit {
     if (this.isLoading !== true) {
       this.form.onCloseClick();
 
-      this.nationService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
+      this.ethnicityService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
           this.getList();
         }
@@ -101,7 +101,7 @@ export class NationComponent implements OnInit {
   private getList() {
 
     this.isLoading = true;
-    this.nationService.getList(this.paging, this.searchText).subscribe((response: ResponseModel) => {
+    this.ethnicityService.getList(this.paging, this.searchText).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;

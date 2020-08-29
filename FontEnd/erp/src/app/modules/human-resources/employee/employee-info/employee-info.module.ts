@@ -24,7 +24,7 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { AppDateAdapter } from '../../../../core/helpers/format-datepicker.helper';
 import { FormatDatePipe } from '../../../../core/pipes/format-date.pipe';
 import { PersonalInfoService } from './personal-info/personal-info.service';
-import { NationService } from '../../configuration/nation/nation.service';
+import { EthnicityService } from '../../configuration/ethnicity/ethnicity.service';
 import { NationalityService } from '../../configuration/nationality/nationality.service';
 import { EducationService } from '../../configuration/education/education.service';
 import { ProfessionalQualificationService } from '../../configuration/professional-qualification/professional-qualification.service';
@@ -69,7 +69,7 @@ const routes: Routes = [
     PersonalInfoService,
     FormatDatePipe,
     ReligionService,
-    NationService,
+    EthnicityService,
     NationalityService,
     EducationService,
     ProfessionalQualificationService,

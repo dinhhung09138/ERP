@@ -1,4 +1,3 @@
-import { AuthenticationGuard } from './../../core/guards/authentication.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HumanResourcesComponent } from './human-resources.component';
@@ -103,8 +102,8 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'configuration/nation',
-        loadChildren: () => import('./configuration/nation/nation.module').then(m => m.NationModule),
+        path: 'configuration/ethnicity',
+        loadChildren: () => import('./configuration/ethnicity/ethnicity.module').then(m => m.EthnicityModule),
         pathMatch: 'full'
       },
       {

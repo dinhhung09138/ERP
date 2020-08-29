@@ -4,7 +4,7 @@ import { PersonalInfoViewModel } from './personal-info.model';
 import { ResponseModel } from '../../../../../core/models/response.model';
 import { ResponseStatus } from '../../../../../core/enums/response-status.enum';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
-import { NationViewModel } from '../../../configuration/nation/nation.model';
+import { EthnicityViewModel } from '../../../configuration/ethnicity/ethnicity.model';
 import { NationalityViewModel } from '../../../configuration/nationality/nationality.model';
 import { EducationViewModel } from '../../../configuration/education/education.model';
 import { ReligionViewModel } from '../../../configuration/religion/religion.model';
@@ -30,8 +30,8 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   personalInfo: PersonalInfoViewModel;
   personalInfoForm: FormGroup;
 
-  nationLoading = false;
-  nationList: NationViewModel[];
+  ethnicityLoading = false;
+  ethnicityList: EthnicityViewModel[];
   nationalityLoading = false;
   nationalityList: NationalityViewModel[];
   educationLoading = false;
@@ -54,7 +54,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
       gender: [true, [Validators.required]],
       materialStatusId: [null],
       religionId: [null],
-      nationId: [null],
+      ethnicityId: [null],
       nationalityId: [null],
       academicLevelId: [null],
       professionalQualificationId: [null],
@@ -85,7 +85,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.personalInfoForm.get('gender').setValue(true);
     this.personalInfoForm.get('materialStatusId').setValue(null);
     this.personalInfoForm.get('religionId').setValue(null);
-    this.personalInfoForm.get('nationId').setValue(null);
+    this.personalInfoForm.get('ethnicityId').setValue(null);
     this.personalInfoForm.get('nationalityId').setValue(null);
     this.personalInfoForm.get('academicLevelId').setValue(null);
     this.personalInfoForm.get('professionalQualificationId').setValue(null);
@@ -120,14 +120,14 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     }
   }
 
-  onAddNewNationClick() {
-    this.nationLoading = true;
-    this.personalInfoService.addNewNation().subscribe((response: ResponseModel) => {
+  onAddNewEthnicityClick() {
+    this.ethnicityLoading = true;
+    this.personalInfoService.addNewEthnicity().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.personalInfoForm.get('nationId').setValue(null);
-        this.nationList = response.result;
+        this.personalInfoForm.get('ethnicityId').setValue(null);
+        this.ethnicityList = response.result;
       }
-      this.nationLoading = false;
+      this.ethnicityLoading = false;
     });
   }
 
@@ -197,8 +197,8 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   private getSelection() {
     this.isLoading = true;
     this.personalInfoService.getSelection().subscribe(response => {
-      if (response.nations && response.nations.responseStatus === ResponseStatus.success) {
-        this.nationList = response.nations.result;
+      if (response.ethnicity && response.ethnicity.responseStatus === ResponseStatus.success) {
+        this.ethnicityList = response.ethnicity.result;
       }
       if (response.nationalities && response.nationalities.responseStatus === ResponseStatus.success) {
         this.nationalityList = response.nationalities.result;
@@ -227,7 +227,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
       this.personalInfoForm.get('gender').setValue(data.gender);
       this.personalInfoForm.get('materialStatusId').setValue(data.materialStatusId);
       this.personalInfoForm.get('religionId').setValue(data.religionId);
-      this.personalInfoForm.get('nationId').setValue(data.nationId);
+      this.personalInfoForm.get('ethnicityId').setValue(data.ethnicityId);
       this.personalInfoForm.get('nationalityId').setValue(data.nationalityId);
       this.personalInfoForm.get('academicLevelId').setValue(data.academicLevelId);
       this.personalInfoForm.get('professionalQualificationId').setValue(data.professionalQualificationId);

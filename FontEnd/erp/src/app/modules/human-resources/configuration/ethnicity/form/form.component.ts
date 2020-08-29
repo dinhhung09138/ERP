@@ -1,20 +1,20 @@
-import { NationService } from './../nation.service';
+import { EthnicityService } from './../ethnicity.service';
 import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
-import { NationViewModel } from './../nation.model';
+import { EthnicityViewModel } from './../ethnicity.model';
 import { Component, OnInit, ElementRef, EventEmitter, Output, ViewChild, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
-  selector: 'app-hr-nation-form',
+  selector: 'app-hr-ethnicity-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class NationFormComponent implements OnInit {
+export class EthnicityFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
@@ -25,18 +25,18 @@ export class NationFormComponent implements OnInit {
   formTitle = '';
   isSubmit = false;
   isLoading = false;
-  nationForm: FormGroup;
-  item: NationViewModel;
+  ethnicityForm: FormGroup;
+  item: EthnicityViewModel;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
-    private dialogRef: MatDialogRef<NationFormComponent>,
+    private dialogRef: MatDialogRef<EthnicityFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,
-    private nationService: NationService) { }
+    private ethnicityService: EthnicityService) { }
 
   ngOnInit(): void {
-    this.nationForm = this.fb.group({
+    this.ethnicityForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
@@ -60,21 +60,21 @@ export class NationFormComponent implements OnInit {
     }
 
     this.formAction = formStatus;
-    this.nationForm.get('id').setValue(0);
-    this.nationForm.get('name').reset();
-    this.nationForm.get('precedence').reset();
-    this.nationForm.get('isActive').reset();
+    this.ethnicityForm.get('id').setValue(0);
+    this.ethnicityForm.get('name').reset();
+    this.ethnicityForm.get('precedence').reset();
+    this.ethnicityForm.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
-      this.nationForm.get('name').disable();
-      this.nationForm.get('precedence').disable();
-      this.nationForm.get('isActive').disable();
+      this.ethnicityForm.get('name').disable();
+      this.ethnicityForm.get('precedence').disable();
+      this.ethnicityForm.get('isActive').disable();
     } else {
-      this.nationForm.get('isActive').setValue(true);
-      this.nationForm.get('precedence').setValue(1);
-      this.nationForm.get('name').enable();
-      this.nationForm.get('precedence').enable();
-      this.nationForm.get('isActive').enable();
+      this.ethnicityForm.get('isActive').setValue(true);
+      this.ethnicityForm.get('precedence').setValue(1);
+      this.ethnicityForm.get('name').enable();
+      this.ethnicityForm.get('precedence').enable();
+      this.ethnicityForm.get('isActive').enable();
     }
     this.elm.nativeElement.querySelector('#name').focus();
   }
@@ -130,12 +130,12 @@ export class NationFormComponent implements OnInit {
 
   submitForm() {
     this.isSubmit = true;
-    if (this.nationForm.invalid) {
+    if (this.ethnicityForm.invalid) {
       return;
     }
     this.isLoading = true;
 
-    this.nationService.save(this.nationForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+    this.ethnicityService.save(this.ethnicityForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
 
         if (this.dialogData?.isPopup === true) {
@@ -152,7 +152,7 @@ export class NationFormComponent implements OnInit {
 
   private getItem(id: number) {
     this.isLoading = true;
-    this.nationService.item(id).subscribe((response: ResponseModel) => {
+    this.ethnicityService.item(id).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.item = response.result;
         this.setDataToForm(this.item);
@@ -161,12 +161,12 @@ export class NationFormComponent implements OnInit {
     });
   }
 
-  private setDataToForm(data: NationViewModel) {
-    this.nationForm.get('id').setValue(data.id);
-    this.nationForm.get('name').setValue(data.name);
-    this.nationForm.get('precedence').setValue(data.precedence);
-    this.nationForm.get('isActive').setValue(data.isActive);
-    this.nationForm.get('rowVersion').setValue(data.rowVersion);
+  private setDataToForm(data: EthnicityViewModel) {
+    this.ethnicityForm.get('id').setValue(data.id);
+    this.ethnicityForm.get('name').setValue(data.name);
+    this.ethnicityForm.get('precedence').setValue(data.precedence);
+    this.ethnicityForm.get('isActive').setValue(data.isActive);
+    this.ethnicityForm.get('rowVersion').setValue(data.rowVersion);
   }
 
 }

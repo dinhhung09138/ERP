@@ -4,7 +4,7 @@ import { ApiService } from './../../../../core/services/api.service';
 import { PagingModel } from './../../../../core/models/paging.model';
 import { Injectable } from '@angular/core';
 import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
-import { NationViewModel } from './nation.model';
+import { EthnicityViewModel } from './ethnicity.model';
 import { Observable, of } from 'rxjs';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -12,15 +12,15 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
-export class NationService {
+export class EthnicityService {
 
   url = {
-    list: APIUrlConstants.hrApi + 'nation/get-list',
-    dropdown: APIUrlConstants.hrApi + 'nation/dropdown',
-    item: APIUrlConstants.hrApi + 'nation/item',
-    insert: APIUrlConstants.hrApi + 'nation/insert',
-    update: APIUrlConstants.hrApi + 'nation/update',
-    delete: APIUrlConstants.hrApi + 'nation/delete',
+    list: APIUrlConstants.hrApi + 'ethnicity/get-list',
+    dropdown: APIUrlConstants.hrApi + 'ethnicity/dropdown',
+    item: APIUrlConstants.hrApi + 'ethnicity/item',
+    insert: APIUrlConstants.hrApi + 'ethnicity/insert',
+    update: APIUrlConstants.hrApi + 'ethnicity/update',
+    delete: APIUrlConstants.hrApi + 'ethnicity/delete',
   };
 
   constructor(
@@ -66,7 +66,7 @@ export class NationService {
     return this.api.getDropdown(this.url.dropdown);
   }
 
-  save(model: NationViewModel, action: FormActionStatus): Observable<ResponseModel> {
+  save(model: EthnicityViewModel, action: FormActionStatus): Observable<ResponseModel> {
     switch (action) {
       case FormActionStatus.Insert:
         return this.api.insert(this.url.insert, model);

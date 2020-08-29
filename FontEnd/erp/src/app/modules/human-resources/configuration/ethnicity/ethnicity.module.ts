@@ -1,4 +1,4 @@
-import { NationService } from './nation.service';
+import { EthnicityService } from './ethnicity.service';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,14 +8,14 @@ import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { NationComponent } from './nation.component';
-import { NationFormComponent } from './form/form.component';
+import { EthnicityComponent } from './ethnicity.component';
+import { EthnicityFormComponent } from './form/form.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: NationComponent,
+    component: EthnicityComponent,
     data: { title: 'Dân tộc' }
   }
 ];
@@ -23,8 +23,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    NationComponent,
-    NationFormComponent
+    EthnicityComponent,
+    EthnicityFormComponent
   ],
   imports: [
     SharedModule,
@@ -37,9 +37,9 @@ const routes: Routes = [
     MatDialogModule,
   ],
   providers: [
-    NationService,
+    EthnicityService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
   ]
 })
-export class NationModule { }
+export class EthnicityModule { }

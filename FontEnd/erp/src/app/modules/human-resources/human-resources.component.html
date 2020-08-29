@@ -31,17 +31,20 @@
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a routerLink="/hr/commendation" class="nav-link">
-              <p> Hình thức khen thưởng </p>
+              <p> {{ 'SCREEN.HR.COMMENDATION.TITLE' | translate }} </p>
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a href="javascript: {}" class="nav-link" routerLink="/hr/discipline">
-              <p> Hình thức kỉ luật </p>
+              <p> {{ 'SCREEN.HR.DISCIPLINE.TITLE' | translate }} </p>
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a routerLink="/hr/employee" class="nav-link">
-              <p> Nhân viên <span class="right badge badge-danger">100</span></p>
+              <p>
+                {{ 'SCREEN.HR.EMPLOYEE.TITLE' | translate }}
+                <span class="right badge badge-danger">100</span>
+              </p>
             </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
@@ -70,77 +73,77 @@
           <li class="nav-item">
             <a (click)="openSideMenu('configuration')" class="nav-link"
               [ngClass]="{'menu-open': linkSelected === 'configuration'}">
-              <p>Thiết lập <i class="fa fa-angle-left right"></i></p>
+              <p>{{ 'SCREEN.HR.CONFIGURATION.TITLE' | translate }} <i class="fa fa-angle-left right"></i></p>
             </a>
             <ul class="nav" [ngStyle]="{'display': linkSelected === 'configuration' ? 'block' : 'none'}">
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/province">
-                  <p> Tỉnh/Thành phố </p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.PROVINCE.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/district">
-                  <p> Quận/Huyện </p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.DISTRICT.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/ward">
-                  <p> Phường/Xã </p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.WARD.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/education">
-                  <p> Trình độ học vấn</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.EDUCATION.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/model-of-study">
-                  <p> Hình thức đào tạo</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.MODEL_OF_STUDY.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/identification">
-                  <p> Giấy tờ tùy thân</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.IDENTIFICATION.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/qualification">
-                  <p> Trình độ chuyên môn</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.QUALIFICATION.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/ranking">
-                  <p> Xếp hạng học tập</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.RANKING.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/contract-type">
-                  <p> Loại hợp đồng </p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/employee-status">
-                  <p> Tình trạng nhân viên</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.WORKING_STATUS.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/relationship-type">
-                  <p> Quan hệ gia đình</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.RELATIONSHIP_TYPE.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/religion">
-                  <p> Tôn giáo</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.RELIGION.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/nation">
+                <a class="nav-link" routerLink="/hr/configuration/ethnicity">
                   <p> Dân tộc</p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/nationality">
-                  <p> Quốc tịch</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.NATIONALITY.TITLE' | translate }} </p>
                 </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
@@ -150,7 +153,7 @@
               </li>
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/hr/configuration/approve-status">
-                  <p> Trạng thái phê duyệt</p>
+                  <p> {{ 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.TITLE' | translate }} </p>
                 </a>
               </li>
             </ul>

@@ -9,7 +9,7 @@ export interface PersonalInfoViewModel extends BaseViewModel {
   dateOfBirth: Date;
   materialStatusId: number;
   religionId: number;
-  nationId: number;
+  ethnicityId: number;
   nationalityId: number;
   academicLevelId: number;
   professionalQualificationId: number;

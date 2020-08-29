@@ -4,13 +4,13 @@ import { APIUrlConstants } from '../../../../../core/constants/api-url.constant'
 import { PersonalInfoViewModel } from './personal-info.model';
 import { Observable, forkJoin } from 'rxjs';
 import { ResponseModel } from '../../../../../core/models/response.model';
-import { NationService } from '../../../configuration/nation/nation.service';
+import { EthnicityService } from '../../../configuration/ethnicity/ethnicity.service';
 import { ReligionService } from '../../../configuration/religion/religion.service';
 import { NationalityService } from '../../../configuration/nationality/nationality.service';
 import { EducationService } from '../../../configuration/education/education.service';
 import { ProfessionalQualificationService } from '../../../configuration/professional-qualification/professional-qualification.service';
 import { map } from 'rxjs/operators';
-import { NationFormComponent } from '../../../configuration/nation/form/form.component';
+import { EthnicityFormComponent } from '../../../configuration/ethnicity/form/form.component';
 import { NationalityFormComponent } from '../../../configuration/nationality/form/form.component';
 import { EducationFormComponent } from '../../../configuration/education/form/form.component';
 import { ProfessionalQualificationFormComponent } from '../../../configuration/professional-qualification/form/form.component';
@@ -23,7 +23,7 @@ export class PersonalInfoService {
   constructor(
     private http: HttpClient,
     private api: ApiService,
-    private nationService: NationService,
+    private ethnicityService: EthnicityService,
     private nationalityService: NationalityService,
     private religionService: ReligionService,
     private educationService: EducationService,
@@ -53,16 +53,16 @@ export class PersonalInfoService {
 
   getSelection(): Observable<any> {
     return forkJoin([
-      this.nationService.getDropdown(),
+      this.ethnicityService.getDropdown(),
       this.nationalityService.getDropdown(),
       this.religionService.getDropdown(),
       this.educationService.getDropdown(),
       this.qualificationService.getDropdown(),
     ]).pipe(
       map(
-        ([nationData, nationalityData, religionData, educationData, qualificationData]) => {
+        ([ethnicityData, nationalityData, religionData, educationData, qualificationData]) => {
           return {
-            nations: nationData,
+            ethnicity: ethnicityData,
             nationalities: nationalityData,
             religions: religionData,
             educations: educationData,
@@ -73,8 +73,8 @@ export class PersonalInfoService {
     );
   }
 
-  addNewNation(): Observable<ResponseModel> {
-    return this.nationService.openPopup(NationFormComponent);
+  addNewEthnicity(): Observable<ResponseModel> {
+    return this.ethnicityService.openPopup(EthnicityFormComponent);
   }
 
   addNewNationality(): Observable<ResponseModel> {
