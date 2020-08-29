@@ -6,6 +6,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PositionViewModel } from '../position.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-position-form',
@@ -28,6 +29,7 @@ export class PositionFormComponent implements OnInit {
   item: PositionViewModel;
 
   constructor(
+    private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private positionService: PositionService) { }
@@ -88,13 +90,17 @@ export class PositionFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.formTitle = 'Thêm mới';
+    this.translate.get('SCREEN.HR.POSITION.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.formTitle = 'Cập nhật';
+    this.translate.get('SCREEN.HR.POSITION.FORM.TITLE_EDIT').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   onResetClick() {

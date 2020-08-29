@@ -15,7 +15,7 @@ const route: Routes = [
   {
     path: '',
     component: PositionComponent,
-    data: { title: 'Position' }
+    data: { title: 'SCREEN.HR.POSITION.TITLE' }
   }
 ];
 

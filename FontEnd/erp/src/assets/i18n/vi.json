@@ -67,10 +67,26 @@
     }
   },
   "SCREEN": {
-    "SIDEBAR": {
-
-    },
     "HR": {
+      "TITLE": "Nhân sự",
+      "POSITION": {
+        "TITLE": "Chức vụ",
+        "LIST_TITLE": "Danh sách chức vụ",
+        "POPUP_TITLE": "Thêm mới chức vụ",
+        "TABLE": {
+          "NAME": "Tên",
+          "DESCRIPTION": "Mô tả"
+        },
+        "FORM": {
+          "TITLE_NEW": "Thêm mới",
+          "TITLE_EDIT": "Cập nhật",
+          "NAME": "Tên",
+          "DESCRIPTION": "Mô tả"
+        },
+        "ERROR": {
+          "DROPDOWN": "Không thể lấy danh sách chức vụ"
+        }
+      },
       "COMMENDATION": {
         "TITLE": "Hình thức khen thưởng",
         "LIST_TITLE": "Danh sách hình thức khen thưởng",
