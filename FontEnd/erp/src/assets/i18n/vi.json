@@ -144,6 +144,19 @@
         },
         "ERROR": {
           "DROPDOWN": "Không thể lấy danh sách nhân viên"
+        },
+        "PERSONAL_INFO": {
+          "TITLE": "Thông tin cá nhân",
+          "DOB": "Ngày sinh",
+          "GENDER": "Giới tinh",
+          "GENDER_MALE": "Nam",
+          "GENDER_FEMALE": "Nữ",
+          "MATERIAL_STATUS": "Trình trạng hôn nhân",
+          "NATIONALITY": "Quốc tịch",
+          "ETHNICITY": "Dân tộc",
+          "RELIGION": "Tôn giáo",
+          "EDUCATION": "Trình độ học vấn",
+          "QUALIFICATION": "Trình độ chuyên môn"
         }
       },
       "CONFIGURATION": {

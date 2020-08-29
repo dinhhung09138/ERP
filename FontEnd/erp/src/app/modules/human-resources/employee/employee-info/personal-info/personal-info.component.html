@@ -3,7 +3,7 @@
     <form [formGroup]="personalInfoForm" (submit)="!isLoading ? onSubmit() : false">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-          <h1>Nhân viên: {{ Employee?.fullName }}</h1>
+          <h1>{{ 'SCREEN.HR.EMPLOYEE.TITLE' | translate }}: {{ Employee?.fullName }}</h1>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right" *ngIf="Employee">
           <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="14" *ngIf="isEdit">
@@ -25,7 +25,9 @@
             <div class="col-12">
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
-                    <label class="label">Ngày sinh</label>
+                    <label class="label">
+                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.DOB' | translate }}
+                    </label>
                     <mat-form-field class="form-control">
                       <input matInput [matDatepicker]="dateOfBirthDatepicker" formControlName="dateOfBirth"
                         maxlength="10" tabindex="1" autocomplete="off" [readonly]="!isEdit" />
@@ -35,21 +37,29 @@
                       <mat-datepicker #dateOfBirthDatepicker [disabled]="!isEdit"></mat-datepicker>
                     </mat-form-field>
                     <mat-error *ngIf="isSubmit && personalInfoForm.controls['dateOfBirth'].errors?.date">
-                      Ngày nhập vào không hợp lệ
+                      {{ 'VALIDATION_MESSAGE.DATE_INVALID' | translate }}
                     </mat-error>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
-                    <label class="label">Giới tính</label>
+                    <label class="label">
+                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.GENDER' | translate }}
+                    </label>
                     <div class="input-group">
                       <mat-radio-group formControlName="gender" [disabled]="!isEdit" aria-label="Giới tính">
-                        <mat-radio-button ngDefaultControl [value]="true" >Nam</mat-radio-button>
+                        <mat-radio-button ngDefaultControl [value]="true" >
+                          {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.GENDER_MALE' | translate }}
+                        </mat-radio-button>
                         &nbsp;&nbsp;&nbsp;
-                        <mat-radio-button ngDefaultControl [value]="false">Nữ</mat-radio-button>
+                        <mat-radio-button ngDefaultControl [value]="false">
+                          {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.GENDER_FEMALE' | translate }}
+                        </mat-radio-button>
                       </mat-radio-group>
                     </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
-                    <label class="label">Tình trạng hôn nhân</label>
+                    <label class="label">
+                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.MATERIAL_STATUS' | translate }}
+                    </label>
                   </div>
                 </div>
             </div>
@@ -58,7 +68,9 @@
             <div class="col-12">
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
-                    <label class="label">Quốc tịch</label>
+                    <label class="label">
+                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.NATIONALITY' | translate }}
+                    </label>
                     <div class="input-group">
                       <ng-select [items]="nationalityList" [bindLabel]="'name'" [bindValue]="'id'"
                                 formControlName="nationalityId" [searchable]="true" [selectOnTab]="true"
@@ -71,7 +83,9 @@
 
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
-                    <label class="label">Dân tộc</label>
+                    <label class="label">
+                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.ETHNICITY' | translate }}
+                    </label>
                     <div class="input-group">
                       <ng-select [items]="ethnicityList" [bindValue]="'id'" [bindLabel]="'name'"
                                 formControlName="ethnicityId" [selectOnTab]="true" [searchable]="true"
@@ -83,7 +97,9 @@
                     </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
-                    <label class="label">Tôn giáo</label>
+                    <label class="label">
+                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.RELIGION' | translate }}
+                    </label>
                     <div class="input-group">
                       <ng-select [items]="religionList" [bindValue]="'id'" [bindLabel]="'name'"
                                 formControlName="religionId" [selectOnTab]="true" [searchable]="true"
@@ -101,7 +117,9 @@
             <div class="col-12">
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
-                    <label class="label">Trình độ học vấn</label>
+                    <label class="label">
+                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.EDUCATION' | translate }}
+                    </label>
                     <div class="input-group">
                       <ng-select [items]="educationList" [bindValue]="'id'" [bindLabel]="'name'"
                                 formControlName="academicLevelId" [selectOnTab]="true" [searchable]="true"
@@ -113,7 +131,9 @@
                     </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
-                    <label class="label">Trình độ chuyên môn</label>
+                    <label class="label">
+                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.QUALIFICATION' | translate }}
+                    </label>
                     <div class="input-group">
                       <ng-select [items]="qualificationList" [bindValue]="'id'" [bindLabel]="'name'"
                                 formControlName="professionalQualificationId" [selectOnTab]="true" [searchable]="true"
