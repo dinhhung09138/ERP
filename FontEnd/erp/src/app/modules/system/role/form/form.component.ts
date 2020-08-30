@@ -43,10 +43,11 @@ export class RoleFormComponent implements OnInit {
     });
     this.initFormControl(this.formAction);
   }
+
   initFormControl(formStatus: FormActionStatus){
     this.isSubmit = false;
 
-    if(this.formDirective){
+    if (this.formDirective){
       this.formDirective.resetForm();
     }
 
@@ -65,36 +66,38 @@ export class RoleFormComponent implements OnInit {
       this.roleForm.get('name').enable();
       this.roleForm.get('description').enable();
       this.roleForm.get('isActive').enable();
-	    this.elm.nativeElement.querySelector('#name').focus();
+      this.elm.nativeElement.querySelector('#name').focus();
     }
     this.elm.nativeElement.querySelector('#name').focus();
   }
+
   showFormStatus(){
-    if(this.formAction == FormActionStatus.UnKnow){
+    if (this.formAction === FormActionStatus.UnKnow){
       return false;
     }
     return true;
   }
+
   onCreateClick() {
     if (this.formAction !== FormActionStatus.Insert) {
       this.initFormControl(FormActionStatus.Insert);
     }
     this.elm.nativeElement.querySelector('#name').focus();
-    this.translate.get('SCREEN.SYSTEM.ROLE.FORM.TITLE_NEW').subscribe(message =>{
+    this.translate.get('SCREEN.SYSTEM.ROLE.FORM.TITLE_NEW').subscribe(message => {
       this.formTitle = message;
-    })
+    });
   }
 
   onUpdateClick(id: number) {
     this.initFormControl(FormActionStatus.Update);
     this.getItem(id);
-    this.translate.get('SCREEN.SYSTEM.ROLE.FORM.TITLE_EDIT').subscribe(message =>{
+    this.translate.get('SCREEN.SYSTEM.ROLE.FORM.TITLE_EDIT').subscribe(message => {
       this.formTitle = message;
-    })
+    });
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;
@@ -102,17 +105,17 @@ export class RoleFormComponent implements OnInit {
         this.setDataToForm(this.item);
         this.elm.nativeElement.querySelector('#name').focus();
         break;
-    };
+    }
   }
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
   }
 
-  getItem(id:number){
+  getItem(id: number){
     this.isLoading = true;
-    this.roleService.item(id).subscribe((response: ResponseModel)=>{
-      if (response !== null && response.responseStatus == ResponseStatus.success) {
+    this.roleService.item(id).subscribe((response: ResponseModel) => {
+      if (response !== null && response.responseStatus === ResponseStatus.success) {
         this.item = response.result;
         this.setDataToForm(this.item);
       }
@@ -122,13 +125,13 @@ export class RoleFormComponent implements OnInit {
 
   submitForm(){
     this.isSubmit = true;
-    if(this.roleForm.invalid){
+    if (this.roleForm.invalid){
       return;
     }
     this.isLoading = true;
 
-    this.roleService.save(this.roleForm.getRawValue(), this.formAction).subscribe((res:ResponseModel)=>{
-      if(res.responseStatus == ResponseStatus.success){
+    this.roleService.save(this.roleForm.getRawValue(), this.formAction).subscribe((res: ResponseModel) => {
+      if (res.responseStatus === ResponseStatus.success){
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
       }
@@ -136,6 +139,7 @@ export class RoleFormComponent implements OnInit {
       this.isSubmit = false;
     });
   }
+
   private setDataToForm(data: RoleViewModel) {
     this.roleForm.get('id').setValue(data.id);
     this.roleForm.get('name').setValue(data.name);

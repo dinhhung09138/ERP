@@ -53,9 +53,9 @@ export class RoleComponent implements OnInit {
     }
   }
 
-  onDeleteClick(id: number,rowVersion: any) {
+  onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading !== true) {
-      this.form.onCloseClick();      
+      this.form.onCloseClick();
       this.roleService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
           this.getList();
@@ -99,7 +99,7 @@ export class RoleComponent implements OnInit {
 
   getList() {
     this.isLoading = true;
-    this.roleService.getList(this.paging,this.searchText).subscribe((response: ResponseModel) => {   
+    this.roleService.getList(this.paging,this.searchText).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;

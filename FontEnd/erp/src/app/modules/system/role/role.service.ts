@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class RoleService {
-    url={
+    url = {
         list: APIUrlConstants.systemApi + 'role/get-list',
         dropdown: APIUrlConstants.systemApi + 'role/dropdown',
         item: APIUrlConstants.systemApi + 'role/item',
@@ -25,7 +25,7 @@ export class RoleService {
         private api: ApiService,
         private dialogService: DialogService){}
 
-    getList(paging:PagingModel,searchText: string){
+    getList(paging: PagingModel, searchText: string){
         const filter = new FilterModel();
         filter.text = searchText;
         filter.paging.pageIndex = paging.pageIndex;
@@ -37,7 +37,7 @@ export class RoleService {
         return this.api.getDropdown(this.url.dropdown);
     }
 
-    item(id:number){
+    item(id: number){
         return this.api.item(this.url.item,id);
     }
 
@@ -49,9 +49,9 @@ export class RoleService {
                 return this.api.update(this.url.update, model);
         }
     }
-    
+
     confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
-        return this.dialogService.openConfirmDeleteDialog().pipe(           
+        return this.dialogService.openConfirmDeleteDialog().pipe(
             switchMap((confirmResponse: boolean) => {
                 if (confirmResponse === true) {
                     return this.delete(itemId, version);
@@ -61,7 +61,7 @@ export class RoleService {
             })
         );
     }
-  
+
     delete(itemId: number, version: any): Observable<ResponseModel> {
         return this.api.delete(this.url.delete, { id: itemId, rowVersion: version });
     }

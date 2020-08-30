@@ -432,6 +432,7 @@
       }
     },
     "SYSTEM":{
+      "TITLE": "Hệ thống",
       "ROLE":{
         "TITLE":"Nhóm người dùng",
         "LIST_TITLE":"Danh sách nhóm người dùng",

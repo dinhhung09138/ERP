@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RoleComponent } from './role.component';
 import { RoleFormComponent } from './form/form.component';
 import { RouterModule, Routes } from '@angular/router';

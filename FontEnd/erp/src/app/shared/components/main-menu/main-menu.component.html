@@ -5,7 +5,9 @@
         <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
       </li>
       <li class="nav-item" [routerLinkActive]="'active'">
-        <a class="nav-link" [routerLink]="['/hr']">Nhân sự</a>
+        <a class="nav-link" [routerLink]="['/hr']">
+          {{ 'SCREEN.HR.TITLE' | translate }}
+        </a>
       </li>
       <li class="nav-item" [routerLinkActive]="'active'">
         <a class="nav-link" [routerLink]="['/training']">Training</a>
@@ -14,7 +16,9 @@
         <a class="nav-link" href="javascript:{}">Recruiting</a>
       </li>
       <li class="nav-item" [routerLinkActive]="'active'">
-        <a class="nav-link" [routerLink]="['/system']">Systems</a>
+        <a class="nav-link" [routerLink]="['/system']">
+          {{ 'SCREEN.SYSTEM.TITLE' | translate }}
+        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="javascript:{}">Others</a>
