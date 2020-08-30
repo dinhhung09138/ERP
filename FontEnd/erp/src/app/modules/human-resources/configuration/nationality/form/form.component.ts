@@ -48,7 +48,9 @@ export class NationalityFormComponent implements OnInit {
 
     if (this.dialogData?.isPopup === true) {
       this.formAction = FormActionStatus.Insert;
-      this.formTitle = this.dialogData?.title;
+      this.translate.get(this.dialogData?.title).subscribe(message => {
+        this.formTitle = message;
+      });
     }
 
     this.initFormControl(this.formAction);

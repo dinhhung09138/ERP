@@ -9,21 +9,21 @@
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: flex; align-items: stretch; width: 100%;">
           <ul class="nav module-sidebar flex-column" role="menu" data-accordion="false">
-            <li class="nav-item">
+            <li class="nav-item" [routerLinkActive]="['active']">
               <a routerLink="/system/dashboard" class="nav-link">
                 <p> Thống kê </p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [routerLinkActive]="['active']">
               <a routerLink="/system/account" class="nav-link">
                 <p> Tài khoản </p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [routerLinkActive]="['active']">
               <a routerLink="/system/role" class="nav-link">
-                <p> Nhóm người dùng </p>
+                <p> {{ 'SCREEN.SYSTEM.ROLE.TITLE' | translate }} </p>
               </a>
-            </li>            
+            </li>
           </ul>
           <div class="row" style="width: 100%; margin-left: 1px;">
             <div class="col-lg-12 col-md-12 col-xs-12 main-page-contain">
@@ -35,4 +35,3 @@
       <app-footer></app-footer>
     </div>
 </div>
-  

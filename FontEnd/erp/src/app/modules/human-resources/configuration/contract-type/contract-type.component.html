@@ -35,29 +35,47 @@
             <app-table-loading [Show]="isLoading"></app-table-loading>
             <table mat-table matSort [dataSource]="dataSource" class="table">
               <ng-container matColumnDef="code">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-100">{{'TABLE.LIST.CODE'|translate}}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-100">
+                  {{'TABLE.LIST.CODE'|translate}}
+                </th>
                 <td mat-cell *matCellDef="let element">{{ element.code }}</td>
               </ng-container>
               <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'TABLE.LIST.NAME'| translate}}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{'TABLE.LIST.NAME'| translate}}
+                </th>
                 <td mat-cell *matCellDef="let element"> {{ element.name }}</td>
               </ng-container>
               <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.TABLE.DESCRIPTION' | translate}}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.TABLE.DESCRIPTION' | translate}}
+                </th>
                 <td mat-cell *matCellDef="let element">{{ element.description }}</td>
               </ng-container>
               <ng-container matColumnDef="allowInsurance">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-120">{{'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.TABLE.INSURANCE' | translate}}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-120">
+                  {{'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.TABLE.INSURANCE' | translate}}
+                </th>
                 <td mat-cell *matCellDef="let element" class="center">
-                  <label class="label label-outline-success" *ngIf="element.allowInsurance">Có</label>
-                  <label class="label label-outline-danger" *ngIf="!element.allowInsurance">Không</label>
+                  <label class="label label-outline-success" *ngIf="element.allowInsurance">
+                    {{'TABLE.LIST.YES'|translate}}
+                  </label>
+                  <label class="label label-outline-danger" *ngIf="!element.allowInsurance">
+                    {{'TABLE.LIST.NO'|translate}}
+                  </label>
                 </td>
               </ng-container>
               <ng-container matColumnDef="allowLeaveDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-120">{{'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.TABLE.LEAVEDATE' | translate}}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="td-w-120">
+                  {{'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.TABLE.LEAVEDATE' | translate}}
+                </th>
                 <td mat-cell *matCellDef="let element" class="center">
-                  <label class="label label-outline-success" *ngIf="element.allowLeaveDate">Có</label>
-                  <label class="label label-outline-danger" *ngIf="!element.allowLeaveDate">Không</label>
+                  <label class="label label-outline-success" *ngIf="element.allowLeaveDate">
+                    {{'TABLE.LIST.YES'|translate}}
+                  </label>
+                  <label class="label label-outline-danger" *ngIf="!element.allowLeaveDate">
+                    {{'TABLE.LIST.NO'|translate}}
+                  </label>
                 </td>
               </ng-container>
               <ng-container matColumnDef="precedence">
@@ -67,22 +85,30 @@
               <ng-container matColumnDef="isActive">
                 <th mat-header-cell *matHeaderCellDef class="td-w-100">{{ 'TABLE.LIST.STATUS' | translate }}</th>
                 <td mat-cell *matCellDef="let element" class="center">
-                  <label class="label label-outline-success" *ngIf="element.isActive">{{ 'TABLE.LIST.ACTIVE' | translate }}</label>
-                  <label class="label label-outline-danger" *ngIf="!element.isActive">{{ 'TABLE.LIST.DEACTIVATION' | translate }}</label>
+                  <label class="label label-outline-success" *ngIf="element.isActive">
+                    {{ 'TABLE.LIST.ACTIVE' | translate }}
+                  </label>
+                  <label class="label label-outline-danger" *ngIf="!element.isActive">
+                    {{ 'TABLE.LIST.DEACTIVATION' | translate }}
+                  </label>
                 </td>
               </ng-container>
               <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef class="td-w-70">{{ 'TABLE.LIST.ACTIVE' | translate }}</th>
+                <th mat-header-cell *matHeaderCellDef class="td-w-70">
+                  {{ 'TABLE.LIST.ACTIVE' | translate }}
+                </th>
                 <td mat-cell *matCellDef="let element" class="center">
                   <div class=" btn-group">
                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                       <i class="fa fa-bars"></i>
                     </a>
                     <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
-                      <a href="javascript:{}" class="dropdown-item text-success"
-                          (click)="onUpdateClick(element.id)">{{ 'BUTTON.UPDATE' | translate }}</a>
-                      <a href="javascript:{}" class="dropdown-item text-danger"
-                          (click)="onDeleteClick(element.id, element.rowVersion)">{{ 'BUTTON.DELETE' | translate }}</a>
+                      <a href="javascript:{}" class="dropdown-item text-success" (click)="onUpdateClick(element.id)">
+                          {{ 'BUTTON.UPDATE' | translate }}
+                        </a>
+                      <a href="javascript:{}" class="dropdown-item text-danger" (click)="onDeleteClick(element.id, element.rowVersion)">
+                          {{ 'BUTTON.DELETE' | translate }}
+                        </a>
                     </div>
                   </div>
                 </td>

@@ -63,7 +63,9 @@
       "ACTIVE": "Active",
       "DEACTIVATION" : "Deactivation",
       "STATUS": "Status",
-      "ACTION": "Action"
+      "ACTION": "Action",
+      "YES": "Yes",
+      "NO": "No"
     }
   },
   "SCREEN": {
@@ -229,226 +231,227 @@
           }
         },
         "WORKING_STATUS": {
-          "TITLE": "Trạng thái nhân viên",
-          "LIST_TITLE": "Danh sách trạng thái nhân viên",
-          "POPUP_TITLE": "Thêm mới trạng thái nhân viên",
+          "TITLE": "Working Status",
+          "LIST_TITLE": "List Of Working Status",
+          "POPUP_TITLE": "Add New Working Status",
           "TABLE": {
-            "NAME": "Tên",
-            "DESCRIPTION": "Mô tả"
+            "NAME": "Name",
+            "DESCRIPTION": "Description"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên",
-            "DESCRIPTION": "Mô tả"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name",
+            "DESCRIPTION": "Description"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách trạng thái nhân viên"
+            "DROPDOWN": "Can not get the list of working status"
           }
         },
         "IDENTIFICATION": {
-          "TITLE": "Giấy tờ tùy thân",
-          "LIST_TITLE": "Danh sách giấy tờ tùy thân",
-          "POPUP_TITLE": "Thêm mới giấy tờ tùy thân",
+          "TITLE": "Identification",
+          "LIST_TITLE": "List Of Identification",
+          "POPUP_TITLE": "Add New Identification",
           "TABLE": {
-            "NAME": "Tên"
+            "NAME": "Name"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách giấy tờ tùy thân"
+            "DROPDOWN": "Can not get the list of identification"
           }
         },
         "MODEL_OF_STUDY": {
-          "TITLE": "Hình thức đào tạo",
-          "LIST_TITLE": "Danh sách hình thức đào tạo",
-          "POPUP_TITLE": "Thêm mới hình thức đào tạo",
+          "TITLE": "Model Of Study",
+          "LIST_TITLE": "List Of Model Of Study",
+          "POPUP_TITLE": "Add New Model Of Study",
           "TABLE": {
-            "NAME": "Tên"
+            "NAME": "Name"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách hình thức đào tạo"
+            "DROPDOWN": "Can not get the list of model of study"
           }
         },
         "NATIONALITY": {
-          "TITLE": "Quốc tịch",
-          "LIST_TITLE": "Danh sách quốc tịch",
-          "POPUP_TITLE": "Thêm mới quốc tịch",
+          "TITLE": "Nationality",
+          "LIST_TITLE": "List Of Nationality",
+          "POPUP_TITLE": "Add New Nationality",
           "TABLE": {
-            "NAME": "Tên"
+            "NAME": "Name"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách quốc tịch"
+            "DROPDOWN": "Can not get the list of nationality"
           }
         },
         "QUALIFICATION": {
-          "TITLE": "Trình độ chuyên môn",
-          "LIST_TITLE": "Danh sách trình độ chuyên môn",
-          "POPUP_TITLE": "Thêm mới trình độ chuyên môn",
+          "TITLE": "Qualification",
+          "LIST_TITLE": "List Of Qualification",
+          "POPUP_TITLE": "Add New Qualification",
           "TABLE": {
-            "NAME": "Tên"
+            "NAME": "Name"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách trình độ chuyên môn"
+            "DROPDOWN": "Can not get the list of qualification"
           }
         },
         "PROVINCE": {
-          "TITLE": "Tỉnh/Thành phố",
-          "LIST_TITLE": "Danh sách Tỉnh/Thành phố",
-          "POPUP_TITLE": "Thêm mới Tỉnh/Thành phố",
+          "TITLE": "Province",
+          "LIST_TITLE": "List Of Province",
+          "POPUP_TITLE": "Add New Province",
           "TABLE": {
-            "NAME": "Tên tỉnh/thành phố"
+            "NAME": "Province Name"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên tỉnh/thành phố"        },
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Province Name"        },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách Tỉnh/Thành phố"
+            "DROPDOWN": "Can not get the list of province"
           }
         },
         "RANKING": {
-          "TITLE": "Xếp hạng học tập",
-          "LIST_TITLE": "Danh sách xếp hạng học tập",
+          "TITLE": "Ranking",
+          "LIST_TITLE": "List Of Ranking",
           "TABLE": {
-            "NAME": "Tên"
+            "NAME": "Name"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách xếp hạng học tập"
+            "DROPDOWN": "Can not get the list of ranking"
           }
         },
         "RELATIONSHIP_TYPE": {
-          "TITLE": "Quan hệ gia đình",
-          "LIST_TITLE": "Danh sách quan hệ gia đình",
+          "TITLE": "Relationship Type",
+          "LIST_TITLE": "List Of Relationship Type",
           "TABLE": {
-            "NAME": "Tên",
-            "DESCRIPTION": "Mô tả"
+            "NAME": "Name",
+            "DESCRIPTION": "Description"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên",
-            "DESCRIPTION": "Mô tả"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name",
+            "DESCRIPTION": "Description"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách mối quan hệ gia đình"
+            "DROPDOWN": "Can not get the list of relationship type"
           }
         },
         "ETHNICITY": {
-          "TITLE": "Dân tộc",
-          "POPUP_TITLE": "Thêm mới dân tộc",
-          "LIST_TITLE": "Danh sách dân tộc",
+          "TITLE": "Ethnicity",
+          "LIST_TITLE": "List Of Ethnicity",
+          "POPUP_TITLE": "Add New Ethnicity",
           "TABLE": {
-            "NAME": "Tên dân tộc"
+            "NAME": "Name"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách dân tộc"
+            "DROPDOWN": "Can not get the list of ethnicity"
           }
         },
         "RELIGION": {
-          "TITLE": "Tôn giáo",
-          "POPUP_TITLE": "Thêm mới tôn giáo",
-          "LIST_TITLE": "Danh sách tôn giáo",
+          "TITLE": "Religion",
+          "POPUP_TITLE": "Add New Religion",
+          "LIST_TITLE": "List Of Religion",
           "TABLE": {
-            "NAME": "Tên tôn giáo"
+            "NAME": "Name"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách tôn giáo"
+            "DROPDOWN": "Can not get the list of religion"
           }
         },
         "WARD": {
-          "TITLE": "Phường/Xã",
-          "LIST_TITLE": "Danh sách phường xã",
+          "TITLE": "Ward",
+          "LIST_TITLE": "List Of Ward",
+          "POPUP_TITLE": "Add New Ward",
           "TABLE": {
-            "NAME": "Tên phường/xã",
-            "DISTRICT_NAME": "Quận/Huyện",
-            "PROVINCE_NAME": "Tỉnh/Thành phố"
+            "NAME": "Ward's Name",
+            "DISTRICT_NAME": "District's Name",
+            "PROVINCE_NAME": "Province's Name"
           },
           "FORM": {
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME": "Tên phường/xã",
-            "DISTRICT_NAME": "Quận/Huyện",
-            "PROVINCE_NAME": "Tỉnh/Thành phố"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Ward's Name",
+            "DISTRICT_NAME": "District's Name",
+            "PROVINCE_NAME": "Province's Name"
           },
           "ERROR": {
-            "DROPDOWN": "Không thể lấy danh sách phường/xã"
+            "DROPDOWN": "Can not get the list of ward"
           }
         },
         "CONTRACT_TYPE":{
-          "TITLE":"Loại hợp đồng",
-          "LIST_TITLE":"Danh sách loại hợp đồng",
+          "TITLE":"Contract Type",
+          "LIST_TITLE":"List Of Contract Type",
           "TABLE":{
-            "NAME":"Tên",
-            "DESCRIPTION":"Mô tả",
-            "INSURANCE":"Đóng bảo hiểm",
-            "LEAVEDATE":"Được nghỉ phép"
+            "NAME":"Contract Name",
+            "DESCRIPTION":"Description",
+            "INSURANCE":"Allow Insurance",
+            "LEAVEDATE":"Allow Leave"
           },
           "FORM":{
-            "TITLE_NEW": "Thêm mới",
-            "TITLE_EDIT": "Cập nhật",
-            "NAME":"Tên loại hợp đồng",
-            "DESCRIPTION":"Mô tả",
-            "INSURANCE":"Đóng bảo hiểm",
-            "LEAVEDATE":"Được nghỉ phép"
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME":"Contract Name",
+            "DESCRIPTION":"Description",
+            "INSURANCE":"Allow Insurance",
+            "LEAVEDATE":"Allow Leave"
           },
           "ERROR":{
-            "DROPDOWN": "Không thể lấy danh sách hợp đồng"
+            "DROPDOWN": "Can not get the list of contract type"
           }
         }
       }
     },
     "SYSTEM":{
-      "TITLE": "Hệ thống",
+      "TITLE": "System",
       "ROLE":{
-        "TITLE":"Nhóm người dùng",
-        "LIST_TITLE":"Danh sách nhóm người dùng",
-        "POPUP_TITLE":"Thêm mới nhóm người dùng",
+        "TITLE":"Role",
+        "LIST_TITLE":"List Of Role",
+        "POPUP_TITLE":"Add New Role",
         "TABLE":{
-          "NAME":"Tên",
-          "DESCRIPTION":"Mô tả"
+          "NAME":"Name",
+          "DESCRIPTION":"Description"
         },
         "FORM":{
-          "TITLE_NEW":"Thêm mới",
-          "TITLE_EDIT":"Cập nhật",
-          "NAME":"Tên",
-          "DESCRIPTION":"Mô tả"
+          "TITLE_NEW":"Add New",
+          "TITLE_EDIT":"Update",
+          "NAME":"Name",
+          "DESCRIPTION":"Description"
         },
         "ERROR":{
-          "DROPDOWN":"Không thể lấy danh sách nhóm người dùng"
+          "DROPDOWN":"Can not get the list of role"
         }
       }
     }

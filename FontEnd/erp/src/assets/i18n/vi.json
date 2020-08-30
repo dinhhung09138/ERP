@@ -61,9 +61,11 @@
       "NAME": "Tên",
       "PRECEDENCE": "Thứ tự",
       "ACTIVE": "Hoạt động",
-      "DEACTIVATION" : "Khóa",
+      "DEACTIVATION": "Khóa",
       "STATUS": "Trạng thái",
-      "ACTION": "Thao tác"
+      "ACTION": "Thao tác",
+      "YES": "Có",
+      "NO": "Không"
     }
   },
   "SCREEN": {
