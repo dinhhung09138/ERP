@@ -186,7 +186,7 @@
                     </mat-datepicker-toggle>
                     <mat-datepicker #startWorkingDateDateicker [disabled]="!isEditEmployee"></mat-datepicker>
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && employeeForm.controls['dateApplyFingerSign'].errors?.date">
+                  <mat-error *ngIf="isSubmit && employeeForm.controls['startWorkingDate'].errors?.date">
                     {{ 'VALIDATION_MESSAGE.DATE_INVALID' | translate }}
                   </mat-error>
                 </div>
@@ -208,7 +208,7 @@
                   <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="14"
                     *ngIf="isEditEmployee">
                   <button type="button" class="btn btn-success" tabindex="15" *ngIf="!isEditEmployee" (click)="onEditClick()">
-                    {{ 'BUTTON.EDIT' | translate }}
+                    {{ 'BUTTON.UPDATE' | translate }}
                   </button>
                   <button type="button" class="btn btn-danger" tabindex="15" *ngIf="formAction == 2 && isEditEmployee" (click)="onCancelClick()">
                     {{ 'BUTTON.CANCEL' | translate }}

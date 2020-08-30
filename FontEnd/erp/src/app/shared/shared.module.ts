@@ -106,7 +106,6 @@ export class SharedModule {
   constructor(private translate: TranslateService) {
     if (ApplicationConstant.defaultLanguage) {
       translate.use(ApplicationConstant.defaultLanguage);
-      console.log(ApplicationConstant.defaultLanguage);
     }
   }
  }

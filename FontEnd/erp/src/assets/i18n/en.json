@@ -1,23 +1,454 @@
 {
-  "ERROR": {
-
-  },
+  "SITE_TITLE": " | Mr. Hung",
   "NOTIFICATION": {
 
   },
+  "VALIDATION_MESSAGE": {
+    "EMPTY": "This field is required",
+    "DATE_INVALID": "Date is invalid",
+    "EMAIL_INVALID": "Email is invalid",
+    "MONEY_INVALID": "Money is invalid",
+    "PRECEDENCE_INVALID": "Precedence is invalid"
+  },
+  "MESSAGE": {
+    "LOADING": "Loading...",
+    "TOKEN_TIMEOUT": "Timeout. Please login again",
+    "INTERNET_CONNECTION": "Please check internet connection",
+    "SERVER_NOTFOUND": "Can not connect to the server",
+    "UNAUTHORIZE": "You don't have permission to do this function",
+    "URL_NOTFOUND": "Link not found on the server",
+    "CONTENT_NOTFOUND": "Content not found",
+    "NO_DATA": "No data available",
+    "SAVE_SUCCESS": "Add new item success",
+    "SAVE_ERROR": "Add new item fail",
+    "EDIT_SUCCESS": "Update item success",
+    "EDIT_ERROR": "Update item fail",
+    "DELETE_SUCCESS": "Delete success",
+    "DELETE_ERROR": "Delete error",
+    "PAGE_NOT_FOUND": "This page is updating",
+    "OUT_OF_DATE_DATA": "The data has changed, Please get the latest version before action",
+    "CODE_EXISTS": "Code is exists"
+  },
+  "DIALOG": {
+    "CONFIRM": "Confirmation",
+    "NOTIFY": "Alert",
+    "CONFIRM_DELETE": "Are you want to delete selected item?"
+  },
   "BUTTON": {
-    "ADD": "Thêm mới"
+    "ADD": "Add new",
+    "UPDATE": "Update",
+    "DELETE": "Delete",
+    "IMPORT": "Import",
+    "EXPORT": "Export",
+    "SAVE": "Save",
+    "RESET": "Reset",
+    "CLOSE": "Close",
+    "CANCEL": "Cancel",
+    "CONFIRM_AGREE": "Yes",
+    "CONFIRM_CANCEL": "No"
+  },
+  "TABLE": {
+    "SEARCH": "Search",
+    "NAVIGATOR": {
+      "DISPLAY": "Display",
+      "NEXT": "Next page",
+      "PREVIOUS": "Prev page",
+      "FIRST": "First",
+      "LAST": "Last"
+    },
+    "LIST": {
+      "CODE": "Code",
+      "NAME": "Name",
+      "PRECEDENCE": "Precedence",
+      "ACTIVE": "Active",
+      "DEACTIVATION" : "Deactivation",
+      "STATUS": "Status",
+      "ACTION": "Action"
+    }
   },
   "SCREEN": {
     "HR": {
+      "TITLE": "HR",
+      "POSITION": {
+        "TITLE": "Position",
+        "LIST_TITLE": "List Of Position",
+        "POPUP_TITLE": "Add New Position",
+        "TABLE": {
+          "NAME": "Name",
+          "DESCRIPTION": "Description"
+        },
+        "FORM": {
+          "TITLE_NEW": "Add new",
+          "TITLE_EDIT": "Update",
+          "NAME": "Name",
+          "DESCRIPTION": "Description"
+        },
+        "ERROR": {
+          "DROPDOWN": "Can not get the list of position"
+        }
+      },
+      "COMMENDATION": {
+        "TITLE": "Commendation",
+        "LIST_TITLE": "List Of Commendation",
+        "POPUP_TITLE": "Add New Commendation",
+        "TABLE": {
+          "NAME": "Name",
+          "MONEY": "Money",
+          "DESCRIPTION": "Description"
+        },
+        "FORM": {
+          "TITLE_NEW": "Add new",
+          "TITLE_EDIT": "Update",
+          "NAME": "Name",
+          "MONEY": "Money",
+          "DESCRIPTION": "Description"
+        },
+        "ERROR": {
+          "DROPDOWN": "Can not get the list of commendation"
+        }
+      },
+      "DISCIPLINE": {
+        "TITLE": "Discipline",
+        "LIST_TITLE": "List Of Discipline",
+        "POPUP_TITLE": "Add New Discipline",
+        "TABLE": {
+          "NAME": "Name",
+          "MONEY": "Money",
+          "DESCRIPTION": "Description"
+        },
+        "FORM": {
+          "TITLE_NEW": "Add new",
+          "TITLE_EDIT": "Update",
+          "NAME": "Name",
+          "MONEY": "Money",
+          "DESCRIPTION": "Description"
+        },
+        "ERROR": {
+          "DROPDOWN": "Can not get the list of discipline"
+        }
+      },
+      "EMPLOYEE": {
+        "TITLE": "Employee",
+        "LIST_TITLE": "List Of Employee",
+        "POPUP_TITLE": "Add New Employee",
+        "TABLE": {
+          "CODE": "Employee Code",
+          "NAME": "Full Name",
+          "EMAIL": "Email",
+          "PHONE": "Phone",
+          "STATUS": "Employee Status",
+          "WORKING_DATE": "Start Working At"
+        },
+        "FORM": {
+          "TITLE_NEW": "Add new employee",
+          "TITLE_EDIT": "Update",
+          "CODE": "Employee Code",
+          "FIRST_NAME": "First Name",
+          "LAST_NAME": "Last Name",
+          "EMAIL": "Email",
+          "BADGE_CARD_NUMBER": "Card Number",
+          "BADGE_CARD_DATE": "Date Apply",
+          "POSITION": "Position",
+          "FINGER_SIGN_NUMBER": "Finger Sign Number",
+          "FINGER_SIGN_DATE": "Date Apply",
+          "DEPARTMENT": "Department",
+          "PHONE": "Phone",
+          "PROBATION_DATE": "Probation Date",
+          "BASIC_SALARY": "Basic Salary",
+          "STATUS": "Working Status",
+          "WORKING_DATE": "Start Working At"
+        },
+        "ERROR": {
+          "DROPDOWN": "Can not get list of employee"
+        },
+        "PERSONAL_INFO": {
+          "TITLE": "Personal Info",
+          "DOB": "Date Of Birth",
+          "GENDER": "Gender",
+          "GENDER_MALE": "Male",
+          "GENDER_FEMALE": "Female",
+          "MATERIAL_STATUS": "Material Status",
+          "NATIONALITY": "Nationality",
+          "ETHNICITY": "Ethnicity",
+          "RELIGION": "Religion",
+          "EDUCATION": "Education",
+          "QUALIFICATION": "Qualification"
+        }
+      },
       "CONFIGURATION": {
+        "TITLE": "Configuration",
         "APPROVE_STATUS": {
-          "LIST": {
-
+          "TITLE": "Approve Status",
+          "LIST_TITLE": "List Of Approve Status",
+          "TABLE": {
           },
           "FORM": {
-
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "CODE": "Code",
+            "NAME": "Name"
+          },
+          "ERROR": {
+            "DROPDOWN": "Can not get the list of approve status"
           }
+        },
+        "DISTRICT": {
+          "TITLE": "District",
+          "LIST_TITLE": "List Of District",
+          "POPUP_TITLE": "Add New District",
+          "TABLE": {
+            "NAME": "District Name",
+            "PROVINCE": "Province Name"
+          },
+          "FORM": {
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "District Name",
+            "PROVINCE": "Province Name"
+          },
+          "ERROR": {
+            "DROPDOWN": "Can not get the list of district"
+          }
+        },
+        "EDUCATION": {
+          "TITLE": "Education",
+          "LIST_TITLE": "List Of Education",
+          "POPUP_TITLE": "Add New Education",
+          "TABLE": {
+            "NAME": "Name",
+            "DESCRIPTION": "Description"
+          },
+          "FORM": {
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name",
+            "DESCRIPTION": "Description"
+          },
+          "ERROR": {
+            "DROPDOWN": "Can not get the list of education"
+          }
+        },
+        "WORKING_STATUS": {
+          "TITLE": "Trạng thái nhân viên",
+          "LIST_TITLE": "Danh sách trạng thái nhân viên",
+          "POPUP_TITLE": "Thêm mới trạng thái nhân viên",
+          "TABLE": {
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách trạng thái nhân viên"
+          }
+        },
+        "IDENTIFICATION": {
+          "TITLE": "Giấy tờ tùy thân",
+          "LIST_TITLE": "Danh sách giấy tờ tùy thân",
+          "POPUP_TITLE": "Thêm mới giấy tờ tùy thân",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách giấy tờ tùy thân"
+          }
+        },
+        "MODEL_OF_STUDY": {
+          "TITLE": "Hình thức đào tạo",
+          "LIST_TITLE": "Danh sách hình thức đào tạo",
+          "POPUP_TITLE": "Thêm mới hình thức đào tạo",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách hình thức đào tạo"
+          }
+        },
+        "NATIONALITY": {
+          "TITLE": "Quốc tịch",
+          "LIST_TITLE": "Danh sách quốc tịch",
+          "POPUP_TITLE": "Thêm mới quốc tịch",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách quốc tịch"
+          }
+        },
+        "QUALIFICATION": {
+          "TITLE": "Trình độ chuyên môn",
+          "LIST_TITLE": "Danh sách trình độ chuyên môn",
+          "POPUP_TITLE": "Thêm mới trình độ chuyên môn",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách trình độ chuyên môn"
+          }
+        },
+        "PROVINCE": {
+          "TITLE": "Tỉnh/Thành phố",
+          "LIST_TITLE": "Danh sách Tỉnh/Thành phố",
+          "POPUP_TITLE": "Thêm mới Tỉnh/Thành phố",
+          "TABLE": {
+            "NAME": "Tên tỉnh/thành phố"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên tỉnh/thành phố"        },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách Tỉnh/Thành phố"
+          }
+        },
+        "RANKING": {
+          "TITLE": "Xếp hạng học tập",
+          "LIST_TITLE": "Danh sách xếp hạng học tập",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách xếp hạng học tập"
+          }
+        },
+        "RELATIONSHIP_TYPE": {
+          "TITLE": "Quan hệ gia đình",
+          "LIST_TITLE": "Danh sách quan hệ gia đình",
+          "TABLE": {
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên",
+            "DESCRIPTION": "Mô tả"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách mối quan hệ gia đình"
+          }
+        },
+        "ETHNICITY": {
+          "TITLE": "Dân tộc",
+          "POPUP_TITLE": "Thêm mới dân tộc",
+          "LIST_TITLE": "Danh sách dân tộc",
+          "TABLE": {
+            "NAME": "Tên dân tộc"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách dân tộc"
+          }
+        },
+        "RELIGION": {
+          "TITLE": "Tôn giáo",
+          "POPUP_TITLE": "Thêm mới tôn giáo",
+          "LIST_TITLE": "Danh sách tôn giáo",
+          "TABLE": {
+            "NAME": "Tên tôn giáo"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách tôn giáo"
+          }
+        },
+        "WARD": {
+          "TITLE": "Phường/Xã",
+          "LIST_TITLE": "Danh sách phường xã",
+          "TABLE": {
+            "NAME": "Tên phường/xã",
+            "DISTRICT_NAME": "Quận/Huyện",
+            "PROVINCE_NAME": "Tỉnh/Thành phố"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên phường/xã",
+            "DISTRICT_NAME": "Quận/Huyện",
+            "PROVINCE_NAME": "Tỉnh/Thành phố"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách phường/xã"
+          }
+        },
+        "CONTRACT_TYPE":{
+          "TITLE":"Loại hợp đồng",
+          "LIST_TITLE":"Danh sách loại hợp đồng",
+          "TABLE":{
+            "NAME":"Tên",
+            "DESCRIPTION":"Mô tả",
+            "INSURANCE":"Đóng bảo hiểm",
+            "LEAVEDATE":"Được nghỉ phép"
+          },
+          "FORM":{
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME":"Tên loại hợp đồng",
+            "DESCRIPTION":"Mô tả",
+            "INSURANCE":"Đóng bảo hiểm",
+            "LEAVEDATE":"Được nghỉ phép"
+          },
+          "ERROR":{
+            "DROPDOWN": "Không thể lấy danh sách hợp đồng"
+          }
+        }
+      }
+    },
+    "SYSTEM":{
+      "TITLE": "Hệ thống",
+      "ROLE":{
+        "TITLE":"Nhóm người dùng",
+        "LIST_TITLE":"Danh sách nhóm người dùng",
+        "POPUP_TITLE":"Thêm mới nhóm người dùng",
+        "TABLE":{
+          "NAME":"Tên",
+          "DESCRIPTION":"Mô tả"
+        },
+        "FORM":{
+          "TITLE_NEW":"Thêm mới",
+          "TITLE_EDIT":"Cập nhật",
+          "NAME":"Tên",
+          "DESCRIPTION":"Mô tả"
+        },
+        "ERROR":{
+          "DROPDOWN":"Không thể lấy danh sách nhóm người dùng"
         }
       }
     }

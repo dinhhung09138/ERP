@@ -4,7 +4,9 @@
     <div class="card">
       <div class="card-header">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> Danh sách trạng thái phê duyệt</div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            {{ 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.LIST_TITLE' | translate }}
+          </div>
         </div>
       </div>
       <div class="card-body">
@@ -76,7 +78,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
                       <a href="javascript:{}" class="dropdown-item text-success"
-                        (click)="onUpdateClick(element.id)">{{ 'BUTTON.EDIT' | translate }}</a>
+                        (click)="onUpdateClick(element.id)">{{ 'BUTTON.UPDATE' | translate }}</a>
                       <a href="javascript:{}" class="dropdown-item text-danger"
                         (click)="onDeleteClick(element.id, element.rowVersion)">{{ 'BUTTON.DELETE' | translate }}</a>
                     </div>

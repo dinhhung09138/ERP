@@ -36,7 +36,7 @@
   },
   "BUTTON": {
     "ADD": "Thêm mới",
-    "EDIT": "Cập nhật",
+    "UPDATE": "Cập nhật",
     "DELETE": "Xóa",
     "IMPORT": "Nhập",
     "EXPORT": "Xuất file",
