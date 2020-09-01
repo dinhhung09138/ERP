@@ -9,6 +9,7 @@ namespace Database.Sql.ERP.Entities.HR
     {
         [Key]
         [Column(TypeName = "int")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Column(TypeName = "varchar(10)")]

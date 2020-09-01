@@ -9,6 +9,7 @@ namespace Database.Sql.ERP.Entities.Security
     {
         [Key]
         [Column(TypeName = "uniqueidentifier")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Column(TypeName = "varchar(500)")]

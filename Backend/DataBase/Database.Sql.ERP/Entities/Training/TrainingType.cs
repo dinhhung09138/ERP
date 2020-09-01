@@ -9,6 +9,7 @@ namespace Database.Sql.ERP.Entities.Training
     {
         [Key]
         [Column(TypeName = "int")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
