@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.Common
 {
-    [Table("District")]
+    [Table("Common_District")]
     public class District
     {
         [Key]

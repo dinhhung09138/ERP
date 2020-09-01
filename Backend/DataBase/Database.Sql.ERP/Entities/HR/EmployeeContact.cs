@@ -33,7 +33,7 @@ namespace Database.Sql.ERP.Entities.HR
         [MaxLength(50)]
         public string Skyper { get; set; }
 
-        [Column(TypeName = "varchar(250)")]
+        [Column(TypeName = "nvarchar(250)")]
         [MaxLength(250)]
         public string TemporaryAddress { get; set; }
 
@@ -46,7 +46,7 @@ namespace Database.Sql.ERP.Entities.HR
         [Column(TypeName = "int")]
         public int? TemporaryCityId { get; set; }
 
-        [Column(TypeName = "varchar(250")]
+        [Column(TypeName = "nvarchar(250)")]
         [MaxLength(250)]
         public string PermanentAddress { get; set; }
 

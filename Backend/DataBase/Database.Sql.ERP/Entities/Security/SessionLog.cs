@@ -5,22 +5,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.Security
 {
+    [Table("Security_SessionLog")]
     public class SessionLog
     {
         [Key]
-        [Column(TypeName = "uniqueidentifier")]
+        [Column(TypeName = "int")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Column(TypeName = "varchar(500)")]
         [Required]
-        [MaxLength(500)]
         public string Token { get; set; }
+
+        [Column(TypeName = "varchar(500)")]
+        [Required]
+        public string RefreshToken { get; set; }
 
         [Column(TypeName = "datetime")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue("Getdate()")]
         public DateTime LoginTime { get; set; }
 
         [Column(TypeName = "datetime")]
@@ -32,8 +34,6 @@ namespace Database.Sql.ERP.Entities.Security
 
         [Column(TypeName = "bit")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue(true)]
         public bool IsOnline { get; set; }
 
         [Column(TypeName = "varchar(50)")]
@@ -54,36 +54,28 @@ namespace Database.Sql.ERP.Entities.Security
 
         [Column(TypeName = "bit")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue(true)]
         public bool IsActive { get; set; }
 
-        [Column(TypeName = "varchar(40)")]
+        [Column(TypeName = "int")]
         [Required]
-        public string CreateBy { get; set; }
+        public int CreateBy { get; set; }
 
         [Column(TypeName = "datetime")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue("getdate()")]
         public DateTime CreateDate { get; set; }
-
-        [Column(TypeName = "varchar(40)")]
-        public string UpdateBy { get; set; }
 
         [Column(TypeName = "datetime")]
         public DateTime? UpdateDate { get; set; }
 
+        [Column(TypeName = "int")]
+        public int? UpdateBy { get; set; }
+
         [Column(TypeName = "bit")]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue(false)]
         public bool Deleted { get; set; }
 
-        [Column(TypeName = "varchar(40)")]
-        public string DeleteBy { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? DeleteDate { get; set; }
+        [Column(TypeName = "timestamp")]
+        [Required]
+        public byte[] RowVersion { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.Common
 {
-    [Table("ProfessionalQualification")]
+    [Table("Common_ProfessionalQualification")]
     public class ProfessionalQualification
     {
         [Key]
