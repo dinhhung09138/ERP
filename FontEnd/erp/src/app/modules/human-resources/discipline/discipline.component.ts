@@ -11,7 +11,7 @@ import { DisciplineFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-discipline',
   templateUrl: './discipline.component.html',
-  styleUrls: ['./discipline.component.css']
+  styleUrls: ['./discipline.component.scss']
 })
 export class DisciplineComponent implements OnInit {
 

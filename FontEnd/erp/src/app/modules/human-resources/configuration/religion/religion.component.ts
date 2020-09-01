@@ -11,7 +11,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-hr-religion',
   templateUrl: './religion.component.html',
-  styleUrls: ['./religion.component.css']
+  styleUrls: ['./religion.component.scss']
 })
 export class ReligionComponent implements OnInit {
 

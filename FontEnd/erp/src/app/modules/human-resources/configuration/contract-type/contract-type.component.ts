@@ -11,7 +11,7 @@ import { ContractTypeFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-contract-type',
   templateUrl: './contract-type.component.html',
-  styleUrls: ['./contract-type.component.css']
+  styleUrls: ['./contract-type.component.scss']
 })
 export class ContractTypeComponent implements OnInit {
 

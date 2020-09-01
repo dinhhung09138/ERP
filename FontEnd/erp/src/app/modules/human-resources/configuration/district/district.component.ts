@@ -13,7 +13,7 @@ import { ProvinceViewModel } from '../province/province.model';
 @Component({
   selector: 'app-hr-district',
   templateUrl: './district.component.html',
-  styleUrls: ['./district.component.css']
+  styleUrls: ['./district.component.scss']
 })
 export class DistrictComponent implements OnInit {
 

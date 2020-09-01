@@ -3,14 +3,13 @@ import { LoadingService } from './core/services/loading.service';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { map, catchError, filter } from 'rxjs/operators';
-import { Observable, of, pipe } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 

@@ -11,7 +11,7 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 @Component({
   selector: 'app-hr-model-of-study-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class ModelOfStudyFormComponent implements OnInit {
 

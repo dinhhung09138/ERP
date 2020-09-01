@@ -10,7 +10,7 @@ import { TrainingTypeViewModel } from '../training-type.model';
 @Component({
   selector: 'app-training-training-type-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class TrainingTypeFormComponent implements OnInit {
 

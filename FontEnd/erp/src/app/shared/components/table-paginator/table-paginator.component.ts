@@ -5,7 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-table-paginator',
   templateUrl: './table-paginator.component.html',
-  styleUrls: ['./table-paginator.component.css']
+  styleUrls: ['./table-paginator.component.scss']
 })
 export class TablePaginatorComponent implements OnInit {
 

@@ -12,7 +12,7 @@ import { EducationFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-education',
   templateUrl: './education.component.html',
-  styleUrls: ['./education.component.css']
+  styleUrls: ['./education.component.scss']
 })
 export class EducationComponent implements OnInit {
 

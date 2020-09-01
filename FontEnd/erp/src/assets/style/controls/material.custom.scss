@@ -176,3 +176,16 @@
 .mat-progress-spinner.mat-accent circle, .mat-spinner.mat-accent circle {
   stroke: $primary-background-color !important;
 }
+
+.mat-header-cell, .mat-cell, .mat-footer-cell {
+  font: $font-family;
+  font-weight: 500;
+}
+
+.mat-paginator, .mat-paginator-page-size .mat-select-trigger {
+  font: $font-family;
+}
+
+.mat-menu-item {
+  font: $font-family;
+}

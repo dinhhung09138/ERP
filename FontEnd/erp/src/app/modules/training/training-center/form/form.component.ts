@@ -9,7 +9,7 @@ import { Component, OnInit, ElementRef, EventEmitter, Output, ViewChild } from '
 @Component({
   selector: 'app-training-training-center-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class TrainingCenterFormComponent implements OnInit {
 

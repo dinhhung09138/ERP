@@ -11,7 +11,7 @@ import { IdentificationTypeFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-identification-type',
   templateUrl: './identification-type.component.html',
-  styleUrls: ['./identification-type.component.css']
+  styleUrls: ['./identification-type.component.scss']
 })
 export class IdentificationTypeComponent implements OnInit {
 

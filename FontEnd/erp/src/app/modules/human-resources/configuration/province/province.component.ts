@@ -11,7 +11,7 @@ import { ProvinceFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-province',
   templateUrl: './province.component.html',
-  styleUrls: ['./province.component.css']
+  styleUrls: ['./province.component.scss']
 })
 export class ProvinceComponent implements OnInit {
 

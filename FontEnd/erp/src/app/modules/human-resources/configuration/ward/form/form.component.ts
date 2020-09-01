@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-hr-ward-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class WardFormComponent implements OnInit {
 

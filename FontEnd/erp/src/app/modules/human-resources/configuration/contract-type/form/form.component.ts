@@ -12,7 +12,7 @@ import { ApplicationConstant } from 'src/app/core/constants/app.constant';
 @Component({
   selector: 'app-hr-contract-type-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class ContractTypeFormComponent implements OnInit {
 

@@ -1,0 +1,35 @@
+.header {
+  background-color: #1A6E64;
+  padding: 0.3rem 0.5rem;
+}
+
+.header a.nav-link {
+  color: White;
+}
+
+.header .navbar-nav .nav-item .nav-link {
+  padding-right: 1.2rem;
+  padding-left: 1.2rem;
+}
+
+.header .navbar-nav .nav-item .nav-link i {
+  font-size: 15px;
+  color: white;
+}
+
+.header .navbar-nav .nav-link .navbar-badge {
+  top: 4px;
+  position: absolute;
+}
+
+.header .mat-menu-trigger {
+  cursor: pointer;
+}
+
+.mat-menu-item {
+  padding: 0.25rem 0.25rem;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+  height: 36px;
+  line-height: 20px;
+}

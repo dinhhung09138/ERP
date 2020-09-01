@@ -11,7 +11,7 @@ import { ProfessionalQualificationFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-professional-qualification',
   templateUrl: './professional-qualification.component.html',
-  styleUrls: ['./professional-qualification.component.css']
+  styleUrls: ['./professional-qualification.component.scss']
 })
 export class ProfessionalQualificationComponent implements OnInit {
 

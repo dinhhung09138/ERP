@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-hr-discipline-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class DisciplineFormComponent implements OnInit {
 

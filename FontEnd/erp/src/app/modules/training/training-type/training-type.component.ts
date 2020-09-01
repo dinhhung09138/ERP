@@ -16,7 +16,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 @Component({
   selector: 'app-training-training-type',
   templateUrl: './training-type.component.html',
-  styleUrls: ['./training-type.component.css']
+  styleUrls: ['./training-type.component.scss']
 })
 export class TrainingTypeComponent implements OnInit {
 

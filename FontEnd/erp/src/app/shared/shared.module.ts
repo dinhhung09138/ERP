@@ -15,6 +15,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { TablePaginatorComponent } from './components/table-paginator/table-paginator.component';
 import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
+import {MatMenuModule} from '@angular/material/menu';
 import { AppMatPaginatorIntl } from './services/mat-paginator-intl.service';
 import { NotifyComponent } from './components/notify/notify.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -33,6 +34,7 @@ import { ApplicationConstant } from '../core/constants/app.constant';
     ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
+    MatMenuModule,
     RouterModule,
     TranslateModule.forRoot({
       loader: {

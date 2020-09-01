@@ -11,7 +11,7 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 @Component({
   selector: 'app-hr-identification-type-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class IdentificationTypeFormComponent implements OnInit {
 

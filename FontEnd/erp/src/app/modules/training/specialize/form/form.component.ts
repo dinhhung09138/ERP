@@ -9,7 +9,7 @@ import { SpecializeViewModel } from '../specialize.model';
 @Component({
   selector: 'app-training-specialize-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class SpecializeFormComponent implements OnInit {
 

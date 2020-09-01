@@ -14,7 +14,7 @@ import { DistrictViewModel } from '../district/district.model';
 @Component({
   selector: 'app-hr-ward',
   templateUrl: './ward.component.html',
-  styleUrls: ['./ward.component.css']
+  styleUrls: ['./ward.component.scss']
 })
 export class WardComponent implements OnInit {
 

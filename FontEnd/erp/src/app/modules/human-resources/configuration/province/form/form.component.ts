@@ -13,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-hr-province-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class ProvinceFormComponent implements OnInit {
 

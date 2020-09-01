@@ -99,5 +99,24 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i class="fa fa-th-large"></i></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" mat-button [matMenuTriggerFor]="beforeMenu">
+            <img src="../../../../assets/images/no-image.png" width="30" height="30" />
+            &nbsp;
+            Tran Dinh Hung
+            &nbsp;
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </a>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item>
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              Change password
+            </button>
+            <button mat-menu-item>
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+              Logout
+            </button>
+          </mat-menu>
+        </li>
     </ul>
 </nav>

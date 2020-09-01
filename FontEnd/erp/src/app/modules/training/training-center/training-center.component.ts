@@ -16,7 +16,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-training-training-center',
   templateUrl: './training-center.component.html',
-  styleUrls: ['./training-center.component.css']
+  styleUrls: ['./training-center.component.scss']
 })
 export class TrainingCenterComponent implements OnInit {
 

@@ -11,7 +11,7 @@ import { CommendationFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-commendation',
   templateUrl: './commendation.component.html',
-  styleUrls: ['./commendation.component.css']
+  styleUrls: ['./commendation.component.scss']
 })
 export class CommendationComponent implements OnInit {
 

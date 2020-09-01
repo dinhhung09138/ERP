@@ -11,7 +11,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-hr-ethnicity',
   templateUrl: './ethnicity.component.html',
-  styleUrls: ['./ethnicity.component.css']
+  styleUrls: ['./ethnicity.component.scss']
 })
 export class EthnicityComponent implements OnInit {
 

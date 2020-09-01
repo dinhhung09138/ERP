@@ -11,7 +11,7 @@ import { ModelOfStudyFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-model-of-study',
   templateUrl: './model-of-study.component.html',
-  styleUrls: ['./model-of-study.component.css']
+  styleUrls: ['./model-of-study.component.scss']
 })
 export class ModelOfStudyComponent implements OnInit {
 

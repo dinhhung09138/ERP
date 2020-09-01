@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-error-dialog',
   templateUrl: './error-dialog.component.html',
-  styleUrls: ['./error-dialog.component.css']
+  styleUrls: ['./error-dialog.component.scss']
 })
 export class ErrorDialogComponent implements OnInit {
 

@@ -1,5 +1,6 @@
 $primary-background-color: #1A6E64;
 $card-background-color: #1A6E64;
+$font-family: 400 16px/20px Roboto, "Helvetica Neue", sans-serif !important;
 
 /* You can add global styles to this file, and also import other style files */
 html,
@@ -9,7 +10,7 @@ body {
 
 body {
   margin: 0;
-  font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  font: 400 16px/20px Roboto, "Helvetica Neue", sans-serif !important;
   letter-spacing: normal;
 }
 

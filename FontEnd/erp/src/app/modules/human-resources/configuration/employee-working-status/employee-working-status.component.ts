@@ -11,7 +11,7 @@ import { EmployeeWorkingStatusFormComponent } from './form/form.component';
 @Component({
   selector: 'app-employee-working-status',
   templateUrl: './employee-working-status.component.html',
-  styleUrls: ['./employee-working-status.component.css']
+  styleUrls: ['./employee-working-status.component.scss']
 })
 export class EmployeeWorkingStatusComponent implements OnInit {
 

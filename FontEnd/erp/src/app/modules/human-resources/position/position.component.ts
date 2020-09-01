@@ -11,7 +11,7 @@ import { PositionFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-position',
   templateUrl: './position.component.html',
-  styleUrls: ['./position.component.css']
+  styleUrls: ['./position.component.scss']
 })
 export class PositionComponent implements OnInit {
 

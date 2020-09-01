@@ -11,7 +11,7 @@ import { RelationshipTypeFormComponent } from './form/form.component';
 @Component({
   selector: 'app-hr-relationship-type',
   templateUrl: './relationship-type.component.html',
-  styleUrls: ['./relationship-type.component.css']
+  styleUrls: ['./relationship-type.component.scss']
 })
 export class RelationshipTypeComponent implements OnInit {
 

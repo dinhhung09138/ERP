@@ -16,7 +16,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 @Component({
   selector: 'app-training-specialize',
   templateUrl: './specialize.component.html',
-  styleUrls: ['./specialize.component.css']
+  styleUrls: ['./specialize.component.scss']
 })
 export class SpecializeComponent implements OnInit {
 

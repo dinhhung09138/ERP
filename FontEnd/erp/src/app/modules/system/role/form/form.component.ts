@@ -11,7 +11,7 @@ import { ApplicationConstant } from 'src/app/core/constants/app.constant';
 @Component({
   selector: 'app-role-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class RoleFormComponent implements OnInit {
 

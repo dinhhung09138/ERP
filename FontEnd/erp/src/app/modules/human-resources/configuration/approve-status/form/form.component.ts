@@ -12,7 +12,7 @@ import { ApplicationConstant } from '../../../../../core/constants/app.constant'
 @Component({
   selector: 'app-hr-approve-status-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
 export class ApproveStatusFormComponent implements OnInit {
 
