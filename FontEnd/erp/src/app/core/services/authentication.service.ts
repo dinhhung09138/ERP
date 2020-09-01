@@ -37,7 +37,7 @@ export class AuthenticationService {
       if (this.context.isAuthenticated() === true) {
         const refreshTokenModel = this.context.getRefreshToken();
         if (refreshTokenModel) {
-          this.http.post<ResponseModel>(APIUrlConstants.authenticationApi + 'refresh-token', refreshTokenModel).toPromise().then(
+          this.http.post<ResponseModel>(this.url.refreshToken, refreshTokenModel).toPromise().then(
             (response: ResponseModel) => {
               if (response && response.responseStatus === ResponseStatus.success) {
                 this.context.saveToken(response.result);

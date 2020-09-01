@@ -25,6 +25,12 @@ import { AppLoadService } from './services/app-load.service';
     NotifyService,
     LoadingService,
     AuthenticationService,
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: (authenticationService: AuthenticationService) => () => authenticationService.refreshToken(1000),
+    //   deps: [AuthenticationService, HttpClientModule],
+    //   multi: true,
+    // },
     {
       provide: APP_INITIALIZER,
       useFactory: (config: AppLoadService) => () => config.getUrlSetting(),
@@ -37,12 +43,6 @@ import { AppLoadService } from './services/app-load.service';
       deps: [AppLoadService, HttpClientModule],
       multi: true
     },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (authenticationService: AuthenticationService) => () => authenticationService.refreshToken(1000),
-      deps: [AuthenticationService, HttpClientModule],
-      multi: true,
-    }
   ],
   declarations: []
 })

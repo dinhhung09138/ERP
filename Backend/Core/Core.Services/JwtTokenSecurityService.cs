@@ -68,7 +68,7 @@ namespace Core.Services
             }
             catch (Exception ex)
             {
-                return null;
+                throw ex;
             }
         }
 
@@ -88,9 +88,9 @@ namespace Core.Services
                 return null;
                 
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                throw ex;
             }
         }
 
@@ -131,9 +131,9 @@ namespace Core.Services
 
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
@@ -148,7 +148,7 @@ namespace Core.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
             };
 

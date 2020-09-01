@@ -82,6 +82,13 @@ export class ErrorInterceptor implements HttpInterceptor {
               } as DialogDataInterface;
               this.dialogService.openErrorDialog(error204);
               break;
+            default:
+              const errorNotResponse = {
+                isError: true,
+                httpError: HttpErrorStatusEnum.serverNotFound
+              } as DialogDataInterface;
+              this.dialogService.openErrorDialog(errorNotResponse);
+              break;
         }
         console.log(error.error);
         return throwError(error);
