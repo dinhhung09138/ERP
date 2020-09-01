@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Database.Sql.ERP;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -20,7 +23,13 @@ namespace APIGateway
             try
             {
                 Log.Information("Application start");
-                CreateHostBuilder(args).Build().Run();
+                var host = CreateHostBuilder(args).Build();// CreateHostBuilder(args).Build().Run();
+                using (var scope = host.Services.CreateScope())
+                {
+                    var context = scope.ServiceProvider.GetService<ERPContext>();
+                    context.Database.Migrate();
+                }
+                host.Run();
             }
             catch (Exception ex)
             {
