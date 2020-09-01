@@ -46,6 +46,7 @@ namespace Database.Sql.ERP.Entities.Security
         public bool Deleted { get; set; }
 
         [Column(TypeName = "timestamp")]
+        [Required]
         public byte[] RowVersion { get; set; }
     }
 }

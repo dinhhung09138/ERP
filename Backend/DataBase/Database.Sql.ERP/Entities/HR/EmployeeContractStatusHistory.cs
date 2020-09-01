@@ -57,7 +57,12 @@ namespace Database.Sql.ERP.Entities.HR
         [Column(TypeName = "int")]
         public int? UpdateBy { get; set; }
 
+        [Column(TypeName = "bit")]
+        [Required]
+        public bool Deleted { get; set; }
+
         [Column(TypeName = "timestamp")]
+        [Required]
         public byte[] RowVersion { get; set; }
     }
 }

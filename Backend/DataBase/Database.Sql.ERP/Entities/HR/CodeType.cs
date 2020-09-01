@@ -46,5 +46,9 @@ namespace Database.Sql.ERP.Entities.HR
         [Column(TypeName = "int")]
         [Required]
         public int Precedence { get; set; }
+
+        [Column(TypeName = "timestamp")]
+        [Required]
+        public byte[] RowVersion { get; set; }
     }
 }

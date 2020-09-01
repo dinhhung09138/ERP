@@ -66,5 +66,9 @@ namespace Database.Sql.ERP.Entities.Common
 
         [Column(TypeName = "datetime")]
         public DateTime? DeletedDate { get; set; }
+
+        [Column(TypeName = "timestamp")]
+        [Required]
+        public byte[] RowVersion { get; set; }
     }
 }

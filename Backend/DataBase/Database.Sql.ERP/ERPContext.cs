@@ -111,97 +111,184 @@ namespace Database.Sql.ERP
             #region " [ Common ] "
 
             modelBuilder.Entity<District>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<ProfessionalQualification>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Province>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Ward>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
-            modelBuilder.Entity<File>();
+            modelBuilder.Entity<File>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
 
             #endregion
 
             #region " [ HR ] "
 
             modelBuilder.Entity<Education>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<ApproveStatus>(entity => {
                 entity.HasIndex(m => m.Code).IsUnique(true);
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
-            modelBuilder.Entity<CodeType>();
+            modelBuilder.Entity<CodeType>(entity => {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
             modelBuilder.Entity<Commendation>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<ContractType>(entity => {
                 entity.HasIndex(m => m.Code).IsUnique(true);
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Discipline>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Employee>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeCommendation>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeContact>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeContract>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeContractStatusHistory>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeDiscipline>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeEducation>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeIdentification>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeInfo>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeRelationship>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<EmployeeWorkingStatus>(entity => {
                 entity.HasIndex(m => m.Code).IsUnique(true);
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<IdentificationType>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<ModelOfStudy>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Ethnicity>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Nationality>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Ranking>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<RelationshipType>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Religion>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Position>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
@@ -210,36 +297,69 @@ namespace Database.Sql.ERP
             #region " [ Training ]
 
             modelBuilder.Entity<Appraise>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<AppraiseAnswer>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<AppraiseQuestion>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<AppraiseSection>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<Lecturer>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<SpecializedTraining>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<TrainingCenter>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<TrainingCenterContact>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<TrainingCourse>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<TrainingCourseDocument>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
             modelBuilder.Entity<TrainingType>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
@@ -247,10 +367,18 @@ namespace Database.Sql.ERP
 
             #region " [ Security ]
 
-            modelBuilder.Entity<User>();
+            modelBuilder.Entity<User>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
             modelBuilder.Entity<SessionLog>();
 
             modelBuilder.Entity<Role>(entity => {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 

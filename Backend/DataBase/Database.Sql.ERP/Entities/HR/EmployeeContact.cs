@@ -85,6 +85,7 @@ namespace Database.Sql.ERP.Entities.HR
         public bool Deleted { get; set; }
 
         [Column(TypeName = "timestamp")]
+        [Required]
         public byte[] RowVersion { get; set; }
     }
 }
