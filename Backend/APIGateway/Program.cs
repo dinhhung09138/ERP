@@ -24,11 +24,11 @@ namespace APIGateway
             {
                 Log.Information("Application start");
                 var host = CreateHostBuilder(args).Build();
-                using (var scope = host.Services.CreateScope())
-                {
-                    var context = scope.ServiceProvider.GetService<ERPContext>();
-                    context.Database.Migrate();
-                }
+                //using (var scope = host.Services.CreateScope())
+                //{
+                //    var context = scope.ServiceProvider.GetService<ERPContext>();
+                //    context.Database.Migrate();
+                //}
                 host.Run();
             }
             catch (Exception ex)
