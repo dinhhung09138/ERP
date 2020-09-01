@@ -1,5 +1,4 @@
 ﻿using Core.CommonModel;
-using Core.CommonModel.Exceptions;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
 using Service.HR.Interfaces;

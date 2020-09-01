@@ -1,6 +1,4 @@
-﻿using Core.CommonMessage;
-using Core.CommonModel;
-using Core.CommonModel.Exceptions;
+﻿using Core.CommonModel;
 using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Training;
@@ -72,11 +70,6 @@ namespace Service.Training
             try
             {
                 TrainingCourseDocument md = await _context.TrainingCourseDocumentRepository.FirstOrDefaultAsync(m => m.Id == id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
 
                 TrainingCourseDocumentModel model = new TrainingCourseDocumentModel()
                 {

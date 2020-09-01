@@ -1,5 +1,4 @@
 ﻿using Core.CommonModel;
-using Core.CommonModel.Exceptions;
 using Service.HR.Interfaces;
 using Service.HR.Models;
 using System;

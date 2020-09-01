@@ -1,6 +1,4 @@
-﻿using Core.CommonMessage;
-using Core.CommonModel;
-using Core.CommonModel.Exceptions;
+﻿using Core.CommonModel;
 using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
@@ -148,11 +146,6 @@ namespace Service.HR
                                           IsActive = m.IsActive,
                                           RowVersion = m.RowVersion,
                                       };
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
 
                 EmployeeModel item = await md.FirstOrDefaultAsync();
 

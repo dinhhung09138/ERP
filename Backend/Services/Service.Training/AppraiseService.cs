@@ -1,6 +1,4 @@
-﻿using Core.CommonMessage;
-using Core.CommonModel;
-using Core.CommonModel.Exceptions;
+﻿using Core.CommonModel;
 using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Training;
@@ -97,11 +95,6 @@ namespace Service.Training
             try
             {
                 Appraise md = await _context.AppraiseRepository.FirstOrDefaultAsync(m => m.Id == id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
 
                 AppraiseModel model = new AppraiseModel()
                 {

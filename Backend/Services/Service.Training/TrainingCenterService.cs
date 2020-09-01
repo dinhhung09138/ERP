@@ -1,6 +1,5 @@
 ﻿using Core.CommonMessage;
 using Core.CommonModel;
-using Core.CommonModel.Exceptions;
 using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Training;

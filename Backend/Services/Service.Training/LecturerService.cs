@@ -1,6 +1,4 @@
-﻿using Core.CommonMessage;
-using Core.CommonModel;
-using Core.CommonModel.Exceptions;
+﻿using Core.CommonModel;
 using Core.Services;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Training;
@@ -108,11 +106,6 @@ namespace Service.Training
             try
             {
                 Lecturer md = await _context.LecturerRepository.FirstOrDefaultAsync(m => m.Id == id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
 
                 LecturerModel model = new LecturerModel()
                 {

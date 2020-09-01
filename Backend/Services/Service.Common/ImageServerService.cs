@@ -8,7 +8,6 @@ using Service.Common.Models;
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Core.CommonModel.Exceptions;
 using Core.Utility.Extensions;
 using System.IO;
 using System.Drawing;
@@ -129,11 +128,6 @@ namespace Service.Common
             try
             {
                 Database.Sql.ERP.Entities.Common.File md = await _context.FileRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
-
-                if (md == null)
-                {
-                    throw new NullParameterException();
-                }
 
                 if (!string.IsNullOrEmpty(md.FilePath) && System.IO.File.Exists(Path.Combine(md.FilePath)))
                 {
