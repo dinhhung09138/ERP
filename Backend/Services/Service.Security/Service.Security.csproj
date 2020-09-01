@@ -12,6 +12,7 @@
     <ProjectReference Include="..\..\Core\Core.Services\Core.Services.csproj" />
     <ProjectReference Include="..\..\Core\Core.Utility\Core.Utility.csproj" />
     <ProjectReference Include="..\..\DataBase\Database.Sql.ERP\Database.Sql.ERP.csproj" />
+    <ProjectReference Include="..\Service.Common\Service.Common.csproj" />
   </ItemGroup>
 
 </Project>
