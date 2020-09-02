@@ -11,22 +11,27 @@ namespace Database.Sql.ERP.Entities.Security
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Column(TypeName = "varchar(20)")]
+        [Column(TypeName = "varchar(50)")]
+        [MaxLength(50)]
         [Required]
         public string FunctionCode { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
+        [MaxLength(50)]
         [Required]
         public string Name { get; set; }
 
         [Column(TypeName = "varchar(50)")]
+        [MaxLength(50)]
         public string ModuleName { get; set; }
 
         [Column(TypeName = "varchar(50)")]
+        [MaxLength(50)]
         [Required]
         public string ControllerName { get; set; }
 
         [Column(TypeName = "varchar(50)")]
+        [MaxLength(50)]
         [Required]
         public string ActionName { get; set; }
 

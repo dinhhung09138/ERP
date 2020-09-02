@@ -399,6 +399,51 @@ namespace Database.Sql.ERP
 
         #region " [ Security ] "
 
+        private ITableGenericRepository<Function> _functionRepository;
+        public ITableGenericRepository<Function> FunctionRepository
+        {
+            get
+            {
+                return _functionRepository = _functionRepository ?? new TableGenericRepository<Function>(_context);
+            }
+        }
+
+        private ITableGenericRepository<FunctionCommand> _functionCommandRepository;
+        public ITableGenericRepository<FunctionCommand> FunctionCommandRepository
+        {
+            get
+            {
+                return _functionCommandRepository = _functionCommandRepository ?? new TableGenericRepository<FunctionCommand>(_context);
+            }
+        }
+
+        private ITableGenericRepository<Module> _moduleRepository;
+        public ITableGenericRepository<Module> ModuleRepository
+        {
+            get
+            {
+                return _moduleRepository = _moduleRepository ?? new TableGenericRepository<Module>(_context);
+            }
+        }
+
+        private ITableGenericRepository<Role> _roleRepository;
+        public ITableGenericRepository<Role> RoleRepository
+        {
+            get
+            {
+                return _roleRepository = _roleRepository ?? new TableGenericRepository<Role>(_context);
+            }
+        }
+
+        private ITableGenericRepository<RoleDetail> _roleDetailRepository;
+        public ITableGenericRepository<RoleDetail> RoleDetailRepository
+        {
+            get
+            {
+                return _roleDetailRepository = _roleDetailRepository ?? new TableGenericRepository<RoleDetail>(_context);
+            }
+        }
+
         private ITableGenericRepository<User> _userRepository;
         public ITableGenericRepository<User> UserRepository
         {
@@ -417,14 +462,24 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<Role> _roleRepository;
-        public ITableGenericRepository<Role> RoleRepository
+        private ITableGenericRepository<SystemLog> _systemLogRepository;
+        public ITableGenericRepository<SystemLog> SystemLogRepository
         {
             get
             {
-                return _roleRepository = _roleRepository ?? new TableGenericRepository<Role>(_context);
+                return _systemLogRepository = _systemLogRepository ?? new TableGenericRepository<SystemLog>(_context);
             }
         }
+
+        private ITableGenericRepository<UserRole> _userRoleRepository;
+        public ITableGenericRepository<UserRole> UserRoleRepository
+        {
+            get
+            {
+                return _userRoleRepository = _userRoleRepository ?? new TableGenericRepository<UserRole>(_context);
+            }
+        }
+
         #endregion
 
         public ERPUnitOfWork(ERPContext context)

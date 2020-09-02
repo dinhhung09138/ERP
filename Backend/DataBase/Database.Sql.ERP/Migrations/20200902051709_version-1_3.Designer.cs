@@ -4,14 +4,16 @@ using Database.Sql.ERP;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    partial class ERPContextModelSnapshot : ModelSnapshot
+    [Migration("20200902051709_version-1_3")]
+    partial class version1_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1956,8 +1958,8 @@ namespace Database.Sql.ERP.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("ParentCode")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int>("Precedence")
                         .ValueGeneratedOnAdd()
@@ -2329,8 +2331,8 @@ namespace Database.Sql.ERP.Migrations
             modelBuilder.Entity("Database.Sql.ERP.Entities.Security.Module", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Icon")
                         .HasColumnType("varchar(255)")

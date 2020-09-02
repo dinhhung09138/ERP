@@ -4,14 +4,16 @@ using Database.Sql.ERP;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    partial class ERPContextModelSnapshot : ModelSnapshot
+    [Migration("20200902031718_version-1_1")]
+    partial class version1_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1938,8 +1940,8 @@ namespace Database.Sql.ERP.Migrations
             modelBuilder.Entity("Database.Sql.ERP.Entities.Security.Function", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Icon")
                         .HasColumnType("varchar(255)")
@@ -1947,8 +1949,8 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<string>("ModuleCode")
                         .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1956,8 +1958,8 @@ namespace Database.Sql.ERP.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("ParentCode")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int>("Precedence")
                         .ValueGeneratedOnAdd()
@@ -1971,318 +1973,6 @@ namespace Database.Sql.ERP.Migrations
                     b.HasKey("Code");
 
                     b.ToTable("Security_Function");
-
-                    b.HasData(
-                        new
-                        {
-                            Code = "HR_DASHBOARD",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "DASHBOARD",
-                            ParentCode = "",
-                            Precedence = 1,
-                            Url = "/dashboard"
-                        },
-                        new
-                        {
-                            Code = "HR_DEPARTMENT",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "DASHBOARD",
-                            ParentCode = "",
-                            Precedence = 2,
-                            Url = "/department"
-                        },
-                        new
-                        {
-                            Code = "HR_TEAM",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "TEAM",
-                            ParentCode = "",
-                            Precedence = 3,
-                            Url = "/team"
-                        },
-                        new
-                        {
-                            Code = "HR_POSITION",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "POSITION",
-                            ParentCode = "",
-                            Precedence = 4,
-                            Url = "/position"
-                        },
-                        new
-                        {
-                            Code = "HR_COMMENDATION",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "COMMENDATION",
-                            ParentCode = "",
-                            Precedence = 5,
-                            Url = "/commendation"
-                        },
-                        new
-                        {
-                            Code = "HR_DISCIPLINE",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "DISCIPLINE",
-                            ParentCode = "",
-                            Precedence = 6,
-                            Url = "/discipline"
-                        },
-                        new
-                        {
-                            Code = "HR_EMPLOYEE",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "EMPLOYEE",
-                            ParentCode = "",
-                            Precedence = 6,
-                            Url = "/employee"
-                        },
-                        new
-                        {
-                            Code = "HR_LEAVE_MNT",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "LEAVE_MANAGEMENT",
-                            ParentCode = "",
-                            Precedence = 7,
-                            Url = "/leave-management"
-                        },
-                        new
-                        {
-                            Code = "HR_LEAVE_CALENDAR",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "CALENDAR",
-                            ParentCode = "HR_LEAVE_MNT",
-                            Precedence = 1,
-                            Url = "/leave-management/calendar"
-                        },
-                        new
-                        {
-                            Code = "HR_LEAVE_SUMMARY",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "SUMMARY",
-                            ParentCode = "HR_LEAVE_MNT",
-                            Precedence = 2,
-                            Url = "/leave-management/summary"
-                        },
-                        new
-                        {
-                            Code = "HR_LEAVE_NEW",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "NEW",
-                            ParentCode = "HR_LEAVE_MNT",
-                            Precedence = 3,
-                            Url = "/leave-management/new"
-                        },
-                        new
-                        {
-                            Code = "HR_LEAVE_APPROVE_ST",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "APPROVE_STATUS",
-                            ParentCode = "HR_LEAVE_MNT",
-                            Precedence = 4,
-                            Url = "/leave-management/approve-status"
-                        },
-                        new
-                        {
-                            Code = "HR_HOLIDAY",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "HOLIDAY",
-                            ParentCode = "",
-                            Precedence = 8,
-                            Url = "/holiday"
-                        },
-                        new
-                        {
-                            Code = "HR_CONFIGURATION",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "CONFIGURATION",
-                            ParentCode = "",
-                            Precedence = 9,
-                            Url = "/configuration"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_PROVINCE",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "PROVINCE",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 1,
-                            Url = "/configuration/province"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_DISTRICT",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "DISTRICT",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 2,
-                            Url = "/configuration/district"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_WARD",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "WARD",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 3,
-                            Url = "/configuration/ward"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_RELIGION",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "RELIGION",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 4,
-                            Url = "/configuration/religion"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_ETHNICITY",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "ETHNICITY",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 5,
-                            Url = "/configuration/ethnicity"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_NATIONALITY",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "NATIONALITY",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 6,
-                            Url = "/configuration/nationality"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_EDUCATION",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "EDUCATION",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 7,
-                            Url = "/configuration/education"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_QUALIFICATION",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "QUALIFICATION",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 8,
-                            Url = "/configuration/qualification"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_MODEL_OF_STUDY",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "MODEL_OF_STUDY",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 9,
-                            Url = "/configuration/model-of-study"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_RANKING",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "RANKING",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 10,
-                            Url = "/configuration/ranking"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_RELATIONSHIP",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "RELATIONSHIP_TYPE",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 11,
-                            Url = "/configuration/relationship-type"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_CONTRACT",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "CONTRACT_TYPE",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 12,
-                            Url = "/configuration/contract-type"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_WORKING",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "WORKING_STATUS",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 13,
-                            Url = "/configuration/working-status"
-                        },
-                        new
-                        {
-                            Code = "HR_CONF_JOB",
-                            Icon = "",
-                            ModuleCode = "HR",
-                            Name = "JOB_TITLE",
-                            ParentCode = "HR_CONFIGURATION",
-                            Precedence = 14,
-                            Url = "/configuration/job-title"
-                        },
-                        new
-                        {
-                            Code = "SYS_ACCOUNT",
-                            Icon = "",
-                            ModuleCode = "SYSTEM",
-                            Name = "ACCOUNT",
-                            ParentCode = "",
-                            Precedence = 1,
-                            Url = "/account"
-                        },
-                        new
-                        {
-                            Code = "SYS_ROLE",
-                            Icon = "",
-                            ModuleCode = "SYSTEM",
-                            Name = "ROLE",
-                            ParentCode = "",
-                            Precedence = 2,
-                            Url = "/role"
-                        },
-                        new
-                        {
-                            Code = "SYS_SYSTEM_ERROR",
-                            Icon = "",
-                            ModuleCode = "SYSTEM",
-                            Name = "SYSTEM_ERROR",
-                            ParentCode = "",
-                            Precedence = 2,
-                            Url = "/system-error"
-                        });
                 });
 
             modelBuilder.Entity("Database.Sql.ERP.Entities.Security.FunctionCommand", b =>
@@ -2304,8 +1994,8 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<string>("FunctionCode")
                         .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("ModuleName")
                         .HasColumnType("varchar(50)")
@@ -2329,8 +2019,8 @@ namespace Database.Sql.ERP.Migrations
             modelBuilder.Entity("Database.Sql.ERP.Entities.Security.Module", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Icon")
                         .HasColumnType("varchar(255)")
@@ -2342,8 +2032,8 @@ namespace Database.Sql.ERP.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("ParentCode")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int>("Precedence")
                         .ValueGeneratedOnAdd()
@@ -2357,35 +2047,6 @@ namespace Database.Sql.ERP.Migrations
                     b.HasKey("Code");
 
                     b.ToTable("Security_Module");
-
-                    b.HasData(
-                        new
-                        {
-                            Code = "DASHBOARD",
-                            Icon = "",
-                            Name = "DASHBOARD",
-                            ParentCode = "",
-                            Precedence = 1,
-                            Url = "/dashboard"
-                        },
-                        new
-                        {
-                            Code = "HR",
-                            Icon = "",
-                            Name = "HR",
-                            ParentCode = "",
-                            Precedence = 2,
-                            Url = "/hr"
-                        },
-                        new
-                        {
-                            Code = "SYSTEM",
-                            Icon = "",
-                            Name = "SYSTEM",
-                            ParentCode = "",
-                            Precedence = 5,
-                            Url = "/system"
-                        });
                 });
 
             modelBuilder.Entity("Database.Sql.ERP.Entities.Security.Role", b =>
@@ -2448,6 +2109,15 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<int>("CommandId")
                         .HasColumnType("int");
+
+                    b.Property<string>("FunctionCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("ModuleCode")
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
