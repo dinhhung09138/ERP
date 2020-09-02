@@ -10,5 +10,6 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<District> DistrictRepository { get; }
         ITableGenericRepository<Ward> WardRepository { get; }
         ITableGenericRepository<File> FileRepository { get; }
+        ITableGenericRepository<CodeType> CodeTypeRepository { get; }
     }
 }

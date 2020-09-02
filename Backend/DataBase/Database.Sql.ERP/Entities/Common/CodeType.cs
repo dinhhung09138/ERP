@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Database.Sql.ERP.Entities.HR
+namespace Database.Sql.ERP.Entities.Common
 {
-    [Table("CodeType")]
+    [Table("Common_CodeType")]
     public class CodeType
     {
         [Key]
         [Column(TypeName = "int")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Column(TypeName = "varchar(30)")]

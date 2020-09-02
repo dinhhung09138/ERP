@@ -6,7 +6,6 @@ namespace Database.Sql.ERP.Entities
     {
         ITableGenericRepository<Education> EducationRepository { get; }
         ITableGenericRepository<ApproveStatus> ApproveStatusRepository { get; }
-        ITableGenericRepository<CodeType> CodeTypeRepository { get; }
         ITableGenericRepository<Commendation> CommendationRepository { get; }
         ITableGenericRepository<ContractType> ContractTypeRepository { get; }
         ITableGenericRepository<Discipline> DisciplineRepository { get; }

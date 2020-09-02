@@ -7,8 +7,12 @@ namespace Database.Sql.ERP.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "dbo");
+
             migrationBuilder.CreateTable(
-                name: "CodeType",
+                name: "Common_CodeType",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -24,11 +28,12 @@ namespace Database.Sql.ERP.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CodeType", x => x.Id);
+                    table.PrimaryKey("PK_Common_CodeType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Common_District",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -51,6 +56,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Common_File",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -77,6 +83,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Common_ProfessionalQualification",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -98,6 +105,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Common_Province",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -119,6 +127,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Common_Ward",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -142,6 +151,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EmployeeCommendation",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -172,40 +182,8 @@ namespace Database.Sql.ERP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeContact",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    Phone = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true),
-                    Mobile = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true),
-                    Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
-                    Skyper = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    TemporaryAddress = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    TemporaryWardId = table.Column<int>(type: "int", nullable: true),
-                    TemporaryDistrictId = table.Column<int>(type: "int", nullable: false),
-                    TemporaryCityId = table.Column<int>(type: "int", nullable: true),
-                    PermanentAddress = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    PermanentWardId = table.Column<int>(type: "int", nullable: false),
-                    PermanentDistrictId = table.Column<int>(type: "int", nullable: true),
-                    PermanentCityId = table.Column<int>(type: "int", nullable: true),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    CreateBy = table.Column<int>(type: "int", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
-                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
-                    UpdateBy = table.Column<int>(type: "int", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    RowVersion = table.Column<byte[]>(type: "timestamp", rowVersion: true, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployeeContact", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EmployeeContract",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -239,6 +217,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EmployeeContractStatusHistory",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -265,6 +244,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EmployeeDiscipline",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -296,6 +276,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EmployeeEducation",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -322,6 +303,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EmployeeIdentification",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -348,6 +330,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EmployeeRelationship",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -372,6 +355,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_ApproveStatus",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -394,6 +378,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_Commendation",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -416,6 +401,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_ContractType",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -441,6 +427,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_Discipline",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -463,6 +450,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_Education",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -484,6 +472,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_Employee",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -514,7 +503,42 @@ namespace Database.Sql.ERP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HR_EmployeeContact",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    Phone = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true),
+                    Mobile = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true),
+                    Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    Skyper = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                    TemporaryAddress = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    TemporaryWardId = table.Column<int>(type: "int", nullable: true),
+                    TemporaryDistrictId = table.Column<int>(type: "int", nullable: false),
+                    TemporaryCityId = table.Column<int>(type: "int", nullable: true),
+                    PermanentAddress = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    PermanentWardId = table.Column<int>(type: "int", nullable: false),
+                    PermanentDistrictId = table.Column<int>(type: "int", nullable: true),
+                    PermanentCityId = table.Column<int>(type: "int", nullable: true),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    CreateBy = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
+                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UpdateBy = table.Column<int>(type: "int", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    RowVersion = table.Column<byte[]>(type: "timestamp", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HR_EmployeeContact", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HR_EmployeeInfo",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -546,6 +570,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_EmployeeWorkingStatus",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -569,6 +594,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_Ethnicity",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -590,6 +616,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_IdentificationType",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -611,6 +638,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_ModelOfStudy",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -632,6 +660,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_Nationality",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -653,6 +682,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_Position",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -675,6 +705,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_Ranking",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -696,6 +727,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_RelationshipType",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -718,6 +750,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "HR_Religion",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -739,6 +772,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Security_Function",
+                schema: "dbo",
                 columns: table => new
                 {
                     Code = table.Column<string>(type: "varchar(20)", nullable: false),
@@ -756,6 +790,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Security_FunctionCommand",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -774,6 +809,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Security_Module",
+                schema: "dbo",
                 columns: table => new
                 {
                     Code = table.Column<string>(type: "varchar(20)", nullable: false),
@@ -790,6 +826,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Security_Role",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -811,6 +848,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Security_SessionLog",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -840,6 +878,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Security_User",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -862,6 +901,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Security_UserRole",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -876,6 +916,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Secutiry_SystemLog",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -894,6 +935,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_Appraise",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -915,6 +957,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_AppraiseAnswer",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -938,6 +981,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_AppraiseQuestion",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -962,6 +1006,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_AppraiseSection",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -985,6 +1030,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_Lecturer",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -1015,6 +1061,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_SpecializedTraining",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -1036,6 +1083,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_TrainingCenter",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -1060,6 +1108,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_TrainingCenterContact",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -1086,6 +1135,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_TrainingCourse",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -1110,6 +1160,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_TrainingCourseDocument",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -1133,6 +1184,7 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Training_TrainingType",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -1154,34 +1206,46 @@ namespace Database.Sql.ERP.Migrations
                 });
 
             migrationBuilder.InsertData(
+                schema: "dbo",
                 table: "HR_Employee",
                 columns: new[] { "Id", "AvatarFileId", "BadgeCardNumber", "BasicSalary", "CreateBy", "DateApplyBadge", "DateApplyFingerSign", "EmployeeCode", "EmployeeWorkingStatusId", "FingerSignNumber", "ProbationDate", "StartWorkingDate", "UpdateBy", "UpdateDate", "WorkingEmail", "WorkingPhone" },
                 values: new object[] { 1, null, null, 0m, 0, null, null, "SYSTEM", 1, null, null, null, null, null, null, null });
 
             migrationBuilder.InsertData(
+                schema: "dbo",
                 table: "HR_EmployeeInfo",
                 columns: new[] { "Id", "AcademicLevelId", "CreateBy", "DateOfBirth", "EmployeeId", "EthnicityId", "ExpirationDate", "FirstName", "Gender", "LastName", "MaterialStatusId", "NationalityId", "ProfessionalQualificationId", "ReligionId", "UpdateBy", "UpdateDate" },
                 values: new object[] { 1, null, 0, null, 1, null, null, "Sys", null, "Admin", null, null, null, null, null, null });
 
             migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "HR_EmployeeWorkingStatus",
+                columns: new[] { "Id", "Code", "CreateBy", "Description", "Name", "UpdateBy", "UpdateDate" },
+                values: new object[] { 1, "Sys", 0, null, "System", null, null });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
                 table: "Security_User",
                 columns: new[] { "Id", "CreateBy", "EmployeeId", "Password", "UpdateBy", "UpdateDate", "UserName" },
                 values: new object[] { 1, 0, 1, "NTZFMjNDNTNCNjVFMjdGMjM3NDIyOTkwRTI5MjJFNzA0RkE2MTJBQzQ3OEE3NjA4NUI5QkQxMTU1OTBDNTgyMw==", null, null, "sysadmin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_HR_ApproveStatus_Code",
+                schema: "dbo",
                 table: "HR_ApproveStatus",
                 column: "Code",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_HR_ContractType_Code",
+                schema: "dbo",
                 table: "HR_ContractType",
                 column: "Code",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_HR_EmployeeWorkingStatus_Code",
+                schema: "dbo",
                 table: "HR_EmployeeWorkingStatus",
                 column: "Code",
                 unique: true);
@@ -1190,151 +1254,200 @@ namespace Database.Sql.ERP.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CodeType");
+                name: "Common_CodeType",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Common_District");
+                name: "Common_District",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Common_File");
+                name: "Common_File",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Common_ProfessionalQualification");
+                name: "Common_ProfessionalQualification",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Common_Province");
+                name: "Common_Province",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Common_Ward");
+                name: "Common_Ward",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "EmployeeCommendation");
+                name: "EmployeeCommendation",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "EmployeeContact");
+                name: "EmployeeContract",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "EmployeeContract");
+                name: "EmployeeContractStatusHistory",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "EmployeeContractStatusHistory");
+                name: "EmployeeDiscipline",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "EmployeeDiscipline");
+                name: "EmployeeEducation",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "EmployeeEducation");
+                name: "EmployeeIdentification",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "EmployeeIdentification");
+                name: "EmployeeRelationship",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "EmployeeRelationship");
+                name: "HR_ApproveStatus",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_ApproveStatus");
+                name: "HR_Commendation",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_Commendation");
+                name: "HR_ContractType",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_ContractType");
+                name: "HR_Discipline",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_Discipline");
+                name: "HR_Education",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_Education");
+                name: "HR_Employee",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_Employee");
+                name: "HR_EmployeeContact",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_EmployeeInfo");
+                name: "HR_EmployeeInfo",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_EmployeeWorkingStatus");
+                name: "HR_EmployeeWorkingStatus",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_Ethnicity");
+                name: "HR_Ethnicity",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_IdentificationType");
+                name: "HR_IdentificationType",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_ModelOfStudy");
+                name: "HR_ModelOfStudy",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_Nationality");
+                name: "HR_Nationality",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_Position");
+                name: "HR_Position",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_Ranking");
+                name: "HR_Ranking",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_RelationshipType");
+                name: "HR_RelationshipType",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "HR_Religion");
+                name: "HR_Religion",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Security_Function");
+                name: "Security_Function",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Security_FunctionCommand");
+                name: "Security_FunctionCommand",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Security_Module");
+                name: "Security_Module",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Security_Role");
+                name: "Security_Role",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Security_SessionLog");
+                name: "Security_SessionLog",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Security_User");
+                name: "Security_User",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Security_UserRole");
+                name: "Security_UserRole",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Secutiry_SystemLog");
+                name: "Secutiry_SystemLog",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_Appraise");
+                name: "Training_Appraise",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_AppraiseAnswer");
+                name: "Training_AppraiseAnswer",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_AppraiseQuestion");
+                name: "Training_AppraiseQuestion",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_AppraiseSection");
+                name: "Training_AppraiseSection",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_Lecturer");
+                name: "Training_Lecturer",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_SpecializedTraining");
+                name: "Training_SpecializedTraining",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_TrainingCenter");
+                name: "Training_TrainingCenter",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_TrainingCenterContact");
+                name: "Training_TrainingCenterContact",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_TrainingCourse");
+                name: "Training_TrainingCourse",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_TrainingCourseDocument");
+                name: "Training_TrainingCourseDocument",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Training_TrainingType");
+                name: "Training_TrainingType",
+                schema: "dbo");
         }
     }
 }

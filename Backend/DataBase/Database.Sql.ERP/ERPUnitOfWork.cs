@@ -27,7 +27,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<ProfessionalQualification> _professionalQualificationRepository;
         public ITableGenericRepository<ProfessionalQualification> ProfessionalQualificationRepository
         {
@@ -37,7 +36,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<Province> _provinceRepository;
         public ITableGenericRepository<Province> ProvinceRepository
         {
@@ -46,7 +44,6 @@ namespace Database.Sql.ERP
                 return _provinceRepository = _provinceRepository ?? new TableGenericRepository<Province>(_context);
             }
         }
-
 
         private ITableGenericRepository<Ward> _wardRepository;
         public ITableGenericRepository<Ward> WardRepository
@@ -66,6 +63,15 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<CodeType> _codeTypeRepository;
+        public ITableGenericRepository<CodeType> CodeTypeRepository
+        {
+            get
+            {
+                return _codeTypeRepository = _codeTypeRepository ?? new TableGenericRepository<CodeType>(_context);
+            }
+        }
+
         #endregion
 
         #region " [ HR ] "
@@ -79,7 +85,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<Commendation> _commendationRepository;
         public ITableGenericRepository<Commendation> CommendationRepository
         {
@@ -88,7 +93,6 @@ namespace Database.Sql.ERP
                 return _commendationRepository = _commendationRepository ?? new TableGenericRepository<Commendation>(_context);
             }
         }
-
 
         private ITableGenericRepository<ContractType> _contractTypeRepository;
         public ITableGenericRepository<ContractType> ContractTypeRepository
@@ -117,7 +121,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<Employee> _employeeRepository;
         public ITableGenericRepository<Employee> EmployeeRepository
         {
@@ -126,7 +129,6 @@ namespace Database.Sql.ERP
                 return _employeeRepository = _employeeRepository ?? new TableGenericRepository<Employee>(_context);
             }
         }
-
 
         private ITableGenericRepository<EmployeeCommendation> _employeeCommendationRepository;
         public ITableGenericRepository<EmployeeCommendation> EmployeeCommendationRepository
@@ -137,7 +139,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<EmployeeContact> _employeeContactRepository;
         public ITableGenericRepository<EmployeeContact> EmployeeContactRepository
         {
@@ -146,7 +147,6 @@ namespace Database.Sql.ERP
                 return _employeeContactRepository = _employeeContactRepository ?? new TableGenericRepository<EmployeeContact>(_context);
             }
         }
-
 
         private ITableGenericRepository<EmployeeContract> _employeeContractRepository;
         public ITableGenericRepository<EmployeeContract> EmployeeContractRepository
@@ -157,7 +157,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<EmployeeContractStatusHistory> _employeeContractStatusHistoryRepository;
         public ITableGenericRepository<EmployeeContractStatusHistory> EmployeeContractStatusHistoryRepository
         {
@@ -166,7 +165,6 @@ namespace Database.Sql.ERP
                 return _employeeContractStatusHistoryRepository = _employeeContractStatusHistoryRepository ?? new TableGenericRepository<EmployeeContractStatusHistory>(_context);
             }
         }
-
 
         private ITableGenericRepository<EmployeeDiscipline> _employeeDisciplineRepository;
         public ITableGenericRepository<EmployeeDiscipline> EmployeeDisciplineRepository
@@ -177,7 +175,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<EmployeeEducation> _employeeEducationRepository;
         public ITableGenericRepository<EmployeeEducation> EmployeeEducationRepository
         {
@@ -186,7 +183,6 @@ namespace Database.Sql.ERP
                 return _employeeEducationRepository = _employeeEducationRepository ?? new TableGenericRepository<EmployeeEducation>(_context);
             }
         }
-
 
         private ITableGenericRepository<EmployeeIdentification> _employeeIdentificationRepository;
         public ITableGenericRepository<EmployeeIdentification> EmployeeIdentificationRepository
@@ -197,7 +193,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<EmployeeInfo> _employeeInfoRepository;
         public ITableGenericRepository<EmployeeInfo> EmployeeInfoRepository
         {
@@ -206,7 +201,6 @@ namespace Database.Sql.ERP
                 return _employeeInfoRepository = _employeeInfoRepository ?? new TableGenericRepository<EmployeeInfo>(_context);
             }
         }
-
 
         private ITableGenericRepository<EmployeeRelationship> _employeeRelationshipRepository;
         public ITableGenericRepository<EmployeeRelationship> EmployeeRelationshipRepository
@@ -217,7 +211,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<EmployeeWorkingStatus> _employeeWorkingStatusRepository;
         public ITableGenericRepository<EmployeeWorkingStatus> EmployeeWorkingStatusRepository
         {
@@ -226,7 +219,6 @@ namespace Database.Sql.ERP
                 return _employeeWorkingStatusRepository = _employeeWorkingStatusRepository ?? new TableGenericRepository<EmployeeWorkingStatus>(_context);
             }
         }
-
 
         private ITableGenericRepository<IdentificationType> _identificationTypeRepository;
         public ITableGenericRepository<IdentificationType> IdentificationTypeRepository
@@ -237,7 +229,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<ModelOfStudy> _modelOfStudyRepository;
         public ITableGenericRepository<ModelOfStudy> ModelOfStudyRepository
         {
@@ -246,7 +237,6 @@ namespace Database.Sql.ERP
                 return _modelOfStudyRepository = _modelOfStudyRepository ?? new TableGenericRepository<ModelOfStudy>(_context);
             }
         }
-
 
         private ITableGenericRepository<Ethnicity> _nationRepository;
         public ITableGenericRepository<Ethnicity> NationRepository
@@ -257,7 +247,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<Nationality> _nationalityRepository;
         public ITableGenericRepository<Nationality> NationalityRepository
         {
@@ -266,7 +255,6 @@ namespace Database.Sql.ERP
                 return _nationalityRepository = _nationalityRepository ?? new TableGenericRepository<Nationality>(_context);
             }
         }
-
 
         private ITableGenericRepository<Ranking> _rankingRepository;
         public ITableGenericRepository<Ranking> RankingRepository
@@ -277,7 +265,6 @@ namespace Database.Sql.ERP
             }
         }
 
-
         private ITableGenericRepository<RelationshipType> _relationshipTypeRepository;
         public ITableGenericRepository<RelationshipType> RelationshipTypeRepository
         {
@@ -287,6 +274,14 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<Position> _positionRepository;
+        public ITableGenericRepository<Position> PositionRepository
+        {
+            get
+            {
+                return _positionRepository = _positionRepository ?? new TableGenericRepository<Position>(_context);
+            }
+        }
 
         private ITableGenericRepository<Religion> _religionRepository;
         public ITableGenericRepository<Religion> ReligionRepository
@@ -431,25 +426,6 @@ namespace Database.Sql.ERP
             }
         }
         #endregion
-
-
-        private ITableGenericRepository<CodeType> _codeTypeRepository;
-
-        public ITableGenericRepository<CodeType> CodeTypeRepository
-        {
-            get
-            {
-                return _codeTypeRepository = _codeTypeRepository ?? new TableGenericRepository<CodeType>(_context);
-            }
-        }
-        private ITableGenericRepository<Position> _positionRepository;
-        public ITableGenericRepository<Position> PositionRepository
-        {
-            get
-            {
-                return _positionRepository = _positionRepository ?? new TableGenericRepository<Position>(_context);
-            }
-        }
 
         public ERPUnitOfWork(ERPContext context)
         {

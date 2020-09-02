@@ -20,6 +20,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<File> File { get; set; }
 
+        public virtual DbSet<CodeType> CodeType { get; set; }
+
         #endregion
 
         #region " [ HR ] "
@@ -27,8 +29,6 @@ namespace Database.Sql.ERP
         public virtual DbSet<Education> AcademicLevel { get; set; }
 
         public virtual DbSet<ApproveStatus> ApproveStatus { get; set; }
-
-        public virtual DbSet<CodeType> CodeType { get; set; }
 
         public virtual DbSet<Commendation> Commendation { get; set; }
 
@@ -119,6 +119,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<ProfessionalQualification>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -127,6 +128,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Province>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -135,6 +137,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Ward>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -143,8 +146,15 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<File>(entity =>
             {
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
+            modelBuilder.Entity<CodeType>(entity =>
+            {
+                entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
@@ -160,6 +170,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<ApproveStatus>(entity =>
             {
                 entity.HasIndex(m => m.Code).IsUnique(true);
@@ -169,11 +180,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
-            modelBuilder.Entity<CodeType>(entity =>
-            {
-                entity.Property(m => m.Precedence).HasDefaultValue(1);
-                entity.Property(m => m.RowVersion).IsRowVersion();
-            });
+
             modelBuilder.Entity<Commendation>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -181,6 +188,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<ContractType>(entity =>
             {
                 entity.HasIndex(m => m.Code).IsUnique(true);
@@ -190,6 +198,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Discipline>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -197,6 +206,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -204,6 +214,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeCommendation>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -211,6 +222,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeContact>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -218,6 +230,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeContract>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -225,12 +238,14 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeContractStatusHistory>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeDiscipline>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -238,6 +253,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeEducation>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -245,6 +261,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeIdentification>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -252,6 +269,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeInfo>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -259,6 +277,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeRelationship>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -266,6 +285,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<EmployeeWorkingStatus>(entity =>
             {
                 entity.HasIndex(m => m.Code).IsUnique(true);
@@ -275,6 +295,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<IdentificationType>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -283,6 +304,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<ModelOfStudy>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -291,6 +313,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Ethnicity>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -299,6 +322,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Nationality>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -307,6 +331,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Ranking>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -315,6 +340,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<RelationshipType>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -323,6 +349,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Religion>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -331,6 +358,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Position>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -351,6 +379,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<AppraiseAnswer>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -358,6 +387,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<AppraiseQuestion>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -366,6 +396,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<AppraiseSection>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -374,6 +405,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<Lecturer>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -381,6 +413,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<SpecializedTraining>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -388,6 +421,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<TrainingCenter>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -395,6 +429,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<TrainingCenterContact>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -403,6 +438,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<TrainingCourse>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -410,6 +446,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<TrainingCourseDocument>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -417,6 +454,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<TrainingType>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -452,6 +490,7 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
             modelBuilder.Entity<SessionLog>(entity =>
             {
                 entity.Property(m => m.LoginTime).HasDefaultValueSql("getdate()");
@@ -476,9 +515,22 @@ namespace Database.Sql.ERP
 
             #endregion
 
+            CreateDefaultEmployeeWorkingStatus(modelBuilder);
             CreateDefaultEmployee(modelBuilder);
             CreateDefaultUser(modelBuilder);
 
+        }
+
+        private void CreateDefaultEmployeeWorkingStatus(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EmployeeWorkingStatus>().HasData(
+                new EmployeeWorkingStatus()
+                {
+                    Id = 1,
+                    Code = "Sys",
+                    Name = "System",
+                }
+            );
         }
 
         private void CreateDefaultEmployee(ModelBuilder modelBuilder)
@@ -501,6 +553,7 @@ namespace Database.Sql.ERP
                 }
             );
         }
+
         private void CreateDefaultUser(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
