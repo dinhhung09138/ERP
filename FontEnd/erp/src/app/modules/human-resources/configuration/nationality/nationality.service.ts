@@ -55,15 +55,15 @@ export class NationalityService {
     filter.paging.pageIndex = paging.pageIndex;
     filter.paging.pageSize = paging.pageSize;
 
-    return this.api.getList(this.url.list, filter);
+    return this.api.getListDataByFilterModel(this.url.list, filter);
   }
 
   item(id: number) {
-    return this.api.item(this.url.item, id);
+    return this.api.getDataById(this.url.item, id);
   }
 
   getDropdown() {
-    return this.api.getDropdown(this.url.dropdown);
+    return this.api.getListData(this.url.dropdown);
   }
 
   save(model: NationalityViewModel, action: FormActionStatus): Observable<ResponseModel> {

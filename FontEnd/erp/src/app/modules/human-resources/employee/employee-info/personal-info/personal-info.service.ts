@@ -36,7 +36,7 @@ export class PersonalInfoService {
   };
 
   item(id: number): Observable<ResponseModel> {
-    return this.api.item(this.url.item, id);
+    return this.api.getDataById(this.url.item, id);
   }
 
   getInfoByEmployeeId(employeeId: number): Observable<ResponseModel> {

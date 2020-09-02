@@ -33,15 +33,15 @@ export class ContractTypeService {
     filter.paging.pageIndex = paging.pageIndex;
     filter.paging.pageSize = paging.pageSize;
 
-    return this.api.getList(this.url.list, filter);
+    return this.api.getListDataByFilterModel(this.url.list, filter);
   }
 
   getDropdown() {
-    return this.api.getDropdown(this.url.dropdown);
+    return this.api.getListData(this.url.dropdown);
   }
 
   item(id: number) {
-    return this.api.item(this.url.item, id);
+    return this.api.getDataById(this.url.item, id);
   }
 
   save(model: ContractTypeViewModel, action: FormActionStatus): Observable<ResponseModel> {

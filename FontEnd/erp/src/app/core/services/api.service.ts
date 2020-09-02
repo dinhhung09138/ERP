@@ -27,7 +27,7 @@ export class ApiService {
    * @param url: string.
    * @param filter: Filter object model.
    */
-  getList(url: string, filter: FilterModel): Observable<ResponseModel> {
+  getListDataByFilterModel(url: string, filter: FilterModel): Observable<ResponseModel> {
     return this.http.post<ResponseModel>(url, filter).pipe(
       map((data: ResponseModel) => {
         return data;
@@ -39,7 +39,7 @@ export class ApiService {
    * Get list data to show on dropdown selection
    * @param url: string
    */
-  getDropdown(url: string): Observable<ResponseModel> {
+  getListData(url: string): Observable<ResponseModel> {
     return this.http.get<ResponseModel>(url).pipe(
       map((data: ResponseModel) => {
         return data;
@@ -53,7 +53,7 @@ export class ApiService {
    * @param url: string
    * @param id: Id: number
    */
-  item(url: string, id: number): Observable<ResponseModel> {
+  getDataById(url: string, id: number): Observable<ResponseModel> {
     return this.http.get<ResponseModel>(url + '?id=' + id).pipe(
       map((data: ResponseModel) => {
         return data;
