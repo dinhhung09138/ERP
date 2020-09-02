@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.Security
@@ -31,5 +33,7 @@ namespace Database.Sql.ERP.Entities.Security
         [Column(TypeName = "int")]
         [Required]
         public int Precedence { get; set; }
+
+        public ICollection<Function> Functions { get; set; }
     }
 }

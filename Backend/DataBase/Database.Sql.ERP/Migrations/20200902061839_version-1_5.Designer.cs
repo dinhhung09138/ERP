@@ -4,14 +4,16 @@ using Database.Sql.ERP;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    partial class ERPContextModelSnapshot : ModelSnapshot
+    [Migration("20200902061839_version-1_5")]
+    partial class version1_5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2659,10 +2661,6 @@ namespace Database.Sql.ERP.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("Security_UserRole");
                 });
 
@@ -3340,7 +3338,7 @@ namespace Database.Sql.ERP.Migrations
                     b.HasOne("Database.Sql.ERP.Entities.Security.Module", "Module")
                         .WithMany("Functions")
                         .HasForeignKey("ModuleCode")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -3364,21 +3362,6 @@ namespace Database.Sql.ERP.Migrations
                     b.HasOne("Database.Sql.ERP.Entities.Security.Role", "Role")
                         .WithMany("Details")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Database.Sql.ERP.Entities.Security.UserRole", b =>
-                {
-                    b.HasOne("Database.Sql.ERP.Entities.Security.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Database.Sql.ERP.Entities.Security.User", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

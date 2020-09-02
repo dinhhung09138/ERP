@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.Security
@@ -15,6 +17,9 @@ namespace Database.Sql.ERP.Entities.Security
         [MaxLength(50)]
         [Required]
         public string FunctionCode { get; set; }
+
+        [ForeignKey("FunctionCode")]
+        public Function Function { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
         [MaxLength(50)]
@@ -38,6 +43,8 @@ namespace Database.Sql.ERP.Entities.Security
         [Column(TypeName = "int")]
         [Required]
         public int Precedence { get; set; }
+
+        public ICollection<RoleDetail> RoleDetails { get; set; }
 
     }
 }

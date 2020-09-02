@@ -16,8 +16,14 @@ namespace Database.Sql.ERP.Entities.Security
         [Required]
         public int RoleId { get; set; }
 
+        [ForeignKey("RoleId")]
+        public Role Role { get; set; }
+
         [Column(TypeName = "int")]
         [Required]
         public int CommandId { get; set; }
+
+        [ForeignKey("CommandId")]
+        public FunctionCommand FunctionCommand { get; set; }
     }
 }

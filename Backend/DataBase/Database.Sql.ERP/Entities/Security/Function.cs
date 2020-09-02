@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.Security
@@ -36,6 +38,11 @@ namespace Database.Sql.ERP.Entities.Security
         [MaxLength(50)]
         [Required]
         public string ModuleCode { get; set; }
+
+        [ForeignKey("ModuleCode")]
+        public Module Module { get; set; }
+
+        public ICollection<FunctionCommand> Commands { get; set; }
 
     }
 }

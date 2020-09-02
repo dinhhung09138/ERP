@@ -3,6 +3,7 @@ using Database.Sql.ERP.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Database.Sql.ERP.Entities.Training;
 using Database.Sql.ERP.Entities.Security;
+using System;
 
 namespace Database.Sql.ERP
 {
@@ -479,10 +480,20 @@ namespace Database.Sql.ERP
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
             });
 
+            modelBuilder.Entity<Function>()
+                        .HasOne(p => p.Module)
+                        .WithMany(b => b.Functions)
+                        .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<FunctionCommand>(entity =>
             {
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
             });
+
+            modelBuilder.Entity<FunctionCommand>()
+                        .HasOne(p => p.Function)
+                        .WithMany(b => b.Commands)
+                        .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Module>(entity =>
             {
@@ -498,6 +509,16 @@ namespace Database.Sql.ERP
             });
 
             modelBuilder.Entity<RoleDetail>();
+
+            modelBuilder.Entity<RoleDetail>()
+                        .HasOne(p => p.FunctionCommand)
+                        .WithMany(b => b.RoleDetails)
+                        .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RoleDetail>()
+                        .HasOne(p => p.Role)
+                        .WithMany(b => b.Details)
+                        .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<SessionLog>(entity =>
             {
@@ -520,6 +541,14 @@ namespace Database.Sql.ERP
             });
 
             modelBuilder.Entity<UserRole>();
+            modelBuilder.Entity<UserRole>()
+                        .HasOne(p => p.User)
+                        .WithMany(b => b.UserRoles)
+                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<UserRole>()
+                        .HasOne(p => p.Role)
+                        .WithMany(b => b.UserRoles)
+                        .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
 
