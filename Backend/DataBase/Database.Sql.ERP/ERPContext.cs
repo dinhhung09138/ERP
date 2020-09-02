@@ -107,6 +107,7 @@ namespace Database.Sql.ERP
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "3.1.2");
+            modelBuilder.HasDefaultSchema("dbo");
 
             #region " [ Common ] "
 
