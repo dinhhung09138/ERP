@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    [Migration("20200902061839_version-1_5")]
-    partial class version1_5
+    [Migration("20200903232941_version-1_0_1")]
+    partial class version1_0_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -2311,6 +2311,11 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<bool>("IsView")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("ModuleName")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
@@ -2607,6 +2612,9 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<DateTime?>("LastLogin")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Password")
                         .HasColumnType("varchar(255)")
                         .HasMaxLength(255);
@@ -2660,6 +2668,10 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Security_UserRole");
                 });
@@ -3338,7 +3350,7 @@ namespace Database.Sql.ERP.Migrations
                     b.HasOne("Database.Sql.ERP.Entities.Security.Module", "Module")
                         .WithMany("Functions")
                         .HasForeignKey("ModuleCode")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -3362,6 +3374,21 @@ namespace Database.Sql.ERP.Migrations
                     b.HasOne("Database.Sql.ERP.Entities.Security.Role", "Role")
                         .WithMany("Details")
                         .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Database.Sql.ERP.Entities.Security.UserRole", b =>
+                {
+                    b.HasOne("Database.Sql.ERP.Entities.Security.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Database.Sql.ERP.Entities.Security.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

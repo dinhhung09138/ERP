@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Database.Sql.ERP.Migrations
 {
-    public partial class version1 : Migration
+    public partial class version1_0_1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -771,52 +771,15 @@ namespace Database.Sql.ERP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Security_Function",
-                schema: "dbo",
-                columns: table => new
-                {
-                    Code = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Url = table.Column<string>(type: "varchar(255)", nullable: true),
-                    Icon = table.Column<string>(type: "varchar(255)", nullable: true),
-                    ParentCode = table.Column<string>(type: "varchar(20)", nullable: true),
-                    Precedence = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    ModuleCode = table.Column<string>(type: "varchar(20)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Security_Function", x => x.Code);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Security_FunctionCommand",
-                schema: "dbo",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FunctionCode = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    ModuleName = table.Column<string>(type: "varchar(50)", nullable: true),
-                    ControllerName = table.Column<string>(type: "varchar(50)", nullable: false),
-                    ActionName = table.Column<string>(type: "varchar(50)", nullable: false),
-                    Precedence = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Security_FunctionCommand", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Security_Module",
                 schema: "dbo",
                 columns: table => new
                 {
-                    Code = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Url = table.Column<string>(type: "varchar(255)", nullable: true),
-                    Icon = table.Column<string>(type: "varchar(255)", nullable: true),
-                    ParentCode = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Code = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Url = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true),
+                    Icon = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true),
+                    ParentCode = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
                     Precedence = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
                 },
                 constraints: table =>
@@ -886,6 +849,7 @@ namespace Database.Sql.ERP.Migrations
                     EmployeeId = table.Column<int>(nullable: false),
                     UserName = table.Column<string>(type: "varchar(50)", maxLength: 40, nullable: false),
                     Password = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true),
+                    LastLogin = table.Column<DateTime>(type: "datetime", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CreateBy = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
@@ -897,21 +861,6 @@ namespace Database.Sql.ERP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Security_User", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Security_UserRole",
-                schema: "dbo",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Security_UserRole", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1205,6 +1154,116 @@ namespace Database.Sql.ERP.Migrations
                     table.PrimaryKey("PK_Training_TrainingType", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Security_Function",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Code = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Url = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true),
+                    Icon = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true),
+                    ParentCode = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                    Precedence = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
+                    ModuleCode = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Security_Function", x => x.Code);
+                    table.ForeignKey(
+                        name: "FK_Security_Function_Security_Module_ModuleCode",
+                        column: x => x.ModuleCode,
+                        principalSchema: "dbo",
+                        principalTable: "Security_Module",
+                        principalColumn: "Code",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Security_UserRole",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Security_UserRole", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Security_UserRole_Security_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalSchema: "dbo",
+                        principalTable: "Security_Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Security_UserRole_Security_User_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "dbo",
+                        principalTable: "Security_User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Security_FunctionCommand",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FunctionCode = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    IsView = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    ModuleName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                    ControllerName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    ActionName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Precedence = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Security_FunctionCommand", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Security_FunctionCommand_Security_Function_FunctionCode",
+                        column: x => x.FunctionCode,
+                        principalSchema: "dbo",
+                        principalTable: "Security_Function",
+                        principalColumn: "Code",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Security_RoleDetail",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    CommandId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Security_RoleDetail", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Security_RoleDetail_Security_FunctionCommand_CommandId",
+                        column: x => x.CommandId,
+                        principalSchema: "dbo",
+                        principalTable: "Security_FunctionCommand",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Security_RoleDetail_Security_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalSchema: "dbo",
+                        principalTable: "Security_Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "HR_Employee",
@@ -1225,9 +1284,59 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.InsertData(
                 schema: "dbo",
+                table: "Security_Module",
+                columns: new[] { "Code", "Icon", "Name", "ParentCode", "Precedence", "Url" },
+                values: new object[,]
+                {
+                    { "DASHBOARD", "", "DASHBOARD", "", 1, "/dashboard" },
+                    { "HR", "", "HR", "", 2, "/hr" },
+                    { "SYSTEM", "", "SYSTEM", "", 5, "/system" }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
                 table: "Security_User",
-                columns: new[] { "Id", "CreateBy", "EmployeeId", "Password", "UpdateBy", "UpdateDate", "UserName" },
-                values: new object[] { 1, 0, 1, "NTZFMjNDNTNCNjVFMjdGMjM3NDIyOTkwRTI5MjJFNzA0RkE2MTJBQzQ3OEE3NjA4NUI5QkQxMTU1OTBDNTgyMw==", null, null, "sysadmin" });
+                columns: new[] { "Id", "CreateBy", "EmployeeId", "LastLogin", "Password", "UpdateBy", "UpdateDate", "UserName" },
+                values: new object[] { 1, 0, 1, null, "NTZFMjNDNTNCNjVFMjdGMjM3NDIyOTkwRTI5MjJFNzA0RkE2MTJBQzQ3OEE3NjA4NUI5QkQxMTU1OTBDNTgyMw==", null, null, "sysadmin" });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "Security_Function",
+                columns: new[] { "Code", "Icon", "ModuleCode", "Name", "ParentCode", "Precedence", "Url" },
+                values: new object[,]
+                {
+                    { "HR_DASHBOARD", "", "HR", "DASHBOARD", "", 1, "/dashboard" },
+                    { "SYS_ACCOUNT", "", "SYSTEM", "ACCOUNT", "", 1, "/account" },
+                    { "HR_CONF_JOB", "", "HR", "JOB_TITLE", "HR_CONFIGURATION", 14, "/configuration/job-title" },
+                    { "HR_CONF_WORKING", "", "HR", "WORKING_STATUS", "HR_CONFIGURATION", 13, "/configuration/working-status" },
+                    { "HR_CONF_CONTRACT", "", "HR", "CONTRACT_TYPE", "HR_CONFIGURATION", 12, "/configuration/contract-type" },
+                    { "HR_CONF_RELATIONSHIP", "", "HR", "RELATIONSHIP_TYPE", "HR_CONFIGURATION", 11, "/configuration/relationship-type" },
+                    { "HR_CONF_RANKING", "", "HR", "RANKING", "HR_CONFIGURATION", 10, "/configuration/ranking" },
+                    { "HR_CONF_MODEL_OF_STUDY", "", "HR", "MODEL_OF_STUDY", "HR_CONFIGURATION", 9, "/configuration/model-of-study" },
+                    { "HR_CONF_QUALIFICATION", "", "HR", "QUALIFICATION", "HR_CONFIGURATION", 8, "/configuration/qualification" },
+                    { "HR_CONF_EDUCATION", "", "HR", "EDUCATION", "HR_CONFIGURATION", 7, "/configuration/education" },
+                    { "HR_CONF_NATIONALITY", "", "HR", "NATIONALITY", "HR_CONFIGURATION", 6, "/configuration/nationality" },
+                    { "HR_CONF_ETHNICITY", "", "HR", "ETHNICITY", "HR_CONFIGURATION", 5, "/configuration/ethnicity" },
+                    { "HR_CONF_RELIGION", "", "HR", "RELIGION", "HR_CONFIGURATION", 4, "/configuration/religion" },
+                    { "HR_CONF_WARD", "", "HR", "WARD", "HR_CONFIGURATION", 3, "/configuration/ward" },
+                    { "SYS_ROLE", "", "SYSTEM", "ROLE", "", 2, "/role" },
+                    { "HR_CONF_DISTRICT", "", "HR", "DISTRICT", "HR_CONFIGURATION", 2, "/configuration/district" },
+                    { "HR_CONFIGURATION", "", "HR", "CONFIGURATION", "", 9, "/configuration" },
+                    { "HR_HOLIDAY", "", "HR", "HOLIDAY", "", 8, "/holiday" },
+                    { "HR_LEAVE_APPROVE_ST", "", "HR", "APPROVE_STATUS", "HR_LEAVE_MNT", 4, "/leave-management/approve-status" },
+                    { "HR_LEAVE_NEW", "", "HR", "NEW", "HR_LEAVE_MNT", 3, "/leave-management/new" },
+                    { "HR_LEAVE_SUMMARY", "", "HR", "SUMMARY", "HR_LEAVE_MNT", 2, "/leave-management/summary" },
+                    { "HR_LEAVE_CALENDAR", "", "HR", "CALENDAR", "HR_LEAVE_MNT", 1, "/leave-management/calendar" },
+                    { "HR_LEAVE_MNT", "", "HR", "LEAVE_MANAGEMENT", "", 7, "/leave-management" },
+                    { "HR_EMPLOYEE", "", "HR", "EMPLOYEE", "", 6, "/employee" },
+                    { "HR_DISCIPLINE", "", "HR", "DISCIPLINE", "", 6, "/discipline" },
+                    { "HR_COMMENDATION", "", "HR", "COMMENDATION", "", 5, "/commendation" },
+                    { "HR_POSITION", "", "HR", "POSITION", "", 4, "/position" },
+                    { "HR_TEAM", "", "HR", "TEAM", "", 3, "/team" },
+                    { "HR_DEPARTMENT", "", "HR", "DASHBOARD", "", 2, "/department" },
+                    { "HR_CONF_PROVINCE", "", "HR", "PROVINCE", "HR_CONFIGURATION", 1, "/configuration/province" },
+                    { "SYS_SYSTEM_ERROR", "", "SYSTEM", "SYSTEM_ERROR", "", 2, "/system-error" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_HR_ApproveStatus_Code",
@@ -1249,6 +1358,42 @@ namespace Database.Sql.ERP.Migrations
                 table: "HR_EmployeeWorkingStatus",
                 column: "Code",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Security_Function_ModuleCode",
+                schema: "dbo",
+                table: "Security_Function",
+                column: "ModuleCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Security_FunctionCommand_FunctionCode",
+                schema: "dbo",
+                table: "Security_FunctionCommand",
+                column: "FunctionCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Security_RoleDetail_CommandId",
+                schema: "dbo",
+                table: "Security_RoleDetail",
+                column: "CommandId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Security_RoleDetail_RoleId",
+                schema: "dbo",
+                table: "Security_RoleDetail",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Security_UserRole_RoleId",
+                schema: "dbo",
+                table: "Security_UserRole",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Security_UserRole_UserId",
+                schema: "dbo",
+                table: "Security_UserRole",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -1374,27 +1519,11 @@ namespace Database.Sql.ERP.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Security_Function",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "Security_FunctionCommand",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "Security_Module",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "Security_Role",
+                name: "Security_RoleDetail",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "Security_SessionLog",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "Security_User",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -1447,6 +1576,26 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.DropTable(
                 name: "Training_TrainingType",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Security_FunctionCommand",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Security_Role",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Security_User",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Security_Function",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Security_Module",
                 schema: "dbo");
         }
     }
