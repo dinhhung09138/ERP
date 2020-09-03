@@ -15,6 +15,8 @@ namespace Services.System.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
+        public bool IsView { get; set; }
+
         [MaxLength(50)]
         public string ModuleName { get; set; }
 

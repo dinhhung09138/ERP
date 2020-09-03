@@ -11,5 +11,6 @@ namespace Services.System.Interfaces
     public interface IFunctionService
     {
         Task<ResponseModel> GetAllFunctions();
+        Task<List<ModuleModel>> GetListPageUserCanAccess(int userId);
     }
 }

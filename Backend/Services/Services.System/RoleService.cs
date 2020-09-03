@@ -114,6 +114,8 @@ namespace Services.System
             ResponseModel response = new ResponseModel();
             try
             {
+                await _context.BeginTransactionAsync();
+
                 Role md = new Role();
 
                 md.Name = model.Name;
@@ -125,10 +127,27 @@ namespace Services.System
 
                 await _context.RoleRepository.AddAsync(md).ConfigureAwait(true);
 
+                if (model.Roles != null)
+                {
+                    foreach (var role in model.Roles)
+                    {
+                        RoleDetail dt = new RoleDetail()
+                        {
+                            RoleId = md.Id,
+                            CommandId = role.CommandId
+                        };
+
+                        await _context.RoleDetailRepository.AddAsync(dt).ConfigureAwait(false);
+                    }
+                }
+
                 await _context.SaveChangesAsync();
+
+                await _context.CommitTransactionAsync();
             }
             catch (Exception ex)
             {
+                await _context.RollbackTransactionAsync();
                 throw ex;
             }
             return response;
@@ -139,6 +158,8 @@ namespace Services.System
             ResponseModel response = new ResponseModel();
             try
             {
+                await _context.BeginTransactionAsync();
+
                 Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
@@ -153,12 +174,31 @@ namespace Services.System
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = base.UserId;
 
+                var deleteRoles = await _context.RoleDetailRepository.Query().Where(m => m.RoleId == model.Id).ToArrayAsync();
+                _context.RoleDetailRepository.DeleteRange(deleteRoles);
+
+                if (model.Roles != null)
+                {
+                    foreach (var role in model.Roles)
+                    {
+                        RoleDetail dt = new RoleDetail()
+                        {
+                            RoleId = md.Id,
+                            CommandId = role.CommandId
+                        };
+
+                        await _context.RoleDetailRepository.AddAsync(dt).ConfigureAwait(false);
+                    }
+                }
+
                 _context.RoleRepository.Update(md);
 
                 await _context.SaveChangesAsync();
+                await _context.CommitTransactionAsync();
             }
             catch (Exception ex)
             {
+                await _context.RollbackTransactionAsync();
                 throw ex;
             }
             return response;

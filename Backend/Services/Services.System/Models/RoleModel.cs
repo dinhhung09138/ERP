@@ -15,5 +15,7 @@ namespace Services.System.Models
 
         [MaxLength(255)]
         public string Description { get; set; }
+
+        public List<RoleDetailModel> Roles { get; set; }
     }
 }
