@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RoleService } from './role.service';
+import { FunctionService } from '../function/function.service';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
   ],
   providers: [
     RoleService,
+    FunctionService,
   ]
 })
 export class RoleModule { }

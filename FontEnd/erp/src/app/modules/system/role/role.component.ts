@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RoleService } from '../role/role.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
@@ -7,6 +7,8 @@ import { RoleFormComponent } from './form/form.component';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
+import { FunctionService } from '../function/function.service';
+import { ModuleInterface } from '../../../core/interfaces/module.interface';
 
 @Component({
   selector: 'app-role',
@@ -27,12 +29,16 @@ export class RoleComponent implements OnInit {
   listColumnsName: string[] = ['name', 'description', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
+  listModuleData: ModuleInterface[];
+
   constructor(
-    private roleService: RoleService) { }
+    private roleService: RoleService,
+    private functionService: FunctionService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
     this.getList();
+    this.getAllModuleData();
   }
 
   reloadTableEventListener($event: boolean) {
@@ -97,14 +103,23 @@ export class RoleComponent implements OnInit {
     }
   }
 
-  getList() {
+  private getList() {
     this.isLoading = true;
-    this.roleService.getList(this.paging,this.searchText).subscribe((response: ResponseModel) => {
+    this.roleService.getList(this.paging, this.searchText).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.totalItems;
       }
       this.isLoading = false;
+    });
+  }
+
+  private getAllModuleData() {
+    this.functionService.getAllFunctions().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.listModuleData = response.result;
+        console.log(this.listModuleData);
+      }
     });
   }
 }
