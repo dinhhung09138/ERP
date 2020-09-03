@@ -36,14 +36,13 @@
   <ItemGroup>
     <ProjectReference Include="..\API\API.Common\API.Common.csproj" />
     <ProjectReference Include="..\API\API.HR\API.HR.csproj" />
-    <ProjectReference Include="..\API\API.Security\API.Security.csproj" />
     <ProjectReference Include="..\API\API.System\API.System.csproj" />
     <ProjectReference Include="..\API\API.Training\API.Training.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="File\" />
-    <Folder Include="wwwroot\File\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

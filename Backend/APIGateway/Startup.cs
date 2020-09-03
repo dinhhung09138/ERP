@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
-using API.Security;
 using APIGateway.Extensions;
 using API.HR;
 using API.Training;
@@ -61,7 +60,6 @@ namespace APIGateway
 
             //Use Security services
             services.AddCommonService(Configuration);
-            services.AddSecurityServices(Configuration);
             services.AddHrServices(Configuration);
             services.AddTrainingServices(Configuration);
             services.AddRoleServices(Configuration);
