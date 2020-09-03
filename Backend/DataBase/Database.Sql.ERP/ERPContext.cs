@@ -487,6 +487,7 @@ namespace Database.Sql.ERP
 
             modelBuilder.Entity<FunctionCommand>(entity =>
             {
+                entity.Property(m => m.IsView).HasDefaultValue(false);
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
             });
 

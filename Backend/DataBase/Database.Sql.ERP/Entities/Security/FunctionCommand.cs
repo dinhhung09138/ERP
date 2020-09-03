@@ -26,6 +26,10 @@ namespace Database.Sql.ERP.Entities.Security
         [Required]
         public string Name { get; set; }
 
+        [Column(TypeName = "bit")]
+        [Required]
+        public bool IsView { get; set; }
+
         [Column(TypeName = "varchar(50)")]
         [MaxLength(50)]
         public string ModuleName { get; set; }

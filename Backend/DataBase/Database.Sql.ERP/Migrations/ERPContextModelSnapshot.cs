@@ -2309,6 +2309,11 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<bool>("IsView")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("ModuleName")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
