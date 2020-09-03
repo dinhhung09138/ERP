@@ -14,6 +14,7 @@ namespace API.System
             services.AddScoped<IJwtTokenSecurityService, JwtTokenSecurityService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IFunctionService, FunctionService>();
             return services;
         }

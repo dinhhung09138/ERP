@@ -51,13 +51,18 @@ namespace Services.System
 
                 if (md != null)
                 {
-                    UserModel user = await GetUserInfo(md.EmployeeId);
+                    Core.CommonModel.UserModel user = await GetUserInfo(md.EmployeeId);
                     user.Id = md.Id;
                     user.UserName = md.UserName;
                     JwtTokenModel token = _tokenService.CreateToken(user);
                     response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Success;
                     response.Result = token;
                     response.Extra.Add(await _functionService.GetListPageUserCanAccess(user.Id));
+
+
+                    md.LastLogin = DateTime.Now;
+                    _context.UserRepository.Update(md);
+                    await _context.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
@@ -81,7 +86,7 @@ namespace Services.System
                     var md = await _context.UserRepository.FirstOrDefaultAsync(m => m.Id == model.UserId
                                                                                 && m.IsActive
                                                                                 && !m.Deleted).ConfigureAwait(false);
-                    UserModel user = await GetUserInfo(md.EmployeeId);
+                    Core.CommonModel.UserModel user = await GetUserInfo(md.EmployeeId);
                     user.UserName = md.UserName;
 
                     JwtTokenModel token = _tokenService.CreateToken(user);
@@ -106,7 +111,7 @@ namespace Services.System
             return response;
         }
 
-        private async Task<UserModel> GetUserInfo(int employeeId)
+        private async Task<Core.CommonModel.UserModel> GetUserInfo(int employeeId)
         {
             var employeeInfo = await (from m in _context.EmployeeRepository.Query()
                                       join inf in _context.EmployeeInfoRepository.Query() on m.Id equals inf.EmployeeId
@@ -136,7 +141,7 @@ namespace Services.System
                 }
             }
 
-            UserModel user = new UserModel()
+            Core.CommonModel.UserModel user = new Core.CommonModel.UserModel()
             {
                 Id = 0,
                 EmployeeId = employeeInfo.Id,

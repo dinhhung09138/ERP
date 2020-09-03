@@ -26,6 +26,9 @@ namespace Database.Sql.ERP.Entities.Security
         [MaxLength(255)]
         public string Password { get; set; }
 
+        [Column(TypeName = "datetime")]
+        public DateTime? LastLogin { get; set; }
+
         [Column(TypeName = "bit")]
         [Required]
         public bool IsActive { get; set; }

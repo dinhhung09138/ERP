@@ -49,6 +49,7 @@ namespace Services.System
                     query = query.Where(m => m.Name.ToLower().Contains(filter.Text.ToLower())
                                 || m.Description.ToLower().Contains(filter.Text.ToLower()));
                 }
+
                 BaseListModel<RoleModel> listItems = new BaseListModel<RoleModel>();
                 listItems.TotalItems = await _context.ReligionRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize)

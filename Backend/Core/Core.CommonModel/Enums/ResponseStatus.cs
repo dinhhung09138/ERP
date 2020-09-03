@@ -30,6 +30,16 @@ namespace Core.CommonModel.Enums
         CodeExists = -2,
 
         /// <summary>
+        /// Show when user name is exists
+        /// </summary>
+        UserNameExists = -3,
+
+        /// <summary>
+        /// Current password not match
+        /// </summary>
+        CurrentPasswordNotMatch = -4,
+
+        /// <summary>
         /// Error when get dropdown data
         /// </summary>
         GetDropDownError = -3,
