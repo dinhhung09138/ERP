@@ -28,12 +28,14 @@ namespace Services.System
             IJwtTokenSecurityService tokenService,
             IERPUnitOfWork context,
             ILogger<AuthenticationService> logger,
-            IImageServerService imageServerService)
+            IImageServerService imageServerService,
+            IFunctionService functionService)
         {
             _tokenService = tokenService;
             _context = context;
             _logger = logger;
             _imageServerService = imageServerService;
+            _functionService = functionService;
         }
 
         public async Task<ResponseModel> AuthencitateUser(LoginModel model)
