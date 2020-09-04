@@ -7,6 +7,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { RoleViewModel } from '../role.model';
 import { TranslateService } from '@ngx-translate/core';
 import { ApplicationConstant } from 'src/app/core/constants/app.constant';
+import { ModuleInterface } from '../../../../core/interfaces/module.interface';
 
 @Component({
   selector: 'app-role-form',
@@ -25,6 +26,7 @@ export class RoleFormComponent implements OnInit {
   isLoading = false;
   roleForm: FormGroup;
   item: RoleViewModel;
+  listModule: ModuleInterface[];
 
   constructor(
     private translate: TranslateService,
@@ -69,6 +71,10 @@ export class RoleFormComponent implements OnInit {
       this.elm.nativeElement.querySelector('#name').focus();
     }
     this.elm.nativeElement.querySelector('#name').focus();
+  }
+
+  setListModule(listModule: ModuleInterface[]) {
+    this.listModule = listModule;
   }
 
   showFormStatus(){

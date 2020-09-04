@@ -49,12 +49,14 @@ export class RoleComponent implements OnInit {
 
   onCreateClick() {
     if (this.isLoading !== true) {
+      this.form.setListModule(this.listModuleData);
       this.form.onCreateClick();
     }
   }
 
   onUpdateClick(id: number) {
     if (id !== null) {
+      this.form.setListModule(this.listModuleData);
       this.form.onUpdateClick(id);
     }
   }

@@ -46,6 +46,41 @@
                 </div>
               </div>
               <div class="row">
+                <div class="col-12 form-group">
+                  Danh sách chức năng
+                  <br/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <div class="divide"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <div class="card" *ngFor="let module of listModule">
+                    <div class="card-header">
+                      <i class="fa fa-tags" aria-hidden="true"></i>
+                      {{ module.name }}
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let screen of module.functions">
+                          <p class="screen">
+                            <mat-checkbox class="ml-10" tabindex="4"></mat-checkbox>
+                              {{ screen.name }}
+                          </p>
+                          <p class="function" *ngFor="let command of screen.commands">
+                            <mat-checkbox class="ml-10" tabindex="4"></mat-checkbox>
+                              {{ command.name }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
                   <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="5">
                   <button type="button" class="btn btn-warning" tabindex="6" (click)="onResetClick()">
