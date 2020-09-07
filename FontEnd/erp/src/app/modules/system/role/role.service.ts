@@ -1,3 +1,4 @@
+import { FunctionCommandInterface } from './../../../core/interfaces/function-command.interface';
 import { Injectable } from '@angular/core';
 import { APIUrlConstants } from '../../../core/constants/api-url.constant';
 import { FilterModel } from '../../../core/models/filter-table.model';
@@ -41,7 +42,8 @@ export class RoleService {
         return this.api.getDataById(this.url.item,id);
     }
 
-    save(model: RoleViewModel, action: FormActionStatus): Observable<ResponseModel> {
+    save(model: RoleViewModel, commands: FunctionCommandInterface[], action: FormActionStatus): Observable<ResponseModel> {
+        model.commands = commands;
         switch (action) {
             case FormActionStatus.Insert:
                 return this.api.insert(this.url.insert, model);

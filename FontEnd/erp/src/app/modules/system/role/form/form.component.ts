@@ -148,7 +148,7 @@ export class RoleFormComponent implements OnInit {
     }
     this.isLoading = true;
 
-    this.roleService.save(this.roleForm.getRawValue(), this.formAction).subscribe((res: ResponseModel) => {
+    this.roleService.save(this.roleForm.getRawValue(), this.listCommandSelected, this.formAction).subscribe((res: ResponseModel) => {
       if (res.responseStatus === ResponseStatus.success){
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
