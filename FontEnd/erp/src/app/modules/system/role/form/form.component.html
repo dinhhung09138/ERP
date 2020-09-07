@@ -61,19 +61,23 @@
                   <div class="card" *ngFor="let module of listModule">
                     <div class="card-header">
                       <i class="fa fa-tags" aria-hidden="true"></i>
+                      <mat-checkbox class="ml-10" tabindex="4"></mat-checkbox>
                       {{ module.name }}
                     </div>
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let screen of module.functions">
-                          <p class="screen">
+                        <!-- <app-system-role-permission class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let f of module.functions" [Function]="f">
+                        </app-system-role-permission> -->
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let f of module.functions">
+                          <div class="screen">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
                             <mat-checkbox class="ml-10" tabindex="4"></mat-checkbox>
-                              {{ screen.name }}
-                          </p>
-                          <p class="function" *ngFor="let command of screen.commands">
+                              {{ f.name }}
+                          </div>
+                          <div class="function" *ngFor="let command of f.commands">
                             <mat-checkbox class="ml-10" tabindex="4"></mat-checkbox>
                               {{ command.name }}
-                          </p>
+                          </div>
                         </div>
                       </div>
                     </div>

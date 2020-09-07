@@ -1,0 +1,10 @@
+
+  <p class="screen">
+    <i class="fa fa-angle-right" aria-hidden="true"></i>
+    <mat-checkbox class="ml-10" tabindex="4"></mat-checkbox>
+      {{ Function.name }}
+  </p>
+  <p class="function" *ngFor="let command of Function.commands">
+    <mat-checkbox class="ml-10" tabindex="4"></mat-checkbox>
+      {{ command.name }}
+  </p>

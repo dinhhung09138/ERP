@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RoleService } from './role.service';
 import { FunctionService } from '../function/function.service';
+import { PermissionComponent } from './form/permission/permission.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [RoleComponent, RoleFormComponent],
+  declarations: [
+    RoleComponent,
+    RoleFormComponent,
+    PermissionComponent],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
