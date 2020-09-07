@@ -1,10 +1,15 @@
 
-  <p class="screen">
-    <i class="fa fa-angle-right" aria-hidden="true"></i>
-    <mat-checkbox class="ml-10" tabindex="4"></mat-checkbox>
-      {{ Function.name }}
-  </p>
-  <p class="function" *ngFor="let command of Function.commands">
-    <mat-checkbox class="ml-10" tabindex="4"></mat-checkbox>
-      {{ command.name }}
-  </p>
+  <form [formGroup]="form">
+    <p class="screen">
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+      <mat-checkbox class="ml-10" tabindex="4" formControlName="function" (change)="checkAll($event.checked)"></mat-checkbox>
+        {{ Function.name }}
+    </p>
+    <div style="display: inline-grid; padding-left: 15px;" formArrayName="commands">
+      <mat-checkbox class="ml-10 function" *ngFor="let cmd of commands.controls; let i = index" [formControl]="cmd"
+                  (change)="commandChecked($event.checked, Function.commands[i].id)">
+        {{ Function.commands[i].name }}
+      </mat-checkbox>
+    </div>
+  </form>
+

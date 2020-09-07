@@ -2,11 +2,11 @@
   border-bottom: 1px solid #ccc;
 }
 
-.card {
+.detail-function .card {
   border: unset;
 }
 
-.card-header {
+.detail-function .card-header {
   border: unset;
   font-weight: normal;
   color: black;
@@ -14,9 +14,13 @@
   border-bottom: 1px solid #ccc;
 }
 
-.card-header i {
+.detail-function .card-header i {
   float: left;
   margin-top: unset;
   margin-left: unset;
   margin-right: 10px;
+}
+
+.box.opened {
+  max-height: 700px;
 }

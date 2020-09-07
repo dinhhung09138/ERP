@@ -1,3 +1,4 @@
+import { FunctionCommandInterface } from './../../../../core/interfaces/function-command.interface';
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroupDirective, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -27,6 +28,7 @@ export class RoleFormComponent implements OnInit {
   roleForm: FormGroup;
   item: RoleViewModel;
   listModule: ModuleInterface[];
+  listCommandSelected: FunctionCommandInterface[] = [];
 
   constructor(
     private translate: TranslateService,
@@ -44,6 +46,16 @@ export class RoleFormComponent implements OnInit {
       rowVersion: [null]
     });
     this.initFormControl(this.formAction);
+  }
+
+  commandSelectedListener(commands: FunctionCommandInterface[]) {
+    for (const cmd of commands) {
+      if (cmd.selected === true) {
+        this.listCommandSelected.push(cmd);
+      } else {
+        this.listCommandSelected = this.listCommandSelected.filter(m => m.id !== cmd.id);
+      }
+    }
   }
 
   initFormControl(formStatus: FormActionStatus){

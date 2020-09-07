@@ -7,4 +7,5 @@ export interface FunctionCommandInterface {
   controllerName: string;
   actionName: string;
   precedence: number;
+  selected: boolean;
 }
