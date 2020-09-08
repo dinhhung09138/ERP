@@ -6,10 +6,14 @@
         {{ Function.name }}
     </p>
     <div style="display: inline-grid; padding-left: 15px;" formArrayName="commands">
-      <mat-checkbox class="ml-10 function" *ngFor="let cmd of commands.controls; let i = index" [formControl]="cmd"
-                  (change)="commandChecked($event.checked, Function.commands[i].id)">
-        {{ Function.commands[i].name }}
-      </mat-checkbox>
+      <div *ngFor="let cmd of commands.controls; let i = index">
+        <div [formGroupName]="i">
+          <mat-checkbox class="ml-10 function"  formControlName="command"
+                    (change)="commandChecked($event.checked, Function.commands[i].id)">
+          {{ Function.commands[i].name }}
+          </mat-checkbox>
+        </div>
+      </div>
     </div>
   </form>
 

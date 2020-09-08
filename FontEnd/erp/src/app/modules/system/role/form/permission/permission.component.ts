@@ -1,18 +1,20 @@
-import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { RoleService } from './../../role.service';
+import { RoleDetailInterface } from './../../role-detail.interface';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { FunctionInterface } from '../../../../../core/interfaces/function.interface';
 import { FunctionCommandInterface } from './../../../../../core/interfaces/function-command.interface';
-import { throwIfEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-system-role-permission',
   templateUrl: './permission.component.html',
   styleUrls: ['./permission.component.scss']
 })
-export class PermissionComponent implements OnInit, OnChanges {
+export class PermissionComponent implements OnInit {
 
   @Input() Function: FunctionInterface;
+  @Input() Roles: RoleDetailInterface[] = [];
   @Output() listCommandSelected = new EventEmitter<FunctionCommandInterface[]>();
 
   form: FormGroup;
@@ -21,41 +23,66 @@ export class PermissionComponent implements OnInit, OnChanges {
     return this.form.get('commands') as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {
-    console.log('constructor');
+  constructor(
+    private fb: FormBuilder,
+    private roleService: RoleService
+    ) {
   }
 
   ngOnInit(): void {
-    console.log('init');
     this.form = this.fb.group({
       function: [false],
       commands: this.createCommandControlArray()
     });
+
+    let checkAll = true;
+    const listCommandsArray = this.form.get('commands') as FormArray;
+    if (listCommandsArray.controls.length === 0) {
+      checkAll = false;
+    } else {
+      for (const control of listCommandsArray.controls) {
+        if (control.get('command').value === false) {
+          checkAll = false;
+        }
+      }
+    }
+    this.form.get('function').setValue(checkAll);
+
+    this.resetCommandFunctionsListener();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-  }
 
-  resetCommandFunctions() {
-    console.log('reset');
-    const listCommandArray = this.form.get('commands') as FormArray;
-    console.log(listCommandArray.controls);
-    listCommandArray.controls.forEach((value, idx) => {
-      console.log(idx);
-      console.log(value);
+
+  resetCommandFunctionsListener() {
+
+    this.roleService.resetCommandInput.subscribe(status => {
+      if (status === true) {
+
+        this.form.get('function').setValue(false);
+
+        const listCommandArray = this.form.get('commands') as FormArray;
+
+        for (const control of listCommandArray.controls) {
+          control.get('command').setValue(false);
+        }
+
+        for (const cmd of this.Function.commands) {
+          cmd.selected = false;
+        }
+      }
     });
+
   }
 
   createCommandControlArray() {
     if (this.Function.commands === null) {
       return null;
     }
-    console.log(this.Function);
-    const arr = this.Function.commands.map(cm => {
-      console.log(cm.selected);
-      return new FormControl(cm.selected);
+    const arr = this.Function.commands.map((cm: FunctionCommandInterface) => {
+      return this.fb.group({
+        command: [cm.selected]
+      });
     });
-    console.log(arr);
     return new FormArray(arr);
   }
 
@@ -64,7 +91,7 @@ export class PermissionComponent implements OnInit, OnChanges {
     const listCommandArray = this.form.get('commands') as FormArray;
 
     for (const control of listCommandArray.controls) {
-      control.setValue(checked);
+      control.get('command').setValue(checked);
     }
     for (const cmd of this.Function.commands) {
       cmd.selected = checked;
@@ -80,9 +107,8 @@ export class PermissionComponent implements OnInit, OnChanges {
     } else {
       const listCommandArray = this.form.get('commands') as FormArray;
       for (const control of listCommandArray.controls) {
-        if (control.value === false) {
-          checkAll = control.value;
-          break;
+        if (control.get('command').value === false) {
+          checkAll = false;
         }
       }
     }

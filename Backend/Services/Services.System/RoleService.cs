@@ -51,7 +51,7 @@ namespace Services.System
                 }
 
                 BaseListModel<RoleModel> listItems = new BaseListModel<RoleModel>();
-                listItems.TotalItems = await _context.ReligionRepository.Query().Where(m => !m.Deleted).CountAsync();
+                listItems.TotalItems = await _context.RoleRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize)
                                              .Take(filter.Paging.PageSize).ToListAsync()
                                              .ConfigureAwait(false);

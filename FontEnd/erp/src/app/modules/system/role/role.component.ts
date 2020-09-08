@@ -49,14 +49,12 @@ export class RoleComponent implements OnInit {
 
   onCreateClick() {
     if (this.isLoading !== true) {
-      this.form.setListModule(this.listModuleData);
       this.form.onCreateClick();
     }
   }
 
   onUpdateClick(id: number) {
     if (id !== null) {
-      this.form.setListModule(this.listModuleData);
       this.form.onUpdateClick(id);
     }
   }
@@ -120,7 +118,6 @@ export class RoleComponent implements OnInit {
     this.functionService.getAllFunctions().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.listModuleData = response.result;
-        console.log(this.listModuleData);
       }
     });
   }

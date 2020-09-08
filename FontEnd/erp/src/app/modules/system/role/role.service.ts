@@ -1,9 +1,8 @@
-import { FunctionCommandInterface } from './../../../core/interfaces/function-command.interface';
 import { Injectable } from '@angular/core';
 import { APIUrlConstants } from '../../../core/constants/api-url.constant';
 import { FilterModel } from '../../../core/models/filter-table.model';
 import { ResponseModel } from '../../../core/models/response.model';
-import { of, Observable } from 'rxjs';
+import { of, Observable, BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { PagingModel } from 'src/app/core/models/paging.model';
@@ -14,6 +13,11 @@ import { RoleDetailInterface } from './role-detail.interface';
 
 @Injectable()
 export class RoleService {
+
+    private resetStatus = new BehaviorSubject(false);
+
+    resetCommandInput = this.resetStatus.asObservable();
+
     url = {
         list: APIUrlConstants.systemApi + 'role/get-list',
         dropdown: APIUrlConstants.systemApi + 'role/dropdown',
@@ -26,6 +30,10 @@ export class RoleService {
     constructor(
         private api: ApiService,
         private dialogService: DialogService){}
+
+    startResetCommandInputForm() {
+      this.resetStatus.next(true);
+    }
 
     getList(paging: PagingModel, searchText: string){
         const filter = new FilterModel();

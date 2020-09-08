@@ -64,7 +64,8 @@ namespace Services.System
                             {
                                 Id = m.Id,
                                 Name = m.Name,
-                                IsView = m.IsView
+                                IsView = m.IsView,
+                                Selected = false,
                             }).ToList()
                         }).ToList()
                     }).ToListAsync();

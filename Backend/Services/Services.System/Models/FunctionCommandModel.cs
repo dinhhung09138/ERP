@@ -27,5 +27,6 @@ namespace Services.System.Models
         public string ActionName { get; set; }
 
         public int Precedence { get; set; }
+        public bool Selected { get; set; } = false;
     }
 }

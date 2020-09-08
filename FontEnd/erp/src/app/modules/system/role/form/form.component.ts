@@ -1,5 +1,5 @@
 import { FunctionCommandInterface } from './../../../../core/interfaces/function-command.interface';
-import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, Input } from '@angular/core';
 import { FormGroupDirective, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { RoleService } from '../role.service';
@@ -18,6 +18,7 @@ import { RoleDetailInterface } from '../role-detail.interface';
 export class RoleFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
+  @Input() ListModule: ModuleInterface[];
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
@@ -27,7 +28,7 @@ export class RoleFormComponent implements OnInit {
   isLoading = false;
   roleForm: FormGroup;
   item: RoleInterface;
-  listModule: ModuleInterface[];
+  currentModule: ModuleInterface[];
   roleDetails: RoleDetailInterface[] = [];
 
   constructor(
@@ -51,12 +52,17 @@ export class RoleFormComponent implements OnInit {
   commandSelectedListener(commands: FunctionCommandInterface[]) {
     for (const cmd of commands) {
       if (cmd.selected === true) {
-        const roleDetail = {
-          commandId: cmd.id,
-          roleId: 0
-        } as RoleDetailInterface;
+        const checkExists = this.roleDetails.some(detail => {
+          return detail.commandId === cmd.id;
+        });
+        if (checkExists === false) {
+          const roleDetail = {
+            commandId: cmd.id,
+            roleId: 0
+          } as RoleDetailInterface;
 
-        this.roleDetails.push(roleDetail);
+          this.roleDetails.push(roleDetail);
+        }
       } else {
         this.roleDetails = this.roleDetails.filter(m => m.commandId !== cmd.id);
       }
@@ -65,6 +71,12 @@ export class RoleFormComponent implements OnInit {
 
   initFormControl(formStatus: FormActionStatus){
     this.isSubmit = false;
+
+    this.currentModule = [];
+    this.roleDetails = [];
+    if (this.ListModule) {
+      this.currentModule = [...this.ListModule];
+    }
 
     if (this.formDirective){
       this.formDirective.resetForm();
@@ -88,10 +100,6 @@ export class RoleFormComponent implements OnInit {
       this.elm.nativeElement.querySelector('#name').focus();
     }
     this.elm.nativeElement.querySelector('#name').focus();
-  }
-
-  setListModule(listModule: ModuleInterface[]) {
-    this.listModule = listModule;
   }
 
   showFormStatus(){
@@ -120,6 +128,7 @@ export class RoleFormComponent implements OnInit {
   }
 
   onResetClick() {
+    this.roleService.startResetCommandInputForm();
     switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
@@ -164,8 +173,9 @@ export class RoleFormComponent implements OnInit {
   }
 
   private setDataToForm(data: RoleInterface) {
+    const moduleList = [...this.ListModule];
     for (const r of data.roles) {
-      for (const m of this.listModule) {
+      for (const m of moduleList) {
         for (const f of m.functions) {
           const c = f.commands.find(t => t.id === r.commandId);
           if (c) {
@@ -174,6 +184,8 @@ export class RoleFormComponent implements OnInit {
         }
       }
     }
+    this.currentModule = [...moduleList];
+    this.roleDetails = data.roles;
     this.roleForm.get('id').setValue(data.id);
     this.roleForm.get('name').setValue(data.name);
     this.roleForm.get('description').setValue(data.description);

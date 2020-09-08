@@ -1,4 +1,4 @@
-<app-role-form (reloadTableEvent)="reloadTableEventListener($event)"></app-role-form>
+<app-role-form (reloadTableEvent)="reloadTableEventListener($event)" [ListModule]="listModuleData"></app-role-form>
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
@@ -9,7 +9,7 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-lg-9 col-md-8 col-sm-6">
+          <div class="col-lg-9 col-md-8 col-sm-6 form-group">
             <button class="btn btn-outline-info" (click)="onCreateClick()"><i class="fa fa-plus"></i>
               {{ 'BUTTON.ADD' | translate }}
             </button>
