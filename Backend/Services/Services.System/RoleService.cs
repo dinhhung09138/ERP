@@ -92,15 +92,24 @@ namespace Services.System
             ResponseModel response = new ResponseModel();
             try
             {
-                Role md = await _context.RoleRepository.FirstOrDefaultAsync(m => m.Id == id);
-                RoleModel model = new RoleModel()
-                {
-                    Id = md.Id,
-                    Name = md.Name,
-                    Description = md.Description,
-                    IsActive = md.IsActive,
-                    RowVersion = md.RowVersion
-                };
+                RoleModel model = await _context.RoleRepository.Query()
+                                        .Include(m => m.Details)
+                                        .Select(m => new RoleModel
+                                        {
+                                            Id = m.Id,
+                                            Name = m.Name,
+                                            Description = m.Description,
+                                            IsActive = m.IsActive,
+                                            RowVersion = m.RowVersion,
+                                            Roles = m.Details.Select(r => new RoleDetailModel()
+                                            {
+                                                Id = r.Id,
+                                                RoleId = r.RoleId,
+                                                CommandId = r.CommandId
+                                            }).ToList()
+                                        }).FirstOrDefaultAsync(m => m.Id == id);
+
+
                 response.Result = model;
             }
             catch (Exception ex)
@@ -127,6 +136,7 @@ namespace Services.System
                 md.CreateBy = base.UserId;
 
                 await _context.RoleRepository.AddAsync(md).ConfigureAwait(true);
+                await _context.SaveChangesAsync();
 
                 if (model.Roles != null)
                 {
@@ -142,8 +152,8 @@ namespace Services.System
                     }
                 }
 
-                await _context.SaveChangesAsync();
 
+                await _context.SaveChangesAsync();
                 await _context.CommitTransactionAsync();
             }
             catch (Exception ex)

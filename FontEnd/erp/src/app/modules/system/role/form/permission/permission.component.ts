@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 import { FunctionInterface } from '../../../../../core/interfaces/function.interface';
 import { FunctionCommandInterface } from './../../../../../core/interfaces/function-command.interface';
@@ -10,7 +10,7 @@ import { throwIfEmpty } from 'rxjs/operators';
   templateUrl: './permission.component.html',
   styleUrls: ['./permission.component.scss']
 })
-export class PermissionComponent implements OnInit {
+export class PermissionComponent implements OnInit, OnChanges {
 
   @Input() Function: FunctionInterface;
   @Output() listCommandSelected = new EventEmitter<FunctionCommandInterface[]>();
@@ -21,12 +21,28 @@ export class PermissionComponent implements OnInit {
     return this.form.get('commands') as FormArray;
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+    console.log('constructor');
+  }
 
   ngOnInit(): void {
+    console.log('init');
     this.form = this.fb.group({
       function: [false],
       commands: this.createCommandControlArray()
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+  }
+
+  resetCommandFunctions() {
+    console.log('reset');
+    const listCommandArray = this.form.get('commands') as FormArray;
+    console.log(listCommandArray.controls);
+    listCommandArray.controls.forEach((value, idx) => {
+      console.log(idx);
+      console.log(value);
     });
   }
 
@@ -34,10 +50,12 @@ export class PermissionComponent implements OnInit {
     if (this.Function.commands === null) {
       return null;
     }
+    console.log(this.Function);
     const arr = this.Function.commands.map(cm => {
-      return new FormControl(false);
+      console.log(cm.selected);
+      return new FormControl(cm.selected);
     });
-
+    console.log(arr);
     return new FormArray(arr);
   }
 

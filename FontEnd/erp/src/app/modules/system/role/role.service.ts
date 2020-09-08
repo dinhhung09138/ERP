@@ -4,12 +4,13 @@ import { APIUrlConstants } from '../../../core/constants/api-url.constant';
 import { FilterModel } from '../../../core/models/filter-table.model';
 import { ResponseModel } from '../../../core/models/response.model';
 import { of, Observable } from 'rxjs';
-import { RoleViewModel } from './role.model';
 import { ApiService } from 'src/app/core/services/api.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { switchMap } from 'rxjs/operators';
+import { RoleInterface } from './role.interface';
+import { RoleDetailInterface } from './role-detail.interface';
 
 @Injectable()
 export class RoleService {
@@ -42,8 +43,8 @@ export class RoleService {
         return this.api.getDataById(this.url.item,id);
     }
 
-    save(model: RoleViewModel, commands: FunctionCommandInterface[], action: FormActionStatus): Observable<ResponseModel> {
-        model.commands = commands;
+    save(model: RoleInterface, commands: RoleDetailInterface[], action: FormActionStatus): Observable<ResponseModel> {
+        model.roles = commands;
         switch (action) {
             case FormActionStatus.Insert:
                 return this.api.insert(this.url.insert, model);

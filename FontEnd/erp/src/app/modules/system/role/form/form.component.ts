@@ -5,10 +5,10 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { RoleService } from '../role.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
-import { RoleViewModel } from '../role.model';
 import { TranslateService } from '@ngx-translate/core';
-import { ApplicationConstant } from 'src/app/core/constants/app.constant';
 import { ModuleInterface } from '../../../../core/interfaces/module.interface';
+import { RoleInterface } from '../role.interface';
+import { RoleDetailInterface } from '../role-detail.interface';
 
 @Component({
   selector: 'app-role-form',
@@ -26,9 +26,9 @@ export class RoleFormComponent implements OnInit {
   isSubmit = false;
   isLoading = false;
   roleForm: FormGroup;
-  item: RoleViewModel;
+  item: RoleInterface;
   listModule: ModuleInterface[];
-  listCommandSelected: FunctionCommandInterface[] = [];
+  roleDetails: RoleDetailInterface[] = [];
 
   constructor(
     private translate: TranslateService,
@@ -51,9 +51,14 @@ export class RoleFormComponent implements OnInit {
   commandSelectedListener(commands: FunctionCommandInterface[]) {
     for (const cmd of commands) {
       if (cmd.selected === true) {
-        this.listCommandSelected.push(cmd);
+        const roleDetail = {
+          commandId: cmd.id,
+          roleId: 0
+        } as RoleDetailInterface;
+
+        this.roleDetails.push(roleDetail);
       } else {
-        this.listCommandSelected = this.listCommandSelected.filter(m => m.id !== cmd.id);
+        this.roleDetails = this.roleDetails.filter(m => m.commandId !== cmd.id);
       }
     }
   }
@@ -143,12 +148,12 @@ export class RoleFormComponent implements OnInit {
 
   submitForm(){
     this.isSubmit = true;
-    if (this.roleForm.invalid){
+    if (this.roleForm.invalid) {
       return;
     }
     this.isLoading = true;
 
-    this.roleService.save(this.roleForm.getRawValue(), this.listCommandSelected, this.formAction).subscribe((res: ResponseModel) => {
+    this.roleService.save(this.roleForm.getRawValue(), this.roleDetails, this.formAction).subscribe((res: ResponseModel) => {
       if (res.responseStatus === ResponseStatus.success){
         this.initFormControl(FormActionStatus.UnKnow);
         this.reloadTableEvent.emit(true);
@@ -158,7 +163,17 @@ export class RoleFormComponent implements OnInit {
     });
   }
 
-  private setDataToForm(data: RoleViewModel) {
+  private setDataToForm(data: RoleInterface) {
+    for (const r of data.roles) {
+      for (const m of this.listModule) {
+        for (const f of m.functions) {
+          const c = f.commands.find(t => t.id === r.commandId);
+          if (c) {
+            c.selected = true;
+          }
+        }
+      }
+    }
     this.roleForm.get('id').setValue(data.id);
     this.roleForm.get('name').setValue(data.name);
     this.roleForm.get('description').setValue(data.description);
