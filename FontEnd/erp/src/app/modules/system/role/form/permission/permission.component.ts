@@ -1,10 +1,11 @@
 import { RoleService } from './../../role.service';
-import { RoleDetailInterface } from './../../role-detail.interface';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { FunctionInterface } from '../../../../../core/interfaces/function.interface';
 import { FunctionCommandInterface } from './../../../../../core/interfaces/function-command.interface';
+import { RoleDetailViewModel } from '../../role-detail.model';
+import { RoleViewModel } from '../../role.model';
 
 @Component({
   selector: 'app-system-role-permission',
@@ -14,7 +15,7 @@ import { FunctionCommandInterface } from './../../../../../core/interfaces/funct
 export class PermissionComponent implements OnInit {
 
   @Input() Function: FunctionInterface;
-  @Input() Roles: RoleDetailInterface[] = [];
+  @Input() Roles: RoleDetailViewModel[] = [];
   @Output() listCommandSelected = new EventEmitter<FunctionCommandInterface[]>();
 
   form: FormGroup;
@@ -49,6 +50,7 @@ export class PermissionComponent implements OnInit {
     this.form.get('function').setValue(checkAll);
 
     this.resetCommandFunctionsListener();
+    this.getRoleDetailsInfoListener();
   }
 
 
@@ -72,6 +74,36 @@ export class PermissionComponent implements OnInit {
       }
     });
 
+  }
+
+  getRoleDetailsInfoListener() {
+    this.roleService.listRoleDetail.subscribe((data: RoleViewModel) => {
+      if (data && data.roles) {
+        for (const dt of data.roles) {
+          const cmd = this.Function.commands.find(m => m.id === dt.commandId);
+          if (cmd) {
+            cmd.selected = true;
+          }
+        }
+
+        const listCommandsArray = this.form.get('commands') as FormArray;
+
+        let checkAll = true;
+        let idx = 0;
+        for (const d of this.Function.commands) {
+          listCommandsArray.controls[idx].get('command').setValue(d.selected);
+          if (d.selected === false) {
+            checkAll = true;
+          }
+          idx ++;
+        }
+        if (this.Function.commands.length === 0) {
+          checkAll = false;
+        }
+
+        this.form.get('function').setValue(checkAll);
+      }
+    });
   }
 
   createCommandControlArray() {
@@ -119,7 +151,6 @@ export class PermissionComponent implements OnInit {
 
     const outPutValue: FunctionCommandInterface[] = [];
     outPutValue.push(cmd);
-
 
     this.listCommandSelected.emit(outPutValue);
   }

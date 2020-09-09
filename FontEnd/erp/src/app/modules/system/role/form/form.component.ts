@@ -7,8 +7,8 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { TranslateService } from '@ngx-translate/core';
 import { ModuleInterface } from '../../../../core/interfaces/module.interface';
-import { RoleInterface } from '../role.interface';
-import { RoleDetailInterface } from '../role-detail.interface';
+import { RoleViewModel } from '../role.model';
+import { RoleDetailViewModel } from '../role-detail.model';
 
 @Component({
   selector: 'app-role-form',
@@ -27,9 +27,9 @@ export class RoleFormComponent implements OnInit {
   isSubmit = false;
   isLoading = false;
   roleForm: FormGroup;
-  item: RoleInterface;
+  item: RoleViewModel;
   currentModule: ModuleInterface[];
-  roleDetails: RoleDetailInterface[] = [];
+  roleDetails: RoleDetailViewModel[] = [];
 
   constructor(
     private translate: TranslateService,
@@ -59,7 +59,7 @@ export class RoleFormComponent implements OnInit {
           const roleDetail = {
             commandId: cmd.id,
             roleId: 0
-          } as RoleDetailInterface;
+          } as RoleDetailViewModel;
 
           this.roleDetails.push(roleDetail);
         }
@@ -135,6 +135,7 @@ export class RoleFormComponent implements OnInit {
         break;
       case FormActionStatus.Update:
         this.setDataToForm(this.item);
+        this.roleService.passingRoleDetailsData(this.item);
         this.elm.nativeElement.querySelector('#name').focus();
         break;
     }
@@ -172,7 +173,7 @@ export class RoleFormComponent implements OnInit {
     });
   }
 
-  private setDataToForm(data: RoleInterface) {
+  private setDataToForm(data: RoleViewModel) {
     const moduleList = [...this.ListModule];
     for (const r of data.roles) {
       for (const m of moduleList) {

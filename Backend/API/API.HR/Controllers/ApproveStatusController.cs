@@ -1,4 +1,5 @@
-﻿using Core.CommonModel;
+﻿using API.HR.Filters;
+using Core.CommonModel;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -8,6 +9,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/approve-status")]
     [ApiController]
+    [AuthorizationFilter]
     public class ApproveStatusController : ControllerBase
     {
         private readonly IApproveStatusService _approveStatusService;

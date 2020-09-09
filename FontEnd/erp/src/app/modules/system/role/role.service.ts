@@ -8,15 +8,18 @@ import { DialogService } from 'src/app/core/services/dialog.service';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { switchMap } from 'rxjs/operators';
-import { RoleInterface } from './role.interface';
-import { RoleDetailInterface } from './role-detail.interface';
+import { RoleDetailViewModel } from './role-detail.model';
+import { RoleViewModel } from './role.model';
 
 @Injectable()
 export class RoleService {
 
-    private resetStatus = new BehaviorSubject(false);
+    private resetStatus$ = new BehaviorSubject(false);
+    resetCommandInput = this.resetStatus$.asObservable();
 
-    resetCommandInput = this.resetStatus.asObservable();
+    private roleDetail$ = new BehaviorSubject(new RoleViewModel());
+    listRoleDetail = this.roleDetail$.asObservable();
+
 
     url = {
         list: APIUrlConstants.systemApi + 'role/get-list',
@@ -32,7 +35,12 @@ export class RoleService {
         private dialogService: DialogService){}
 
     startResetCommandInputForm() {
-      this.resetStatus.next(true);
+      this.resetStatus$.next(true);
+    }
+
+    passingRoleDetailsData(data: RoleViewModel) {
+      console.log(data);
+      this.roleDetail$.next(data);
     }
 
     getList(paging: PagingModel, searchText: string){
@@ -43,15 +51,15 @@ export class RoleService {
         return this.api.getListDataByFilterModel(this.url.list, filter);
     }
 
-    getDropdown(){
+    getDropdown() {
         return this.api.getListData(this.url.dropdown);
     }
 
-    item(id: number){
-        return this.api.getDataById(this.url.item,id);
+    item(id: number) {
+        return this.api.getDataById(this.url.item, id);
     }
 
-    save(model: RoleInterface, commands: RoleDetailInterface[], action: FormActionStatus): Observable<ResponseModel> {
+    save(model: RoleViewModel, commands: RoleDetailViewModel[], action: FormActionStatus): Observable<ResponseModel> {
         model.roles = commands;
         switch (action) {
             case FormActionStatus.Insert:
