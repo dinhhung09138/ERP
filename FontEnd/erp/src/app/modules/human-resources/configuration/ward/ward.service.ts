@@ -14,12 +14,12 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 export class WardService {
 
   url = {
-    list: APIUrlConstants.hrApi + 'ward/get-list',
-    dropdown: APIUrlConstants.hrApi + 'ward/dropdown',
-    item: APIUrlConstants.hrApi + 'ward/item',
-    insert: APIUrlConstants.hrApi + 'ward/insert',
-    update: APIUrlConstants.hrApi + 'ward/update',
-    delete: APIUrlConstants.hrApi + 'ward/delete',
+    list: APIUrlConstants.commonApi + 'ward/get-list',
+    dropdown: APIUrlConstants.commonApi + 'ward/dropdown',
+    item: APIUrlConstants.commonApi + 'ward/item',
+    insert: APIUrlConstants.commonApi + 'ward/insert',
+    update: APIUrlConstants.commonApi + 'ward/update',
+    delete: APIUrlConstants.commonApi + 'ward/delete',
   };
 
   constructor(

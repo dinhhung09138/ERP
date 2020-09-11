@@ -15,12 +15,12 @@ import { MatDialog } from '@angular/material/dialog';
 export class ProfessionalQualificationService {
 
   url = {
-    list: APIUrlConstants.hrApi + 'professional-qualification/get-list',
-    dropdown: APIUrlConstants.hrApi + 'professional-qualification/dropdown',
-    item: APIUrlConstants.hrApi + 'professional-qualification/item',
-    insert: APIUrlConstants.hrApi + 'professional-qualification/insert',
-    update: APIUrlConstants.hrApi + 'professional-qualification/update',
-    delete: APIUrlConstants.hrApi + 'professional-qualification/delete',
+    list: APIUrlConstants.commonApi + 'professional-qualification/get-list',
+    dropdown: APIUrlConstants.commonApi + 'professional-qualification/dropdown',
+    item: APIUrlConstants.commonApi + 'professional-qualification/item',
+    insert: APIUrlConstants.commonApi + 'professional-qualification/insert',
+    update: APIUrlConstants.commonApi + 'professional-qualification/update',
+    delete: APIUrlConstants.commonApi + 'professional-qualification/delete',
   };
 
   constructor(

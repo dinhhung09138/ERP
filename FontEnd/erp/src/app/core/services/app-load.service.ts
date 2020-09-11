@@ -26,7 +26,7 @@ export class AppLoadService {
     return this.http.get<UrlSettingInterface>(this.configPath + 'url.config.json').toPromise().then(response => {
       APIUrlConstants.authenticationApi = response.authenticationApi;
       APIUrlConstants.hrApi = response.hrApi;
-      APIUrlConstants.marketingApi = response.marketingApi;
+      APIUrlConstants.commonApi = response.commonApi;
       APIUrlConstants.systemApi = response.systemApi;
     });
   }

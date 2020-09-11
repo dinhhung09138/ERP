@@ -1,6 +1,6 @@
 export interface UrlSettingInterface {
   hrApi: string;
-  marketingApi: string;
+  commonApi: string;
   authenticationApi: string;
   systemApi: string;
 }

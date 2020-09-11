@@ -15,12 +15,12 @@ import { MatDialog } from '@angular/material/dialog';
 export class ProvinceService {
 
   url = {
-    list: APIUrlConstants.hrApi + 'province/get-list',
-    dropdown: APIUrlConstants.hrApi + 'province/dropdown',
-    item: APIUrlConstants.hrApi + 'province/item',
-    insert: APIUrlConstants.hrApi + 'province/insert',
-    update: APIUrlConstants.hrApi + 'province/update',
-    delete: APIUrlConstants.hrApi + 'province/delete',
+    list: APIUrlConstants.commonApi + 'province/get-list',
+    dropdown: APIUrlConstants.commonApi + 'province/dropdown',
+    item: APIUrlConstants.commonApi + 'province/item',
+    insert: APIUrlConstants.commonApi + 'province/insert',
+    update: APIUrlConstants.commonApi + 'province/update',
+    delete: APIUrlConstants.commonApi + 'province/delete',
   };
 
   constructor(

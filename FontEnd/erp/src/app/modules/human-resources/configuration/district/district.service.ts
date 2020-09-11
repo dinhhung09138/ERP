@@ -15,12 +15,12 @@ import { MatDialog } from '@angular/material/dialog';
 export class DistrictService {
 
   url = {
-    list: APIUrlConstants.hrApi + 'district/get-list',
-    dropdown: APIUrlConstants.hrApi + 'district/dropdown',
-    item: APIUrlConstants.hrApi + 'district/item',
-    insert: APIUrlConstants.hrApi + 'district/insert',
-    update: APIUrlConstants.hrApi + 'district/update',
-    delete: APIUrlConstants.hrApi + 'district/delete',
+    list: APIUrlConstants.commonApi + 'district/get-list',
+    dropdown: APIUrlConstants.commonApi + 'district/dropdown',
+    item: APIUrlConstants.commonApi + 'district/item',
+    insert: APIUrlConstants.commonApi + 'district/insert',
+    update: APIUrlConstants.commonApi + 'district/update',
+    delete: APIUrlConstants.commonApi + 'district/delete',
   };
 
   constructor(

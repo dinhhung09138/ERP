@@ -1,5 +1,5 @@
 {
-  "marketingApi": "https://localhost:44337/api/marketing/",
+  "commonApi": "https://localhost:44337/api/common/",
   "authenticationApi": "https://localhost:44337/api/authentication/",
   "hrApi": "https://localhost:44337/api/hr/",
   "systemApi": "https://localhost:44337/api/system/"

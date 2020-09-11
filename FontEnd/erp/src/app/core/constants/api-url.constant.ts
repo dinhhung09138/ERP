@@ -1,5 +1,5 @@
 export const APIUrlConstants = {
-  marketingApi: '',
+  commonApi: '',
   authenticationApi: '',
   hrApi: '',
   systemApi: '',
