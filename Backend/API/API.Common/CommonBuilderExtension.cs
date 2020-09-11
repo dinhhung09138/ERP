@@ -11,6 +11,10 @@ namespace API.Common
         public static IServiceCollection AddCommonService(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<IImageServerService, ImageServerService>();
+            services.AddScoped<IProfessionalQualificationService, ProfessionalQualificationService>();
+            services.AddScoped<IDistrictService, DistrictService>();
+            services.AddScoped<IWardService, WardService>();
+            services.AddScoped<IProvinceService, ProvinceService>();
             return services;
         }
     }
