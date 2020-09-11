@@ -1,4 +1,6 @@
-﻿using Core.CommonModel;
+﻿using API.HR.Filters;
+using Core.CommonModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -8,6 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/identification-type")]
     [ApiController]
+    [AuthorizationFilter]
     public class IdentificationTypeController : ControllerBase
     {
         private readonly IIdentificationTypeService _identificationTypeService;
@@ -25,6 +28,7 @@ namespace API.HR.Controllers
         }
 
         [HttpGet, Route("dropdown")]
+        [AllowAnonymous]
         public async Task<ResponseModel> Dropdown()
         {
             var response = await _identificationTypeService.DropDownSelection();

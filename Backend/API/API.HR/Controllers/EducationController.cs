@@ -1,4 +1,6 @@
-﻿using Core.CommonModel;
+﻿using API.HR.Filters;
+using Core.CommonModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -8,6 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/education")]
     [ApiController]
+    [AuthorizationFilter]
     public class EducationController : ControllerBase
     {
         private readonly IEducationService _educationService;
@@ -25,6 +28,7 @@ namespace API.HR.Controllers
         }
 
         [HttpGet, Route("dropdown")]
+        [AllowAnonymous]
         public async Task<ResponseModel> Dropdown()
         {
             var response = await _educationService.DropDownSelection();
