@@ -1210,23 +1210,12 @@ namespace Database.Sql.ERP
             #endregion
 
             #region " HR "
-            // HR_DASHBOARD
-            modelBuilder.Entity<FunctionCommand>().HasData(
-                new FunctionCommand()
-                {
-                    FunctionCode = "HR_DASHBOARD",
-                    Name = "VIEW",
-                    ModuleName = "HR",
-                    ControllerName = "Dashboard",
-                    ActionName = "Index",
-                    Precedence = 1,
-                    IsView = true,
-                }
-            );
+            
             // HR_DEPARTMENT
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 12,
                     FunctionCode = "HR_DEPARTMENT",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1237,6 +1226,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 13,
                     FunctionCode = "HR_DEPARTMENT",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1247,6 +1237,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 14,
                     FunctionCode = "HR_DEPARTMENT",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1257,6 +1248,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 15,
                     FunctionCode = "HR_DEPARTMENT",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1270,6 +1262,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 16,
                     FunctionCode = "HR_TEAM",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1280,6 +1273,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 17,
                     FunctionCode = "HR_TEAM",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1290,6 +1284,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 18,
                     FunctionCode = "HR_TEAM",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1300,6 +1295,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 19,
                     FunctionCode = "HR_TEAM",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1313,6 +1309,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 20,
                     FunctionCode = "HR_POSITION",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1323,6 +1320,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 21,
                     FunctionCode = "HR_POSITION",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1333,6 +1331,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 22,
                     FunctionCode = "HR_POSITION",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1343,6 +1342,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 23,
                     FunctionCode = "HR_POSITION",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1356,6 +1356,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 24,
                     FunctionCode = "HR_COMMENDATION",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1366,6 +1367,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 25,
                     FunctionCode = "HR_COMMENDATION",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1376,6 +1378,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 26,
                     FunctionCode = "HR_COMMENDATION",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1386,6 +1389,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 27,
                     FunctionCode = "HR_COMMENDATION",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1399,6 +1403,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 28,
                     FunctionCode = "HR_DISCIPLINE",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1409,6 +1414,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 29,
                     FunctionCode = "HR_DISCIPLINE",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1419,6 +1425,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 30,
                     FunctionCode = "HR_DISCIPLINE",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1429,6 +1436,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 31,
                     FunctionCode = "HR_DISCIPLINE",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1442,6 +1450,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 32,
                     FunctionCode = "HR_CONF_PROVINCE",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1452,6 +1461,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 33,
                     FunctionCode = "HR_CONF_PROVINCE",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1462,6 +1472,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 34,
                     FunctionCode = "HR_CONF_PROVINCE",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1472,6 +1483,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 35,
                     FunctionCode = "HR_CONF_PROVINCE",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1485,6 +1497,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 36,
                     FunctionCode = "HR_CONF_DISTRICT",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1495,6 +1508,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 37,
                     FunctionCode = "HR_CONF_DISTRICT",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1505,6 +1519,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 38,
                     FunctionCode = "HR_CONF_DISTRICT",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1515,6 +1530,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 39,
                     FunctionCode = "HR_CONF_DISTRICT",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1528,6 +1544,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 40,
                     FunctionCode = "HR_CONF_WARD",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1538,6 +1555,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 41,
                     FunctionCode = "HR_CONF_WARD",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1548,6 +1566,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 42,
                     FunctionCode = "HR_CONF_WARD",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1558,6 +1577,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 43,
                     FunctionCode = "HR_CONF_WARD",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1571,6 +1591,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 44,
                     FunctionCode = "HR_CONF_RELIGION",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1581,6 +1602,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 45,
                     FunctionCode = "HR_CONF_RELIGION",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1591,6 +1613,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 46,
                     FunctionCode = "HR_CONF_RELIGION",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1601,6 +1624,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 47,
                     FunctionCode = "HR_CONF_RELIGION",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1614,6 +1638,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 48,
                     FunctionCode = "HR_CONF_ETHNICITY",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1624,6 +1649,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 49,
                     FunctionCode = "HR_CONF_ETHNICITY",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1634,6 +1660,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 50,
                     FunctionCode = "HR_CONF_ETHNICITY",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1644,6 +1671,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 51,
                     FunctionCode = "HR_CONF_ETHNICITY",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1657,6 +1685,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 52,
                     FunctionCode = "HR_CONF_NATIONALITY",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1667,6 +1696,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 53,
                     FunctionCode = "HR_CONF_NATIONALITY",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1677,6 +1707,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 54,
                     FunctionCode = "HR_CONF_NATIONALITY",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1687,6 +1718,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 55,
                     FunctionCode = "HR_CONF_NATIONALITY",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1700,6 +1732,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 56,
                     FunctionCode = "HR_CONF_EDUCATION",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1710,6 +1743,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 57,
                     FunctionCode = "HR_CONF_EDUCATION",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1720,6 +1754,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 58,
                     FunctionCode = "HR_CONF_EDUCATION",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1730,6 +1765,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 59,
                     FunctionCode = "HR_CONF_EDUCATION",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1743,6 +1779,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 60,
                     FunctionCode = "HR_CONF_QUALIFICATION",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1753,6 +1790,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 61,
                     FunctionCode = "HR_CONF_QUALIFICATION",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1763,6 +1801,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 62,
                     FunctionCode = "HR_CONF_QUALIFICATION",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1773,6 +1812,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 63,
                     FunctionCode = "HR_CONF_QUALIFICATION",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1786,6 +1826,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 64,
                     FunctionCode = "HR_CONF_MODEL_OF_STUDY",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1796,6 +1837,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 65,
                     FunctionCode = "HR_CONF_MODEL_OF_STUDY",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1806,6 +1848,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 66,
                     FunctionCode = "HR_CONF_MODEL_OF_STUDY",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1816,6 +1859,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 67,
                     FunctionCode = "HR_CONF_MODEL_OF_STUDY",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1829,6 +1873,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 68,
                     FunctionCode = "HR_CONF_RANKING",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1839,6 +1884,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 69,
                     FunctionCode = "HR_CONF_RANKING",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1849,6 +1895,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 70,
                     FunctionCode = "HR_CONF_RANKING",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1859,6 +1906,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 71,
                     FunctionCode = "HR_CONF_RANKING",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1872,6 +1920,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 72,
                     FunctionCode = "HR_CONF_RELATIONSHIP",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1882,6 +1931,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 73,
                     FunctionCode = "HR_CONF_RELATIONSHIP",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1892,6 +1942,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 74,
                     FunctionCode = "HR_CONF_RELATIONSHIP",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1902,6 +1953,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 75,
                     FunctionCode = "HR_CONF_RELATIONSHIP",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1915,6 +1967,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 76,
                     FunctionCode = "HR_CONF_CONTRACT",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1925,6 +1978,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 77,
                     FunctionCode = "HR_CONF_CONTRACT",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1935,6 +1989,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 78,
                     FunctionCode = "HR_CONF_CONTRACT",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1945,6 +2000,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 79,
                     FunctionCode = "HR_CONF_CONTRACT",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1958,6 +2014,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 80,
                     FunctionCode = "HR_CONF_WORKING",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1968,6 +2025,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 81,
                     FunctionCode = "HR_CONF_WORKING",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1978,6 +2036,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 82,
                     FunctionCode = "HR_CONF_WORKING",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1988,6 +2047,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 83,
                     FunctionCode = "HR_CONF_WORKING",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -2001,6 +2061,7 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
+                    Id = 84,
                     FunctionCode = "HR_EMPLOYEE",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -2011,6 +2072,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 85,
                     FunctionCode = "HR_EMPLOYEE",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -2021,6 +2083,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 86,
                     FunctionCode = "HR_EMPLOYEE",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -2031,6 +2094,7 @@ namespace Database.Sql.ERP
                 },
                 new FunctionCommand()
                 {
+                    Id = 87,
                     FunctionCode = "HR_EMPLOYEE",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -2045,5 +2109,6 @@ namespace Database.Sql.ERP
 
             #endregion
         }
+
     }
 }
