@@ -70,7 +70,9 @@ export class LoginComponent implements OnInit {
           this.context.saveToken(response.result);
           this.router.navigate([this.returnUrl ? this.returnUrl : '/dashboard'], {});
         } else {
-          this.warningMessage.push('Tên đăng nhập hoặc mật khẩu không đúng');
+          this.translate.get('SCREEN.LOGIN.WARNING').subscribe(message => {
+            this.warningMessage.push(message);
+          });
           this.isLoading = false;
           this.submitted = false;
         }

@@ -71,6 +71,7 @@
   "SCREEN": {
     "LOGIN": {
       "TITLE": "LOGIN",
+      "WARNING": "UserName or Password incorrect",
       "FORM": {
         "USER_NAME": "User Name",
         "PASSWORD": "Password",

@@ -71,6 +71,7 @@
   "SCREEN": {
     "LOGIN": {
       "TITLE": "ĐĂNG NHẬP HỆ THỐNG",
+      "WARNING": "Tên đăng nhập hoặc mật khẩu không đúng",
       "FORM": {
         "USER_NAME": "Tên đăng nhập",
         "PASSWORD": "Mật khẩu",
