@@ -566,10 +566,11 @@ namespace Database.Sql.ERP
 
             CreateDefaultModule(modelBuilder);
             CreateDefaultFunction(modelBuilder);
+            CreateDefaultCommand(modelBuilder);
+            CreateDefaultRole(modelBuilder);
             CreateDefaultEmployeeWorkingStatus(modelBuilder);
             CreateDefaultEmployee(modelBuilder);
             CreateDefaultUser(modelBuilder);
-
         }
 
         private void CreateDefaultModule(ModelBuilder modelBuilder)
@@ -628,10 +629,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 1,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_DEPARTMENT",
@@ -641,10 +639,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 2,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_TEAM",
@@ -654,10 +649,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 3,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_POSITION",
@@ -667,10 +659,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 4,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_COMMENDATION",
@@ -680,10 +669,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 5,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_DISCIPLINE",
@@ -693,10 +679,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 6,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_EMPLOYEE",
@@ -706,10 +689,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 6,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_LEAVE_MNT",
@@ -719,10 +699,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 7,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_LEAVE_CALENDAR",
@@ -732,10 +709,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_LEAVE_MNT",
                     Precedence = 1,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_LEAVE_SUMMARY",
@@ -745,10 +719,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_LEAVE_MNT",
                     Precedence = 2,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_LEAVE_NEW",
@@ -758,10 +729,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_LEAVE_MNT",
                     Precedence = 3,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_LEAVE_APPROVE_ST",
@@ -771,10 +739,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_LEAVE_MNT",
                     Precedence = 4,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_HOLIDAY",
@@ -784,10 +749,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 8,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONFIGURATION",
@@ -797,10 +759,7 @@ namespace Database.Sql.ERP
                     ParentCode = string.Empty,
                     Precedence = 9,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_PROVINCE",
@@ -810,10 +769,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 1,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_DISTRICT",
@@ -823,10 +779,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 2,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_WARD",
@@ -836,10 +789,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 3,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_RELIGION",
@@ -849,10 +799,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 4,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_ETHNICITY",
@@ -862,10 +809,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 5,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_NATIONALITY",
@@ -875,10 +819,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 6,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_EDUCATION",
@@ -888,10 +829,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 7,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_QUALIFICATION",
@@ -901,10 +839,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 8,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_MODEL_OF_STUDY",
@@ -914,10 +849,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 9,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_RANKING",
@@ -927,10 +859,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 10,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_RELATIONSHIP",
@@ -940,10 +869,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 11,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_CONTRACT",
@@ -953,10 +879,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 12,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_WORKING",
@@ -966,10 +889,7 @@ namespace Database.Sql.ERP
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 13,
                     ModuleCode = "HR"
-                }
-            );
-
-            modelBuilder.Entity<Function>().HasData(
+                },
                 new Function()
                 {
                     Code = "HR_CONF_JOB",
@@ -996,10 +916,7 @@ namespace Database.Sql.ERP
                    ParentCode = string.Empty,
                    Precedence = 1,
                    ModuleCode = "SYSTEM"
-               }
-           );
-
-            modelBuilder.Entity<Function>().HasData(
+               },
                new Function()
                {
                    Code = "SYS_ROLE",
@@ -1009,10 +926,7 @@ namespace Database.Sql.ERP
                    ParentCode = string.Empty,
                    Precedence = 2,
                    ModuleCode = "SYSTEM"
-               }
-           );
-
-            modelBuilder.Entity<Function>().HasData(
+               },
                new Function()
                {
                    Code = "SYS_SYSTEM_ERROR",
@@ -1024,6 +938,88 @@ namespace Database.Sql.ERP
                    ModuleCode = "SYSTEM"
                }
            );
+        }
+
+        private void CreateDefaultRole(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>().HasData(
+               new Role()
+               {
+                   Id = 1,
+                   Name = "Sys",
+                   IsActive = true,
+                   CreateBy = 1,
+                   CreateDate = DateTime.Now,
+                   Description = "Sys",
+               }
+           );
+            modelBuilder.Entity<RoleDetail>().HasData(
+                new RoleDetail()
+                {
+                    Id = 1,
+                    RoleId = 1,
+                    CommandId = 1
+                },
+                new RoleDetail()
+                {
+                    Id = 2,
+                    RoleId = 1,
+                    CommandId = 2
+                },
+                new RoleDetail()
+                {
+                    Id = 3,
+                    RoleId = 1,
+                    CommandId = 3
+                },
+                new RoleDetail()
+                {
+                    Id = 4,
+                    RoleId = 1,
+                    CommandId = 4
+                },
+                new RoleDetail()
+                {
+                    Id = 5,
+                    RoleId = 1,
+                    CommandId = 5
+                },
+                new RoleDetail()
+                {
+                    Id = 6,
+                    RoleId = 1,
+                    CommandId = 6
+                },
+                new RoleDetail()
+                {
+                    Id = 7,
+                    RoleId = 1,
+                    CommandId = 7
+                },
+                new RoleDetail()
+                {
+                    Id = 8,
+                    RoleId = 1,
+                    CommandId = 8
+                },
+                new RoleDetail()
+                {
+                    Id = 9,
+                    RoleId = 1,
+                    CommandId = 9
+                },
+                new RoleDetail()
+                {
+                    Id = 10,
+                    RoleId = 1,
+                    CommandId = 10
+                },
+                new RoleDetail()
+                {
+                    Id = 11,
+                    RoleId = 1,
+                    CommandId = 11
+                });
         }
 
         private void CreateDefaultEmployeeWorkingStatus(ModelBuilder modelBuilder)
@@ -1070,6 +1066,984 @@ namespace Database.Sql.ERP
                     Password = "NTZFMjNDNTNCNjVFMjdGMjM3NDIyOTkwRTI5MjJFNzA0RkE2MTJBQzQ3OEE3NjA4NUI5QkQxMTU1OTBDNTgyMw=="
                 }
             );
+            modelBuilder.Entity<UserRole>().HasData(
+                new UserRole()
+                {
+                    Id = 1,
+                    UserId = 1,
+                    RoleId = 1
+                }
+            );
+        }
+
+        private void CreateDefaultCommand(ModelBuilder modelBuilder)
+        {
+            #region " System Command "
+            // SYS_ACCOUNT
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 1,
+                    FunctionCode = "SYS_ACCOUNT",
+                    Name = "VIEW",
+                    ModuleName = "System",
+                    ControllerName = "User",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 2,
+                    FunctionCode = "SYS_ACCOUNT",
+                    Name = "INSERT",
+                    ModuleName = "System",
+                    ControllerName = "User",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 3,
+                    FunctionCode = "SYS_ACCOUNT",
+                    Name = "UPDATE",
+                    ModuleName = "System",
+                    ControllerName = "User",
+                    ActionName = "ChangeRole",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 4,
+                    FunctionCode = "SYS_ACCOUNT",
+                    Name = "ACTIVE_OR_DEACTIVATION",
+                    ModuleName = "System",
+                    ControllerName = "User",
+                    ActionName = "ActiveOrDeactivation",
+                    Precedence = 4,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 5,
+                    FunctionCode = "SYS_ACCOUNT",
+                    Name = "ADMIN_CHANGE_PASSWORD",
+                    ModuleName = "System",
+                    ControllerName = "User",
+                    ActionName = "AdminChangepassword",
+                    Precedence = 5,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 6,
+                    FunctionCode = "SYS_ACCOUNT",
+                    Name = "USER_CHANGE_PASSWORD",
+                    ModuleName = "System",
+                    ControllerName = "User",
+                    ActionName = "UserChangepassword",
+                    Precedence = 6,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 7,
+                    FunctionCode = "SYS_ACCOUNT",
+                    Name = "DELETE",
+                    ModuleName = "System",
+                    ControllerName = "User",
+                    ActionName = "Delete",
+                    Precedence = 7,
+                    IsView = false,
+                }
+            );
+            // SYS_ROLE
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 8,
+                    FunctionCode = "SYS_ROLE",
+                    Name = "VIEW",
+                    ModuleName = "System",
+                    ControllerName = "Role",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 9,
+                    FunctionCode = "SYS_ROLE",
+                    Name = "INSERT",
+                    ModuleName = "System",
+                    ControllerName = "Role",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 10,
+                    FunctionCode = "SYS_ROLE",
+                    Name = "UPDATE",
+                    ModuleName = "System",
+                    ControllerName = "Role",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 11,
+                    FunctionCode = "SYS_ROLE",
+                    Name = "DELETE",
+                    ModuleName = "System",
+                    ControllerName = "Role",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+
+            #endregion
+
+            #region " HR "
+            // HR_DASHBOARD
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_DASHBOARD",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Dashboard",
+                    ActionName = "Index",
+                    Precedence = 1,
+                    IsView = true,
+                }
+            );
+            // HR_DEPARTMENT
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_DEPARTMENT",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Department",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_DEPARTMENT",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Department",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_DEPARTMENT",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Department",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_DEPARTMENT",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Department",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_TEAM
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_TEAM",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Team",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_TEAM",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Team",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_TEAM",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Team",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_TEAM",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Team",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_POSITION
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_POSITION",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Position",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_POSITION",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Position",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_POSITION",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Position",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_POSITION",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Position",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_COMMENDATION
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_COMMENDATION",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Commendation",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_COMMENDATION",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Commendation",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_COMMENDATION",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Commendation",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_COMMENDATION",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Commendation",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_DISCIPLINE
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_DISCIPLINE",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Discipline",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_DISCIPLINE",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Discipline",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_DISCIPLINE",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Discipline",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_DISCIPLINE",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Discipline",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_PROVINCE
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_PROVINCE",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Province",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_PROVINCE",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Province",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_PROVINCE",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Province",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_PROVINCE",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Province",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_DISTRICT
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_DISTRICT",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "District",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_DISTRICT",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "District",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_DISTRICT",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "District",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_DISTRICT",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "District",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_WARD
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_WARD",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Ward",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_WARD",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Ward",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_WARD",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Ward",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_WARD",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Ward",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_RELIGION
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RELIGION",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Religion",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RELIGION",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Religion",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RELIGION",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Religion",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RELIGION",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Religion",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_ETHNICITY
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_ETHNICITY",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Ethnicity",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_ETHNICITY",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Ethnicity",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_ETHNICITY",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Ethnicity",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_ETHNICITY",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Ethnicity",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_NATIONALITY
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_NATIONALITY",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Nationality",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_NATIONALITY",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Nationality",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_NATIONALITY",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Nationality",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_NATIONALITY",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Nationality",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_EDUCATION
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_EDUCATION",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Education",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_EDUCATION",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Education",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_EDUCATION",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Education",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_EDUCATION",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Education",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_QUALIFICATION
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_QUALIFICATION",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "ProfessionalQualification",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_QUALIFICATION",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "ProfessionalQualification",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_QUALIFICATION",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "ProfessionalQualification",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_QUALIFICATION",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "ProfessionalQualification",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_MODEL_OF_STUDY
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_MODEL_OF_STUDY",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "ModelOfStudy",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_MODEL_OF_STUDY",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "ModelOfStudy",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_MODEL_OF_STUDY",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "ModelOfStudy",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_MODEL_OF_STUDY",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "ModelOfStudy",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_RANKING
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RANKING",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Ranking",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RANKING",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Ranking",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RANKING",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Ranking",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RANKING",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Ranking",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_RELATIONSHIP
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RELATIONSHIP",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "RelationshipType",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RELATIONSHIP",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "RelationshipType",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RELATIONSHIP",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "RelationshipType",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_RELATIONSHIP",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "RelationshipType",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_CONTRACT
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_CONTRACT",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "ContractType",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_CONTRACT",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "ContractType",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_CONTRACT",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "ContractType",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_CONTRACT",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "ContractType",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_CONF_WORKING
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_WORKING",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "EmployeeWorkingStatus",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_WORKING",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "EmployeeWorkingStatus",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_WORKING",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "EmployeeWorkingStatus",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_CONF_WORKING",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "EmployeeWorkingStatus",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+            // HR_EMPLOYEE
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_EMPLOYEE",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Employee",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_EMPLOYEE",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Employee",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_EMPLOYEE",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Employee",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    FunctionCode = "HR_EMPLOYEE",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Employee",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+
+
+
+            #endregion
         }
     }
 }
