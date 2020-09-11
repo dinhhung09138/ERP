@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/ranking")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class RankingController : ControllerBase
     {
         private readonly IRankingService _rankingService;

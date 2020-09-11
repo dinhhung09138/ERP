@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/approve-status")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class ApproveStatusController : ControllerBase
     {
         private readonly IApproveStatusService _approveStatusService;

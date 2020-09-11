@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/relationship-type")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class RelationshipTypeController : ControllerBase
     {
         private readonly IRelationshipTypeService _relationshipTypeService;

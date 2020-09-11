@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/discipline")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class DisciplineController : ControllerBase
     {
         private readonly IDisciplineService _disciplineService;

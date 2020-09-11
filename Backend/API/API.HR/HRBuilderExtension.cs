@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using API.HR.Filters;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Service.HR;
 using Service.HR.Interfaces;
@@ -25,6 +26,7 @@ namespace API.HR
             services.AddScoped<IEthnicityService, EthnicityService>();
             services.AddScoped<INationalityService, NationalityService>();
             services.AddScoped<IReligionService, ReligionService>();
+            services.AddScoped<AuthorizationFilterAttribute>();
             return services;
         }
     }

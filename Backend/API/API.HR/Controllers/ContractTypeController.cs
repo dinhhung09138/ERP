@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/contract-type")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class ContractTypeController : ControllerBase
     {
         private readonly IContractTypeService _contractTypeService;

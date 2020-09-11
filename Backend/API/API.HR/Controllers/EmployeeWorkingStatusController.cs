@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/employee-working-status")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class EmployeeWorkingStatusController : ControllerBase
     {
         private readonly IEmployeeWorkingStatusService _employeeWorkingStatusService;

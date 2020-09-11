@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/identification-type")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class IdentificationTypeController : ControllerBase
     {
         private readonly IIdentificationTypeService _identificationTypeService;

@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/religion")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class ReligionController : ControllerBase
     {
         private readonly IReligionService _religionService;

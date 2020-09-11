@@ -9,7 +9,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/commendation")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class CommendationController : ControllerBase
     {
         private readonly ICommendationService _commendationService;

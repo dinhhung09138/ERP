@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/ethnicity")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class EthnicityController : ControllerBase
     {
         private readonly IEthnicityService _nationService;

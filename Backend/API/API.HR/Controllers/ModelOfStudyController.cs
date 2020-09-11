@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/model-of-study")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class ModelOfStudyController : ControllerBase
     {
         private readonly IModelOfStudyService _modelOfStudyService;
