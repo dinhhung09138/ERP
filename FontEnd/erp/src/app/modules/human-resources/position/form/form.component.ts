@@ -1,12 +1,14 @@
-import { AppValidator } from 'src/app/core/validators/app.validator';
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+
+import { TranslateService } from '@ngx-translate/core';
+
+import { AppValidator } from 'src/app/core/validators/app.validator';
 import { PositionService } from '../position.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PositionViewModel } from '../position.model';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-position-form',
@@ -104,7 +106,7 @@ export class PositionFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

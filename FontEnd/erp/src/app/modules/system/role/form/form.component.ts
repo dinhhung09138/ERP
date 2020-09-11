@@ -1,11 +1,13 @@
-import { FunctionCommandInterface } from './../../../../core/interfaces/function-command.interface';
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, Input } from '@angular/core';
 import { FormGroupDirective, FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { TranslateService } from '@ngx-translate/core';
+
+import { FunctionCommandInterface } from './../../../../core/interfaces/function-command.interface';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { RoleService } from '../role.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
-import { TranslateService } from '@ngx-translate/core';
 import { ModuleInterface } from '../../../../core/interfaces/module.interface';
 import { RoleViewModel } from '../role.model';
 import { RoleDetailViewModel } from '../role-detail.model';

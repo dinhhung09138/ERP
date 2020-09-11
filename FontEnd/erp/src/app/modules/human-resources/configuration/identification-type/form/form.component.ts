@@ -1,6 +1,8 @@
-import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { IdentificationTypeService } from '../identification-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -97,7 +99,7 @@ export class IdentificationTypeFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

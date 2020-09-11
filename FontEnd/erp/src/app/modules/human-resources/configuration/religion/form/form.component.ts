@@ -1,14 +1,16 @@
+import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
+
+import { TranslateService } from '@ngx-translate/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { ReligionService } from './../religion.service';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ReligionViewModel } from './../religion.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
-import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-religion-form',
@@ -116,7 +118,7 @@ export class ReligionFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

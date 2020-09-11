@@ -1,14 +1,16 @@
-import { EthnicityService } from './../ethnicity.service';
+import { Component, OnInit, ElementRef, EventEmitter, Output, ViewChild, Inject } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
+
+import { EthnicityService } from './../ethnicity.service';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { EthnicityViewModel } from './../ethnicity.model';
-import { Component, OnInit, ElementRef, EventEmitter, Output, ViewChild, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-ethnicity-form',

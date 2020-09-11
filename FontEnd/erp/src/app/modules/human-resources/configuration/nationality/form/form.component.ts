@@ -1,14 +1,17 @@
+
+import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
+
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
+
 import { NationalityService } from './../nationality.service';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { NationalityViewModel } from './../nationality.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
-import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-nationality-form',
@@ -116,7 +119,7 @@ export class NationalityFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

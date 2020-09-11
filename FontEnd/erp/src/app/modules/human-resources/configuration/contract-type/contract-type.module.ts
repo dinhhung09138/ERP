@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { ContractTypeComponent } from './contract-type.component';
 import { Routes, RouterModule } from '@angular/router';
-import { ContractTypeFormComponent } from './form/form.component';
-import { ContractTypeService } from './contract-type.service';
-import { SharedModule } from 'src/app/shared/shared.module';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+
+import { ContractTypeFormComponent } from './form/form.component';
+import { ContractTypeService } from './contract-type.service';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ContractTypeComponent } from './contract-type.component';
 
 const route: Routes = [
   {

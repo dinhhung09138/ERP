@@ -1,12 +1,15 @@
-import { PagingModel } from 'src/app/core/models/paging.model';
-import { NationalityFormComponent } from './form/form.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { NationalityService } from './nationality.service';
 import { PageEvent } from '@angular/material/paginator';
+
+import { PagingModel } from 'src/app/core/models/paging.model';
+import { NationalityFormComponent } from './form/form.component';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { NationalityService } from './nationality.service';
+
 
 @Component({
   selector: 'app-hr-nationality',

@@ -1,14 +1,16 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, inject, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
+
 import { EducationService } from '../education.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { EducationViewModel } from '../education.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-education-form',
@@ -111,7 +113,7 @@ export class EducationFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

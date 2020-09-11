@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { HumanResourcesComponent } from './human-resources.component';
 import { DistrictResolver } from './configuration/district/district.resolver';
 import { WardResolver } from './configuration/ward/ward.resolver';

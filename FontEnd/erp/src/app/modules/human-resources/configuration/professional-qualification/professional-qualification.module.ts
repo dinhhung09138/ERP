@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { ProfessionalQualificationComponent } from './professional-qualification.component';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfessionalQualificationFormComponent } from './form/form.component';
-import { ProfessionalQualificationService } from './professional-qualification.service';
-import { SharedModule } from 'src/app/shared/shared.module';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+import { ProfessionalQualificationComponent } from './professional-qualification.component';
+import { ProfessionalQualificationFormComponent } from './form/form.component';
+import { ProfessionalQualificationService } from './professional-qualification.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const route: Routes = [
   {

@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { PageEvent } from '@angular/material/paginator';
+
 import { RoleService } from '../role/role.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
-import { MatSort } from '@angular/material/sort';
 import { RoleFormComponent } from './form/form.component';
 import { PagingModel } from 'src/app/core/models/paging.model';
-import { MatTableDataSource } from '@angular/material/table';
-import { PageEvent } from '@angular/material/paginator';
 import { FunctionService } from '../function/function.service';
 import { ModuleInterface } from '../../../core/interfaces/module.interface';
 

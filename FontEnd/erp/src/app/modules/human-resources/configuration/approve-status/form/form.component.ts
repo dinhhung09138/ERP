@@ -1,13 +1,14 @@
-import { AppValidator } from 'src/app/core/validators/app.validator';
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { ApproveStatusService } from '../approve-status.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ApproveStatusViewModel } from '../approve-status.model';
-import { TranslateService } from '@ngx-translate/core';
-import { ApplicationConstant } from '../../../../../core/constants/app.constant';
+import { AppValidator } from 'src/app/core/validators/app.validator';
 
 @Component({
   selector: 'app-hr-approve-status-form',
@@ -109,7 +110,7 @@ export class ApproveStatusFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

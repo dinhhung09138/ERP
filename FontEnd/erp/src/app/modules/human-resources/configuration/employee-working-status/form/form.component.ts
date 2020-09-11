@@ -1,12 +1,14 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { EmployeeWorkingStatusViewModel } from '../employee-working-status.model';
 import { EmployeeWorkingStatusService } from '../employee-working-status.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-employee-working-status-form',
@@ -111,7 +113,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

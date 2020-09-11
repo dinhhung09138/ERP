@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
+
 import { EducationService } from './education.service';
-import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';

@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
+
 import { IdentificationTypeService } from './identification-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';

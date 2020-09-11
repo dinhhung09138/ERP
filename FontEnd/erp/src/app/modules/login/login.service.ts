@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginModel } from './login.model';
+
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+
+import { LoginModel } from './login.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
 

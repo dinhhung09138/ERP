@@ -1,14 +1,16 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
+
 import { ProvinceService } from '../province.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ProvinceViewModel } from '../province.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-province-form',
@@ -23,7 +25,6 @@ export class ProvinceFormComponent implements OnInit {
 
   formTitle = '';
   isSubmit = false;
-  // Show loading when the form have a action call to server
   isLoading = false;
   provinceForm: FormGroup;
   item: ProvinceViewModel;
@@ -111,7 +112,7 @@ export class ProvinceFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

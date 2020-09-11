@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from 'src/app/core/services/api.service';
-import { ResponseModel } from 'src/app/core/models/response.model';
+
 import { switchMap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
+
+import { ApiService } from 'src/app/core/services/api.service';
+import { ResponseModel } from 'src/app/core/models/response.model';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
 import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
 import { EmployeeViewModel } from './employee.model';

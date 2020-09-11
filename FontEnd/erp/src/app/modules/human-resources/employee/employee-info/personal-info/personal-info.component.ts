@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+
 import { PersonalInfoService } from './personal-info.service';
 import { PersonalInfoViewModel } from './personal-info.model';
 import { ResponseModel } from '../../../../../core/models/response.model';
 import { ResponseStatus } from '../../../../../core/enums/response-status.enum';
-import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { EthnicityViewModel } from '../../../configuration/ethnicity/ethnicity.model';
 import { NationalityViewModel } from '../../../configuration/nationality/nationality.model';
 import { EducationViewModel } from '../../../configuration/education/education.model';

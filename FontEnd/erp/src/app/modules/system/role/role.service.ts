@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
+
+import { of, Observable, BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
 import { APIUrlConstants } from '../../../core/constants/api-url.constant';
 import { FilterModel } from '../../../core/models/filter-table.model';
 import { ResponseModel } from '../../../core/models/response.model';
-import { of, Observable, BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
-import { switchMap } from 'rxjs/operators';
 import { RoleDetailViewModel } from './role-detail.model';
 import { RoleViewModel } from './role.model';
 

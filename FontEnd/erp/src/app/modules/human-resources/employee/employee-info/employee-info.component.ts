@@ -1,19 +1,21 @@
-import { EmployeeWorkingStatusViewModel } from './../../configuration/employee-working-status/employee-working-status.model';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
-import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AppValidator } from 'src/app/core/validators/app.validator';
+
+import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+
+import { EmployeeWorkingStatusViewModel } from './../../configuration/employee-working-status/employee-working-status.model';
+import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
+import { AppValidator } from 'src/app/core/validators/app.validator';
 import { APP_DATE_FORMATS, AppDateAdapter } from 'src/app/core/helpers/format-datepicker.helper';
 import { EmployeeService } from '../employee.service';
 import { EmployeeViewModel } from '../employee.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
-import { Title } from '@angular/platform-browser';
 import { ApplicationConstant } from '../../../../core/constants/app.constant';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-employee-info',

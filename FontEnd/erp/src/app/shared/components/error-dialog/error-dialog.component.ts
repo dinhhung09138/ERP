@@ -1,8 +1,10 @@
-import { DialogDataInterface } from './../../../core/interfaces/dialog-data.interface';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpErrorStatusEnum } from 'src/app/core/enums/http-error.enum';
+
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
+
+import { DialogDataInterface } from './../../../core/interfaces/dialog-data.interface';
+import { HttpErrorStatusEnum } from 'src/app/core/enums/http-error.enum';
 
 @Component({
   selector: 'app-error-dialog',

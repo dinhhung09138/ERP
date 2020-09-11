@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
+
 import { DistrictService } from './district.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { DistrictFormComponent } from './form/form.component';
-import { ActivatedRoute } from '@angular/router';
 import { ProvinceViewModel } from '../province/province.model';
 
 @Component({

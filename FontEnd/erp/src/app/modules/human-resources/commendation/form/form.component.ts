@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { CommendationService } from '../commendation.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -7,7 +10,6 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { CommendationViewModel } from '../commendation.model';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-commendation-form',
@@ -102,7 +104,7 @@ export class CommendationFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

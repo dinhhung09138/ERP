@@ -1,12 +1,14 @@
-import { ReligionFormComponent } from './form/form.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { MatSort } from '@angular/material/sort';
-import { PagingModel } from 'src/app/core/models/paging.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReligionService } from './religion.service';
 import { PageEvent } from '@angular/material/paginator';
+
+import { ReligionFormComponent } from './form/form.component';
+import { ReligionService } from './religion.service';
+import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-hr-religion',

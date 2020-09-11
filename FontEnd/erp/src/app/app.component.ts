@@ -1,10 +1,12 @@
-import { ApplicationConstant } from './core/constants/app.constant';
-import { LoadingService } from './core/services/loading.service';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+
 import { filter } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+
+import { ApplicationConstant } from './core/constants/app.constant';
+import { LoadingService } from './core/services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +21,6 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private activatedRoute: ActivatedRoute,
     private loadingService: LoadingService) {
-
-
       this.router.events.subscribe((e: RouterEvent) => {
         this.navigationInterceptor(e);
       });

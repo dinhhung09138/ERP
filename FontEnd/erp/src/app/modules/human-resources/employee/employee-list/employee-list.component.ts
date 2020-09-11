@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { MatSort } from '@angular/material/sort';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { PageEvent } from '@angular/material/paginator';
+
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
-import { PageEvent } from '@angular/material/paginator';
 import { EmployeeService } from '../employee.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hr-employee-list',

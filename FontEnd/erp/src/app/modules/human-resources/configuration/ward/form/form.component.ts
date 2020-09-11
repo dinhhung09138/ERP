@@ -1,18 +1,20 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { WardService } from '../ward.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { WardViewModel } from '../ward.model';
-import { ActivatedRoute } from '@angular/router';
 import { ProvinceViewModel } from '../../province/province.model';
 import { DistrictViewModel } from '../../district/district.model';
 import { ProvinceService } from '../../province/province.service';
 import { DistrictService } from '../../district/district.service';
 import { DistrictFormComponent } from '../../district/form/form.component';
 import { ProvinceFormComponent } from '../../province/form/form.component';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-ward-form',
@@ -151,7 +153,7 @@ export class WardFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

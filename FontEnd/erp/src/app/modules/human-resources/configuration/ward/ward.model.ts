@@ -1,6 +1,4 @@
 import { BaseViewModel } from 'src/app/core/models/base.model';
-import { ProvinceViewModel } from '../province/province.model';
-import { DistrictViewModel } from '../district/district.model';
 
 export interface WardViewModel extends BaseViewModel {
   name: string;

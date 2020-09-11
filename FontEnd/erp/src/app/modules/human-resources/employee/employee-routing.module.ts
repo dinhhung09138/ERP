@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { EmployeeComponent } from './employee.component';
 import { EmployeeInfoResolver } from './employee-info/employee-info.resolver';
 

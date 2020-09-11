@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
+
 import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { ProvinceService } from '../province/province.service';
 import { DistrictService } from '../district/district.service';
 

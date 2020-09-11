@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
+
 import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { EmployeeWorkingStatusService } from '../../configuration/employee-working-status/employee-working-status.service';
 
 @Injectable()

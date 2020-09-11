@@ -1,12 +1,14 @@
-import { AppValidator } from './../../../../../core/validators/app.validator';
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { RelationshipTypeService } from '../relationship-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { RelationshipTypeViewModel } from '../relationship-type.model';
-import { TranslateService } from '@ngx-translate/core';
+import { AppValidator } from './../../../../../core/validators/app.validator';
 
 @Component({
   selector: 'app-hr-relationship-type-form',
@@ -102,7 +104,7 @@ export class RelationshipTypeFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

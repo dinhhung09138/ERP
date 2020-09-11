@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { Observable, forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { ApiService } from '../../../../../core/services/api.service';
 import { APIUrlConstants } from '../../../../../core/constants/api-url.constant';
 import { PersonalInfoViewModel } from './personal-info.model';
-import { Observable, forkJoin } from 'rxjs';
 import { ResponseModel } from '../../../../../core/models/response.model';
 import { EthnicityService } from '../../../configuration/ethnicity/ethnicity.service';
 import { ReligionService } from '../../../configuration/religion/religion.service';
 import { NationalityService } from '../../../configuration/nationality/nationality.service';
 import { EducationService } from '../../../configuration/education/education.service';
 import { ProfessionalQualificationService } from '../../../configuration/professional-qualification/professional-qualification.service';
-import { map } from 'rxjs/operators';
 import { EthnicityFormComponent } from '../../../configuration/ethnicity/form/form.component';
 import { NationalityFormComponent } from '../../../configuration/nationality/form/form.component';
 import { EducationFormComponent } from '../../../configuration/education/form/form.component';
 import { ProfessionalQualificationFormComponent } from '../../../configuration/professional-qualification/form/form.component';
 import { ReligionFormComponent } from '../../../configuration/religion/form/form.component';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class PersonalInfoService {

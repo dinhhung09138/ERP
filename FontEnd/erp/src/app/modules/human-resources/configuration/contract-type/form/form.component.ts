@@ -1,13 +1,14 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { ContractTypeService } from '../contract-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ContractTypeViewModel } from '../contract-type.model';
 import { AppValidator } from '../../../../../core/validators/app.validator';
-import { TranslateService } from '@ngx-translate/core';
-import { ApplicationConstant } from 'src/app/core/constants/app.constant';
 
 @Component({
   selector: 'app-hr-contract-type-form',
@@ -120,7 +121,7 @@ export class ContractTypeFormComponent implements OnInit {
   }
 
   onResetClick() {
-    switch(this.formAction) {
+    switch (this.formAction) {
       case FormActionStatus.Insert:
         this.initFormControl(this.formAction);
         break;

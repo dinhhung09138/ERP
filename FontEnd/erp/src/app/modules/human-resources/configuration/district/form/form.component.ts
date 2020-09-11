@@ -1,18 +1,20 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+import { TranslateService } from '@ngx-translate/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { DistrictService } from '../district.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { DistrictViewModel } from '../district.model';
 import { ProvinceViewModel } from '../../province/province.model';
-import { ActivatedRoute } from '@angular/router';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProvinceService } from '../../province/province.service';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 import { ProvinceFormComponent } from '../../province/form/form.component';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hr-district-form',
@@ -29,7 +31,6 @@ export class DistrictFormComponent implements OnInit {
 
   formTitle = '';
   isSubmit = false;
-  // Show loading when the form have a action call to server
   isLoading = false;
   districtForm: FormGroup;
   item: DistrictViewModel;
