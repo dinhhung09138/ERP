@@ -17,6 +17,7 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<SystemLog> SystemLogRepository { get; }
         ITableGenericRepository<User> UserRepository { get; }
         ITableGenericRepository<UserRole> UserRoleRepository { get; }
+        ITableGenericRepository<UserModule> UserModuleRepository { get; }
 
     }
 }

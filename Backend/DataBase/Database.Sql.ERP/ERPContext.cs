@@ -103,6 +103,7 @@ namespace Database.Sql.ERP
         public virtual DbSet<SystemLog> SystemLog { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
+        public virtual DbSet<UserModule> UserModule { get; set; }
 
 
         #endregion
@@ -549,6 +550,16 @@ namespace Database.Sql.ERP
             modelBuilder.Entity<UserRole>()
                         .HasOne(p => p.Role)
                         .WithMany(b => b.UserRoles)
+                        .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserModule>();
+            modelBuilder.Entity<UserModule>()
+                        .HasOne(p => p.User)
+                        .WithMany(b => b.UserModules)
+                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<UserModule>()
+                        .HasOne(p => p.Module)
+                        .WithMany(b => b.UserModules)
                         .OnDelete(DeleteBehavior.Cascade);
 
             #endregion

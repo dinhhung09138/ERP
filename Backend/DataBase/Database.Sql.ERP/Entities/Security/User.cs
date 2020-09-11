@@ -56,5 +56,7 @@ namespace Database.Sql.ERP.Entities.Security
         public byte[] RowVersion { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; }
+
+        public ICollection<UserModule> UserModules { get; set; }
     }
 }

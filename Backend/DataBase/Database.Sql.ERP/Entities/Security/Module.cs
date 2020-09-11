@@ -35,5 +35,7 @@ namespace Database.Sql.ERP.Entities.Security
         public int Precedence { get; set; }
 
         public ICollection<Function> Functions { get; set; }
+
+        public ICollection<UserModule> UserModules { get; set; }
     }
 }

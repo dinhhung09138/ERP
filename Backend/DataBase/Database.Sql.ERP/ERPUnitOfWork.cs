@@ -480,6 +480,15 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<UserModule> _userModuleRepository;
+        public ITableGenericRepository<UserModule> UserModuleRepository
+        {
+            get
+            {
+                return _userModuleRepository = _userModuleRepository ?? new TableGenericRepository<UserModule>(_context);
+            }
+        }
+
         #endregion
 
         public ERPUnitOfWork(ERPContext context)
