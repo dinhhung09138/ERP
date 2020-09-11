@@ -3,17 +3,17 @@ using Core.Services;
 using Database.Sql.ERP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Services.System.Interfaces;
+using Service.System.Interfaces;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Services.System.Models;
+using Service.System.Models;
 using Microsoft.EntityFrameworkCore;
 using Core.Services.Interfaces;
 
-namespace Services.System
+namespace Service.System
 {
     public class FunctionService : BaseService, IFunctionService
     {

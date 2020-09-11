@@ -2,8 +2,8 @@
 using Core.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Services.System;
-using Services.System.Interfaces;
+using Service.System;
+using Service.System.Interfaces;
 
 namespace API.System
 {

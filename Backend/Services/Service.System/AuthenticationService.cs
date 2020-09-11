@@ -5,8 +5,8 @@ using Database.Sql.ERP;
 using Microsoft.Extensions.Logging;
 using Service.Common.Interfaces;
 using Service.Common.Models;
-using Services.System.Interfaces;
-using Services.System.Models;
+using Service.System.Interfaces;
+using Service.System.Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Services.System
+namespace Service.System
 {
     public class AuthenticationService : IAuthenticationService
     {
@@ -111,6 +111,38 @@ namespace Services.System
             _tokenService.RevokeToken(model);
 
             return response;
+        }
+
+        public async Task<bool> CheckAuthorization(string moduleName, string controllerName, string actionName)
+        {
+            try
+            {
+                var query = from m in _context.UserRoleRepository.Query()
+                            join u in _context.UserRepository.Query() on m.UserId equals u.Id
+                            join r in _context.RoleRepository.Query() on m.RoleId equals r.Id
+                            join rdt in _context.RoleDetailRepository.Query() on m.RoleId equals rdt.RoleId
+                            join c in _context.FunctionCommandRepository.Query() on rdt.CommandId equals c.Id
+                            where m.UserId == 0 
+                                    && c.ModuleName == moduleName
+                                    && c.ControllerName == controllerName
+                                    && c.ActionName == actionName
+                                    && !u.Deleted && u.IsActive
+                                    && !r.Deleted && r.IsActive
+                            select new
+                            {
+                                m.UserId
+                            };
+                if (await query.AnyAsync() == false)
+                {
+                    return false;
+                }
+                            
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return true;
         }
 
         private async Task<Core.CommonModel.UserModel> GetUserInfo(int employeeId)

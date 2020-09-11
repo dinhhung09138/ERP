@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using System.Threading.Tasks;
 
-namespace Services.System.Interfaces
+namespace Service.System.Interfaces
 {
     public interface IAuthenticationService
     {
@@ -10,5 +10,7 @@ namespace Services.System.Interfaces
         Task<ResponseModel> RefreshToken(TokenModel model);
 
         ResponseModel RevokeToken(TokenModel model);
+
+        Task<bool> CheckAuthorization(string moduleName, string controllerName, string actionName);
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Core.CommonModel;
 using Core.Services;
-using Services.System.Models;
+using Service.System.Models;
 using Database.Sql.ERP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Services.System.Interfaces;
+using Service.System.Interfaces;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Database.Sql.ERP.Entities.Security;
 using Core.Utility.Security;
 
-namespace Services.System
+namespace Service.System
 {
     public class UserService : BaseService, IUserService
     {

@@ -2,7 +2,7 @@
 using Core.Utility.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Services.System.Interfaces;
+using Service.System.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;

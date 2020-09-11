@@ -1,7 +1,7 @@
 ﻿using Core.CommonModel;
 using Microsoft.AspNetCore.Mvc;
-using Services.System.Interfaces;
-using Services.System.Models;
+using Service.System.Interfaces;
+using Service.System.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

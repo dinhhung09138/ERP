@@ -1,6 +1,6 @@
 ﻿
 
-namespace Services.System.Models
+namespace Service.System.Models
 {
     public class UserRoleModel
     {

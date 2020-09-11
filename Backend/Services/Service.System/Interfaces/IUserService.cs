@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.System.Interfaces
+namespace Service.System.Interfaces
 {
     public interface IUserService : IBaseInterfaceService<Models.UserModel>
     {

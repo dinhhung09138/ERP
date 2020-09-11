@@ -1,11 +1,11 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Dynamic;
+using System.Text;
 
-namespace Services.System.Models
+namespace Service.System.Models
 {
-    public class ModuleModel
+    public class FunctionModel
     {
         [MaxLength(20)]
         public string Code { get; set; }
@@ -22,8 +22,12 @@ namespace Services.System.Models
         [MaxLength(20)]
         public string ParentCode { get; set; }
 
+        [Required]
         public int Precedence { get; set; }
 
-        public List<FunctionModel> Functions { get; set; } = new List<FunctionModel>();
+        [MaxLength(20)]
+        public string ModuleCode { get; set; }
+
+        public List<FunctionCommandModel> Commands { get; set; } = new List<FunctionCommandModel>();
     }
 }

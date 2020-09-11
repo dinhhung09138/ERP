@@ -42,3 +42,5 @@ Backend/Services/Service.Common/obj/
 Backend/Services/Service.Common/bin/
 Backend/API/API.Common/bin/
 Backend/API/API.Common/obj/
+Backend/Services/Service.System/obj/
+Backend/Services/Service.System/bin/

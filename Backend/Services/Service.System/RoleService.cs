@@ -5,13 +5,13 @@ using Database.Sql.ERP.Entities.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Services.System.Interfaces;
-using Services.System.Models;
+using Service.System.Interfaces;
+using Service.System.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Services.System
+namespace Service.System
 {
     public class RoleService : BaseService, IRoleService
     {
