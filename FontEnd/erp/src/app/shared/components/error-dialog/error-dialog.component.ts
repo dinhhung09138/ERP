@@ -43,6 +43,9 @@ export class ErrorDialogComponent implements OnInit {
         case HttpErrorStatusEnum.unauthorized:
           key = 'MESSAGE.UNAUTHORIZE';
           break;
+        case HttpErrorStatusEnum.forbidden:
+          key = 'MESSAGE.FORBIDDEN';
+          break;
         case HttpErrorStatusEnum.notFound:
           key = 'MESSAGE.URL_NOTFOUND';
           break;

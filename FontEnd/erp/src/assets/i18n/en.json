@@ -17,6 +17,7 @@
     "SERVER_NOTFOUND": "Can not connect to the server",
     "UNAUTHORIZE": "You don't have permission to do this function",
     "URL_NOTFOUND": "Link not found on the server",
+    "FORBIDDEN": "You don't have any permission to do this function",
     "CONTENT_NOTFOUND": "Content not found",
     "NO_DATA": "No data available",
     "SAVE_SUCCESS": "Add new item success",

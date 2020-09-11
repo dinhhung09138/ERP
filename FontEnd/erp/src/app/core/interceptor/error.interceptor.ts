@@ -54,7 +54,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       retry(2),
       catchError((error: HttpErrorResponse) => {
 
-        switch(error.status) {
+        switch (error.status) {
           case 500:
             const error500 = {
               isError: true,
@@ -68,6 +68,13 @@ export class ErrorInterceptor implements HttpInterceptor {
               httpError: HttpErrorStatusEnum.notFound
             } as DialogDataInterface;
             this.dialogService.openErrorDialog(error404);
+            break;
+          case 403:
+            const error403 = {
+              isError: true,
+              httpError: HttpErrorStatusEnum.forbidden,
+            } as DialogDataInterface;
+            this.dialogService.openErrorDialog(error403);
             break;
           case 401:
             const error401 = {

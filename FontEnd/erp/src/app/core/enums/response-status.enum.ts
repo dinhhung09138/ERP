@@ -4,5 +4,5 @@ export enum ResponseStatus {
   warning = 0,
   codeExists = -2,
   getDropDownError = -3,
-  outOfDateData = -4
+  outOfDateData = -4,
 }

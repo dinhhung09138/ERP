@@ -36,6 +36,7 @@ export class DialogService {
     const disableClosed = errorModel.isError === true
                           && (errorModel.httpError === HttpErrorStatusEnum.noInternet
                             || errorModel.httpError === HttpErrorStatusEnum.timeOut
+                            || errorModel.httpError === HttpErrorStatusEnum.forbidden
                             || errorModel.httpError === HttpErrorStatusEnum.unauthorized);
 
     this.dialog.open(ErrorDialogComponent, {

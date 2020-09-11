@@ -17,6 +17,7 @@
     "SERVER_NOTFOUND": "Không thể kết nối tới server",
     "UNAUTHORIZE": "Bạn không có quyền thao tác trên tính năng này",
     "URL_NOTFOUND": "Liên kết không tồn tại trên server",
+    "FORBIDDEN": "Bạn không có quyền thao tác trên tính năng này",
     "CONTENT_NOTFOUND": "Không tìm thấy nội dung",
     "NO_DATA": "Không tìm thấy dữ liệu",
     "SAVE_SUCCESS": "Thêm mới dữ liệu thành công",

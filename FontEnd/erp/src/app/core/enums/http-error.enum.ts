@@ -4,6 +4,7 @@ export enum HttpErrorStatusEnum {
   timeOut = 2,
   serverNotFound = 500,
   notFound = 404,
+  forbidden = 403,
   noContent = 204,
   unauthorized = 401,
 }
