@@ -1,10 +1,11 @@
-import { DialogDataInterface } from './../interfaces/dialog-data.interface';
-import { DialogService } from './../services/dialog.service';
-import { HttpErrorStatusEnum } from './../enums/http-error.enum';
-import { Observable, EMPTY } from 'rxjs';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { Observable, EMPTY } from 'rxjs';
+
+import { DialogDataInterface } from './../interfaces/dialog-data.interface';
+import { DialogService } from './../services/dialog.service';
+import { HttpErrorStatusEnum } from './../enums/http-error.enum';
 
 @Injectable()
 export class NetworkInterceptor implements HttpInterceptor {

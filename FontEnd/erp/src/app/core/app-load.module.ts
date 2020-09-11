@@ -1,11 +1,12 @@
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AuthenticationService } from './services/authentication.service';
 import { LoadingService } from './services/loading.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotifyService } from './services/notify.service';
 import { DialogService } from './services/dialog.service';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppLoadService } from './services/app-load.service';
 
 

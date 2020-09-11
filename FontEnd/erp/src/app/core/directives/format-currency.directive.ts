@@ -1,4 +1,5 @@
 import { Directive, ElementRef, OnInit, HostListener } from '@angular/core';
+
 import { FormatNumberPipe } from '../pipes/format-number.pipe';
 
 @Directive({

@@ -1,10 +1,12 @@
-import { NotifyService } from './notify.service';
-import { FilterModel } from './../models/filter-table.model';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { ResponseModel } from './../models/response.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { NotifyService } from './notify.service';
+import { FilterModel } from './../models/filter-table.model';
+import { ResponseModel } from './../models/response.model';
 import { ResponseStatus } from '../enums/response-status.enum';
 
 /**

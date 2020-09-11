@@ -1,12 +1,14 @@
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import { catchError, retry, map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+
 import { NotifyService } from './../services/notify.service';
 import { DialogDataInterface } from './../interfaces/dialog-data.interface';
 import { DialogService } from './../services/dialog.service';
 import { HttpErrorStatusEnum } from './../enums/http-error.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
-import { catchError, retry, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { ResponseStatus } from '../enums/response-status.enum';
 import { SessionContext } from '../session.context';
 

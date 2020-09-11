@@ -1,7 +1,9 @@
-import { NotifyComponent } from './../../shared/components/notify/notify.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
+
 import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { NotifyComponent } from './../../shared/components/notify/notify.component';
 
 @Injectable()
 export class NotifyService {

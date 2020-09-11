@@ -1,7 +1,9 @@
-import { SessionContext } from './../session.context';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHeaders, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { EMPTY, Observable } from 'rxjs';
+
+import { Observable } from 'rxjs';
+
+import { SessionContext } from './../session.context';
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {

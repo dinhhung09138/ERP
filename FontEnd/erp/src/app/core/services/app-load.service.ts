@@ -1,10 +1,12 @@
-import { ApplicationConstant } from './../constants/app.constant';
-import { ApplicationSettingInterface } from './../interfaces/app-setting.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+import { TranslateService } from '@ngx-translate/core';
+
+import { ApplicationConstant } from './../constants/app.constant';
+import { ApplicationSettingInterface } from './../interfaces/app-setting.interface';
 import { UrlSettingInterface } from '../interfaces/url-setting.interface';
 import { APIUrlConstants } from '../constants/api-url.constant';
-import { TranslateService } from '@ngx-translate/core';
 
 /**
  * A service used to read configuration setting before application initialize from setting files.

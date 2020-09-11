@@ -1,5 +1,6 @@
-import { RefreshTokenModel } from './models/refresh-token.model';
 import { Injectable } from '@angular/core';
+
+import { RefreshTokenModel } from './models/refresh-token.model';
 import { TokenModel } from './models/token.model';
 import { UserInfoModel } from './models/user-info.model';
 

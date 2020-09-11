@@ -1,10 +1,12 @@
+import { Injectable } from '@angular/core';
+
 import { map, catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+
 import { ErrorDialogComponent } from './../../shared/components/error-dialog/error-dialog.component';
 import { DialogDataInterface } from './../interfaces/dialog-data.interface';
 import { ConfirmDialogComponent } from './../../shared/components/confirm-dialog/confirm-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { Injectable } from '@angular/core';
 import { HttpErrorStatusEnum } from '../enums/http-error.enum';
 
 @Injectable()

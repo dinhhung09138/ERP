@@ -1,11 +1,13 @@
-import { SessionContext } from 'src/app/core/session.context';
-import { map, catchError } from 'rxjs/operators';
-import { LoginModel } from './../../modules/login/login.model';
-import { Observable, of } from 'rxjs';
-import { ResponseModel } from './../models/response.model';
-import { HttpClient } from '@angular/common/http';
-import { APIUrlConstants } from './../constants/api-url.constant';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+import { SessionContext } from 'src/app/core/session.context';
+import { LoginModel } from './../../modules/login/login.model';
+import { ResponseModel } from './../models/response.model';
+import { APIUrlConstants } from './../constants/api-url.constant';
 import { ResponseStatus } from '../enums/response-status.enum';
 
 @Injectable()
