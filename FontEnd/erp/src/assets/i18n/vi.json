@@ -1,5 +1,5 @@
 {
-  "SITE_TITLE": " | Trần Đình Hưng",
+  "SITE_TITLE": "Trần Đình Hưng",
   "NOTIFICATION": {
 
   },
@@ -69,6 +69,15 @@
     }
   },
   "SCREEN": {
+    "LOGIN": {
+      "TITLE": "ĐĂNG NHẬP HỆ THỐNG",
+      "FORM": {
+        "USER_NAME": "Tên đăng nhập",
+        "PASSWORD": "Mật khẩu",
+        "LOGIN": "Đăng nhập",
+        "REMEMBER_ME": "Lưu thông tin đăng nhập"
+      }
+    },
     "HR": {
       "TITLE": "Nhân sự",
       "POSITION": {

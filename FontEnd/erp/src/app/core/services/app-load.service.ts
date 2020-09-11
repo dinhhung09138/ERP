@@ -39,7 +39,7 @@ export class AppLoadService {
       ApplicationConstant.defaultLanguage = response.defaultLanguage;
       this.translate.use(ApplicationConstant.defaultLanguage);
       this.translate.get('SITE_TITLE').subscribe(message => {
-        ApplicationConstant.siteTitle = message;
+        ApplicationConstant.siteTitle = ' | ' + message;
       });
     });
   }

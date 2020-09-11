@@ -1,5 +1,5 @@
 {
-  "SITE_TITLE": " | Mr. Hung",
+  "SITE_TITLE": " Mr. Hung",
   "NOTIFICATION": {
 
   },
@@ -69,6 +69,15 @@
     }
   },
   "SCREEN": {
+    "LOGIN": {
+      "TITLE": "LOGIN",
+      "FORM": {
+        "USER_NAME": "User Name",
+        "PASSWORD": "Password",
+        "LOGIN": "Login",
+        "REMEMBER_ME": "Remember me!"
+      }
+    },
     "HR": {
       "TITLE": "HR",
       "POSITION": {

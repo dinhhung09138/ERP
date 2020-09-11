@@ -10,31 +10,36 @@
                     </div>
                     <form class="form" [formGroup]="loginForm" (submit)="!isLoading ? onSubmitForm() : false"
                         autocomplete="off">
-                      <h3 class="text-center text-info">ĐĂNG NHẬP HỆ THỐNG</h3>
+                      <h3 class="text-center text-info">{{ 'SCREEN.LOGIN.TITLE' | translate }}</h3>
                       <div class="row">
                         <div class="col-md-12 col-xs-12 form-group">
-                          <label class="text-info">Tên đăng nhập:</label><br>
+                          <label class="text-info">{{ 'SCREEN.LOGIN.FORM.USER_NAME' | translate }}:</label><br>
                           <mat-form-field class="form-control">
                             <input matInput formControlName="userName" maxlength="50" tabindex="1"/>
                           </mat-form-field>
-                          <mat-error *ngIf="submitted && loginForm.controls['userName'].errors?.required">Vui lòng điền thông tin</mat-error>
+                          <mat-error *ngIf="submitted && loginForm.controls['userName'].errors?.required">
+                            {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                          </mat-error>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-12 col-xs-12 form-group">
-                          <label class="text-info">Mật khẩu:</label><br>
+                          <label class="text-info">{{ 'SCREEN.LOGIN.FORM.PASSWORD' | translate }}:</label><br>
                           <mat-form-field class="form-control">
                             <input matInput type="password" formControlName="password" maxlength="50" tabindex="2"/>
                           </mat-form-field>
-                          <mat-error *ngIf="submitted && loginForm.controls['userName'].errors?.required">Vui lòng điền thông tin</mat-error>
+                          <mat-error *ngIf="submitted && loginForm.controls['userName'].errors?.required">
+                            {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                          </mat-error>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-12 col-xs-12 form-group">
-                          <label class="text-info"><span>Lưu thông tin đăng nhập</span> &nbsp;
+                          <label class="text-info">
                             <span>
                               <mat-checkbox formControlName="rememberMe" tabindex="3"></mat-checkbox>
-                            </span>
+                            </span> &nbsp;
+                            <span>{{ 'SCREEN.LOGIN.FORM.REMEMBER_ME' | translate }}</span>
                           </label>
                         </div>
                       </div>
@@ -42,13 +47,15 @@
                       <div class="row">
                         <div class="col-md-12 col-xs-12 form-group">
                           <button type="submit" name="submit" class="btn btn-info btn-md w-100" tabindex="4">
-                            Đăng nhập
+                            {{ 'SCREEN.LOGIN.FORM.LOGIN' | translate }}
                             <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
                           </button>
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-md-12 col-xs-12 text-center mb-0">Trần Đình Hưng</div>
+                        <div class="col-md-12 col-xs-12 text-center mb-0">
+                          {{ 'SITE_TITLE' | translate }}
+                        </div>
                       </div>
                     </form>
                   </div>

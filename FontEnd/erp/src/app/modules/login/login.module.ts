@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { LoginComponent } from './login.component';
 import { AuthenticationService } from './../../core/services/authentication.service';
@@ -27,6 +28,7 @@ const routes: Routes = [
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
   providers: [

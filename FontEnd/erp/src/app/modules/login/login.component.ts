@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { TranslateService } from '@ngx-translate/core';
+
+import { ApplicationConstant } from 'src/app/core/constants/app.constant';
 import { AuthenticationService } from './../../core/services/authentication.service';
 import { SessionContext } from 'src/app/core/session.context';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -21,11 +24,16 @@ export class LoginComponent implements OnInit {
   warningMessage = [];
 
   constructor(
+    public translate: TranslateService,
     private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private context: SessionContext,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService) {
+      if (ApplicationConstant.defaultLanguage) {
+        translate.use(ApplicationConstant.defaultLanguage);
+      }
+    }
 
   ngOnInit(): void {
     this.returnUrl = this.activeRoute.snapshot.queryParams.returnUrl;
