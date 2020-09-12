@@ -23,8 +23,9 @@ namespace Core.Utility.Middlewares
 
             if (!string.IsNullOrEmpty(token))
             {
-                bool check = jwtTokenSerivice.ValidateToken(token);
-                context.Items["isValidToken"] = check;
+                var tokenInfo = jwtTokenSerivice.ValidateToken(token);
+                context.Items["isValidToken"] = true;
+                context.Items["TokenInfo"] = tokenInfo;
             }
             // Call the next delegate/middleware in the pipeline
             await _next(context);

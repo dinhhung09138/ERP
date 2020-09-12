@@ -161,6 +161,54 @@ namespace Core.Services
             }
         }
 
+        public void Set<T>(T data, string key, DateTime date)
+        {
+            try
+            {
+                _pool.WaitOne(1);
+
+                Remove(key);
+
+                var cacheOption = new MemoryCacheEntryOptions();
+                cacheOption.SetAbsoluteExpiration(date);
+                cacheOption.Priority = CacheItemPriority.Normal;
+
+                _cache.Set(key, data, cacheOption);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _pool.Release();
+            }
+        }
+
+        public void Set<T>(List<T> data, string key, DateTime date)
+        {
+            try
+            {
+                _pool.WaitOne(1);
+
+                Remove(key);
+
+                var cacheOption = new MemoryCacheEntryOptions();
+                cacheOption.SetAbsoluteExpiration(date);
+                cacheOption.Priority = CacheItemPriority.Normal;
+
+                _cache.Set(key, data, cacheOption);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _pool.Release();
+            }
+        }
+
         public T GetValue<T>(string key)
         {
             return _cache.Get<T>(key);
@@ -175,5 +223,6 @@ namespace Core.Services
         {
             _cache.Remove(key);
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Services.Interfaces
 {
@@ -66,6 +67,24 @@ namespace Core.Services.Interfaces
         /// <param name="hours">hours</param>
         /// <param name="minutes">minutes</param>
         void Set<T>(List<T> data, string key, int days, int hours, int minutes);
+
+        /// <summary>
+        /// Caching object with expiration time as day and time
+        /// </summary>
+        /// <typeparam name="T">Object type</typeparam>
+        /// <param name="data">Data</param>
+        /// <param name="key">Key</param>
+        /// <param name="date">expired datetime</param>
+        void Set<T>(T data, string key, DateTime date);
+
+        /// <summary>
+        /// Caching list of object with expiration time as day and time
+        /// </summary>
+        /// <typeparam name="T">Object type</typeparam>
+        /// <param name="data">Data</param>
+        /// <param name="key">Key</param>
+        /// <param name="date">expired datetime</param>
+        void Set<T>(List<T> data, string key, DateTime date);
 
         /// <summary>
         /// Get object from cache
