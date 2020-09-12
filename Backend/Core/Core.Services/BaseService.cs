@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -24,14 +26,14 @@ namespace Core.Services
 
         private int GetCurrentUserId()
         {
-            var context = _httpContext.HttpContext;
+            var tokenInfo = _httpContext.HttpContext.Items["TokenInfo"] as JwtSecurityToken;
 
-            if (context == null)
+            if (tokenInfo == null)
             {
                 throw new Exception();
             }
 
-            var userId = context.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = tokenInfo.Claims.Where(m => m.Type == JwtRegisteredClaimNames.Sub).FirstOrDefault().Value;
 
             return int.Parse(userId);
         }
