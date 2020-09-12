@@ -66,6 +66,10 @@ namespace Service.System
                     _context.UserRepository.Update(md);
                     await _context.SaveChangesAsync();
                 }
+                else
+                {
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.UserOrPassowrdInvalid;
+                }
             }
             catch (Exception ex)
             {

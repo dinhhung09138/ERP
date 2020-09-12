@@ -49,5 +49,9 @@ namespace Core.CommonModel.Enums
         /// </summary>
         OutOfDateData = -4,
 
+        /// <summary>
+        /// Login fail
+        /// </summary>
+        UserOrPassowrdInvalid = -5,
     }
 }

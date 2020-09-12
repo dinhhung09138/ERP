@@ -1,4 +1,5 @@
 ﻿using Core.CommonModel;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Core.Services.Interfaces
 {
@@ -18,6 +19,6 @@ namespace Core.Services.Interfaces
 
         bool RevokeToken(TokenModel token);
 
-        bool ValidateToken(string token);
+        JwtSecurityToken ValidateToken(string token);
     }
 }

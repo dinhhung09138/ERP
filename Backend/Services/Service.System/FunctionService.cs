@@ -88,7 +88,7 @@ namespace Service.System
         {
             try
             {
-                var userData = _memoryCachingService.GetList<ModuleModel>($"{CacheScreenByUser}-{UserId}");
+                var userData = _memoryCachingService.GetList<ModuleModel>($"{CacheScreenByUser}-{userId}");
 
                 if (userData != null)
                 {
@@ -138,7 +138,7 @@ namespace Service.System
                                               .Distinct().ToList();
                     }
 
-                    _memoryCachingService.Set<ModuleModel>(listModule, $"{CacheScreenByUser}-{UserId}", 10);
+                    _memoryCachingService.Set<ModuleModel>(listModule, $"{CacheScreenByUser}-{userId}", 10);
 
                     return listModule;
                 }

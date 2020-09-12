@@ -33,11 +33,6 @@ namespace APIGateway
             // Add Polity
             services.AddCrossOriginResourceSharing(Configuration);
 
-            services.AddControllers().AddNewtonsoftJson();
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(new AuthenticationFilter());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             // Add JWT Authentication
             services.AddJwtToken(Configuration);
@@ -48,7 +43,13 @@ namespace APIGateway
 
             // Use http context
             // Omitted for clarity
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthenticationFilter());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
+            services.AddControllers().AddNewtonsoftJson();
 
             // Caching
             services.AddCaching();

@@ -21,19 +21,15 @@ namespace Core.Services
     public class JwtTokenSecurityService : IJwtTokenSecurityService
     {
         private readonly IConfiguration _configuration;
-        private readonly IMemoryCache _cache;
 
         /// <summary>
         /// Initializes a new instance of the class.
         /// Constructor.
         /// </summary>
         /// <param name="configuration">IConfiguration.</param>
-        /// <param name="cache">IMemoryCache.</param>
-        /// <param name="logger">ILogger.</param>
-        public JwtTokenSecurityService(IConfiguration configuration, IMemoryCache cache)
+        public JwtTokenSecurityService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _cache = cache;
         }
 
         /// <summary>
@@ -47,24 +43,16 @@ namespace Core.Services
             {
                 var jwtSecurityToken = GetJwtSecurityToken(user);
 
-                var token = new JwtTokenModel
-                {
-                    AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                    Expiration = jwtSecurityToken.ValidTo.ToLocalTime().Ticks,
-                    RefreshToken = GenerateRefreshToken(),
-                    UserInfo = user,
-                };
-
                 var refreshTokenData = new TokenModel
                 {
-                    Token = token.RefreshToken,
+                    Token = jwtSecurityToken.RefreshToken,
                     UserId = user.Id,
                 };
+                
+                // TODO
+                // Save to database;
 
-                var cacheEntryOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(jwtSecurityToken.ValidTo.ToLocalTime());
-                this._cache.Set(token.RefreshToken, refreshTokenData, cacheEntryOptions);
-
-                return token;
+                return jwtSecurityToken;
             }
             catch (Exception ex)
             {
@@ -76,17 +64,17 @@ namespace Core.Services
         {
             try
             {
-                var cacheTokenModel = _cache.Get(refreshTokenModel.Token) as TokenModel;
+                //var cacheTokenModel = _cache.Get(refreshTokenModel.Token) as TokenModel;
 
                 // Remove current cache
-                _cache.Remove(refreshTokenModel.Token);
+                //_cache.Remove(refreshTokenModel.Token);
 
-                if (cacheTokenModel != null && cacheTokenModel.UserId == refreshTokenModel.UserId)
-                {
-                    return cacheTokenModel;
-                }
+                //if (cacheTokenModel != null && cacheTokenModel.UserId == refreshTokenModel.UserId)
+                //{
+                //    return cacheTokenModel;
+                //}
                 return null;
-                
+
             }
             catch (Exception ex)
             {
@@ -98,7 +86,7 @@ namespace Core.Services
         {
             try
             {
-                _cache.Remove(token.Token);
+                // _cache.Remove(token.Token);
 
                 return true;
             }
@@ -108,7 +96,7 @@ namespace Core.Services
             }
         }
 
-        public bool ValidateToken(string token)
+        public JwtSecurityToken ValidateToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             // Get security key from app config
@@ -127,43 +115,49 @@ namespace Core.Services
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
 
-                Console.WriteLine(jwtToken);
-
-                return true;
+                return jwtToken;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
 
-        private JwtSecurityToken GetJwtSecurityToken(UserModel user)
+        private JwtTokenModel GetJwtSecurityToken(UserModel user)
         {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration[JwtConstant.SECRET_KEY]));
             var accessTokenLifeTimeValue = double.Parse(_configuration[JwtConstant.TOKEN_LIFE_TIME]);
 
             var now = DateTime.UtcNow;
             var accessTokenLifetime = now.AddMinutes(accessTokenLifeTimeValue);
 
-            var claims = new[]
+            ClaimsIdentity claims = new ClaimsIdentity(new Claim[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim("UserId", user.Id.ToString()),
+            });
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = claims,
+                Expires = accessTokenLifetime,
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
             };
 
-            // Get security key from app config
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configuration[JwtConstant.SECRET_KEY]));
-            // Creae Credentials
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var tokenObj = new JwtSecurityTokenHandler().CreateToken(tokenDescriptor);
+            string token = new JwtSecurityTokenHandler().WriteToken(tokenObj);
 
-            return new JwtSecurityToken(
-                                        issuer: this._configuration[JwtConstant.ISSUER],
-                                        audience: this._configuration[JwtConstant.AUDIENCE],
-                                        claims: claims,
-                                        notBefore: now,
-                                        expires: accessTokenLifetime,
-                                        signingCredentials: creds);
+            return new JwtTokenModel
+            {
+                AccessToken = token,
+                Expiration = accessTokenLifetime.ToLocalTime().Ticks,
+                RefreshToken = GenerateRefreshToken(),
+                UserInfo = user,
+            };
         }
 
         private string GenerateRefreshToken()
