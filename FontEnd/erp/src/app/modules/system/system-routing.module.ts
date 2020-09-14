@@ -10,7 +10,7 @@ const routes: Routes = [
     component: SystemComponent,
     children: [
       {
-        path: '',
+        path: 'account',
         loadChildren: () => import('../system/account/account.module').then(m => m.AccountModule),
         pathMatch: 'full',
       },
