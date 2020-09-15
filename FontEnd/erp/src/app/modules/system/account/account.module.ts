@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: '',
     component: AccountComponent,
-    data: { title: '' }
+    data: { title: 'SCREEN.SYSTEM.ACCOUNT.TITLE' }
   }
 ];
 

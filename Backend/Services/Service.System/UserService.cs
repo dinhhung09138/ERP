@@ -36,7 +36,7 @@ namespace Service.System
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.UserRepository.Query()
+                var query = from m in _context.UserRepository.Query().Include(m => m.UserRoles)
                             join em in _context.EmployeeRepository.Query() on m.EmployeeId equals em.Id
                             join inf in _context.EmployeeInfoRepository.Query() on m.EmployeeId equals inf.EmployeeId
                             where !m.Deleted
@@ -49,18 +49,30 @@ namespace Service.System
                                 UserName = m.UserName,
                                 LastLogin = m.LastLogin,
                                 IsActive = m.IsActive,
-                                RowVersion = m.RowVersion
+                                RowVersion = m.RowVersion,
+                                Roles = m.UserRoles.Select(dt => new UserRoleModel() {
+                                    RoleId = dt.RoleId
+                                }).ToList()
                             };
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
                     query = query.Where(m => m.EmployeeName.ToLower().Contains(filter.Text.ToLower())
                                             || m.UserName.ToLower().Contains(filter.Text.ToLower()));
                 }
-                BaseListModel<Models.UserModel> listItems = new BaseListModel<Models.UserModel>();
-                listItems.TotalItems = await _context.ReligionRepository.Query().Where(m => !m.Deleted).CountAsync();
-                listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize)
+
+                var listData = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize)
                                              .Take(filter.Paging.PageSize).ToListAsync()
                                              .ConfigureAwait(false);
+
+                foreach (var item in listData)
+                {
+                    var listRole = item.Roles.Select(m => m.RoleId).ToArray();
+                    item.RoleName = string.Join(",", await _context.RoleRepository.Query().Where(m => listRole.Contains(m.Id)).Select(m => m.Name).ToArrayAsync());
+                }
+
+                BaseListModel<Models.UserModel> listItems = new BaseListModel<Models.UserModel>();
+                listItems.TotalItems = await _context.ReligionRepository.Query().Where(m => !m.Deleted).CountAsync();
+                listItems.Items = listData;
 
                 response.Result = listItems;
             }
