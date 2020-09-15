@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-12">
     <div class="card box" [class.opened]="showFormStatus()">
       <div class="card-header">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{{ formTitle }}</div>
+          <div class="col-12">{{ formTitle }}</div>
         </div>
       </div>
       <div class="card-body">
@@ -13,7 +13,7 @@
           <div [class]="getClassByFormOrPopup()">
             <form [formGroup]="ethnicityForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                <div class="col-12 form-group">
                   <label class="label">
                     {{ 'SCREEN.HR.CONFIGURATION.ETHNICITY.FORM.NAME' | translate }}
                   </label>
@@ -51,7 +51,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" *ngIf="formAction != 0">
+                <div class="col-12 form-group" *ngIf="formAction != 0">
                   <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="4">
                   <button type="button" class="btn btn-warning" tabindex="5" (click)="onResetClick()">
                     {{ 'BUTTON.RESET' | translate }}

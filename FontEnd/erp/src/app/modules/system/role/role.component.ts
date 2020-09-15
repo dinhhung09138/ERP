@@ -50,7 +50,7 @@ export class RoleComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.form.onCreateClick();
     }
   }
@@ -73,19 +73,19 @@ export class RoleComponent implements OnInit {
   }
 
   onImportClick() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.form.onCloseClick();
     }
   }
 
   onExportClick() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.form.onCloseClick();
     }
   }
 
   onFilterChange() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       if (this.searchText.length > 0) {
         this.paging.pageIndex = 0;
       }
@@ -94,7 +94,7 @@ export class RoleComponent implements OnInit {
   }
 
   onPageChange(page: PageEvent) {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.paging.pageSize = page.pageSize;
       this.paging.pageIndex = page.pageIndex;
       if (page.pageSize !== this.currentPageSize) {
