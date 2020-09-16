@@ -1,3 +1,5 @@
+import { RoleService } from './role/role.service';
+import { AccountResolver } from './account/account.resolver';
 import { NgModule } from '@angular/core';
 
 import { SystemComponent } from './system.component';
@@ -12,6 +14,10 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     SharedModule,
     SystemRouterModule
+  ],
+  providers: [
+    AccountResolver,
+    RoleService,
   ]
 })
 export class SystemModule { }

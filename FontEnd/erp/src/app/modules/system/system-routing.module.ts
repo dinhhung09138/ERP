@@ -1,3 +1,4 @@
+import { AccountResolver } from './account/account.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -13,6 +14,7 @@ const routes: Routes = [
         path: 'account',
         loadChildren: () => import('../system/account/account.module').then(m => m.AccountModule),
         pathMatch: 'full',
+        resolve: { data: AccountResolver }
       },
       {
         path: 'role',
