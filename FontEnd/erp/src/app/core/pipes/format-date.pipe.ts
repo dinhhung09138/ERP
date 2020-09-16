@@ -10,6 +10,12 @@ export class FormatDatePipe extends DatePipe implements PipeTransform {
 
   transform(value?: Date, ...args: unknown[]): string {
     if (value) {
+      if (args !== null) {
+      switch (args[0]) {
+        case 'datetime':
+          return super.transform(value, FormatConstant.datetime);
+        }
+      }
       return super.transform(value, FormatConstant.date);
     }
     return null;

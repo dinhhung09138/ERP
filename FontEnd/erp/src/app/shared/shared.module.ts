@@ -28,6 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HttpLoaderFactory } from '../core/factories/http.loader.factory';
 import { ApplicationConstant } from '../core/constants/app.constant';
+import { FormatDatePipe } from '../core/pipes/format-date.pipe';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { ApplicationConstant } from '../core/constants/app.constant';
     PageNotFoundComponent,
     // Pipes
     FormatNumberPipe,
+    FormatDatePipe,
     // Directives
     FormatDecimalDirective,
     FormatCurrencyDirective,
@@ -68,7 +70,6 @@ import { ApplicationConstant } from '../core/constants/app.constant';
   ],
   providers: [
     // Directives
-    FormatNumberPipe,
     // Use for change language of paginator.
     appInterceptors,
     {
@@ -99,6 +100,7 @@ import { ApplicationConstant } from '../core/constants/app.constant';
     PageNotFoundComponent,
     // Pipes
     FormatNumberPipe,
+    FormatDatePipe,
     // Directives
     FormatDecimalDirective,
     FormatCurrencyDirective,
