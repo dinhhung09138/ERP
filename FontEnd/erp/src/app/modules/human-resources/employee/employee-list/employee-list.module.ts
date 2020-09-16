@@ -9,7 +9,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EmployeeListComponent } from './employee-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EmployeeService } from '../employee.service';
-import { FormatDatePipe } from '../../../../core/pipes/format-date.pipe';
 
 const routes: Routes = [
   {
@@ -22,7 +21,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     EmployeeListComponent,
-    FormatDatePipe,
   ],
   imports: [
     SharedModule,

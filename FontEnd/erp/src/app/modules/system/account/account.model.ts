@@ -5,6 +5,7 @@ export interface AccountViewModel extends BaseViewModel {
   employeeId: number;
   employeeName: number;
   userName: number;
+  roleName: string;
   password: number;
-  lastLogin: number;
+  lastLogin: Date;
 }

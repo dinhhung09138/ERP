@@ -26,7 +26,7 @@ const routes: Routes = [
   declarations: [
     AccountComponent,
     AccountFormComponent,
-    PasswordComponent
+    PasswordComponent,
   ],
   imports: [
     SharedModule,

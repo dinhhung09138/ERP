@@ -1,7 +1,7 @@
 import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 
 import { DialogService } from './../../../core/services/dialog.service';
 import { AccountViewModel } from './account.model';
@@ -37,13 +37,13 @@ export class AccountService {
     return this.api.insert(this.url.insert, model);
   }
 
-  confirmActiveOrDeactivation(isActive: boolean): Observable<ResponseModel> {
+  confirmActiveOrDeactivation(isActive: boolean): Observable<ResponseModel | any> {
     return this.dialogService.openConfirmDeleteDialog().pipe(
       switchMap((confirmResponse: boolean) => {
         if (confirmResponse === true) {
           return of(new ResponseModel());
         } else {
-          return of(null);
+          return of(EMPTY);
         }
       })
     );

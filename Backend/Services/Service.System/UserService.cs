@@ -71,7 +71,7 @@ namespace Service.System
                 }
 
                 BaseListModel<Models.UserModel> listItems = new BaseListModel<Models.UserModel>();
-                listItems.TotalItems = await _context.ReligionRepository.Query().Where(m => !m.Deleted).CountAsync();
+                listItems.TotalItems = await _context.UserRepository.Query().Where(m => !m.Deleted).CountAsync();
                 listItems.Items = listData;
 
                 response.Result = listItems;

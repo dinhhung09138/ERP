@@ -446,6 +446,24 @@
     },
     "SYSTEM":{
       "TITLE": "Hệ thống",
+      "ACCOUNT": {
+        "TITLE":"Tài khoản",
+        "LIST_TITLE":"Danh sách tài khoản",
+        "POPUP_TITLE":"Thêm tài khoản",
+        "TABLE":{
+          "EMPLOYEE":"Nhân viên",
+          "USER_NAME":"Tên tài khoản",
+          "ROLE": "Quyền",
+          "LAST_LOGIN": "Lần đăng nhập sau cùng"
+        },
+        "FORM":{
+          "TITLE_NEW":"Add New",
+          "TITLE_EDIT":"Update",
+          "EMPLOYEE":"Nhân viên",
+          "USER_NAME":"Tên tài khoản",
+          "ROLE": "Quyền"
+        }
+      },
       "ROLE":{
         "TITLE":"Nhóm người dùng",
         "LIST_TITLE":"Danh sách nhóm người dùng",

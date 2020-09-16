@@ -447,6 +447,24 @@
     },
     "SYSTEM":{
       "TITLE": "System",
+      "ACCOUNT": {
+        "TITLE":"Account",
+        "LIST_TITLE":"List Of Account",
+        "POPUP_TITLE":"Add New Account",
+        "TABLE":{
+          "EMPLOYEE":"Employee Name",
+          "USER_NAME":"User Name",
+          "ROLE": "Role",
+          "LAST_LOGIN": "Last Login"
+        },
+        "FORM":{
+          "TITLE_NEW":"Add New",
+          "TITLE_EDIT":"Update",
+          "EMPLOYEE":"Employee Name",
+          "USER_NAME":"User Name",
+          "ROLE": "Role"
+        }
+      },
       "ROLE":{
         "TITLE":"Role",
         "LIST_TITLE":"List Of Role",

@@ -31,6 +31,9 @@ namespace API.HR.Filters
                 throw new ArgumentNullException(nameof(context));
             }
 
+            await next.Invoke();
+            return;
+
             bool hasAllowAnonymous = context.ActionDescriptor.EndpointMetadata.Any(m => m.GetType() == typeof(AllowAnonymousAttribute));
 
             if (hasAllowAnonymous == true)
