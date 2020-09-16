@@ -84,7 +84,7 @@
       "TITLE": "HR",
       "POSITION": {
         "TITLE": "Position",
-        "LIST_TITLE": "List Of Position",
+        "LIST_TITLE": "List of Position",
         "POPUP_TITLE": "Add New Position",
         "TABLE": {
           "NAME": "Name",
@@ -102,7 +102,7 @@
       },
       "COMMENDATION": {
         "TITLE": "Commendation",
-        "LIST_TITLE": "List Of Commendation",
+        "LIST_TITLE": "List of Commendation",
         "POPUP_TITLE": "Add New Commendation",
         "TABLE": {
           "NAME": "Name",
@@ -122,7 +122,7 @@
       },
       "DISCIPLINE": {
         "TITLE": "Discipline",
-        "LIST_TITLE": "List Of Discipline",
+        "LIST_TITLE": "List of Discipline",
         "POPUP_TITLE": "Add New Discipline",
         "TABLE": {
           "NAME": "Name",
@@ -142,7 +142,7 @@
       },
       "EMPLOYEE": {
         "TITLE": "Employee",
-        "LIST_TITLE": "List Of Employee",
+        "LIST_TITLE": "List of Employee",
         "POPUP_TITLE": "Add New Employee",
         "TABLE": {
           "CODE": "Employee Code",
@@ -176,7 +176,7 @@
         },
         "PERSONAL_INFO": {
           "TITLE": "Personal Info",
-          "DOB": "Date Of Birth",
+          "DOB": "Date of Birth",
           "GENDER": "Gender",
           "GENDER_MALE": "Male",
           "GENDER_FEMALE": "Female",
@@ -192,7 +192,7 @@
         "TITLE": "Configuration",
         "APPROVE_STATUS": {
           "TITLE": "Approve Status",
-          "LIST_TITLE": "List Of Approve Status",
+          "LIST_TITLE": "List of Approve Status",
           "TABLE": {
           },
           "FORM": {
@@ -207,7 +207,7 @@
         },
         "DISTRICT": {
           "TITLE": "District",
-          "LIST_TITLE": "List Of District",
+          "LIST_TITLE": "List of District",
           "POPUP_TITLE": "Add New District",
           "TABLE": {
             "NAME": "District Name",
@@ -225,7 +225,7 @@
         },
         "EDUCATION": {
           "TITLE": "Education",
-          "LIST_TITLE": "List Of Education",
+          "LIST_TITLE": "List of Education",
           "POPUP_TITLE": "Add New Education",
           "TABLE": {
             "NAME": "Name",
@@ -243,7 +243,7 @@
         },
         "WORKING_STATUS": {
           "TITLE": "Working Status",
-          "LIST_TITLE": "List Of Working Status",
+          "LIST_TITLE": "List of Working Status",
           "POPUP_TITLE": "Add New Working Status",
           "TABLE": {
             "NAME": "Name",
@@ -261,7 +261,7 @@
         },
         "IDENTIFICATION": {
           "TITLE": "Identification",
-          "LIST_TITLE": "List Of Identification",
+          "LIST_TITLE": "List of Identification",
           "POPUP_TITLE": "Add New Identification",
           "TABLE": {
             "NAME": "Name"
@@ -276,9 +276,9 @@
           }
         },
         "MODEL_OF_STUDY": {
-          "TITLE": "Model Of Study",
-          "LIST_TITLE": "List Of Model Of Study",
-          "POPUP_TITLE": "Add New Model Of Study",
+          "TITLE": "Model of Study",
+          "LIST_TITLE": "List of Model of Study",
+          "POPUP_TITLE": "Add New Model of Study",
           "TABLE": {
             "NAME": "Name"
           },
@@ -293,7 +293,7 @@
         },
         "NATIONALITY": {
           "TITLE": "Nationality",
-          "LIST_TITLE": "List Of Nationality",
+          "LIST_TITLE": "List of Nationality",
           "POPUP_TITLE": "Add New Nationality",
           "TABLE": {
             "NAME": "Name"
@@ -309,7 +309,7 @@
         },
         "QUALIFICATION": {
           "TITLE": "Qualification",
-          "LIST_TITLE": "List Of Qualification",
+          "LIST_TITLE": "List of Qualification",
           "POPUP_TITLE": "Add New Qualification",
           "TABLE": {
             "NAME": "Name"
@@ -325,7 +325,7 @@
         },
         "PROVINCE": {
           "TITLE": "Province",
-          "LIST_TITLE": "List Of Province",
+          "LIST_TITLE": "List of Province",
           "POPUP_TITLE": "Add New Province",
           "TABLE": {
             "NAME": "Province Name"
@@ -340,7 +340,7 @@
         },
         "RANKING": {
           "TITLE": "Ranking",
-          "LIST_TITLE": "List Of Ranking",
+          "LIST_TITLE": "List of Ranking",
           "TABLE": {
             "NAME": "Name"
           },
@@ -355,7 +355,7 @@
         },
         "RELATIONSHIP_TYPE": {
           "TITLE": "Relationship Type",
-          "LIST_TITLE": "List Of Relationship Type",
+          "LIST_TITLE": "List of Relationship Type",
           "TABLE": {
             "NAME": "Name",
             "DESCRIPTION": "Description"
@@ -372,7 +372,7 @@
         },
         "ETHNICITY": {
           "TITLE": "Ethnicity",
-          "LIST_TITLE": "List Of Ethnicity",
+          "LIST_TITLE": "List of Ethnicity",
           "POPUP_TITLE": "Add New Ethnicity",
           "TABLE": {
             "NAME": "Name"
@@ -389,7 +389,7 @@
         "RELIGION": {
           "TITLE": "Religion",
           "POPUP_TITLE": "Add New Religion",
-          "LIST_TITLE": "List Of Religion",
+          "LIST_TITLE": "List of Religion",
           "TABLE": {
             "NAME": "Name"
           },
@@ -404,7 +404,7 @@
         },
         "WARD": {
           "TITLE": "Ward",
-          "LIST_TITLE": "List Of Ward",
+          "LIST_TITLE": "List of Ward",
           "POPUP_TITLE": "Add New Ward",
           "TABLE": {
             "NAME": "Ward's Name",
@@ -424,7 +424,7 @@
         },
         "CONTRACT_TYPE":{
           "TITLE":"Contract Type",
-          "LIST_TITLE":"List Of Contract Type",
+          "LIST_TITLE":"List of Contract Type",
           "TABLE":{
             "NAME":"Contract Name",
             "DESCRIPTION":"Description",
@@ -449,7 +449,7 @@
       "TITLE": "System",
       "ACCOUNT": {
         "TITLE":"Account",
-        "LIST_TITLE":"List Of Account",
+        "LIST_TITLE":"List of Account",
         "POPUP_TITLE":"Add New Account",
         "TABLE":{
           "EMPLOYEE":"Employee Name",
@@ -467,7 +467,7 @@
       },
       "ROLE":{
         "TITLE":"Role",
-        "LIST_TITLE":"List Of Role",
+        "LIST_TITLE":"List of Role",
         "POPUP_TITLE":"Add New Role",
         "TABLE":{
           "NAME":"Name",
