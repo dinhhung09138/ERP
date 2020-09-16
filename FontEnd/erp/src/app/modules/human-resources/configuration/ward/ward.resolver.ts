@@ -21,10 +21,10 @@ export class WardResolver implements Resolve<Observable<any>> {
       this.districtService.getDropdown(),
     ]).pipe(
       map(
-        ([first, second]) => {
+        ([provinceData, districtData]) => {
           return {
-            provinces: first,
-            districts: second,
+            provinces: provinceData,
+            districts: districtData,
           };
         }));
   }

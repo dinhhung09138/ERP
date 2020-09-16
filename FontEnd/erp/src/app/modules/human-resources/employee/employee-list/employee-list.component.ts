@@ -47,29 +47,29 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.router.navigate(['/hr/employee/new']);
     }
   }
 
   onImportClick() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
     }
   }
 
   onExportClick() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading !== true && id !== null) {
+    if (this.isLoading === false && id !== null) {
       this.router.navigate([`/hr/employee/edit/${id}`]);
     }
   }
 
   onDeleteClick(id: number) {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.employeeService.confirmDelete(id).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
           this.getList();
@@ -79,7 +79,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onFilterChange() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       if (this.searchText.length > 0) {
         this.paging.pageIndex = 0;
       }
@@ -88,7 +88,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onPageChange(page: PageEvent) {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.paging.pageSize = page.pageSize;
       this.paging.pageIndex = page.pageIndex;
       if (page.pageSize !== this.currentPageSize) {

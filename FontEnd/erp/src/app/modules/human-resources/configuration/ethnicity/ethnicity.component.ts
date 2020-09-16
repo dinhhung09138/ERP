@@ -45,31 +45,31 @@ export class EthnicityComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.form.onCreateClick();
     }
   }
 
   onImportClick() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.form.onCloseClick();
     }
   }
 
   onExportClick() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading !== true && id !== null) {
+    if (this.isLoading === false && id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number, rowVersion: any) {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.form.onCloseClick();
 
       this.ethnicityService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
@@ -81,7 +81,7 @@ export class EthnicityComponent implements OnInit {
   }
 
   onFilterChange() {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       if (this.searchText.length > 0) {
         this.paging.pageIndex = 0;
       }
@@ -90,7 +90,7 @@ export class EthnicityComponent implements OnInit {
   }
 
   onPageChange(page: PageEvent) {
-    if (this.isLoading !== true) {
+    if (this.isLoading === false) {
       this.paging.pageSize = page.pageSize;
       this.paging.pageIndex = page.pageIndex;
       if (page.pageSize !== this.currentPageSize) {
