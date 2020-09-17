@@ -28,7 +28,8 @@
     "DELETE_ERROR": "Lỗi khi xóa dữ liệu",
     "PAGE_NOT_FOUND": "Chức năng đang cập nhật",
     "OUT_OF_DATE_DATA": "Dữ liệu đã được thay đổi trước đó, vui lòng cập nhật trước khi tiến hành thao tác mới",
-    "CODE_EXISTS": "Mã đã tồn tại"
+    "CODE_EXISTS": "Mã đã tồn tại",
+    "SELECT_OPTION": "Chọn"
   },
   "DIALOG": {
     "CONFIRM": "Xác nhận",

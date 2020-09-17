@@ -115,6 +115,35 @@ namespace Service.HR
             return response;
         }
 
+        public async Task<ResponseModel> EmployeeWithoutAccount()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.EmployeeRepository.Query()
+                            join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
+                            join acc in _context.UserRepository.Query() on m.Id equals acc.EmployeeId into account
+                            from acc in account.DefaultIfEmpty()
+                            where m.IsActive && !m.Deleted && acc == null
+                            orderby m.CreateDate ascending
+                            select new EmployeeModel
+                            {
+                                Id = m.Id,
+                                EmployeeCode = m.EmployeeCode,
+                                FirstName = info.FirstName,
+                                LastName = info.LastName,
+                            };
+
+                response.Result = await query.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.GetDropDownError;
+                _logger.LogError(ex.Message, ex);
+            }
+            return response;
+        }
+
         public async Task<ResponseModel> Item(int id)
         {
             ResponseModel response = new ResponseModel();

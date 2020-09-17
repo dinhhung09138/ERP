@@ -28,7 +28,8 @@
     "DELETE_ERROR": "Delete error",
     "PAGE_NOT_FOUND": "This page is updating",
     "OUT_OF_DATE_DATA": "The data has changed, Please get the latest version before action",
-    "CODE_EXISTS": "Code is exists"
+    "CODE_EXISTS": "Code is exists",
+    "SELECT_OPTION": "Select an option"
   },
   "DIALOG": {
     "CONFIRM": "Confirmation",

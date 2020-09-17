@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { PageEvent } from '@angular/material/paginator';
 
 import { AccountViewModel } from './account.model';
 import { AccountService } from './account.service';
 import { PagingModel } from '../../../core/models/paging.model';
-import { MatSort } from '@angular/material/sort';
 import { ResponseModel } from '../../../core/models/response.model';
 import { ResponseStatus } from '../../../core/enums/response-status.enum';
-import { PageEvent } from '@angular/material/paginator';
 import { AccountFormComponent } from './form/form.component';
 
 @Component({

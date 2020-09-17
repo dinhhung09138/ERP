@@ -1,1 +1,44 @@
-<p>form works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card box" [class.opened]="showFormStatus()">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-12">{{ formTitle }}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <app-element-loading [Show]="isLoading"></app-element-loading>
+        <form [formGroup]="accountForm" (submit)="!isLoading ? submitForm() : false">
+          <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+              <div class="row">
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>{{ 'SCREEN.SYSTEM.ACCOUNT.FORM.USER_NAME' | translate }}</label>
+                  <mat-form-field>
+                    <mat-select formControlName="employeeId">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listEmployee" value="item.id">{{ item.firstName + ' ' + item.lastName }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-12 form-group"></div>
+                <div class="col-md-6 col-xs-12 form-group"></div>
+              </div>
+            </div>
+            <div class="col-lg-2"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<mat-form-field>
+  <mat-label>abc</mat-label>
+  <mat-select>
+    <mat-option>None</mat-option>
+  </mat-select>
+</mat-form-field>

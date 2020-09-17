@@ -18,6 +18,7 @@ export class EmployeeService {
   url = {
     list: APIUrlConstants.hrApi + 'employee/get-list',
     dropdown: APIUrlConstants.hrApi + 'employee/dropdown',
+    dontHaveAccount: APIUrlConstants.hrApi + 'employee/dont-have-account',
     item: APIUrlConstants.hrApi + 'employee/item',
     insert: APIUrlConstants.hrApi + 'employee/insert',
     update: APIUrlConstants.hrApi + 'employee/update',
@@ -43,6 +44,10 @@ export class EmployeeService {
 
     getDropdown(): Observable<ResponseModel> {
       return this.api.getListData(this.url.dropdown);
+    }
+
+    getEmployeeDontHaveAccount(): Observable<ResponseModel> {
+      return this.api.getListData(this.url.dontHaveAccount);
     }
 
     save(model: EmployeeViewModel, action: FormActionStatus, file?: any): Observable<ResponseModel> {

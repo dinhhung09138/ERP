@@ -7,6 +7,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AccountComponent } from './account.component';
 import { AccountService } from './account.service';
@@ -37,6 +38,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatInputModule,
     MatDialogModule,
+    MatSelectModule,
   ],
   providers: [
     AccountService,

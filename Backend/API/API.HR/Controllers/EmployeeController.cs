@@ -35,6 +35,14 @@ namespace API.HR.Controllers
             return response;
         }
 
+        [HttpGet, Route("dont-have-account")]
+        [AllowAnonymous]
+        public async Task<ResponseModel> EmployeeWithoutAccount()
+        {
+            var response = await _employeeService.EmployeeWithoutAccount();
+            return response;
+        }
+
         [HttpGet, Route("item")]
         public async Task<ResponseModel> Item([FromQuery] int id)
         {
