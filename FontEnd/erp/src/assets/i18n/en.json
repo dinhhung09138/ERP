@@ -463,6 +463,7 @@
           "TITLE_EDIT":"Update",
           "EMPLOYEE":"Employee Name",
           "USER_NAME":"User Name",
+          "PASSWORD": "Password",
           "ROLE": "Role"
         }
       },

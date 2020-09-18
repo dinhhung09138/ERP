@@ -48,10 +48,10 @@ export class AccountFormComponent implements OnInit {
     });
     this.accountForm = this.fb.group({
       id: [0],
-      employeeId: [null, Validators.required],
+      employeeId: ['', Validators.required],
       userName: ['', Validators.required],
       password: [null, Validators.required],
-      role: [null, Validators.required],
+      roleIds: [null, Validators.required],
       isActive: [true],
       rowVersion: [null]
     });
@@ -62,9 +62,24 @@ export class AccountFormComponent implements OnInit {
     this.isSubmit = false;
 
     if (this.formDirective) {
-      //this.formDirective.resetForm();
+      this.formDirective.reset();
     }
     this.formAction = formStatus;
+    this.accountForm.get('employeeId').setValue('');
+
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.accountForm.get('employeeId').disable();
+      this.accountForm.get('userName').disable();
+      this.accountForm.get('password').disable();
+      this.accountForm.get('isActive').disable();
+    } else {
+      this.accountForm.get('isActive').setValue(true);
+      this.accountForm.get('employeeId').enable();
+      this.accountForm.get('userName').enable();
+      this.accountForm.get('password').enable();
+      this.accountForm.get('isActive').enable();
+    }
+    this.elm.nativeElement.querySelector('#employeeId').focus();
   }
 
   showFormStatus(){
@@ -79,7 +94,7 @@ export class AccountFormComponent implements OnInit {
       this.initFormControl(FormActionStatus.Insert);
     }
 
-    //this.elm.nativeElement.querySelector('#employeeId').focus();
+    this.elm.nativeElement.querySelector('#employeeId').focus();
     this.translateService.get('SCREEN.SYSTEM.ACCOUNT.FORM.TITLE_NEW').subscribe(message => {
       this.formTitle = message;
     });
@@ -89,11 +104,21 @@ export class AccountFormComponent implements OnInit {
 
   }
 
-  onCloseClick() {
+  onResetClick() {
+    this.initFormControl(this.formAction);
+  }
 
+  onCloseClick() {
+    this.initFormControl(FormActionStatus.UnKnow);
   }
 
   submitForm() {
+    this.isSubmit = true;
 
+    if (this.accountForm.invalid) {
+      return;
+    }
+
+    this.isLoading = true;
   }
 }
