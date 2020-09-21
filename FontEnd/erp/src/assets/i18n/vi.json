@@ -37,6 +37,10 @@
     "NOTIFY": "Thông báo",
     "CONFIRM_DELETE": "Bạn có muốn xóa dòng dữ liệu đang chọn?"
   },
+  "USER": {
+    "CHANGE_PASSWORD": "Đổi mật khẩu",
+    "LOGOUT": "Thoát"
+  },
   "BUTTON": {
     "ADD": "Thêm mới",
     "UPDATE": "Cập nhật",

@@ -37,6 +37,10 @@
     "NOTIFY": "Alert",
     "CONFIRM_DELETE": "Are you want to delete selected item?"
   },
+  "USER": {
+    "CHANGE_PASSWORD": "Change Password",
+    "LOGOUT": "Logout"
+  },
   "BUTTON": {
     "ADD": "Add new",
     "UPDATE": "Update",
