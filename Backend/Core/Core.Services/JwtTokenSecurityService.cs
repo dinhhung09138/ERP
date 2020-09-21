@@ -125,7 +125,7 @@ namespace Core.Services
 
         public JwtSecurityToken ValidateToken()
         {
-            string token = _httpContextInterceptor.HttpContext.Request.Headers["Authorization"].ToString();
+            string token = _httpContextInterceptor.HttpContext.Request.Headers["Authorization"].ToString().Split(" ").Last();
 
 
             var tokenHandler = new JwtSecurityTokenHandler();
