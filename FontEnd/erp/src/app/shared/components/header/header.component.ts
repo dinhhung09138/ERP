@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { SessionContext } from '../../../core/session.context';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private context: SessionContext) { }
 
   ngOnInit(): void {
+  }
+
+  onLogoutClick() {
+    this.context.clearToken();
+    this.router.navigate(['/login']);
   }
 
 }

@@ -456,11 +456,11 @@
           "EMPLOYEE":"Nhân viên",
           "USER_NAME":"Tên tài khoản",
           "ROLE": "Quyền",
-          "LAST_LOGIN": "Lần đăng nhập sau cùng"
+          "LAST_LOGIN": "T/G Đăng nhập"
         },
         "FORM":{
-          "TITLE_NEW":"Add New",
-          "TITLE_EDIT":"Update",
+          "TITLE_NEW":"Thêm tài khoản mới",
+          "TITLE_EDIT":"Cập nhật thông tin tài khoản",
           "EMPLOYEE":"Nhân viên",
           "USER_NAME":"Tên tài khoản",
           "PASSWORD": "Mật khẩu",
