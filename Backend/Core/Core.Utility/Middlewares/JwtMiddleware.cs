@@ -21,9 +21,6 @@ namespace Core.Utility.Middlewares
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
-            var user = context.User;
-            //var allow = context.Response.HttpContext.u
-
             if (!string.IsNullOrEmpty(token))
             {
                 var tokenInfo = _jwtTokenSerivice.ValidateToken();

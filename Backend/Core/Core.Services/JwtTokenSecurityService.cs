@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -23,6 +24,9 @@ namespace Core.Services
     {
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextInterceptor;
+        private readonly IMemoryCachingService _memoryCachingService;
+
+        private readonly string CacheKey = "UserLogin";
 
         /// <summary>
         /// Initializes a new instance of the class.
@@ -30,10 +34,14 @@ namespace Core.Services
         /// </summary>
         /// <param name="configuration">IConfiguration.</param>
         /// <param name="httpInterceptor">IHttpContextAccessor</param>
-        public JwtTokenSecurityService(IConfiguration configuration, IHttpContextAccessor httpInterceptor)
+        public JwtTokenSecurityService(
+            IConfiguration configuration,
+            IHttpContextAccessor httpInterceptor,
+            IMemoryCachingService memoryCachingService)
         {
             _configuration = configuration;
             _httpContextInterceptor = httpInterceptor;
+            _memoryCachingService = memoryCachingService;
         }
 
         /// <summary>
@@ -52,9 +60,19 @@ namespace Core.Services
                     Token = jwtSecurityToken.RefreshToken,
                     UserId = user.Id,
                 };
-                
+
                 // TODO
                 // Save to database;
+
+                var listCache = _memoryCachingService.GetList<JwtTokenModel>(CacheKey);
+
+                if (listCache == null)
+                {
+                    listCache = new List<JwtTokenModel>();
+                }
+
+                listCache.Add(jwtSecurityToken);
+                _memoryCachingService.Set<JwtTokenModel>(listCache, CacheKey, DateTime.Now.AddDays(1));
 
                 return jwtSecurityToken;
             }
@@ -90,7 +108,12 @@ namespace Core.Services
         {
             try
             {
-                // _cache.Remove(token.Token);
+                var listCache = _memoryCachingService.GetList<JwtTokenModel>(CacheKey);
+                if (listCache != null)
+                {
+                    listCache = listCache.Where(m => m.UserInfo.Id == token.UserId).ToList();
+                    _memoryCachingService.Set<JwtTokenModel>(listCache, CacheKey, DateTime.Now.AddDays(1));
+                }
 
                 return true;
             }
