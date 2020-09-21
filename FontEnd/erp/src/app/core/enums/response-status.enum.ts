@@ -4,5 +4,8 @@ export enum ResponseStatus {
   warning = 0,
   codeExists = -2,
   getDropDownError = -3,
-  outOfDateData = -4,
+  currentPasswordNotMatch = -4,
+  userNameExists = -5,
+  outOfDateData = -6,
+  userOrPasswordInvalid = -7,
 }

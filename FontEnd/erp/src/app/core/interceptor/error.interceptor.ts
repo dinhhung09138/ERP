@@ -44,6 +44,9 @@ export class ErrorInterceptor implements HttpInterceptor {
             case ResponseStatus.getDropDownError:
               this.notifyService.notifyCannotGetDropdown(req.url);
               break;
+            case ResponseStatus.userNameExists:
+              this.notifyService.notifyUserNameIsExists();
+              break;
           }
         }
 

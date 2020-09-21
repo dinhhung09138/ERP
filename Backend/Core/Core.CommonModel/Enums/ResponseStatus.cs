@@ -30,9 +30,9 @@ namespace Core.CommonModel.Enums
         CodeExists = -2,
 
         /// <summary>
-        /// Show when user name is exists
+        /// Error when get dropdown data
         /// </summary>
-        UserNameExists = -3,
+        GetDropDownError = -3,
 
         /// <summary>
         /// Current password not match
@@ -40,18 +40,18 @@ namespace Core.CommonModel.Enums
         CurrentPasswordNotMatch = -4,
 
         /// <summary>
-        /// Error when get dropdown data
+        /// Show when user name is exists
         /// </summary>
-        GetDropDownError = -3,
+        UserNameExists = -5,
 
         /// <summary>
         /// Version is not map. Data was changed before
         /// </summary>
-        OutOfDateData = -4,
+        OutOfDateData = -6,
 
         /// <summary>
         /// Login fail
         /// </summary>
-        UserOrPassowrdInvalid = -5,
+        UserOrPasswordInvalid = -7,
     }
 }

@@ -88,6 +88,13 @@ export class NotifyService {
     });
   }
 
+  notifyUserNameIsExists() {
+    this.translate.get('MESSAGE.USER_NAME_EXISTS').subscribe(message => {
+      this.notifyWarning(message);
+    });
+  }
+
+
   /**
    * Show warning when code is exists.
    */
