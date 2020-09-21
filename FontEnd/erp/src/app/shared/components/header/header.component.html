@@ -101,9 +101,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" mat-button [matMenuTriggerFor]="beforeMenu">
-            <img src="../../../../assets/images/no-image.png" width="30" height="30" />
+            <img [src]="getAvatar()" width="30" height="30" />
             &nbsp;
-            Tran Dinh Hung
+            {{ userInfo.fullName }}
             &nbsp;
             <i class="fa fa-angle-down" aria-hidden="true"></i>
           </a>
