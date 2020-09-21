@@ -2,6 +2,7 @@
 using Core.CommonModel;
 using Core.Services.Constants;
 using Core.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -21,15 +22,18 @@ namespace Core.Services
     public class JwtTokenSecurityService : IJwtTokenSecurityService
     {
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextInterceptor;
 
         /// <summary>
         /// Initializes a new instance of the class.
         /// Constructor.
         /// </summary>
         /// <param name="configuration">IConfiguration.</param>
-        public JwtTokenSecurityService(IConfiguration configuration)
+        /// <param name="httpInterceptor">IHttpContextAccessor</param>
+        public JwtTokenSecurityService(IConfiguration configuration, IHttpContextAccessor httpInterceptor)
         {
             _configuration = configuration;
+            _httpContextInterceptor = httpInterceptor;
         }
 
         /// <summary>
@@ -96,8 +100,11 @@ namespace Core.Services
             }
         }
 
-        public JwtSecurityToken ValidateToken(string token)
+        public JwtSecurityToken ValidateToken()
         {
+            string token = _httpContextInterceptor.HttpContext.Request.Headers["Authorization"].ToString();
+
+
             var tokenHandler = new JwtSecurityTokenHandler();
             // Get security key from app config
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration[JwtConstant.SECRET_KEY]));

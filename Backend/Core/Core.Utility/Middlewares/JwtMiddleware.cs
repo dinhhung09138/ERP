@@ -8,27 +8,30 @@ using System.Threading.Tasks;
 
 namespace Core.Utility.Middlewares
 {
-    public class JwtMiddleware
+    public class JwtMiddleware : IMiddleware
     {
-        private readonly RequestDelegate _next;
+        private readonly IJwtTokenSecurityService _jwtTokenSerivice;
 
-        public JwtMiddleware(RequestDelegate next)
+        public JwtMiddleware(IJwtTokenSecurityService jwtTokenSerivice)
         {
-            _next = next;
+            _jwtTokenSerivice = jwtTokenSerivice;
         }
 
-        public async Task InvokeAsync(HttpContext context, IJwtTokenSecurityService jwtTokenSerivice)
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
+            var user = context.User;
+            //var allow = context.Response.HttpContext.u
+
             if (!string.IsNullOrEmpty(token))
             {
-                var tokenInfo = jwtTokenSerivice.ValidateToken(token);
+                var tokenInfo = _jwtTokenSerivice.ValidateToken();
                 context.Items["isValidToken"] = true;
                 context.Items["TokenInfo"] = tokenInfo;
             }
             // Call the next delegate/middleware in the pipeline
-            await _next(context);
+            await next(context);
         }
     }
 }

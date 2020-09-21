@@ -19,6 +19,6 @@ namespace Core.Services.Interfaces
 
         bool RevokeToken(TokenModel token);
 
-        JwtSecurityToken ValidateToken(string token);
+        JwtSecurityToken ValidateToken();
     }
 }

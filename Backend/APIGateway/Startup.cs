@@ -64,6 +64,7 @@ namespace APIGateway
             services.AddHrServices(Configuration);
             services.AddTrainingServices(Configuration);
             services.AddRoleServices(Configuration);
+            services.AddTransient<JwtMiddleware>();
 
         }
 
