@@ -31,6 +31,7 @@ import { EducationService } from '../../configuration/education/education.servic
 import { EmployeeInfoComponent } from './employee-info.component';
 import { ProfessionalQualificationService } from '../../configuration/professional-qualification/professional-qualification.service';
 import { ReligionService } from '../../configuration/religion/religion.service';
+import { FormatNumberPipe } from '../../../../core/pipes/format-number.pipe';
 
 const routes: Routes = [
   {
@@ -76,6 +77,7 @@ const routes: Routes = [
     NationalityService,
     EducationService,
     ProfessionalQualificationService,
+    FormatNumberPipe,
   ]
 })
 

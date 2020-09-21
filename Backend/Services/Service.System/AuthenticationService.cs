@@ -68,7 +68,7 @@ namespace Service.System
                 }
                 else
                 {
-                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.UserOrPassowrdInvalid;
+                    response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.UserOrPasswordInvalid;
                 }
             }
             catch (Exception ex)

@@ -98,7 +98,7 @@ namespace Service.System
             ResponseModel response = new ResponseModel();
             try
             {
-                if (await _context.UserRepository.AnyAsync(m => m.UserName == model.UserName && m.Deleted == false))
+                if (await _context.UserRepository.AnyAsync(m => m.UserName == model.UserName))
                 {
                     response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.UserNameExists;
                     return response;
@@ -110,6 +110,7 @@ namespace Service.System
 
                 User md = new User();
 
+                md.EmployeeId = model.EmployeeId;
                 md.UserName = model.UserName;
                 md.Password = password;
                 md.CreateDate = DateTime.Now;
@@ -118,16 +119,24 @@ namespace Service.System
                 md.CreateBy = base.UserId;
 
                 await _context.UserRepository.AddAsync(md).ConfigureAwait(false);
+                await _context.SaveChangesAsync();
 
-                foreach (var item in model.Roles)
+                UserRole role = new UserRole()
                 {
-                    UserRole role = new UserRole()
-                    {
-                        UserId = md.Id,
-                        RoleId = item.RoleId
-                    };
-                    await _context.UserRoleRepository.AddAsync(role);
-                }
+                    UserId = md.Id,
+                    RoleId = model.RoleId
+                };
+                await _context.UserRoleRepository.AddAsync(role);
+
+                //foreach (var item in model.Roles)
+                //{
+                //    UserRole role = new UserRole()
+                //    {
+                //        UserId = md.Id,
+                //        RoleId = item.RoleId
+                //    };
+                //    await _context.UserRoleRepository.AddAsync(role);
+                //}
 
                 await _context.SaveChangesAsync();
                 await _context.CommitTransactionAsync();
@@ -156,15 +165,22 @@ namespace Service.System
 
                 _context.UserRoleRepository.DeleteRange(listRole);
 
-                foreach (var item in model.Roles)
+                UserRole role = new UserRole()
                 {
-                    UserRole md = new UserRole()
-                    {
-                        UserId = model.Id,
-                        RoleId = item.RoleId
-                    };
-                    await _context.UserRoleRepository.AddAsync(md).ConfigureAwait(false);
-                }
+                    UserId = model.Id,
+                    RoleId = model.RoleId
+                };
+                await _context.UserRoleRepository.AddAsync(role);
+
+                //foreach (var item in model.Roles)
+                //{
+                //    UserRole md = new UserRole()
+                //    {
+                //        UserId = model.Id,
+                //        RoleId = item.RoleId
+                //    };
+                //    await _context.UserRoleRepository.AddAsync(md).ConfigureAwait(false);
+                //}
 
                 await _context.SaveChangesAsync();
                 await _context.CommitTransactionAsync();

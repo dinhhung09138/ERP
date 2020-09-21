@@ -18,7 +18,7 @@
                   <mat-form-field class="form-control">
                     <mat-select id="employeeId" formControlName="employeeId" required tabindex="1">
                       <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                      <mat-option *ngFor="let item of listEmployee" value="item.id">{{ item.firstName + ' ' + item.lastName }}</mat-option>
+                      <mat-option *ngFor="let item of listEmployee" [value]="item.id">{{ item.firstName + ' ' + item.lastName }}</mat-option>
                     </mat-select>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && accountForm.controls['employeeId'].errors?.required">
@@ -28,12 +28,12 @@
                 <div class="col-md-6 col-xs-12 form-group">
                   <label>{{ 'SCREEN.SYSTEM.ACCOUNT.FORM.ROLE' | translate }}</label>
                   <mat-form-field class="form-control">
-                    <mat-select formControlName="roleIds" required tabindex="2">
+                    <mat-select formControlName="roleId" required tabindex="2">
                       <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                      <mat-option *ngFor="let item of listRole" value="item.id">{{ item.name }}</mat-option>
+                      <mat-option *ngFor="let item of listRole" [value]="item.id">{{ item.name }}</mat-option>
                     </mat-select>
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && accountForm.controls['roleIds'].errors?.required">
+                  <mat-error *ngIf="isSubmit && accountForm.controls['roleId'].errors?.required">
                     {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>
@@ -47,6 +47,12 @@
                   <mat-error *ngIf="isSubmit && accountForm.controls['userName'].errors?.required">
                     {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
+                  <mat-error *ngIf="isSubmit && accountForm.controls['userName'].errors?.minlength">
+                    {{ 'SCREEN.SYSTEM.ACCOUNT.VALIDATION_MESSAGE.MIN_LENGTH' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="isSubmit && accountForm.controls['userName'].errors?.maxlength">
+                    {{ 'SCREEN.SYSTEM.ACCOUNT.VALIDATION_MESSAGE.MAX_LENGTH' | translate }}
+                  </mat-error>
                 </div>
                 <div class="col-md-6 col-xs-12 form-group">
                   <label>{{ 'SCREEN.SYSTEM.ACCOUNT.FORM.PASSWORD' | translate }}</label>
@@ -55,6 +61,12 @@
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && accountForm.controls['password'].errors?.required">
                     {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="isSubmit && accountForm.controls['password'].errors?.minlength">
+                    {{ 'SCREEN.SYSTEM.ACCOUNT.VALIDATION_MESSAGE.MIN_LENGTH' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="isSubmit && accountForm.controls['password'].errors?.maxlength">
+                    {{ 'SCREEN.SYSTEM.ACCOUNT.VALIDATION_MESSAGE.MAX_LENGTH' | translate }}
                   </mat-error>
                 </div>
               </div>
@@ -77,9 +89,3 @@
     </div>
   </div>
 </div>
-<mat-form-field>
-  <mat-label>abc</mat-label>
-  <mat-select>
-    <mat-option>None</mat-option>
-  </mat-select>
-</mat-form-field>

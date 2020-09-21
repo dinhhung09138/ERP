@@ -14,6 +14,7 @@ import { AccountService } from './account.service';
 import { SharedModule } from '../../../shared/shared.module';
 import { AccountFormComponent } from './form/form.component';
 import { PasswordComponent } from './password/password.component';
+import { EmployeeService } from '../../human-resources/employee/employee.service';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
   ],
   providers: [
     AccountService,
+    EmployeeService,
   ]
 })
 export class AccountModule { }

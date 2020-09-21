@@ -8,6 +8,9 @@ import { RoleViewModel } from './../../role/role.model';
 import { AccountService } from './../account.service';
 import { EmployeeViewModel } from '../../../human-resources/employee/employee.model';
 import { FormActionStatus } from '../../../../core/enums/form-action-status.enum';
+import { ResponseModel } from '../../../../core/models/response.model';
+import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
+import { EmployeeService } from '../../../human-resources/employee/employee.service';
 
 @Component({
   selector: 'app-system-account-form',
@@ -36,6 +39,7 @@ export class AccountFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private accountService: AccountService,
     private translateService: TranslateService,
+    private employeeService: EmployeeService,
   ) {
   }
 
@@ -43,15 +47,13 @@ export class AccountFormComponent implements OnInit {
     this.activatedRoute.data.subscribe(response => {
       this.listRole = response.data.role.result;
       this.listEmployee = response.data.employees.result;
-      console.log(this.listRole);
-      console.log(this.listEmployee);
     });
     this.accountForm = this.fb.group({
       id: [0],
       employeeId: ['', Validators.required],
-      userName: ['', Validators.required],
-      password: [null, Validators.required],
-      roleIds: [null, Validators.required],
+      userName: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
+      password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
+      roleId: [null, Validators.required],
       isActive: [true],
       rowVersion: [null]
     });
@@ -64,17 +66,22 @@ export class AccountFormComponent implements OnInit {
     if (this.formDirective) {
       this.formDirective.reset();
     }
+
     this.formAction = formStatus;
+    this.accountForm.get('id').setValue(0);
     this.accountForm.get('employeeId').setValue('');
+    this.accountForm.get('roleId').setValue('');
 
     if (formStatus === FormActionStatus.UnKnow) {
       this.accountForm.get('employeeId').disable();
+      this.accountForm.get('roleId').disable();
       this.accountForm.get('userName').disable();
       this.accountForm.get('password').disable();
       this.accountForm.get('isActive').disable();
     } else {
       this.accountForm.get('isActive').setValue(true);
       this.accountForm.get('employeeId').enable();
+      this.accountForm.get('roleId').enable();
       this.accountForm.get('userName').enable();
       this.accountForm.get('password').enable();
       this.accountForm.get('isActive').enable();
@@ -114,11 +121,27 @@ export class AccountFormComponent implements OnInit {
 
   submitForm() {
     this.isSubmit = true;
+    console.log(this.accountForm.getRawValue());
 
     if (this.accountForm.invalid) {
       return;
     }
+    this.accountService.insert(this.accountForm.getRawValue()).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.initFormControl(FormActionStatus.UnKnow);
+        this.reloadTableEvent.emit(true);
+        this.getListEmployeeDontHaveAccount();
+      }
+    });
+    this.isSubmit = false;
+    this.isLoading = false;
+  }
 
-    this.isLoading = true;
+  private getListEmployeeDontHaveAccount() {
+    this.employeeService.getEmployeeDontHaveAccount().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.listEmployee = response.result;
+      }
+    });
   }
 }

@@ -17,6 +17,7 @@ namespace Service.System.Models
         public string UserName { get; set; }
 
         public string RoleName { get; set; }
+        public int RoleId { get; set; }
 
         [MaxLength(255)]
         public string Password { get; set; }
