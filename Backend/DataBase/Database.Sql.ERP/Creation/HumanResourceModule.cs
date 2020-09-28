@@ -1439,6 +1439,16 @@ namespace Database.Sql.ERP.Creation
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 14,
                     ModuleCode = "HR"
+                },
+                new Function()
+                {
+                    Code = "HR_CONF_APPROVE_ST",
+                    Name = "APPROVE_STATUS",
+                    Url = "/configuration/approve-status",
+                    Icon = string.Empty,
+                    ParentCode = "HR_CONFIGURATION",
+                    Precedence = 14,
+                    ModuleCode = "HR"
                 }
             );
 
