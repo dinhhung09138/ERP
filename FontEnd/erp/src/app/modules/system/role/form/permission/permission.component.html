@@ -10,7 +10,7 @@
         <div [formGroupName]="i">
           <mat-checkbox class="ml-10 function"  formControlName="command"
                     (change)="commandChecked($event.checked, Function.commands[i].id)">
-          {{ Function.commands[i].name }}
+          {{ 'PERMISSION.' + Function.commands[i].name | translate }}
           </mat-checkbox>
         </div>
       </div>

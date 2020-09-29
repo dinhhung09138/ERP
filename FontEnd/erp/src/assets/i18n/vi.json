@@ -490,5 +490,16 @@
         }
       }
     }
+  },
+  "PERMISSION": {
+    "VIEW": "Xem",
+    "INSERT": "Thêm mới",
+    "UPDATE": "Cập nhật",
+    "DELETE": "Xóa",
+    "ACTIVATE_ACCOUNT": "Kích hoạt tài khoản",
+    "DEACTIVATION_ACCOUNT": "Khóa tài khoản",
+    "ACTIVE_OR_DEACTIVATION": "Kích hoạt/Khóa tài khoản",
+    "ADMIN_CHANGE_PASSWORD": "Admin đổi mật khẩu",
+    "USER_CHANGE_PASSWORD": "Người dùng đổi mật khẩu"
   }
 }

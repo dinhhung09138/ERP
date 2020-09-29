@@ -64,7 +64,7 @@
                   <div class="card" *ngFor="let module of currentModule">
                     <div class="card-header">
                       <i class="fa fa-tags" aria-hidden="true"></i>
-                      <mat-checkbox class="ml-10" tabindex="4">{{ module.name }}</mat-checkbox>
+                      <mat-checkbox class="ml-10" tabindex="4">{{ 'SCREEN.' + module.name + '.TITLE' | translate }}</mat-checkbox>
                     </div>
                     <div class="card-body" *ngIf="!isLoading">
                       <div class="row">

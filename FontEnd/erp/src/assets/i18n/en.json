@@ -495,5 +495,16 @@
         }
       }
     }
+  },
+  "PERMISSION": {
+    "VIEW": "View",
+    "INSERT": "Insert",
+    "UPDATE": "Update",
+    "DELETE": "Delete",
+    "ACTIVATE_ACCOUNT": "Account Activation",
+    "DEACTIVATION_ACCOUNT": "Account Deactivation",
+    "ACTIVE_OR_DEACTIVATION": "Activation/Deactivation account",
+    "ADMIN_CHANGE_PASSWORD": "Admin change password",
+    "USER_CHANGE_PASSWORD": "User change password"
   }
 }
