@@ -3,7 +3,7 @@
     <p class="screen">
       <i class="fa fa-angle-right" aria-hidden="true"></i>
       <mat-checkbox class="ml-10" tabindex="4" formControlName="function" (change)="checkAll($event.checked)"></mat-checkbox>
-        {{ Function.name }}
+        {{ 'SCREEN.' + Function.moduleCode + '.' + Function.name + '.TITLE' | translate }}
     </p>
     <div style="display: inline-grid; padding-left: 15px;" formArrayName="commands">
       <div *ngFor="let cmd of commands.controls; let i = index">

@@ -69,9 +69,20 @@
                     <div class="card-body" *ngIf="!isLoading">
                       <div class="row">
                         <app-system-role-permission class="col-lg-2 col-md-3 col-sm-4 col-xs-12"
-                          *ngFor="let f of module.functions" [Function]="f" [Roles]="roleDetails"
+                          *ngFor="let f of getListParentFunctionWithoutChild(module.code)" [Function]="f" [Roles]="roleDetails"
                           (listCommandSelected)="commandSelectedListener($event)">
                         </app-system-role-permission>
+                      </div>
+                      <div class="row">
+                        <div class="col-12" *ngFor="let func of getListParentFunctionHasChild(module.code)">
+                          <h1>{{ func.name }}</h1>
+                          <div class="row">
+                            <app-system-role-permission class="col-lg-2 col-md-3 col-sm-4 col-xs-12"
+                              *ngFor="let f of getListChildFunction(module.code, func.code)" [Function]="f" [Roles]="roleDetails"
+                              (listCommandSelected)="commandSelectedListener($event)">
+                            </app-system-role-permission>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -53,13 +53,16 @@ namespace Service.System
                     .OrderBy(m => m.Precedence)
                     .Select(m => new ModuleModel
                     {
+                        Code = m.Code,
                         Name = m.Name,
                         Precedence = m.Precedence,
                         Functions = m.Functions.OrderBy(m => m.Precedence).Select(m => new FunctionModel
                         {
+                            Code = m.Code,
                             Name = m.Name,
                             ModuleCode = m.ModuleCode,
                             Precedence = m.Precedence,
+                            ParentCode = m.ParentCode,
                             Commands = m.Commands.OrderBy(m => m.Precedence).Select(m => new FunctionCommandModel
                             {
                                 Id = m.Id,

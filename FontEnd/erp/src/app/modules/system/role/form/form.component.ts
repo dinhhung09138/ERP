@@ -79,6 +79,7 @@ export class RoleFormComponent implements OnInit {
     if (this.ListModule) {
       this.currentModule = [...this.ListModule];
     }
+    console.log(this.ListModule);
 
     if (this.formDirective){
       this.formDirective.resetForm();
@@ -145,6 +146,25 @@ export class RoleFormComponent implements OnInit {
 
   onCloseClick() {
     this.initFormControl(FormActionStatus.UnKnow);
+  }
+
+  getListParentFunctionWithoutChild(moduleCode: string) {
+    const module = this.ListModule.find(m => m.code === moduleCode);
+    const f = module.functions.filter(m => m.parentCode === '').sort(m => m.precedence);
+    return f;
+  }
+
+  getListParentFunctionHasChild(moduleCode: string) {
+    const module = this.ListModule.find(m => m.code === moduleCode);
+    const f = module.functions.filter(m => m.parentCode === ''
+                                      && module.functions.some(c => c.parentCode === m.code))
+                              .sort(m => m.precedence);
+    return f;
+  }
+
+  getListChildFunction(moduleCode: string, functionCode: string) {
+    const module = this.ListModule.find(m => m.code === moduleCode);
+    return module.functions.filter(m => m.parentCode === functionCode).sort(m => m.precedence);
   }
 
   getItem(id: number){
