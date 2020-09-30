@@ -15,6 +15,8 @@ import { RoleViewModel } from '../../role.model';
 export class PermissionComponent implements OnInit {
 
   @Input() Function: FunctionInterface;
+  @Input() ModuleName: string;
+  @Input() ParentName: string;
   @Input() Roles: RoleDetailViewModel[] = [];
   @Output() listCommandSelected = new EventEmitter<FunctionCommandInterface[]>();
 
@@ -153,6 +155,10 @@ export class PermissionComponent implements OnInit {
     outPutValue.push(cmd);
 
     this.listCommandSelected.emit(outPutValue);
+  }
+
+  getLabel() {
+    return 'SCREEN.' + this.ModuleName + '.' + (this.ParentName ? (this.ParentName + '.') : '') + this.Function.name + '.TITLE';
   }
 
 }
