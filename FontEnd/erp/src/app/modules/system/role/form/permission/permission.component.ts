@@ -1,11 +1,11 @@
-import { RoleService } from './../../role.service';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { FunctionInterface } from '../../../../../core/interfaces/function.interface';
-import { FunctionCommandInterface } from './../../../../../core/interfaces/function-command.interface';
+import { RoleService } from './../../role.service';
 import { RoleDetailViewModel } from '../../role-detail.model';
 import { RoleViewModel } from '../../role.model';
+import { FunctionViewModel } from '../../../../../core/models/function.model';
+import { FunctionCommandViewModel } from '../../../../../core/models/function-command.model';
 
 @Component({
   selector: 'app-system-role-permission',
@@ -14,11 +14,11 @@ import { RoleViewModel } from '../../role.model';
 })
 export class PermissionComponent implements OnInit {
 
-  @Input() Function: FunctionInterface;
+  @Input() Function: FunctionViewModel;
   @Input() ModuleName: string;
   @Input() ParentName: string;
   @Input() Roles: RoleDetailViewModel[] = [];
-  @Output() listCommandSelected = new EventEmitter<FunctionCommandInterface[]>();
+  @Output() listCommandSelected = new EventEmitter<FunctionCommandViewModel[]>();
 
   form: FormGroup;
 
@@ -112,7 +112,7 @@ export class PermissionComponent implements OnInit {
     if (this.Function.commands === null) {
       return null;
     }
-    const arr = this.Function.commands.map((cm: FunctionCommandInterface) => {
+    const arr = this.Function.commands.map((cm: FunctionCommandViewModel) => {
       return this.fb.group({
         command: [cm.selected]
       });
@@ -121,7 +121,7 @@ export class PermissionComponent implements OnInit {
   }
 
   checkAll(checked: boolean) {
-    const outPutValue: FunctionCommandInterface[] = [];
+    const outPutValue: FunctionCommandViewModel[] = [];
     const listCommandArray = this.form.get('commands') as FormArray;
 
     for (const control of listCommandArray.controls) {
@@ -151,7 +151,7 @@ export class PermissionComponent implements OnInit {
     const cmd = this.Function.commands.find(m => m.id === commandId);
     cmd.selected = checked;
 
-    const outPutValue: FunctionCommandInterface[] = [];
+    const outPutValue: FunctionCommandViewModel[] = [];
     outPutValue.push(cmd);
 
     this.listCommandSelected.emit(outPutValue);

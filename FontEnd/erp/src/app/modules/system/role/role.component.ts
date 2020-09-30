@@ -10,7 +10,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { RoleFormComponent } from './form/form.component';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { FunctionService } from '../function/function.service';
-import { ModuleInterface } from '../../../core/interfaces/module.interface';
+import { ModuleViewModel } from '../../../core/models/module.model';
 
 @Component({
   selector: 'app-role',
@@ -31,7 +31,7 @@ export class RoleComponent implements OnInit {
   listColumnsName: string[] = ['name', 'description', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  listModuleData: ModuleInterface[];
+  listModuleData: ModuleViewModel[];
 
   constructor(
     private roleService: RoleService,

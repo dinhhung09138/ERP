@@ -3,14 +3,14 @@ import { FormGroupDirective, FormGroup, FormBuilder, Validators } from '@angular
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { FunctionCommandInterface } from './../../../../core/interfaces/function-command.interface';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { RoleService } from '../role.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
-import { ModuleInterface } from '../../../../core/interfaces/module.interface';
 import { RoleViewModel } from '../role.model';
 import { RoleDetailViewModel } from '../role-detail.model';
+import { ModuleViewModel } from '../../../../core/models/module.model';
+import { FunctionCommandViewModel } from '../../../../core/models/function-command.model';
 
 @Component({
   selector: 'app-role-form',
@@ -20,7 +20,7 @@ import { RoleDetailViewModel } from '../role-detail.model';
 export class RoleFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
-  @Input() ListModule: ModuleInterface[];
+  @Input() ListModule: ModuleViewModel[];
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
@@ -30,7 +30,7 @@ export class RoleFormComponent implements OnInit {
   isLoading = false;
   roleForm: FormGroup;
   item: RoleViewModel;
-  currentModule: ModuleInterface[];
+  currentModule: ModuleViewModel[];
   roleDetails: RoleDetailViewModel[] = [];
 
   constructor(
@@ -51,7 +51,7 @@ export class RoleFormComponent implements OnInit {
     this.initFormControl(this.formAction);
   }
 
-  commandSelectedListener(commands: FunctionCommandInterface[]) {
+  commandSelectedListener(commands: FunctionCommandViewModel[]) {
     for (const cmd of commands) {
       if (cmd.selected === true) {
         const checkExists = this.roleDetails.some(detail => {

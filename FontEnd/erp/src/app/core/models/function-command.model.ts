@@ -1,5 +1,5 @@
 
-export interface FunctionCommandInterface {
+export interface FunctionCommandViewModel {
   id: number;
   functionCode: string;
   name: string;
