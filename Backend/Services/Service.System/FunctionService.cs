@@ -22,7 +22,6 @@ namespace Service.System
         private readonly ILogger<RoleService> _logger;
 
         private readonly string CacheKey = "all_function_data";
-        private readonly string CacheScreenByUser = "screen_data";
 
         public FunctionService(
             IERPUnitOfWork context,
@@ -77,7 +76,7 @@ namespace Service.System
 
                     _memoryCachingService.Set<ModuleModel>(list, CacheKey, 10);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -91,60 +90,71 @@ namespace Service.System
         {
             try
             {
-                var userData = _memoryCachingService.GetList<ModuleModel>($"{CacheScreenByUser}-{userId}");
+                var listData = await (from userRole in _context.UserRoleRepository.Query()
+                                      join roleDetail in _context.RoleDetailRepository.Query() on userRole.RoleId equals roleDetail.RoleId
+                                      join fCommand in _context.FunctionCommandRepository.Query() on roleDetail.CommandId equals fCommand.Id
+                                      join function in _context.FunctionRepository.Query() on fCommand.FunctionCode equals function.Code
+                                      join module in _context.ModuleRepository.Query() on function.ModuleCode equals module.Code
+                                      where userRole.UserId == userId
+                                      orderby module.Precedence, function.Precedence
+                                      select new
+                                      {
+                                          ModuleCode = module.Code,
+                                          ModuleName = module.Name,
+                                          ModuleUrl = module.Url,
+                                          ModuleIcon = module.Icon,
+                                          ModulePrecedence = module.Precedence,
+                                          FunctionCode = function.Code,
+                                          FunctionName = function.Name,
+                                          FunctionUrl = function.Url,
+                                          FunctionIcon = function.Icon,
+                                          FunctionPrecedence = function.Precedence,
+                                          FunctionCommand = function.Commands
+                                      }).ToListAsync();
 
-                if (userData != null)
+                List<ModuleModel> listModule = new List<ModuleModel>();
+
+                var listModuleCode = listData.OrderBy(m => m.ModulePrecedence)
+                                     .Select(m => new
+                                     {
+                                         Code = m.ModuleCode
+                                     }).Distinct().ToList();
+
+                foreach (var m in listModuleCode)
                 {
-                    return userData;
-                }
-                else
-                {
-                    var listData = await (from userRole in _context.UserRoleRepository.Query()
-                                          join roleDetail in _context.RoleDetailRepository.Query() on userRole.RoleId equals roleDetail.RoleId
-                                          join fCommand in _context.FunctionCommandRepository.Query() on roleDetail.CommandId equals fCommand.Id
-                                          join function in _context.FunctionRepository.Query() on fCommand.FunctionCode equals function.Code
-                                          join module in _context.ModuleRepository.Query() on function.ModuleCode equals module.Code
-                                          where userRole.UserId == userId && fCommand.IsView == true
-                                          orderby module.Precedence, function.Precedence
-                                          select new
-                                          {
-                                              ModuleName = module.Name,
-                                              ModuleUrl = module.Url,
-                                              ModuleIcon = module.Icon,
-                                              ModulePrecedence = module.Precedence,
-                                              FunctionName = function.Name,
-                                              FunctionUrl = function.Url,
-                                              FunctionIcon = function.Icon,
-                                              FunctionPrecedence = function.Precedence,
-                                          }).ToListAsync();
+                    var module = listData.FirstOrDefault(md => md.ModuleCode == m.Code);
 
-                    List<ModuleModel> listModule = new List<ModuleModel>();
+                    var listFunc = listData.Where(md => md.ModuleCode == m.Code).Select(md => md.FunctionCode).Distinct().ToArray();
 
-                    listModule = listData.OrderBy(m => m.ModulePrecedence)
-                                         .Select(m => new ModuleModel
-                                         {
-                                             Name = m.ModuleName,
-                                             Url = m.ModuleUrl,
-                                             Icon = m.ModuleIcon
-                                         }).Distinct().ToList();
+                    ModuleModel md = new ModuleModel();
+                    md.Name = module.ModuleName;
+                    md.Url = module.ModuleUrl;
 
-                    foreach (var m in listModule)
+
+                    md.Functions = new List<FunctionModel>();
+
+                    foreach (var fc in listFunc)
                     {
-                        m.Functions = new List<FunctionModel>();
-                        m.Functions = listData.OrderBy(f => f.FunctionPrecedence)
-                                              .Select(f => new FunctionModel()
-                                              {
-                                                  Name = f.FunctionName,
-                                                  Url = $"{m.Url}{f.FunctionUrl}",
-                                                  Icon = f.FunctionIcon,
-                                              })
-                                              .Distinct().ToList();
+                        md.Functions.Add(listData.OrderBy(f => f.FunctionPrecedence)
+                                               .Where(f => f.FunctionCode == fc)
+                                               .Select(f => new FunctionModel()
+                                               {
+                                                   Name = f.FunctionName,
+                                                   Url = $"{module.ModuleUrl}{f.FunctionUrl}",
+                                                   Icon = f.FunctionIcon,
+                                                   Commands = f.FunctionCommand.Select(cm => new FunctionCommandModel()
+                                                   {
+                                                       IsView = cm.IsView,
+                                                       Name = cm.Name
+                                                   }).ToList()
+                                               }).FirstOrDefault());
                     }
 
-                    _memoryCachingService.Set<ModuleModel>(listModule, $"{CacheScreenByUser}-{userId}", 10);
+                   
 
-                    return listModule;
+                    listModule.Add(md);
                 }
+                return listModule;
             }
             catch (Exception ex)
             {
