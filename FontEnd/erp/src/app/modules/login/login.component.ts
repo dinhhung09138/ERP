@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.loginForm.value).subscribe((response: ResponseModel) => {
       if (response) {
         if (response.responseStatus === ResponseStatus.success) {
-          console.log(response.result);
+          this.context.saveModules(response.extra[0]);
           this.context.saveToken(response.result);
           this.router.navigate([this.returnUrl ? this.returnUrl : '/dashboard'], {});
         } else {

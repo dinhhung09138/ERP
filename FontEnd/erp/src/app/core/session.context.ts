@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { RefreshTokenModel } from './models/refresh-token.model';
 import { TokenModel } from './models/token.model';
 import { UserInfoModel } from './models/user-info.model';
+import { ModuleViewModel } from './models/module.model';
+
 
 /**
  * Processing user data into the local storage.
@@ -69,6 +71,16 @@ export class SessionContext {
   clearToken() {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('userInfo');
+    sessionStorage.removeItem('modules');
+  }
+
+  saveModules(modules: ModuleViewModel[]) {
+    sessionStorage.setItem('modules', JSON.stringify(modules));
+  }
+
+  getListModule(): ModuleViewModel[] {
+    const listModule = JSON.parse(sessionStorage.getItem('modules')) as ModuleViewModel[];
+    return listModule;
   }
 
 }
