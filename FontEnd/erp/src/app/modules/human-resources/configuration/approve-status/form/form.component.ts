@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { ApproveStatusService } from '../approve-status.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -22,6 +23,7 @@ export class ApproveStatusFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
@@ -37,6 +39,7 @@ export class ApproveStatusFormComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.permission = this.approveStatusService.getPermission();
     this.approveStatusForm = this.fb.group({
       id: [0],
       code: ['', [Validators.required]],
@@ -126,6 +129,9 @@ export class ApproveStatusFormComponent implements OnInit {
   }
 
   onSubmitForm() {
+    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
+      return;
+    }
     this.isSubmit = true;
     if (this.approveStatusForm.invalid) {
       return;

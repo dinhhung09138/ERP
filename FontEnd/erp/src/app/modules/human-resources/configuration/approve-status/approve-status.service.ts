@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
+import { SessionContext } from 'src/app/core/session.context';
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { DialogService } from './../../../../core/services/dialog.service';
 import { FormActionStatus } from './../../../../core/enums/form-action-status.enum';
 import { PagingModel } from './../../../../core/models/paging.model';
@@ -15,6 +17,8 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 @Injectable()
 export class ApproveStatusService {
 
+  moduleName = 'HR';
+  functionCode = 'HR_CONF_APPROVE_ST';
   url = {
     list: APIUrlConstants.hrApi + 'approve-status/get-list',
     item: APIUrlConstants.hrApi + 'approve-status/item',
@@ -25,7 +29,12 @@ export class ApproveStatusService {
 
   constructor(
     private api: ApiService,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private context: SessionContext) { }
+
+  getPermission(): PermissionViewModel {
+    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+  }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();
