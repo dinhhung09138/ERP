@@ -79,7 +79,6 @@ export class RoleFormComponent implements OnInit {
     if (this.ListModule) {
       this.currentModule = [...this.ListModule];
     }
-    console.log(this.ListModule);
 
     if (this.formDirective){
       this.formDirective.resetForm();

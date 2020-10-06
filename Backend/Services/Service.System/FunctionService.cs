@@ -145,6 +145,7 @@ namespace Service.System
                                                    Url = $"{module.ModuleUrl}{f.FunctionUrl}",
                                                    Icon = f.FunctionIcon,
                                                    ParentCode = f.FunctionParent,
+                                                   Precedence = f.FunctionPrecedence,
                                                    Commands = f.FunctionCommand.Select(cm => new FunctionCommandModel()
                                                    {
                                                        IsView = cm.IsView,
@@ -163,12 +164,13 @@ namespace Service.System
                                 Code = prFunction.Code,
                                 Name = prFunction.Name,
                                 Icon = prFunction.Icon,
-                                ParentCode = string.Empty
+                                ParentCode = string.Empty,
+                                Precedence = prFunction.Precedence,
                             });
                         }
                     }
 
-
+                    md.Functions = md.Functions.OrderBy(m => m.Precedence).ToList();
 
                     listModule.Add(md);
                 }

@@ -49,7 +49,8 @@
   transform: rotate(-90deg);
 }
 
-.module-sidebar .nav-item.active a {
+.module-sidebar > .nav-item.active > a,
+.module-sidebar ul.nav .nav-item.active > a {
   color: white;
   background-color: $primary-background-color;
 }

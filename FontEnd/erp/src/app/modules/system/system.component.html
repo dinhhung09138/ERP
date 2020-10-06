@@ -9,20 +9,14 @@
       <div class="row">
         <div class="col-12" style="display: flex; align-items: stretch; width: 100%;">
           <ul class="nav module-sidebar flex-column" role="menu" data-accordion="false">
-            <li class="nav-item" [routerLinkActive]="['active']">
-              <a routerLink="/system/dashboard" class="nav-link">
-                <p> Thống kê </p>
-              </a>
-            </li>
-            <li class="nav-item" [routerLinkActive]="['active']">
-              <a routerLink="/system/account" class="nav-link">
-                <p> {{ 'SCREEN.SYSTEM.ACCOUNT.TITLE' | translate }} </p>
-              </a>
-            </li>
-            <li class="nav-item" [routerLinkActive]="['active']">
-              <a routerLink="/system/role" class="nav-link">
-                <p> {{ 'SCREEN.SYSTEM.ROLE.TITLE' | translate }} </p>
-              </a>
+            <li *ngFor="let m of sidebar" class="nav-item" [routerLinkActive]="['active']">
+              <ng-container [ngSwitch]="checkSubMenu(m.code, m.parentCode)">
+                <ng-container *ngSwitchCase="0">
+                  <a class="nav-link" [routerLink]="[m.url]">
+                    {{ 'SCREEN.' + moduleCode + '.' + m.name + '.TITLE' | translate }}
+                  </a>
+                </ng-container>
+              </ng-container>
             </li>
           </ul>
           <div class="row" style="width: 100%; margin-left: 1px;">

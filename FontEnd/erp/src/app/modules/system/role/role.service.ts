@@ -41,7 +41,6 @@ export class RoleService {
     }
 
     passingRoleDetailsData(data: RoleViewModel) {
-      console.log(data);
       this.roleDetail$.next(data);
     }
 

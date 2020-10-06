@@ -86,7 +86,6 @@ export class SessionContext {
 
   getSidebarByModule(moduleName: string): FunctionViewModel[] {
     const listModule = JSON.parse(sessionStorage.getItem('modules')) as ModuleViewModel[];
-    console.log(listModule);
     const md = listModule.find(m => m.name === moduleName);
     return md.functions;
   }

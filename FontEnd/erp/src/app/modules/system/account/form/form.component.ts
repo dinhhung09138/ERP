@@ -121,7 +121,6 @@ export class AccountFormComponent implements OnInit {
 
   submitForm() {
     this.isSubmit = true;
-    console.log(this.accountForm.getRawValue());
 
     if (this.accountForm.invalid) {
       return;

@@ -10,58 +10,25 @@
       <div class="col-lg-12 col-md-12 col-xs-12" style="display: flex; align-items: stretch; width: 100%;">
         <ul class="nav module-sidebar flex-column" role="menu" data-accordion="false">
           <li *ngFor="let m of sidebar" class="nav-item" [routerLinkActive]="['active']">
-            <ng-container [ngSwitch]="true">
-              <ng-container *ngSwitchCase="checkSubMenu(m.code, m.parentCode) === 0">
-                <a *ngIf="checkSubMenu(m.code, m.parentCode) === 0 else subMenu" class="nav-link" [routerLink]="[m.url]">
+            <ng-container [ngSwitch]="checkSubMenu(m.code, m.parentCode)">
+              <ng-container *ngSwitchCase="0">
+                <a class="nav-link" [routerLink]="[m.url]">
                   {{ 'SCREEN.' + moduleCode + '.' + m.name + '.TITLE' | translate }}
                 </a>
               </ng-container>
-              <ng-container *ngSwitchCase="checkSubMenu(m.code, m.parentCode) === 1">
+              <ng-container *ngSwitchCase="1">
                 <a (click)="openSideMenu(m.code)" class="nav-link" [ngClass]="{'menu-open': linkSelected === m.code}">
                   <p> {{ 'SCREEN.' + moduleCode + '.' + m.name + '.TITLE' | translate }} <i class="fa fa-angle-left right"></i></p>
-                  <ul class="nav" [ngStyle]="{'display': linkSelected === m.code ? 'block' : 'none' }">
-                  </ul>
                 </a>
+                <ul class="nav" [ngStyle]="{'display': linkSelected === m.code ? 'block' : 'none' }">
+                  <li class="nav-item" *ngFor="let sub of getListSubMenu(m.code)" [routerLinkActive]="['active']">
+                    <a class="nav-link" [routerLink]="[sub.url]">
+                      <p> {{ 'SCREEN.' + moduleCode + '.' + m.name + '.' + sub.name + '.TITLE' | translate }} </p>
+                    </a>
+                  </li>
+                </ul>
               </ng-container>
             </ng-container>
-          </li>
-          <li class="nav-item">
-            <a href="javascript: {}" class="nav-link">
-              <p> Dashboard </p>
-            </a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/hr/department">
-              <p> Department </p>
-            </a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/hr/team">
-              <p> Team </p>
-            </a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/hr/position">
-              <p> {{ 'SCREEN.HR.POSITION.TITLE' | translate }} </p>
-            </a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a routerLink="/hr/commendation" class="nav-link">
-              <p> {{ 'SCREEN.HR.COMMENDATION.TITLE' | translate }} </p>
-            </a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a href="javascript: {}" class="nav-link" routerLink="/hr/discipline">
-              <p> {{ 'SCREEN.HR.DISCIPLINE.TITLE' | translate }} </p>
-            </a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a routerLink="/hr/employee" class="nav-link">
-              <p>
-                {{ 'SCREEN.HR.EMPLOYEE.TITLE' | translate }}
-                <span class="right badge badge-danger">100</span>
-              </p>
-            </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a routerLink="/hr/leave" class="nav-link" (click)="openSideMenu('leave')"
