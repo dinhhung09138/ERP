@@ -10,7 +10,7 @@ namespace API.Common.Controllers
 {
     [Route("api/common/district")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class DistrictController : ControllerBase
     {
         private readonly IDistrictService _districtService;

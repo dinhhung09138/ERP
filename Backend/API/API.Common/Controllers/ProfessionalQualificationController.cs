@@ -10,7 +10,7 @@ namespace API.Common.Controllers
 {
     [Route("api/common/professional-qualification")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class ProfessionalQualificationController : ControllerBase
     {
         private readonly IProfessionalQualificationService _professionalQualificationService;

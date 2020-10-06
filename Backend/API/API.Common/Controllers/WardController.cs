@@ -10,7 +10,7 @@ namespace API.Common.Controllers
 {
     [Route("api/common/ward")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class WardController : ControllerBase
     {
         private readonly IWardService _wardService;

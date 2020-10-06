@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using API.Common.Filters;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Common;
 using Service.Common.Interfaces;
-using System;
 
 namespace API.Common
 {
@@ -15,6 +15,7 @@ namespace API.Common
             services.AddScoped<IDistrictService, DistrictService>();
             services.AddScoped<IWardService, WardService>();
             services.AddScoped<IProvinceService, ProvinceService>();
+            services.AddScoped<AuthorizationFilterAttribute>();
             return services;
         }
     }

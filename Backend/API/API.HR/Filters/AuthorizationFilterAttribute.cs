@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Service.System.Interfaces;
 using Microsoft.Extensions.Logging;
 using System.Net;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace API.HR.Filters
 {
@@ -26,19 +27,17 @@ namespace API.HR.Filters
 
         public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (context == null)
+            if (context == null || context.HttpContext.Items["TokenInfo"] == null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
-
-            await next.Invoke();
-            return;
 
             bool hasAllowAnonymous = context.ActionDescriptor.EndpointMetadata.Any(m => m.GetType() == typeof(AllowAnonymousAttribute));
 
             if (hasAllowAnonymous == true)
             {
                 await next.Invoke();
+                return;
             }
 
             var ctrl = context.Controller as ControllerBase;
@@ -46,22 +45,25 @@ namespace API.HR.Filters
             var moduleName = "HR";
             var controllerName = ctrl.ControllerContext.ActionDescriptor.ControllerName;
             var actionName = ctrl.ControllerContext.ActionDescriptor.ActionName;
+
+            var tokenInfo = context.HttpContext.Items["TokenInfo"] as JwtSecurityToken;
+
+            var userId = tokenInfo.Claims.Where(m => m.Type == JwtRegisteredClaimNames.Sub).FirstOrDefault().Value;
+
             try
             {
-                bool isAuthorize = await _authorizationService.CheckAuthorization(moduleName, controllerName, actionName);
+                bool isAuthorize = await _authorizationService.CheckAuthorization(int.Parse(userId), moduleName, controllerName, actionName);
                 if (isAuthorize == true)
                 {
                     await next.Invoke();
+                    return;
                 }
+
             }
             catch(Exception ex)
             {
                 throw ex;
             }
-
-            var response = context.HttpContext.Response;
-
-            response.StatusCode = (int)HttpStatusCode.Forbidden;
 
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
 

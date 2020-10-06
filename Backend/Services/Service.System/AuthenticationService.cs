@@ -117,7 +117,7 @@ namespace Service.System
             return response;
         }
 
-        public async Task<bool> CheckAuthorization(string moduleName, string controllerName, string actionName)
+        public async Task<bool> CheckAuthorization(int userId, string moduleName, string controllerName, string actionName)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace Service.System
                             join r in _context.RoleRepository.Query() on m.RoleId equals r.Id
                             join rdt in _context.RoleDetailRepository.Query() on m.RoleId equals rdt.RoleId
                             join c in _context.FunctionCommandRepository.Query() on rdt.CommandId equals c.Id
-                            where m.UserId == 0 
+                            where m.UserId == userId
                                     && c.ModuleName == moduleName
                                     && c.ControllerName == controllerName
                                     && c.ActionName == actionName

@@ -10,7 +10,7 @@ namespace API.Common.Controllers
 {
     [Route("api/common/province")]
     [ApiController]
-    [AuthorizationFilter]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class ProvinceController : ControllerBase
     {
         private readonly IProvinceService _provinceService;

@@ -11,6 +11,6 @@ namespace Service.System.Interfaces
 
         ResponseModel RevokeToken(TokenModel model);
 
-        Task<bool> CheckAuthorization(string moduleName, string controllerName, string actionName);
+        Task<bool> CheckAuthorization(int userId, string moduleName, string controllerName, string actionName);
     }
 }
