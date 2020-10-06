@@ -5,7 +5,7 @@ import { TokenModel } from './models/token.model';
 import { UserInfoModel } from './models/user-info.model';
 import { ModuleViewModel } from './models/module.model';
 import { FunctionViewModel } from './models/function.model';
-
+import { PermissionViewModel } from './models/permission.model';
 
 /**
  * Processing user data into the local storage.
@@ -88,6 +88,34 @@ export class SessionContext {
     const listModule = JSON.parse(sessionStorage.getItem('modules')) as ModuleViewModel[];
     const md = listModule.find(m => m.name === moduleName);
     return md.functions;
+  }
+
+  getPermissionByForm(moduleName: string, functionCode: string): PermissionViewModel {
+
+    const permission = new PermissionViewModel();
+
+    const listModule = JSON.parse(sessionStorage.getItem('modules')) as ModuleViewModel[];
+    const listCommands = listModule.find(m => m.name === moduleName).functions.find(t => t.code === functionCode).commands;
+
+    console.log(listCommands);
+
+    if (listCommands.length > 0) {
+      if (listCommands.some(m => m.isView)) {
+        permission.allowView = true;
+      }
+      if (listCommands.some(m => m.name === 'INSERT')) {
+        permission.allowInsert = true;
+      }
+      if (listCommands.some(m => m.name === 'UPDATE')) {
+        permission.allowUpdate = true;
+      }
+      if (listCommands.some(m => m.name === 'DELETE')) {
+        permission.allowDelete = true;
+      }
+    }
+
+    return permission;
+
   }
 
 }

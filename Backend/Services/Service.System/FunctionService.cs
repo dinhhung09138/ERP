@@ -110,7 +110,7 @@ namespace Service.System
                                           FunctionIcon = function.Icon,
                                           FunctionParent = function.ParentCode,
                                           FunctionPrecedence = function.Precedence,
-                                          FunctionCommand = function.Commands
+                                          FunctionCommand = function.Commands.Where(c => c.Id == roleDetail.CommandId).ToList()
                                       }).ToListAsync();
 
                 List<ModuleModel> listModule = new List<ModuleModel>();

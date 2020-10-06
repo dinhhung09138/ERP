@@ -44,7 +44,7 @@ namespace API.HR.Filters
 
             var moduleName = "HR";
             var controllerName = ctrl.ControllerContext.ActionDescriptor.ControllerName;
-            var actionName = ctrl.ControllerContext.ActionDescriptor.ActionName;
+            var actionName = GetActionName(ctrl.ControllerContext.ActionDescriptor.ActionName);
 
             var tokenInfo = context.HttpContext.Items["TokenInfo"] as JwtSecurityToken;
 
@@ -66,8 +66,17 @@ namespace API.HR.Filters
             }
 
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+        }
 
-
+        private string GetActionName(string action)
+        {
+            switch (action)
+            {
+                case "Item":
+                    return "GetList";
+                default:
+                    return action;
+            }
         }
 
     }

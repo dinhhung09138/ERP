@@ -38,7 +38,7 @@ namespace API.Common.Filters
 
             var ctrl = context.Controller as ControllerBase;
 
-            var actionName = ctrl.ControllerContext.ActionDescriptor.ActionName;
+            var actionName = GetActionName(ctrl.ControllerContext.ActionDescriptor.ActionName);
             var controllerName = ctrl.ControllerContext.ActionDescriptor.ControllerName;
             var moduleName = GetModuleCode(controllerName);
 
@@ -75,6 +75,17 @@ namespace API.Common.Filters
                     return "HR";
             }
             return "Common";
+        }
+
+        private string GetActionName(string action)
+        {
+            switch (action)
+            {
+                case "Item":
+                    return "GetList";
+                default:
+                    return action;
+            }
         }
     }
 }
