@@ -108,6 +108,7 @@ namespace Service.System
                                           FunctionName = function.Name,
                                           FunctionUrl = function.Url,
                                           FunctionIcon = function.Icon,
+                                          FunctionParent = function.ParentCode,
                                           FunctionPrecedence = function.Precedence,
                                           FunctionCommand = function.Commands
                                       }).ToListAsync();
@@ -135,22 +136,39 @@ namespace Service.System
 
                     foreach (var fc in listFunc)
                     {
-                        md.Functions.Add(listData.OrderBy(f => f.FunctionPrecedence)
+                        var function = listData.OrderBy(f => f.FunctionPrecedence)
                                                .Where(f => f.FunctionCode == fc)
                                                .Select(f => new FunctionModel()
                                                {
+                                                   Code = f.FunctionCode,
                                                    Name = f.FunctionName,
                                                    Url = $"{module.ModuleUrl}{f.FunctionUrl}",
                                                    Icon = f.FunctionIcon,
+                                                   ParentCode = f.FunctionParent,
                                                    Commands = f.FunctionCommand.Select(cm => new FunctionCommandModel()
                                                    {
                                                        IsView = cm.IsView,
                                                        Name = cm.Name
                                                    }).ToList()
-                                               }).FirstOrDefault());
+                                               }).FirstOrDefault();
+
+                        md.Functions.Add(function);
+
+                        if (!string.IsNullOrEmpty(function.ParentCode) && !md.Functions.Any(t => t.Code == function.ParentCode))
+                        {
+                            var prFunction = _context.FunctionRepository.Query().FirstOrDefault(m => m.Code == function.ParentCode);
+
+                            md.Functions.Add(new FunctionModel()
+                            {
+                                Code = prFunction.Code,
+                                Name = prFunction.Name,
+                                Icon = prFunction.Icon,
+                                ParentCode = string.Empty
+                            });
+                        }
                     }
 
-                   
+
 
                     listModule.Add(md);
                 }

@@ -4,6 +4,7 @@ import { RefreshTokenModel } from './models/refresh-token.model';
 import { TokenModel } from './models/token.model';
 import { UserInfoModel } from './models/user-info.model';
 import { ModuleViewModel } from './models/module.model';
+import { FunctionViewModel } from './models/function.model';
 
 
 /**
@@ -81,6 +82,13 @@ export class SessionContext {
   getListModule(): ModuleViewModel[] {
     const listModule = JSON.parse(sessionStorage.getItem('modules')) as ModuleViewModel[];
     return listModule;
+  }
+
+  getSidebarByModule(moduleName: string): FunctionViewModel[] {
+    const listModule = JSON.parse(sessionStorage.getItem('modules')) as ModuleViewModel[];
+    console.log(listModule);
+    const md = listModule.find(m => m.name === moduleName);
+    return md.functions;
   }
 
 }
