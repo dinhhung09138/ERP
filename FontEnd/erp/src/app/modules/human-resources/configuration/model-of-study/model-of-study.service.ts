@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { SessionContext } from 'src/app/core/session.context';
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { FormActionStatus } from './../../../../core/enums/form-action-status.enum';
 import { PagingModel } from './../../../../core/models/paging.model';
 import { DialogService } from './../../../../core/services/dialog.service';
@@ -15,6 +17,8 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 @Injectable()
 export class ModelOfStudyService {
 
+  moduleName = 'HR';
+  functionCode = 'HR_CONF_MODEL_OF_STUDY';
   url = {
     list: APIUrlConstants.hrApi + 'model-of-study/get-list',
     dropdown: APIUrlConstants.hrApi + 'model-of-study/dropdown',
@@ -26,7 +30,12 @@ export class ModelOfStudyService {
 
   constructor(
     private api: ApiService,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private context: SessionContext) { }
+
+  getPermission(): PermissionViewModel {
+    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+  }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();
