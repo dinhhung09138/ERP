@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { EducationService } from '../education.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -22,6 +23,7 @@ export class EducationFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
@@ -38,6 +40,7 @@ export class EducationFormComponent implements OnInit {
     private educationService: EducationService) { }
 
   ngOnInit(): void {
+    this.permission = this.educationService.getPermission();
     this.educationForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
@@ -133,6 +136,9 @@ export class EducationFormComponent implements OnInit {
   }
 
   submitForm() {
+    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
+      return;
+    }
     this.isSubmit = true;
     if (this.educationForm.invalid) {
       return;

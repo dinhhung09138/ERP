@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 
+import { SessionContext } from 'src/app/core/session.context';
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
 import { EducationViewModel } from './education.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -16,6 +18,8 @@ import { FormActionStatus } from './../../../../core/enums/form-action-status.en
 @Injectable()
 export class EducationService {
 
+  moduleName = 'HR';
+  functionCode = 'HR_CONF_EDUCATION';
   url = {
     list: APIUrlConstants.hrApi + 'education/get-list',
     dropdown: APIUrlConstants.hrApi + 'education/dropdown',
@@ -28,28 +32,33 @@ export class EducationService {
   constructor(
     private api: ApiService,
     private dialog: MatDialog,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private context: SessionContext) { }
 
-    openPopupForm(form: any): Observable<ResponseModel> {
-      const dialogRef = this.dialog.open(form, {
-        width: '500px',
-        disableClose: true,
-        data: {
-          isPopup: true,
-          title: 'SCREEN.HR.CONFIGURATION.EDUCATION.POPUP_TITLE',
+  getPermission(): PermissionViewModel {
+    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+  }
+
+  openPopupForm(form: any): Observable<ResponseModel> {
+    const dialogRef = this.dialog.open(form, {
+      width: '500px',
+      disableClose: true,
+      data: {
+        isPopup: true,
+        title: 'SCREEN.HR.CONFIGURATION.EDUCATION.POPUP_TITLE',
+      }
+    });
+
+    return dialogRef.beforeClosed().pipe(
+      switchMap((data: boolean) => {
+        if (data === true) {
+          return this.getDropdown();
+        } else {
+          return of(null);
         }
-      });
-
-      return dialogRef.beforeClosed().pipe(
-        switchMap((data: boolean) => {
-          if (data === true) {
-            return this.getDropdown();
-          } else {
-            return of(null);
-          }
-        })
-      );
-    }
+      })
+    );
+  }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();
