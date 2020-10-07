@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { SessionContext } from 'src/app/core/session.context';
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { FormActionStatus } from './../../../../core/enums/form-action-status.enum';
 import { PagingModel } from './../../../../core/models/paging.model';
 import { DialogService } from './../../../../core/services/dialog.service';
@@ -15,6 +17,8 @@ import { EmployeeWorkingStatusViewModel } from './employee-working-status.model'
 @Injectable()
 export class EmployeeWorkingStatusService {
 
+  moduleName = 'HR';
+  functionCode = 'HR_CONF_WORKING';
   url = {
     list: APIUrlConstants.hrApi + 'employee-working-status/get-list',
     dropdown: APIUrlConstants.hrApi + 'employee-working-status/dropdown',
@@ -26,7 +30,12 @@ export class EmployeeWorkingStatusService {
 
   constructor(
     private api: ApiService,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private context: SessionContext) { }
+
+  getPermission(): PermissionViewModel {
+    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+  }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();
