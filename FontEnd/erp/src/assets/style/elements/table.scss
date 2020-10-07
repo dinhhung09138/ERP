@@ -34,6 +34,11 @@ td.mat-footer-cell {
   border-left: 2px solid #dee2e6;
 }
 
+td.mat-cell a.dropdown-toggle,
+td.mat-cell a.dropdown-toggle i.fa-bars {
+  color: black;
+}
+
 .td-w-70 {
   width: 70px;
 }

@@ -110,7 +110,8 @@ namespace Service.System
                                           FunctionIcon = function.Icon,
                                           FunctionParent = function.ParentCode,
                                           FunctionPrecedence = function.Precedence,
-                                          FunctionCommand = function.Commands.Where(c => c.Id == roleDetail.CommandId).ToList()
+                                          CommandName = fCommand.Name,
+                                          IsView = fCommand.IsView
                                       }).ToListAsync();
 
                 List<ModuleModel> listModule = new List<ModuleModel>();
@@ -146,12 +147,15 @@ namespace Service.System
                                                    Icon = f.FunctionIcon,
                                                    ParentCode = f.FunctionParent,
                                                    Precedence = f.FunctionPrecedence,
-                                                   Commands = f.FunctionCommand.Select(cm => new FunctionCommandModel()
-                                                   {
-                                                       IsView = cm.IsView,
-                                                       Name = cm.Name
-                                                   }).ToList()
                                                }).FirstOrDefault();
+
+                        function.Commands = listData.Where(c => c.FunctionCode == fc)
+                                                    .Select(c => new FunctionCommandModel()
+                                                    {
+                                                        IsView = c.IsView,
+                                                        Name = c.CommandName
+                                                    })
+                                                    .ToList();
 
                         md.Functions.Add(function);
 

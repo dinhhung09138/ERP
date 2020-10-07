@@ -40,7 +40,7 @@ export class DialogService {
                             || errorModel.httpError === HttpErrorStatusEnum.unauthorized);
 
     this.dialog.open(ErrorDialogComponent, {
-      width: '300px',
+      width: '400px',
       disableClose: disableClosed,
       data: errorModel
     });
