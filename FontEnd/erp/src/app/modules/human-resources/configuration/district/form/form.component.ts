@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Inject, ɵConsole } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
+import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { DistrictService } from '../district.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -28,10 +29,13 @@ export class DistrictFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
+  provincePermission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
   isLoading = false;
+  isPopup = false;
   districtForm: FormGroup;
   item: DistrictViewModel;
 
@@ -49,6 +53,8 @@ export class DistrictFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permission = this.districtService.getPermission();
+    this.provincePermission = this.provinceService.getPermission();
     this.districtForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
@@ -64,6 +70,7 @@ export class DistrictFormComponent implements OnInit {
       });
       this.formAction = FormActionStatus.Insert;
       this.getListProvince();
+      this.isPopup = true;
     } else {
       this.activatedRoute.data.subscribe(res => {
         this.provinceList = res.province.result as ProvinceViewModel[];
@@ -118,10 +125,7 @@ export class DistrictFormComponent implements OnInit {
   }
 
   allowAddProvince() {
-    if (Object.prototype.hasOwnProperty.call(this.dialogData, 'isPopup') === false) {
-      return true;
-    }
-    if (this.dialogData.isPopup === false) {
+    if (this.isPopup === false && this.provincePermission.allowInsert) {
       return true;
     }
     return false;
@@ -180,6 +184,9 @@ export class DistrictFormComponent implements OnInit {
   }
 
   submitForm() {
+    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
+      return;
+    }
     this.isSubmit = true;
     if (this.districtForm.invalid) {
       return;

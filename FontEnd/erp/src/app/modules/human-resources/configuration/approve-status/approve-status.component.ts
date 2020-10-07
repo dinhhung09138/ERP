@@ -23,7 +23,6 @@ export class ApproveStatusComponent implements OnInit {
   @ViewChild(ApproveStatusFormComponent) form: ApproveStatusFormComponent;
 
   permission = new PermissionViewModel();
-
   isLoading = false;
 
   paging = new PagingModel();

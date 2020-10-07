@@ -97,8 +97,6 @@ export class SessionContext {
     const listModule = JSON.parse(sessionStorage.getItem('modules')) as ModuleViewModel[];
     const listCommands = listModule.find(m => m.name === moduleName).functions.find(t => t.code === functionCode).commands;
 
-    console.log(listCommands);
-
     if (listCommands.length > 0) {
       if (listCommands.some(m => m.isView)) {
         permission.allowView = true;
