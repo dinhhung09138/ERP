@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { ContractTypeService } from '../contract-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -21,6 +22,7 @@ export class ContractTypeFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
@@ -36,6 +38,7 @@ export class ContractTypeFormComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.permission = this.contractTypeService.getPermission();
     this.contractTypeForm = this.fb.group({
       id: [0],
       code: ['', [Validators.required]],
@@ -137,6 +140,9 @@ export class ContractTypeFormComponent implements OnInit {
   }
 
   submitForm() {
+    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
+      return;
+    }
     this.isSubmit = true;
     if (this.contractTypeForm.invalid) {
       return;

@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { ContractTypeService } from './contract-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
@@ -20,6 +21,7 @@ export class ContractTypeComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(ContractTypeFormComponent) form: ContractTypeFormComponent;
 
+  permission = new PermissionViewModel();
   isLoading = false;
 
   paging = new PagingModel();
@@ -32,6 +34,7 @@ export class ContractTypeComponent implements OnInit {
   constructor(private contractTypeService: ContractTypeService) { }
 
   ngOnInit(): void {
+    this.permission = this.contractTypeService.getPermission();
     this.dataSource.sort = this.sort;
     this.getList();
   }
@@ -43,31 +46,31 @@ export class ContractTypeComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowInsert) {
       this.form.onCreateClick();
     }
   }
 
   onImportClick() {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowInsert) {
       this.form.onCloseClick();
     }
   }
 
   onExportClick() {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowView) {
       this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
+    if (this.isLoading === false && this.permission.allowUpdate && id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number, rowVersion: any) {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowDelete) {
       this.form.onCloseClick();
 
       this.contractTypeService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
