@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-lg-2"></div>
           <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <form [formGroup]="identificationForm" (submit)="!isLoading ? submitForm() : false">
+            <form *ngIf="permission.allowInsert || permission.allowUpdate" [formGroup]="identificationForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-12 form-group">
                   <label class="label">
@@ -52,7 +52,7 @@
               </div>
               <div class="row">
                 <div class="col-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="4">
+                  <input *ngIf="(permission.allowInsert && formAction === 1) || (permission.allowUpdate && formAction === 2)" type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="4">
                   <button type="button" class="btn btn-warning" tabindex="5" (click)="onResetClick()">
                     {{ 'BUTTON.RESET' | translate }}
                   </button>

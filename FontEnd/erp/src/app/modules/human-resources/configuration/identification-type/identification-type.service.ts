@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { SessionContext } from 'src/app/core/session.context';
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { PagingModel } from './../../../../core/models/paging.model';
 import { DialogService } from './../../../../core/services/dialog.service';
 import { ApiService } from './../../../../core/services/api.service';
@@ -15,6 +17,8 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 @Injectable()
 export class IdentificationTypeService {
 
+  moduleName = 'HR';
+  functionCode = 'HR_CONF_IDENTIFICATION';
   url = {
     list: APIUrlConstants.hrApi + 'identification-type/get-list',
     dropdown: APIUrlConstants.hrApi + 'identification-type/dropdown',
@@ -26,7 +30,12 @@ export class IdentificationTypeService {
 
   constructor(
     private api: ApiService,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private context: SessionContext) { }
+
+  getPermission(): PermissionViewModel {
+    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+  }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();
