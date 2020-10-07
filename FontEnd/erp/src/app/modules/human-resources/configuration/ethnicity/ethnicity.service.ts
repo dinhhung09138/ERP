@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 
+import { SessionContext } from 'src/app/core/session.context';
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { FormActionStatus } from './../../../../core/enums/form-action-status.enum';
 import { DialogService } from './../../../../core/services/dialog.service';
 import { ApiService } from './../../../../core/services/api.service';
@@ -16,6 +18,8 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 @Injectable()
 export class EthnicityService {
 
+  moduleName = 'HR';
+  functionCode = 'HR_CONF_ETHNICITY';
   url = {
     list: APIUrlConstants.hrApi + 'ethnicity/get-list',
     dropdown: APIUrlConstants.hrApi + 'ethnicity/dropdown',
@@ -28,7 +32,12 @@ export class EthnicityService {
   constructor(
     private api: ApiService,
     private dialog: MatDialog,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private context: SessionContext) { }
+
+  getPermission(): PermissionViewModel {
+    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+  }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();

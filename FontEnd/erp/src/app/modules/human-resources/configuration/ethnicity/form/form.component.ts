@@ -4,6 +4,7 @@ import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { EthnicityService } from './../ethnicity.service';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -24,6 +25,7 @@ export class EthnicityFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
@@ -40,6 +42,7 @@ export class EthnicityFormComponent implements OnInit {
     private ethnicityService: EthnicityService) { }
 
   ngOnInit(): void {
+    this.permission = this.ethnicityService.getPermission();
     this.ethnicityForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
@@ -139,6 +142,9 @@ export class EthnicityFormComponent implements OnInit {
   }
 
   submitForm() {
+    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
+      return;
+    }
     this.isSubmit = true;
     if (this.ethnicityForm.invalid) {
       return;
