@@ -4,14 +4,16 @@ using Database.Sql.ERP;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    partial class ERPContextModelSnapshot : ModelSnapshot
+    [Migration("20201007233051_version-1_0_4")]
+    partial class version1_0_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2962,50 +2964,6 @@ namespace Database.Sql.ERP.Migrations
                         },
                         new
                         {
-                            Id = 92,
-                            ActionName = "GetList",
-                            ControllerName = "IdentificationType",
-                            FunctionCode = "HR_CONF_IDENTIFICATION",
-                            IsView = true,
-                            ModuleName = "HR",
-                            Name = "VIEW",
-                            Precedence = 1
-                        },
-                        new
-                        {
-                            Id = 93,
-                            ActionName = "Insert",
-                            ControllerName = "IdentificationType",
-                            FunctionCode = "HR_CONF_IDENTIFICATION",
-                            IsView = false,
-                            ModuleName = "HR",
-                            Name = "INSERT",
-                            Precedence = 2
-                        },
-                        new
-                        {
-                            Id = 94,
-                            ActionName = "Update",
-                            ControllerName = "IdentificationType",
-                            FunctionCode = "HR_CONF_IDENTIFICATION",
-                            IsView = false,
-                            ModuleName = "HR",
-                            Name = "UPDATE",
-                            Precedence = 3
-                        },
-                        new
-                        {
-                            Id = 95,
-                            ActionName = "Delete",
-                            ControllerName = "IdentificationType",
-                            FunctionCode = "HR_CONF_IDENTIFICATION",
-                            IsView = false,
-                            ModuleName = "HR",
-                            Name = "DELETE",
-                            Precedence = 4
-                        },
-                        new
-                        {
                             Id = 56,
                             ActionName = "GetList",
                             ControllerName = "Education",
@@ -3314,50 +3272,6 @@ namespace Database.Sql.ERP.Migrations
                         },
                         new
                         {
-                            Id = 88,
-                            ActionName = "GetList",
-                            ControllerName = "ApproveStatus",
-                            FunctionCode = "HR_CONF_APPROVE_ST",
-                            IsView = true,
-                            ModuleName = "HR",
-                            Name = "VIEW",
-                            Precedence = 1
-                        },
-                        new
-                        {
-                            Id = 89,
-                            ActionName = "Insert",
-                            ControllerName = "ApproveStatus",
-                            FunctionCode = "HR_CONF_APPROVE_ST",
-                            IsView = false,
-                            ModuleName = "HR",
-                            Name = "INSERT",
-                            Precedence = 2
-                        },
-                        new
-                        {
-                            Id = 90,
-                            ActionName = "Update",
-                            ControllerName = "ApproveStatus",
-                            FunctionCode = "HR_CONF_APPROVE_ST",
-                            IsView = false,
-                            ModuleName = "HR",
-                            Name = "UPDATE",
-                            Precedence = 3
-                        },
-                        new
-                        {
-                            Id = 91,
-                            ActionName = "Delete",
-                            ControllerName = "ApproveStatus",
-                            FunctionCode = "HR_CONF_APPROVE_ST",
-                            IsView = false,
-                            ModuleName = "HR",
-                            Name = "DELETE",
-                            Precedence = 4
-                        },
-                        new
-                        {
                             Id = 84,
                             ActionName = "GetList",
                             ControllerName = "Employee",
@@ -3395,6 +3309,50 @@ namespace Database.Sql.ERP.Migrations
                             ActionName = "Delete",
                             ControllerName = "Employee",
                             FunctionCode = "HR_EMPLOYEE",
+                            IsView = false,
+                            ModuleName = "HR",
+                            Name = "DELETE",
+                            Precedence = 4
+                        },
+                        new
+                        {
+                            Id = 88,
+                            ActionName = "GetList",
+                            ControllerName = "ApproveStatus",
+                            FunctionCode = "HR_CONF_APPROVE_ST",
+                            IsView = true,
+                            ModuleName = "HR",
+                            Name = "VIEW",
+                            Precedence = 1
+                        },
+                        new
+                        {
+                            Id = 89,
+                            ActionName = "Insert",
+                            ControllerName = "ApproveStatus",
+                            FunctionCode = "HR_CONF_APPROVE_ST",
+                            IsView = false,
+                            ModuleName = "HR",
+                            Name = "INSERT",
+                            Precedence = 2
+                        },
+                        new
+                        {
+                            Id = 90,
+                            ActionName = "Update",
+                            ControllerName = "ApproveStatus",
+                            FunctionCode = "HR_CONF_APPROVE_ST",
+                            IsView = false,
+                            ModuleName = "HR",
+                            Name = "UPDATE",
+                            Precedence = 3
+                        },
+                        new
+                        {
+                            Id = 91,
+                            ActionName = "Delete",
+                            ControllerName = "ApproveStatus",
+                            FunctionCode = "HR_CONF_APPROVE_ST",
                             IsView = false,
                             ModuleName = "HR",
                             Name = "DELETE",
@@ -3519,7 +3477,7 @@ namespace Database.Sql.ERP.Migrations
                         {
                             Id = 1,
                             CreateBy = 1,
-                            CreateDate = new DateTime(2020, 10, 8, 6, 36, 44, 805, DateTimeKind.Local).AddTicks(8405),
+                            CreateDate = new DateTime(2020, 10, 8, 6, 30, 50, 427, DateTimeKind.Local).AddTicks(3807),
                             Deleted = false,
                             Description = "Sys",
                             IsActive = true,

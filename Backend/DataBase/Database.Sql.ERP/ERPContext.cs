@@ -450,52 +450,9 @@ namespace Database.Sql.ERP
                 }
             );
 
-            modelBuilder.Entity<FunctionCommand>().HasData(
-                new FunctionCommand()
-                {
-                    Id = 88,
-                    FunctionCode = "HR_CONF_APPROVE_ST",
-                    Name = "VIEW",
-                    ModuleName = "HR",
-                    ControllerName = "ApproveStatus",
-                    ActionName = "GetList",
-                    Precedence = 1,
-                    IsView = true,
-                },
-                new FunctionCommand()
-                {
-                    Id = 89,
-                    FunctionCode = "HR_CONF_APPROVE_ST",
-                    Name = "INSERT",
-                    ModuleName = "HR",
-                    ControllerName = "ApproveStatus",
-                    ActionName = "Insert",
-                    Precedence = 2,
-                    IsView = false,
-                },
-                new FunctionCommand()
-                {
-                    Id = 90,
-                    FunctionCode = "HR_CONF_APPROVE_ST",
-                    Name = "UPDATE",
-                    ModuleName = "HR",
-                    ControllerName = "ApproveStatus",
-                    ActionName = "Update",
-                    Precedence = 3,
-                    IsView = false,
-                },
-                new FunctionCommand()
-                {
-                    Id = 91,
-                    FunctionCode = "HR_CONF_APPROVE_ST",
-                    Name = "DELETE",
-                    ModuleName = "HR",
-                    ControllerName = "ApproveStatus",
-                    ActionName = "Delete",
-                    Precedence = 4,
-                    IsView = false,
-                }
-            );
+            
+
+            //FunctionCommand MaxId = 95
 
             #endregion
         }

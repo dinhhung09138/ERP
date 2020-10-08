@@ -237,6 +237,7 @@ namespace Database.Sql.ERP.Creation
             modelBuilder.CreateDefaultCommandConfReligion();
             modelBuilder.CreateDefaultCommandConfEthnicity();
             modelBuilder.CreateDefaultCommandConfNationality();
+            modelBuilder.CreateDefaultCommandConfIdentification();
             modelBuilder.CreateDefaultCommandConfEducation();
             modelBuilder.CreateDefaultCommandConfQualification();
             modelBuilder.CreateDefaultCommandConfModelOfStudy();
@@ -244,6 +245,7 @@ namespace Database.Sql.ERP.Creation
             modelBuilder.CreateDefaultCommandConfRelationShip();
             modelBuilder.CreateDefaultCommandConfContract();
             modelBuilder.CreateDefaultCommandConfWorkingStatus();
+            modelBuilder.CreateDefaultCommandConfApproveStatus();
         }
 
         private static void CreateDefaultCommandDepartment(this ModelBuilder modelBuilder)
@@ -798,6 +800,56 @@ namespace Database.Sql.ERP.Creation
             );
         }
 
+        private static void CreateDefaultCommandConfIdentification(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 92,
+                    FunctionCode = "HR_CONF_IDENTIFICATION",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "IdentificationType",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 93,
+                    FunctionCode = "HR_CONF_IDENTIFICATION",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "IdentificationType",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 94,
+                    FunctionCode = "HR_CONF_IDENTIFICATION",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "IdentificationType",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 95,
+                    FunctionCode = "HR_CONF_IDENTIFICATION",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "IdentificationType",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
         private static void CreateDefaultCommandConfEducation(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<FunctionCommand>().HasData(
@@ -1148,6 +1200,56 @@ namespace Database.Sql.ERP.Creation
             );
         }
 
+        private static void CreateDefaultCommandConfApproveStatus(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 88,
+                    FunctionCode = "HR_CONF_APPROVE_ST",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "ApproveStatus",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 89,
+                    FunctionCode = "HR_CONF_APPROVE_ST",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "ApproveStatus",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 90,
+                    FunctionCode = "HR_CONF_APPROVE_ST",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "ApproveStatus",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 91,
+                    FunctionCode = "HR_CONF_APPROVE_ST",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "ApproveStatus",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
         #endregion
 
         #region " [ Leave Management ] "
@@ -1362,6 +1464,16 @@ namespace Database.Sql.ERP.Creation
                 },
                 new Function()
                 {
+                    Code = "HR_CONF_IDENTIFICATION",
+                    Name = "IDENTIFICATION",
+                    Url = "/configuration/identification",
+                    Icon = string.Empty,
+                    ParentCode = "HR_CONFIGURATION",
+                    Precedence = 6,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
                     Code = "HR_CONF_EDUCATION",
                     Name = "EDUCATION",
                     Url = "/configuration/education",
@@ -1424,7 +1536,7 @@ namespace Database.Sql.ERP.Creation
                 {
                     Code = "HR_CONF_WORKING",
                     Name = "WORKING_STATUS",
-                    Url = "/configuration/working-status",
+                    Url = "/configuration/employee-status",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 13,
