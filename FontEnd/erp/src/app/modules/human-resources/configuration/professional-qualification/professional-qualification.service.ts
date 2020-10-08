@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 
+import { SessionContext } from 'src/app/core/session.context';
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { PagingModel } from './../../../../core/models/paging.model';
 import { ApiService } from './../../../../core/services/api.service';
 import { DialogService } from './../../../../core/services/dialog.service';
@@ -16,6 +18,8 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 @Injectable()
 export class ProfessionalQualificationService {
 
+  moduleName = 'HR';
+  functionCode = 'HR_CONF_QUALIFICATION';
   url = {
     list: APIUrlConstants.commonApi + 'professional-qualification/get-list',
     dropdown: APIUrlConstants.commonApi + 'professional-qualification/dropdown',
@@ -28,28 +32,33 @@ export class ProfessionalQualificationService {
   constructor(
     private api: ApiService,
     private dialog: MatDialog,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private context: SessionContext) { }
 
-    openPopupForm(form: any): Observable<ResponseModel> {
-      const dialogRef = this.dialog.open(form, {
-        width: '500px',
-        disableClose: true,
-        data: {
-          isPopup: true,
-          title: 'SCREEN.HR.CONFIGURATION.QUALIFICATION.POPUP_TITLE',
-        },
-      });
+  getPermission(): PermissionViewModel {
+    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+  }
 
-      return dialogRef.beforeClosed().pipe(
-        switchMap((data: boolean) => {
-          if (data === true) {
-            return this.getDropdown();
-          } else {
-            return of(null);
-          }
-        })
-      );
-    }
+  openPopupForm(form: any): Observable<ResponseModel> {
+    const dialogRef = this.dialog.open(form, {
+      width: '500px',
+      disableClose: true,
+      data: {
+        isPopup: true,
+        title: 'SCREEN.HR.CONFIGURATION.QUALIFICATION.POPUP_TITLE',
+      },
+    });
+
+    return dialogRef.beforeClosed().pipe(
+      switchMap((data: boolean) => {
+        if (data === true) {
+          return this.getDropdown();
+        } else {
+          return of(null);
+        }
+      })
+    );
+  }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();
