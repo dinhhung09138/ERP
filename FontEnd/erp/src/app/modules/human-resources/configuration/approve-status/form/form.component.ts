@@ -129,9 +129,6 @@ export class ApproveStatusFormComponent implements OnInit {
   }
 
   onSubmitForm() {
-    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
-      return;
-    }
     this.isSubmit = true;
     if (this.approveStatusForm.invalid) {
       return;
