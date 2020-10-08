@@ -5,6 +5,7 @@ import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild, Inject 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { NationalityService } from './../nationality.service';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
@@ -25,6 +26,7 @@ export class NationalityFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
@@ -41,6 +43,7 @@ export class NationalityFormComponent implements OnInit {
     private nationalityService: NationalityService) { }
 
   ngOnInit(): void {
+    this.permission = this.nationalityService.getPermission();
     this.nationalityForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
@@ -139,6 +142,10 @@ export class NationalityFormComponent implements OnInit {
   }
 
   submitForm() {
+    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
+      return;
+    }
+
     this.isSubmit = true;
     if (this.nationalityForm.invalid) {
       return;

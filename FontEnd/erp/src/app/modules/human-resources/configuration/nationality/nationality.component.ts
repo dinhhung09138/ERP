@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { NationalityFormComponent } from './form/form.component';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
@@ -21,6 +22,7 @@ export class NationalityComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(NationalityFormComponent) form: NationalityFormComponent;
 
+  permission = new PermissionViewModel();
   isLoading = false;
 
   paging = new PagingModel();
@@ -35,6 +37,7 @@ export class NationalityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permission = this.nationalityService.getPermission();
     this.dataSource.sort = this.sort;
     this.getList();
   }
@@ -46,31 +49,31 @@ export class NationalityComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowInsert) {
       this.form.onCreateClick();
     }
   }
 
   onImportClick() {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowInsert) {
       this.form.onCloseClick();
     }
   }
 
   onExportClick() {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowView) {
       this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
+    if (this.isLoading === false && this.permission.allowUpdate && id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number, rowVersion: any) {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowDelete) {
       this.form.onCloseClick();
 
       this.nationalityService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
