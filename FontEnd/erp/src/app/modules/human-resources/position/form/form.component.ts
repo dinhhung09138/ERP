@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { PositionService } from '../position.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -22,6 +23,7 @@ export class PositionFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isShow = false;
@@ -37,6 +39,7 @@ export class PositionFormComponent implements OnInit {
     private positionService: PositionService) { }
 
   ngOnInit(): void {
+    this.permission = this.positionService.getPermission();
     this.positionForm = this.fb.group({
       id: [0],
       code: ['', [Validators.required]],

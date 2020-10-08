@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { DisciplineService } from '../discipline.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -23,6 +24,7 @@ export class DisciplineFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
@@ -38,6 +40,7 @@ export class DisciplineFormComponent implements OnInit {
     private disciplineService: DisciplineService) { }
 
   ngOnInit(): void {
+    this.permission = this.disciplineService.getPermission();
     this.disciplineForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],

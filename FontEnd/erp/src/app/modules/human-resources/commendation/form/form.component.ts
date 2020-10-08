@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { CommendationService } from '../commendation.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -22,6 +23,7 @@ export class CommendationFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
@@ -37,6 +39,7 @@ export class CommendationFormComponent implements OnInit {
     private commendationService: CommendationService) { }
 
   ngOnInit(): void {
+    this.permission = this.commendationService.getPermission();
     this.commendationForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],

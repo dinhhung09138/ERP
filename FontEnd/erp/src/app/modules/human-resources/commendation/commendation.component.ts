@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 
+import { PermissionViewModel } from './../../../core/models/permission.model';
 import { CommendationService } from './commendation.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
@@ -20,6 +21,7 @@ export class CommendationComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(CommendationFormComponent) form: CommendationFormComponent;
 
+  permission = new PermissionViewModel();
   isLoading = false;
 
   paging = new PagingModel();
@@ -32,6 +34,7 @@ export class CommendationComponent implements OnInit {
   constructor(private commendationService: CommendationService) { }
 
   ngOnInit(): void {
+    this.permission = this.commendationService.getPermission();
     this.dataSource.sort = this.sort;
     this.getList();
   }

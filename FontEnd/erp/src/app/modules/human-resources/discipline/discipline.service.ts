@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { SessionContext } from 'src/app/core/session.context';
+import { PermissionViewModel } from './../../../core/models/permission.model';
 import { DialogService } from './../../../core/services/dialog.service';
 import { ApiService } from './../../../core/services/api.service';
 import { PagingModel } from './../../../core/models/paging.model';
@@ -15,6 +17,9 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 @Injectable()
 export class DisciplineService {
 
+  permission = new PermissionViewModel();
+  moduleName = 'HR';
+  functionCode = 'HR_DISCIPLINE';
   url = {
     list: APIUrlConstants.hrApi + 'discipline/get-list',
     dropdown: APIUrlConstants.hrApi + 'discipline/dropdown',
@@ -26,7 +31,13 @@ export class DisciplineService {
 
   constructor(
     private api: ApiService,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private context: SessionContext) { }
+
+  getPermission(): PermissionViewModel {
+    this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    return this.permission;
+  }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();
@@ -46,6 +57,9 @@ export class DisciplineService {
   }
 
   save(model: DisciplineViewModel, action: FormActionStatus): Observable<ResponseModel> {
+    if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
+      return;
+    }
     switch (action) {
       case FormActionStatus.Insert:
         return this.api.insert(this.url.insert, model);
@@ -55,6 +69,9 @@ export class DisciplineService {
   }
 
   confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.dialogService.openConfirmDeleteDialog().pipe(
       switchMap((confirmResponse: boolean) => {
         if (confirmResponse === true) {
@@ -67,6 +84,9 @@ export class DisciplineService {
   }
 
   delete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.api.delete(this.url.delete, { id: itemId, rowVersion: version });
   }
 }
