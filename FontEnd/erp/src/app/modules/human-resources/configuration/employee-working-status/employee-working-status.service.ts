@@ -17,6 +17,7 @@ import { EmployeeWorkingStatusViewModel } from './employee-working-status.model'
 @Injectable()
 export class EmployeeWorkingStatusService {
 
+  permission = new PermissionViewModel();
   moduleName = 'HR';
   functionCode = 'HR_CONF_WORKING';
   url = {
@@ -34,7 +35,8 @@ export class EmployeeWorkingStatusService {
     private context: SessionContext) { }
 
   getPermission(): PermissionViewModel {
-    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    return this.permission;
   }
 
   getList(paging: PagingModel, searchText: string) {
@@ -55,6 +57,9 @@ export class EmployeeWorkingStatusService {
   }
 
   save(model: EmployeeWorkingStatusViewModel, action: FormActionStatus): Observable<ResponseModel> {
+    if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
+      return;
+    }
     switch (action) {
       case FormActionStatus.Insert:
         return this.api.insert(this.url.insert, model);
@@ -64,6 +69,9 @@ export class EmployeeWorkingStatusService {
   }
 
   confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.dialogService.openConfirmDeleteDialog().pipe(
       switchMap((confirmResponse: boolean) => {
         if (confirmResponse === true) {
@@ -76,6 +84,9 @@ export class EmployeeWorkingStatusService {
   }
 
   delete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.api.delete(this.url.delete, {id: itemId, rowVersion: version });
   }
 }

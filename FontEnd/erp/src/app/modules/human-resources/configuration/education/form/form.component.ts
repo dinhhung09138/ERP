@@ -136,9 +136,6 @@ export class EducationFormComponent implements OnInit {
   }
 
   submitForm() {
-    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
-      return;
-    }
     this.isSubmit = true;
     if (this.educationForm.invalid) {
       return;

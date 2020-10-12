@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { ReligionFormComponent } from './form/form.component';
 import { ReligionService } from './religion.service';
 import { PagingModel } from 'src/app/core/models/paging.model';
@@ -20,6 +21,7 @@ export class ReligionComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(ReligionFormComponent) form: ReligionFormComponent;
 
+  permission = new PermissionViewModel();
   isLoading = false;
 
   paging = new PagingModel();
@@ -35,6 +37,7 @@ export class ReligionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permission = this.religionService.getPermission();
     this.dataSource.sort = this.sort;
     this.getList();
   }

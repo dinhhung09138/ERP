@@ -118,10 +118,6 @@ export class RankingFormComponent implements OnInit {
   }
 
   submitForm() {
-    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
-      return;
-    }
-
     this.isSubmit = true;
     if (this.rankingForm.invalid) {
       return;

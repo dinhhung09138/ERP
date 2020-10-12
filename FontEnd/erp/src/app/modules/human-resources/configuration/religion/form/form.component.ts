@@ -4,6 +4,7 @@ import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild, Inject 
 import { TranslateService } from '@ngx-translate/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
+import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { ReligionService } from './../religion.service';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -24,6 +25,7 @@ export class ReligionFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
@@ -40,6 +42,7 @@ export class ReligionFormComponent implements OnInit {
     private religionService: ReligionService) { }
 
   ngOnInit(): void {
+    this.permission = this.religionService.getPermission();
     this.religionForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],

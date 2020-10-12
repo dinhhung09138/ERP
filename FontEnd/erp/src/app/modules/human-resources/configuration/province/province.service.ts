@@ -18,6 +18,7 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 @Injectable()
 export class ProvinceService {
 
+  permission = new PermissionViewModel();
   moduleName = 'HR';
   functionCode = 'HR_CONF_PROVINCE';
   url = {
@@ -36,7 +37,8 @@ export class ProvinceService {
     private context: SessionContext) { }
 
   getPermission(): PermissionViewModel {
-    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    return this.permission;
   }
 
   getList(paging: PagingModel, searchText: string) {
@@ -57,6 +59,9 @@ export class ProvinceService {
   }
 
   save(model: ProvinceViewModel, action: FormActionStatus): Observable<ResponseModel> {
+    if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
+      return;
+    }
     switch (action) {
       case FormActionStatus.Insert:
         return this.api.insert(this.url.insert, model);
@@ -66,6 +71,9 @@ export class ProvinceService {
   }
 
   confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.dialogService.openConfirmDeleteDialog().pipe(
       switchMap((confirmResponse: boolean) => {
         if (confirmResponse === true) {
@@ -78,6 +86,9 @@ export class ProvinceService {
   }
 
   delete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.api.delete(this.url.delete, {id: itemId, rowVersion: version });
   }
 

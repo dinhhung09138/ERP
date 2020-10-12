@@ -17,6 +17,7 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 @Injectable()
 export class IdentificationTypeService {
 
+  permission = new PermissionViewModel();
   moduleName = 'HR';
   functionCode = 'HR_CONF_IDENTIFICATION';
   url = {
@@ -34,7 +35,8 @@ export class IdentificationTypeService {
     private context: SessionContext) { }
 
   getPermission(): PermissionViewModel {
-    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    return this.permission;
   }
 
   getList(paging: PagingModel, searchText: string) {
@@ -55,6 +57,9 @@ export class IdentificationTypeService {
   }
 
   save(model: IdentificationTypeViewModel, action: FormActionStatus): Observable<ResponseModel> {
+    if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
+      return;
+    }
     switch (action) {
       case FormActionStatus.Insert:
         return this.api.insert(this.url.insert, model);
@@ -64,6 +69,9 @@ export class IdentificationTypeService {
   }
 
   confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.dialogService.openConfirmDeleteDialog().pipe(
       switchMap((confirmResponse: boolean) => {
         if (confirmResponse === true) {
@@ -76,6 +84,9 @@ export class IdentificationTypeService {
   }
 
   delete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.api.delete(this.url.delete, {id: itemId, rowVersion: version });
   }
 }

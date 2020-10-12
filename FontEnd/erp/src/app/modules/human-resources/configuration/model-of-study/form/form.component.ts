@@ -118,10 +118,6 @@ export class ModelOfStudyFormComponent implements OnInit {
   }
 
   submitForm() {
-    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
-      return;
-    }
-
     this.isSubmit = true;
     if (this.modelOfStudyForm.invalid) {
       return;

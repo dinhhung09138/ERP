@@ -62,7 +62,7 @@ export class NationalityFormComponent implements OnInit {
     this.initFormControl(this.formAction);
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
 
     if (this.formDirective) {
@@ -142,10 +142,6 @@ export class NationalityFormComponent implements OnInit {
   }
 
   submitForm() {
-    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
-      return;
-    }
-
     this.isSubmit = true;
     if (this.nationalityForm.invalid) {
       return;

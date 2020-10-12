@@ -17,6 +17,7 @@ import { PermissionViewModel } from '../../../../core/models/permission.model';
 @Injectable()
 export class ContractTypeService {
 
+  permission = new PermissionViewModel();
   moduleName = 'HR';
   functionCode = 'HR_CONF_CONTRACT';
   url = {
@@ -34,9 +35,10 @@ export class ContractTypeService {
     private dialogService: DialogService,
     private context: SessionContext) { }
 
-  getPermission(): PermissionViewModel {
-    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
-  }
+    getPermission(): PermissionViewModel {
+      this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
+      return this.permission;
+    }
 
   getList(paging: PagingModel, searchText: string) {
     const filter = new FilterModel();
@@ -56,6 +58,9 @@ export class ContractTypeService {
   }
 
   save(model: ContractTypeViewModel, action: FormActionStatus): Observable<ResponseModel> {
+    if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
+      return;
+    }
     switch (action) {
       case FormActionStatus.Insert:
         return this.api.insert(this.url.insert, model);
@@ -65,6 +70,9 @@ export class ContractTypeService {
   }
 
   confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.dialogService.openConfirmDeleteDialog().pipe(
       switchMap((confirmResponse: boolean) => {
         if (confirmResponse === true) {
@@ -77,6 +85,9 @@ export class ContractTypeService {
   }
 
   delete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.api.delete(this.url.delete, {id: itemId, rowVersion: version });
   }
 

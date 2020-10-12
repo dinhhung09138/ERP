@@ -140,10 +140,6 @@ export class ProfessionalQualificationFormComponent implements OnInit {
   }
 
   submitForm() {
-    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
-      return;
-    }
-
     this.isSubmit = true;
     if (this.qualificationForm.invalid) {
       return;

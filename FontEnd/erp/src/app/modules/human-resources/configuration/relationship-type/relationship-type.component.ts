@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { RelationshipTypeService } from './relationship-type.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
@@ -20,6 +21,7 @@ export class RelationshipTypeComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(RelationshipTypeFormComponent) form: RelationshipTypeFormComponent;
 
+  permission = new PermissionViewModel();
   isLoading = false;
 
   paging = new PagingModel();
@@ -33,6 +35,7 @@ export class RelationshipTypeComponent implements OnInit {
     private relationshipTypeService: RelationshipTypeService) { }
 
   ngOnInit(): void {
+    this.permission = this.relationshipTypeService.getPermission();
     this.dataSource.sort = this.sort;
     this.getList();
   }

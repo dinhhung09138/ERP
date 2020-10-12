@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-lg-2"></div>
           <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <form [formGroup]="wardForm" (submit)="!isLoading ? submitForm() : false">
+            <form *ngIf="permission.allowInsert || permission.allowUpdate" [formGroup]="wardForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                   <label class="label">
@@ -22,7 +22,7 @@
                       [selectOnTab]="true" tabindex="1" (change)="onProvinceChange($event)" class="form-control"
                       [ngClass]="{'is-invalid' : isSubmit && wardForm.controls['provinceId'].errors}">
                     </ng-select>
-                    <div class="input-group-append">
+                    <div class="input-group-append" *ngIf="allowAddProvince()">
                       <button class="btn btn-outline-info" type="button" tabindex="2" (click)="onAddNewProvinceClick()">+</button>
                     </div>
                   </div>
@@ -39,7 +39,7 @@
                       [bindValue]="'id'" [selectOnTab]="true" tabindex="3" class="form-control"
                       [ngClass]="{'is-invalid' : isSubmit && wardForm.controls['districtId'].errors}">
                     </ng-select>
-                    <div class="input-group-append">
+                    <div class="input-group-append" *ngIf="allowAddDistrict()">
                       <button class="btn btn-outline-info" type="button" tabindex="4" (click)="onAddNewDistrictClick()">+</button>
                     </div>
                   </div>
@@ -88,7 +88,7 @@
               </div>
               <div class="row">
                 <div class="col-12 form-group" *ngIf="formAction != 0">
-                  <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="8">
+                  <input *ngIf="(permission.allowInsert && formAction === 1) || (permission.allowUpdate && formAction === 2)" type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="8">
                   <button type="button" class="btn btn-warning" tabindex="9" (click)="onResetClick()">
                     {{ 'BUTTON.RESET' | translate }}
                   </button>

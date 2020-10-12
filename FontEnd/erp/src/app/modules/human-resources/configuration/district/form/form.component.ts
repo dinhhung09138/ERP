@@ -184,9 +184,6 @@ export class DistrictFormComponent implements OnInit {
   }
 
   submitForm() {
-    if (!this.permission.allowInsert && !this.permission.allowUpdate) {
-      return;
-    }
     this.isSubmit = true;
     if (this.districtForm.invalid) {
       return;

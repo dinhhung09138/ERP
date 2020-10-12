@@ -46,31 +46,31 @@ export class EmployeeWorkingStatusComponent implements OnInit {
   }
 
   onCreateClick() {
-    if (this.isLoading === false && this.permission.allowInsert) {
+    if (this.isLoading === false) {
       this.form.onCreateClick();
     }
   }
 
   onImportClick() {
-    if (this.isLoading === false && this.permission.allowInsert) {
+    if (this.isLoading === false) {
       this.form.onCloseClick();
     }
   }
 
   onExportClick() {
-    if (this.isLoading === false && this.permission.allowView) {
+    if (this.isLoading === false) {
       this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && this.permission.allowUpdate && id !== null) {
+    if (this.isLoading === false && id !== null) {
       this.form.onUpdateClick(id);
     }
   }
 
   onDeleteClick(id: number, rowVersion: any) {
-    if (this.isLoading === false && this.permission.allowDelete) {
+    if (this.isLoading === false) {
       this.form.onCloseClick();
 
       this.workingStatusService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {

@@ -18,6 +18,7 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 @Injectable()
 export class NationalityService {
 
+  permission = new PermissionViewModel();
   moduleName = 'HR';
   functionCode = 'HR_CONF_NATIONALITY';
   url = {
@@ -36,7 +37,8 @@ export class NationalityService {
     private context: SessionContext) { }
 
   getPermission(): PermissionViewModel {
-    return this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    return this.permission;
   }
 
   openPopupForm(form: any): Observable<ResponseModel> {
@@ -78,6 +80,9 @@ export class NationalityService {
   }
 
   save(model: NationalityViewModel, action: FormActionStatus): Observable<ResponseModel> {
+    if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
+      return;
+    }
     switch (action) {
       case FormActionStatus.Insert:
         return this.api.insert(this.url.insert, model);
@@ -87,6 +92,9 @@ export class NationalityService {
   }
 
   confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.dialogService.openConfirmDeleteDialog().pipe(
       switchMap((confirmResponse: boolean) => {
         if (confirmResponse === true) {
@@ -99,6 +107,9 @@ export class NationalityService {
   }
 
   delete(itemId: number, version: any): Observable<ResponseModel> {
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.api.delete(this.url.delete, {id: itemId, rowVersion: version });
   }
 }
