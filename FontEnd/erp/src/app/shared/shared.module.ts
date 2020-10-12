@@ -76,6 +76,9 @@ import { FormatDatePipe } from '../core/pipes/format-date.pipe';
       provide: MatPaginatorIntl,
       useClass: AppMatPaginatorIntl
     },
+    // Pipes
+    FormatNumberPipe,
+    FormatDatePipe,
     // Services
     ApiService,
     TranslateService,
