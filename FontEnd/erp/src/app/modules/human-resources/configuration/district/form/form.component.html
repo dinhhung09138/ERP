@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-lg-2"></div>
           <div [class]="getClassByFormOrPopup()">
-            <form *ngIf="permission.allowInsert || permission.allowUpdate" [formGroup]="districtForm" (submit)="!isLoading ? submitForm() : false">
+            <form [formGroup]="districtForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-12 form-group">
                   <label class="label">
