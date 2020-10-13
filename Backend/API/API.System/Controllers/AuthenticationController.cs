@@ -1,11 +1,8 @@
-﻿using Core.CommonModel;
-using Core.Utility.Filters;
+﻿using API.System.Filters;
+using Core.CommonModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.System.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace API.System.Controllers
@@ -29,30 +26,6 @@ namespace API.System.Controllers
             return response;
         }
 
-        [HttpPost("refresh-token")]
-        [AllowAnonymous]
-        public async Task<ResponseModel> RefreshToken([FromBody] TokenModel model)
-        {
-            var response = await _authenService.RefreshToken(model);
-            return response;
-        }
-
-        [HttpPost("revoke-token")]
-        [Authentication]
-        public ResponseModel RevokeToken([FromBody] TokenModel model)
-        {
-            var response = _authenService.RevokeToken(model);
-            return response;
-        }
-
-        [HttpPost("post")]
-        public string Post()
-        {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            IList<Claim> claim = identity.Claims.ToList();
-
-            return "Welcome To: ";
-        }
 
     }
 }

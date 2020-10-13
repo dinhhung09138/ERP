@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 
+import { PermissionViewModel } from './../../../core/models/permission.model';
 import { RoleService } from '../role/role.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
@@ -22,6 +23,7 @@ export class RoleComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(RoleFormComponent) form: RoleFormComponent;
 
+  permission = new PermissionViewModel();
   isLoading = false;
 
   paging = new PagingModel();
@@ -38,6 +40,7 @@ export class RoleComponent implements OnInit {
     private functionService: FunctionService) { }
 
   ngOnInit(): void {
+    this.permission = this.roleService.getPermission();
     this.dataSource.sort = this.sort;
     this.getList();
     this.getAllModuleData();
@@ -69,18 +72,6 @@ export class RoleComponent implements OnInit {
           this.getList();
         }
       });
-    }
-  }
-
-  onImportClick() {
-    if (this.isLoading === false) {
-      this.form.onCloseClick();
-    }
-  }
-
-  onExportClick() {
-    if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 

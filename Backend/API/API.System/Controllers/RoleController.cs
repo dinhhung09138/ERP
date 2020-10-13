@@ -1,4 +1,6 @@
-﻿using Core.CommonModel;
+﻿using API.System.Filters;
+using Core.CommonModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.System.Interfaces;
 using Service.System.Models;
@@ -11,6 +13,7 @@ namespace API.System.Controllers
 {
     [Route("api/system/role")]
     [ApiController]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;
@@ -28,6 +31,7 @@ namespace API.System.Controllers
         }
 
         [HttpGet, Route("dropdown")]
+        [AllowAnonymous]
         public async Task<ResponseModel> Dropdown()
         {
             var response = await _roleService.DropDownSelection();

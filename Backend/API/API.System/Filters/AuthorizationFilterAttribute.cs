@@ -1,26 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore.Internal;
+using Service.System.Interfaces;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Service.System.Interfaces;
-using Microsoft.Extensions.Logging;
-using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 
-namespace API.HR.Filters
+namespace API.System.Filters
 {
     public class AuthorizationFilterAttribute : ActionFilterAttribute
     {
-        private readonly IAuthenticationService _authorizationService;
-        
-        public AuthorizationFilterAttribute(IAuthenticationService authorizationService)
+        private readonly IAuthenticationService _authService;
+
+        public AuthorizationFilterAttribute(IAuthenticationService authService)
         {
-            _authorizationService = authorizationService;
+            _authService = authService;
         }
 
         public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
@@ -40,25 +39,23 @@ namespace API.HR.Filters
 
             var ctrl = context.Controller as ControllerBase;
 
-            var moduleName = "HR";
+            var moduleName = "SYSTEM";
             var controllerName = ctrl.ControllerContext.ActionDescriptor.ControllerName;
             var actionName = GetActionName(ctrl.ControllerContext.ActionDescriptor.ActionName);
 
             var tokenInfo = context.HttpContext.Items["TokenInfo"] as JwtSecurityToken;
-
             var userId = tokenInfo.Claims.Where(m => m.Type == JwtRegisteredClaimNames.Sub).FirstOrDefault().Value;
 
             try
             {
-                bool isAuthorize = await _authorizationService.CheckAuthorization(int.Parse(userId), moduleName, controllerName, actionName);
+                bool isAuthorize = await _authService.CheckAuthorization(int.Parse(userId), moduleName, controllerName, actionName);
                 if (isAuthorize == true)
                 {
                     await next.Invoke();
                     return;
                 }
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -76,6 +73,5 @@ namespace API.HR.Filters
                     return action;
             }
         }
-
     }
 }

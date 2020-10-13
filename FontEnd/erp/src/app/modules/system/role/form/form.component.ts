@@ -3,6 +3,7 @@ import { FormGroupDirective, FormGroup, FormBuilder, Validators } from '@angular
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { RoleService } from '../role.service';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -24,6 +25,7 @@ export class RoleFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle = '';
   isSubmit = false;
@@ -41,6 +43,7 @@ export class RoleFormComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.permission = this.roleService.getPermission();
     this.roleForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],

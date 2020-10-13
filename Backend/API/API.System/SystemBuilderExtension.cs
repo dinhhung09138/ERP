@@ -1,4 +1,5 @@
-﻿using Core.Services;
+﻿using API.System.Filters;
+using Core.Services;
 using Core.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ namespace API.System
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IFunctionService, FunctionService>();
+            services.AddScoped<AuthorizationFilterAttribute>();
             return services;
         }
     }

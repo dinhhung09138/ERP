@@ -1,4 +1,6 @@
-﻿using Core.CommonModel;
+﻿using API.System.Filters;
+using Core.CommonModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.System.Interfaces;
 using Service.System.Models;
@@ -12,13 +14,16 @@ namespace API.System.Controllers
 {
     [Route("api/system/user")]
     [ApiController]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IAuthenticationService _authenService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IAuthenticationService authenService)
         {
             _userService = userService;
+            _authenService = authenService;
         }
 
         [HttpPost, Route("get-list")]
@@ -76,5 +81,21 @@ namespace API.System.Controllers
             var response = await _userService.Delete(model);
             return response;
         }
+
+        [HttpPost("refresh-token")]
+        [AllowAnonymous]
+        public async Task<ResponseModel> RefreshToken([FromBody] TokenModel model)
+        {
+            var response = await _authenService.RefreshToken(model);
+            return response;
+        }
+
+        [HttpPost("revoke-token")]
+        public ResponseModel RevokeToken([FromBody] TokenModel model)
+        {
+            var response = _authenService.RevokeToken(model);
+            return response;
+        }
+
     }
 }
