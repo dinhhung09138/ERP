@@ -4,6 +4,7 @@ import { FormGroupDirective, FormBuilder, FormGroup, Validators } from '@angular
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { PermissionViewModel } from './../../../../core/models/permission.model';
 import { RoleViewModel } from './../../role/role.model';
 import { AccountService } from './../account.service';
 import { EmployeeViewModel } from '../../../human-resources/employee/employee.model';
@@ -23,6 +24,7 @@ export class AccountFormComponent implements OnInit {
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
+  permission = new PermissionViewModel();
 
   formTitle: '';
   isLoading = false;
@@ -44,6 +46,7 @@ export class AccountFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permission = this.accountService.getPermission();
     this.activatedRoute.data.subscribe(response => {
       this.listRole = response.data.role.result;
       this.listEmployee = response.data.employees.result;

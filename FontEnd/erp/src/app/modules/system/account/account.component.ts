@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
 
+import { PermissionViewModel } from './../../../core/models/permission.model';
 import { AccountViewModel } from './account.model';
 import { AccountService } from './account.service';
 import { PagingModel } from '../../../core/models/paging.model';
@@ -21,6 +22,7 @@ export class AccountComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(AccountFormComponent, {static: true}) form: AccountFormComponent;
 
+  permission = new PermissionViewModel();
   isLoading = false;
 
   paging = new PagingModel();
@@ -37,6 +39,7 @@ export class AccountComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.permission = this.accountService.getPermission();
     this.dataSource.sort = this.sort;
     this.getList();
   }

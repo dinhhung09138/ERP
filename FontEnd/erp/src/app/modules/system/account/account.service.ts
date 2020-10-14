@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 
 import { EMPTY, Observable, of } from 'rxjs';
 
+import { SessionContext } from 'src/app/core/session.context';
+import { PermissionViewModel } from './../../../core/models/permission.model';
 import { DialogService } from './../../../core/services/dialog.service';
 import { AccountViewModel } from './account.model';
 import { ResponseModel } from './../../../core/models/response.model';
@@ -15,6 +17,9 @@ import { ApiService } from '../../../core/services/api.service';
 @Injectable()
 export class AccountService {
 
+  permission = new PermissionViewModel();
+  moduleName = 'SYSTEM';
+  functionCode = 'SYS_ACCOUNT';
   url = {
     list: APIUrlConstants.systemApi + 'user/get-list',
     insert: APIUrlConstants.systemApi + 'user/insert',
@@ -22,7 +27,13 @@ export class AccountService {
 
   constructor(
     private api: ApiService,
-    private dialogService: DialogService) {
+    private dialogService: DialogService,
+    private context: SessionContext) {
+  }
+
+  getPermission(): PermissionViewModel {
+    this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    return this.permission;
   }
 
   getList(paging: PagingModel, searchText: string): Observable<ResponseModel> {
@@ -34,6 +45,9 @@ export class AccountService {
   }
 
   insert(model: AccountViewModel): Observable<ResponseModel> {
+    if (this.permission.allowInsert === false) {
+      return;
+    }
     return this.api.insert(this.url.insert, model);
   }
 
