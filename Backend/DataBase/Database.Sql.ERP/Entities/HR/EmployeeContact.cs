@@ -33,6 +33,26 @@ namespace Database.Sql.ERP.Entities.HR
         [MaxLength(50)]
         public string Skyper { get; set; }
 
+        [Column(TypeName = "varchar(20)")]
+        [MaxLength(20)]
+        public string Zalo { get; set; }
+
+        [Column(TypeName = "varchar(200)")]
+        [MaxLength(200)]
+        public string Facebook { get; set; }
+
+        [Column(TypeName = "varchar(200)")]
+        [MaxLength(200)]
+        public string LinkedIn { get; set; }
+
+        [Column(TypeName = "varchar(200)")]
+        [MaxLength(200)]
+        public string Twitter { get; set; }
+
+        [Column(TypeName = "varchar(200)")]
+        [MaxLength(200)]
+        public string Github { get; set; }
+
         [Column(TypeName = "nvarchar(250)")]
         [MaxLength(250)]
         public string TemporaryAddress { get; set; }
@@ -44,7 +64,7 @@ namespace Database.Sql.ERP.Entities.HR
         public int? TemporaryDistrictId { get; set; }
 
         [Column(TypeName = "int")]
-        public int? TemporaryCityId { get; set; }
+        public int? TemporaryProvinceId { get; set; }
 
         [Column(TypeName = "nvarchar(250)")]
         [MaxLength(250)]
@@ -57,10 +77,7 @@ namespace Database.Sql.ERP.Entities.HR
         public int? PermanentDistrictId { get; set; }
 
         [Column(TypeName = "int")]
-        public int? PermanentCityId { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime ExpirationDate { get; set; }
+        public int? PermanentProvinceId { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]
