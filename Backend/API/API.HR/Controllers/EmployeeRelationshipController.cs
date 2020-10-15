@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace API.HR.Controllers
 {
-    [Route("api/hr/approve-status")]
+    [Route("api/hr/employee-relationship")]
     [ApiController]
     //[ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class EmployeeRelationshipController : ControllerBase
