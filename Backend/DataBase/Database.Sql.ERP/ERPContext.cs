@@ -276,7 +276,11 @@ namespace Database.Sql.ERP
                 {
                     Id = 1,
                     EmployeeCode = "SYSTEM",
-                    EmployeeWorkingStatusId = 1
+                    EmployeeWorkingStatusId = 1,
+                    BadgeCardNumber = string.Empty,
+                    FingerSignNumber = string.Empty,
+                    WorkingEmail = string.Empty,
+                    WorkingPhone = string.Empty
                 }
             );
             modelBuilder.Entity<EmployeeInfo>().HasData(
@@ -285,7 +289,7 @@ namespace Database.Sql.ERP
                     Id = 1,
                     EmployeeId = 1,
                     FirstName = "Sys",
-                    LastName = "Admin"
+                    LastName = "Admin",
                 }
             );
         }

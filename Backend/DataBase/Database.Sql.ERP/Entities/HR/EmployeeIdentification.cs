@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("EmployeeIdentification")]
+    [Table("HR_EmployeeIdentification")]
     public class EmployeeIdentification
     {
         [Key]
@@ -32,10 +32,10 @@ namespace Database.Sql.ERP.Entities.HR
 
         [Column(TypeName = "int")]
         [Required]
-        public int TypeId { get; set; }
+        public int IdentificationTypeId { get; set; }
 
-        [Column(TypeName = "varchar(100)")]
-        [MaxLength(100)]
+        [Column(TypeName = "varchar(255)")]
+        [MaxLength(255)]
         public string Notes { get; set; }
 
         [Column(TypeName = "datetime")]
