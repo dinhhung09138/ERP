@@ -10,7 +10,6 @@ using Database.Sql.ERP.Entities.HR;
 using Microsoft.Extensions.Logging;
 using Core.Services;
 using Microsoft.AspNetCore.Http;
-using Core.CommonMessage;
 
 namespace Service.HR
 {

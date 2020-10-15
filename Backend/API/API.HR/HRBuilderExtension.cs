@@ -23,6 +23,7 @@ namespace API.HR
             services.AddScoped<IEmployeeInfoService, EmployeeInfoService>();
             services.AddScoped<IEmployeeWorkingStatusService, EmployeeWorkingStatusService>();
             services.AddScoped<IEmployeeContactService, EmployeeContactService>();
+            services.AddScoped<IEmployeeRelationshipService, EmployeeRelationshipService>();
             services.AddScoped<IRelationshipTypeService, RelationShipTypeService>();
             services.AddScoped<IEthnicityService, EthnicityService>();
             services.AddScoped<INationalityService, NationalityService>();

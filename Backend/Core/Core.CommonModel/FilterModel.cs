@@ -19,5 +19,6 @@ namespace Core.CommonModel
         /// </summary>
         public PagingModel Paging { get; set; } = new PagingModel();
 
+        public int EmployeeId { get; set; }
     }
 }
