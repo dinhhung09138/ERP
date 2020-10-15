@@ -32,6 +32,7 @@ import { EmployeeInfoComponent } from './employee-info.component';
 import { ProfessionalQualificationService } from '../../configuration/professional-qualification/professional-qualification.service';
 import { ReligionService } from '../../configuration/religion/religion.service';
 import { FormatNumberPipe } from '../../../../core/pipes/format-number.pipe';
+import { EmployeeRelationShipService } from './relationship/relationship.service';
 
 const routes: Routes = [
   {
@@ -70,6 +71,7 @@ const routes: Routes = [
   providers: [
     AppDateAdapter,
     EmployeeService,
+    EmployeeRelationShipService,
     PersonalInfoService,
     FormatDatePipe,
     ReligionService,

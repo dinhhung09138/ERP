@@ -242,6 +242,26 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" data-toggle="tab">
+                  Thông tin liên hệ
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" data-toggle="tab">
+                  Bằng cấp
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" data-toggle="tab">
+                  Chứng chỉ
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#relationship" data-toggle="tab">
+                  Thông tin gia đình
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#ipsum-left" data-toggle="tab">
                   Ipsum
                 </a>
@@ -263,6 +283,9 @@
             <div class="tab-content">
               <div class="tab-pane active" id="personalInfo">
                 <app-hr-employee-personal-info [Employee]="currentSelectedEmployee"></app-hr-employee-personal-info>
+              </div>
+              <div class="tab-pane" id="relationship">
+                <app-hr-employee-relationship [Employee]="currentSelectedEmployee"></app-hr-employee-relationship>
               </div>
               <article class="tab-pane" id="ipsum-left">
                 <h1>Ipsum</h1>
