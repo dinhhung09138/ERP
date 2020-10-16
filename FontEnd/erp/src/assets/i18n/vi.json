@@ -192,6 +192,13 @@
           "RELIGION": "Tôn giáo",
           "EDUCATION": "Trình độ học vấn",
           "QUALIFICATION": "Trình độ chuyên môn"
+        },
+        "RELATIONSHIP": {
+          "TITLE": "Thông tin gia đình",
+          "FULL_NAME": "Họ Tên",
+          "ADDRESS": "Địa chỉ",
+          "MOBILE": "Điện thoại",
+          "RELATIONSHIP_TYPE": "Mối quan hệ"
         }
       },
       "CONFIGURATION": {

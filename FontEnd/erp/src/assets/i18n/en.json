@@ -192,6 +192,13 @@
           "RELIGION": "Religion",
           "EDUCATION": "Education",
           "QUALIFICATION": "Qualification"
+        },
+        "RELATIONSHIP": {
+          "TITLE": "Employee Relationship",
+          "FULL_NAME": "Full Name",
+          "ADDRESS": "Address",
+          "MOBILE": "Phone",
+          "RELATIONSHIP_TYPE": "Type"
         }
       },
       "CONFIGURATION": {

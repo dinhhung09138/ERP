@@ -13,6 +13,8 @@ import { ResponseModel } from '../../../../../core/models/response.model';
 import { ResponseStatus } from '../../../../../core/enums/response-status.enum';
 import { EmployeeRelationshipFormComponent } from './form/form.component';
 import { PermissionViewModel } from '../../../../../core/models/permission.model';
+import { RelationshipTypeService } from '../../../configuration/relationship-type/relationship-type.service';
+import { RelationshipTypeViewModel } from '../../../configuration/relationship-type/relationship-type.model';
 
 @Component({
   selector: 'app-hr-employee-relationship',
@@ -34,10 +36,12 @@ export class RelationshipComponent implements OnInit {
 
   listColumnsName: string[] = [ 'fullName', 'address', 'mobile', 'relationshipTypeName', 'action' ];
   dataSource = new MatTableDataSource();
+  listRelationShip: RelationshipTypeViewModel[];
 
   constructor(
     private dialog: MatDialog,
     private employeeRelationshipService: EmployeeRelationShipService,
+    private relationshipTypeService: RelationshipTypeService,
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +52,10 @@ export class RelationshipComponent implements OnInit {
   onAddClick() {
     const modalRef = this.dialog.open(EmployeeRelationshipFormComponent, {
       disableClose: true,
+      data: {
+        isPopup: true,
+        data: this.listRelationShip
+      }
     });
 
     return modalRef.afterClosed().pipe(
@@ -85,6 +93,16 @@ export class RelationshipComponent implements OnInit {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.TotalItems;
+      }
+      this.isLoading = false;
+    });
+  }
+
+  private getListRelationshipType() {
+    this.isLoading = true;
+    this.relationshipTypeService.getDropdown().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.listRelationShip = response.result;
       }
       this.isLoading = false;
     });

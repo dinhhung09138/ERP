@@ -33,6 +33,8 @@ import { ProfessionalQualificationService } from '../../configuration/profession
 import { ReligionService } from '../../configuration/religion/religion.service';
 import { FormatNumberPipe } from '../../../../core/pipes/format-number.pipe';
 import { EmployeeRelationShipService } from './relationship/relationship.service';
+import { RelationshipTypeService } from '../../configuration/relationship-type/relationship-type.service';
+import { RankingService } from '../../configuration/ranking/ranking.service';
 
 const routes: Routes = [
   {
@@ -77,6 +79,8 @@ const routes: Routes = [
     ReligionService,
     EthnicityService,
     NationalityService,
+    RelationshipTypeService,
+    RankingService,
     EducationService,
     ProfessionalQualificationService,
     FormatNumberPipe,
