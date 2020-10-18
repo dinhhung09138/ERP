@@ -2,7 +2,6 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { map, catchError } from 'rxjs/operators';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -50,23 +49,19 @@ export class EmployeeRelationshipComponent implements OnInit {
   }
 
   onAddClick() {
-    const modalRef = this.dialog.open(EmployeeRelationshipFormComponent, {
-      disableClose: true,
-      width: '450px',
-      data: {
-        isPopup: true,
-        data: this.listRelationShip,
-        employeeId: this.Employee.id,
+    this.showFormModal();
+  }
+
+  onUpdateClick(id: number) {
+    this.showFormModal(id);
+  }
+
+  onDeleteClick(id: number, version: any) {
+    this.employeeRelationshipService.confirmDelete(id, version).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.getList(true);
       }
     });
-
-    return modalRef.afterClosed().subscribe(
-      (result: boolean) => {
-        if (result === true) {
-          this.getList(true);
-        }
-      }
-    );
   }
 
   onPageChange(page: PageEvent) {
@@ -105,6 +100,27 @@ export class EmployeeRelationshipComponent implements OnInit {
       }
       this.isLoading = false;
     });
+  }
+
+  private showFormModal(id?: number) {
+    const modalRef = this.dialog.open(EmployeeRelationshipFormComponent, {
+      disableClose: true,
+      width: '450px',
+      data: {
+        isPopup: true,
+        data: this.listRelationShip,
+        employeeId: this.Employee.id,
+        itemId: id
+      }
+    });
+
+    return modalRef.afterClosed().subscribe(
+      (result: boolean) => {
+        if (result === true) {
+          this.getList(true);
+        }
+      }
+    );
   }
 
 }

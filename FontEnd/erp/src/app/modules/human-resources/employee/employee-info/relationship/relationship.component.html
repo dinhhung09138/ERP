@@ -52,10 +52,10 @@
               <i class="fa fa-bars"></i>
             </a>
             <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
-              <a class="dropdown-item text-success" href="javascript:{}">
+              <a class="dropdown-item text-success" href="javascript:{}" (click)="onUpdateClick(element.id)">
                 {{ 'BUTTON.UPDATE' | translate }}
               </a>
-              <a class="dropdown-item text-danger" href="javascript:{}">
+              <a class="dropdown-item text-danger" href="javascript:{}" (click)="onDeleteClick(element.id, element.rowVersion)">
                 {{ 'BUTTON.DELETE' | translate }}
               </a>
             </div>

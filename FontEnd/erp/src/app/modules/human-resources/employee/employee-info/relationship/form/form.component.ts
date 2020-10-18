@@ -51,12 +51,16 @@ export class EmployeeRelationshipFormComponent implements OnInit {
     });
 
     this.formAction = FormActionStatus.Insert;
+    this.initFormControl(this.formAction);
     if (this.dialogData && this.dialogData.isPopup === true) {
       this.listRelationShip = this.dialogData.data;
       this.employeeId = this.dialogData.employeeId;
+      if (this.dialogData.itemId !== undefined) {
+        this.formAction = FormActionStatus.Update;
+        this.getItem(this.dialogData.itemId);
+      }
     }
 
-    this.initFormControl(this.formAction);
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -110,6 +114,28 @@ export class EmployeeRelationshipFormComponent implements OnInit {
         this.dialogRef.close(true);
       }
     });
+  }
+
+  private getItem(itemId: number) {
+    this.isLoading = true;
+    this.emplRelationShipService.item(itemId).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.setDataToForm(response.result);
+      }
+      this.isLoading = false;
+    });
+  }
+
+  private setDataToForm(data: EmployeeRelationShipViewModel) {
+    if (data) {
+      this.form.get('id').setValue(data.id);
+      this.form.get('employeeId').setValue(this.employeeId);
+      this.form.get('fullName').setValue(data.fullName);
+      this.form.get('address').setValue(data.address);
+      this.form.get('mobile').setValue(data.mobile);
+      this.form.get('relationshipTypeId').setValue(data.relationshipTypeId);
+      this.form.get('rowVersion').setValue(data.rowVersion);
+    }
   }
 
 }
