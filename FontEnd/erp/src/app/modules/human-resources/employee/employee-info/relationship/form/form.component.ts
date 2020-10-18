@@ -23,6 +23,7 @@ export class EmployeeRelationshipFormComponent implements OnInit {
   formTitle = '';
   isLoading = false;
   isSubmit = false;
+  employeeId = 0;
   form: FormGroup;
   formAction: FormActionStatus;
   listRelationShip: RelationshipTypeViewModel[];
@@ -40,6 +41,7 @@ export class EmployeeRelationshipFormComponent implements OnInit {
 
     this.form = this.fb.group({
       id: [0],
+      employeeId: [null, Validators.required],
       fullName: ['', [Validators.required]],
       address: ['', [Validators.maxLength(255)]],
       mobile: ['', [Validators.maxLength(20)]],
@@ -48,9 +50,13 @@ export class EmployeeRelationshipFormComponent implements OnInit {
       rowVersion: [null]
     });
 
+    this.formAction = FormActionStatus.Insert;
     if (this.dialogData && this.dialogData.isPopup === true) {
       this.listRelationShip = this.dialogData.data;
+      this.employeeId = this.dialogData.employeeId;
     }
+
+    this.initFormControl(this.formAction);
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -58,10 +64,11 @@ export class EmployeeRelationshipFormComponent implements OnInit {
 
     this.formAction = formStatus;
     this.form.get('id').setValue(0);
+    this.form.get('employeeId').setValue(this.employeeId);
     this.form.get('fullName').reset();
     this.form.get('address').reset();
     this.form.get('mobile').reset();
-    this.form.get('relationshipTypeId').reset();
+    this.form.get('relationshipTypeId').setValue('');
     this.form.get('isActive').reset();
 
     if (formStatus === FormActionStatus.UnKnow) {
@@ -96,7 +103,13 @@ export class EmployeeRelationshipFormComponent implements OnInit {
       return;
     }
 
-
+    this.isLoading = true;
+    this.emplRelationShipService.save(this.form.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.isLoading = false;
+        this.dialogRef.close(true);
+      }
+    });
   }
 
 }

@@ -55,19 +55,17 @@ export class EmployeeRelationshipComponent implements OnInit {
       width: '450px',
       data: {
         isPopup: true,
-        data: this.listRelationShip
+        data: this.listRelationShip,
+        employeeId: this.Employee.id,
       }
     });
 
-    return modalRef.afterClosed().pipe(
-      map((result: boolean) => {
+    return modalRef.afterClosed().subscribe(
+      (result: boolean) => {
         if (result === true) {
           this.getList(true);
         }
-      }),
-      catchError(xhr => {
-        return null;
-      })
+      }
     );
   }
 
@@ -82,7 +80,7 @@ export class EmployeeRelationshipComponent implements OnInit {
     this.getList(true);
   }
 
-  private getList(allowReload: boolean) {
+  public getList(allowReload: boolean) {
     if (allowReload === false) {
       return;
     }

@@ -7,5 +7,6 @@ export interface DialogDataInterface {
   isError: boolean;
   httpError: HttpErrorStatusEnum;
   isPopup: boolean;
+  employeeId: number;
   data: any[];
 }

@@ -209,6 +209,7 @@ export class EmployeeInfoComponent implements OnInit {
       case 'relationship':
         if (this.initRelationshipTab === false) {
           this.initRelationshipTab = true;
+          this.relationshipTab.getList(true);
           this.relationshipTab.getListRelationshipType();
         }
         break;

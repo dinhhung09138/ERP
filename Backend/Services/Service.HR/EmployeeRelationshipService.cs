@@ -32,7 +32,7 @@ namespace Service.HR
                 var query = from m in _context.EmployeeRelationshipRepository.Query()
                             join r in _context.RelationshipTypeRepository.Query() on m.RelationshipTypeId equals r.Id
                             where !m.Deleted && m.EmployeeId == filter.EmployeeId
-                            orderby m.CreateDate
+                            orderby r.Precedence
                             select new EmployeeRelationshipModel()
                             {
                                 Id = m.Id,
