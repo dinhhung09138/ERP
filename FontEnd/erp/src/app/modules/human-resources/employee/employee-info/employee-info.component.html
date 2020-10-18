@@ -257,7 +257,8 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#relationship" data-toggle="tab">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#relationship"
+                  (click)="onSelectTab('relationship')" data-toggle="tab">
                   {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.TITLE' | translate }}
                 </a>
               </li>

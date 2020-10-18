@@ -21,7 +21,7 @@ import { RelationshipTypeViewModel } from '../../../configuration/relationship-t
   templateUrl: './relationship.component.html',
   styleUrls: ['./relationship.component.scss']
 })
-export class RelationshipComponent implements OnInit {
+export class EmployeeRelationshipComponent implements OnInit {
 
   @Input() Employee: EmployeeViewModel;
 
@@ -52,6 +52,7 @@ export class RelationshipComponent implements OnInit {
   onAddClick() {
     const modalRef = this.dialog.open(EmployeeRelationshipFormComponent, {
       disableClose: true,
+      width: '450px',
       data: {
         isPopup: true,
         data: this.listRelationShip
@@ -81,7 +82,7 @@ export class RelationshipComponent implements OnInit {
     this.getList(true);
   }
 
-  getList(allowReload: boolean) {
+  private getList(allowReload: boolean) {
     if (allowReload === false) {
       return;
     }
@@ -98,7 +99,7 @@ export class RelationshipComponent implements OnInit {
     });
   }
 
-  private getListRelationshipType() {
+  public getListRelationshipType() {
     this.isLoading = true;
     this.relationshipTypeService.getDropdown().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {

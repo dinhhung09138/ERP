@@ -16,6 +16,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { ApplicationConstant } from '../../../../core/constants/app.constant';
+import { EmployeeRelationshipComponent } from './relationship/relationship.component';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -43,50 +44,10 @@ export class EmployeeInfoComponent implements OnInit {
   fileToUpload: any;
   fileUrl: string;
 
-  listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
+  initRelationshipTab = false;
+  @ViewChild(EmployeeRelationshipComponent) relationshipTab: EmployeeRelationshipComponent;
 
-  employeeTabs: any[] = [
-    {
-      label: 'Commendation',
-      link: '/hr/employee/commendation',
-      index: 0
-    },
-    {
-      label: 'Contact',
-      link: '/hr/employee/contact',
-      index: 1
-    },
-    {
-      label: 'Contract',
-      link: '/hr/employee/contract',
-      index: 2
-    },
-    {
-      label: 'Dicipline',
-      link: '/hr/employee/dicipline',
-      index: 3
-    },
-    {
-      label: 'Education',
-      link: '/hr/employee/education',
-      index: 4
-    },
-    {
-      label: 'Identification',
-      link: '/hr/employee/identification',
-      index: 5
-    },
-    {
-      label: 'Info',
-      link: '/hr/employee/info',
-      index: 6
-    },
-    {
-      label: 'Relationship',
-      link: '/hr/employee/relationship',
-      index: 7
-    },
-  ];
+  listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
 
   constructor(
     public translate: TranslateService,
@@ -241,6 +202,17 @@ export class EmployeeInfoComponent implements OnInit {
       this.fileUrl = event.target.result;
     };
 
+  }
+
+  onSelectTab(tabName: string) {
+    switch (tabName) {
+      case 'relationship':
+        if (this.initRelationshipTab === false) {
+          this.initRelationshipTab = true;
+          this.relationshipTab.getListRelationshipType();
+        }
+        break;
+    }
   }
 
   submitForm() {

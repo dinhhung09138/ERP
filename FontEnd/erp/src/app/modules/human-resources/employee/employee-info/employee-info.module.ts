@@ -15,7 +15,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { EmployeeService } from '../employee.service';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
-import { RelationshipComponent } from './relationship/relationship.component';
+import { EmployeeRelationshipComponent } from './relationship/relationship.component';
 import { EducationComponent } from './education/education.component';
 import { IdentificationComponent } from './identification/identification.component';
 import { ContractComponent } from './contract/contract.component';
@@ -35,6 +35,9 @@ import { FormatNumberPipe } from '../../../../core/pipes/format-number.pipe';
 import { EmployeeRelationShipService } from './relationship/relationship.service';
 import { RelationshipTypeService } from '../../configuration/relationship-type/relationship-type.service';
 import { RankingService } from '../../configuration/ranking/ranking.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployeeRelationshipFormComponent } from './relationship/form/form.component';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   {
@@ -48,7 +51,8 @@ const routes: Routes = [
   declarations: [
     EmployeeInfoComponent,
     PersonalInfoComponent,
-    RelationshipComponent,
+    EmployeeRelationshipComponent,
+    EmployeeRelationshipFormComponent,
     EducationComponent,
     IdentificationComponent,
     ContractComponent,
@@ -65,6 +69,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatRadioModule,
     MatTabsModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,

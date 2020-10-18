@@ -12,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogDataInterface } from '../../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
-  selector: 'app-form',
+  selector: 'app-hr-employee-relationship-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
@@ -43,7 +43,7 @@ export class EmployeeRelationshipFormComponent implements OnInit {
       fullName: ['', [Validators.required]],
       address: ['', [Validators.maxLength(255)]],
       mobile: ['', [Validators.maxLength(20)]],
-      relationshipTypeId: [null, [Validators.required]],
+      relationshipTypeId: ['', [Validators.required]],
       isActive: [true],
       rowVersion: [null]
     });
@@ -53,7 +53,49 @@ export class EmployeeRelationshipFormComponent implements OnInit {
     }
   }
 
+  initFormControl(formStatus: FormActionStatus) {
+    this.isSubmit = false;
+
+    this.formAction = formStatus;
+    this.form.get('id').setValue(0);
+    this.form.get('fullName').reset();
+    this.form.get('address').reset();
+    this.form.get('mobile').reset();
+    this.form.get('relationshipTypeId').reset();
+    this.form.get('isActive').reset();
+
+    if (formStatus === FormActionStatus.UnKnow) {
+      this.form.get('fullName').disable();
+      this.form.get('address').disable();
+      this.form.get('mobile').disable();
+      this.form.get('relationshipTypeId').disable();
+      this.form.get('isActive').disable();
+    } else {
+      this.form.get('isActive').setValue(true);
+      this.form.get('fullName').enable();
+      this.form.get('address').enable();
+      this.form.get('mobile').enable();
+      this.form.get('relationshipTypeId').enable();
+      this.form.get('isActive').enable();
+    }
+    this.elm.nativeElement.querySelector('#fullName').focus();
+  }
+
+  onResetClick() {
+    this.initFormControl(this.formAction);
+  }
+
+  onCloseClick() {
+    this.dialogRef.close(false);
+  }
+
   onSubmit() {
+    this.isSubmit = true;
+
+    if (this.form.invalid) {
+      return;
+    }
+
 
   }
 
