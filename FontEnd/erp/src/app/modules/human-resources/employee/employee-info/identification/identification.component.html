@@ -1,1 +1,77 @@
-<p>identification works!</p>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <h1>{{ 'SCREEN.HR.EMPLOYEE.TITLE' | translate }}: {{ Employee?.fullName }}</h1>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right" *ngIf="Employee">
+    <button type="button" class="btn btn-outline-info" (click)="onAddClick()">
+      {{ 'BUTTON.ADD' | translate }}
+      </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <app-table-loading [Show]="isLoading"></app-table-loading>
+    <table mat-table matSort [dataSource]="dataSource" class="table">
+      <ng-container matColumnDef="identificationTypeName">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-w-150">
+          {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.TYPE' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.identificationTypeName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="code">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-w-100">
+          {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.CODE' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.code }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="expirationDate">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-w-150">
+          {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.EXPIRATION' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.expirationDate }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="placeName">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-w-150">
+          {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.PLACE' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.placeName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="notes">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef>
+          {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.NOTES' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.notes }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="center td-w-70">#</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="btn-group">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-bars"></i>
+            </a>
+            <div class="dropdown-menu dropdown-action-menu dropdown-menu-right" role="menu">
+              <a class="dropdown-item text-success" href="javascript:{}" (click)="onUpdateClick(element.id)">
+                {{ 'BUTTON.UPDATE' | translate }}
+              </a>
+              <a class="dropdown-item text-danger" href="javascript:{}" (click)="onDeleteClick(element.id, element.rowVersion)">
+                {{ 'BUTTON.DELETE' | translate }}
+              </a>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="listColumnsName"></tr>
+      <tr mat-row *matRowDef="let row; columns: listColumnsName"></tr>
+    </table>
+  </div>
+</div>

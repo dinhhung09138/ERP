@@ -199,6 +199,14 @@
           "ADDRESS": "Address",
           "MOBILE": "Phone",
           "RELATIONSHIP_TYPE": "Type"
+        },
+        "IDENTIFICATION": {
+          "TITLE": "Identification",
+          "TYPE": "Type",
+          "CODE": "Code",
+          "PLACE": "Place",
+          "NOTES": "Notes",
+          "EXPIRATION": "Expiration"
         }
       },
       "CONFIGURATION": {

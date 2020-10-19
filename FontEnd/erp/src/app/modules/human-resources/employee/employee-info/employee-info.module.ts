@@ -17,7 +17,7 @@ import { EmployeeService } from '../employee.service';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { EmployeeRelationshipComponent } from './relationship/relationship.component';
 import { EducationComponent } from './education/education.component';
-import { IdentificationComponent } from './identification/identification.component';
+import { EmployeeIdentificationComponent } from './identification/identification.component';
 import { ContractComponent } from './contract/contract.component';
 import { ContactComponent } from './contact/contact.component';
 import { FormComponent } from './contact/form/form.component';
@@ -35,9 +35,12 @@ import { FormatNumberPipe } from '../../../../core/pipes/format-number.pipe';
 import { EmployeeRelationShipService } from './relationship/relationship.service';
 import { RelationshipTypeService } from '../../configuration/relationship-type/relationship-type.service';
 import { RankingService } from '../../configuration/ranking/ranking.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeRelationshipFormComponent } from './relationship/form/form.component';
 import { MatSelectModule } from '@angular/material/select';
+import { EmployeeIdentificationFormComponent } from './identification/form/form.component';
+import { EmployeeIdentificationService } from './identification/identification.service';
+import { ProvinceService } from '../../configuration/province/province.service';
+import { IdentificationTypeService } from '../../configuration/identification-type/identification-type.service';
 
 const routes: Routes = [
   {
@@ -53,8 +56,9 @@ const routes: Routes = [
     PersonalInfoComponent,
     EmployeeRelationshipComponent,
     EmployeeRelationshipFormComponent,
+    EmployeeIdentificationComponent,
+    EmployeeIdentificationFormComponent,
     EducationComponent,
-    IdentificationComponent,
     ContractComponent,
     ContactComponent,
     FormComponent,
@@ -79,7 +83,10 @@ const routes: Routes = [
     AppDateAdapter,
     EmployeeService,
     EmployeeRelationShipService,
+    EmployeeIdentificationService,
     PersonalInfoService,
+    ProvinceService,
+    IdentificationTypeService,
     FormatDatePipe,
     ReligionService,
     EthnicityService,

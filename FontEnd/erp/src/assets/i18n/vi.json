@@ -199,6 +199,14 @@
           "ADDRESS": "Địa chỉ",
           "MOBILE": "Điện thoại",
           "RELATIONSHIP_TYPE": "Mối quan hệ"
+        },
+        "IDENTIFICATION": {
+          "TITLE": "Giấy tờ tùy thân",
+          "TYPE": "Loại",
+          "CODE": "Mã số",
+          "PLACE": "Nơi cấp",
+          "NOTES": "Ghi chú",
+          "EXPIRATION": "Ngày hết hạn"
         }
       },
       "CONFIGURATION": {

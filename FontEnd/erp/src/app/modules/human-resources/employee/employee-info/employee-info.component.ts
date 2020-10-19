@@ -17,6 +17,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { ApplicationConstant } from '../../../../core/constants/app.constant';
 import { EmployeeRelationshipComponent } from './relationship/relationship.component';
+import { EmployeeIdentificationComponent } from './identification/identification.component';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -46,6 +47,8 @@ export class EmployeeInfoComponent implements OnInit {
 
   initRelationshipTab = false;
   @ViewChild(EmployeeRelationshipComponent) relationshipTab: EmployeeRelationshipComponent;
+  initIdentificationTab = false;
+  @ViewChild(EmployeeIdentificationComponent) identificationTab: EmployeeIdentificationComponent;
 
   listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
 
@@ -209,8 +212,16 @@ export class EmployeeInfoComponent implements OnInit {
       case 'relationship':
         if (this.initRelationshipTab === false) {
           this.initRelationshipTab = true;
-          this.relationshipTab.getList(true);
+          this.relationshipTab.getList();
           this.relationshipTab.getListRelationshipType();
+        }
+        break;
+      case 'identification':
+        if (this.initIdentificationTab === false) {
+          this.initIdentificationTab = true;
+          this.identificationTab.getList();
+          this.identificationTab.getIdentificationType();
+          this.identificationTab.getProvince();
         }
         break;
     }

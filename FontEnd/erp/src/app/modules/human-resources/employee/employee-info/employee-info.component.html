@@ -257,6 +257,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#identification"
+                  (click)="onSelectTab('identification')" data-toggle="tab">
+                  {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.TITLE' | translate }}
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#relationship"
                   (click)="onSelectTab('relationship')" data-toggle="tab">
                   {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.TITLE' | translate }}
@@ -284,6 +290,9 @@
             <div class="tab-content">
               <div class="tab-pane active" id="personalInfo">
                 <app-hr-employee-personal-info [Employee]="currentSelectedEmployee"></app-hr-employee-personal-info>
+              </div>
+              <div class="tab-pane" id="identification">
+                <app-hr-employee-identification [Employee]="currentSelectedEmployee"></app-hr-employee-identification>
               </div>
               <div class="tab-pane" id="relationship">
                 <app-hr-employee-relationship [Employee]="currentSelectedEmployee"></app-hr-employee-relationship>

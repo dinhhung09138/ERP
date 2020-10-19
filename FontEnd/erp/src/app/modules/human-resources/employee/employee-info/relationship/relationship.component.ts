@@ -27,7 +27,6 @@ export class EmployeeRelationshipComponent implements OnInit {
   @ViewChild(MatSort, { static: true}) sort: MatSort;
 
   permission = new PermissionViewModel();
-  isInitData = false;
   isLoading = false;
   paging = new PagingModel();
   searchText = '';
@@ -59,7 +58,7 @@ export class EmployeeRelationshipComponent implements OnInit {
   onDeleteClick(id: number, version: any) {
     this.employeeRelationshipService.confirmDelete(id, version).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.getList(true);
+        this.getList();
       }
     });
   }
@@ -72,13 +71,10 @@ export class EmployeeRelationshipComponent implements OnInit {
       this.currentPageSize = page.pageSize;
       this.paging.pageIndex = 0;
     }
-    this.getList(true);
+    this.getList();
   }
 
-  public getList(allowReload: boolean) {
-    if (allowReload === false) {
-      return;
-    }
+  public getList() {
     if (this.Employee === undefined) {
       return;
     }
@@ -117,7 +113,7 @@ export class EmployeeRelationshipComponent implements OnInit {
     return modalRef.afterClosed().subscribe(
       (result: boolean) => {
         if (result === true) {
-          this.getList(true);
+          this.getList();
         }
       }
     );
