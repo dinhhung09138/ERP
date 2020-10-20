@@ -53,12 +53,12 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
       employeeId: [0],
       dateOfBirth: [null],
       gender: [true, [Validators.required]],
-      materialStatusId: [null],
-      religionId: [null],
-      ethnicityId: [null],
-      nationalityId: [null],
-      academicLevelId: [null],
-      professionalQualificationId: [null],
+      materialStatusId: [''],
+      religionId: [''],
+      ethnicityId: [''],
+      nationalityId: [''],
+      academicLevelId: [''],
+      professionalQualificationId: [''],
       rowVersion: [null],
     });
     this.initFormControl();
@@ -84,12 +84,12 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.personalInfoForm.get('employeeId').setValue(null);
     this.personalInfoForm.get('dateOfBirth').setValue(null);
     this.personalInfoForm.get('gender').setValue(true);
-    this.personalInfoForm.get('materialStatusId').setValue(null);
-    this.personalInfoForm.get('religionId').setValue(null);
-    this.personalInfoForm.get('ethnicityId').setValue(null);
-    this.personalInfoForm.get('nationalityId').setValue(null);
-    this.personalInfoForm.get('academicLevelId').setValue(null);
-    this.personalInfoForm.get('professionalQualificationId').setValue(null);
+    this.personalInfoForm.get('materialStatusId').setValue('');
+    this.personalInfoForm.get('religionId').setValue('');
+    this.personalInfoForm.get('ethnicityId').setValue('');
+    this.personalInfoForm.get('nationalityId').setValue('');
+    this.personalInfoForm.get('academicLevelId').setValue('');
+    this.personalInfoForm.get('professionalQualificationId').setValue('');
 
   }
 
@@ -226,12 +226,12 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
         this.personalInfoForm.get('dateOfBirth').setValue(new Date(data.dateOfBirth));
       }
       this.personalInfoForm.get('gender').setValue(data.gender);
-      this.personalInfoForm.get('materialStatusId').setValue(data.materialStatusId);
-      this.personalInfoForm.get('religionId').setValue(data.religionId);
-      this.personalInfoForm.get('ethnicityId').setValue(data.ethnicityId);
-      this.personalInfoForm.get('nationalityId').setValue(data.nationalityId);
-      this.personalInfoForm.get('academicLevelId').setValue(data.academicLevelId);
-      this.personalInfoForm.get('professionalQualificationId').setValue(data.professionalQualificationId);
+      this.personalInfoForm.get('materialStatusId').setValue(data.materialStatusId || '');
+      this.personalInfoForm.get('religionId').setValue(data.religionId || '');
+      this.personalInfoForm.get('ethnicityId').setValue(data.ethnicityId || '');
+      this.personalInfoForm.get('nationalityId').setValue(data.nationalityId || '');
+      this.personalInfoForm.get('academicLevelId').setValue(data.academicLevelId || '');
+      this.personalInfoForm.get('professionalQualificationId').setValue(data.professionalQualificationId || '');
       this.personalInfoForm.get('rowVersion').setValue(data.rowVersion);
     }
   }

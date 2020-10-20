@@ -84,10 +84,12 @@
                   <label class="label">
                     {{ 'SCREEN.HR.EMPLOYEE.FORM.STATUS' | translate }}
                   </label>
-                  <ng-select [items]="listWorkingStatus" [bindLabel]="'name'" [bindValue]="'id'"
-                            formControlName="employeeWorkingStatusId" autocomplete="off"
-                            [tabIndex]="6" [searchable]="true" [selectOnTab]="true"
-                            placeholder="Chọn" [readonly]="!isEditEmployee"></ng-select>
+                  <mat-form-field class="form-control">
+                    <mat-select formControlName="employeeWorkingStatusId" tabindex="6" [disabled]="!isEditEmployee">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listWorkingStatus" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                   <mat-error *ngIf="isSubmit && employeeForm.controls['employeeWorkingStatusId'].errors?.required">
                     {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>

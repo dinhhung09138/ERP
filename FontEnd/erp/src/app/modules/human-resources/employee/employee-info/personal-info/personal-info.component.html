@@ -30,7 +30,7 @@
                     </label>
                     <mat-form-field class="form-control">
                       <input matInput [matDatepicker]="dateOfBirthDatepicker" formControlName="dateOfBirth"
-                        maxlength="10" tabindex="1" autocomplete="off" [readonly]="!isEdit" />
+                        maxlength="10" tabindex="50" autocomplete="off" [readonly]="!isEdit" />
                       <mat-datepicker-toggle matSuffix [for]="dateOfBirthDatepicker">
                         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                       </mat-datepicker-toggle>
@@ -45,12 +45,12 @@
                       {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.GENDER' | translate }}
                     </label>
                     <div class="input-group">
-                      <mat-radio-group formControlName="gender" [disabled]="!isEdit" aria-label="Giới tính">
-                        <mat-radio-button ngDefaultControl [value]="true" >
+                      <mat-radio-group formControlName="gender" tabindex="51" [disabled]="!isEdit" aria-label="Giới tính">
+                        <mat-radio-button ngDefaultControl [value]="true" tabindex="52" >
                           {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.GENDER_MALE' | translate }}
                         </mat-radio-button>
                         &nbsp;&nbsp;&nbsp;
-                        <mat-radio-button ngDefaultControl [value]="false">
+                        <mat-radio-button ngDefaultControl [value]="false" tabindex="53">
                           {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.GENDER_FEMALE' | translate }}
                         </mat-radio-button>
                       </mat-radio-group>
@@ -60,6 +60,7 @@
                     <label class="label">
                       {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.MATERIAL_STATUS' | translate }}
                     </label>
+                    <!--54-->
                   </div>
                 </div>
             </div>
@@ -72,27 +73,30 @@
                       {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.NATIONALITY' | translate }}
                     </label>
                     <div class="input-group">
-                      <ng-select [items]="nationalityList" [bindLabel]="'name'" [bindValue]="'id'"
-                                formControlName="nationalityId" [searchable]="true" [selectOnTab]="true"
-                                placeholder="Chọn" [readonly]="!isEdit" class="form-control" [loading]="nationalityLoading">
-                      </ng-select>
+                      <mat-form-field class="form-control">
+                        <mat-select formControlName="nationalityId" [disabled]="!isEdit" tabindex="55">
+                          <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                          <mat-option *ngFor="let item of nationalityList" [value]="item.id">{{ item.name }}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                       <div class="input-group-append">
-                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="4" (click)="onAddNewNationalityClick()">+</button>
+                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="56" (click)="onAddNewNationalityClick()">+</button>
                       </div>
                     </div>
-
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">
                       {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.ETHNICITY' | translate }}
                     </label>
                     <div class="input-group">
-                      <ng-select [items]="ethnicityList" [bindValue]="'id'" [bindLabel]="'name'"
-                                formControlName="ethnicityId" [selectOnTab]="true" [searchable]="true"
-                                placeholder="Chọn" [readonly]="!isEdit" class="form-control" [loading]="ethnicityLoading">
-                      </ng-select>
+                      <mat-form-field class="form-control">
+                        <mat-select formControlName="ethnicityId" tabindex="57" [disabled]="!isEdit">
+                          <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                          <mat-option *ngFor="let item of ethnicityList" [value]="item.id">{{ item.name }}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                       <div class="input-group-append">
-                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="4" (click)="onAddNewEthnicityClick()" >+</button>
+                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="58" (click)="onAddNewEthnicityClick()" >+</button>
                       </div>
                     </div>
                   </div>
@@ -101,12 +105,14 @@
                       {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.RELIGION' | translate }}
                     </label>
                     <div class="input-group">
-                      <ng-select [items]="religionList" [bindValue]="'id'" [bindLabel]="'name'"
-                                formControlName="religionId" [selectOnTab]="true" [searchable]="true"
-                                placeholder="Chọn" [readonly]="!isEdit" class="form-control" [loading]="religionLoading">
-                      </ng-select>
+                      <mat-form-field class="form-control">
+                        <mat-select formControlName="religionId" tabindex="59" [disabled]="!isEdit">
+                          <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                          <mat-option *ngFor="let item of religionList" [value]="item.id">{{ item.name }}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                       <div class="input-group-append">
-                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="4" (click)="onAddNewReligionClick()">+</button>
+                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="60" (click)="onAddNewReligionClick()">+</button>
                       </div>
                     </div>
                   </div>
@@ -121,12 +127,14 @@
                       {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.EDUCATION' | translate }}
                     </label>
                     <div class="input-group">
-                      <ng-select [items]="educationList" [bindValue]="'id'" [bindLabel]="'name'"
-                                formControlName="academicLevelId" [selectOnTab]="true" [searchable]="true"
-                                placeholder="Chọn" [readonly]="!isEdit" class="form-control" [loading]="educationLoading">
-                      </ng-select>
+                      <mat-form-field class="form-control">
+                        <mat-select formControlName="academicLevelId" tabindex="61" [disabled]="!isEdit">
+                          <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                          <mat-option *ngFor="let item of educationList" [value]="item.id">{{ item.name }}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                       <div class="input-group-append">
-                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="4" (click)="onAddNewEducationClick()">+</button>
+                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="62" (click)="onAddNewEducationClick()">+</button>
                       </div>
                     </div>
                   </div>
@@ -135,12 +143,14 @@
                       {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.QUALIFICATION' | translate }}
                     </label>
                     <div class="input-group">
-                      <ng-select [items]="qualificationList" [bindValue]="'id'" [bindLabel]="'name'"
-                                formControlName="professionalQualificationId" [selectOnTab]="true" [searchable]="true"
-                                placeholder="Chọn" [readonly]="!isEdit" class="form-control" [loading]="qualificationLoading">
-                      </ng-select>
+                      <mat-form-field class="form-control">
+                        <mat-select formControlName="professionalQualificationId" tabindex="63" [disabled]="!isEdit">
+                          <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                          <mat-option *ngFor="let item of qualificationList" [value]="item.id">{{ item.name }}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                       <div class="input-group-append">
-                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="4" (click)="onAddNewQualificationClick()">+</button>
+                        <button class="btn btn-outline-info" [disabled]="!isEdit" type="button" tabindex="64" (click)="onAddNewQualificationClick()">+</button>
                       </div>
                     </div>
                   </div>
