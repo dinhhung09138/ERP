@@ -11,7 +11,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
-import { NgSelectModule } from '@ng-select/ng-select';
 
 import { EmployeeService } from '../employee.service';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
@@ -66,7 +65,6 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    NgSelectModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,

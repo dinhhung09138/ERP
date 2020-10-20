@@ -58,7 +58,7 @@ export class DistrictFormComponent implements OnInit {
     this.districtForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
-      provinceId: [null, [Validators.required]],
+      provinceId: ['', [Validators.required]],
       precedence: [1, [Validators.required, AppValidator.number]],
       isActive: [true],
       rowVersion: [null],
@@ -90,7 +90,7 @@ export class DistrictFormComponent implements OnInit {
     this.formAction = formStatus;
     this.districtForm.get('id').setValue(0);
     this.districtForm.get('name').reset();
-    this.districtForm.get('provinceId').reset();
+    this.districtForm.get('provinceId').setValue('');
     this.districtForm.get('precedence').reset();
     this.districtForm.get('isActive').reset();
 

@@ -18,6 +18,7 @@ import { DistrictService } from '../../district/district.service';
 import { DistrictFormComponent } from '../../district/form/form.component';
 import { ProvinceFormComponent } from '../../province/form/form.component';
 import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-hr-ward-form',
@@ -65,8 +66,8 @@ export class WardFormComponent implements OnInit {
     this.wardForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required]],
-      districtId: [null, [Validators.required]],
-      provinceId: [null, [Validators.required]],
+      districtId: ['', [Validators.required]],
+      provinceId: ['', [Validators.required]],
       precedence: [1, [Validators.required]],
       isActive: [true],
       rowVersion: [null],
@@ -100,8 +101,8 @@ export class WardFormComponent implements OnInit {
     this.formAction = formStatus;
     this.wardForm.get('id').setValue(0);
     this.wardForm.get('name').reset();
-    this.wardForm.get('districtId').reset();
-    this.wardForm.get('provinceId').reset();
+    this.wardForm.get('districtId').setValue('');
+    this.wardForm.get('provinceId').setValue('');
     this.wardForm.get('precedence').reset();
     this.wardForm.get('isActive').reset();
 
@@ -161,15 +162,16 @@ export class WardFormComponent implements OnInit {
     });
   }
 
-  onProvinceChange(province?: ProvinceViewModel) {
+  onProvinceChange(event?: MatSelectChange) {
+    console.log(event);
     this.districtDropdown = [];
-    if (province) {
+    if (event) {
       this.wardForm.get('districtId').enable();
-      this.districtDropdown = this.districtList.filter(m => m.provinceId === province.id);
+      this.districtDropdown = this.districtList.filter(m => m.provinceId === event.value);
     } else {
       this.wardForm.get('districtId').disable();
     }
-    this.wardForm.get('districtId').setValue(null);
+    this.wardForm.get('districtId').setValue('');
   }
 
   onCreateClick() {

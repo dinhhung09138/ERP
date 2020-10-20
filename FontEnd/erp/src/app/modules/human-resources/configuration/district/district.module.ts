@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { NgSelectModule } from '@ng-select/ng-select';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -29,11 +30,12 @@ const route: Routes = [
   ],
   imports: [
     SharedModule,
-    NgSelectModule,
     RouterModule.forChild(route),
     MatTableModule,
     MatSortModule,
     MatCheckboxModule,
+    MatSelectModule,
+    MatIconModule,
     MatInputModule,
     MatDialogModule,
   ],

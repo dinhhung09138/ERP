@@ -18,11 +18,12 @@
                     {{ 'SCREEN.HR.CONFIGURATION.DISTRICT.TABLE.PROVINCE' | translate}}
                   </label>
                   <div class="input-group">
-                    <ng-select id="provinceId" [items]="provinceList" [bindLabel]="'name'" [bindValue]="'id'" [appendTo]="'body'"
-                      formControlName="provinceId" tabindex="1" [selectOnTab]="true"
-                      [closeOnSelect]="true" [searchFn]="onProvinceSearch" class="form-control"
-                      [ngClass]="{'is-invalid' : isSubmit && districtForm.controls['provinceId'].errors}">
-                    </ng-select>
+                    <mat-form-field class="form-control">
+                      <mat-select id="provinceId" formControlName="provinceId" tabindex="1">
+                        <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                        <mat-option *ngFor="let item of provinceList" [value]="item.id">{{ item.name }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
                     <div class="input-group-append" *ngIf="allowAddProvince()">
                       <button class="btn btn-outline-info" type="button" tabindex="2" (click)="onAddNewProvinceClick()">+</button>
                     </div>
