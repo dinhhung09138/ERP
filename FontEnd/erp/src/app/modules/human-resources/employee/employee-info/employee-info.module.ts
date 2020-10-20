@@ -15,7 +15,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { EmployeeService } from '../employee.service';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { EmployeeRelationshipComponent } from './relationship/relationship.component';
-import { EducationComponent } from './education/education.component';
+import { EmployeeEducationComponent } from './education/education.component';
+import { EmployeeEducationFormComponent } from './education/form/form.component';
+import { EmployeeEducationService } from './education/education.service';
 import { EmployeeIdentificationComponent } from './identification/identification.component';
 import { ContractComponent } from './contract/contract.component';
 import { ContactComponent } from './contact/contact.component';
@@ -53,11 +55,12 @@ const routes: Routes = [
   declarations: [
     EmployeeInfoComponent,
     PersonalInfoComponent,
+    EmployeeEducationComponent,
+    EmployeeEducationFormComponent,
     EmployeeRelationshipComponent,
     EmployeeRelationshipFormComponent,
     EmployeeIdentificationComponent,
     EmployeeIdentificationFormComponent,
-    EducationComponent,
     ContractComponent,
     ContactComponent,
     FormComponent,
@@ -80,6 +83,7 @@ const routes: Routes = [
   providers: [
     AppDateAdapter,
     EmployeeService,
+    EmployeeEducationService,
     EmployeeRelationShipService,
     EmployeeIdentificationService,
     PersonalInfoService,
