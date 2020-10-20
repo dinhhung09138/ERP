@@ -17,7 +17,7 @@
                     {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.FULL_NAME' | translate }}
                   </label>
                   <mat-form-field class="form-control">
-                    <input matInput id="fullName" formControlName="fullName" maxlength="100" required tabindex="1" autocomplete="off" />
+                    <input matInput id="fullName" formControlName="fullName" maxlength="100" required tabindex="150" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && form.controls['fullName'].errors?.required">
                     {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
@@ -30,7 +30,7 @@
                     {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.ADDRESS' | translate }}
                   </label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="address" maxlength="255" tabindex="2" autocomplete="off" />
+                    <input matInput formControlName="address" maxlength="255" tabindex="151" autocomplete="off" />
                   </mat-form-field>
                 </div>
               </div>
@@ -40,7 +40,7 @@
                     {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.MOBILE' | translate }}
                   </label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="mobile" maxlength="15" tabindex="3" autocomplete="off" />
+                    <input matInput formControlName="mobile" maxlength="15" tabindex="152" autocomplete="off" />
                   </mat-form-field>
                 </div>
               </div>
@@ -50,7 +50,7 @@
                     {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.RELATIONSHIP_TYPE' | translate }}
                   </label>
                   <mat-form-field class="form-control">
-                    <mat-select formControlName="relationshipTypeId" required tabindex="4">
+                    <mat-select formControlName="relationshipTypeId" required tabindex="153">
                       <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
                       <mat-option *ngFor="let item of listRelationShip" [value]="item.id">{{ item.name }}</mat-option>
                     </mat-select>
@@ -64,19 +64,17 @@
               <div class="row">
                 <div class="col-12 form-group" *ngIf="formAction !== 0">
                   <input type="submit"
-                    class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="4">
-                  <button type="button" class="btn btn-warning" (click)="onResetClick()">
+                    class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="154">
+                  <button type="button" class="btn btn-warning" (click)="onResetClick()" tabindex="155">
                     {{ 'BUTTON.RESET' | translate }}
                   </button>
-                  <button type="button" class="btn btn-secondary" (click)="onCloseClick()">
+                  <button type="button" class="btn btn-secondary" (click)="onCloseClick()" tabindex="156">
                     {{ 'BUTTON.CLOSE' | translate }}
                   </button>
                 </div>
               </div>
             </form>
           </div>
-        </div>
-        <div class="card-footer">
         </div>
       </div>
     </div>

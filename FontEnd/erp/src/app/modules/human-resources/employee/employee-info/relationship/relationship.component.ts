@@ -104,7 +104,7 @@ export class EmployeeRelationshipComponent implements OnInit {
       width: '450px',
       data: {
         isPopup: true,
-        data: this.listRelationShip,
+        listRelationShip: this.listRelationShip,
         employeeId: this.Employee.id,
         itemId: id
       }

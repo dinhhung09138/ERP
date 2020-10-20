@@ -51,10 +51,10 @@ export class EmployeeRelationshipFormComponent implements OnInit {
     });
 
     this.formAction = FormActionStatus.Insert;
-    this.initFormControl(this.formAction);
     if (this.dialogData && this.dialogData.isPopup === true) {
-      this.listRelationShip = this.dialogData.data;
+      this.listRelationShip = this.dialogData.listRelationShip;
       this.employeeId = this.dialogData.employeeId;
+      this.initFormControl(this.formAction);
       if (this.dialogData.itemId !== undefined) {
         this.formAction = FormActionStatus.Update;
         this.getItem(this.dialogData.itemId);
@@ -63,10 +63,10 @@ export class EmployeeRelationshipFormComponent implements OnInit {
 
   }
 
-  initFormControl(formStatus: FormActionStatus) {
+  initFormControl(formAction: FormActionStatus) {
     this.isSubmit = false;
 
-    this.formAction = formStatus;
+    this.formAction = formAction;
     this.form.get('id').setValue(0);
     this.form.get('employeeId').setValue(this.employeeId);
     this.form.get('fullName').reset();
@@ -75,7 +75,7 @@ export class EmployeeRelationshipFormComponent implements OnInit {
     this.form.get('relationshipTypeId').setValue('');
     this.form.get('isActive').reset();
 
-    if (formStatus === FormActionStatus.UnKnow) {
+    if (formAction === FormActionStatus.UnKnow) {
       this.form.get('fullName').disable();
       this.form.get('address').disable();
       this.form.get('mobile').disable();
