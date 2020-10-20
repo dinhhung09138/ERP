@@ -9,5 +9,6 @@ export interface EmployeeIdentificationViewModel extends BaseViewModel {
   identificationTypeId: number;
   identificationTypeName: string;
   notes: string;
+  applyDate: Date;
   expirationDate: Date;
 }

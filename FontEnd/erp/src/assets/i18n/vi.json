@@ -204,9 +204,10 @@
           "TITLE": "Giấy tờ tùy thân",
           "TYPE": "Loại",
           "CODE": "Mã số",
+          "APPLY": "Ngày cấp",
           "PLACE": "Nơi cấp",
-          "NOTES": "Ghi chú",
-          "EXPIRATION": "Ngày hết hạn"
+          "EXPIRATION": "Ngày hết hạn",
+          "NOTES": "Ghi chú"
         }
       },
       "CONFIGURATION": {

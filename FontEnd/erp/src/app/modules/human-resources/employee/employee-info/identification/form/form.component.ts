@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core'
 import { FormGroupDirective, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
 
+import { APP_DATE_FORMATS, AppDateAdapter } from './../../../../../../core/helpers/format-datepicker.helper';
+import { AppValidator } from './../../../../../../core/validators/app.validator';
 import { EmployeeIdentificationViewModel } from '../identification.model';
 import { FormActionStatus } from '../../../../../../core/enums/form-action-status.enum';
 import { ProvinceViewModel } from '../../../../configuration/province/province.model';
@@ -15,7 +18,11 @@ import { ResponseModel } from '../../../../../../core/models/response.model';
 @Component({
   selector: 'app-hr-employee-identification-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    { provide: DateAdapter, useClass: AppDateAdapter }
+  ]
 })
 export class EmployeeIdentificationFormComponent implements OnInit {
 
@@ -48,7 +55,8 @@ export class EmployeeIdentificationFormComponent implements OnInit {
       placeId: ['', [Validators.required]],
       identificationTypeId: ['', [Validators.required]],
       notes: ['', [Validators.maxLength(255)]],
-      expirationDate: [null],
+      applyDate: [null, [AppValidator.date]],
+      expirationDate: [null, [AppValidator.date]],
       isActive: [true],
       rowVersion: [null]
     });
@@ -75,7 +83,8 @@ export class EmployeeIdentificationFormComponent implements OnInit {
     this.form.get('placeId').setValue('');
     this.form.get('notes').reset();
     this.form.get('identificationTypeId').setValue('');
-    this.form.get('expirationDate').reset();
+    this.form.get('applyDate').setValue(null);
+    this.form.get('expirationDate').setValue(null);
     this.form.get('isActive').reset();
 
     if (formAction === FormActionStatus.UnKnow) {
@@ -83,6 +92,7 @@ export class EmployeeIdentificationFormComponent implements OnInit {
       this.form.get('placeId').disable();
       this.form.get('notes').disable();
       this.form.get('identificationTypeId').disable();
+      this.form.get('applyDate').disable();
       this.form.get('expirationDate').disable();
       this.form.get('isActive').disable();
     } else {
@@ -91,6 +101,7 @@ export class EmployeeIdentificationFormComponent implements OnInit {
       this.form.get('placeId').enable();
       this.form.get('notes').enable();
       this.form.get('identificationTypeId').enable();
+      this.form.get('applyDate').enable();
       this.form.get('expirationDate').enable();
       this.form.get('isActive').enable();
     }
@@ -139,6 +150,7 @@ export class EmployeeIdentificationFormComponent implements OnInit {
       this.form.get('placeId').setValue(data.placeId);
       this.form.get('notes').setValue(data.notes);
       this.form.get('identificationTypeId').setValue(data.identificationTypeId);
+      this.form.get('applyDate').setValue(data.applyDate);
       this.form.get('expirationDate').setValue(data.expirationDate);
       this.form.get('rowVersion').setValue(data.rowVersion);
     }

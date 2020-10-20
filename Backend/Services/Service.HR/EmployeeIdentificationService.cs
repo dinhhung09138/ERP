@@ -38,7 +38,7 @@ namespace Service.HR
                             {
                                 Id = m.Id,
                                 Code = m.Code,
-                                Name = m.Name,
+                                ApplyDate = m.ApplyDate,
                                 PlaceId = m.PlaceId,
                                 PlaceName = p.Name,
                                 IdentificationTypeId = m.IdentificationTypeId,
@@ -83,7 +83,7 @@ namespace Service.HR
                                 Id = m.Id,
                                 EmployeeId = m.EmployeeId,
                                 Code = m.Code,
-                                Name = m.Name,
+                                ApplyDate = m.ApplyDate,
                                 PlaceId = m.PlaceId,
                                 IdentificationTypeId = m.IdentificationTypeId,
                                 Notes = m.Notes,
@@ -111,7 +111,7 @@ namespace Service.HR
 
                 md.EmployeeId = model.EmployeeId;
                 md.Code = model.Code;
-                md.Name = model.Name;
+                md.ApplyDate = model.ApplyDate;
                 md.PlaceId = model.PlaceId;
                 md.IdentificationTypeId = model.IdentificationTypeId;
                 md.Notes = model.Notes;
@@ -149,7 +149,7 @@ namespace Service.HR
 
                 md.EmployeeId = model.EmployeeId;
                 md.Code = model.Code;
-                md.Name = model.Name;
+                md.ApplyDate = model.ApplyDate;
                 md.PlaceId = model.PlaceId;
                 md.IdentificationTypeId = model.IdentificationTypeId;
                 md.Notes = model.Notes;

@@ -17,18 +17,17 @@ namespace Database.Sql.ERP.Entities.HR
         [Required]
         public int EmployeeId { get; set; }
 
-        [Column(TypeName = "varchar(15)")]
-        [MaxLength(15)]
+        [Column(TypeName = "varchar(20)")]
+        [MaxLength(20)]
         [Required]
         public string Code { get; set; }
-
-        [Column(TypeName = "nvarchar(100)")]
-        [MaxLength(100)]
-        public string Name { get; set; }
 
         [Column(TypeName = "int")]
         [Required]
         public int PlaceId { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime? ApplyDate { get; set; }
 
         [Column(TypeName = "int")]
         [Required]

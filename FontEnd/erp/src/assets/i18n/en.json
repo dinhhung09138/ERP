@@ -204,9 +204,10 @@
           "TITLE": "Identification",
           "TYPE": "Type",
           "CODE": "Code",
+          "APPLY": "Apply Date",
           "PLACE": "Place",
-          "NOTES": "Notes",
-          "EXPIRATION": "Expiration"
+          "EXPIRATION": "Expiration",
+          "NOTES": "Notes"
         }
       },
       "CONFIGURATION": {

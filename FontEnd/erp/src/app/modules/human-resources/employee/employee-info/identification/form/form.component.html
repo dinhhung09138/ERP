@@ -43,6 +43,21 @@
               <div class="row">
                 <div class="col-12 form-group">
                   <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.APPLY' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input matInput [matDatepicker]="applyDatePicker" formControlName="applyDate"
+                        tabindex="102" maxlength="10" autocomplete="off" />
+                    <mat-datepicker-toggle matSuffix [for]="applyDatePicker">
+                      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #applyDatePicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
                     {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.PLACE' | translate }}
                   </label>
                   <mat-form-field class="form-control">
@@ -59,10 +74,25 @@
               <div class="row">
                 <div class="col-12 form-group">
                   <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.EXPIRATION' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input matInput [matDatepicker]="expirationDatePicker" formControlName="expirationDate"
+                          maxlength="10" tabindex="104"/>
+                    <mat-datepicker-toggle matSuffix [for]="expirationDatePicker">
+                      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #expirationDatePicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
                     {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.NOTES' | translate }}
                   </label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="notes" maxlength="255" tabindex="106" autocomplete="off" />
+                    <input matInput formControlName="notes" maxlength="255" tabindex="105" autocomplete="off" />
                   </mat-form-field>
                 </div>
               </div>

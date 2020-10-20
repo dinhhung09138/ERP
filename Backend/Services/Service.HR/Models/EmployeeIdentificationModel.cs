@@ -13,8 +13,7 @@ namespace Service.HR.Models
         [MaxLength(15)]
         public string Code { get; set; }
 
-        [MaxLength(100)]
-        public string Name { get; set; }
+        public DateTime? ApplyDate { get; set; }
 
         public int PlaceId { get; set; }
 
