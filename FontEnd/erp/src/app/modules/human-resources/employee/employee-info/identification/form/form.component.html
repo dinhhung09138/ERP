@@ -1,1 +1,88 @@
-<p>form works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-12">{{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.TITLE' | translate }}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <app-element-loading [Show]="isLoading"></app-element-loading>
+            <form [formGroup]="form" (submit)="!isLoading ? onSubmit() : false">
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.TYPE' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <mat-select id="identificationTypeId" formControlName="identificationTypeId" required tabindex="100">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listIdentificationType" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['identificationTypeId'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.CODE' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input matInput formControlName="code" maxlength="20" required tabindex="101" autocomplete="off" />
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['code'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.PLACE' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <mat-select formControlName="placeId" required tabindex="103">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listProvince" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['placeId'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.IDENTIFICATION.NOTES' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input matInput formControlName="notes" maxlength="255" tabindex="106" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-12 form-group" *ngIf="formAction !== 0">
+                  <input type="submit"
+                    class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="107">
+                  <button type="button" class="btn btn-warning" (click)="onResetClick()" tabindex="108">
+                    {{ 'BUTTON.RESET' | translate }}
+                  </button>
+                  <button type="button" class="btn btn-secondary" (click)="onCloseClick()" tabindex="109">
+                    {{ 'BUTTON.CLOSE' | translate }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

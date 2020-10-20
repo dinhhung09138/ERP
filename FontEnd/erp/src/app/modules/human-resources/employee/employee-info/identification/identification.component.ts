@@ -118,7 +118,8 @@ export class EmployeeIdentificationComponent implements OnInit {
       width: '450px',
       data: {
         isPopup: true,
-        data: this.listIdentificationType,
+        listProvince: this.listProvince,
+        listIdentificationType: this.listIdentificationType,
         employeeId: this.Employee.id,
         itemId: id
       }
