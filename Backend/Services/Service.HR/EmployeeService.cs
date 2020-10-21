@@ -61,7 +61,7 @@ namespace Service.HR
                                 WorkingEmail = m.WorkingEmail,
                                 WorkingPhone = m.WorkingPhone,
                                 EmployeeWorkingStatusId = m.EmployeeWorkingStatusId,
-                                EmployeeWorkingStatusName = status.Name,
+                                EmployeeWorkingStatusName = status.Name ?? "",
                                 IsActive = m.IsActive,
                                 RowVersion = m.RowVersion,
                             };

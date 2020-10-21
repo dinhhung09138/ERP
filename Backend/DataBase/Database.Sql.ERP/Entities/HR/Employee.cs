@@ -51,7 +51,7 @@ namespace Database.Sql.ERP.Entities.HR
         public string WorkingPhone { get; set; }
 
         [Column(TypeName = "int")]
-        public int EmployeeWorkingStatusId { get; set; }
+        public int? EmployeeWorkingStatusId { get; set; }
 
         [Column(TypeName = "money")]
         public double BasicSalary { get; set; }

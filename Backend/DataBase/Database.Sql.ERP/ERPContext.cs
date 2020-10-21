@@ -62,6 +62,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<IdentificationType> IdentificationType { get; set; }
 
+        public virtual DbSet<Major> MajorType { get; set; }
+
         public virtual DbSet<ModelOfStudy> ModelOfStudy { get; set; }
 
         public virtual DbSet<Ethnicity> Nation { get; set; }
@@ -276,7 +278,6 @@ namespace Database.Sql.ERP
                 {
                     Id = 1,
                     EmployeeCode = "SYSTEM",
-                    EmployeeWorkingStatusId = 1,
                     BadgeCardNumber = string.Empty,
                     FingerSignNumber = string.Empty,
                     WorkingEmail = string.Empty,

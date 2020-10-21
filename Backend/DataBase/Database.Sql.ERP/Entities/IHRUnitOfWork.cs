@@ -21,6 +21,7 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<EmployeeRelationship> EmployeeRelationshipRepository { get; }
         ITableGenericRepository<EmployeeWorkingStatus> EmployeeWorkingStatusRepository { get; }
         ITableGenericRepository<IdentificationType> IdentificationTypeRepository { get; }
+        ITableGenericRepository<Major> MajorRepository { get; }
         ITableGenericRepository<ModelOfStudy> ModelOfStudyRepository { get; }
         ITableGenericRepository<Ethnicity> NationRepository { get; }
         ITableGenericRepository<Nationality> NationalityRepository { get; }

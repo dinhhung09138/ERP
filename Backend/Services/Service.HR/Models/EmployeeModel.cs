@@ -50,7 +50,7 @@ namespace Service.HR.Models
         [MaxLength(20)]
         public string WorkingPhone { get; set; }
 
-        public int EmployeeWorkingStatusId { get; set; }
+        public int? EmployeeWorkingStatusId { get; set; }
 
         public string EmployeeWorkingStatusName { get; set; }
 

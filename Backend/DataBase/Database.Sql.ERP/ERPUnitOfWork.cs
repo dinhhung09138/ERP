@@ -229,6 +229,15 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<Major> _majorRepository;
+        public ITableGenericRepository<Major> MajorRepository
+        {
+            get
+            {
+                return _majorRepository = _majorRepository ?? new TableGenericRepository<Major>(_context);
+            }
+        }
+
         private ITableGenericRepository<ModelOfStudy> _modelOfStudyRepository;
         public ITableGenericRepository<ModelOfStudy> ModelOfStudyRepository
         {
