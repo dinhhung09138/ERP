@@ -14,10 +14,10 @@ import { FunctionCommandViewModel } from '../../../../../core/models/function-co
 })
 export class PermissionComponent implements OnInit {
 
-  @Input() Function: FunctionViewModel;
-  @Input() ModuleName: string;
-  @Input() ParentName: string;
-  @Input() Roles: RoleDetailViewModel[] = [];
+  @Input() function: FunctionViewModel;
+  @Input() moduleName: string;
+  @Input() parentName: string;
+  @Input() roles: RoleDetailViewModel[] = [];
   @Output() listCommandSelected = new EventEmitter<FunctionCommandViewModel[]>();
 
   form: FormGroup;
@@ -70,7 +70,7 @@ export class PermissionComponent implements OnInit {
           control.get('command').setValue(false);
         }
 
-        for (const cmd of this.Function.commands) {
+        for (const cmd of this.function.commands) {
           cmd.selected = false;
         }
       }
@@ -82,7 +82,7 @@ export class PermissionComponent implements OnInit {
     this.roleService.listRoleDetail.subscribe((data: RoleViewModel) => {
       if (data && data.roles) {
         for (const dt of data.roles) {
-          const cmd = this.Function.commands.find(m => m.id === dt.commandId);
+          const cmd = this.function.commands.find(m => m.id === dt.commandId);
           if (cmd) {
             cmd.selected = true;
           }
@@ -92,14 +92,14 @@ export class PermissionComponent implements OnInit {
 
         let checkAll = true;
         let idx = 0;
-        for (const d of this.Function.commands) {
+        for (const d of this.function.commands) {
           listCommandsArray.controls[idx].get('command').setValue(d.selected);
           if (d.selected === false) {
             checkAll = true;
           }
           idx ++;
         }
-        if (this.Function.commands.length === 0) {
+        if (this.function.commands.length === 0) {
           checkAll = false;
         }
 
@@ -109,10 +109,10 @@ export class PermissionComponent implements OnInit {
   }
 
   createCommandControlArray() {
-    if (this.Function.commands === null) {
+    if (this.function.commands === null) {
       return null;
     }
-    const arr = this.Function.commands.map((cm: FunctionCommandViewModel) => {
+    const arr = this.function.commands.map((cm: FunctionCommandViewModel) => {
       return this.fb.group({
         command: [cm.selected]
       });
@@ -127,7 +127,7 @@ export class PermissionComponent implements OnInit {
     for (const control of listCommandArray.controls) {
       control.get('command').setValue(checked);
     }
-    for (const cmd of this.Function.commands) {
+    for (const cmd of this.function.commands) {
       cmd.selected = checked;
       outPutValue.push(cmd);
     }
@@ -148,7 +148,7 @@ export class PermissionComponent implements OnInit {
     }
     this.form.get('function').setValue(checkAll);
 
-    const cmd = this.Function.commands.find(m => m.id === commandId);
+    const cmd = this.function.commands.find(m => m.id === commandId);
     cmd.selected = checked;
 
     const outPutValue: FunctionCommandViewModel[] = [];
@@ -158,7 +158,7 @@ export class PermissionComponent implements OnInit {
   }
 
   getLabel() {
-    return 'SCREEN.' + this.ModuleName + '.' + (this.ParentName ? (this.ParentName + '.') : '') + this.Function.name + '.TITLE';
+    return 'SCREEN.' + this.moduleName + '.' + (this.parentName ? (this.parentName + '.') : '') + this.function.name + '.TITLE';
   }
 
 }

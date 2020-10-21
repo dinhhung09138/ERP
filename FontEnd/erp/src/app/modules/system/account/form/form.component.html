@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="card-body">
-        <app-element-loading [Show]="isLoading"></app-element-loading>
+        <app-element-loading [show]="isLoading"></app-element-loading>
         <form [formGroup]="accountForm" (submit)="!isLoading ? submitForm() : false">
           <div class="row">
             <div class="col-lg-2"></div>

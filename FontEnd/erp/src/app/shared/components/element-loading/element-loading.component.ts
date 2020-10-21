@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ElementLoadingComponent implements OnInit {
 
-  @Input() Show = false;
+  @Input() show = false;
 
   constructor() {
    }

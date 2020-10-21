@@ -21,7 +21,7 @@ import { FunctionCommandViewModel } from '../../../../core/models/function-comma
 export class RoleFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
-  @Input() ListModule: ModuleViewModel[];
+  @Input() listModule: ModuleViewModel[];
   @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
@@ -79,8 +79,8 @@ export class RoleFormComponent implements OnInit {
 
     this.currentModule = [];
     this.roleDetails = [];
-    if (this.ListModule) {
-      this.currentModule = [...this.ListModule];
+    if (this.listModule) {
+      this.currentModule = [...this.listModule];
     }
 
     if (this.formDirective){
@@ -151,13 +151,13 @@ export class RoleFormComponent implements OnInit {
   }
 
   getListParentFunctionWithoutChild(moduleCode: string) {
-    const module = this.ListModule.find(m => m.code === moduleCode);
+    const module = this.listModule.find(m => m.code === moduleCode);
     const f = module.functions.filter(m => m.parentCode === '').sort(m => m.precedence);
     return f;
   }
 
   getListParentFunctionHasChild(moduleCode: string) {
-    const module = this.ListModule.find(m => m.code === moduleCode);
+    const module = this.listModule.find(m => m.code === moduleCode);
     const f = module.functions.filter(m => m.parentCode === ''
                                       && module.functions.some(c => c.parentCode === m.code))
                               .sort(m => m.precedence);
@@ -165,7 +165,7 @@ export class RoleFormComponent implements OnInit {
   }
 
   getListChildFunction(moduleCode: string, functionCode: string) {
-    const module = this.ListModule.find(m => m.code === moduleCode);
+    const module = this.listModule.find(m => m.code === moduleCode);
     return module.functions.filter(m => m.parentCode === functionCode).sort(m => m.precedence);
   }
 
@@ -198,7 +198,7 @@ export class RoleFormComponent implements OnInit {
   }
 
   private setDataToForm(data: RoleViewModel) {
-    const moduleList = [...this.ListModule];
+    const moduleList = [...this.listModule];
     for (const r of data.roles) {
       for (const m of moduleList) {
         for (const f of m.functions) {

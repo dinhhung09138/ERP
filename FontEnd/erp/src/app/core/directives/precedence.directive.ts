@@ -7,7 +7,7 @@ export class PrecedenceDirective {
 
   constructor(private elm: ElementRef) { }
 
-  @Input() IsPrecedence: boolean;
+  @Input() isPrecedence: boolean;
 
   @HostListener('keydown', ['$event']) onKeydown(event: KeyboardEvent) {
 

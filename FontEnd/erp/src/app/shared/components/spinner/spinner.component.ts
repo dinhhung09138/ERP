@@ -8,13 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  @Input() IsLoading = false;
+  @Input() isLoading = false;
 
   constructor(private loadingService: LoadingService) { }
 
   ngOnInit(): void {
     this.loadingService.shareIsNavigationStatus.subscribe((status: boolean) => {
-      this.IsLoading = status;
+      this.isLoading = status;
     });
   }
 

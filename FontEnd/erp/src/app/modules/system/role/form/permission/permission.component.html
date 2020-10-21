@@ -9,8 +9,8 @@
       <div *ngFor="let cmd of commands.controls; let i = index">
         <div [formGroupName]="i">
           <mat-checkbox class="ml-10 function"  formControlName="command"
-                    (change)="commandChecked($event.checked, Function.commands[i].id)">
-          {{ 'PERMISSION.' + Function.commands[i].name | translate }}
+                    (change)="commandChecked($event.checked, function.commands[i].id)">
+          {{ 'PERMISSION.' + function.commands[i].name | translate }}
           </mat-checkbox>
         </div>
       </div>

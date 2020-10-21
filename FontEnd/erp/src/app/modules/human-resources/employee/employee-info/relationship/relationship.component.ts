@@ -22,7 +22,7 @@ import { RelationshipTypeViewModel } from '../../../configuration/relationship-t
 })
 export class EmployeeRelationshipComponent implements OnInit {
 
-  @Input() Employee: EmployeeViewModel;
+  @Input() employee: EmployeeViewModel;
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
 
@@ -75,11 +75,11 @@ export class EmployeeRelationshipComponent implements OnInit {
   }
 
   public getList() {
-    if (this.Employee === undefined) {
+    if (this.employee === undefined) {
       return;
     }
     this.isLoading = true;
-    this.employeeRelationshipService.getList(this.paging, this.searchText, this.Employee.id).subscribe((response: ResponseModel) => {
+    this.employeeRelationshipService.getList(this.paging, this.searchText, this.employee.id).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.TotalItems;
@@ -105,7 +105,7 @@ export class EmployeeRelationshipComponent implements OnInit {
       data: {
         isPopup: true,
         listRelationShip: this.listRelationShip,
-        employeeId: this.Employee.id,
+        employeeId: this.employee.id,
         itemId: id
       }
     });

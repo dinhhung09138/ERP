@@ -21,7 +21,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
-  @Input() Employee: EmployeeViewModel;
+  @Input() employee: EmployeeViewModel;
 
 
   isInitData = false; // Set true after get all init data in the first time.
@@ -109,7 +109,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   }
 
   private getInfoByEmployeeId(employeeId: number) {
-    if (this.Employee) {
+    if (this.employee) {
       this.isLoading = true;
       this.personalInfoService.getInfoByEmployeeId(employeeId).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
@@ -221,7 +221,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   private setDataToForm(data?: PersonalInfoViewModel) {
     if (data) {
       this.personalInfoForm.get('id').setValue(data.id);
-      this.personalInfoForm.get('employeeId').setValue(this.Employee.id);
+      this.personalInfoForm.get('employeeId').setValue(this.employee.id);
       if (data.dateOfBirth) {
         this.personalInfoForm.get('dateOfBirth').setValue(new Date(data.dateOfBirth));
       }

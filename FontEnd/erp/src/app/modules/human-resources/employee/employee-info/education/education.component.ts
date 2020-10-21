@@ -24,7 +24,7 @@ import { ProvinceViewModel } from '../../../configuration/province/province.mode
 })
 export class EmployeeEducationComponent implements OnInit {
 
-  @Input() Employee: EmployeeViewModel;
+  @Input() employee: EmployeeViewModel;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 

@@ -3,9 +3,9 @@
     <form [formGroup]="personalInfoForm" (submit)="!isLoading ? onSubmit() : false">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-          <h1>{{ 'SCREEN.HR.EMPLOYEE.TITLE' | translate }}: {{ Employee?.fullName }}</h1>
+          <h1>{{ 'SCREEN.HR.EMPLOYEE.TITLE' | translate }}: {{ employee?.fullName }}</h1>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right" *ngIf="Employee">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right" *ngIf="employee">
           <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="14" *ngIf="isEdit">
           <button type="button" class="btn btn-success" tabindex="15" *ngIf="!isEdit" (click)="onEditClick()">
           {{ 'BUTTON.UPDATE' | translate }}

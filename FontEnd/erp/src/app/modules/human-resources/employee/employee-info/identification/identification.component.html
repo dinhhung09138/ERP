@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-    <h1>{{ 'SCREEN.HR.EMPLOYEE.TITLE' | translate }}: {{ Employee?.fullName }}</h1>
+    <h1>{{ 'SCREEN.HR.EMPLOYEE.TITLE' | translate }}: {{ employee?.fullName }}</h1>
   </div>
-  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right" *ngIf="Employee">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right" *ngIf="employee">
     <button type="button" class="btn btn-outline-info" (click)="onAddClick()">
       {{ 'BUTTON.ADD' | translate }}
       </button>
@@ -10,7 +10,7 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <app-table-loading [Show]="isLoading"></app-table-loading>
+    <app-table-loading [show]="isLoading"></app-table-loading>
     <table mat-table matSort [dataSource]="dataSource" class="table">
       <ng-container matColumnDef="identificationTypeName">
         <th mat-sort-header mat-header-cell *matHeaderCellDef class="td-w-150">

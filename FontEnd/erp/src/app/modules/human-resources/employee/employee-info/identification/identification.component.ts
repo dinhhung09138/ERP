@@ -24,7 +24,7 @@ import { ProvinceViewModel } from '../../../configuration/province/province.mode
 })
 export class EmployeeIdentificationComponent implements OnInit {
 
-  @Input() Employee: EmployeeViewModel;
+  @Input() employee: EmployeeViewModel;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -79,11 +79,11 @@ export class EmployeeIdentificationComponent implements OnInit {
   }
 
   public getList() {
-    if (this.Employee === undefined) {
+    if (this.employee === undefined) {
       return;
     }
     this.isLoading = true;
-    this.employeeIdentificationService.getList(this.paging, this.searchText, this.Employee.id).subscribe((response: ResponseModel) => {
+    this.employeeIdentificationService.getList(this.paging, this.searchText, this.employee.id).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.dataSource.data = response.result.items;
         this.paging.length = response.result.TotalItems;
@@ -120,7 +120,7 @@ export class EmployeeIdentificationComponent implements OnInit {
         isPopup: true,
         listProvince: this.listProvince,
         listIdentificationType: this.listIdentificationType,
-        employeeId: this.Employee.id,
+        employeeId: this.employee.id,
         itemId: id
       }
     });

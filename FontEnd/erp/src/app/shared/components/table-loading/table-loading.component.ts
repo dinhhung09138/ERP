@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TableLoadingComponent implements OnInit {
 
-  @Input() Show = false;
+  @Input() show = false;
   constructor() {
   }
 

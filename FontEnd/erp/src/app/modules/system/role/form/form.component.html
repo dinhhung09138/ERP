@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="card-body">
-        <app-element-loading [Show]="isLoading"></app-element-loading>
+        <app-element-loading [show]="isLoading"></app-element-loading>
             <form [formGroup]="roleForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-lg-2"></div>
@@ -70,10 +70,10 @@
                       <div class="row">
                         <app-system-role-permission class="col-lg-2 col-md-3 col-sm-4 col-xs-12"
                           *ngFor="let f of getListParentFunctionWithoutChild(module.code)"
-                          [Function]="f"
-                          [ModuleName]="module.name"
-                          [ParentName]=""
-                          [Roles]="roleDetails"
+                          [function]="f"
+                          [moduleName]="module.name"
+                          [parentName]=""
+                          [roles]="roleDetails"
                           (listCommandSelected)="commandSelectedListener($event)">
                         </app-system-role-permission>
                       </div>
@@ -83,10 +83,10 @@
                           <div class="row">
                             <app-system-role-permission class="col-lg-2 col-md-3 col-sm-4 col-xs-12"
                               *ngFor="let f of getListChildFunction(module.code, func.code)"
-                              [Function]="f"
-                              [ModuleName]="module.name"
-                              [ParentName]="func.name"
-                              [Roles]="roleDetails"
+                              [function]="f"
+                              [moduleName]="module.name"
+                              [parentName]="func.name"
+                              [roles]="roleDetails"
                               (listCommandSelected)="commandSelectedListener($event)">
                             </app-system-role-permission>
                           </div>

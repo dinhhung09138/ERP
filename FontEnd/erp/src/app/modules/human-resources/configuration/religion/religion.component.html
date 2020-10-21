@@ -34,7 +34,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <app-table-loading [Show]="isLoading"></app-table-loading>
+            <app-table-loading [show]="isLoading"></app-table-loading>
             <table mat-table matSort [dataSource]="dataSource" class="table">
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -82,8 +82,8 @@
               <tr mat-header-row *matHeaderRowDef="listColumnsName"></tr>
               <tr mat-row *matRowDef="let row; columns: listColumnsName;"></tr>
             </table>
-            <app-no-data-available [Show]="paging.length === 0"></app-no-data-available>
-            <app-table-paginator [IsLoading]="isLoading" [Paging]="paging" (pageEventChange)="onPageChange($event)"></app-table-paginator>
+            <app-no-data-available [show]="paging.length === 0"></app-no-data-available>
+            <app-table-paginator [isLoading]="isLoading" [paging]="paging" (pageEventChange)="onPageChange($event)"></app-table-paginator>
           </div>
         </div>
       </div>

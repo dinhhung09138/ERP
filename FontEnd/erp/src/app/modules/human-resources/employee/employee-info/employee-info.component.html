@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="card-body">
-        <app-element-loading [Show]="isLoading"></app-element-loading>
+        <app-element-loading [show]="isLoading"></app-element-loading>
         <div class="row">
           <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             <div class="employee-img">
@@ -291,13 +291,13 @@
           <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
             <div class="tab-content">
               <div class="tab-pane active" id="personalInfo">
-                <app-hr-employee-personal-info [Employee]="currentSelectedEmployee"></app-hr-employee-personal-info>
+                <app-hr-employee-personal-info [employee]="currentSelectedEmployee"></app-hr-employee-personal-info>
               </div>
               <div class="tab-pane" id="identification">
-                <app-hr-employee-identification [Employee]="currentSelectedEmployee"></app-hr-employee-identification>
+                <app-hr-employee-identification [employee]="currentSelectedEmployee"></app-hr-employee-identification>
               </div>
               <div class="tab-pane" id="relationship">
-                <app-hr-employee-relationship [Employee]="currentSelectedEmployee"></app-hr-employee-relationship>
+                <app-hr-employee-relationship [employee]="currentSelectedEmployee"></app-hr-employee-relationship>
               </div>
               <article class="tab-pane" id="ipsum-left">
                 <h1>Ipsum</h1>
