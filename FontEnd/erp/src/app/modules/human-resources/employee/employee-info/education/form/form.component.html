@@ -1,1 +1,126 @@
-<p>form works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-12">{{ 'SCREEN.HR.EMPLOYEE.EDUCATION.TITLE' | translate }}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <app-element-loading [show]="isLoading"></app-element-loading>
+            <form [formGroup]="form" (submit)="!isLoading ? onSubmit() : false">
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.EDUCATION_TYPE' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <mat-select id="educationTypeId" formControlName="educationTypeId" required tabindex="170">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listEducation" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['educationTypeId'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.SCHOOL' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input formControlName="school" maxlength="255" required tabindex="171" autocomplete="off" />
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['school'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.MAJOR' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <mat-select formControlName="majorId" required tabindex="172">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listMajor" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['majorId'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.RANKING' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <mat-select formControlName="rankingId" required tabindex="173">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listRank" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['rankingId'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.MODEL_OF_STUDY' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <mat-select formControlName="modelOfStudyId" required tabindex="174">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listModelOfStudy" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['modelOfStudyId'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.YEAR' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <mat-select formControlName="year" required tabindex="174">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listYear" [value]="item">{{ item }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['year'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-12 form-group" *ngIf="formAction !== 0">
+                  <input type="submit"
+                    class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="154">
+                  <button type="button" class="btn btn-warning" (click)="onResetClick()" tabindex="155">
+                    {{ 'BUTTON.RESET' | translate }}
+                  </button>
+                  <button type="button" class="btn btn-secondary" (click)="onCloseClick()" tabindex="156">
+                    {{ 'BUTTON.CLOSE' | translate }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

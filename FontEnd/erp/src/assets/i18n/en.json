@@ -193,6 +193,15 @@
           "EDUCATION": "Education",
           "QUALIFICATION": "Qualification"
         },
+        "EDUCATION": {
+          "TITLE": "Education",
+          "EDUCATION_TYPE": "Type",
+          "SCHOOL": "School",
+          "MAJOR": "Major",
+          "RANKING": "Ranking",
+          "MODEL_OF_STUDY": "Model of study",
+          "YEAR": "Year"
+        },
         "RELATIONSHIP": {
           "TITLE": "Employee Relationship",
           "FULL_NAME": "Full Name",

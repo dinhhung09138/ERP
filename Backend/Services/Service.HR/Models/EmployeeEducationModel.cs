@@ -7,21 +7,19 @@ namespace Service.HR.Models
     {
         public int Id { get; set; }
 
+        public int EducationTypeId { get; set; }
+
+        public string EducationTypeName { get; set; }
+
         public int EmployeeId { get; set; }
 
-        public int SchoolId { get; set; }
+        public string School { get; set; }
 
-        public string SchoolName { get; set; }
+        public int MajorId { get; set; }
 
-        public int SpecializedTrainingId { get; set; }
-
-        public string SpecializedTrainingName { get; set; }
+        public string MajorName { get; set; }
 
         public int Year { get; set; }
-
-        public int TrainingTypeId { get; set; }
-
-        public string TrainingTypeName { get; set; }
 
         public int RankingId { get; set; }
 

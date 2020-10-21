@@ -30,7 +30,7 @@ namespace Service.HR
             try
             {
                 var query = from m in _context.EmployeeEducationRepository.Query()
-                            join sp in _context.SpecializedTrainingRepository.Query() on m.SpecializedTrainingId equals sp.Id
+                            join t in _context.EducationRepository.Query() on m.EducationTypeId equals t.Id
                             join rk in _context.RankingRepository.Query() on m.RankingId equals rk.Id
                             join md in _context.ModelOfStudyRepository.Query() on m.ModelOfStudyId equals md.Id
                             where !m.Deleted && m.EmployeeId == filter.EmployeeId
@@ -38,13 +38,12 @@ namespace Service.HR
                             select new EmployeeEducationModel()
                             {
                                 Id = m.Id,
-                                SchoolId = m.SchoolId,
-                                SchoolName = string.Empty,
-                                SpecializedTrainingId = m.SpecializedTrainingId,
-                                SpecializedTrainingName = sp.Name,
+                                EducationTypeId = m.EducationTypeId,
+                                EducationTypeName = t.Name,
+                                School = m.School,
+                                MajorId = m.MajorId,
+                                MajorName = string.Empty,
                                 Year = m.Year,
-                                TrainingTypeId = m.TrainingTypeId,
-                                TrainingTypeName = string.Empty,
                                 RankingId = m.RankingId,
                                 RankingName = rk.Name,
                                 ModelOfStudyId = m.ModelOfStudyId,
@@ -55,9 +54,9 @@ namespace Service.HR
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
-                    query = query.Where(m => m.SchoolName.ToLower().Contains(filter.Text)
-                                            || m.SpecializedTrainingName.ToLower().Contains(filter.Text)
-                                            || m.TrainingTypeName.ToLower().Contains(filter.Text)
+                    query = query.Where(m => m.School.ToLower().Contains(filter.Text)
+                                            || m.EducationTypeName.ToLower().Contains(filter.Text)
+                                            || m.MajorName.ToLower().Contains(filter.Text)
                                             || m.ModelOfStudyName.ToLower().Contains(filter.Text)
                                             || m.RankingName.ToLower().Contains(filter.Text));
                 }
@@ -86,10 +85,10 @@ namespace Service.HR
                             {
                                 Id = m.Id,
                                 EmployeeId = m.EmployeeId,
-                                SchoolId = m.SchoolId,
-                                SpecializedTrainingId = m.SpecializedTrainingId,
+                                EducationTypeId = m.EducationTypeId,
+                                School = m.School,
+                                MajorId = m.MajorId,
                                 Year = m.Year,
-                                TrainingTypeId = m.TrainingTypeId,
                                 RankingId = m.RankingId,
                                 ModelOfStudyId = m.ModelOfStudyId,
                                 IsActive = m.IsActive,
@@ -114,10 +113,10 @@ namespace Service.HR
                 EmployeeEducation md = new EmployeeEducation();
 
                 md.EmployeeId = model.EmployeeId;
-                md.SchoolId = model.SchoolId;
-                md.SpecializedTrainingId = model.SpecializedTrainingId;
+                md.EducationTypeId = model.EducationTypeId;
+                md.School = model.School;
+                md.MajorId = model.MajorId;
                 md.Year = model.Year;
-                md.TrainingTypeId = model.TrainingTypeId;
                 md.RankingId = model.RankingId;
                 md.ModelOfStudyId = model.ModelOfStudyId;
                 md.IsActive = model.IsActive;
@@ -152,10 +151,10 @@ namespace Service.HR
                 }
 
                 md.EmployeeId = model.EmployeeId;
-                md.SchoolId = model.SchoolId;
-                md.SpecializedTrainingId = model.SpecializedTrainingId;
+                md.EducationTypeId = model.EducationTypeId;
+                md.School = model.School;
+                md.MajorId = model.MajorId;
                 md.Year = model.Year;
-                md.TrainingTypeId = model.TrainingTypeId;
                 md.RankingId = model.RankingId;
                 md.ModelOfStudyId = model.ModelOfStudyId;
                 md.IsActive = model.IsActive;

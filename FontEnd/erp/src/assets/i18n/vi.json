@@ -193,6 +193,15 @@
           "EDUCATION": "Trình độ học vấn",
           "QUALIFICATION": "Trình độ chuyên môn"
         },
+        "EDUCATION": {
+          "TITLE": "Bằng cấp",
+          "EDUCATION_TYPE": "Hình thức",
+          "SCHOOL": "Trường",
+          "MAJOR": "Chuyên ngành",
+          "RANKING": "Xếp hạng",
+          "MODEL_OF_STUDY": "Hình thức đào tạo",
+          "YEAR": "Năm"
+        },
         "RELATIONSHIP": {
           "TITLE": "Thông tin gia đình",
           "FULL_NAME": "Họ Tên",

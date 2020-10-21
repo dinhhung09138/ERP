@@ -19,19 +19,20 @@ namespace Database.Sql.ERP.Entities.HR
 
         [Column(TypeName = "int")]
         [Required]
-        public int SchoolId { get; set; }
+        public int EducationTypeId { get; set; }
+
+        [Column(TypeName = "nvarchar(255)")]
+        [MaxLength(255)]
+        [Required]
+        public string School { get; set; }
 
         [Column(TypeName = "int")]
         [Required]
-        public int SpecializedTrainingId { get; set; }
+        public int MajorId { get; set; }
 
         [Column(TypeName = "int")]
         [Required]
         public int Year { get; set; }
-
-        [Column(TypeName = "int")]
-        [Required]
-        public int TrainingTypeId { get; set; }
 
         [Column(TypeName = "int")]
         [Required]

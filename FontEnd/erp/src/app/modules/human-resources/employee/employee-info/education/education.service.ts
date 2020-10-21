@@ -12,7 +12,7 @@ import { PagingModel } from '../../../../../core/models/paging.model';
 import { FilterModel } from '../../../../../core/models/filter-table.model';
 import { ResponseModel } from '../../../../../core/models/response.model';
 import { FormActionStatus } from '../../../../../core/enums/form-action-status.enum';
-import { EmployeeEducationViewModel } from './form/education.model';
+import { EmployeeEducationViewModel } from './education.model';
 
 @Injectable()
 export class EmployeeEducationService {

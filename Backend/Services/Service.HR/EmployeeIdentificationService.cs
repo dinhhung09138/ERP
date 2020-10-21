@@ -52,7 +52,6 @@ namespace Service.HR
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
                     query = query.Where(m => m.Code.ToLower().Contains(filter.Text)
-                                            || m.Name.ToLower().Contains(filter.Text)
                                             || m.PlaceName.ToLower().Contains(filter.Text)
                                             || m.IdentificationTypeName.ToLower().Contains(filter.Text)
                                             || m.Notes.ToLower().Contains(filter.Text));
