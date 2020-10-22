@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Service.HR
 {
-    class EmployeeEducationService : BaseService, IEmployeeEducationService
+    public class EmployeeEducationService : BaseService, IEmployeeEducationService
     {
         private readonly IERPUnitOfWork _context;
 

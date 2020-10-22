@@ -44,7 +44,8 @@ namespace Service.HR
             {
                 var query = from m in _context.EmployeeRepository.Query()
                             join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
-                            join status in _context.EmployeeWorkingStatusRepository.Query() on m.EmployeeWorkingStatusId equals status.Id
+                            join status in _context.EmployeeWorkingStatusRepository.Query() on m.EmployeeWorkingStatusId equals status.Id into status
+                            from emplStatus in status.DefaultIfEmpty()
                             where !m.Deleted
                             orderby m.CreateDate
                             select new EmployeeModel()
@@ -61,7 +62,7 @@ namespace Service.HR
                                 WorkingEmail = m.WorkingEmail,
                                 WorkingPhone = m.WorkingPhone,
                                 EmployeeWorkingStatusId = m.EmployeeWorkingStatusId,
-                                EmployeeWorkingStatusName = status.Name ?? "",
+                                EmployeeWorkingStatusName = emplStatus.Name ?? "",
                                 IsActive = m.IsActive,
                                 RowVersion = m.RowVersion,
                             };

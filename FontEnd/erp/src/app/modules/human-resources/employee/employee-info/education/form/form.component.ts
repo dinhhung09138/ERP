@@ -18,7 +18,7 @@ import { DialogDataInterface } from '../../../../../../core/interfaces/dialog-da
 
 
 @Component({
-  selector: 'app-form',
+  selector: 'app-hr-employee-education-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
@@ -32,11 +32,16 @@ export class EmployeeEducationFormComponent implements OnInit {
   employeeId = 0;
   form: FormGroup;
   formAction: FormActionStatus;
-  listMajor: any[];
+  listMajor: any[] = [
+    {
+      id: 1,
+      name: 'Demo'
+    }
+  ];
   listEducation: EducationViewModel[];
   listRank: RankingViewModel[];
   listModelOfStudy: ModelOfStudyViewModel[];
-  listYear: number[];
+  listYear: number[] = [];
   item: EmployeeEducationViewModel;
 
   constructor(
@@ -73,7 +78,7 @@ export class EmployeeEducationFormComponent implements OnInit {
     this.formAction = FormActionStatus.Insert;
     if (this.dialogData && this.dialogData.isPopup === true) {
       this.listEducation = this.dialogData.listEducation;
-      this.listMajor = this.dialogData.listMajor;
+      //this.listMajor = this.dialogData.listMajor;
       this.listRank = this.dialogData.listRank;
       this.listModelOfStudy = this.dialogData.listModelOfStudy;
       this.employeeId = this.dialogData.employeeId;

@@ -42,6 +42,7 @@ import { EmployeeIdentificationFormComponent } from './identification/form/form.
 import { EmployeeIdentificationService } from './identification/identification.service';
 import { ProvinceService } from '../../configuration/province/province.service';
 import { IdentificationTypeService } from '../../configuration/identification-type/identification-type.service';
+import { ModelOfStudyService } from '../../configuration/model-of-study/model-of-study.service';
 
 const routes: Routes = [
   {
@@ -89,6 +90,9 @@ const routes: Routes = [
     PersonalInfoService,
     ProvinceService,
     IdentificationTypeService,
+    ModelOfStudyService,
+    RankingService,
+    EducationService,
     FormatDatePipe,
     ReligionService,
     EthnicityService,

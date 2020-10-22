@@ -22,7 +22,7 @@ import { ResponseStatus } from '../../../../../core/enums/response-status.enum';
 
 
 @Component({
-  selector: 'app-education',
+  selector: 'app-hr-employee-education',
   templateUrl: './education.component.html',
   styleUrls: ['./education.component.scss']
 })
@@ -104,7 +104,11 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
-  public getRankingType() {
+  public getMajor() {
+
+  }
+
+  public getRanking() {
     this.isLoading = true;
     this.rankingService.getDropdown().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
@@ -129,6 +133,7 @@ export class EmployeeEducationComponent implements OnInit {
     this.educationTypeService.getDropdown().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.listEducation = response.result;
+        console.log(this.listEducation);
       }
       this.isLoading = false;
     });
@@ -140,6 +145,12 @@ export class EmployeeEducationComponent implements OnInit {
       width: '450px',
       data: {
         isPopup: true,
+        itemId: id,
+        employeeId: this.employee.id,
+        listEducation: this.listEducation,
+        listMajor: null,
+        listRank: this.listRank,
+        listModelOfStudy: this.listModelOfStudy
       }
     });
 

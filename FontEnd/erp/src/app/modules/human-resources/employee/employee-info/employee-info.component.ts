@@ -18,6 +18,7 @@ import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { ApplicationConstant } from '../../../../core/constants/app.constant';
 import { EmployeeRelationshipComponent } from './relationship/relationship.component';
 import { EmployeeIdentificationComponent } from './identification/identification.component';
+import { EmployeeEducationComponent } from './education/education.component';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -45,6 +46,8 @@ export class EmployeeInfoComponent implements OnInit {
   fileToUpload: any;
   fileUrl: string;
 
+  initEducationTab = false;
+  @ViewChild(EmployeeEducationComponent) educationTab: EmployeeEducationComponent;
   initRelationshipTab = false;
   @ViewChild(EmployeeRelationshipComponent) relationshipTab: EmployeeRelationshipComponent;
   initIdentificationTab = false;
@@ -222,6 +225,16 @@ export class EmployeeInfoComponent implements OnInit {
           this.identificationTab.getList();
           this.identificationTab.getIdentificationType();
           this.identificationTab.getProvince();
+        }
+        break;
+      case 'education':
+        if (this.initEducationTab === false) {
+          this.initEducationTab = true;
+          this.educationTab.getList();
+          this.educationTab.getEducationType();
+          this.educationTab.getModelOfStudyType();
+          this.educationTab.getRanking();
+          this.educationTab.getMajor();
         }
         break;
     }

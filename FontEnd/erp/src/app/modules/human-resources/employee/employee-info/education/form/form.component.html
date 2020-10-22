@@ -33,7 +33,7 @@
                     {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.SCHOOL' | translate }}
                   </label>
                   <mat-form-field class="form-control">
-                    <input formControlName="school" maxlength="255" required tabindex="171" autocomplete="off" />
+                    <input matInput formControlName="school" maxlength="255" required tabindex="171" autocomplete="off" />
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && form.controls['school'].errors?.required">
                     {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
