@@ -101,7 +101,7 @@ export class EmployeeRelationshipComponent implements OnInit {
   private showFormModal(id?: number) {
     const modalRef = this.dialog.open(EmployeeRelationshipFormComponent, {
       disableClose: true,
-      width: '450px',
+      panelClass: 'mat-modal-md',
       data: {
         isPopup: true,
         listRelationShip: this.listRelationShip,

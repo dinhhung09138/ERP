@@ -189,3 +189,69 @@
 .mat-menu-item {
   font: $font-family;
 }
+
+.mat-modal-sm {
+  width: 100%;
+  max-width: unset !important;
+}
+
+.mat-modal-md {
+  width: 100%;
+  max-width: unset !important;
+}
+
+.mat-modal-lg {
+  width: 100%;
+  max-width: unset !important;
+}
+
+@media only screen and (min-width: 567px) {
+  .mat-modal-sm {
+    width: 300px;
+  }
+
+  .mat-modal-md {
+    width: 400px;
+  }
+
+  .mat-modal-lg {
+    width: 500px;
+  }
+
+}
+
+@media only screen and (min-width: 992px) {
+
+  .mat-modal-md {
+    width: 600px;
+  }
+
+  .mat-modal-lg {
+    width: 800px;
+  }
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .mat-modal-md {
+    width: 60%;
+  }
+
+  .mat-modal-lg {
+    width: 80%;
+  }
+
+}
+
+@media only screen and (min-width: 1366px) {
+
+  .mat-modal-md {
+    width: 50%;
+  }
+
+  .mat-modal-lg {
+    width: 70%;
+  }
+
+}

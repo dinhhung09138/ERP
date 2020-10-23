@@ -115,7 +115,7 @@ export class EmployeeIdentificationComponent implements OnInit {
   private showFormModal(id?: number) {
     const modalRef = this.dialog.open(EmployeeIdentificationFormComponent, {
       disableClose: true,
-      width: '450px',
+      panelClass: 'mat-modal-md',
       data: {
         isPopup: true,
         listProvince: this.listProvince,

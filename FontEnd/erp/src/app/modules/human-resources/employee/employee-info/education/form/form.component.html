@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-12 form-group">
+                <div class="col-md-6 col-sm-12 form-group">
                   <label class="label">
                     {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.MAJOR' | translate }}
                   </label>
@@ -55,30 +55,12 @@
                     {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-12 form-group">
-                  <label class="label">
-                    {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.RANKING' | translate }}
-                  </label>
-                  <mat-form-field class="form-control">
-                    <mat-select formControlName="rankingId" required tabindex="173">
-                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                      <mat-option *ngFor="let item of listRank" [value]="item.id">{{ item.name }}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-error *ngIf="isSubmit && form.controls['rankingId'].errors?.required">
-                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
-                  </mat-error>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 form-group">
+                <div class="col-md-6 col-sm-12 form-group">
                   <label class="label">
                     {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.MODEL_OF_STUDY' | translate }}
                   </label>
                   <mat-form-field class="form-control">
-                    <mat-select formControlName="modelOfStudyId" required tabindex="174">
+                    <mat-select formControlName="modelOfStudyId" required tabindex="173">
                       <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
                       <mat-option *ngFor="let item of listModelOfStudy" [value]="item.id">{{ item.name }}</mat-option>
                     </mat-select>
@@ -89,7 +71,21 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-12 form-group">
+                <div class="col-md-6 col-sm-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.RANKING' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <mat-select formControlName="rankingId" required tabindex="174">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listRank" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['rankingId'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+                <div class="col-md-6 col-sm-12 form-group">
                   <label class="label">
                     {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.YEAR' | translate }}
                   </label>

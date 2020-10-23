@@ -142,7 +142,7 @@ export class EmployeeEducationComponent implements OnInit {
   private showFormModal(id?: number) {
     const modalRef = this.dialog.open(EmployeeEducationFormComponent, {
       disableClose: true,
-      width: '450px',
+      panelClass: 'mat-modal-md',
       data: {
         isPopup: true,
         itemId: id,
