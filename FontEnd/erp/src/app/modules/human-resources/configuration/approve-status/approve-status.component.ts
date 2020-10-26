@@ -20,7 +20,6 @@ import { ApproveStatusFormComponent } from './form/form.component';
 export class ApproveStatusComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(ApproveStatusFormComponent) form: ApproveStatusFormComponent;
 
   permission = new PermissionViewModel();
   isLoading = false;
@@ -45,39 +44,26 @@ export class ApproveStatusComponent implements OnInit {
     this.getList();
   }
 
-  reloadTableEventListener($event: boolean) {
-    if ($event === true) {
-      this.getList();
-    }
-  }
-
   onCreateClick() {
-    if (this.isLoading === false) {
-      this.form.onCreateClick();
-    }
+    this.openModalForm();
   }
 
   onImportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onExportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
-      this.form.onUpdateClick(id);
-    }
+    this.openModalForm(id);
   }
 
   onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
 
       this.approveStatusService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
@@ -117,5 +103,26 @@ export class ApproveStatusComponent implements OnInit {
       }
       this.isLoading = false;
     });
+  }
+
+  private openModalForm(id?: number) {
+    if (this.isLoading === false) {
+      const modalRef = this.dialog.open(ApproveStatusFormComponent, {
+        disableClose: true,
+        panelClass: 'mat-modal-sm',
+        data: {
+          isPopup: true,
+          itemId: id,
+        }
+      });
+
+      modalRef.afterClosed().subscribe(
+        (result: boolean) => {
+          if (result === true) {
+            this.getList();
+          }
+        }
+      );
+    }
   }
 }

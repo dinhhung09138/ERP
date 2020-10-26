@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -10,6 +10,9 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ApproveStatusViewModel } from '../approve-status.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { inject } from '@angular/core/testing';
+import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-approve-status-form',
@@ -19,8 +22,6 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 export class ApproveStatusFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
-
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
@@ -32,8 +33,10 @@ export class ApproveStatusFormComponent implements OnInit {
   item: ApproveStatusViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
     public translate: TranslateService,
     private elm: ElementRef,
+    private dialogRef: MatDialogRef<ApproveStatusFormComponent>,
     private fb: FormBuilder,
     private approveStatusService: ApproveStatusService) {
     }
@@ -48,7 +51,19 @@ export class ApproveStatusFormComponent implements OnInit {
       isActive: [true],
       rowVersion: [null],
     });
-    this.initFormControl(this.formAction);
+    this.initFormControl(FormActionStatus.Insert);
+    this.translate.get('SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
+    if (this.dialogData && this.dialogData.isPopup === true) {
+      if (this.dialogData.itemId) {
+        this.translate.get('SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_EDIT').subscribe(message => {
+          this.formTitle = message;
+        });
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
+    }
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -93,25 +108,6 @@ export class ApproveStatusFormComponent implements OnInit {
     return true;
   }
 
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#code').focus();
-
-    this.translate.get('SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_EDIT').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
   onResetClick() {
     switch (this.formAction) {
       case FormActionStatus.Insert:
@@ -125,7 +121,7 @@ export class ApproveStatusFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
+    this.dialogRef.close(false);
   }
 
   onSubmitForm() {
@@ -138,7 +134,7 @@ export class ApproveStatusFormComponent implements OnInit {
     this.approveStatusService.save(this.approveStatusForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response !== null && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
-        this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
       }
       this.isLoading = false;
       this.isSubmit = false;

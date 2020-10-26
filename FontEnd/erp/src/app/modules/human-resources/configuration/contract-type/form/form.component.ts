@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { ContractTypeService } from '../contract-type.service';
@@ -10,6 +11,7 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ContractTypeViewModel } from '../contract-type.model';
 import { AppValidator } from '../../../../../core/validators/app.validator';
+import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-contract-type-form',
@@ -19,7 +21,6 @@ import { AppValidator } from '../../../../../core/validators/app.validator';
 export class ContractTypeFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
@@ -31,6 +32,8 @@ export class ContractTypeFormComponent implements OnInit {
   item: ContractTypeViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<ContractTypeFormComponent>,
     private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
@@ -50,7 +53,19 @@ export class ContractTypeFormComponent implements OnInit {
       isActive: [true],
       rowVersion: [null],
     });
-    this.initFormControl(this.formAction);
+    this.initFormControl(FormActionStatus.Insert);
+    if (this.dialogData && this.dialogData.isPopup === true) {
+      if (this.dialogData.itemId) {
+        this.translate.get('SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_EDIT').subscribe(message => {
+          this.formTitle = message;
+        });
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
+    }
+    this.translate.get('SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_NEW').subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -105,24 +120,6 @@ export class ContractTypeFormComponent implements OnInit {
     return true;
   }
 
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#code').focus();
-    this.translate.get('SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_NEW').subscribe(message =>{
-      this.formTitle = message;
-    })
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_EDIT').subscribe(message =>{
-      this.formTitle = message;
-    })
-  }
-
   onResetClick() {
     switch (this.formAction) {
       case FormActionStatus.Insert:
@@ -136,7 +133,7 @@ export class ContractTypeFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
+    this.dialogRef.close(false);
   }
 
   submitForm() {
@@ -149,7 +146,7 @@ export class ContractTypeFormComponent implements OnInit {
     this.contractTypeService.save(this.contractTypeForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response !== null && response.responseStatus === ResponseStatus.success) {
         this.initFormControl(FormActionStatus.UnKnow);
-        this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
       }
       this.isLoading = false;
       this.isSubmit = false;

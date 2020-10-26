@@ -56,6 +56,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     .pipe(
       retry(2),
       catchError((error: HttpErrorResponse) => {
+        console.log(error.error);
 
         switch (error.status) {
           case 500:
@@ -102,7 +103,6 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.dialogService.openErrorDialog(errorNotResponse);
               break;
         }
-        console.log(error.error);
         return throwError(error);
       })
     );

@@ -9,8 +9,7 @@
       <div class="card-body">
         <app-element-loading [show]="isLoading"></app-element-loading>
         <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-12">
             <form [formGroup]="approveStatusForm" (submit)="!isLoading ? onSubmitForm() : false">
               <div class="row">
                 <div class="col-12 form-group">
@@ -63,6 +62,7 @@
                   </div>
                 </div>
               </div>
+              <br/>
               <div class="row">
                 <div class="col-12 form-group" *ngIf="formAction != 0">
                   <input *ngIf="(permission.allowInsert && formAction === 1) || (permission.allowUpdate && formAction === 2)" type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="5">
@@ -76,7 +76,6 @@
               </div>
             </form>
           </div>
-          <div class="col-lg-2"></div>
         </div>
       </div>
     </div>

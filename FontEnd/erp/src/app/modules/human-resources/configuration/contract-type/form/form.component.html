@@ -9,8 +9,7 @@
       <div class="card-body">
         <app-element-loading [show]="isLoading"></app-element-loading>
         <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-12">
             <form [formGroup]="contractTypeForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-12 form-group">
@@ -38,15 +37,17 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
+                <div class="col-12 form-group">
+                  <mat-checkbox tabindex="4" formControlName="allowInsurance">
+                  </mat-checkbox>
+                  &nbsp;&nbsp;
                   <label class="label">{{'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.INSURANCE' | translate}}</label>
-                  <mat-checkbox class="ml-10" tabindex="4" formControlName="allowInsurance">
-                  </mat-checkbox>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group">
-                  <label class="label">{{'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.LEAVEDATE' | translate}}</label>
-                  <mat-checkbox class="ml-10" tabindex="5" formControlName="allowLeaveDate">
+                <div class="col-12 form-group">
+                  <mat-checkbox tabindex="5" formControlName="allowLeaveDate">
                   </mat-checkbox>
+                  &nbsp;&nbsp;
+                  <label class="label">{{'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.LEAVEDATE' | translate}}</label>
                 </div>
               </div>
               <div class="row">
@@ -65,7 +66,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                   <label class="label">{{'TABLE.LIST.ACTIVE' | translate}}</label>
                   <div class="input-group">
-                    <mat-checkbox class="ml-10" tabindex="6" formControlName="isActive">
+                    <mat-checkbox tabindex="6" formControlName="isActive">
                     </mat-checkbox>
                   </div>
                 </div>
@@ -79,7 +80,6 @@
               </div>
             </form>
           </div>
-          <div class="col-lg-2"></div>
         </div>
       </div>
     </div>
