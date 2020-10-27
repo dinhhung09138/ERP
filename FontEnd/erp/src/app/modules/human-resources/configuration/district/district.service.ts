@@ -14,6 +14,9 @@ import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
 import { DistrictViewModel } from './district.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FilterModel } from 'src/app/core/models/filter-table.model';
+import { ProvinceService } from '../province/province.service';
+import { ResponseStatus } from '../../../../core/enums/response-status.enum';
+import { ProvinceViewModel } from '../province/province.model';
 
 
 @Injectable()
@@ -35,7 +38,8 @@ export class DistrictService {
     private api: ApiService,
     private dialog: MatDialog,
     private dialogService: DialogService,
-    private context: SessionContext) { }
+    private context: SessionContext,
+    private provinceService: ProvinceService) { }
 
   getPermission(): PermissionViewModel {
     this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
@@ -94,15 +98,20 @@ export class DistrictService {
   }
 
   openPopupForm(form: any): Observable<ResponseModel> {
-    const dialogRef = this.dialog.open(form, {
-      width: '500px',
-      disableClose: true,
-      data: {
-        isPopup: true,
-        title: 'SCREEN.HR.CONFIGURATION.DISTRICT.POPUP_TITLE'
+    let provinceData = null;
+    this.provinceService.getDropdown().toPromise().then((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        provinceData = response.result;
       }
     });
 
+    const dialogRef = this.dialog.open(form, {
+      panelClass: 'mat-modal-sm',
+      disableClose: true,
+      data: {
+        listProvince: provinceData
+      }
+    });
     return dialogRef.beforeClosed().pipe(
       switchMap((result: boolean) => {
         if (result === true) {

@@ -90,13 +90,6 @@ export class ProfessionalQualificationFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  showFormStatus() {
-    if (this.formAction === FormActionStatus.UnKnow) {
-      return false;
-    }
-    return true;
-  }
-
   onResetClick() {
     switch (this.formAction) {
       case FormActionStatus.Insert:

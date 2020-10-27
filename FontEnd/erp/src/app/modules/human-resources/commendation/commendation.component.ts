@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
@@ -19,7 +20,6 @@ import { CommendationFormComponent } from './form/form.component';
 export class CommendationComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(CommendationFormComponent) form: CommendationFormComponent;
 
   permission = new PermissionViewModel();
   isLoading = false;
@@ -31,7 +31,9 @@ export class CommendationComponent implements OnInit {
   listColumnsName: string[] = ['name', 'description', 'money', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private commendationService: CommendationService) { }
+  constructor(
+    private dialog: MatDialog,
+    private commendationService: CommendationService) { }
 
   ngOnInit(): void {
     this.permission = this.commendationService.getPermission();
@@ -39,39 +41,26 @@ export class CommendationComponent implements OnInit {
     this.getList();
   }
 
-  reloadTableEventListener($event: boolean) {
-    if ($event === true) {
-      this.getList();
-    }
-  }
-
   onCreateClick() {
-    if (this.isLoading === false) {
-      this.form.onCreateClick();
-    }
+    this.openModalForm();
   }
 
   onImportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onExportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
-      this.form.onUpdateClick(id);
-    }
+    this.openModalForm(id);
   }
 
   onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
 
       this.commendationService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
@@ -111,5 +100,26 @@ export class CommendationComponent implements OnInit {
       }
       this.isLoading = false;
     });
+  }
+
+  private openModalForm(id?: number) {
+    if (this.isLoading === false) {
+      const modalRef = this.dialog.open(CommendationFormComponent, {
+        disableClose: true,
+        panelClass: 'mat-modal-md',
+        data: {
+          isPopup: true,
+          itemId: id,
+        }
+      });
+
+      modalRef.afterClosed().subscribe(
+        (result: boolean) => {
+          if (result === true) {
+            this.getList();
+          }
+        }
+      );
+    }
   }
 }

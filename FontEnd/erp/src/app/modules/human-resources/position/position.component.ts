@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
@@ -19,7 +20,6 @@ import { PositionFormComponent } from './form/form.component';
 export class PositionComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(PositionFormComponent) form: PositionFormComponent;
 
   permission = new PermissionViewModel();
   isLoading = false;
@@ -31,7 +31,9 @@ export class PositionComponent implements OnInit {
   listColumnsName: string[] = ['name', 'description', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private positionService: PositionService) { }
+  constructor(
+    private dialog: MatDialog,
+    private positionService: PositionService) { }
 
   ngOnInit(): void {
     this.permission = this.positionService.getPermission();
@@ -39,39 +41,26 @@ export class PositionComponent implements OnInit {
     this.getList();
   }
 
-  reloadTableEventListener($event: boolean) {
-    if ($event === true) {
-      this.getList();
-    }
-  }
-
   onCreateClick() {
-    if (this.isLoading === false) {
-      this.form.onCreateClick();
-    }
+    this.openModalForm();
   }
 
   onImportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onExportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
-      this.form.onUpdateClick(id);
-    }
+    this.openModalForm(id);
   }
 
   onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
 
       this.positionService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
@@ -111,5 +100,26 @@ export class PositionComponent implements OnInit {
       }
       this.isLoading = false;
     });
+  }
+
+  private openModalForm(id?: number) {
+    if (this.isLoading === false) {
+      const modalRef = this.dialog.open(PositionFormComponent, {
+        disableClose: true,
+        panelClass: 'mat-modal-md',
+        data: {
+          isPopup: true,
+          itemId: id,
+        }
+      });
+
+      modalRef.afterClosed().subscribe(
+        (result: boolean) => {
+          if (result === true) {
+            this.getList();
+          }
+        }
+      );
+    }
   }
 }

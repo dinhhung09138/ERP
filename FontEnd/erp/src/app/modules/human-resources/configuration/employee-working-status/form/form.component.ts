@@ -103,13 +103,6 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
     }
   }
 
-  showFormStatus() {
-    if (this.formAction === FormActionStatus.UnKnow) {
-      return false;
-    }
-    return true;
-  }
-
   onResetClick() {
     switch (this.formAction) {
       case FormActionStatus.Insert:

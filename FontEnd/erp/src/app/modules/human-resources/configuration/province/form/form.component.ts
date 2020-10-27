@@ -63,13 +63,6 @@ export class ProvinceFormComponent implements OnInit {
     });
   }
 
-  showFormStatus() {
-    if (this.formAction === FormActionStatus.UnKnow) {
-      return false;
-    }
-    return true;
-  }
-
   initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
 

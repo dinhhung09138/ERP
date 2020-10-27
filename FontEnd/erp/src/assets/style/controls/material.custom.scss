@@ -1,4 +1,8 @@
 
+.cdk-overlay-dark-backdrop {
+  background: rgba(0,0,0,.6);
+}
+
 .mat-focused {
   border-color: $primary-background-color !important;
   outline: 0 !important;

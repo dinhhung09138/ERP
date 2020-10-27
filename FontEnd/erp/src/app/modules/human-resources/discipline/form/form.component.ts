@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -11,6 +11,8 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { DisciplineViewModel } from '../discipline.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogDataInterface } from '../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-discipline-form',
@@ -20,8 +22,6 @@ import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 export class DisciplineFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
-
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
@@ -33,6 +33,8 @@ export class DisciplineFormComponent implements OnInit {
   item: DisciplineViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<DisciplineFormComponent>,
     private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
@@ -40,6 +42,7 @@ export class DisciplineFormComponent implements OnInit {
     private disciplineService: DisciplineService) { }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.DISCIPLINE.FORM.TITLE_NEW';
     this.permission = this.disciplineService.getPermission();
     this.disciplineForm = this.fb.group({
       id: [0],
@@ -49,7 +52,18 @@ export class DisciplineFormComponent implements OnInit {
       isActive: [true],
       rowVersion: [null],
     });
-    this.initFormControl(this.formAction);
+
+    this.initFormControl(FormActionStatus.Insert);
+    if (this.dialogData) {
+      if (this.dialogData.itemId) {
+        title = 'SCREEN.HR.DISCIPLINE.FORM.TITLE_EDIT';
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
+    }
+    this.translate.get(title).subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -83,31 +97,6 @@ export class DisciplineFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  showFormStatus() {
-    if (this.formAction === FormActionStatus.UnKnow) {
-      return false;
-    }
-    return true;
-  }
-
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#name').focus();
-    this.translate.get('SCREEN.HR.DISCIPLINE.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.DISCIPLINE.FORM.TITLE_EDIT').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
   onResetClick() {
     switch (this.formAction) {
       case FormActionStatus.Insert:
@@ -121,7 +110,7 @@ export class DisciplineFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
+    this.dialogRef.close(false);
   }
 
   submitForm() {
@@ -133,8 +122,7 @@ export class DisciplineFormComponent implements OnInit {
 
     this.disciplineService.save(this.disciplineForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.initFormControl(FormActionStatus.UnKnow);
-        this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
       }
       this.isLoading = false;
       this.isSubmit = false;

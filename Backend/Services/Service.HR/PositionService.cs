@@ -35,7 +35,7 @@ namespace Service.HR
             {
                 var query = from p in _context.PositionRepository.Query()
                             where !p.Deleted && p.IsActive
-                            orderby p.Name ascending
+                            orderby p.Precedence ascending
                             select new PositionModel()
                             {
                                 Id = p.Id,

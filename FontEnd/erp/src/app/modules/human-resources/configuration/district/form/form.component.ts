@@ -104,13 +104,6 @@ export class DistrictFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#provinceId').focus();
   }
 
-  showFormStatus() {
-    if (this.formAction === FormActionStatus.UnKnow) {
-      return false;
-    }
-    return true;
-  }
-
   allowAddProvince() {
     if (this.provincePermission.allowInsert) {
       return true;

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
@@ -19,7 +20,6 @@ import { DisciplineFormComponent } from './form/form.component';
 export class DisciplineComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(DisciplineFormComponent) form: DisciplineFormComponent;
 
   permission = new PermissionViewModel();
   isLoading = false;
@@ -31,7 +31,9 @@ export class DisciplineComponent implements OnInit {
   listColumnsName: string[] = ['name', 'description', 'money', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private disciplineService: DisciplineService) { }
+  constructor(
+    private dialog: MatDialog,
+    private disciplineService: DisciplineService) { }
 
   ngOnInit(): void {
     this.permission = this.disciplineService.getPermission();
@@ -39,39 +41,26 @@ export class DisciplineComponent implements OnInit {
     this.getList();
   }
 
-  reloadTableEventListener($event: boolean) {
-    if ($event === true) {
-      this.getList();
-    }
-  }
-
   onCreateClick() {
-    if (this.isLoading === false) {
-      this.form.onCreateClick();
-    }
+    this.openModalForm();
   }
 
   onImportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onExportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
-      this.form.onUpdateClick(id);
-    }
+    this.openModalForm(id);
   }
 
   onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
 
       this.disciplineService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
@@ -111,5 +100,26 @@ export class DisciplineComponent implements OnInit {
       }
       this.isLoading = false;
     });
+  }
+
+  private openModalForm(id?: number) {
+    if (this.isLoading === false) {
+      const modalRef = this.dialog.open(DisciplineFormComponent, {
+        disableClose: true,
+        panelClass: 'mat-modal-md',
+        data: {
+          isPopup: true,
+          itemId: id,
+        }
+      });
+
+      modalRef.afterClosed().subscribe(
+        (result: boolean) => {
+          if (result === true) {
+            this.getList();
+          }
+        }
+      );
+    }
   }
 }

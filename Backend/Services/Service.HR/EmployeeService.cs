@@ -151,31 +151,32 @@ namespace Service.HR
             try
             {
                 var md = from m in _context.EmployeeRepository.Query()
-                                      join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
-                                      join status in _context.EmployeeWorkingStatusRepository.Query() on m.EmployeeWorkingStatusId equals status.Id
-                                      where m.IsActive && !m.Deleted && m.Id == id
-                                      select new EmployeeModel()
-                                      {
-                                          Id = m.Id,
-                                          AvatarFileId = m.AvatarFileId,
-                                          EmployeeCode = m.EmployeeCode,
-                                          FirstName = info.FirstName,
-                                          LastName = info.LastName,
-                                          Gender = info.Gender,
-                                          ProbationDate = m.ProbationDate,
-                                          StartWorkingDate = m.StartWorkingDate,
-                                          BadgeCardNumber = m.BadgeCardNumber,
-                                          DateApplyBadge = m.DateApplyBadge,
-                                          FingerSignNumber = m.FingerSignNumber,
-                                          DateApplyFingerSign = m.DateApplyFingerSign,
-                                          WorkingEmail = m.WorkingEmail,
-                                          WorkingPhone = m.WorkingPhone,
-                                          EmployeeWorkingStatusId = m.EmployeeWorkingStatusId,
-                                          EmployeeWorkingStatusName = status.Name,
-                                          BasicSalary = m.BasicSalary,
-                                          IsActive = m.IsActive,
-                                          RowVersion = m.RowVersion,
-                                      };
+                         join info in _context.EmployeeInfoRepository.Query() on m.Id equals info.EmployeeId
+                         join status in _context.EmployeeWorkingStatusRepository.Query() on m.EmployeeWorkingStatusId equals status.Id into status
+                         from emplStatus in status.DefaultIfEmpty()
+                         where m.IsActive && !m.Deleted && m.Id == id
+                         select new EmployeeModel()
+                         {
+                             Id = m.Id,
+                             AvatarFileId = m.AvatarFileId,
+                             EmployeeCode = m.EmployeeCode,
+                             FirstName = info.FirstName,
+                             LastName = info.LastName,
+                             Gender = info.Gender,
+                             ProbationDate = m.ProbationDate,
+                             StartWorkingDate = m.StartWorkingDate,
+                             BadgeCardNumber = m.BadgeCardNumber,
+                             DateApplyBadge = m.DateApplyBadge,
+                             FingerSignNumber = m.FingerSignNumber,
+                             DateApplyFingerSign = m.DateApplyFingerSign,
+                             WorkingEmail = m.WorkingEmail,
+                             WorkingPhone = m.WorkingPhone,
+                             EmployeeWorkingStatusId = m.EmployeeWorkingStatusId,
+                             EmployeeWorkingStatusName = emplStatus.Name ?? string.Empty,
+                             BasicSalary = m.BasicSalary,
+                             IsActive = m.IsActive,
+                             RowVersion = m.RowVersion,
+                         };
 
                 EmployeeModel item = await md.FirstOrDefaultAsync();
 

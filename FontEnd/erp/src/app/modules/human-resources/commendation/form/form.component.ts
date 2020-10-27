@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
 import { PermissionViewModel } from './../../../../core/models/permission.model';
@@ -11,6 +12,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { CommendationViewModel } from '../commendation.model';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { AppValidator } from 'src/app/core/validators/app.validator';
+import { DialogDataInterface } from '../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-commendation-form',
@@ -20,7 +22,6 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 export class CommendationFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
@@ -32,6 +33,8 @@ export class CommendationFormComponent implements OnInit {
   item: CommendationViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<CommendationFormComponent>,
     private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
@@ -39,6 +42,7 @@ export class CommendationFormComponent implements OnInit {
     private commendationService: CommendationService) { }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.COMMENDATION.FORM.TITLE_NEW';
     this.permission = this.commendationService.getPermission();
     this.commendationForm = this.fb.group({
       id: [0],
@@ -48,7 +52,18 @@ export class CommendationFormComponent implements OnInit {
       isActive: [true],
       rowVersion: [null],
     });
-    this.initFormControl(this.formAction);
+
+    this.initFormControl(FormActionStatus.Insert);
+    if (this.dialogData) {
+      if (this.dialogData.itemId) {
+        title = 'SCREEN.HR.COMMENDATION.FORM.TITLE_EDIT';
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
+    }
+    this.translate.get(title).subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -81,31 +96,6 @@ export class CommendationFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  showFormStatus() {
-    if (this.formAction === FormActionStatus.UnKnow) {
-      return false;
-    }
-    return true;
-  }
-
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#name').focus();
-    this.translate.get('SCREEN.HR.COMMENDATION.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.COMMENDATION.FORM.TITLE_EDIT').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
   onResetClick() {
     switch (this.formAction) {
       case FormActionStatus.Insert:
@@ -119,7 +109,7 @@ export class CommendationFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
+    this.dialogRef.close(false);
   }
 
   submitForm() {
@@ -131,8 +121,7 @@ export class CommendationFormComponent implements OnInit {
 
     this.commendationService.save(this.commendationForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.initFormControl(FormActionStatus.UnKnow);
-        this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
       }
       this.isLoading = false;
       this.isSubmit = false;

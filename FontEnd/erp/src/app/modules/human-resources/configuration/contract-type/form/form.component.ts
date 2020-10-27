@@ -113,13 +113,6 @@ export class ContractTypeFormComponent implements OnInit {
     }
   }
 
-  showFormStatus() {
-    if (this.formAction === FormActionStatus.UnKnow) {
-      return false;
-    }
-    return true;
-  }
-
   onResetClick() {
     switch (this.formAction) {
       case FormActionStatus.Insert:
