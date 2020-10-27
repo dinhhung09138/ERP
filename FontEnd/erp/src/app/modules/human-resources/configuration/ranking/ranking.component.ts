@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
@@ -19,7 +20,6 @@ import { RankingFormComponent } from './form/form.component';
 export class RankingComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(RankingFormComponent) form: RankingFormComponent;
 
   permission = new PermissionViewModel();
   isLoading = false;
@@ -32,6 +32,7 @@ export class RankingComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   constructor(
+    private dialog: MatDialog,
     private rankingService: RankingService) { }
 
   ngOnInit(): void {
@@ -40,39 +41,26 @@ export class RankingComponent implements OnInit {
     this.getList();
   }
 
-  reloadTableEventListener($event: boolean) {
-    if ($event === true) {
-      this.getList();
-    }
-  }
-
   onCreateClick() {
-    if (this.isLoading === false) {
-      this.form.onCreateClick();
-    }
+    this.openModalForm();
   }
 
   onImportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onExportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
-      this.form.onUpdateClick(id);
-    }
+    this.openModalForm(id);
   }
 
   onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
 
       this.rankingService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
@@ -112,5 +100,26 @@ export class RankingComponent implements OnInit {
       }
       this.isLoading = false;
     });
+  }
+
+  private openModalForm(id?: number) {
+    if (this.isLoading === false) {
+      const modalRef = this.dialog.open(RankingFormComponent, {
+        disableClose: true,
+        panelClass: 'mat-modal-sm',
+        data: {
+          isPopup: true,
+          itemId: id,
+        }
+      });
+
+      modalRef.afterClosed().subscribe(
+        (result: boolean) => {
+          if (result === true) {
+            this.getList();
+          }
+        }
+      );
+    }
   }
 }

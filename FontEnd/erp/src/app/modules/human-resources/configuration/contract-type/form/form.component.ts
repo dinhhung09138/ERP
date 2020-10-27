@@ -41,6 +41,7 @@ export class ContractTypeFormComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_NEW';
     this.permission = this.contractTypeService.getPermission();
     this.contractTypeForm = this.fb.group({
       id: [0],
@@ -54,18 +55,17 @@ export class ContractTypeFormComponent implements OnInit {
       rowVersion: [null],
     });
     this.initFormControl(FormActionStatus.Insert);
-    if (this.dialogData && this.dialogData.isPopup === true) {
+    if (this.dialogData) {
       if (this.dialogData.itemId) {
-        this.translate.get('SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_EDIT').subscribe(message => {
-          this.formTitle = message;
-        });
+        title = 'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_EDIT';
         this.initFormControl(FormActionStatus.Update);
         this.getItem(this.dialogData.itemId);
       }
     }
-    this.translate.get('SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.FORM.TITLE_NEW').subscribe(message => {
+    this.translate.get(title).subscribe(message => {
       this.formTitle = message;
     });
+
   }
 
   initFormControl(formStatus: FormActionStatus) {

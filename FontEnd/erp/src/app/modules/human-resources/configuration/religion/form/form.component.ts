@@ -1,5 +1,5 @@
 import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
-import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -22,8 +22,6 @@ export class ReligionFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
-
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
 
@@ -42,6 +40,7 @@ export class ReligionFormComponent implements OnInit {
     private religionService: ReligionService) { }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.CONFIGURATION.RELIGION.FORM.TITLE_NEW';
     this.permission = this.religionService.getPermission();
     this.religionForm = this.fb.group({
       id: [0],
@@ -51,14 +50,17 @@ export class ReligionFormComponent implements OnInit {
       rowVersion: [null],
     });
 
-    if (this.dialogData?.isPopup === true) {
-      this.formAction = FormActionStatus.Insert;
-      this.translate.get(this.dialogData?.title).subscribe(message => {
-        this.formTitle = message;
-      });
+    this.initFormControl(FormActionStatus.Insert);
+    if (this.dialogData) {
+      if (this.dialogData.itemId) {
+        title = 'SCREEN.HR.CONFIGURATION.RELIGION.FORM.TITLE_EDIT';
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
     }
-
-    this.initFormControl(this.formAction);
+    this.translate.get(title).subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -88,38 +90,6 @@ export class ReligionFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  getClassByFormOrPopup() {
-    if (this.dialogData?.isPopup === true) {
-      return 'col-12';
-    }
-    return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
-  }
-
-  showFormStatus() {
-    if (this.formAction === FormActionStatus.UnKnow) {
-      return false;
-    }
-    return true;
-  }
-
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#name').focus();
-    this.translate.get('SCREEN.HR.CONFIGURATION.RELIGION.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.CONFIGURATION.RELIGION.FORM.TITLE_EDIT').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
   onResetClick() {
     switch (this.formAction) {
       case FormActionStatus.Insert:
@@ -133,10 +103,7 @@ export class ReligionFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
-    if (this.dialogData?.isPopup === true) {
-      this.dialogRef.close(false);
-    }
+    this.dialogRef.close(false);
   }
 
   submitForm() {
@@ -150,8 +117,7 @@ export class ReligionFormComponent implements OnInit {
 
     this.religionService.save(this.religionForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.initFormControl(FormActionStatus.UnKnow);
-        this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -162,11 +128,6 @@ export class ReligionFormComponent implements OnInit {
     this.isLoading = true;
     this.religionService.item(id).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-
-        if (this.dialogData?.isPopup === true) {
-          this.dialogRef.close(true);
-        }
-
         this.item = response.result;
         this.setDataToForm(this.item);
       }

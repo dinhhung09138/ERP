@@ -9,8 +9,7 @@
       <div class="card-body">
         <app-element-loading [show]="isLoading"></app-element-loading>
         <div class="row">
-          <div class="col-lg-2"></div>
-          <div [class]="getClassByFormOrPopup()">
+          <div class="col-12">
             <form [formGroup]="districtForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-12 form-group">
@@ -21,7 +20,7 @@
                     <mat-form-field class="form-control">
                       <mat-select id="provinceId" formControlName="provinceId" tabindex="1">
                         <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                        <mat-option *ngFor="let item of provinceList" [value]="item.id">{{ item.name }}</mat-option>
+                        <mat-option *ngFor="let item of listProvince" [value]="item.id">{{ item.name }}</mat-option>
                       </mat-select>
                     </mat-form-field>
                     <div class="input-group-append" *ngIf="allowAddProvince()">
@@ -71,6 +70,7 @@
                   </div>
                 </div>
               </div>
+              <br/>
               <div class="row">
                 <div class="col-12 form-group" *ngIf="formAction != 0">
                   <input *ngIf="(permission.allowInsert && formAction === 1) || (permission.allowUpdate && formAction === 2)" type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="6">
@@ -84,7 +84,6 @@
               </div>
             </form>
           </div>
-          <div class="col-lg-2"></div>
         </div>
       </div>
     </div>

@@ -42,6 +42,7 @@ export class ApproveStatusFormComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_NEW';
     this.permission = this.approveStatusService.getPermission();
     this.approveStatusForm = this.fb.group({
       id: [0],
@@ -52,18 +53,16 @@ export class ApproveStatusFormComponent implements OnInit {
       rowVersion: [null],
     });
     this.initFormControl(FormActionStatus.Insert);
-    this.translate.get('SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-    if (this.dialogData && this.dialogData.isPopup === true) {
+    if (this.dialogData) {
       if (this.dialogData.itemId) {
-        this.translate.get('SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_EDIT').subscribe(message => {
-          this.formTitle = message;
-        });
+        title = 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.FORM.TITLE_EDIT';
         this.initFormControl(FormActionStatus.Update);
         this.getItem(this.dialogData.itemId);
       }
     }
+    this.translate.get(title).subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   initFormControl(formStatus: FormActionStatus) {

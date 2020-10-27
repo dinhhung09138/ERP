@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EthnicityService } from './ethnicity.service';
@@ -20,7 +21,6 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 export class EthnicityComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(EthnicityFormComponent) form: EthnicityFormComponent;
 
   permission = new PermissionViewModel();
   isLoading = false;
@@ -32,7 +32,9 @@ export class EthnicityComponent implements OnInit {
   listColumnsName: string[] = ['name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private ethnicityService: EthnicityService) {
+  constructor(
+    public dialog: MatDialog,
+    private ethnicityService: EthnicityService) {
   }
 
   ngOnInit(): void {
@@ -41,39 +43,26 @@ export class EthnicityComponent implements OnInit {
     this.getList();
   }
 
-  reloadTableEventListener($event: boolean) {
-    if ($event === true) {
-      this.getList();
-    }
-  }
-
   onCreateClick() {
-    if (this.isLoading === false) {
-      this.form.onCreateClick();
-    }
+    this.openModalForm();
   }
 
   onImportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onExportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
-      this.form.onUpdateClick(id);
-    }
+    this.openModalForm(id);
   }
 
   onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
 
       this.ethnicityService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
@@ -105,7 +94,6 @@ export class EthnicityComponent implements OnInit {
   }
 
   private getList() {
-
     this.isLoading = true;
     this.ethnicityService.getList(this.paging, this.searchText).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
@@ -114,5 +102,26 @@ export class EthnicityComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  private openModalForm(id?: number) {
+    if (this.isLoading === false) {
+      const modalRef = this.dialog.open(EthnicityFormComponent, {
+        disableClose: true,
+        panelClass: 'mat-modal-sm',
+        data: {
+          isPopup: true,
+          itemId: id,
+        }
+      });
+
+      modalRef.afterClosed().subscribe(
+        (result: boolean) => {
+          if (result === true) {
+            this.getList();
+          }
+        }
+      );
+    }
   }
 }

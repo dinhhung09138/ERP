@@ -32,7 +32,7 @@ export class ContractTypeComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   constructor(
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private contractTypeService: ContractTypeService) { }
 
   ngOnInit(): void {

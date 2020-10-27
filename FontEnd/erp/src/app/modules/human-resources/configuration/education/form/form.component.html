@@ -9,8 +9,7 @@
       <div class="card-body">
         <app-element-loading [show]="isLoading"></app-element-loading>
         <div class="row">
-          <div class="col-lg-2"></div>
-          <div [class]="getClassByFormOrPopup()">
+          <div class="col-12">
             <form [formGroup]="educationForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
                 <div class="col-12 form-group">
@@ -63,7 +62,6 @@
               </div>
             </form>
           </div>
-          <div class="col-lg-2"></div>
         </div>
       </div>
     </div>

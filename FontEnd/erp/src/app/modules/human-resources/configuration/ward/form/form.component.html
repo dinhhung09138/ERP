@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-    <div class="card box" [class.opened]="showFormStatus()">
+    <div class="card">
       <div class="card-header">
         <div class="row">
           <div class="col-12">{{ formTitle }}</div>
@@ -9,11 +9,10 @@
       <div class="card-body">
         <app-element-loading [show]="isLoading"></app-element-loading>
         <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-12">
             <form [formGroup]="wardForm" (submit)="!isLoading ? submitForm() : false">
               <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <div class="col-12 form-group">
                   <label class="label">
                     {{ 'SCREEN.HR.CONFIGURATION.WARD.FORM.PROVINCE_NAME' | translate}}
                   </label>
@@ -21,7 +20,7 @@
                     <mat-form-field class="form-control">
                       <mat-select id="provinceId" formControlName="provinceId" tabindex="1" (selectionChange)="onProvinceChange($event)">
                         <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                        <mat-option *ngFor="let item of provinceList" [value]="item.id">{{ item.name }}</mat-option>
+                        <mat-option *ngFor="let item of listProvince" [value]="item.id">{{ item.name }}</mat-option>
                       </mat-select>
                     </mat-form-field>
                     <div class="input-group-append" *ngIf="allowAddProvince()">
@@ -32,7 +31,9 @@
                     {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
                   <label class="label">
                     {{ 'SCREEN.HR.CONFIGURATION.WARD.FORM.DISTRICT_NAME' | translate}}
                   </label>
@@ -90,6 +91,7 @@
                   </div>
                 </div>
               </div>
+              <br />
               <div class="row">
                 <div class="col-12 form-group" *ngIf="formAction != 0">
                   <input *ngIf="(permission.allowInsert && formAction === 1) || (permission.allowUpdate && formAction === 2)" type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="8">
@@ -103,7 +105,6 @@
               </div>
             </form>
           </div>
-          <div class="col-lg-2"></div>
         </div>
       </div>
     </div>

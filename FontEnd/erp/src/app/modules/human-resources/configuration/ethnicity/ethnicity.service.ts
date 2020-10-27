@@ -52,11 +52,10 @@ export class EthnicityService {
 
   openPopup(form: any): Observable<ResponseModel> {
     const dialogRef = this.dialog.open(form, {
-      width: '500px',
+      panelClass: 'mat-modal-sm',
       disableClose: true,
       data: {
-        isPopup: true,
-        title: 'SCREEN.HR.CONFIGURATION.ETHNICITY.POPUP_TITLE'
+        isPopup: true
       },
     });
 

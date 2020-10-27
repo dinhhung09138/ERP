@@ -1,6 +1,6 @@
 
 import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
-import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,8 +23,6 @@ export class NationalityFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
-
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
 
@@ -43,6 +41,7 @@ export class NationalityFormComponent implements OnInit {
     private nationalityService: NationalityService) { }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.CONFIGURATION.NATIONALITY.FORM.TITLE_NEW';
     this.permission = this.nationalityService.getPermission();
     this.nationalityForm = this.fb.group({
       id: [0],
@@ -52,14 +51,17 @@ export class NationalityFormComponent implements OnInit {
       rowVersion: [null],
     });
 
-    if (this.dialogData?.isPopup === true) {
-      this.formAction = FormActionStatus.Insert;
-      this.translate.get(this.dialogData?.title).subscribe(message => {
-        this.formTitle = message;
-      });
+    this.initFormControl(FormActionStatus.Insert);
+    if (this.dialogData) {
+      if (this.dialogData.itemId) {
+        title = 'SCREEN.HR.CONFIGURATION.NATIONALITY.FORM.TITLE_EDIT';
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
     }
-
-    this.initFormControl(this.formAction);
+    this.translate.get(title).subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -89,36 +91,11 @@ export class NationalityFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  getClassByFormOrPopup() {
-    if (this.dialogData?.isPopup === true) {
-      return 'col-12';
-    }
-    return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
-  }
-
   showFormStatus() {
     if (this.formAction === FormActionStatus.UnKnow) {
       return false;
     }
     return true;
-  }
-
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#name').focus();
-    this.translate.get('SCREEN.HR.CONFIGURATION.NATIONALITY.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.CONFIGURATION.NATIONALITY.FORM.TITLE_EDIT').subscribe(message => {
-      this.formTitle = message;
-    });
   }
 
   onResetClick() {
@@ -134,11 +111,7 @@ export class NationalityFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
-
-    if (this.dialogData?.isPopup === true) {
-      this.dialogRef.close(false);
-    }
+    this.dialogRef.close(false);
   }
 
   submitForm() {
@@ -150,13 +123,7 @@ export class NationalityFormComponent implements OnInit {
 
     this.nationalityService.save(this.nationalityForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-
-        if (this.dialogData?.isPopup === true) {
-          this.dialogRef.close(true);
-        }
-
-        this.initFormControl(FormActionStatus.UnKnow);
-        this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
       }
       this.isLoading = false;
       this.isSubmit = false;

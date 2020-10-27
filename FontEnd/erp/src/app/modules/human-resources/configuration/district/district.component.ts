@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
@@ -21,7 +22,6 @@ import { ProvinceViewModel } from '../province/province.model';
 export class DistrictComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(DistrictFormComponent) form: DistrictFormComponent;
 
   permission = new PermissionViewModel();
   isLoading = false;
@@ -30,12 +30,13 @@ export class DistrictComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName: string[] = ['name', 'provinceName', 'precedence', 'isActive', 'action'];
+  listColumnsName: string[] = ['provinceName', 'name', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  provinceList: ProvinceViewModel[] = [];
+  listProvince: ProvinceViewModel[] = [];
 
   constructor(
+    private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private districtService: DistrictService) {
   }
@@ -43,45 +44,32 @@ export class DistrictComponent implements OnInit {
   ngOnInit(): void {
     this.permission = this.districtService.getPermission();
     this.activatedRoute.data.subscribe((res) => {
-      this.provinceList = res.province.result;
+      this.listProvince = res.province.result;
     });
     this.dataSource.sort = this.sort;
     this.getList();
   }
 
-  reloadTableEventListener($event: boolean) {
-    if ($event === true) {
-      this.getList();
-    }
-  }
-
   onCreateClick() {
-    if (this.isLoading === false) {
-      this.form.onCreateClick();
-    }
+    this.openModalForm();
   }
 
   onImportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onExportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
-      this.form.onUpdateClick(id);
-    }
+    this.openModalForm(id);
   }
 
   onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
 
       this.districtService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
@@ -121,5 +109,27 @@ export class DistrictComponent implements OnInit {
       }
       this.isLoading = false;
     });
+  }
+
+  private openModalForm(id?: number) {
+    if (this.isLoading === false) {
+      const modalRef = this.dialog.open(DistrictFormComponent, {
+        disableClose: true,
+        panelClass: 'mat-modal-sm',
+        data: {
+          isPopup: true,
+          itemId: id,
+          listProvince: this.listProvince
+        }
+      });
+
+      modalRef.afterClosed().subscribe(
+        (result: boolean) => {
+          if (result === true) {
+            this.getList();
+          }
+        }
+      );
+    }
   }
 }

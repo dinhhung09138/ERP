@@ -32,7 +32,7 @@ export class ApproveStatusComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   constructor(
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private approveStatusService: ApproveStatusService,
   ) {
   }

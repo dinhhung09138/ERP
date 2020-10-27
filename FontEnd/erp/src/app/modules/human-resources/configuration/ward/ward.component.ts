@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
@@ -22,7 +23,6 @@ import { DistrictViewModel } from '../district/district.model';
 export class WardComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(WardFormComponent) form: WardFormComponent;
 
   permission = new PermissionViewModel();
   isLoading = false;
@@ -34,10 +34,11 @@ export class WardComponent implements OnInit {
   listColumnsName: string[] = ['name', 'districtName', 'provinceName', 'precedence', 'isActive', 'action'];
   dataSource = new MatTableDataSource();
 
-  provinceList: ProvinceViewModel[] = [];
-  districtList: DistrictViewModel[] = [];
+  listProvince: ProvinceViewModel[] = [];
+  listDistrict: DistrictViewModel[] = [];
 
   constructor(
+    private dialog: MatDialog,
     private wardService: WardService,
     private activatedRoute: ActivatedRoute) {
   }
@@ -45,46 +46,33 @@ export class WardComponent implements OnInit {
   ngOnInit(): void {
     this.permission = this.wardService.getPermission();
     this.activatedRoute.data.subscribe(res => {
-      this.provinceList = res.data.provinces.result;
-      this.districtList = res.data.districts.result;
+      this.listProvince = res.data.provinces.result;
+      this.listDistrict = res.data.districts.result;
     });
     this.dataSource.sort = this.sort;
     this.getList();
   }
 
-  reloadTableEventListener($event: boolean) {
-    if ($event === true) {
-      this.getList();
-    }
-  }
-
   onCreateClick() {
-    if (this.isLoading === false) {
-      this.form.onCreateClick();
-    }
+    this.openModalForm();
   }
 
   onImportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onExportClick() {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
-      this.form.onUpdateClick(id);
-    }
+    this.openModalForm(id);
   }
 
   onDeleteClick(id: number, rowVersion: any) {
     if (this.isLoading === false) {
-      this.form.onCloseClick();
 
       this.wardService.confirmDelete(id, rowVersion).subscribe((response: ResponseModel) => {
         if (response && response.responseStatus === ResponseStatus.success) {
@@ -124,5 +112,28 @@ export class WardComponent implements OnInit {
       }
       this.isLoading = false;
     });
+  }
+
+  private openModalForm(id?: number) {
+    if (this.isLoading === false) {
+      const modalRef = this.dialog.open(WardFormComponent, {
+        disableClose: true,
+        panelClass: 'mat-modal-sm',
+        data: {
+          isPopup: true,
+          itemId: id,
+          listDistrict: this.listDistrict,
+          listProvince: this.listProvince
+        }
+      });
+
+      modalRef.afterClosed().subscribe(
+        (result: boolean) => {
+          if (result === true) {
+            this.getList();
+          }
+        }
+      );
+    }
   }
 }

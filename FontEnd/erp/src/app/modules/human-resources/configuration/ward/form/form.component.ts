@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { WardService } from '../ward.service';
@@ -28,7 +27,6 @@ import { MatSelectChange } from '@angular/material/select';
 export class WardFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
@@ -42,23 +40,24 @@ export class WardFormComponent implements OnInit {
   wardForm: FormGroup;
   item: WardViewModel;
 
-  provinceList: ProvinceViewModel[] = [];
-  districtList: DistrictViewModel[] = [];
+  listProvince: ProvinceViewModel[] = [];
+  listDistrict: DistrictViewModel[] = [];
 
   districtDropdown: DistrictViewModel[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<WardFormComponent>,
     public translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
     private wardService: WardService,
     private provinceService: ProvinceService,
-    private districtService: DistrictService,
-    private activatedRoute: ActivatedRoute) {
+    private districtService: DistrictService) {
   }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.CONFIGURATION.WARD.FORM.TITLE_NEW';
     this.permission = this.provinceService.getPermission();
     this.provincePermission = this.provinceService.getPermission();
     this.districtPermission = this.districtService.getPermission();
@@ -73,22 +72,19 @@ export class WardFormComponent implements OnInit {
       rowVersion: [null],
     });
 
-    if (this.dialogData && this.dialogData.isPopup === true) {
-      this.translate.get(this.dialogData.title).subscribe((message: string) => {
-        this.formTitle = message;
-      });
-      this.formAction = FormActionStatus.Insert;
-      this.isPopup = true;
-      this.getListProvince();
-      this.getListDistrict();
-    } else {
-      this.activatedRoute.data.subscribe(res => {
-        this.provinceList = res.data.provinces.result;
-        this.districtList = res.data.districts.result;
-      });
+    this.initFormControl(FormActionStatus.Insert);
+    if (this.dialogData) {
+      this.listProvince = this.dialogData.listProvince;
+      this.listDistrict = this.dialogData.listDistrict;
+      if (this.dialogData.itemId) {
+        title = 'SCREEN.HR.CONFIGURATION.WARD.FORM.TITLE_EDIT';
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
     }
-
-    this.initFormControl(this.formAction);
+    this.translate.get(title).subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -125,13 +121,6 @@ export class WardFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#provinceId').focus();
   }
 
-  showFormStatus() {
-    if (this.formAction === FormActionStatus.UnKnow) {
-      return false;
-    }
-    return true;
-  }
-
   allowAddProvince() {
     if (this.isPopup === true && !this.provincePermission.allowInsert) {
       return false;
@@ -142,7 +131,7 @@ export class WardFormComponent implements OnInit {
   onAddNewProvinceClick() {
     this.provinceService.openPopupForm(ProvinceFormComponent).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.provinceList = response.result;
+        this.listProvince = response.result;
       }
     });
   }
@@ -157,39 +146,20 @@ export class WardFormComponent implements OnInit {
   onAddNewDistrictClick() {
     this.districtService.openPopupForm(DistrictFormComponent).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.districtList = response.result;
+        this.listDistrict = response.result;
       }
     });
   }
 
   onProvinceChange(event?: MatSelectChange) {
-    console.log(event);
     this.districtDropdown = [];
     if (event) {
       this.wardForm.get('districtId').enable();
-      this.districtDropdown = this.districtList.filter(m => m.provinceId === event.value);
+      this.districtDropdown = this.listDistrict.filter(m => m.provinceId === event.value);
     } else {
       this.wardForm.get('districtId').disable();
     }
     this.wardForm.get('districtId').setValue('');
-  }
-
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#provinceId').focus();
-    this.translate.get('SCREEN.HR.CONFIGURATION.WARD.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.CONFIGURATION.WARD.FORM.TITLE_EDIT').subscribe(message => {
-      this.formTitle = message;
-    });
   }
 
   onResetClick() {
@@ -205,7 +175,7 @@ export class WardFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
+    this.dialogRef.close(false);
   }
 
   submitForm() {
@@ -217,8 +187,7 @@ export class WardFormComponent implements OnInit {
 
     this.wardService.save(this.wardForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-          this.initFormControl(FormActionStatus.UnKnow);
-          this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
         }
       this.isLoading = false;
       this.isSubmit = false;
@@ -238,7 +207,7 @@ export class WardFormComponent implements OnInit {
 
   private setDataToForm(data: WardViewModel) {
     this.districtDropdown = [];
-    this.districtDropdown = this.districtList.filter(m => m.provinceId === data.provinceId);
+    this.districtDropdown = this.listDistrict.filter(m => m.provinceId === data.provinceId);
     setTimeout(() => {
       this.wardForm.get('id').setValue(data.id);
       this.wardForm.get('name').setValue(data.name);
@@ -248,21 +217,5 @@ export class WardFormComponent implements OnInit {
       this.wardForm.get('isActive').setValue(data.isActive);
       this.wardForm.get('rowVersion').setValue(data.rowVersion);
     }, 300);
-  }
-
-  private getListProvince() {
-    this.provinceService.getDropdown().subscribe((response: ResponseModel) => {
-      if (response && response.responseStatus === ResponseStatus.success) {
-        this.provinceList = response.result;
-      }
-    });
-  }
-
-  private getListDistrict() {
-    this.districtService.getDropdown().subscribe((response: ResponseModel) => {
-      if (response && response.responseStatus === ResponseStatus.success) {
-        this.districtList = response.result;
-      }
-    });
   }
 }

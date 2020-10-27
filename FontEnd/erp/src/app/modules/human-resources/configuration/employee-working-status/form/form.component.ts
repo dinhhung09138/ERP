@@ -1,7 +1,8 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { PermissionViewModel } from './../../../../../core/models/permission.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
@@ -10,6 +11,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { EmployeeWorkingStatusViewModel } from '../employee-working-status.model';
 import { EmployeeWorkingStatusService } from '../employee-working-status.service';
+import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-hr-employee-working-status-form',
@@ -19,8 +21,6 @@ import { EmployeeWorkingStatusService } from '../employee-working-status.service
 export class EmployeeWorkingStatusFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
-
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
 
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
@@ -32,6 +32,8 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
   item: EmployeeWorkingStatusViewModel;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    private dialogRef: MatDialogRef<EmployeeWorkingStatusFormComponent>,
     private translate: TranslateService,
     private elm: ElementRef,
     private fb: FormBuilder,
@@ -39,6 +41,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.CONFIGURATION.WORKING_STATUS.FORM.TITLE_NEW';
     this.permission = this.workingStatusService.getPermission();
     this.workingStatusForm = this.fb.group({
       id: [0],
@@ -49,7 +52,17 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
       isActive: [true],
       rowVersion: [null],
     });
-    this.initFormControl(this.formAction);
+    this.initFormControl(FormActionStatus.Insert);
+    if (this.dialogData) {
+      if (this.dialogData.itemId) {
+        title = 'SCREEN.HR.CONFIGURATION.WORKING_STATUS.FORM.TITLE_EDIT';
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
+    }
+    this.translate.get(title).subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -97,24 +110,6 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
     return true;
   }
 
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#code').focus();
-    this.translate.get('SCREEN.HR.CONFIGURATION.WORKING_STATUS.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.CONFIGURATION.WORKING_STATUS.FORM.TITLE_EDIT').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
   onResetClick() {
     switch (this.formAction) {
       case FormActionStatus.Insert:
@@ -128,7 +123,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
+    this.dialogRef.close(false);
   }
 
   submitForm() {
@@ -140,8 +135,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
 
     this.workingStatusService.save(this.workingStatusForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.initFormControl(FormActionStatus.UnKnow);
-        this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
       }
       this.isLoading = false;
       this.isSubmit = false;

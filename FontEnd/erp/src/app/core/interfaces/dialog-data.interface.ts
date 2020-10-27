@@ -5,6 +5,8 @@ import { EducationViewModel } from './../../modules/human-resources/configuratio
 import { HttpErrorStatusEnum } from './../enums/http-error.enum';
 import { ProvinceViewModel } from '../../modules/human-resources/configuration/province/province.model';
 import { IdentificationTypeViewModel } from '../../modules/human-resources/configuration/identification-type/identification-type.model';
+import { DistrictViewModel } from '../../modules/human-resources/configuration/district/district.model';
+import { WardViewModel } from '../../modules/human-resources/configuration/ward/ward.model';
 
 export interface DialogDataInterface {
   animal: string;
@@ -22,4 +24,6 @@ export interface DialogDataInterface {
   listEducation: EducationViewModel[];
   listProvince: ProvinceViewModel[];
   listIdentificationType: IdentificationTypeViewModel[];
+  listDistrict: DistrictViewModel[];
+  listWard: WardViewModel[];
 }

@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Inject, ɵConsole } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -26,8 +25,6 @@ export class DistrictFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
-
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
   provincePermission = new PermissionViewModel();
@@ -35,24 +32,23 @@ export class DistrictFormComponent implements OnInit {
   formTitle = '';
   isSubmit = false;
   isLoading = false;
-  isPopup = false;
   districtForm: FormGroup;
   item: DistrictViewModel;
 
-  provinceList: ProvinceViewModel[] = [];
+  listProvince: ProvinceViewModel[] = [];
 
   constructor(
     private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
     private dialogRef: MatDialogRef<DistrictFormComponent>,
     private elm: ElementRef,
-    private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private districtService: DistrictService,
     private provinceService: ProvinceService) {
   }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.CONFIGURATION.DISTRICT.FORM.TITLE_NEW';
     this.permission = this.districtService.getPermission();
     this.provincePermission = this.provinceService.getPermission();
     this.districtForm = this.fb.group({
@@ -64,20 +60,18 @@ export class DistrictFormComponent implements OnInit {
       rowVersion: [null],
     });
 
-    if (this.dialogData && this.dialogData.isPopup === true) {
-      this.translate.get(this.dialogData?.title).subscribe(message => {
-        this.formTitle = message;
-      });
-      this.formAction = FormActionStatus.Insert;
-      this.getListProvince();
-      this.isPopup = true;
-    } else {
-      this.activatedRoute.data.subscribe(res => {
-        this.provinceList = res.province.result as ProvinceViewModel[];
-      });
+    this.initFormControl(FormActionStatus.Insert);
+    if (this.dialogData) {
+      this.listProvince = this.dialogData.listProvince;
+      if (this.dialogData.itemId) {
+        title = 'SCREEN.HR.CONFIGURATION.DISTRICT.FORM.TITLE_EDIT';
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
     }
-
-    this.initFormControl(this.formAction);
+    this.translate.get(title).subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -117,15 +111,8 @@ export class DistrictFormComponent implements OnInit {
     return true;
   }
 
-  getClassByFormOrPopup() {
-    if (this.dialogData?.isPopup === true) {
-      return 'col-12';
-    }
-    return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
-  }
-
   allowAddProvince() {
-    if (this.isPopup === false && this.provincePermission.allowInsert) {
+    if (this.provincePermission.allowInsert) {
       return true;
     }
     return false;
@@ -134,26 +121,8 @@ export class DistrictFormComponent implements OnInit {
   onAddNewProvinceClick() {
     this.provinceService.openPopupForm(ProvinceFormComponent).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.provinceList = response.result;
+        this.listProvince = response.result;
       }
-    });
-  }
-
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#provinceId');
-    this.translate.get('SCREEN.HR.CONFIGURATION.DISTRICT.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.CONFIGURATION.DISTRICT.FORM.TITLE_EDIT').subscribe(message => {
-      this.formTitle = message;
     });
   }
 
@@ -170,12 +139,7 @@ export class DistrictFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
-
-    if (this.dialogData?.isPopup === true) {
-      this.dialogRef.close(false);
-    }
-
+    this.dialogRef.close(false);
   }
 
   onProvinceSearch(term: string, item: any) {
@@ -192,13 +156,7 @@ export class DistrictFormComponent implements OnInit {
 
     this.districtService.save(this.districtForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response !== null && response.responseStatus === ResponseStatus.success) {
-
-        if (this.dialogData?.isPopup === true) {
-          this.dialogRef.close(true);
-        }
-
-        this.initFormControl(FormActionStatus.UnKnow);
-        this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
@@ -223,14 +181,6 @@ export class DistrictFormComponent implements OnInit {
     this.districtForm.get('precedence').setValue(data.precedence);
     this.districtForm.get('isActive').setValue(data.isActive);
     this.districtForm.get('rowVersion').setValue(data.rowVersion);
-  }
-
-  private getListProvince() {
-    this.provinceService.getDropdown().subscribe((response: ResponseModel) => {
-      if (response && response.responseStatus === ResponseStatus.success) {
-        this.provinceList = response.result;
-      }
-    });
   }
 
 }

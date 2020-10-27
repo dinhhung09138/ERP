@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, EventEmitter, Output, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -22,8 +22,6 @@ export class EthnicityFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
-  @Output() reloadTableEvent = new EventEmitter<boolean>();
-
   formAction = FormActionStatus.UnKnow;
   permission = new PermissionViewModel();
 
@@ -42,6 +40,7 @@ export class EthnicityFormComponent implements OnInit {
     private ethnicityService: EthnicityService) { }
 
   ngOnInit(): void {
+    let title = 'SCREEN.HR.CONFIGURATION.ETHNICITY.FORM.TITLE_NEW';
     this.permission = this.ethnicityService.getPermission();
     this.ethnicityForm = this.fb.group({
       id: [0],
@@ -51,17 +50,20 @@ export class EthnicityFormComponent implements OnInit {
       rowVersion: [null],
     });
 
-    if (this.dialogData?.isPopup === true) {
-      this.formAction = FormActionStatus.Insert;
-      this.translate.get(this.dialogData?.title).subscribe(message => {
-        this.formTitle = message;
-      });
+    this.initFormControl(FormActionStatus.Insert);
+    if (this.dialogData) {
+      if (this.dialogData.itemId) {
+        title = 'SCREEN.HR.CONFIGURATION.ETHNICITY.FORM.TITLE_EDIT';
+        this.initFormControl(FormActionStatus.Update);
+        this.getItem(this.dialogData.itemId);
+      }
     }
-
-    this.initFormControl(this.formAction);
+    this.translate.get(title).subscribe(message => {
+      this.formTitle = message;
+    });
   }
 
-  initFormControl(formStatus: FormActionStatus, isDisabledForm: boolean = true) {
+  initFormControl(formStatus: FormActionStatus) {
     this.isSubmit = false;
 
     if (this.formDirective) {
@@ -88,37 +90,11 @@ export class EthnicityFormComponent implements OnInit {
     this.elm.nativeElement.querySelector('#name').focus();
   }
 
-  getClassByFormOrPopup() {
-    if (this.dialogData?.isPopup === true) {
-      return 'col-12';
-    } else {
-      return 'col-lg-8 col-md-12 col-sm-12 col-xs-12';
-    }
-  }
-
   showFormStatus() {
     if (this.formAction === FormActionStatus.UnKnow) {
       return false;
     }
     return true;
-  }
-
-  onCreateClick() {
-    if (this.formAction !== FormActionStatus.Insert) {
-      this.initFormControl(FormActionStatus.Insert);
-    }
-    this.elm.nativeElement.querySelector('#name').focus();
-    this.translate.get('SCREEN.HR.CONFIGURATION.ETHNICITY.FORM.TITLE_NEW').subscribe(message => {
-      this.formTitle = message;
-    });
-  }
-
-  onUpdateClick(id: number) {
-    this.initFormControl(FormActionStatus.Update);
-    this.getItem(id);
-    this.translate.get('SCREEN.HR.CONFIGURATION.ETHNICITY.FORM.TITLE_EDIT').subscribe(message => {
-      this.formTitle = message;
-    });
   }
 
   onResetClick() {
@@ -134,11 +110,7 @@ export class EthnicityFormComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.initFormControl(FormActionStatus.UnKnow);
-
-    if (this.dialogData?.isPopup === true) {
-      this.dialogRef.close(false);
-    }
+    this.dialogRef.close(false);
   }
 
   submitForm() {
@@ -150,13 +122,7 @@ export class EthnicityFormComponent implements OnInit {
 
     this.ethnicityService.save(this.ethnicityForm.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-
-        if (this.dialogData?.isPopup === true) {
-          this.dialogRef.close(true);
-        }
-
-        this.initFormControl(FormActionStatus.UnKnow);
-        this.reloadTableEvent.emit(true);
+        this.dialogRef.close(true);
       }
       this.isLoading = false;
       this.isSubmit = false;
