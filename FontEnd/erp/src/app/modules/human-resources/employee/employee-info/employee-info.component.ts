@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -19,6 +19,7 @@ import { ApplicationConstant } from '../../../../core/constants/app.constant';
 import { EmployeeRelationshipComponent } from './relationship/relationship.component';
 import { EmployeeIdentificationComponent } from './identification/identification.component';
 import { EmployeeEducationComponent } from './education/education.component';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -29,7 +30,7 @@ import { EmployeeEducationComponent } from './education/education.component';
     { provide: DateAdapter, useClass: AppDateAdapter }
   ]
 })
-export class EmployeeInfoComponent implements OnInit {
+export class EmployeeInfoComponent implements OnInit, AfterViewInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
@@ -46,6 +47,8 @@ export class EmployeeInfoComponent implements OnInit {
   fileToUpload: any;
   fileUrl: string;
 
+  initPersonInfoTab = false;
+  @ViewChild(PersonalInfoComponent) personalInfoTab: PersonalInfoComponent;
   initEducationTab = false;
   @ViewChild(EmployeeEducationComponent) educationTab: EmployeeEducationComponent;
   initRelationshipTab = false;
@@ -90,6 +93,11 @@ export class EmployeeInfoComponent implements OnInit {
     });
     this.initFormControl(this.formAction);
     this.checkFormAction();
+  }
+
+  ngAfterViewInit(){
+    this.initPersonInfoTab = true;
+    this.personalInfoTab.getSelection();
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -154,6 +162,7 @@ export class EmployeeInfoComponent implements OnInit {
         this.elm.nativeElement.querySelector('#firstName').focus();
       }
 
+
     }
   }
 
@@ -212,6 +221,12 @@ export class EmployeeInfoComponent implements OnInit {
 
   onSelectTab(tabName: string) {
     switch (tabName) {
+      case 'personalInfo':
+        if (this.initPersonInfoTab === false) {
+          this.initPersonInfoTab = true;
+          this.personalInfoTab.getSelection();
+        }
+        break;
       case 'relationship':
         if (this.initRelationshipTab === false) {
           this.initRelationshipTab = true;

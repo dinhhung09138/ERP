@@ -23,8 +23,6 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   @Input() employee: EmployeeViewModel;
 
-
-  isInitData = false; // Set true after get all init data in the first time.
   isEdit = false; // If true, enable control for editing
   isLoading = false;
   isSubmit = false;
@@ -65,12 +63,10 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(data: SimpleChanges) {
-    if (data.Employee && data.Employee.currentValue) {
-      if (this.isInitData === false) {
-        this.getSelection();
-        this.isInitData = true;
-      }
-      this.getInfoByEmployeeId(data.Employee.currentValue.id);
+    if (data.employee && data.employee.currentValue) {
+      console.log(data.employee.currentValue.id);
+      this.personalInfoForm.get('employeeId').setValue(data.employee.currentValue.id);
+      this.getInfoByEmployeeId(data.employee.currentValue.id);
     }
   }
 
@@ -180,6 +176,8 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
     this.isSubmit = true;
 
+    console.log(this.personalInfoForm.getRawValue());
+
     if (this.personalInfoForm.invalid) {
       this.isSubmit = false;
       return;
@@ -195,7 +193,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     });
   }
 
-  private getSelection() {
+  public getSelection() {
     this.isLoading = true;
     this.personalInfoService.getSelection().subscribe(response => {
       if (response.ethnicity && response.ethnicity.responseStatus === ResponseStatus.success) {

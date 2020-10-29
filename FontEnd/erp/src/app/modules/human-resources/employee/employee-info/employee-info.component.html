@@ -239,7 +239,8 @@
           <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
             <ul class="nav nav-tabs left-tabs">
               <li class="nav-item">
-                <a class="nav-link active" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#personalInfo" data-toggle="tab">
+                <a class="nav-link active" [class]="{'disabled': currentSelectedEmployee === undefined}" data-toggle="tab"
+                (click)="onSelectTab('personalInfo')" href="#personalInfo">
                   {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.TITLE' | translate }}
                 </a>
               </li>
