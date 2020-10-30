@@ -407,57 +407,7 @@ namespace Database.Sql.ERP
 
             modelBuilder.CreateHumanResourceDefaultCommand();
 
-            // HR_EMPLOYEE
-            modelBuilder.Entity<FunctionCommand>().HasData(
-                new FunctionCommand()
-                {
-                    Id = 84,
-                    FunctionCode = "HR_EMPLOYEE",
-                    Name = "VIEW",
-                    ModuleName = "HR",
-                    ControllerName = "Employee",
-                    ActionName = "GetList",
-                    Precedence = 1,
-                    IsView = true,
-                },
-                new FunctionCommand()
-                {
-                    Id = 85,
-                    FunctionCode = "HR_EMPLOYEE",
-                    Name = "INSERT",
-                    ModuleName = "HR",
-                    ControllerName = "Employee",
-                    ActionName = "Insert",
-                    Precedence = 2,
-                    IsView = false,
-                },
-                new FunctionCommand()
-                {
-                    Id = 86,
-                    FunctionCode = "HR_EMPLOYEE",
-                    Name = "UPDATE",
-                    ModuleName = "HR",
-                    ControllerName = "Employee",
-                    ActionName = "Update",
-                    Precedence = 3,
-                    IsView = false,
-                },
-                new FunctionCommand()
-                {
-                    Id = 87,
-                    FunctionCode = "HR_EMPLOYEE",
-                    Name = "DELETE",
-                    ModuleName = "HR",
-                    ControllerName = "Employee",
-                    ActionName = "Delete",
-                    Precedence = 4,
-                    IsView = false,
-                }
-            );
-
-            
-
-            //FunctionCommand MaxId = 95
+            //FunctionCommand MaxId = 133 (CreateDefaultCommandEmployee)
 
             #endregion
         }
