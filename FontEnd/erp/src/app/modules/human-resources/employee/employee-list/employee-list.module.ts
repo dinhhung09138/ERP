@@ -9,10 +9,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EmployeeListComponent } from './employee-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EmployeeService } from '../employee.service';
-import { PersonalInfoService } from '../employee-info/personal-info/personal-info.service';
-import { EmployeeEducationService } from '../employee-info/education/education.service';
-import { EmployeeIdentificationService } from '../employee-info/identification/identification.service';
-import { EmployeeRelationShipService } from '../employee-info/relationship/relationship.service';
 
 const routes: Routes = [
   {
@@ -36,11 +32,6 @@ const routes: Routes = [
   ],
   providers: [
     EmployeeService,
-    PersonalInfoService,
-    EmployeeEducationService,
-    EmployeeIdentificationService,
-    EmployeeEducationService,
-    EmployeeRelationShipService,
   ]
 })
 export class EmployeeListModule { }
