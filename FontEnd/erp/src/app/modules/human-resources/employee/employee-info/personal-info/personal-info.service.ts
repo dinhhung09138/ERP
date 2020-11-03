@@ -18,9 +18,15 @@ import { NationalityFormComponent } from '../../../configuration/nationality/for
 import { EducationFormComponent } from '../../../configuration/education/form/form.component';
 import { ProfessionalQualificationFormComponent } from '../../../configuration/professional-qualification/form/form.component';
 import { ReligionFormComponent } from '../../../configuration/religion/form/form.component';
+import { PermissionViewModel } from '../../../../../core/models/permission.model';
+import { SessionContext } from '../../../../../core/session.context';
 
 @Injectable()
 export class PersonalInfoService {
+
+  permission = new PermissionViewModel();
+  moduleName = 'HR';
+  functionCode = 'HR_EMPLOYEE_PERSONAL_INFO';
 
   constructor(
     private http: HttpClient,
@@ -29,13 +35,19 @@ export class PersonalInfoService {
     private nationalityService: NationalityService,
     private religionService: ReligionService,
     private educationService: EducationService,
-    private qualificationService: ProfessionalQualificationService) { }
+    private qualificationService: ProfessionalQualificationService,
+    private context: SessionContext) { }
 
   url = {
     item: APIUrlConstants.hrApi + 'employee-info/item',
     itemByEmployeeId: APIUrlConstants.hrApi + 'employee-info/item-by-employee',
     update: APIUrlConstants.hrApi + 'employee-info/update',
   };
+
+  getPermission(): PermissionViewModel {
+    this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
+    return this.permission;
+  }
 
   item(id: number): Observable<ResponseModel> {
     return this.api.getDataById(this.url.item, id);

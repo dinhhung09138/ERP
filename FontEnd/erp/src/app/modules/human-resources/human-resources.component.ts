@@ -33,6 +33,9 @@ export class HumanResourcesComponent implements OnInit {
   }
 
   checkSubMenu(code: string, parentCode: string): number {
+    if (code === 'HR_EMPLOYEE') {
+      return 0;
+    }
     // Return if item in sub-menu
     if (parentCode.length > 0) {
       return -1;

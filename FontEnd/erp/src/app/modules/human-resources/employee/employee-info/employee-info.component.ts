@@ -20,6 +20,8 @@ import { EmployeeRelationshipComponent } from './relationship/relationship.compo
 import { EmployeeIdentificationComponent } from './identification/identification.component';
 import { EmployeeEducationComponent } from './education/education.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
+import { PermissionViewModel } from '../../../../core/models/permission.model';
+import { DialogService } from '../../../../core/services/dialog.service';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -34,6 +36,7 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
+  permission = new PermissionViewModel();
   employeeForm: FormGroup;
   isLoading = false;
   isSubmit = false;
@@ -47,12 +50,16 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
   fileToUpload: any;
   fileUrl: string;
 
+  personalInfoPermission = new PermissionViewModel();
   initPersonInfoTab = false;
   @ViewChild(PersonalInfoComponent) personalInfoTab: PersonalInfoComponent;
+  educationPermission = new PermissionViewModel();
   initEducationTab = false;
   @ViewChild(EmployeeEducationComponent) educationTab: EmployeeEducationComponent;
+  relationshipPermission = new PermissionViewModel();
   initRelationshipTab = false;
   @ViewChild(EmployeeRelationshipComponent) relationshipTab: EmployeeRelationshipComponent;
+  identificationPermission = new PermissionViewModel();
   initIdentificationTab = false;
   @ViewChild(EmployeeIdentificationComponent) identificationTab: EmployeeIdentificationComponent;
 
@@ -67,9 +74,21 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private formatNumber: FormatNumberPipe,
     private employeeService: EmployeeService,
+    private dialog: DialogService,
   ) { }
 
   ngOnInit(): void {
+    this.permission = this.employeeService.getPermission();
+    if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
+      this.dialog.openUnauthorizeDialog();
+      return;
+    }
+
+    this.personalInfoPermission = this.employeeService.getPersonalInfoPermission();
+    this.educationPermission = this.employeeService.getEducationPermission();
+    this.relationshipPermission = this.employeeService.getRelationshipPermission();
+    this.identificationPermission = this.employeeService.getIdentificationPermission();
+
     this.activatedRoute.data.subscribe(response => {
       this.listWorkingStatus = response.data?.workingStatusList?.result || [];
     });
@@ -96,8 +115,10 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
-    this.initPersonInfoTab = true;
-    this.personalInfoTab.getSelection();
+    if (this.router.url.indexOf('/employee/edit') > 0 && this.personalInfoPermission.allowView === true) {
+      this.initPersonInfoTab = true;
+      this.personalInfoTab.getSelection();
+    }
   }
 
   initFormControl(formStatus: FormActionStatus) {
@@ -222,20 +243,20 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
   onSelectTab(tabName: string) {
     switch (tabName) {
       case 'personalInfo':
-        if (this.initPersonInfoTab === false) {
+        if (this.initPersonInfoTab === false && this.personalInfoPermission.allowView === true) {
           this.initPersonInfoTab = true;
           this.personalInfoTab.getSelection();
         }
         break;
       case 'relationship':
-        if (this.initRelationshipTab === false) {
+        if (this.initRelationshipTab === false && this.relationshipPermission.allowView === true) {
           this.initRelationshipTab = true;
           this.relationshipTab.getList();
           this.relationshipTab.getListRelationshipType();
         }
         break;
       case 'identification':
-        if (this.initIdentificationTab === false) {
+        if (this.initIdentificationTab === false && this.identificationPermission.allowView === true) {
           this.initIdentificationTab = true;
           this.identificationTab.getList();
           this.identificationTab.getIdentificationType();
@@ -243,7 +264,7 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
         }
         break;
       case 'education':
-        if (this.initEducationTab === false) {
+        if (this.initEducationTab === false && this.educationPermission.allowView === true) {
           this.initEducationTab = true;
           this.educationTab.getList();
           this.educationTab.getEducationType();

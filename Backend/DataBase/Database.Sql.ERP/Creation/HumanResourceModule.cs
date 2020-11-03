@@ -1330,10 +1330,10 @@ namespace Database.Sql.ERP.Creation
                 {
                     Id = 97,
                     FunctionCode = "HR_EMPLOYEE_PERSONAL_INFO",
-                    Name = "DELETE",
+                    Name = "UPDATE",
                     ModuleName = "HR",
                     ControllerName = "EmployeeInfo",
-                    ActionName = "Delete",
+                    ActionName = "Update",
                     Precedence = 4,
                     IsView = false,
                 }

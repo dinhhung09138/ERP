@@ -20,13 +20,6 @@ namespace API.HR.Controllers
             _emplContactService = emplContactService;
         }
 
-        [HttpGet, Route("item")]
-        public async Task<ResponseModel> Item([FromQuery] int id)
-        {
-            var response = await _emplContactService.Item(id);
-            return response;
-        }
-
         [HttpGet, Route("item-by-employee")]
         public async Task<ResponseModel> ItemByEmployee([FromQuery] int employeeId)
         {
@@ -34,7 +27,7 @@ namespace API.HR.Controllers
             return response;
         }
 
-        [HttpPut, Route("insert")]
+        [HttpPost, Route("insert")]
         public async Task<ResponseModel> Insert([FromBody] EmployeeContactModel model)
         {
             var response = await _emplContactService.Update(model);
@@ -45,6 +38,13 @@ namespace API.HR.Controllers
         public async Task<ResponseModel> Update([FromBody] EmployeeContactModel model)
         {
             var response = await _emplContactService.Update(model);
+            return response;
+        }
+
+        [HttpPut, Route("delete")]
+        public async Task<ResponseModel> Delete([FromBody] EmployeeContactModel model)
+        {
+            var response = await _emplContactService.Delete(model);
             return response;
         }
     }

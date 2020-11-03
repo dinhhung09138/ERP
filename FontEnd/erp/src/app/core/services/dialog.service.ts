@@ -40,9 +40,20 @@ export class DialogService {
                             || errorModel.httpError === HttpErrorStatusEnum.unauthorized);
 
     this.dialog.open(ErrorDialogComponent, {
-      width: '400px',
+      panelClass: 'mat-modal-sm',
       disableClose: disableClosed,
       data: errorModel
+    });
+  }
+
+  openUnauthorizeDialog() {
+    this.dialog.open(ErrorDialogComponent, {
+      panelClass: 'mat-modal-sm',
+      disableClose: false,
+      data: {
+        isError: true,
+        httpError: HttpErrorStatusEnum.unauthorized
+      }
     });
   }
 

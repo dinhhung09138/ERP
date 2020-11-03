@@ -9,6 +9,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { EmployeeService } from '../employee.service';
+import { PermissionViewModel } from '../../../../core/models/permission.model';
 
 @Component({
   selector: 'app-hr-employee-list',
@@ -19,6 +20,7 @@ export class EmployeeListComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+  permission = new PermissionViewModel();
   isLoading = false;
 
   paging = new PagingModel();
@@ -42,28 +44,29 @@ export class EmployeeListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.permission = this.employeeService.getPermission();
     this.dataSource.sort = this.sort;
     this.getList();
   }
 
   onCreateClick() {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowInsert === true) {
       this.router.navigate(['/hr/employee/new']);
     }
   }
 
   onImportClick() {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowInsert === true) {
     }
   }
 
   onExportClick() {
-    if (this.isLoading === false) {
+    if (this.isLoading === false && this.permission.allowView === true) {
     }
   }
 
   onUpdateClick(id: number) {
-    if (this.isLoading === false && id !== null) {
+    if (this.isLoading === false && id !== null && this.permission.allowUpdate === true) {
       this.router.navigate([`/hr/employee/edit/${id}`]);
     }
   }

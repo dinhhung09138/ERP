@@ -19,7 +19,7 @@ export class EmployeeEducationService {
 
   permission = new PermissionViewModel();
   moduleName = 'HR';
-  functionCode = '';
+  functionCode = 'HR_EMPLOYEE_EDUCATION';
   url = {
     list: APIUrlConstants.hrApi + 'employee-education/get-list',
     item: APIUrlConstants.hrApi + 'employee-education/item',

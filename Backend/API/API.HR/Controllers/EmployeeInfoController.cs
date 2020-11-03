@@ -19,13 +19,6 @@ namespace API.HR.Controllers
             _employeeInfoService = employeeInfoService;
         }
 
-        [HttpGet, Route("item")]
-        public async Task<ResponseModel> Item([FromQuery] int id)
-        {
-            var response = await _employeeInfoService.Item(id);
-            return response;
-        }
-
         [HttpGet, Route("item-by-employee")]
         public async Task<ResponseModel> ItemByEmployee([FromQuery] int employeeId)
         {

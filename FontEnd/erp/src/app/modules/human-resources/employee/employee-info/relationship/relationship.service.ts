@@ -19,7 +19,7 @@ export class EmployeeRelationShipService {
 
   permission = new PermissionViewModel();
   moduleName = 'HR';
-  functionCode = '';
+  functionCode = 'HR_EMPLOYEE_RELATIONSHIP';
   url = {
     list: APIUrlConstants.hrApi + 'employee-relationship/get-list',
     item: APIUrlConstants.hrApi + 'employee-relationship/item',

@@ -19,7 +19,7 @@ export class EmployeeIdentificationService {
 
   permission = new PermissionViewModel();
   moduleName = 'HR';
-  functionCode = '';
+  functionCode = 'HR_EMPLOYEE_IDENTIFICATION';
   url = {
     list: APIUrlConstants.hrApi + 'employee-identification/get-list',
     item: APIUrlConstants.hrApi + 'employee-identification/item',

@@ -159,7 +159,7 @@ namespace Service.System
 
                         md.Functions.Add(function);
 
-                        if (!string.IsNullOrEmpty(function.ParentCode) && !md.Functions.Any(t => t.Code == function.ParentCode))
+                        if (function.ParentCode != "HR_EMPLOYEE" && !string.IsNullOrEmpty(function.ParentCode) && !md.Functions.Any(t => t.Code == function.ParentCode))
                         {
                             var prFunction = _context.FunctionRepository.Query().FirstOrDefault(m => m.Code == function.ParentCode);
 

@@ -87,7 +87,7 @@ export class SessionContext {
   getSidebarByModule(moduleName: string): FunctionViewModel[] {
     const listModule = JSON.parse(sessionStorage.getItem('modules')) as ModuleViewModel[];
     const md = listModule.find(m => m.name === moduleName);
-    return md.functions;
+    return md.functions.filter(m => m.code.startsWith('HR_EMPLOYEE_') === false);
   }
 
   getPermissionByForm(moduleName: string, functionCode: string): PermissionViewModel {

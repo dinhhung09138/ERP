@@ -11,10 +11,19 @@ import { EmployeeViewModel } from './employee.model';
 import { PagingModel } from '../../../core/models/paging.model';
 import { FormActionStatus } from '../../../core/enums/form-action-status.enum';
 import { DialogService } from '../../../core/services/dialog.service';
+import { PermissionViewModel } from '../../../core/models/permission.model';
+import { SessionContext } from '../../../core/session.context';
+import { PersonalInfoService } from './employee-info/personal-info/personal-info.service';
+import { EmployeeRelationShipService } from './employee-info/relationship/relationship.service';
+import { EmployeeIdentificationService } from './employee-info/identification/identification.service';
+import { EmployeeEducationService } from './employee-info/education/education.service';
 
 @Injectable()
 export class EmployeeService {
 
+  permission = new PermissionViewModel();
+  moduleName = 'HR';
+  functionCode = 'HR_EMPLOYEE';
   url = {
     list: APIUrlConstants.hrApi + 'employee/get-list',
     dropdown: APIUrlConstants.hrApi + 'employee/dropdown',
@@ -27,7 +36,34 @@ export class EmployeeService {
 
   constructor(
     private dialogService: DialogService,
-    private api: ApiService) { }
+    private api: ApiService,
+    private context: SessionContext,
+    private personalInfoService: PersonalInfoService,
+    private relationShipService: EmployeeRelationShipService,
+    private identificationService: EmployeeIdentificationService,
+    private educationService: EmployeeEducationService,
+    ) { }
+
+    getPermission(): PermissionViewModel {
+      this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
+      return this.permission;
+    }
+
+    getPersonalInfoPermission(): PermissionViewModel {
+      return this.personalInfoService.getPermission();
+    }
+
+    getIdentificationPermission(): PermissionViewModel {
+      return this.identificationService.getPermission();
+    }
+
+    getRelationshipPermission(): PermissionViewModel {
+      return this.relationShipService.getPermission();
+    }
+
+    getEducationPermission(): PermissionViewModel {
+      return this.educationService.getPermission();
+    }
 
     getList(paging: PagingModel, searchText: string): Observable<ResponseModel> {
       const filter = new FilterModel();
@@ -51,6 +87,9 @@ export class EmployeeService {
     }
 
     save(model: EmployeeViewModel, action: FormActionStatus, file?: any): Observable<ResponseModel> {
+      if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
+        return;
+      }
       const formData = new FormData();
 
       formData.append('employeeCode', model.employeeCode);
@@ -95,6 +134,9 @@ export class EmployeeService {
     }
 
     confirmDelete(itemId: number): Observable<ResponseModel> {
+      if (this.permission.allowDelete === false) {
+        return;
+      }
       return this.dialogService.openConfirmDeleteDialog().pipe(
         switchMap((confirmResponse: boolean) => {
           if (confirmResponse === true) {
@@ -107,6 +149,9 @@ export class EmployeeService {
     }
 
     delete(itemId: number): Observable<ResponseModel> {
+      if (this.permission.allowDelete === false) {
+        return;
+      }
       return this.api.deleteById(this.url.delete, itemId);
     }
 }
