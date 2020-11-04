@@ -48,10 +48,16 @@ export class EmployeeRelationshipComponent implements OnInit {
   }
 
   onAddClick() {
+    if (this.permission.allowInsert === false) {
+      return;
+    }
     this.showFormModal();
   }
 
   onUpdateClick(id: number) {
+    if (this.permission.allowUpdate === false) {
+      return;
+    }
     this.showFormModal(id);
   }
 

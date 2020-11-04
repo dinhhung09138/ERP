@@ -10,14 +10,14 @@ import { PermissionViewModel } from '../../../../../core/models/permission.model
 import { PagingModel } from '../../../../../core/models/paging.model';
 import { ModelOfStudyViewModel } from './../../../configuration/model-of-study/model-of-study.model';
 import { RankingViewModel } from './../../../configuration/ranking/ranking.model';
-import { EducationViewModel } from './../../../configuration/education/education.model';
 import { RankingService } from './../../../configuration/ranking/ranking.service';
 import { ModelOfStudyService } from './../../../configuration/model-of-study/model-of-study.service';
-import { EducationService } from './../../../configuration/education/education.service';
 import { EmployeeEducationService } from './education.service';
 import { EmployeeEducationFormComponent } from './form/form.component';
 import { ResponseModel } from '../../../../../core/models/response.model';
 import { ResponseStatus } from '../../../../../core/enums/response-status.enum';
+import { ProfessionalQualificationService } from '../../../configuration/professional-qualification/professional-qualification.service';
+import { ProfessionalQualificationViewModel } from '../../../configuration/professional-qualification/professional-qualification.model';
 
 
 
@@ -46,14 +46,14 @@ export class EmployeeEducationComponent implements OnInit {
                               'year',
                               'action' ];
   dataSource = new MatTableDataSource();
-  listEducation: EducationViewModel[];
+  listEducation: ProfessionalQualificationViewModel[];
   listRank: RankingViewModel[];
   listModelOfStudy: ModelOfStudyViewModel[];
 
   constructor(
     private dialog: MatDialog,
     private employeeEducationService: EmployeeEducationService,
-    private educationTypeService: EducationService,
+    private educationTypeService: ProfessionalQualificationService,
     private modelOfStudyService: ModelOfStudyService,
     private rankingService: RankingService,
   ) { }
@@ -64,10 +64,16 @@ export class EmployeeEducationComponent implements OnInit {
   }
 
   onAddClick() {
+    if (this.permission.allowInsert === false) {
+      return;
+    }
     this.showFormModal();
   }
 
   onUpdateClick(id: number) {
+    if (this.permission.allowUpdate === false) {
+      return;
+    }
     this.showFormModal(id);
   }
 
@@ -133,7 +139,6 @@ export class EmployeeEducationComponent implements OnInit {
     this.educationTypeService.getDropdown().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.listEducation = response.result;
-        console.log(this.listEducation);
       }
       this.isLoading = false;
     });

@@ -54,9 +54,9 @@ export class EmployeeIdentificationService {
   }
 
   save(model: EmployeeIdentificationViewModel, action: FormActionStatus): Observable<ResponseModel> {
-    // if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
-    //   return;
-    // }
+    if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
+      return;
+    }
     switch (action) {
       case FormActionStatus.Insert:
         return this.api.insert(this.url.insert, model);
@@ -66,9 +66,9 @@ export class EmployeeIdentificationService {
   }
 
   confirmDelete(itemId: number, version: any): Observable<ResponseModel> {
-    // if (this.permission.allowDelete === false) {
-    //   return;
-    // }
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.dialogService.openConfirmDeleteDialog().pipe(
       switchMap((confirmResponse: boolean) => {
         if (confirmResponse === true) {
@@ -81,9 +81,9 @@ export class EmployeeIdentificationService {
   }
 
   delete(itemId: number, version: any): Observable<ResponseModel> {
-    // if (this.permission.allowDelete === false) {
-    //   return;
-    // }
+    if (this.permission.allowDelete === false) {
+      return;
+    }
     return this.api.delete(this.url.delete, {id: itemId, rowVersion: version});
   }
 

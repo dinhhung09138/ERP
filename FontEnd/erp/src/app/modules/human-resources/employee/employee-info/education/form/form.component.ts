@@ -1,11 +1,3 @@
-import { RankingService } from './../../../../configuration/ranking/ranking.service';
-import { ModelOfStudyService } from './../../../../configuration/model-of-study/model-of-study.service';
-import { EducationService } from './../../../../configuration/education/education.service';
-import { EmployeeEducationService } from './../education.service';
-import { ModelOfStudyViewModel } from './../../../../configuration/model-of-study/model-of-study.model';
-import { RankingViewModel } from './../../../../configuration/ranking/ranking.model';
-import { EducationViewModel } from './../../../../configuration/education/education.model';
-import { EmployeeEducationViewModel } from './../education.model';
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { FormGroupDirective, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -15,7 +7,12 @@ import { ResponseModel } from '../../../../../../core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormActionStatus } from '../../../../../../core/enums/form-action-status.enum';
 import { DialogDataInterface } from '../../../../../../core/interfaces/dialog-data.interface';
-
+import { PermissionViewModel } from '../../../../../../core/models/permission.model';
+import { ProfessionalQualificationViewModel } from '../../../../configuration/professional-qualification/professional-qualification.model';
+import { EmployeeEducationService } from './../education.service';
+import { ModelOfStudyViewModel } from './../../../../configuration/model-of-study/model-of-study.model';
+import { RankingViewModel } from './../../../../configuration/ranking/ranking.model';
+import { EmployeeEducationViewModel } from './../education.model';
 
 @Component({
   selector: 'app-hr-employee-education-form',
@@ -26,6 +23,7 @@ export class EmployeeEducationFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective, { static: true}) formDirective: FormGroupDirective;
 
+  permission = new PermissionViewModel();
   formTitle = '';
   isLoading = false;
   isSubmit = false;
@@ -38,7 +36,7 @@ export class EmployeeEducationFormComponent implements OnInit {
       name: 'Demo'
     }
   ];
-  listEducation: EducationViewModel[];
+  listEducation: ProfessionalQualificationViewModel[];
   listRank: RankingViewModel[];
   listModelOfStudy: ModelOfStudyViewModel[];
   listYear: number[] = [];
@@ -50,12 +48,10 @@ export class EmployeeEducationFormComponent implements OnInit {
     private dialogRef: MatDialogRef<EmployeeEducationFormComponent>,
     private fb: FormBuilder,
     private employeeEducationService: EmployeeEducationService,
-    private educationTypeService: EducationService,
-    private modelOfStudyService: ModelOfStudyService,
-    private rankingService: RankingService,
   ) { }
 
   ngOnInit(): void {
+    this.permission = this.employeeEducationService.getPermission();
 
     this.form = this.fb.group({
       id: [0],
@@ -163,6 +159,7 @@ export class EmployeeEducationFormComponent implements OnInit {
     if (data) {
       this.form.get('id').setValue(data.id);
       this.form.get('employeeId').setValue(this.employeeId);
+      this.form.get('educationTypeId').setValue(data.educationTypeId);
       this.form.get('school').setValue(data.school);
       this.form.get('majorId').setValue(data.majorId);
       this.form.get('rankingId').setValue(data.rankingId);

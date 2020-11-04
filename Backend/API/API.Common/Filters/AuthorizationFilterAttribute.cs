@@ -68,6 +68,7 @@ namespace API.Common.Filters
         {
             switch(controllerName)
             {
+                // We config it's URL in HR module, So we convert back to HR for check authorize
                 case "Province":
                 case "District":
                 case "Ward":

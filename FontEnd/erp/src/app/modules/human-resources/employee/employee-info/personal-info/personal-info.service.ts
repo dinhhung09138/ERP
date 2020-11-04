@@ -62,6 +62,9 @@ export class PersonalInfoService {
   }
 
   save(model: PersonalInfoViewModel): Observable<ResponseModel> {
+    if (this.permission.allowUpdate === false) {
+      return;
+    }
     return this.api.update(this.url.update, model);
   }
 

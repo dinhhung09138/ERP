@@ -11,6 +11,7 @@ import { EducationViewModel } from '../../../configuration/education/education.m
 import { ReligionViewModel } from '../../../configuration/religion/religion.model';
 import { ProfessionalQualificationViewModel } from '../../../configuration/professional-qualification/professional-qualification.model';
 import { EmployeeViewModel } from '../../employee.model';
+import { PermissionViewModel } from '../../../../../core/models/permission.model';
 
 @Component({
   selector: 'app-hr-employee-personal-info',
@@ -23,6 +24,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   @Input() employee: EmployeeViewModel;
 
+  permission = new PermissionViewModel();
   isEdit = false; // If true, enable control for editing
   isLoading = false;
   isSubmit = false;
@@ -46,6 +48,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit(): void {
+    this.permission = this.personalInfoService.getPermission();
     this.personalInfoForm = this.fb.group({
       id: [0],
       employeeId: [0],
@@ -64,7 +67,6 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
   ngOnChanges(data: SimpleChanges) {
     if (data.employee && data.employee.currentValue) {
-      console.log(data.employee.currentValue.id);
       this.personalInfoForm.get('employeeId').setValue(data.employee.currentValue.id);
       this.getInfoByEmployeeId(data.employee.currentValue.id);
     }
@@ -176,8 +178,6 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
 
     this.isSubmit = true;
 
-    console.log(this.personalInfoForm.getRawValue());
-
     if (this.personalInfoForm.invalid) {
       this.isSubmit = false;
       return;
@@ -185,7 +185,8 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.isLoading = true;
     this.personalInfoService.save(this.personalInfoForm.getRawValue()).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
-        this.personalInfo = this.personalInfoForm.getRawValue();
+        this.personalInfo = response.result;
+        this.setDataToForm(response.result);
         this.isEdit = false;
       }
       this.isLoading = false;

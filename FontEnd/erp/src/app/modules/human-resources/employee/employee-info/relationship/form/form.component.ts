@@ -10,6 +10,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { EmployeeRelationShipViewModel } from '../relationship.model';
 import { FormActionStatus } from '../../../../../../core/enums/form-action-status.enum';
 import { DialogDataInterface } from '../../../../../../core/interfaces/dialog-data.interface';
+import { PermissionViewModel } from '../../../../../../core/models/permission.model';
 
 @Component({
   selector: 'app-hr-employee-relationship-form',
@@ -20,6 +21,7 @@ export class EmployeeRelationshipFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective, { static: true}) formDirective: FormGroupDirective;
 
+  permission = new PermissionViewModel();
   formTitle = '';
   isLoading = false;
   isSubmit = false;
@@ -37,7 +39,7 @@ export class EmployeeRelationshipFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.permission = this.emplRelationShipService.getPermission();
     this.form = this.fb.group({
       id: [0],
       employeeId: [null, Validators.required],

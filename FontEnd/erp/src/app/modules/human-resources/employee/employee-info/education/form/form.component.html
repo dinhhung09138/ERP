@@ -103,7 +103,7 @@
               <br/>
               <div class="row">
                 <div class="col-12 form-group" *ngIf="formAction !== 0">
-                  <input type="submit"
+                  <input type="submit" *ngIf="permission.allowInsert === true || permission.allowUpdate === true"
                     class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="154">
                   <button type="button" class="btn btn-warning" (click)="onResetClick()" tabindex="155">
                     {{ 'BUTTON.RESET' | translate }}

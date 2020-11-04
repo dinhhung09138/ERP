@@ -34,7 +34,7 @@ export class EmployeeIdentificationComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName: string[] = [ 'identificationTypeName', 'code', 'expirationDate', 'placeName', 'notes', 'action' ];
+  listColumnsName: string[] = [ 'identificationTypeName', 'code', 'placeName', 'applyDate', 'expirationDate', 'notes', 'action' ];
   dataSource = new MatTableDataSource();
   listIdentificationType: IdentificationTypeViewModel[];
   listProvince: ProvinceViewModel[];
@@ -52,10 +52,16 @@ export class EmployeeIdentificationComponent implements OnInit {
   }
 
   onAddClick() {
+    if (this.permission.allowInsert === false) {
+      return;
+    }
     this.showFormModal();
   }
 
   onUpdateClick(id: number) {
+    if (this.permission.allowUpdate === false) {
+      return;
+    }
     this.showFormModal(id);
   }
 

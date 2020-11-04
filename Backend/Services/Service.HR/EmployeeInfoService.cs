@@ -203,7 +203,7 @@ namespace Service.HR
             {
                 throw ex;
             }
-            return response;
+            return await ItemByEmployeeId(model.EmployeeId);
         }
 
         public async Task<ResponseModel> UpdateName(int employeeId, string firstName, string lastName)

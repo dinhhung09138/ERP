@@ -14,6 +14,7 @@ import { DialogDataInterface } from '../../../../../../core/interfaces/dialog-da
 import { EmployeeIdentificationService } from '../identification.service';
 import { ResponseStatus } from '../../../../../../core/enums/response-status.enum';
 import { ResponseModel } from '../../../../../../core/models/response.model';
+import { PermissionViewModel } from '../../../../../../core/models/permission.model';
 
 @Component({
   selector: 'app-hr-employee-identification-form',
@@ -28,6 +29,7 @@ export class EmployeeIdentificationFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective, { static: true}) formDirective: FormGroupDirective;
 
+  permission = new PermissionViewModel();
   formTitle = '';
   isLoading = false;
   isSubmit = false;
@@ -47,7 +49,7 @@ export class EmployeeIdentificationFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.permission = this.employeeIdentificationService.getPermission();
     this.form = this.fb.group({
       id: [0],
       employeeId: [null, Validators.required],
@@ -62,7 +64,7 @@ export class EmployeeIdentificationFormComponent implements OnInit {
     });
 
     this.formAction = FormActionStatus.Insert;
-    if (this.dialogData && this.dialogData.isPopup === true) {
+    if (this.dialogData) {
       this.employeeId = this.dialogData.employeeId;
       this.listProvince = this.dialogData.listProvince;
       this.listIdentificationType = this.dialogData.listIdentificationType;
@@ -75,6 +77,11 @@ export class EmployeeIdentificationFormComponent implements OnInit {
   }
 
   initFormControl(formAction: FormActionStatus) {
+
+    if (this.formDirective) {
+      this.formDirective.reset();
+    }
+
     this.isSubmit = false;
     this.formAction = formAction;
     this.form.get('id').setValue(0);
@@ -150,8 +157,12 @@ export class EmployeeIdentificationFormComponent implements OnInit {
       this.form.get('placeId').setValue(data.placeId);
       this.form.get('notes').setValue(data.notes);
       this.form.get('identificationTypeId').setValue(data.identificationTypeId);
-      this.form.get('applyDate').setValue(data.applyDate);
-      this.form.get('expirationDate').setValue(data.expirationDate);
+      if (data.applyDate) {
+        this.form.get('applyDate').setValue(new Date(data.applyDate));
+      }
+      if (data.expirationDate) {
+        this.form.get('expirationDate').setValue(new Date(data.expirationDate));
+      }
       this.form.get('rowVersion').setValue(data.rowVersion);
     }
   }
