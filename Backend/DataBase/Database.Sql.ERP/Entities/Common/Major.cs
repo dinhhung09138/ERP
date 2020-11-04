@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Database.Sql.ERP.Entities.HR
+namespace Database.Sql.ERP.Entities.Common
 {
-    [Table("HR_Major")]
+    [Table("Common_Major")]
     public class Major
     {
         [Key]

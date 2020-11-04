@@ -12,11 +12,17 @@ namespace Database.Sql.ERP
     {
         #region " [ Common ] "
 
+        public virtual DbSet<Certificated> Certificated { get; set; }
+
         public virtual DbSet<District> District { get; set; }
+
+        public virtual DbSet<Major> MajorType { get; set; }
 
         public virtual DbSet<ProfessionalQualification> ProfessionalQualification { get; set; }
 
         public virtual DbSet<Province> Province { get; set; }
+
+        public virtual DbSet<School> School { get; set; }
 
         public virtual DbSet<Ward> Ward { get; set; }
 
@@ -61,8 +67,6 @@ namespace Database.Sql.ERP
         public virtual DbSet<EmployeeWorkingStatus> EmployeeWorkingStatus { get; set; }
 
         public virtual DbSet<IdentificationType> IdentificationType { get; set; }
-
-        public virtual DbSet<Major> MajorType { get; set; }
 
         public virtual DbSet<ModelOfStudy> ModelOfStudy { get; set; }
 
@@ -407,7 +411,7 @@ namespace Database.Sql.ERP
 
             modelBuilder.CreateHumanResourceDefaultCommand();
 
-            //FunctionCommand MaxId = 133 (CreateDefaultCommandEmployee)
+            //FunctionCommand MaxId = 145
 
             #endregion
         }

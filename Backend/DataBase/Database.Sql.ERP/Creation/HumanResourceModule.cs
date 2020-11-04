@@ -156,15 +156,6 @@ namespace Database.Sql.ERP.Creation
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
-            modelBuilder.Entity<Major>(entity =>
-            {
-                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
-                entity.Property(m => m.IsActive).HasDefaultValue(true);
-                entity.Property(m => m.Deleted).HasDefaultValue(false);
-                entity.Property(m => m.Precedence).HasDefaultValue(1);
-                entity.Property(m => m.RowVersion).IsRowVersion();
-            });
-
             modelBuilder.Entity<ModelOfStudy>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -255,6 +246,9 @@ namespace Database.Sql.ERP.Creation
             modelBuilder.CreateDefaultCommandConfContract();
             modelBuilder.CreateDefaultCommandConfWorkingStatus();
             modelBuilder.CreateDefaultCommandConfApproveStatus();
+            modelBuilder.CreateDefaultCommandConfMajor();
+            modelBuilder.CreateDefaultCommandConfSchool();
+            modelBuilder.CreateDefaultCommandConfCertificated();
             modelBuilder.CreateDefaultCommandEmployee();
         }
 
@@ -1260,6 +1254,156 @@ namespace Database.Sql.ERP.Creation
             );
         }
 
+        private static void CreateDefaultCommandConfMajor(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 134,
+                    FunctionCode = "HR_CONF_MAJOR",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Major",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 135,
+                    FunctionCode = "HR_CONF_MAJOR",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Major",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 136,
+                    FunctionCode = "HR_CONF_MAJOR",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Major",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 137,
+                    FunctionCode = "HR_CONF_MAJOR",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Major",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
+        private static void CreateDefaultCommandConfSchool(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 138,
+                    FunctionCode = "HR_CONF_SCHOOL",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "School",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 139,
+                    FunctionCode = "HR_CONF_SCHOOL",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "School",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 140,
+                    FunctionCode = "HR_CONF_SCHOOL",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "School",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 141,
+                    FunctionCode = "HR_CONF_SCHOOL",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "School",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
+        private static void CreateDefaultCommandConfCertificated(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 141,
+                    FunctionCode = "HR_CONF_CERTIFICATED",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Certificated",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 142,
+                    FunctionCode = "HR_CONF_CERTIFICATED",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Certificated",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 144,
+                    FunctionCode = "HR_CONF_CERTIFICATED",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Certificated",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 145,
+                    FunctionCode = "HR_CONF_CERTIFICATED",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Certificated",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
         #endregion
 
         #region " [ Leave Management ] "
@@ -1992,12 +2136,42 @@ namespace Database.Sql.ERP.Creation
                 },
                 new Function()
                 {
+                    Code = "HR_CONF_CERTIFICATED",
+                    Name = "EDUCATION",
+                    Url = "/configuration/certificated",
+                    Icon = string.Empty,
+                    ParentCode = "HR_CONFIGURATION",
+                    Precedence = 8,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
+                    Code = "HR_CONF_SCHOOL",
+                    Name = "SCHOOL",
+                    Url = "/configuration/school",
+                    Icon = string.Empty,
+                    ParentCode = "HR_CONFIGURATION",
+                    Precedence = 9,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
+                    Code = "HR_CONF_MAJOR",
+                    Name = "MAJOR",
+                    Url = "/configuration/major",
+                    Icon = string.Empty,
+                    ParentCode = "HR_CONFIGURATION",
+                    Precedence = 10,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
                     Code = "HR_CONF_MODEL_OF_STUDY",
                     Name = "MODEL_OF_STUDY",
                     Url = "/configuration/model-of-study",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 9,
+                    Precedence = 11,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2007,7 +2181,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/ranking",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 10,
+                    Precedence = 12,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2017,7 +2191,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/relationship-type",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 11,
+                    Precedence = 13,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2027,7 +2201,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/contract-type",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 12,
+                    Precedence = 14,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2037,7 +2211,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/employee-status",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 13,
+                    Precedence = 15,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2047,7 +2221,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/job-title",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 14,
+                    Precedence = 16,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2057,7 +2231,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/approve-status",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 14,
+                    Precedence = 17,
                     ModuleCode = "HR"
                 },
                 new Function()

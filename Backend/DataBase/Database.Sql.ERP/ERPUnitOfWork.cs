@@ -18,12 +18,39 @@ namespace Database.Sql.ERP
 
         #region " [ Common ] "
 
+        private ITableGenericRepository<Certificated> _certificatedRepository;
+        public ITableGenericRepository<Certificated> CertificatedRepository
+        {
+            get
+            {
+                return _certificatedRepository = _certificatedRepository ?? new TableGenericRepository<Certificated>(_context);
+            }
+        }
+
+        private ITableGenericRepository<School> _schoolRepository;
+        public ITableGenericRepository<School> SchoolRepository
+        {
+            get
+            {
+                return _schoolRepository = _schoolRepository ?? new TableGenericRepository<School>(_context);
+            }
+        }
+
         private ITableGenericRepository<District> _districtRepository;
         public ITableGenericRepository<District> DistrictRepository
         {
             get
             {
                 return _districtRepository = _districtRepository ?? new TableGenericRepository<District>(_context);
+            }
+        }
+
+        private ITableGenericRepository<Major> _majorRepository;
+        public ITableGenericRepository<Major> MajorRepository
+        {
+            get
+            {
+                return _majorRepository = _majorRepository ?? new TableGenericRepository<Major>(_context);
             }
         }
 
@@ -226,15 +253,6 @@ namespace Database.Sql.ERP
             get
             {
                 return _identificationTypeRepository = _identificationTypeRepository ?? new TableGenericRepository<IdentificationType>(_context);
-            }
-        }
-
-        private ITableGenericRepository<Major> _majorRepository;
-        public ITableGenericRepository<Major> MajorRepository
-        {
-            get
-            {
-                return _majorRepository = _majorRepository ?? new TableGenericRepository<Major>(_context);
             }
         }
 

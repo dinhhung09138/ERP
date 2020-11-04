@@ -4,26 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.Common
 {
-    [Table("Common_Ward")]
-    public class Ward
+    [Table("Common_Certificated")]
+    public class Certificated
     {
         [Key]
         [Column(TypeName = "int")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
+        [Column(TypeName = "nvarchar(150)")]
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
-
-        [Column(TypeName = "int")]
-        [Required]
-        public int DistrictId { get; set; }
-
-        [Column(TypeName = "int")]
-        [Required]
-        public int ProvinceId { get; set; }
 
         [Column(TypeName = "int")]
         [Required]
