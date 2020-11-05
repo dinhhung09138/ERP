@@ -32,7 +32,7 @@ export class EmployeeRelationshipComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName: string[] = [ 'fullName', 'address', 'mobile', 'relationshipTypeName', 'action' ];
+  listColumnsName: string[] = [ 'fullName', 'mobile', 'relationshipTypeName', 'address', 'action' ];
   dataSource = new MatTableDataSource();
   listRelationShip: RelationshipTypeViewModel[];
 

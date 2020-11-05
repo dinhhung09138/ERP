@@ -20,14 +20,6 @@
           {{ element.fullName }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="address">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.ADDRESS' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.address }}
-        </td>
-      </ng-container>
       <ng-container matColumnDef="mobile">
         <th mat-header-cell mat-sort-header *matHeaderCellDef class="td-w-120">
           {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.MOBILE' | translate }}
@@ -42,6 +34,14 @@
         </th>
         <td mat-cell *matCellDef="let element">
           {{ element.relationshipTypeName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.ADDRESS' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.address }}
         </td>
       </ng-container>
       <ng-container matColumnDef="action">

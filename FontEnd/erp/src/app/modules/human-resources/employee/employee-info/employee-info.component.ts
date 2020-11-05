@@ -22,6 +22,7 @@ import { EmployeeEducationComponent } from './education/education.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { PermissionViewModel } from '../../../../core/models/permission.model';
 import { DialogService } from '../../../../core/services/dialog.service';
+import { PositionViewModel } from '../../position/position.model';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -64,6 +65,7 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
   @ViewChild(EmployeeIdentificationComponent) identificationTab: EmployeeIdentificationComponent;
 
   listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
+  listPosition: PositionViewModel[] = [];
 
   constructor(
     public translate: TranslateService,
@@ -90,7 +92,8 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
     this.identificationPermission = this.employeeService.getIdentificationPermission();
 
     this.activatedRoute.data.subscribe(response => {
-      this.listWorkingStatus = response.data?.workingStatusList?.result || [];
+      this.listWorkingStatus = response.data?.listWorkingStatus?.result || [];
+      this.listPosition = response.data?.listPosition?.result || [];
     });
 
     this.employeeForm = this.fb.group({
@@ -106,7 +109,9 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
       dateApplyFingerSign: [null, [AppValidator.date]],
       probationDate: [null, [AppValidator.date]],
       startWorkingDate: [null, [AppValidator.date]],
-      employeeWorkingStatusId: [null, [Validators.required]],
+      employeeWorkingStatusId: [''],
+      currentPositionId: [''],
+      currentDepartmentId: [''],
       basicSalary: [0, [AppValidator.money, Validators.required]],
       rowVersion: [null],
     });
@@ -144,7 +149,9 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
     this.employeeForm.get('dateApplyFingerSign').setValue(null);
     this.employeeForm.get('probationDate').setValue(null);
     this.employeeForm.get('startWorkingDate').setValue(null);
-    this.employeeForm.get('employeeWorkingStatusId').setValue(null);
+    this.employeeForm.get('employeeWorkingStatusId').setValue('');
+    this.employeeForm.get('currentPositionId').setValue('');
+    this.employeeForm.get('currentDepartmentId').setValue('');
     this.employeeForm.get('basicSalary').setValue(0);
 
     if (this.formAction === FormActionStatus.UnKnow) {
@@ -160,6 +167,8 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
       this.employeeForm.get('probationDate').disable();
       this.employeeForm.get('startWorkingDate').disable();
       this.employeeForm.get('employeeWorkingStatusId').disable();
+      this.employeeForm.get('currentPositionId').disable();
+      this.employeeForm.get('currentDepartmentId').disable();
       this.employeeForm.get('basicSalary').disable();
     } else {
       this.employeeForm.get('firstName').enable();
@@ -173,6 +182,8 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
       this.employeeForm.get('probationDate').enable();
       this.employeeForm.get('startWorkingDate').enable();
       this.employeeForm.get('employeeWorkingStatusId').enable();
+      this.employeeForm.get('currentPositionId').enable();
+      this.employeeForm.get('currentDepartmentId').enable();
       this.employeeForm.get('basicSalary').enable();
 
       if (this.formAction === FormActionStatus.Insert) {
@@ -182,8 +193,6 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
         this.employeeForm.get('employeeCode').disable();
         this.elm.nativeElement.querySelector('#firstName').focus();
       }
-
-
     }
   }
 
@@ -347,6 +356,8 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
         this.employeeForm.get('startWorkingDate').setValue(new Date(data.startWorkingDate));
       }
       this.employeeForm.get('employeeWorkingStatusId').setValue(data.employeeWorkingStatusId);
+      this.employeeForm.get('currentPositionId').setValue(data.currentPositionId);
+      this.employeeForm.get('currentDepartmentId').setValue(data.currentDepartmentId);
       this.employeeForm.get('basicSalary').setValue(this.formatNumber.transform(data.basicSalary));
       this.employeeForm.get('rowVersion').setValue(data.rowVersion);
       this.elm.nativeElement.querySelector('#firstName').focus();

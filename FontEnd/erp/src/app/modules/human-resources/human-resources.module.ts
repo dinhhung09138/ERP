@@ -10,6 +10,7 @@ import { WardResolver } from './configuration/ward/ward.resolver';
 import { SharedModule } from '../../shared/shared.module';
 import { EmployeeInfoResolver } from './employee/employee-info/employee-info.resolver';
 import { EmployeeWorkingStatusService } from './configuration/employee-working-status/employee-working-status.service';
+import { PositionService } from './position/position.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { EmployeeWorkingStatusService } from './configuration/employee-working-s
     EmployeeInfoResolver,
     ProvinceService,
     DistrictService,
+    PositionService,
     EmployeeWorkingStatusService,
   ]
 })
