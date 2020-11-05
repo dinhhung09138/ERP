@@ -53,6 +53,12 @@ namespace Database.Sql.ERP.Entities.HR
         [Column(TypeName = "int")]
         public int? EmployeeWorkingStatusId { get; set; }
 
+        [Column(TypeName = "int")]
+        public int? CurrentPositionId { get; set; }
+
+        [Column(TypeName = "int")]
+        public int? CurrentDepartmentId { get; set; }
+
         [Column(TypeName = "money")]
         public double BasicSalary { get; set; }
 

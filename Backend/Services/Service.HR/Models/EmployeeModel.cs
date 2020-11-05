@@ -54,6 +54,14 @@ namespace Service.HR.Models
 
         public string EmployeeWorkingStatusName { get; set; }
 
+        public int? CurrentPositionId { get; set; }
+
+        public string CurrentPositionName { get; set; }
+
+        public int? CurrentDepartmentId { get; set; }
+
+        public string CurrentDepartmentName { get; set; }
+
         public double BasicSalary { get; set; }
 
         public FileModel? Avatar { get; set; }

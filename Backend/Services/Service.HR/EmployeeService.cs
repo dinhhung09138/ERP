@@ -173,6 +173,8 @@ namespace Service.HR
                              WorkingPhone = m.WorkingPhone,
                              EmployeeWorkingStatusId = m.EmployeeWorkingStatusId,
                              EmployeeWorkingStatusName = emplStatus.Name ?? string.Empty,
+                             CurrentPositionId = m.CurrentPositionId,
+                             CurrentDepartmentId = m.CurrentDepartmentId,
                              BasicSalary = m.BasicSalary,
                              IsActive = m.IsActive,
                              RowVersion = m.RowVersion,
@@ -225,6 +227,8 @@ namespace Service.HR
                 md.WorkingEmail = model.WorkingEmail ?? "";
                 md.WorkingPhone = model.WorkingPhone ?? "";
                 md.EmployeeWorkingStatusId = model.EmployeeWorkingStatusId;
+                md.CurrentDepartmentId = model.CurrentDepartmentId;
+                md.CurrentPositionId = model.CurrentPositionId;
                 md.BasicSalary = model.BasicSalary;
                 md.IsActive = model.IsActive;
                 md.CreateBy = base.UserId;
@@ -308,6 +312,8 @@ namespace Service.HR
                 md.WorkingEmail = model.WorkingEmail ?? "";
                 md.WorkingPhone = model.WorkingPhone ?? "";
                 md.EmployeeWorkingStatusId = model.EmployeeWorkingStatusId;
+                md.CurrentDepartmentId = model.CurrentDepartmentId;
+                md.CurrentPositionId = model.CurrentPositionId;
                 md.BasicSalary = model.BasicSalary;
                 md.IsActive = model.IsActive;
                 md.UpdateBy = base.UserId;

@@ -1359,7 +1359,7 @@ namespace Database.Sql.ERP.Creation
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
-                    Id = 141,
+                    Id = 142,
                     FunctionCode = "HR_CONF_CERTIFICATED",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1370,7 +1370,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 142,
+                    Id = 143,
                     FunctionCode = "HR_CONF_CERTIFICATED",
                     Name = "INSERT",
                     ModuleName = "HR",
