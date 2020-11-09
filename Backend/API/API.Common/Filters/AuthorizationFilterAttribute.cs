@@ -72,6 +72,9 @@ namespace API.Common.Filters
                 case "Province":
                 case "District":
                 case "Ward":
+                case "School":
+                case "Major":
+                case "Certificated":
                 case "ProfessionalQualification":
                     return "HR";
             }

@@ -113,6 +113,21 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'configuration/school',
+        loadChildren: () => import('./configuration/school/school.module').then(m => m.SchoolModule),
+        pathMatch: 'full'
+      },
+      {
+        path: 'configuration/major',
+        loadChildren: () => import('./configuration/major/major.module').then(m => m.MajorModule),
+        pathMatch: 'full'
+      },
+      {
+        path: 'configuration/certificated',
+        loadChildren: () => import('./configuration/certificated/certificated.module').then(m => m.CertificatedModule),
+        pathMatch: 'full'
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       }

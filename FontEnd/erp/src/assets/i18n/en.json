@@ -236,6 +236,22 @@
             "DROPDOWN": "Can not get the list of approve status"
           }
         },
+        "CERTIFICATED": {
+          "TITLE": "Certificated",
+          "LIST_TITLE": "List of Certificated",
+          "POPUP_TITLE": "Add New Certificated",
+          "TABLE": {
+            "NAME": "Name"
+          },
+          "FORM": {
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
+          },
+          "ERROR": {
+            "DROPDOWN": "Can not get the list of certificated"
+          }
+        },
         "DISTRICT": {
           "TITLE": "District",
           "LIST_TITLE": "List of District",
@@ -304,6 +320,22 @@
           },
           "ERROR": {
             "DROPDOWN": "Can not get the list of identification"
+          }
+        },
+        "MAJOR": {
+          "TITLE": "Major",
+          "LIST_TITLE": "List of Major",
+          "POPUP_TITLE": "Add New Major",
+          "TABLE": {
+            "NAME": "Name"
+          },
+          "FORM": {
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
+          },
+          "ERROR": {
+            "DROPDOWN": "Can not get the list of major"
           }
         },
         "MODEL_OF_STUDY": {
@@ -431,6 +463,22 @@
           },
           "ERROR": {
             "DROPDOWN": "Can not get the list of religion"
+          }
+        },
+        "SCHOOL": {
+          "TITLE": "School",
+          "LIST_TITLE": "List of School",
+          "POPUP_TITLE": "Add New School",
+          "TABLE": {
+            "NAME": "Name"
+          },
+          "FORM": {
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
+          },
+          "ERROR": {
+            "DROPDOWN": "Can not get the list of school"
           }
         },
         "WARD": {

@@ -236,6 +236,22 @@
             "DROPDOWN": "Không thể lấy danh sách trạng thái"
           }
         },
+        "CERTIFICATED": {
+          "TITLE": "Chứng chỉ đào tạo",
+          "LIST_TITLE": "Danh sách chứng chỉ",
+          "POPUP_TITLE": "Thêm mới chứng chỉ",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách chứng chỉ"
+          }
+        },
         "DISTRICT": {
           "TITLE": "Quận/Huyện",
           "LIST_TITLE": "Danh sách quận/huyện",
@@ -304,6 +320,22 @@
           },
           "ERROR": {
             "DROPDOWN": "Không thể lấy danh sách giấy tờ tùy thân"
+          }
+        },
+        "MAJOR": {
+          "TITLE": "Chuyên ngành đào tạo",
+          "LIST_TITLE": "Danh sách chuyên ngành đào tạo",
+          "POPUP_TITLE": "Thêm mới chuyên ngành đào tạo",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách chuyên ngành đào tạo"
           }
         },
         "MODEL_OF_STUDY": {
@@ -431,6 +463,22 @@
           },
           "ERROR": {
             "DROPDOWN": "Không thể lấy danh sách tôn giáo"
+          }
+        },
+        "SCHOOL": {
+          "TITLE": "Trường đào tạo",
+          "LIST_TITLE": "Danh sách trường học",
+          "POPUP_TITLE": "Thêm mới trường đào tạo",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách trường đào tạo"
           }
         },
         "WARD": {
