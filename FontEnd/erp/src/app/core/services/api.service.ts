@@ -1,3 +1,4 @@
+import { DeleteViewModel } from './../models/delete.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -99,9 +100,9 @@ export class ApiService {
   /**
    * Delete item by push object model
    * @param url : String
-   * @param model : object model
+   * @param model : Delete object model
    */
-  delete(url: string, model: any): Observable<ResponseModel> {
+  delete(url: string, model: DeleteViewModel): Observable<ResponseModel> {
     return this.http.put<ResponseModel>(url, model).pipe(
       map((data: ResponseModel) => {
         if (data.responseStatus === ResponseStatus.success) {
