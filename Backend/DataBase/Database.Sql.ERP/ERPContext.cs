@@ -30,6 +30,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<CodeType> CodeType { get; set; }
 
+        public virtual DbSet<MaritalStatus> MaritalStatus { get; set; }
+
         #endregion
 
         #region " [ HR ] "

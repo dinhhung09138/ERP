@@ -99,6 +99,15 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<MaritalStatus> _maritalStatusRepository;
+        public ITableGenericRepository<MaritalStatus> MaritalStatusRepository
+        {
+            get
+            {
+                return _maritalStatusRepository = _maritalStatusRepository ?? new TableGenericRepository<MaritalStatus>(_context);
+            }
+        }
+
         #endregion
 
         #region " [ HR ] "

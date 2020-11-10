@@ -14,5 +14,6 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<Ward> WardRepository { get; }
         ITableGenericRepository<File> FileRepository { get; }
         ITableGenericRepository<CodeType> CodeTypeRepository { get; }
+        ITableGenericRepository<MaritalStatus> MaritalStatusRepository { get; }
     }
 }

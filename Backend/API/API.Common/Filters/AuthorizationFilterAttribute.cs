@@ -75,6 +75,7 @@ namespace API.Common.Filters
                 case "School":
                 case "Major":
                 case "Certificated":
+                case "MaritalStatus":
                 case "ProfessionalQualification":
                     return "HR";
             }

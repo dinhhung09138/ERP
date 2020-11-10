@@ -18,6 +18,7 @@ namespace API.Common
             services.AddScoped<IMajorService, MajorService>();
             services.AddScoped<ISchoolService, SchoolService>();
             services.AddScoped<ICertificatedService, CertificatedService>();
+            services.AddScoped<IMaritalStatusService, MaritalStatusService>();
             services.AddScoped<AuthorizationFilterAttribute>();
             return services;
         }

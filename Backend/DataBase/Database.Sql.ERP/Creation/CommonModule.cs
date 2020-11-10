@@ -81,6 +81,16 @@ namespace Database.Sql.ERP.Creation
                 entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
+            modelBuilder.Entity<MaritalStatus>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.Precedence).HasDefaultValue(1);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
         }
 
     }
