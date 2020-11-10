@@ -211,6 +211,15 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<EmployeeCertificate> _employeeCertificateRepository;
+        public ITableGenericRepository<EmployeeCertificate> EmployeeCertificateRepository
+        {
+            get
+            {
+                return _employeeCertificateRepository = _employeeCertificateRepository ?? new TableGenericRepository<EmployeeCertificate>(_context);
+            }
+        }
+
         private ITableGenericRepository<EmployeeIdentification> _employeeIdentificationRepository;
         public ITableGenericRepository<EmployeeIdentification> EmployeeIdentificationRepository
         {

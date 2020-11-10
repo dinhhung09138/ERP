@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("HR_EmployeeEducation")]
-    public class EmployeeEducation
+    [Table("HR_EmployeeCertificated")]
+    public class EmployeeCertificate
     {
         [Key]
         [Column(TypeName = "int")]
@@ -18,28 +18,7 @@ namespace Database.Sql.ERP.Entities.HR
 
         [Column(TypeName = "int")]
         [Required]
-        public int EducationTypeId { get; set; }
-
-        [Column(TypeName = "nvarchar(255)")]
-        [MaxLength(255)]
-        [Required]
-        public string School { get; set; }
-
-        [Column(TypeName = "int")]
-        [Required]
-        public int MajorId { get; set; }
-
-        [Column(TypeName = "int")]
-        [Required]
-        public int Year { get; set; }
-
-        [Column(TypeName = "int")]
-        [Required]
-        public int RankingId { get; set; }
-
-        [Column(TypeName = "int")]
-        [Required]
-        public int ModelOfStudyId { get; set; }
+        public int CertificateId { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]

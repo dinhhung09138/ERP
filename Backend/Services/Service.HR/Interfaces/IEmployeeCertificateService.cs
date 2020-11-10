@@ -3,7 +3,7 @@ using Service.HR.Models;
 
 namespace Service.HR.Interfaces
 {
-    public interface IEmployeeEducationService : IBaseInterfaceService<EmployeeEducationModel>
+    public interface IEmployeeCertificateService : IBaseInterfaceService<EmployeeCertificateModel>
     {
     }
 }

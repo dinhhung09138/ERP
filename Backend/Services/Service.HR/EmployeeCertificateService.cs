@@ -12,11 +12,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Service.HR
 {
-    public class EmployeeEducationService : BaseService, IEmployeeEducationService
+    public class EmployeeCertificateService : BaseService, IEmployeeCertificateService
     {
         private readonly IERPUnitOfWork _context;
 
-        public EmployeeEducationService(
+        public EmployeeCertificateService(
             IERPUnitOfWork context,
             IHttpContextAccessor httpContext)
         {
@@ -29,41 +29,26 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.EmployeeEducationRepository.Query()
-                            join t in _context.EducationRepository.Query() on m.EducationTypeId equals t.Id
-                            join rk in _context.RankingRepository.Query() on m.RankingId equals rk.Id
-                            join md in _context.ModelOfStudyRepository.Query() on m.ModelOfStudyId equals md.Id
-                            join mj in _context.MajorRepository.Query() on m.MajorId equals mj.Id
+                var query = from m in _context.EmployeeCertificateRepository.Query()
+                            join t in _context.CertificatedRepository.Query() on m.CertificateId equals t.Id
                             where !m.Deleted && m.EmployeeId == filter.EmployeeId
                             orderby m.CreateDate
-                            select new EmployeeEducationModel()
+                            select new EmployeeCertificateModel()
                             {
                                 Id = m.Id,
-                                EducationTypeId = m.EducationTypeId,
-                                EducationTypeName = t.Name,
-                                School = m.School,
-                                MajorId = m.MajorId,
-                                MajorName = mj.Name,
-                                Year = m.Year,
-                                RankingId = m.RankingId,
-                                RankingName = rk.Name,
-                                ModelOfStudyId = m.ModelOfStudyId,
-                                ModelOfStudyName = md.Name,
+                                CertificateId = m.CertificateId,
+                                CertificateName = t.Name,
                                 IsActive = m.IsActive,
                                 RowVersion = m.RowVersion,
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
-                    query = query.Where(m => m.School.ToLower().Contains(filter.Text)
-                                            || m.EducationTypeName.ToLower().Contains(filter.Text)
-                                            || m.MajorName.ToLower().Contains(filter.Text)
-                                            || m.ModelOfStudyName.ToLower().Contains(filter.Text)
-                                            || m.RankingName.ToLower().Contains(filter.Text));
+                    query = query.Where(m => m.CertificateName.ToLower().Contains(filter.Text));
                 }
 
-                BaseListModel<EmployeeEducationModel> listItems = new BaseListModel<EmployeeEducationModel>();
-                listItems.TotalItems = await _context.EmployeeEducationRepository.Query().Where(m => !m.Deleted && m.EmployeeId == filter.EmployeeId).CountAsync();
+                BaseListModel<EmployeeCertificateModel> listItems = new BaseListModel<EmployeeCertificateModel>();
+                listItems.TotalItems = await _context.EmployeeCertificateRepository.Query().Where(m => !m.Deleted && m.EmployeeId == filter.EmployeeId).CountAsync();
                 listItems.Items = await query.Skip(filter.Paging.PageIndex * filter.Paging.PageSize).Take(filter.Paging.PageSize).ToListAsync().ConfigureAwait(false);
 
                 response.Result = listItems;
@@ -80,18 +65,13 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.EmployeeEducationRepository.Query()
+                var query = from m in _context.EmployeeCertificateRepository.Query()
                             where m.Id == id
-                            select new EmployeeEducationModel
+                            select new EmployeeCertificateModel
                             {
                                 Id = m.Id,
                                 EmployeeId = m.EmployeeId,
-                                EducationTypeId = m.EducationTypeId,
-                                School = m.School,
-                                MajorId = m.MajorId,
-                                Year = m.Year,
-                                RankingId = m.RankingId,
-                                ModelOfStudyId = m.ModelOfStudyId,
+                                CertificateId = m.CertificateId,
                                 IsActive = m.IsActive,
                                 RowVersion = m.RowVersion,
                             };
@@ -105,27 +85,22 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Insert(EmployeeEducationModel model)
+        public async Task<ResponseModel> Insert(EmployeeCertificateModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                EmployeeEducation md = new EmployeeEducation();
+                EmployeeCertificate md = new EmployeeCertificate();
 
                 md.EmployeeId = model.EmployeeId;
-                md.EducationTypeId = model.EducationTypeId;
-                md.School = model.School;
-                md.MajorId = model.MajorId;
-                md.Year = model.Year;
-                md.RankingId = model.RankingId;
-                md.ModelOfStudyId = model.ModelOfStudyId;
+                md.CertificateId = model.CertificateId;
                 md.IsActive = model.IsActive;
                 md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
                 md.Deleted = false;
 
-                await _context.EmployeeEducationRepository.AddAsync(md).ConfigureAwait(true);
+                await _context.EmployeeCertificateRepository.AddAsync(md).ConfigureAwait(true);
 
                 await _context.SaveChangesAsync();
             }
@@ -137,13 +112,13 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Update(EmployeeEducationModel model)
+        public async Task<ResponseModel> Update(EmployeeCertificateModel model)
         {
             ResponseModel response = new ResponseModel();
 
             try
             {
-                EmployeeEducation md = await _context.EmployeeEducationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                EmployeeCertificate md = await _context.EmployeeCertificateRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
@@ -152,17 +127,12 @@ namespace Service.HR
                 }
 
                 md.EmployeeId = model.EmployeeId;
-                md.EducationTypeId = model.EducationTypeId;
-                md.School = model.School;
-                md.MajorId = model.MajorId;
-                md.Year = model.Year;
-                md.RankingId = model.RankingId;
-                md.ModelOfStudyId = model.ModelOfStudyId;
+                md.CertificateId = model.CertificateId;
                 md.IsActive = model.IsActive;
                 md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
-                _context.EmployeeEducationRepository.Update(md);
+                _context.EmployeeCertificateRepository.Update(md);
 
                 await _context.SaveChangesAsync();
             }
@@ -179,7 +149,7 @@ namespace Service.HR
 
             try
             {
-                EmployeeEducation md = await _context.EmployeeEducationRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
+                EmployeeCertificate md = await _context.EmployeeCertificateRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))
                 {
@@ -191,7 +161,7 @@ namespace Service.HR
                 md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;
 
-                _context.EmployeeEducationRepository.Update(md);
+                _context.EmployeeCertificateRepository.Update(md);
 
                 await _context.SaveChangesAsync();
             }

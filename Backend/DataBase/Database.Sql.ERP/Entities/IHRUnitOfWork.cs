@@ -16,6 +16,7 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<EmployeeContractStatusHistory> EmployeeContractStatusHistoryRepository { get; }
         ITableGenericRepository<EmployeeDiscipline> EmployeeDisciplineRepository { get; }
         ITableGenericRepository<EmployeeEducation> EmployeeEducationRepository { get; }
+        ITableGenericRepository<EmployeeCertificate> EmployeeCertificateRepository { get; }
         ITableGenericRepository<EmployeeIdentification> EmployeeIdentificationRepository { get; }
         ITableGenericRepository<EmployeeInfo> EmployeeInfoRepository { get; }
         ITableGenericRepository<EmployeeRelationship> EmployeeRelationshipRepository { get; }

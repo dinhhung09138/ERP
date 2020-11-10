@@ -113,6 +113,14 @@ namespace Database.Sql.ERP.Creation
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
+            modelBuilder.Entity<EmployeeCertificate>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
             modelBuilder.Entity<EmployeeIdentification>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -1578,7 +1586,7 @@ namespace Database.Sql.ERP.Creation
                 new FunctionCommand()
                 {
                     Id = 106,
-                    FunctionCode = "HR_EMPLOYEE_CERTIFICATION",
+                    FunctionCode = "HR_EMPLOYEE_CERTIFICATE",
                     Name = "VIEW",
                     ModuleName = "HR",
                     ControllerName = "EmployeeCertification",
@@ -1589,7 +1597,7 @@ namespace Database.Sql.ERP.Creation
                 new FunctionCommand()
                 {
                     Id = 107,
-                    FunctionCode = "HR_EMPLOYEE_CERTIFICATION",
+                    FunctionCode = "HR_EMPLOYEE_CERTIFICATE",
                     Name = "INSERT",
                     ModuleName = "HR",
                     ControllerName = "EmployeeCertification",
@@ -1600,7 +1608,7 @@ namespace Database.Sql.ERP.Creation
                 new FunctionCommand()
                 {
                     Id = 108,
-                    FunctionCode = "HR_EMPLOYEE_CERTIFICATION",
+                    FunctionCode = "HR_EMPLOYEE_CERTIFICATE",
                     Name = "UPDATE",
                     ModuleName = "HR",
                     ControllerName = "EmployeeCertification",
@@ -1611,7 +1619,7 @@ namespace Database.Sql.ERP.Creation
                 new FunctionCommand()
                 {
                     Id = 109,
-                    FunctionCode = "HR_EMPLOYEE_CERTIFICATION",
+                    FunctionCode = "HR_EMPLOYEE_CERTIFICATE",
                     Name = "DELETE",
                     ModuleName = "HR",
                     ControllerName = "EmployeeCertification",
@@ -2266,7 +2274,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new Function()
                 {
-                    Code = "HR_EMPLOYEE_CERTIFICATION",
+                    Code = "HR_EMPLOYEE_CERTIFICATE",
                     Name = "CERTIFICATION",
                     Url = "#certification",
                     Icon = string.Empty,

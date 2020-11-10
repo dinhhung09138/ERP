@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace API.HR.Controllers
 {
-    [Route("api/hr/employee-education")]
+    [Route("api/hr/employee-certificate")]
     [ApiController]
     [ServiceFilter(typeof(AuthorizationFilterAttribute))]
-    public class EmployeeEducationController : ControllerBase
+    public class EmployeeCertificateController : ControllerBase
     {
-        private readonly IEmployeeEducationService _emplEducationService;
+        private readonly IEmployeeCertificateService _emplCertificateService;
 
-        public EmployeeEducationController(IEmployeeEducationService emplEducationService)
+        public EmployeeCertificateController(IEmployeeCertificateService emplCertificateService)
         {
-            _emplEducationService = emplEducationService;
+            _emplCertificateService = emplCertificateService;
         }
 
         /// <summary>
@@ -28,35 +28,35 @@ namespace API.HR.Controllers
         [HttpPost, Route("get-list")]
         public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
         {
-            var response = await _emplEducationService.GetList(filter);
+            var response = await _emplCertificateService.GetList(filter);
             return response;
         }
 
         [HttpGet, Route("item")]
         public async Task<ResponseModel> Item([FromQuery] int id)
         {
-            var response = await _emplEducationService.Item(id);
+            var response = await _emplCertificateService.Item(id);
             return response;
         }
 
         [HttpPost, Route("insert")]
-        public async Task<ResponseModel> Insert([FromBody] EmployeeEducationModel model)
+        public async Task<ResponseModel> Insert([FromBody] EmployeeCertificateModel model)
         {
-            var response = await _emplEducationService.Insert(model);
+            var response = await _emplCertificateService.Insert(model);
             return response;
         }
 
         [HttpPut, Route("update")]
-        public async Task<ResponseModel> Update([FromBody] EmployeeEducationModel model)
+        public async Task<ResponseModel> Update([FromBody] EmployeeCertificateModel model)
         {
-            var response = await _emplEducationService.Update(model);
+            var response = await _emplCertificateService.Update(model);
             return response;
         }
 
         [HttpPut, Route("delete")]
         public async Task<ResponseModel> Delete([FromBody] DeleteModel model)
         {
-            var response = await _emplEducationService.Delete(model);
+            var response = await _emplCertificateService.Delete(model);
             return response;
         }
     }

@@ -58,6 +58,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<EmployeeEducation> EmployeeEducation { get; set; }
 
+        public virtual DbSet<EmployeeCertificate> EmployeeCertificate { get; set; }
+
         public virtual DbSet<EmployeeIdentification> EmployeeIdentification { get; set; }
 
         public virtual DbSet<EmployeeInfo> EmployeeInfo { get; set; }
