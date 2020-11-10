@@ -60,7 +60,7 @@ namespace API.System.Controllers
         }
 
         [HttpPut, Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] RoleModel model)
+        public async Task<ResponseModel> Delete([FromBody] DeleteModel model)
         {
             var response = await _roleService.Delete(model);
             return response;

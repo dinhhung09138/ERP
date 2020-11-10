@@ -212,7 +212,7 @@ namespace Service.Common
             return response;
         }
 
-        public async Task<ResponseModel> Delete(WardModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

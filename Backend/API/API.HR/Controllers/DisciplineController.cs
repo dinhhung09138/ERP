@@ -57,7 +57,7 @@ namespace API.HR.Controllers
         }
 
         [HttpPut, Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] DisciplineModel model)
+        public async Task<ResponseModel> Delete([FromBody] DeleteModel model)
         {
             var response = await _disciplineService.Delete(model);
             return response;

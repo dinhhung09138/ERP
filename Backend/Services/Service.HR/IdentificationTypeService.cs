@@ -170,7 +170,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(IdentificationTypeModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

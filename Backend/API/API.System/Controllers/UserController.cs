@@ -76,7 +76,7 @@ namespace API.System.Controllers
         }
 
         [HttpPut, Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] Service.System.Models.UserModel model)
+        public async Task<ResponseModel> Delete([FromBody] DeleteModel model)
         {
             var response = await _userService.Delete(model);
             return response;

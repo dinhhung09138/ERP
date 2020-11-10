@@ -193,7 +193,7 @@ namespace Service.Common
             return response;
         }
 
-        public async Task<ResponseModel> Delete(CertificatedModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

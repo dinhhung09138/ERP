@@ -163,7 +163,7 @@ namespace Service.Training
             return response;
         }
 
-        public async Task<ResponseModel> Delete(TrainingCenterContactModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

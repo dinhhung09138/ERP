@@ -295,7 +295,7 @@ namespace Service.System
             return false;
         }
 
-        public async Task<ResponseModel> Delete(Models.UserModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
             try

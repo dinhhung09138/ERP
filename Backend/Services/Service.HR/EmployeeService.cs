@@ -363,7 +363,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(EmployeeModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

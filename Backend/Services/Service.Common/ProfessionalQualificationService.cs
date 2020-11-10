@@ -49,7 +49,7 @@ namespace Service.Common
                                 Name = m.Name,
                                 Precedence = m.Precedence,
                                 IsActive = m.IsActive,
-                                CreateBy = m.CreateBy.ToString(),
+                                CreateBy = m.CreateBy,
                                 CreateDate = m.CreateDate,
                                 RowVersion = m.RowVersion,
                             };
@@ -194,7 +194,7 @@ namespace Service.Common
             return response;
         }
 
-        public async Task<ResponseModel> Delete(ProfessionalQualificationModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

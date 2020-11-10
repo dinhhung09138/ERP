@@ -57,7 +57,7 @@ namespace API.Common.Controllers
         }
 
         [HttpPut, Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] ProvinceModel model)
+        public async Task<ResponseModel> Delete([FromBody] DeleteModel model)
         {
             var response = await _provinceService.Delete(model);
             return response;

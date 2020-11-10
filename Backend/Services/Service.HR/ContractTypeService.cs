@@ -192,7 +192,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(ContractTypeModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

@@ -53,7 +53,7 @@ namespace API.Training.Controllers
         }
 
         [HttpPut, Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] TrainingCourseModel model)
+        public async Task<ResponseModel> Delete([FromBody] DeleteModel model)
         {
             var response = await _trainingCourseService.Delete(model);
             return response;

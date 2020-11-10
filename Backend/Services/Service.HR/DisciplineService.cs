@@ -43,7 +43,7 @@ namespace Service.HR
                                 Description = m.Description,
                                 Money = m.Money,
                                 IsActive = m.IsActive,
-                                CreateBy = m.CreateBy.ToString(),
+                                CreateBy = m.CreateBy,
                                 CreateDate = m.CreateDate,
                                 RowVersion = m.RowVersion,
                             };
@@ -174,7 +174,7 @@ namespace Service.HR
             return response;
         }
 
-        public async Task<ResponseModel> Delete(DisciplineModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

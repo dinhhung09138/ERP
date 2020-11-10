@@ -148,7 +148,7 @@ namespace Service.Training
             return response;
         }
 
-        public async Task<ResponseModel> Delete(TrainingCourseDocumentModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

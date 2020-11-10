@@ -205,7 +205,7 @@ namespace Service.Common
             return response;
         }
 
-        public async Task<ResponseModel> Delete(DistrictModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
 

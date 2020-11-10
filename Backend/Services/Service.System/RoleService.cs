@@ -215,7 +215,7 @@ namespace Service.System
             return response;
         }
 
-        public async Task<ResponseModel> Delete(RoleModel model)
+        public async Task<ResponseModel> Delete(DeleteModel model)
         {
             ResponseModel response = new ResponseModel();
             try
