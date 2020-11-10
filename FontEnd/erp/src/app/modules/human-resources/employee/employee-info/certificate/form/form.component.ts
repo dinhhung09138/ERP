@@ -8,20 +8,18 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormActionStatus } from '../../../../../../core/enums/form-action-status.enum';
 import { DialogDataViewModel } from '../../../../../../core/models/dialog-data.model';
 import { PermissionViewModel } from '../../../../../../core/models/permission.model';
-import { EmployeeEducationService } from './../education.service';
-import { ModelOfStudyViewModel } from './../../../../configuration/model-of-study/model-of-study.model';
-import { RankingViewModel } from './../../../../configuration/ranking/ranking.model';
-import { EducationViewModel } from './../../../../configuration/education/education.model';
-import { EmployeeEducationViewModel } from './../education.model';
+import { EmployeeCertificateService } from './../certificate.service';
+import { CertificatedViewModel } from './../../../../configuration/certificated/certificated.model';
+import { EmployeeCertificateViewModel } from './../certificate.model';
 import { SchoolViewModel } from './../../../../configuration/school/school.model';
 import { MajorViewModel } from './../../../../configuration/major/major.model';
 
 @Component({
-  selector: 'app-hr-employee-education-form',
+  selector: 'app-hr-employee-certificate-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class EmployeeEducationFormComponent implements OnInit {
+export class EmployeeCertificateFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective, { static: true}) formDirective: FormGroupDirective;
 
@@ -32,33 +30,27 @@ export class EmployeeEducationFormComponent implements OnInit {
   employeeId = 0;
   form: FormGroup;
   formAction: FormActionStatus;
-  listMajor: MajorViewModel[];
+  listCertificated: CertificatedViewModel[];
   listSchool: SchoolViewModel[];
-  listEducation: EducationViewModel[];
-  listRank: RankingViewModel[];
-  listModelOfStudy: ModelOfStudyViewModel[];
   listYear: number[] = [];
-  item: EmployeeEducationViewModel;
+  item: EmployeeCertificateViewModel;
 
   constructor(
     private elm: ElementRef,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
-    private dialogRef: MatDialogRef<EmployeeEducationFormComponent>,
+    private dialogRef: MatDialogRef<EmployeeCertificateFormComponent>,
     private fb: FormBuilder,
-    private employeeEducationService: EmployeeEducationService,
+    private employeeCertificateService: EmployeeCertificateService,
   ) { }
 
   ngOnInit(): void {
-    this.permission = this.employeeEducationService.getPermission();
+    this.permission = this.employeeCertificateService.getPermission();
 
     this.form = this.fb.group({
       id: [0],
       employeeId: [null, Validators.required],
-      educationTypeId: ['', [Validators.required]],
-      schoolId: ['', [Validators.required, Validators.maxLength(255)]],
-      majorId: ['', [Validators.required]],
-      rankingId: ['', [Validators.required]],
-      modelOfStudyId: ['', [Validators.required]],
+      certificateId: ['', [Validators.required]],
+      schoolId: ['', [Validators.required]],
       year: ['', [Validators.required]],
       isActive: [true],
       rowVersion: [null]
@@ -71,11 +63,8 @@ export class EmployeeEducationFormComponent implements OnInit {
 
     this.formAction = FormActionStatus.Insert;
     if (this.dialogData && this.dialogData.isPopup === true) {
-      this.listEducation = this.dialogData.listEducation;
-      this.listMajor = this.dialogData.listMajor;
+      this.listCertificated = this.dialogData.listCertificated;
       this.listSchool = this.dialogData.listSchool;
-      this.listRank = this.dialogData.listRank;
-      this.listModelOfStudy = this.dialogData.listModelOfStudy;
       this.employeeId = this.dialogData.employeeId;
       this.initFormControl(this.formAction);
       if (this.dialogData.itemId !== undefined) {
@@ -91,33 +80,24 @@ export class EmployeeEducationFormComponent implements OnInit {
     this.formAction = formAction;
     this.form.get('id').setValue(0);
     this.form.get('employeeId').setValue(this.employeeId);
-    this.form.get('educationTypeId').setValue('');
-    this.form.get('schoolId').setValue('');
-    this.form.get('majorId').setValue('');
-    this.form.get('rankingId').setValue('');
-    this.form.get('modelOfStudyId').setValue('');
+    this.form.get('certificateId').setValue('');
+    this.form.get('schoolId').reset();
     this.form.get('year').setValue('');
     this.form.get('isActive').reset();
 
     if (formAction === FormActionStatus.UnKnow) {
-      this.form.get('educationTypeId').disable();
+      this.form.get('certificateId').disable();
       this.form.get('schoolId').disable();
-      this.form.get('majorId').disable();
-      this.form.get('rankingId').disable();
-      this.form.get('modelOfStudyId').disable();
       this.form.get('year').disable();
       this.form.get('isActive').disable();
     } else {
       this.form.get('isActive').setValue(true);
-      this.form.get('educationTypeId').enable();
+      this.form.get('certificateId').enable();
       this.form.get('schoolId').enable();
-      this.form.get('majorId').enable();
-      this.form.get('rankingId').enable();
-      this.form.get('modelOfStudyId').enable();
       this.form.get('year').enable();
       this.form.get('isActive').enable();
     }
-    this.elm.nativeElement.querySelector('#educationTypeId').focus();
+    this.elm.nativeElement.querySelector('#certificateId').focus();
   }
 
   onResetClick() {
@@ -136,7 +116,7 @@ export class EmployeeEducationFormComponent implements OnInit {
     }
 
     this.isLoading = true;
-    this.employeeEducationService.save(this.form.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+    this.employeeCertificateService.save(this.form.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.isLoading = false;
         this.dialogRef.close(true);
@@ -146,7 +126,7 @@ export class EmployeeEducationFormComponent implements OnInit {
 
   private getItem(itemId: number) {
     this.isLoading = true;
-    this.employeeEducationService.item(itemId).subscribe((response: ResponseModel) => {
+    this.employeeCertificateService.item(itemId).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.setDataToForm(response.result);
       }
@@ -154,15 +134,12 @@ export class EmployeeEducationFormComponent implements OnInit {
     });
   }
 
-  private setDataToForm(data: EmployeeEducationViewModel) {
+  private setDataToForm(data: EmployeeCertificateViewModel) {
     if (data) {
       this.form.get('id').setValue(data.id);
       this.form.get('employeeId').setValue(this.employeeId);
-      this.form.get('educationTypeId').setValue(data.educationTypeId);
+      this.form.get('certificateId').setValue(data.certificateId);
       this.form.get('schoolId').setValue(data.schoolId);
-      this.form.get('majorId').setValue(data.majorId);
-      this.form.get('rankingId').setValue(data.rankingId);
-      this.form.get('modelOfStudyId').setValue(data.modelOfStudyId);
       this.form.get('year').setValue(data.year);
       this.form.get('rowVersion').setValue(data.rowVersion);
     }

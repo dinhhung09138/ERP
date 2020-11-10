@@ -264,8 +264,9 @@
                 </a>
               </li>
               <li class="nav-item" *ngIf="personalInfoPermission.allowView === true">
-                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" data-toggle="tab">
-                  Chứng chỉ
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#education"
+                  (click)="onSelectTab('certificate')" data-toggle="tab">
+                  {{ 'SCREEN.HR.EMPLOYEE.CERTIFICATE.TITLE' | translate }}
                 </a>
               </li>
               <li class="nav-item" *ngIf="identificationPermission.allowView === true">
@@ -289,6 +290,9 @@
               </div>
               <div class="tab-pane" id="education" *ngIf="educationPermission.allowView === true">
                 <app-hr-employee-education [employee]="currentSelectedEmployee"></app-hr-employee-education>
+              </div>
+              <div class="tab-pane" id="certificate" *ngIf="certificatePermission.allowView === true">
+                <app-hr-employee-certificate [employee]="currentSelectedEmployee"></app-hr-employee-certificate>
               </div>
               <div class="tab-pane" id="identification" *ngIf="identificationPermission.allowView === true">
                 <app-hr-employee-identification [employee]="currentSelectedEmployee"></app-hr-employee-identification>

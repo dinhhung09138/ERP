@@ -33,9 +33,12 @@
                     {{ 'SCREEN.HR.EMPLOYEE.EDUCATION.SCHOOL' | translate }}
                   </label>
                   <mat-form-field class="form-control">
-                    <input matInput formControlName="school" maxlength="255" required tabindex="171" autocomplete="off" />
+                    <mat-select formControlName="schoolId" required tabindex="171">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listSchool" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
                   </mat-form-field>
-                  <mat-error *ngIf="isSubmit && form.controls['school'].errors?.required">
+                  <mat-error *ngIf="isSubmit && form.controls['schoolId'].errors?.required">
                     {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
                   </mat-error>
                 </div>

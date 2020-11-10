@@ -1,5 +1,3 @@
-import { MajorService } from './../../configuration/major/major.service';
-import { SchoolService } from './../../configuration/school/school.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -45,6 +43,11 @@ import { EmployeeIdentificationService } from './identification/identification.s
 import { ProvinceService } from '../../configuration/province/province.service';
 import { IdentificationTypeService } from '../../configuration/identification-type/identification-type.service';
 import { ModelOfStudyService } from '../../configuration/model-of-study/model-of-study.service';
+import { EmployeeCertificateComponent } from './certificate/certificate.component';
+import { EmployeeCertificateFormComponent } from './certificate/form/form.component';
+import { MajorService } from './../../configuration/major/major.service';
+import { SchoolService } from './../../configuration/school/school.service';
+import { EmployeeCertificateService } from './certificate/certificate.service';
 
 const routes: Routes = [
   {
@@ -67,6 +70,8 @@ const routes: Routes = [
     ContractComponent,
     ContactComponent,
     FormComponent,
+    EmployeeCertificateComponent,
+    EmployeeCertificateFormComponent,
   ],
   imports: [
     SharedModule,
@@ -89,6 +94,7 @@ const routes: Routes = [
     EmployeeEducationService,
     EmployeeRelationShipService,
     EmployeeIdentificationService,
+    EmployeeCertificateService,
     PersonalInfoService,
     ProvinceService,
     IdentificationTypeService,

@@ -23,6 +23,7 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { PermissionViewModel } from '../../../../core/models/permission.model';
 import { DialogService } from '../../../../core/services/dialog.service';
 import { PositionViewModel } from '../../position/position.model';
+import { EmployeeCertificateComponent } from './certificate/certificate.component';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -63,6 +64,9 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
   identificationPermission = new PermissionViewModel();
   initIdentificationTab = false;
   @ViewChild(EmployeeIdentificationComponent) identificationTab: EmployeeIdentificationComponent;
+  certificatePermission = new PermissionViewModel();
+  initCertificateTab = false;
+  @ViewChild(EmployeeCertificateComponent) certificateTab: EmployeeCertificateComponent;
 
   listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
   listPosition: PositionViewModel[] = [];
@@ -90,6 +94,7 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
     this.educationPermission = this.employeeService.getEducationPermission();
     this.relationshipPermission = this.employeeService.getRelationshipPermission();
     this.identificationPermission = this.employeeService.getIdentificationPermission();
+    this.certificatePermission = this.employeeService.getCertificatePermission();
 
     this.activatedRoute.data.subscribe(response => {
       this.listWorkingStatus = response.data?.listWorkingStatus?.result || [];
@@ -281,6 +286,14 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
           this.educationTab.getRanking();
           this.educationTab.getMajor();
           this.educationTab.getSchool();
+        }
+        break;
+      case 'certificate':
+        if (this.initCertificateTab === false && this.certificatePermission.allowView === true) {
+          this.initCertificateTab = true;
+          this.certificateTab.getList();
+          this.certificateTab.getCertificated();
+          this.certificateTab.getSchool();
         }
         break;
     }

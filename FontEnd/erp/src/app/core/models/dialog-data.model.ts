@@ -1,3 +1,4 @@
+import { CertificatedViewModel } from './../../modules/human-resources/configuration/certificated/certificated.model';
 import { MajorViewModel } from './../../modules/human-resources/configuration/major/major.model';
 import { SchoolViewModel } from './../../modules/human-resources/configuration/school/school.model';
 import { ModelOfStudyViewModel } from '../../modules/human-resources/configuration/model-of-study/model-of-study.model';
@@ -29,4 +30,5 @@ export interface DialogDataViewModel {
   listIdentificationType: IdentificationTypeViewModel[];
   listDistrict: DistrictViewModel[];
   listWard: WardViewModel[];
+  listCertificated: CertificatedViewModel[];
 }

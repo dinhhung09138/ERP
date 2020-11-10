@@ -1,7 +1,3 @@
-import { SchoolService } from './../../../configuration/school/school.service';
-import { MajorService } from './../../../configuration/major/major.service';
-import { MajorViewModel } from './../../../configuration/major/major.model';
-import { SchoolViewModel } from './../../../configuration/school/school.model';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,9 +17,11 @@ import { EmployeeEducationFormComponent } from './form/form.component';
 import { ResponseModel } from '../../../../../core/models/response.model';
 import { ResponseStatus } from '../../../../../core/enums/response-status.enum';
 import { ProfessionalQualificationService } from '../../../configuration/professional-qualification/professional-qualification.service';
-import { ProfessionalQualificationViewModel } from '../../../configuration/professional-qualification/professional-qualification.model';
-
-
+import { SchoolService } from './../../../configuration/school/school.service';
+import { MajorService } from './../../../configuration/major/major.service';
+import { MajorViewModel } from './../../../configuration/major/major.model';
+import { SchoolViewModel } from './../../../configuration/school/school.model';
+import { EducationViewModel } from './../../../configuration/education/education.model';
 
 @Component({
   selector: 'app-hr-employee-education',
@@ -50,7 +48,7 @@ export class EmployeeEducationComponent implements OnInit {
                               'year',
                               'action' ];
   dataSource = new MatTableDataSource();
-  listEducation: ProfessionalQualificationViewModel[];
+  listEducation: EducationViewModel[];
   listRank: RankingViewModel[];
   listModelOfStudy: ModelOfStudyViewModel[];
   listSchool: SchoolViewModel[];
@@ -190,7 +188,7 @@ export class EmployeeEducationComponent implements OnInit {
           this.getList();
         }
       }
-    )
+    );
   }
 
 }
