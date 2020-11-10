@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ApplicationConstant } from './../constants/app.constant';
-import { ApplicationSettingInterface } from './../interfaces/app-setting.interface';
-import { UrlSettingInterface } from '../interfaces/url-setting.interface';
+import { ApplicationSettingViewModel } from '../models/app-setting.model';
+import { UrlSettingViewModel } from '../models/url-setting.model';
 import { APIUrlConstants } from '../constants/api-url.constant';
 
 /**
@@ -25,7 +25,7 @@ export class AppLoadService {
    * Get server url config.
    */
   getUrlSetting() {
-    return this.http.get<UrlSettingInterface>(this.configPath + 'url.config.json').toPromise().then(response => {
+    return this.http.get<UrlSettingViewModel>(this.configPath + 'url.config.json').toPromise().then(response => {
       APIUrlConstants.authenticationApi = response.authenticationApi;
       APIUrlConstants.hrApi = response.hrApi;
       APIUrlConstants.commonApi = response.commonApi;
@@ -37,7 +37,7 @@ export class AppLoadService {
    * Get application config
    */
   getApplicationConfig() {
-    return this.http.get<ApplicationSettingInterface>(this.configPath + 'application.config.json').toPromise().then(response => {
+    return this.http.get<ApplicationSettingViewModel>(this.configPath + 'application.config.json').toPromise().then(response => {
       ApplicationConstant.defaultLanguage = response.defaultLanguage;
       this.translate.use(ApplicationConstant.defaultLanguage);
       this.translate.get('SITE_TITLE').subscribe(message => {
