@@ -11,7 +11,7 @@ namespace API.HR.Controllers
 
     [Route("api/hr/employee-contact")]
     [ApiController]
-    //[ServiceFilter(typeof(AuthorizationFilterAttribute))]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class EmployeeContactController : ControllerBase
     {
         private readonly IEmployeeContactService _emplContactService;

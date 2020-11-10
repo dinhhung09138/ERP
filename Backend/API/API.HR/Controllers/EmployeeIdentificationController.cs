@@ -10,7 +10,7 @@ namespace API.HR.Controllers
 {
     [Route("api/hr/employee-identification")]
     [ApiController]
-    //[ServiceFilter(typeof(AuthorizationFilterAttribute))]
+    [ServiceFilter(typeof(AuthorizationFilterAttribute))]
     public class EmployeeIdentificationController
     {
         private readonly IEmployeeIdentificationService _emplIdentificationService;
