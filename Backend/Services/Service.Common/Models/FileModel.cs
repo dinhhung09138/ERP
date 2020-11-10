@@ -12,9 +12,11 @@ namespace Service.Common.Models
     {
         public int Id { get; set; }
 
+        [Required]
         [MaxLength(15)]
         public string EmployeeCode { get; set; }
 
+        [Required]
         [MaxLength(250)]
         public string FileName { get; set; }
 

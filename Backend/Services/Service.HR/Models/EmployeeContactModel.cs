@@ -7,6 +7,7 @@ namespace Service.HR.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public int EmployeeId { get; set; }
 
         [MaxLength(15)]

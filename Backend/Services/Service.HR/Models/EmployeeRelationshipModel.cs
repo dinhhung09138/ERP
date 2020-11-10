@@ -7,8 +7,10 @@ namespace Service.HR.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public int EmployeeId { get; set; }
 
+        [Required]
         [MaxLength(100)]
         public string FullName { get; set; }
 

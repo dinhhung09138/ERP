@@ -9,14 +9,18 @@ namespace Service.HR.Models
     public class EmployeeModel : BaseModel
     {
         public int Id { get; set; }
+
         public int? AvatarFileId { get; set; }
 
+        [Required]
         [MaxLength(15)]
         public string EmployeeCode { get; set; }
 
+        [Required]
         [MaxLength(50)]
         public string FirstName { get; set; }
 
+        [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
 

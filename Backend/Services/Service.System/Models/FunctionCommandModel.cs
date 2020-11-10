@@ -9,12 +9,15 @@ namespace Service.System.Models
     {
         public int Id { get; set; }
 
+        [Required]
         [MaxLength(20)]
         public string FunctionCode { get; set; }
 
+        [Required]
         [MaxLength(50)]
         public string Name { get; set; }
 
+        [Required]
         public bool IsView { get; set; }
 
         [MaxLength(50)]
@@ -26,7 +29,9 @@ namespace Service.System.Models
         [MaxLength(50)]
         public string ActionName { get; set; }
 
+        [Required]
         public int Precedence { get; set; }
+
         public bool Selected { get; set; } = false;
     }
 }

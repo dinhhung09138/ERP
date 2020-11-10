@@ -8,13 +8,16 @@ namespace Service.HR.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public int EmployeeId { get; set; }
 
+        [Required]
         [MaxLength(15)]
         public string Code { get; set; }
 
         public DateTime? ApplyDate { get; set; }
 
+        [Required]
         public int PlaceId { get; set; }
 
         public string PlaceName { get; set; }
