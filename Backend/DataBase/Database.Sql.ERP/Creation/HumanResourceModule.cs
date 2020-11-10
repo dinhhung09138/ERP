@@ -2137,7 +2137,7 @@ namespace Database.Sql.ERP.Creation
                 new Function()
                 {
                     Code = "HR_CONF_CERTIFICATED",
-                    Name = "EDUCATION",
+                    Name = "CERTIFICATED",
                     Url = "/configuration/certificated",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
