@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ErrorDialogComponent } from './../../shared/components/error-dialog/error-dialog.component';
-import { DialogDataInterface } from './../interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../models/dialog-data.model';
 import { ConfirmDialogComponent } from './../../shared/components/confirm-dialog/confirm-dialog.component';
 import { HttpErrorStatusEnum } from '../enums/http-error.enum';
 
@@ -31,7 +31,7 @@ export class DialogService {
     );
   }
 
-  openErrorDialog(errorModel: DialogDataInterface) {
+  openErrorDialog(errorModel: DialogDataViewModel) {
 
     const disableClosed = errorModel.isError === true
                           && (errorModel.httpError === HttpErrorStatusEnum.noInternet

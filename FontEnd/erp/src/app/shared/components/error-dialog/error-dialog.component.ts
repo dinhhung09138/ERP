@@ -3,7 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
-import { DialogDataInterface } from './../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../core/models/dialog-data.model';
 import { HttpErrorStatusEnum } from 'src/app/core/enums/http-error.enum';
 
 @Component({
@@ -17,7 +17,7 @@ export class ErrorDialogComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface
+    @Inject(MAT_DIALOG_DATA) public data: DialogDataViewModel
   ) {
    }
 

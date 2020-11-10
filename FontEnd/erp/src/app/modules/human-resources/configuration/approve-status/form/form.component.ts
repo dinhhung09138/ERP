@@ -11,8 +11,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ApproveStatusViewModel } from '../approve-status.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { inject } from '@angular/core/testing';
-import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../core/models/dialog-data.model';
 
 @Component({
   selector: 'app-hr-approve-status-form',
@@ -33,7 +32,7 @@ export class ApproveStatusFormComponent implements OnInit {
   item: ApproveStatusViewModel;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     public translate: TranslateService,
     private elm: ElementRef,
     private dialogRef: MatDialogRef<ApproveStatusFormComponent>,

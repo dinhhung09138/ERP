@@ -13,7 +13,7 @@ import { DistrictViewModel } from '../district.model';
 import { ProvinceViewModel } from '../../province/province.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { ProvinceService } from '../../province/province.service';
-import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../core/models/dialog-data.model';
 import { ProvinceFormComponent } from '../../province/form/form.component';
 
 @Component({
@@ -39,7 +39,7 @@ export class DistrictFormComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<DistrictFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,

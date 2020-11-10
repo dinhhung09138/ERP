@@ -11,7 +11,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { EmployeeWorkingStatusViewModel } from '../employee-working-status.model';
 import { EmployeeWorkingStatusService } from '../employee-working-status.service';
-import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../core/models/dialog-data.model';
 
 @Component({
   selector: 'app-hr-employee-working-status-form',
@@ -32,7 +32,7 @@ export class EmployeeWorkingStatusFormComponent implements OnInit {
   item: EmployeeWorkingStatusViewModel;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<EmployeeWorkingStatusFormComponent>,
     private translate: TranslateService,
     private elm: ElementRef,

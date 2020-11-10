@@ -12,7 +12,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { CommendationViewModel } from '../commendation.model';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { DialogDataInterface } from '../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../core/models/dialog-data.model';
 
 @Component({
   selector: 'app-commendation-form',
@@ -33,7 +33,7 @@ export class CommendationFormComponent implements OnInit {
   item: CommendationViewModel;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<CommendationFormComponent>,
     private translate: TranslateService,
     private elm: ElementRef,

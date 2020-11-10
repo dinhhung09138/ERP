@@ -11,7 +11,7 @@ import { AppValidator } from 'src/app/core/validators/app.validator';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
-import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../core/models/dialog-data.model';
 
 @Component({
   selector: 'app-hr-configuration-major-form',
@@ -33,7 +33,7 @@ export class MajorFormComponent implements OnInit {
 
   constructor(
     public translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<MajorFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,

@@ -12,7 +12,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { NationalityViewModel } from './../nationality.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
-import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../core/models/dialog-data.model';
 
 @Component({
   selector: 'app-hr-nationality-form',
@@ -34,7 +34,7 @@ export class NationalityFormComponent implements OnInit {
 
   constructor(
     public translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<NationalityFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,

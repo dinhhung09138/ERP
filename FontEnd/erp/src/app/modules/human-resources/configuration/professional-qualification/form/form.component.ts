@@ -11,7 +11,7 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ProfessionalQualificationViewModel } from '../professional-qualification.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../core/models/dialog-data.model';
 
 @Component({
   selector: 'app-hr-professional-qualification-form',
@@ -33,7 +33,7 @@ export class ProfessionalQualificationFormComponent implements OnInit {
 
   constructor(
     public translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<ProfessionalQualificationFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,

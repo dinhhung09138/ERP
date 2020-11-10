@@ -11,7 +11,7 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PositionViewModel } from '../position.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogDataInterface } from '../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../core/models/dialog-data.model';
 
 @Component({
   selector: 'app-hr-position-form',
@@ -33,7 +33,7 @@ export class PositionFormComponent implements OnInit {
   item: PositionViewModel;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<PositionFormComponent>,
     private translate: TranslateService,
     private elm: ElementRef,

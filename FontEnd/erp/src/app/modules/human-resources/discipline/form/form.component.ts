@@ -12,7 +12,7 @@ import { DisciplineViewModel } from '../discipline.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
 import { FormatNumberPipe } from 'src/app/core/pipes/format-number.pipe';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DialogDataInterface } from '../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../core/models/dialog-data.model';
 
 @Component({
   selector: 'app-hr-discipline-form',
@@ -33,7 +33,7 @@ export class DisciplineFormComponent implements OnInit {
   item: DisciplineViewModel;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<DisciplineFormComponent>,
     private translate: TranslateService,
     private elm: ElementRef,

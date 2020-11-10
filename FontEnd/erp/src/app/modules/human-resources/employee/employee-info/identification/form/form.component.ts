@@ -10,7 +10,7 @@ import { EmployeeIdentificationViewModel } from '../identification.model';
 import { FormActionStatus } from '../../../../../../core/enums/form-action-status.enum';
 import { ProvinceViewModel } from '../../../../configuration/province/province.model';
 import { IdentificationTypeViewModel } from '../../../../configuration/identification-type/identification-type.model';
-import { DialogDataInterface } from '../../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../../core/models/dialog-data.model';
 import { EmployeeIdentificationService } from '../identification.service';
 import { ResponseStatus } from '../../../../../../core/enums/response-status.enum';
 import { ResponseModel } from '../../../../../../core/models/response.model';
@@ -42,7 +42,7 @@ export class EmployeeIdentificationFormComponent implements OnInit {
 
   constructor(
     private elm: ElementRef,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<EmployeeIdentificationFormComponent>,
     private fb: FormBuilder,
     private employeeIdentificationService: EmployeeIdentificationService,

@@ -9,7 +9,7 @@ import { ResponseModel } from '../../../../../../core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { EmployeeRelationShipViewModel } from '../relationship.model';
 import { FormActionStatus } from '../../../../../../core/enums/form-action-status.enum';
-import { DialogDataInterface } from '../../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../../core/models/dialog-data.model';
 import { PermissionViewModel } from '../../../../../../core/models/permission.model';
 
 @Component({
@@ -32,7 +32,7 @@ export class EmployeeRelationshipFormComponent implements OnInit {
 
   constructor(
     private elm: ElementRef,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<EmployeeRelationshipFormComponent>,
     private fb: FormBuilder,
     private emplRelationShipService: EmployeeRelationShipService,

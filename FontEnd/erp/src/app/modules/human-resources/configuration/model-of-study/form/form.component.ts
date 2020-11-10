@@ -11,7 +11,7 @@ import { FormActionStatus } from 'src/app/core/enums/form-action-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ModelOfStudyViewModel } from '../model-of-study.model';
 import { AppValidator } from 'src/app/core/validators/app.validator';
-import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../core/models/dialog-data.model';
 
 @Component({
   selector: 'app-hr-model-of-study-form',
@@ -33,7 +33,7 @@ export class ModelOfStudyFormComponent implements OnInit {
 
   constructor(
     public translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<ModelOfStudyFormComponent>,
     private elm: ElementRef,
     private fb: FormBuilder,

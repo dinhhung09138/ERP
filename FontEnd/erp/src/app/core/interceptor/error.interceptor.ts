@@ -5,7 +5,7 @@ import { catchError, retry, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { NotifyService } from './../services/notify.service';
-import { DialogDataInterface } from './../interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../models/dialog-data.model';
 import { DialogService } from './../services/dialog.service';
 import { HttpErrorStatusEnum } from './../enums/http-error.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -63,28 +63,28 @@ export class ErrorInterceptor implements HttpInterceptor {
             const error500 = {
               isError: true,
               httpError: HttpErrorStatusEnum.serverNotFound
-            } as DialogDataInterface;
+            } as DialogDataViewModel;
             this.dialogService.openErrorDialog(error500);
             break;
           case 404:
             const error404 = {
               isError: true,
               httpError: HttpErrorStatusEnum.notFound
-            } as DialogDataInterface;
+            } as DialogDataViewModel;
             this.dialogService.openErrorDialog(error404);
             break;
           case 403:
             const error403 = {
               isError: true,
               httpError: HttpErrorStatusEnum.forbidden,
-            } as DialogDataInterface;
+            } as DialogDataViewModel;
             this.dialogService.openErrorDialog(error403);
             break;
           case 401:
             const error401 = {
               isError: true,
               httpError: HttpErrorStatusEnum.timeOut
-            } as DialogDataInterface;
+            } as DialogDataViewModel;
             this.dialogService.openErrorDialog(error401);
             this.context.clearToken();
             break;
@@ -92,14 +92,14 @@ export class ErrorInterceptor implements HttpInterceptor {
               const error204 = {
                 isError: true,
                 httpError: HttpErrorStatusEnum.noContent
-              } as DialogDataInterface;
+              } as DialogDataViewModel;
               this.dialogService.openErrorDialog(error204);
               break;
             default:
               const errorNotResponse = {
                 isError: true,
                 httpError: HttpErrorStatusEnum.serverNotFound
-              } as DialogDataInterface;
+              } as DialogDataViewModel;
               this.dialogService.openErrorDialog(errorNotResponse);
               break;
         }

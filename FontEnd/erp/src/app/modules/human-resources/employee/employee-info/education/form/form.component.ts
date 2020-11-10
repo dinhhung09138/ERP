@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ResponseModel } from '../../../../../../core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormActionStatus } from '../../../../../../core/enums/form-action-status.enum';
-import { DialogDataInterface } from '../../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../../core/models/dialog-data.model';
 import { PermissionViewModel } from '../../../../../../core/models/permission.model';
 import { ProfessionalQualificationViewModel } from '../../../../configuration/professional-qualification/professional-qualification.model';
 import { EmployeeEducationService } from './../education.service';
@@ -44,7 +44,7 @@ export class EmployeeEducationFormComponent implements OnInit {
 
   constructor(
     private elm: ElementRef,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<EmployeeEducationFormComponent>,
     private fb: FormBuilder,
     private employeeEducationService: EmployeeEducationService,

@@ -16,7 +16,7 @@ import { ProvinceService } from '../../province/province.service';
 import { DistrictService } from '../../district/district.service';
 import { DistrictFormComponent } from '../../district/form/form.component';
 import { ProvinceFormComponent } from '../../province/form/form.component';
-import { DialogDataInterface } from '../../../../../core/interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../../../../../core/models/dialog-data.model';
 import { MatSelectChange } from '@angular/material/select';
 
 @Component({
@@ -46,7 +46,7 @@ export class WardFormComponent implements OnInit {
   districtDropdown: DistrictViewModel[] = [];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
     private dialogRef: MatDialogRef<WardFormComponent>,
     public translate: TranslateService,
     private elm: ElementRef,

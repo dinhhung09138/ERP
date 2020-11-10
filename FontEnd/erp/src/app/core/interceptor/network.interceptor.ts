@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, EMPTY } from 'rxjs';
 
-import { DialogDataInterface } from './../interfaces/dialog-data.interface';
+import { DialogDataViewModel } from '../models/dialog-data.model';
 import { DialogService } from './../services/dialog.service';
 import { HttpErrorStatusEnum } from './../enums/http-error.enum';
 
@@ -18,7 +18,7 @@ export class NetworkInterceptor implements HttpInterceptor {
       const errorModel = {
         isError: true,
         httpError: HttpErrorStatusEnum.noInternet
-      } as DialogDataInterface;
+      } as DialogDataViewModel;
 
       this.dialogService.openErrorDialog(errorModel);
       return EMPTY;
