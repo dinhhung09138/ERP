@@ -34,6 +34,7 @@ namespace Service.HR
                             join rk in _context.RankingRepository.Query() on m.RankingId equals rk.Id
                             join md in _context.ModelOfStudyRepository.Query() on m.ModelOfStudyId equals md.Id
                             join mj in _context.MajorRepository.Query() on m.MajorId equals mj.Id
+                            join s in _context.SchoolRepository.Query() on m.SchoolId equals s.Id
                             where !m.Deleted && m.EmployeeId == filter.EmployeeId
                             orderby m.CreateDate
                             select new EmployeeEducationModel()
@@ -41,7 +42,8 @@ namespace Service.HR
                                 Id = m.Id,
                                 EducationTypeId = m.EducationTypeId,
                                 EducationTypeName = t.Name,
-                                School = m.School,
+                                SchoolId = m.SchoolId,
+                                SchoolName = s.Name,
                                 MajorId = m.MajorId,
                                 MajorName = mj.Name,
                                 Year = m.Year,
@@ -55,7 +57,7 @@ namespace Service.HR
 
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
-                    query = query.Where(m => m.School.ToLower().Contains(filter.Text)
+                    query = query.Where(m => m.SchoolName.ToLower().Contains(filter.Text)
                                             || m.EducationTypeName.ToLower().Contains(filter.Text)
                                             || m.MajorName.ToLower().Contains(filter.Text)
                                             || m.ModelOfStudyName.ToLower().Contains(filter.Text)
@@ -87,7 +89,7 @@ namespace Service.HR
                                 Id = m.Id,
                                 EmployeeId = m.EmployeeId,
                                 EducationTypeId = m.EducationTypeId,
-                                School = m.School,
+                                SchoolId = m.SchoolId,
                                 MajorId = m.MajorId,
                                 Year = m.Year,
                                 RankingId = m.RankingId,
@@ -115,7 +117,7 @@ namespace Service.HR
 
                 md.EmployeeId = model.EmployeeId;
                 md.EducationTypeId = model.EducationTypeId;
-                md.School = model.School;
+                md.SchoolId = model.SchoolId;
                 md.MajorId = model.MajorId;
                 md.Year = model.Year;
                 md.RankingId = model.RankingId;
@@ -153,7 +155,7 @@ namespace Service.HR
 
                 md.EmployeeId = model.EmployeeId;
                 md.EducationTypeId = model.EducationTypeId;
-                md.School = model.School;
+                md.SchoolId = model.SchoolId;
                 md.MajorId = model.MajorId;
                 md.Year = model.Year;
                 md.RankingId = model.RankingId;

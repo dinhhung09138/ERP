@@ -14,5 +14,13 @@ namespace Service.HR.Models
         public int CertificateId { get; set; }
 
         public string CertificateName { get; set; }
+
+        [Required]
+        public int SchoolId { get; set; }
+
+        public string SchoolName { get; set; }
+
+        [Required]
+        public int year { get; set; }
     }
 }

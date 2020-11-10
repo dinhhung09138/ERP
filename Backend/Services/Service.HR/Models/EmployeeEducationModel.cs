@@ -15,7 +15,10 @@ namespace Service.HR.Models
         [Required]
         public int EmployeeId { get; set; }
 
-        public string School { get; set; }
+        [Required]
+        public int SchoolId { get; set; }
+
+        public string SchoolName { get; set; }
 
         [Required]
         public int MajorId { get; set; }

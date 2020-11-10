@@ -14,7 +14,7 @@ namespace Database.Sql.ERP.Entities.Common
 
         [Column(TypeName = "nvarchar(150)")]
         [Required]
-        [MaxLength(100)]
+        [MaxLength(150)]
         public string Name { get; set; }
 
         [Column(TypeName = "int")]

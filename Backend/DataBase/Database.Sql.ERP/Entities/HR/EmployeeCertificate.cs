@@ -20,6 +20,14 @@ namespace Database.Sql.ERP.Entities.HR
         [Required]
         public int CertificateId { get; set; }
 
+        [Column(TypeName = "int")]
+        [Required]
+        public int SchoolId { get; set; }
+
+        [Column(TypeName = "int")]
+        [Required]
+        public int year { get; set; }
+
         [Column(TypeName = "bit")]
         [Required]
         public bool IsActive { get; set; }

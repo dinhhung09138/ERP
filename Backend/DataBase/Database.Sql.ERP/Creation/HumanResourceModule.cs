@@ -2084,12 +2084,22 @@ namespace Database.Sql.ERP.Creation
                 },
                 new Function()
                 {
+                    Code = "HR_CONF_MARITAL",
+                    Name = "MARITAL",
+                    Url = "/configuration/marital-status",
+                    Icon = string.Empty,
+                    ParentCode = "HR_CONFIGURATION",
+                    Precedence = 4,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
                     Code = "HR_CONF_RELIGION",
                     Name = "RELIGION",
                     Url = "/configuration/religion",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 4,
+                    Precedence = 5,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2099,7 +2109,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/ethnicity",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 5,
+                    Precedence = 6,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2109,7 +2119,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/nationality",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 6,
+                    Precedence = 7,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2119,7 +2129,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/identification",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 6,
+                    Precedence = 8,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2129,7 +2139,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/education",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 7,
+                    Precedence = 9,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2139,7 +2149,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/qualification",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 8,
+                    Precedence = 10,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2149,7 +2159,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/certificated",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 8,
+                    Precedence = 11,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2159,7 +2169,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/school",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 9,
+                    Precedence = 12,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2169,7 +2179,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/major",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 10,
+                    Precedence = 13,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2179,7 +2189,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/model-of-study",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 11,
+                    Precedence = 14,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2189,7 +2199,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/ranking",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 12,
+                    Precedence = 15,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2199,7 +2209,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/relationship-type",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 13,
+                    Precedence = 16,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2209,7 +2219,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/contract-type",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 14,
+                    Precedence = 17,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2219,7 +2229,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/employee-status",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 15,
+                    Precedence = 18,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2229,7 +2239,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/job-title",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 16,
+                    Precedence = 19,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2239,7 +2249,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "/configuration/approve-status",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
-                    Precedence = 17,
+                    Precedence = 20,
                     ModuleCode = "HR"
                 },
                 new Function()

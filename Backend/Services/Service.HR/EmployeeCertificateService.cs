@@ -31,6 +31,7 @@ namespace Service.HR
             {
                 var query = from m in _context.EmployeeCertificateRepository.Query()
                             join t in _context.CertificatedRepository.Query() on m.CertificateId equals t.Id
+                            join s in _context.SchoolRepository.Query() on m.SchoolId equals s.Id
                             where !m.Deleted && m.EmployeeId == filter.EmployeeId
                             orderby m.CreateDate
                             select new EmployeeCertificateModel()
@@ -38,6 +39,9 @@ namespace Service.HR
                                 Id = m.Id,
                                 CertificateId = m.CertificateId,
                                 CertificateName = t.Name,
+                                SchoolId = m.SchoolId,
+                                SchoolName = s.Name,
+                                year = m.year,
                                 IsActive = m.IsActive,
                                 RowVersion = m.RowVersion,
                             };
@@ -72,6 +76,8 @@ namespace Service.HR
                                 Id = m.Id,
                                 EmployeeId = m.EmployeeId,
                                 CertificateId = m.CertificateId,
+                                SchoolId = m.SchoolId,
+                                year = m.year,
                                 IsActive = m.IsActive,
                                 RowVersion = m.RowVersion,
                             };
@@ -95,6 +101,8 @@ namespace Service.HR
 
                 md.EmployeeId = model.EmployeeId;
                 md.CertificateId = model.CertificateId;
+                md.SchoolId = model.SchoolId;
+                md.year = model.year;
                 md.IsActive = model.IsActive;
                 md.CreateBy = base.UserId;
                 md.CreateDate = DateTime.Now;
@@ -128,6 +136,8 @@ namespace Service.HR
 
                 md.EmployeeId = model.EmployeeId;
                 md.CertificateId = model.CertificateId;
+                md.SchoolId = model.SchoolId;
+                md.year = model.year;
                 md.IsActive = model.IsActive;
                 md.UpdateBy = base.UserId;
                 md.UpdateDate = DateTime.Now;

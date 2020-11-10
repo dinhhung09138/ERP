@@ -20,10 +20,9 @@ namespace Database.Sql.ERP.Entities.HR
         [Required]
         public int EducationTypeId { get; set; }
 
-        [Column(TypeName = "nvarchar(255)")]
-        [MaxLength(255)]
+        [Column(TypeName = "int")]
         [Required]
-        public string School { get; set; }
+        public int SchoolId { get; set; }
 
         [Column(TypeName = "int")]
         [Required]
