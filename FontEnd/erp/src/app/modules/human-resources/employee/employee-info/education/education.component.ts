@@ -1,3 +1,7 @@
+import { SchoolService } from './../../../configuration/school/school.service';
+import { MajorService } from './../../../configuration/major/major.service';
+import { MajorViewModel } from './../../../configuration/major/major.model';
+import { SchoolViewModel } from './../../../configuration/school/school.model';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
@@ -49,6 +53,8 @@ export class EmployeeEducationComponent implements OnInit {
   listEducation: ProfessionalQualificationViewModel[];
   listRank: RankingViewModel[];
   listModelOfStudy: ModelOfStudyViewModel[];
+  listSchool: SchoolViewModel[];
+  listMajor: MajorViewModel[];
 
   constructor(
     private dialog: MatDialog,
@@ -56,6 +62,8 @@ export class EmployeeEducationComponent implements OnInit {
     private educationTypeService: ProfessionalQualificationService,
     private modelOfStudyService: ModelOfStudyService,
     private rankingService: RankingService,
+    private majorService: MajorService,
+    private schoolService: SchoolService,
   ) { }
 
   ngOnInit(): void {
@@ -110,10 +118,6 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
-  public getMajor() {
-
-  }
-
   public getRanking() {
     this.isLoading = true;
     this.rankingService.getDropdown().subscribe((response: ResponseModel) => {
@@ -144,6 +148,26 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
+  public getMajor() {
+    this.isLoading = true;
+    this.majorService.getDropdown().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.listMajor = response.result;
+      }
+      this.isLoading = false;
+    });
+  }
+
+  public getSchool() {
+    this.isLoading = true;
+    this.schoolService.getDropdown().subscribe((response: ResponseModel) => {
+      if (response && response.responseStatus === ResponseStatus.success) {
+        this.listSchool = response.result;
+      }
+      this.isLoading = false;
+    });
+  }
+
   private showFormModal(id?: number) {
     const modalRef = this.dialog.open(EmployeeEducationFormComponent, {
       disableClose: true,
@@ -153,9 +177,10 @@ export class EmployeeEducationComponent implements OnInit {
         itemId: id,
         employeeId: this.employee.id,
         listEducation: this.listEducation,
-        listMajor: null,
         listRank: this.listRank,
-        listModelOfStudy: this.listModelOfStudy
+        listModelOfStudy: this.listModelOfStudy,
+        listMajor: this.listMajor,
+        listSchool: this.listSchool,
       }
     });
 

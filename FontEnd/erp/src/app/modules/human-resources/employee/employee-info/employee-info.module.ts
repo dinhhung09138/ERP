@@ -1,3 +1,5 @@
+import { MajorService } from './../../configuration/major/major.service';
+import { SchoolService } from './../../configuration/school/school.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -100,6 +102,8 @@ const routes: Routes = [
     RelationshipTypeService,
     RankingService,
     EducationService,
+    SchoolService,
+    MajorService,
     ProfessionalQualificationService,
     FormatNumberPipe,
   ]

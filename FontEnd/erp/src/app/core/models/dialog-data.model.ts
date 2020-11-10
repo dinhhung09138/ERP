@@ -1,3 +1,5 @@
+import { MajorViewModel } from './../../modules/human-resources/configuration/major/major.model';
+import { SchoolViewModel } from './../../modules/human-resources/configuration/school/school.model';
 import { ModelOfStudyViewModel } from '../../modules/human-resources/configuration/model-of-study/model-of-study.model';
 import { RankingViewModel } from '../../modules/human-resources/configuration/ranking/ranking.model';
 import { RelationshipTypeViewModel } from '../../modules/human-resources/configuration/relationship-type/relationship-type.model';
@@ -18,7 +20,8 @@ export interface DialogDataViewModel {
   itemId: number;
   employeeId: number;
   listRelationShip: RelationshipTypeViewModel[];
-  listMajor: any[];
+  listMajor: MajorViewModel[];
+  listSchool: SchoolViewModel[];
   listRank: RankingViewModel[];
   listModelOfStudy: ModelOfStudyViewModel[];
   listEducation: EducationViewModel[];

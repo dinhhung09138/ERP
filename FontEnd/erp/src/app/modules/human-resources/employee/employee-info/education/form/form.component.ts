@@ -13,6 +13,8 @@ import { EmployeeEducationService } from './../education.service';
 import { ModelOfStudyViewModel } from './../../../../configuration/model-of-study/model-of-study.model';
 import { RankingViewModel } from './../../../../configuration/ranking/ranking.model';
 import { EmployeeEducationViewModel } from './../education.model';
+import { SchoolViewModel } from './../../../../configuration/school/school.model';
+import { MajorViewModel } from './../../../../configuration/major/major.model';
 
 @Component({
   selector: 'app-hr-employee-education-form',
@@ -30,12 +32,8 @@ export class EmployeeEducationFormComponent implements OnInit {
   employeeId = 0;
   form: FormGroup;
   formAction: FormActionStatus;
-  listMajor: any[] = [
-    {
-      id: 1,
-      name: 'Demo'
-    }
-  ];
+  listMajor: MajorViewModel[];
+  listSchool: SchoolViewModel[];
   listEducation: ProfessionalQualificationViewModel[];
   listRank: RankingViewModel[];
   listModelOfStudy: ModelOfStudyViewModel[];
@@ -74,7 +72,8 @@ export class EmployeeEducationFormComponent implements OnInit {
     this.formAction = FormActionStatus.Insert;
     if (this.dialogData && this.dialogData.isPopup === true) {
       this.listEducation = this.dialogData.listEducation;
-      //this.listMajor = this.dialogData.listMajor;
+      this.listMajor = this.dialogData.listMajor;
+      this.listSchool = this.dialogData.listSchool;
       this.listRank = this.dialogData.listRank;
       this.listModelOfStudy = this.dialogData.listModelOfStudy;
       this.employeeId = this.dialogData.employeeId;

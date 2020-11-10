@@ -280,6 +280,7 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
           this.educationTab.getModelOfStudyType();
           this.educationTab.getRanking();
           this.educationTab.getMajor();
+          this.educationTab.getSchool();
         }
         break;
     }
