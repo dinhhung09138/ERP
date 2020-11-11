@@ -121,6 +121,15 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<Bank> _bankRepository;
+        public ITableGenericRepository<Bank> BankRepository
+        {
+            get
+            {
+                return _bankRepository = _bankRepository ?? new TableGenericRepository<Bank>(_context);
+            }
+        }
+
         private ITableGenericRepository<Commendation> _commendationRepository;
         public ITableGenericRepository<Commendation> CommendationRepository
         {

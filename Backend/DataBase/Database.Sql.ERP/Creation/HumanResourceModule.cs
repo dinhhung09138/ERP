@@ -13,6 +13,15 @@ namespace Database.Sql.ERP.Creation
 
         public static void HRModelCreating(this ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Bank>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.Precedence).HasDefaultValue(1);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
             modelBuilder.Entity<Education>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -258,6 +267,7 @@ namespace Database.Sql.ERP.Creation
             modelBuilder.CreateDefaultCommandConfMajor();
             modelBuilder.CreateDefaultCommandConfSchool();
             modelBuilder.CreateDefaultCommandConfCertificated();
+            modelBuilder.CreateDefaultCommandConfBank();
             modelBuilder.CreateDefaultCommandEmployee();
         }
 
@@ -1463,6 +1473,56 @@ namespace Database.Sql.ERP.Creation
             );
         }
 
+        private static void CreateDefaultCommandConfBank(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 150,
+                    FunctionCode = "HR_CONF_BANK",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Bank",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 150,
+                    FunctionCode = "HR_CONF_BANK",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Bank",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 152,
+                    FunctionCode = "HR_CONF_BANK",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Bank",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 153,
+                    FunctionCode = "HR_CONF_BANK",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Bank",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
         #endregion
 
         #region " [ Leave Management ] "
@@ -2108,6 +2168,16 @@ namespace Database.Sql.ERP.Creation
                     Code = "HR_CONF_PROVINCE",
                     Name = "PROVINCE",
                     Url = "/configuration/province",
+                    Icon = string.Empty,
+                    ParentCode = "HR_CONFIGURATION",
+                    Precedence = 1,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
+                    Code = "HR_CONF_BANK",
+                    Name = "BANK",
+                    Url = "/configuration/bank",
                     Icon = string.Empty,
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 1,

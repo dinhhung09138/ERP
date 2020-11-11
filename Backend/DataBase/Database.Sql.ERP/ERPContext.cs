@@ -40,6 +40,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<ApproveStatus> ApproveStatus { get; set; }
 
+        public virtual DbSet<Bank> Bank { get; set; }
+
         public virtual DbSet<Commendation> Commendation { get; set; }
 
         public virtual DbSet<ContractType> ContractType { get; set; }
@@ -415,7 +417,7 @@ namespace Database.Sql.ERP
 
             modelBuilder.CreateHumanResourceDefaultCommand();
 
-            //FunctionCommand MaxId = 145
+            //FunctionCommand MaxId = 153
 
             #endregion
         }

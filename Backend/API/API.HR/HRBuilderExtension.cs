@@ -10,6 +10,7 @@ namespace API.HR
     {
         public static IServiceCollection AddHrServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddScoped<IBankService, BankService>();
             services.AddScoped<IApproveStatusService, ApproveStatusService>();
             services.AddScoped<IPositionService, PositionService>();
             services.AddScoped<IDisciplineService, DisciplineService>();
