@@ -4,14 +4,16 @@ using Database.Sql.ERP;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    partial class ERPContextModelSnapshot : ModelSnapshot
+    [Migration("20201111001139_version-1_0_11")]
+    partial class version1_0_11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3609,50 +3611,6 @@ namespace Database.Sql.ERP.Migrations
                         },
                         new
                         {
-                            Id = 146,
-                            ActionName = "GetList",
-                            ControllerName = "MaritalStatus",
-                            FunctionCode = "HR_CONF_MARITAL",
-                            IsView = true,
-                            ModuleName = "Common",
-                            Name = "VIEW",
-                            Precedence = 1
-                        },
-                        new
-                        {
-                            Id = 147,
-                            ActionName = "Insert",
-                            ControllerName = "MaritalStatus",
-                            FunctionCode = "HR_CONF_MARITAL",
-                            IsView = false,
-                            ModuleName = "Common",
-                            Name = "INSERT",
-                            Precedence = 2
-                        },
-                        new
-                        {
-                            Id = 148,
-                            ActionName = "Update",
-                            ControllerName = "MaritalStatus",
-                            FunctionCode = "HR_CONF_MARITAL",
-                            IsView = false,
-                            ModuleName = "Common",
-                            Name = "UPDATE",
-                            Precedence = 3
-                        },
-                        new
-                        {
-                            Id = 149,
-                            ActionName = "Delete",
-                            ControllerName = "MaritalStatus",
-                            FunctionCode = "HR_CONF_MARITAL",
-                            IsView = false,
-                            ModuleName = "Common",
-                            Name = "DELETE",
-                            Precedence = 4
-                        },
-                        new
-                        {
                             Id = 72,
                             ActionName = "GetList",
                             ControllerName = "RelationshipType",
@@ -4540,7 +4498,7 @@ namespace Database.Sql.ERP.Migrations
                         {
                             Id = 1,
                             CreateBy = 1,
-                            CreateDate = new DateTime(2020, 11, 11, 7, 18, 22, 892, DateTimeKind.Local).AddTicks(8842),
+                            CreateDate = new DateTime(2020, 11, 11, 7, 11, 38, 531, DateTimeKind.Local).AddTicks(4550),
                             Deleted = false,
                             Description = "Sys",
                             IsActive = true,

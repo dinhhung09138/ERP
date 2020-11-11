@@ -32,7 +32,7 @@ namespace Database.Sql.ERP.Entities.HR
         public DateTime? DateOfBirth { get; set; }
 
         [Column(TypeName = "int")]
-        public int? MaterialStatusId { get; set; }
+        public int? MaritalStatusId { get; set; }
 
         [Column(TypeName = "int")]
         public int? ReligionId { get; set; }

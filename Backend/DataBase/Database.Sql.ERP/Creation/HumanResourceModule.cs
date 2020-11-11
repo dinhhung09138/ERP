@@ -250,6 +250,7 @@ namespace Database.Sql.ERP.Creation
             modelBuilder.CreateDefaultCommandConfQualification();
             modelBuilder.CreateDefaultCommandConfModelOfStudy();
             modelBuilder.CreateDefaultCommandConfRanking();
+            modelBuilder.CreateDefaultCommandConfMaritalStatus();
             modelBuilder.CreateDefaultCommandConfRelationShip();
             modelBuilder.CreateDefaultCommandConfContract();
             modelBuilder.CreateDefaultCommandConfWorkingStatus();
@@ -1055,6 +1056,56 @@ namespace Database.Sql.ERP.Creation
                     Name = "DELETE",
                     ModuleName = "HR",
                     ControllerName = "Ranking",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
+        private static void CreateDefaultCommandConfMaritalStatus(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 146,
+                    FunctionCode = "HR_CONF_MARITAL",
+                    Name = "VIEW",
+                    ModuleName = "Common",
+                    ControllerName = "MaritalStatus",
+                    ActionName = "GetList",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 147,
+                    FunctionCode = "HR_CONF_MARITAL",
+                    Name = "INSERT",
+                    ModuleName = "Common",
+                    ControllerName = "MaritalStatus",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 148,
+                    FunctionCode = "HR_CONF_MARITAL",
+                    Name = "UPDATE",
+                    ModuleName = "Common",
+                    ControllerName = "MaritalStatus",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 149,
+                    FunctionCode = "HR_CONF_MARITAL",
+                    Name = "DELETE",
+                    ModuleName = "Common",
+                    ControllerName = "MaritalStatus",
                     ActionName = "Delete",
                     Precedence = 4,
                     IsView = false,

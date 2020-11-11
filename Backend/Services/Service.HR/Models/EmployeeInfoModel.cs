@@ -23,7 +23,7 @@ namespace Service.HR.Models
 
         public DateTime? DateOfBirth { get; set; }
 
-        public int? MaterialStatusId { get; set; }
+        public int? MaritalStatusId { get; set; }
 
         public int? ReligionId { get; set; }
 

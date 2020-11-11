@@ -80,7 +80,7 @@ namespace Service.HR
                                 Gender = m.Gender,
                                 DateOfBirth = m.DateOfBirth,
                                 ReligionId = m.ReligionId,
-                                MaterialStatusId = m.MaterialStatusId,
+                                MaritalStatusId = m.MaritalStatusId,
                                 EthnicityId = m.EthnicityId,
                                 NationalityId = m.NationalityId,
                                 AcademicLevelId = m.AcademicLevelId,
@@ -114,7 +114,7 @@ namespace Service.HR
                                 Gender = m.Gender,
                                 DateOfBirth = m.DateOfBirth,
                                 ReligionId = m.ReligionId,
-                                MaterialStatusId = m.MaterialStatusId,
+                                MaritalStatusId = m.MaritalStatusId,
                                 EthnicityId = m.EthnicityId,
                                 NationalityId = m.NationalityId,
                                 AcademicLevelId = m.AcademicLevelId,
@@ -145,7 +145,7 @@ namespace Service.HR
                 md.LastName = model.LastName.Trim();
                 md.Gender = model.Gender;
                 md.DateOfBirth = model.DateOfBirth;
-                md.MaterialStatusId = model.MaterialStatusId;
+                md.MaritalStatusId = model.MaritalStatusId;
                 md.ReligionId = model.ReligionId;
                 md.EthnicityId = model.EthnicityId;
                 md.NationalityId = model.NationalityId;
@@ -185,7 +185,7 @@ namespace Service.HR
                 md.EmployeeId = model.EmployeeId;
                 md.Gender = model.Gender;
                 md.DateOfBirth = model.DateOfBirth;
-                md.MaterialStatusId = model.MaterialStatusId;
+                md.MaritalStatusId = model.MaritalStatusId;
                 md.ReligionId = model.ReligionId;
                 md.EthnicityId = model.EthnicityId;
                 md.NationalityId = model.NationalityId;
