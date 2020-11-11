@@ -338,6 +338,22 @@
             "DROPDOWN": "Can not get the list of major"
           }
         },
+        "MARITAL": {
+          "TITLE": "Marital Status",
+          "LIST_TITLE": "List of Marital Status",
+          "POPUP_TITLE": "Add New Marital Status",
+          "TABLE": {
+            "NAME": "Name"
+          },
+          "FORM": {
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "NAME": "Name"
+          },
+          "ERROR": {
+            "DROPDOWN": "Can not get the list of marital status"
+          }
+        },
         "MODEL_OF_STUDY": {
           "TITLE": "Model of Study",
           "LIST_TITLE": "List of Model of Study",

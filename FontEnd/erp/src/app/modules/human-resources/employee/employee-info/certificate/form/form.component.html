@@ -19,7 +19,7 @@
                   <mat-form-field class="form-control">
                     <mat-select id="certificateId" formControlName="certificateId" required tabindex="170">
                       <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                      <mat-option *ngFor="let item of listEducation" [value]="item.id">{{ item.name }}</mat-option>
+                      <mat-option *ngFor="let item of listCertificated" [value]="item.id">{{ item.name }}</mat-option>
                     </mat-select>
                   </mat-form-field>
                   <mat-error *ngIf="isSubmit && form.controls['certificateId'].errors?.required">

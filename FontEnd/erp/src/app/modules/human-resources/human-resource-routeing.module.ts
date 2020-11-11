@@ -123,6 +123,11 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'configuration/marital-status',
+        loadChildren: () => import('./configuration/marital-status/marital-status.module').then(m => m.MaritalStatusModule),
+        pathMatch: 'full'
+      },
+      {
         path: 'configuration/certificated',
         loadChildren: () => import('./configuration/certificated/certificated.module').then(m => m.CertificatedModule),
         pathMatch: 'full'

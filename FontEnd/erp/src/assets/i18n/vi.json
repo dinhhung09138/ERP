@@ -338,6 +338,22 @@
             "DROPDOWN": "Không thể lấy danh sách chuyên ngành đào tạo"
           }
         },
+        "MARITAL": {
+          "TITLE": "Tình trạng hôn nhân",
+          "LIST_TITLE": "Danh sách tình trạng hôn nhân",
+          "POPUP_TITLE": "Thêm mới tình trạng hôn nhân",
+          "TABLE": {
+            "NAME": "Tên"
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "NAME": "Tên"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách tình trạng hôn nhân"
+          }
+        },
         "MODEL_OF_STUDY": {
           "TITLE": "Hình thức đào tạo",
           "LIST_TITLE": "Danh sách hình thức đào tạo",
