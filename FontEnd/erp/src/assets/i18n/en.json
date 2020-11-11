@@ -236,6 +236,21 @@
             "DROPDOWN": "Can not get the list of approve status"
           }
         },
+        "BANK": {
+          "TITLE": "Bank",
+          "LIST_TITLE": "List of Bank",
+          "TABLE": {
+          },
+          "FORM": {
+            "TITLE_NEW": "Add New",
+            "TITLE_EDIT": "Update",
+            "CODE": "Code",
+            "NAME": "Name"
+          },
+          "ERROR": {
+            "DROPDOWN": "Can not get the list of bank"
+          }
+        },
         "CERTIFICATED": {
           "TITLE": "Certificated",
           "LIST_TITLE": "List of Certificated",

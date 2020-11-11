@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-12">{{ formTitle }}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <app-element-loading [show]="isLoading"></app-element-loading>
+        <div class="row">
+          <div class="col-12">
+            <form [formGroup]="form" (submit)="!isLoading ? onSubmitForm() : false">
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.CONFIGURATION.BANK.FORM.CODE' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input matInput id="code" formControlName="code" maxlength="10" tabindex="1" autocomplete="off">
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['code'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.CONFIGURATION.BANK.FORM.NAME' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input matInput id="name" formControlName="name" maxlength="100" tabindex="2" autocomplete="off"/>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['name'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-162 col-md-6 col-sm-6 col-xs-12 form-group">
+                  <label class="label">
+                    {{ 'TABLE.LIST.PRECEDENCE' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input matInput appPrecedence formControlName="precedence" maxlength="3" tabindex="3" autocomplete="off" />
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['precedence'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="isSubmit && form.controls['precedence'].errors?.number">
+                    {{ 'VALIDATION_MESSAGE.PRECEDENCE_INVALID' | translate }}
+                  </mat-error>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                  <label class="label">
+                    {{ 'TABLE.LIST.ACTIVE' | translate }}
+                  </label>
+                  <div class="input-group">
+                    <mat-checkbox class="ml-10" tabindex="4" formControlName="isActive">
+                    </mat-checkbox>
+                  </div>
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-12 form-group" *ngIf="formAction != 0">
+                  <input *ngIf="(permission.allowInsert && formAction === 1) || (permission.allowUpdate && formAction === 2)" type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="5">
+                  <button type="button" class="btn btn-warning" tabindex="6" (click)="onResetClick()">
+                    {{ 'BUTTON.RESET' | translate }}
+                  </button>
+                  <button type="button" class="btn btn-secondary" tabindex="7" (click)="onCloseClick()">
+                    {{ 'BUTTON.CLOSE' | translate }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

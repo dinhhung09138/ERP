@@ -236,6 +236,21 @@
             "DROPDOWN": "Không thể lấy danh sách trạng thái"
           }
         },
+        "BANK": {
+          "TITLE": "Ngân hàng",
+          "LIST_TITLE": "Danh sách ngân hàng",
+          "TABLE": {
+          },
+          "FORM": {
+            "TITLE_NEW": "Thêm mới",
+            "TITLE_EDIT": "Cập nhật",
+            "CODE": "Mã",
+            "NAME": "Tên trạng thái"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách ngân hàng"
+          }
+        },
         "CERTIFICATED": {
           "TITLE": "Chứng chỉ đào tạo",
           "LIST_TITLE": "Danh sách chứng chỉ",

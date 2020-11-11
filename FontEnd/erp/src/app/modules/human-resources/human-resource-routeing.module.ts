@@ -34,6 +34,11 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
+        path: 'configuration/bank',
+        loadChildren: () => import('./configuration/bank/bank.module').then(m => m.BankModule),
+        pathMatch: 'full',
+      },
+      {
         path: 'configuration/province',
         loadChildren: () => import('./configuration/province/province.module').then(m => m.ProvinceModule),
         pathMatch: 'full',
