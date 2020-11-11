@@ -50,6 +50,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<Employee> Employee { get; set; }
 
+        public virtual DbSet<EmployeeBank> EmployeeBank { get; set; }
+
         public virtual DbSet<EmployeeCommendation> EmployeeCommendation { get; set; }
 
         public virtual DbSet<EmployeeContact> EmployeeContact { get; set; }

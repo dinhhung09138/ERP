@@ -75,6 +75,14 @@ namespace Database.Sql.ERP.Creation
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
+            modelBuilder.Entity<EmployeeBank>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
             modelBuilder.Entity<EmployeeCommendation>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");

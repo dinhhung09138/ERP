@@ -11,6 +11,7 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<ContractType> ContractTypeRepository { get; }
         ITableGenericRepository<Discipline> DisciplineRepository { get; }
         ITableGenericRepository<Employee> EmployeeRepository { get; }
+        ITableGenericRepository<EmployeeBank> EmployeeBankRepository { get; }
         ITableGenericRepository<EmployeeCommendation> EmployeeCommendationRepository { get; }
         ITableGenericRepository<EmployeeContact> EmployeeContactRepository { get; }
         ITableGenericRepository<EmployeeContract> EmployeeContractRepository { get; }

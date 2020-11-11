@@ -184,6 +184,15 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<EmployeeBank> _employeeBankRepository;
+        public ITableGenericRepository<EmployeeBank> EmployeeBankRepository
+        {
+            get
+            {
+                return _employeeBankRepository = _employeeBankRepository ?? new TableGenericRepository<EmployeeBank>(_context);
+            }
+        }
+
         private ITableGenericRepository<EmployeeContact> _employeeContactRepository;
         public ITableGenericRepository<EmployeeContact> EmployeeContactRepository
         {
