@@ -1,5 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.Services;
+using Core.Services.Interfaces;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.HR;
 using Microsoft.AspNetCore.Http;
@@ -17,15 +18,20 @@ namespace Service.HR
     {
         private readonly IERPUnitOfWork _context;
         private readonly ILogger<ApproveStatusService> _logger;
+        private readonly IMemoryCachingService _memoryCachingService;
+
+        private readonly string CacheKey = "approve_status_data";
 
         public ApproveStatusService(
             IERPUnitOfWork context,
             ILogger<ApproveStatusService> logger,
-            IHttpContextAccessor httpContext)
+            IHttpContextAccessor httpContext,
+            IMemoryCachingService memoryCachingService)
         {
             _context = context;
             _logger = logger;
             base._httpContext = httpContext;
+            _memoryCachingService = memoryCachingService;
         }
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
@@ -69,17 +75,28 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.ApproveStatusRepository.Query()
-                            where !m.Deleted
-                            orderby m.Precedence
-                            select new ApproveStatusModel()
-                            {
-                                Id = m.Id,
-                                Name = m.Name,
-                            };
+                var cacheData = _memoryCachingService.GetList<ApproveStatusModel>(CacheKey);
 
+                if (cacheData != null)
+                {
+                    response.Result = cacheData;
+                }
+                else
+                {
+                    var query = from m in _context.ApproveStatusRepository.Query()
+                                where !m.Deleted
+                                orderby m.Precedence
+                                select new ApproveStatusModel()
+                                {
+                                    Id = m.Id,
+                                    Name = m.Name,
+                                };
 
-                response.Result = await query.ToListAsync();
+                    var list = await query.ToListAsync();
+                    response.Result = list;
+
+                    _memoryCachingService.Set<ApproveStatusModel>(list, CacheKey, 60, 0, 0);
+                }
             }
             catch (Exception ex)
             {
@@ -139,6 +156,8 @@ namespace Service.HR
                 await _context.ApproveStatusRepository.AddAsync(md).ConfigureAwait(true);
 
                 await _context.SaveChangesAsync();
+
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
@@ -171,6 +190,8 @@ namespace Service.HR
                 _context.ApproveStatusRepository.Update(md);
 
                 await _context.SaveChangesAsync();
+
+                _memoryCachingService.Remove(CacheKey);
             }
             catch (Exception ex)
             {
