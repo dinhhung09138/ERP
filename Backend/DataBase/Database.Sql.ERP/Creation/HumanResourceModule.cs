@@ -1497,7 +1497,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 150,
+                    Id = 151,
                     FunctionCode = "HR_CONF_BANK",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1592,8 +1592,8 @@ namespace Database.Sql.ERP.Creation
                     FunctionCode = "HR_EMPLOYEE_PERSONAL_INFO",
                     Name = "VIEW",
                     ModuleName = "HR",
-                    ControllerName = "Employee",
-                    ActionName = "item-by-employee",
+                    ControllerName = "EmployeeInfo",
+                    ActionName = "GetList",
                     Precedence = 1,
                     IsView = true,
                 },
