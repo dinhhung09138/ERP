@@ -48,6 +48,8 @@ import { EmployeeCertificateFormComponent } from './certificate/form/form.compon
 import { MajorService } from './../../configuration/major/major.service';
 import { SchoolService } from './../../configuration/school/school.service';
 import { EmployeeCertificateService } from './certificate/certificate.service';
+import { CertificatedService } from '../../configuration/certificated/certificated.service';
+import { MaritalStatusService } from '../../configuration/marital-status/marital-status.service';
 
 const routes: Routes = [
   {
@@ -110,6 +112,8 @@ const routes: Routes = [
     EducationService,
     SchoolService,
     MajorService,
+    MaritalStatusService,
+    CertificatedService,
     ProfessionalQualificationService,
     FormatNumberPipe,
   ]

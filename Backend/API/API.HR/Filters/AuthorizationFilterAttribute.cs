@@ -71,6 +71,7 @@ namespace API.HR.Filters
             switch (action)
             {
                 case "Item":
+                case "ItemByEmployee":
                     return "GetList";
                 default:
                     return action;
