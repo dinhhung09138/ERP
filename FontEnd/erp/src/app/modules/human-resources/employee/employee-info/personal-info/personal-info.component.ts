@@ -12,6 +12,7 @@ import { ReligionViewModel } from '../../../configuration/religion/religion.mode
 import { ProfessionalQualificationViewModel } from '../../../configuration/professional-qualification/professional-qualification.model';
 import { EmployeeViewModel } from '../../employee.model';
 import { PermissionViewModel } from '../../../../../core/models/permission.model';
+import { MaritalStatusViewModel } from '../../../configuration/marital-status/marital-status.model';
 
 @Component({
   selector: 'app-hr-employee-personal-info',
@@ -32,15 +33,17 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   personalInfoForm: FormGroup;
 
   ethnicityLoading = false;
-  ethnicityList: EthnicityViewModel[];
+  listEthnicity: EthnicityViewModel[] = [];
   nationalityLoading = false;
-  nationalityList: NationalityViewModel[];
+  listNationality: NationalityViewModel[] = [];
   educationLoading = false;
-  educationList: EducationViewModel[];
+  ListEducation: EducationViewModel[] = [];
   religionLoading = false;
-  religionList: ReligionViewModel[];
+  listReligion: ReligionViewModel[] = [];
   qualificationLoading = false;
-  qualificationList: ProfessionalQualificationViewModel[];
+  listQualification: ProfessionalQualificationViewModel[] = [];
+  maritalLoading = false;
+  listMaritalStatus: MaritalStatusViewModel[] = [];
 
   constructor(
     private personalInfoService: PersonalInfoService,
@@ -54,7 +57,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
       employeeId: [0],
       dateOfBirth: [null],
       gender: [true, [Validators.required]],
-      materialStatusId: [''],
+      maritalStatusId: [''],
       religionId: [''],
       ethnicityId: [''],
       nationalityId: [''],
@@ -82,7 +85,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.personalInfoForm.get('employeeId').setValue(null);
     this.personalInfoForm.get('dateOfBirth').setValue(null);
     this.personalInfoForm.get('gender').setValue(true);
-    this.personalInfoForm.get('materialStatusId').setValue('');
+    this.personalInfoForm.get('maritalStatusId').setValue('');
     this.personalInfoForm.get('religionId').setValue('');
     this.personalInfoForm.get('ethnicityId').setValue('');
     this.personalInfoForm.get('nationalityId').setValue('');
@@ -124,7 +127,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.personalInfoService.addNewEthnicity().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.personalInfoForm.get('ethnicityId').setValue(null);
-        this.ethnicityList = response.result;
+        this.listEthnicity = response.result;
       }
       this.ethnicityLoading = false;
     });
@@ -135,7 +138,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.personalInfoService.addNewNationality().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.personalInfoForm.get('nationalityId').setValue(null);
-        this.nationalityList = response.result;
+        this.listNationality = response.result;
       }
       this.nationalityLoading = false;
     });
@@ -146,7 +149,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.personalInfoService.addNewReligion().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.personalInfoForm.get('religionId').setValue(null);
-        this.religionList = response.result;
+        this.listReligion = response.result;
       }
       this.religionLoading = false;
     });
@@ -157,7 +160,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.personalInfoService.addNewEducation().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.personalInfoForm.get('academicLevelId').setValue(null);
-        this.educationList = response.result;
+        this.ListEducation = response.result;
       }
       this.educationLoading = false;
     });
@@ -168,7 +171,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.personalInfoService.addNewQualification().subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.personalInfoForm.get('professionalQualificationId').setValue(null);
-        this.qualificationList = response.result;
+        this.listQualification = response.result;
       }
       this.qualificationLoading = false;
     });
@@ -198,19 +201,22 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     this.isLoading = true;
     this.personalInfoService.getSelection().subscribe(response => {
       if (response.ethnicity && response.ethnicity.responseStatus === ResponseStatus.success) {
-        this.ethnicityList = response.ethnicity.result;
+        this.listEthnicity = response.ethnicity.result;
       }
       if (response.nationalities && response.nationalities.responseStatus === ResponseStatus.success) {
-        this.nationalityList = response.nationalities.result;
+        this.listNationality = response.nationalities.result;
       }
       if (response.religions && response.religions.responseStatus === ResponseStatus.success) {
-        this.religionList = response.religions.result;
+        this.listReligion = response.religions.result;
       }
       if (response.educations && response.educations.responseStatus === ResponseStatus.success) {
-        this.educationList = response.educations.result;
+        this.ListEducation = response.educations.result;
       }
       if (response.qualifications && response.qualifications.responseStatus === ResponseStatus.success) {
-        this.qualificationList = response.qualifications.result;
+        this.listQualification = response.qualifications.result;
+      }
+      if (response.maritalStatus && response.maritalStatus.responseStatus === ResponseStatus.success) {
+        this.listMaritalStatus = response.maritalStatus.result;
       }
 
       this.isLoading = false;
@@ -225,7 +231,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
         this.personalInfoForm.get('dateOfBirth').setValue(new Date(data.dateOfBirth));
       }
       this.personalInfoForm.get('gender').setValue(data.gender);
-      this.personalInfoForm.get('materialStatusId').setValue(data.materialStatusId || '');
+      this.personalInfoForm.get('maritalStatusId').setValue(data.maritalStatusId || '');
       this.personalInfoForm.get('religionId').setValue(data.religionId || '');
       this.personalInfoForm.get('ethnicityId').setValue(data.ethnicityId || '');
       this.personalInfoForm.get('nationalityId').setValue(data.nationalityId || '');

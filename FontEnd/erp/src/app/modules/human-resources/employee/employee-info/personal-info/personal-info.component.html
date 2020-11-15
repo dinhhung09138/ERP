@@ -58,9 +58,14 @@
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                     <label class="label">
-                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.MATERIAL_STATUS' | translate }}
+                      {{ 'SCREEN.HR.EMPLOYEE.PERSONAL_INFO.MARITAL_STATUS' | translate }}
                     </label>
-                    <!--54-->
+                    <mat-form-field class="form-control">
+                      <mat-select formControlName="maritalStatusId" [disabled]="!isEdit" tabindex="54">
+                        <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                        <mat-option *ngFor="let item of listMaritalStatus" [value]="item.id">{{ item.name }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </div>
                 </div>
             </div>
@@ -76,7 +81,7 @@
                       <mat-form-field class="form-control">
                         <mat-select formControlName="nationalityId" [disabled]="!isEdit" tabindex="55">
                           <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                          <mat-option *ngFor="let item of nationalityList" [value]="item.id">{{ item.name }}</mat-option>
+                          <mat-option *ngFor="let item of listNationality" [value]="item.id">{{ item.name }}</mat-option>
                         </mat-select>
                       </mat-form-field>
                       <div class="input-group-append">
@@ -92,7 +97,7 @@
                       <mat-form-field class="form-control">
                         <mat-select formControlName="ethnicityId" tabindex="57" [disabled]="!isEdit">
                           <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                          <mat-option *ngFor="let item of ethnicityList" [value]="item.id">{{ item.name }}</mat-option>
+                          <mat-option *ngFor="let item of listEthnicity" [value]="item.id">{{ item.name }}</mat-option>
                         </mat-select>
                       </mat-form-field>
                       <div class="input-group-append">
@@ -108,7 +113,7 @@
                       <mat-form-field class="form-control">
                         <mat-select formControlName="religionId" tabindex="59" [disabled]="!isEdit">
                           <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                          <mat-option *ngFor="let item of religionList" [value]="item.id">{{ item.name }}</mat-option>
+                          <mat-option *ngFor="let item of listReligion" [value]="item.id">{{ item.name }}</mat-option>
                         </mat-select>
                       </mat-form-field>
                       <div class="input-group-append">
@@ -130,7 +135,7 @@
                       <mat-form-field class="form-control">
                         <mat-select formControlName="academicLevelId" tabindex="61" [disabled]="!isEdit">
                           <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                          <mat-option *ngFor="let item of educationList" [value]="item.id">{{ item.name }}</mat-option>
+                          <mat-option *ngFor="let item of ListEducation" [value]="item.id">{{ item.name }}</mat-option>
                         </mat-select>
                       </mat-form-field>
                       <div class="input-group-append">
@@ -146,7 +151,7 @@
                       <mat-form-field class="form-control">
                         <mat-select formControlName="professionalQualificationId" tabindex="63" [disabled]="!isEdit">
                           <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
-                          <mat-option *ngFor="let item of qualificationList" [value]="item.id">{{ item.name }}</mat-option>
+                          <mat-option *ngFor="let item of listQualification" [value]="item.id">{{ item.name }}</mat-option>
                         </mat-select>
                       </mat-form-field>
                       <div class="input-group-append">

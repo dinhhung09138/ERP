@@ -20,6 +20,7 @@ import { ProfessionalQualificationFormComponent } from '../../../configuration/p
 import { ReligionFormComponent } from '../../../configuration/religion/form/form.component';
 import { PermissionViewModel } from '../../../../../core/models/permission.model';
 import { SessionContext } from '../../../../../core/session.context';
+import { MaritalStatusService } from '../../../configuration/marital-status/marital-status.service';
 
 @Injectable()
 export class PersonalInfoService {
@@ -36,6 +37,7 @@ export class PersonalInfoService {
     private religionService: ReligionService,
     private educationService: EducationService,
     private qualificationService: ProfessionalQualificationService,
+    private maritalStatusService: MaritalStatusService,
     private context: SessionContext) { }
 
   url = {
@@ -75,15 +77,17 @@ export class PersonalInfoService {
       this.religionService.getDropdown(),
       this.educationService.getDropdown(),
       this.qualificationService.getDropdown(),
+      this.maritalStatusService.getDropdown(),
     ]).pipe(
       map(
-        ([ethnicityData, nationalityData, religionData, educationData, qualificationData]) => {
+        ([ethnicityData, nationalityData, religionData, educationData, qualificationData, maritalData]) => {
           return {
             ethnicity: ethnicityData,
             nationalities: nationalityData,
             religions: religionData,
             educations: educationData,
             qualifications: qualificationData,
+            maritalStatus: maritalData
           };
         }
       )
