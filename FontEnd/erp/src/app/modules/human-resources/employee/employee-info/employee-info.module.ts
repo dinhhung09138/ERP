@@ -20,8 +20,7 @@ import { EmployeeEducationFormComponent } from './education/form/form.component'
 import { EmployeeEducationService } from './education/education.service';
 import { EmployeeIdentificationComponent } from './identification/identification.component';
 import { ContractComponent } from './contract/contract.component';
-import { ContactComponent } from './contact/contact.component';
-import { FormComponent } from './contact/form/form.component';
+import { EmployeeContactComponent } from './contact/contact.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { AppDateAdapter } from '../../../../core/helpers/format-datepicker.helper';
 import { FormatDatePipe } from '../../../../core/pipes/format-date.pipe';
@@ -50,6 +49,7 @@ import { SchoolService } from './../../configuration/school/school.service';
 import { EmployeeCertificateService } from './certificate/certificate.service';
 import { CertificatedService } from '../../configuration/certificated/certificated.service';
 import { MaritalStatusService } from '../../configuration/marital-status/marital-status.service';
+import { EmployeeContactService } from './contact/contact.service';
 
 const routes: Routes = [
   {
@@ -70,8 +70,7 @@ const routes: Routes = [
     EmployeeIdentificationComponent,
     EmployeeIdentificationFormComponent,
     ContractComponent,
-    ContactComponent,
-    FormComponent,
+    EmployeeContactComponent,
     EmployeeCertificateComponent,
     EmployeeCertificateFormComponent,
   ],
@@ -93,6 +92,7 @@ const routes: Routes = [
   providers: [
     AppDateAdapter,
     EmployeeService,
+    EmployeeContactService,
     EmployeeEducationService,
     EmployeeRelationShipService,
     EmployeeIdentificationService,
