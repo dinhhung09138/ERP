@@ -40,7 +40,7 @@ namespace API.Common.Filters
 
             var actionName = GetActionName(ctrl.ControllerContext.ActionDescriptor.ActionName);
             var controllerName = ctrl.ControllerContext.ActionDescriptor.ControllerName;
-            var moduleName = GetModuleCode(controllerName);
+            var moduleName = "Common";
 
             var tokenInfo = context.HttpContext.Items["TokenInfo"] as JwtSecurityToken;
 
@@ -62,24 +62,6 @@ namespace API.Common.Filters
             }
 
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-        }
-
-        private string GetModuleCode(string controllerName)
-        {
-            switch(controllerName)
-            {
-                // We config it's URL in HR module, So we convert back to HR for check authorize
-                case "Province":
-                case "District":
-                case "Ward":
-                case "School":
-                case "Major":
-                case "Certificated":
-                case "MaritalStatus":
-                case "ProfessionalQualification":
-                    return "HR";
-            }
-            return "Common";
         }
 
         private string GetActionName(string action)
