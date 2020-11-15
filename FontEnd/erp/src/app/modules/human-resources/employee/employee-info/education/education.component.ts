@@ -40,7 +40,7 @@ export class EmployeeEducationComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName: string[] = [ 'school',
+  listColumnsName: string[] = [ 'schoolName',
                               'educationTypeName',
                               'majorName',
                               'rankingName',
