@@ -193,6 +193,12 @@
           "EDUCATION": "Education",
           "QUALIFICATION": "Qualification"
         },
+        "CERTIFICATE": {
+          "TITLE": "Professional Certificates",
+          "CERTIFICATE": "Certificate",
+          "SCHOOL": "School",
+          "YEAR": "Year"
+        },
         "EDUCATION": {
           "TITLE": "Education",
           "EDUCATION_TYPE": "Type",

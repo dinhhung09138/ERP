@@ -1,6 +1,5 @@
 ﻿using API.HR.Filters;
 using Core.CommonModel;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.HR.Interfaces;
 using Service.HR.Models;
@@ -11,11 +10,11 @@ namespace API.HR.Controllers
     [Route("api/hr/employee-identification")]
     [ApiController]
     [ServiceFilter(typeof(AuthorizationFilterAttribute))]
-    public class EmployeeIdentificationController
+    public class EmployeeIdentificateController : ControllerBase
     {
         private readonly IEmployeeIdentificationService _emplIdentificationService;
 
-        public EmployeeIdentificationController(IEmployeeIdentificationService emplIdentificationService)
+        public EmployeeIdentificateController(IEmployeeIdentificationService emplIdentificationService)
         {
             _emplIdentificationService = emplIdentificationService;
         }

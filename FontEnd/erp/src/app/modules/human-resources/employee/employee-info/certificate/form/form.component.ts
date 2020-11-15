@@ -81,7 +81,7 @@ export class EmployeeCertificateFormComponent implements OnInit {
     this.form.get('id').setValue(0);
     this.form.get('employeeId').setValue(this.employeeId);
     this.form.get('certificateId').setValue('');
-    this.form.get('schoolId').reset();
+    this.form.get('schoolId').setValue('');
     this.form.get('year').setValue('');
     this.form.get('isActive').reset();
 

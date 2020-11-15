@@ -35,8 +35,8 @@ export class EmployeeCertificateComponent implements OnInit {
   searchText = '';
   currentPageSize = this.paging.pageSize;
 
-  listColumnsName: string[] = [ 'schoolName',
-                                'certificateName',
+  listColumnsName: string[] = [ 'certificateName',
+                                'schoolName',
                                 'year',
                               'action' ];
   dataSource = new MatTableDataSource();

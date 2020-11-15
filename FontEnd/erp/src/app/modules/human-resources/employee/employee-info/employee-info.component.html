@@ -264,7 +264,7 @@
                 </a>
               </li>
               <li class="nav-item" *ngIf="personalInfoPermission.allowView === true">
-                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#education"
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#certificate"
                   (click)="onSelectTab('certificate')" data-toggle="tab">
                   {{ 'SCREEN.HR.EMPLOYEE.CERTIFICATE.TITLE' | translate }}
                 </a>

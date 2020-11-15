@@ -193,6 +193,12 @@
           "EDUCATION": "Trình độ học vấn",
           "QUALIFICATION": "Trình độ chuyên môn"
         },
+        "CERTIFICATE": {
+          "TITLE": "Chứng chỉ chuyên môn",
+          "CERTIFICATE": "Chứng chỉ",
+          "SCHOOL": "Trường",
+          "YEAR": "Năm"
+        },
         "EDUCATION": {
           "TITLE": "Bằng cấp",
           "EDUCATION_TYPE": "Hình thức",
