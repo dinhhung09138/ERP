@@ -115,6 +115,12 @@ export class EmployeeService {
       if (model.employeeWorkingStatusId) {
         formData.append('employeeWorkingStatusId', model.employeeWorkingStatusId.toString());
       }
+      if (model.currentPositionId) {
+        formData.append('currentPositionId', model.currentPositionId.toString());
+      }
+      if (model.currentDepartmentId) {
+        formData.append('currentDepartmentId', model.currentDepartmentId.toString());
+      }
       if (model.basicSalary) {
         formData.append('basicSalary', model.basicSalary.toString());
       }
