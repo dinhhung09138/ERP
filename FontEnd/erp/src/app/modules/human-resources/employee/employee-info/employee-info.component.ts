@@ -24,6 +24,7 @@ import { PermissionViewModel } from '../../../../core/models/permission.model';
 import { DialogService } from '../../../../core/services/dialog.service';
 import { PositionViewModel } from '../../position/position.model';
 import { EmployeeCertificateComponent } from './certificate/certificate.component';
+import { EmployeeContactComponent } from './contact/contact.component';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -67,6 +68,9 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
   certificatePermission = new PermissionViewModel();
   initCertificateTab = false;
   @ViewChild(EmployeeCertificateComponent) certificateTab: EmployeeCertificateComponent;
+  contactPermission = new PermissionViewModel();
+  initContactTab = false;
+  @ViewChild(EmployeeContactComponent) contactTab: EmployeeContactComponent;
 
   listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
   listPosition: PositionViewModel[] = [];
@@ -95,6 +99,7 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
     this.relationshipPermission = this.employeeService.getRelationshipPermission();
     this.identificationPermission = this.employeeService.getIdentificationPermission();
     this.certificatePermission = this.employeeService.getCertificatePermission();
+    this.contactPermission = this.employeeService.getContactPermission();
 
     this.activatedRoute.data.subscribe(response => {
       this.listWorkingStatus = response.data?.listWorkingStatus?.result || [];
@@ -260,6 +265,12 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
         if (this.initPersonInfoTab === false && this.personalInfoPermission.allowView === true) {
           this.initPersonInfoTab = true;
           this.personalInfoTab.getSelection();
+        }
+        break;
+      case 'contact':
+        if (this.initContactTab === false && this.contactPermission.allowView === true) {
+          this.initContactTab = true;
+          this.contactTab.getSelection();
         }
         break;
       case 'relationship':

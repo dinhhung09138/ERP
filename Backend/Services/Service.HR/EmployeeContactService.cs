@@ -62,7 +62,7 @@ namespace Service.HR
                                 RowVersion = m.RowVersion,
                             };
 
-                response.Result = await query.FirstOrDefaultAsync();
+                response.Result = await query.FirstOrDefaultAsync() ?? new EmployeeContactModel();
             }
             catch (Exception ex)
             {
@@ -161,6 +161,11 @@ namespace Service.HR
 
             try
             {
+                if (model.Id == 0)
+                {
+                    return await Insert(model);
+                }
+
                 EmployeeContact md = await _context.EmployeeContactRepository.FirstOrDefaultAsync(m => m.Id == model.Id);
 
                 if (!md.RowVersion.SequenceEqual(model.RowVersion))

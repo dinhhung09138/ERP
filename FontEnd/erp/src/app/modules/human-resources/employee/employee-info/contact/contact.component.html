@@ -1,1 +1,152 @@
-<p>contact works!</p>
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="form" (submit)="!isLoading ? onSubmit() : false">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <h1>{{ 'SCREEN.HR.EMPLOYEE.TITLE' | translate }}: {{ employee?.fullName }}</h1>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right" *ngIf="employee && permission.allowUpdate === true">
+          <input type="submit" class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="14" *ngIf="isEdit">
+          <button type="button" class="btn btn-success" tabindex="15" *ngIf="!isEdit" (click)="onEditClick()">
+          {{ 'BUTTON.UPDATE' | translate }}
+          </button>
+          <button type="button" class="btn btn-danger" tabindex="15" *ngIf="isEdit" (click)="onCancelClick()">
+          {{ 'BUTTON.CANCEL' | translate }}
+          </button>
+          <button type="button" class="btn btn-warning" tabindex="16" *ngIf="isEdit" (click)="onResetClick()">
+          {{ 'BUTTON.RESET' | translate }}
+          </button>
+        </div>
+        <div class="col-12">
+          <hr/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.PHONE' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput id="phone" maxlength="15" formControlName="phone" autocomplete="off" [disabled]="!isEdit" tabindex="200" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.MOBILE' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput maxlength="15" formControlName="mobile" autocomplete="off" [disabled]="!isEdit" tabindex="201" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.EMAIL' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput maxlength="100" formControlName="email" autocomplete="off" [disabled]="!isEdit" tabindex="202" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.ZALO' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput maxlength="20" formControlName="zalo" autocomplete="off" [disabled]="!isEdit" tabindex="203" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.FACEBOOK' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput maxlength="200" formControlName="facebook" autocomplete="off" [disabled]="!isEdit" tabindex="204" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.LINKED_IN' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput maxlength="200" formControlName="linkedIn" autocomplete="off" [disabled]="!isEdit" tabindex="205" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.TWITTER' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput maxlength="200" formControlName="twitter" autocomplete="off" [disabled]="!isEdit" tabindex="206" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.GITHUB' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput maxlength="200" formControlName="github" autocomplete="off" [disabled]="!isEdit" tabindex="207" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.TEMPORARY_ADDRESS' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput maxlength="255" formControlName="temporaryAddress" autocomplete="off" [disabled]="!isEdit" tabindex="208" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.TEMPORARY_PROVINCE' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <mat-select formControlName="temporaryProvinceId" [disabled]="!isEdit" tabindex="209">
+              <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+              <mat-option *ngFor="let item of listProvince" [value]="item.id">{{ item.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.PERMANENT_ADDRESS' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <input matInput maxlength="255" formControlName="permanentAddress" autocomplete="off" [disabled]="!isEdit" tabindex="210" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+          <label class="label">
+            {{ 'SCREEN.HR.EMPLOYEE.CONTACT.PERMANENT_PROVINCE' | translate }}
+          </label>
+          <mat-form-field class="form-control">
+            <mat-select formControlName="permanentProvinceId" [disabled]="!isEdit" tabindex="211">
+              <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+              <mat-option *ngFor="let item of listProvince" [value]="item.id">{{ item.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

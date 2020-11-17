@@ -60,7 +60,7 @@ namespace Database.Sql.ERP.Entities.HR
         [Column(TypeName = "int")]
         public int? TemporaryWardId { get; set; }
 
-        [Column(TypeName = "int")]  [Required]
+        [Column(TypeName = "int")]
         public int? TemporaryDistrictId { get; set; }
 
         [Column(TypeName = "int")]
@@ -71,7 +71,7 @@ namespace Database.Sql.ERP.Entities.HR
         public string PermanentAddress { get; set; }
 
         [Column(TypeName = "int")]
-        public int PermanentWardId { get; set; }
+        public int? PermanentWardId { get; set; }
 
         [Column(TypeName = "int")]
         public int? PermanentDistrictId { get; set; }

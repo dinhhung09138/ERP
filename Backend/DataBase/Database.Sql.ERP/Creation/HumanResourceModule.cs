@@ -1617,7 +1617,7 @@ namespace Database.Sql.ERP.Creation
                     Name = "VIEW",
                     ModuleName = "HR",
                     ControllerName = "EmployeeContact",
-                    ActionName = "ItemByEmployee",
+                    ActionName = "GetList",
                     Precedence = 1,
                     IsView = true,
                 },

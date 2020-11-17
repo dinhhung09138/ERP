@@ -55,7 +55,7 @@ namespace Service.HR.Models
         [MaxLength(250)]
         public string PermanentAddress { get; set; }
 
-        public int PermanentWardId { get; set; }
+        public int? PermanentWardId { get; set; }
 
         public string PermanentWardName { get; set; }
 

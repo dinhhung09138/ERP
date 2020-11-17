@@ -25,6 +25,7 @@ export class EmployeeService {
   relationshipFunctionCode = 'HR_EMPLOYEE_RELATIONSHIP';
   educationFunctionCode = 'HR_EMPLOYEE_EDUCATION';
   certificateFunctionCode = 'HR_EMPLOYEE_CERTIFICATE';
+  contactFunctionCode = 'HR_EMPLOYEE_CONTACT';
   url = {
     list: APIUrlConstants.hrApi + 'employee/get-list',
     dropdown: APIUrlConstants.hrApi + 'employee/dropdown',
@@ -64,6 +65,10 @@ export class EmployeeService {
 
     getCertificatePermission(): PermissionViewModel {
       return this.context.getPermissionByForm(this.moduleName, this.certificateFunctionCode);
+    }
+
+    getContactPermission(): PermissionViewModel {
+      return this.context.getPermissionByForm(this.moduleName, this.contactFunctionCode);
     }
 
     getList(paging: PagingModel, searchText: string): Observable<ResponseModel> {

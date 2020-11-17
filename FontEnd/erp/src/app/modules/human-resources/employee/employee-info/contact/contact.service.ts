@@ -42,6 +42,7 @@ export class EmployeeContactService {
   }
 
   getInfoByEmployeeId(employeeId: number): Observable<ResponseModel> {
+    console.log('call here');
     return this.http.get(this.url.itemByEmployeeId + '?employeeId=' + employeeId).pipe(
       map((response: ResponseModel) => {
         return response;

@@ -4,14 +4,16 @@ using Database.Sql.ERP;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    partial class ERPContextModelSnapshot : ModelSnapshot
+    [Migration("20201117000108_version-1_0_16")]
+    partial class version1_0_16
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1277,7 +1279,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int?>("PermanentProvinceId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PermanentWardId")
+                    b.Property<int>("PermanentWardId")
                         .HasColumnType("int");
 
                     b.Property<string>("Phone")
@@ -4714,7 +4716,7 @@ namespace Database.Sql.ERP.Migrations
                         {
                             Id = 1,
                             CreateBy = 1,
-                            CreateDate = new DateTime(2020, 11, 17, 7, 35, 4, 609, DateTimeKind.Local).AddTicks(5644),
+                            CreateDate = new DateTime(2020, 11, 17, 7, 1, 7, 269, DateTimeKind.Local).AddTicks(563),
                             Deleted = false,
                             Description = "Sys",
                             IsActive = true,

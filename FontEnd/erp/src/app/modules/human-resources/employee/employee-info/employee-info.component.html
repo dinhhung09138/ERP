@@ -253,8 +253,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" data-toggle="tab">
-                  Thông tin liên hệ
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#contact"
+                (click)="onSelectTab('contact')" data-toggle="tab">
+                  {{ 'SCREEN.HR.EMPLOYEE.CONTACT.TITLE' | translate }}
                 </a>
               </li>
               <li class="nav-item" *ngIf="educationPermission.allowView === true">
@@ -290,6 +291,9 @@
               </div>
               <div class="tab-pane" id="education" *ngIf="educationPermission.allowView === true">
                 <app-hr-employee-education [employee]="currentSelectedEmployee"></app-hr-employee-education>
+              </div>
+              <div class="tab-pane" id="contact" *ngIf="contactPermission.allowView === true">
+                <app-hr-employee-contact [employee]="currentSelectedEmployee"></app-hr-employee-contact>
               </div>
               <div class="tab-pane" id="certificate" *ngIf="certificatePermission.allowView === true">
                 <app-hr-employee-certificate [employee]="currentSelectedEmployee"></app-hr-employee-certificate>
