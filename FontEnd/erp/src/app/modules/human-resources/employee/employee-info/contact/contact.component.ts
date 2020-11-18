@@ -163,7 +163,7 @@ export class EmployeeContactComponent implements OnInit, OnChanges {
       this.form.get('linkedIn').setValue(data.linkedIn);
       this.form.get('twitter').setValue(data.twitter);
       this.form.get('github').setValue(data.github);
-      this.form.get('temporaryAddress').setValue(data.phone);
+      this.form.get('temporaryAddress').setValue(data.temporaryAddress);
       this.form.get('temporaryProvinceId').setValue(data.temporaryProvinceId || '');
       this.form.get('permanentAddress').setValue(data.permanentAddress);
       this.form.get('permanentProvinceId').setValue(data.permanentProvinceId || '');

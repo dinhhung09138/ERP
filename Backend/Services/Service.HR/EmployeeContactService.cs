@@ -152,7 +152,7 @@ namespace Service.HR
                 response.ResponseStatus = Core.CommonModel.Enums.ResponseStatus.Error;
                 response.Errors.Add(ex.Message);
             }
-            return response;
+            return await ItemByEmployeeId(model.EmployeeId);
         }
 
         public async Task<ResponseModel> Update(EmployeeContactModel model)
@@ -204,7 +204,7 @@ namespace Service.HR
             {
                 throw ex;
             }
-            return response;
+            return await ItemByEmployeeId(model.EmployeeId);
         }
 
         public async Task<ResponseModel> Delete(DeleteModel model)

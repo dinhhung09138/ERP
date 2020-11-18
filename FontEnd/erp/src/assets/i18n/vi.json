@@ -199,6 +199,21 @@
           "SCHOOL": "Trường",
           "YEAR": "Năm"
         },
+        "CONTACT": {
+          "TITLE": "Thông tin liên hệ",
+          "PHONE": "Điện thoại nhà riêng",
+          "MOBILE": "Số di động",
+          "EMAIL": "Email",
+          "ZALO": "Zalo",
+          "FACEBOOK": "Facebook",
+          "LINKED_IN": "LinkedIn",
+          "TWITTER": "Twitter",
+          "GITHUB": "Github",
+          "TEMPORARY_ADDRESS": "Địa chỉ tạm trú",
+          "TEMPORARY_PROVINCE": "Tỉnh/Thành phố",
+          "PERMANENT_ADDRESS": "Địa chỉ thường trú",
+          "PERMANENT_PROVINCE": "Tỉnh/Thành phố"
+        },
         "EDUCATION": {
           "TITLE": "Bằng cấp",
           "EDUCATION_TYPE": "Hình thức",

@@ -199,6 +199,21 @@
           "SCHOOL": "School",
           "YEAR": "Year"
         },
+        "CONTACT": {
+          "TITLE": "Contact",
+          "PHONE": "Phone",
+          "MOBILE": "Mobile",
+          "EMAIL": "Email",
+          "ZALO": "Zalo",
+          "FACEBOOK": "Facebook",
+          "LINKED_IN": "LinkedIn",
+          "TWITTER": "Twitter",
+          "GITHUB": "Github",
+          "TEMPORARY_ADDRESS": "Temporary Address",
+          "TEMPORARY_PROVINCE": "Province",
+          "PERMANENT_ADDRESS": "Permanent Address",
+          "PERMANENT_PROVINCE": "Province"
+        },
         "EDUCATION": {
           "TITLE": "Education",
           "EDUCATION_TYPE": "Type",
