@@ -20,10 +20,10 @@ namespace API.Common.Controllers
             _provinceService = provinceService;
         }
 
-        [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
+        [HttpPost, Route("list")]
+        public async Task<ResponseModel> List([FromBody] FilterModel filter)
         {
-            var response = await _provinceService.GetList(filter);
+            var response = await _provinceService.List(filter);
             return response;
         }
 

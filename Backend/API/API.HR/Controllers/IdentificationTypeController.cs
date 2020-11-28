@@ -20,10 +20,10 @@ namespace API.HR.Controllers
             _identificationTypeService = identificationTypeService;
         }
 
-        [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
+        [HttpPost, Route("list")]
+        public async Task<ResponseModel> List([FromBody] FilterModel filter)
         {
-            var response = await _identificationTypeService.GetList(filter);
+            var response = await _identificationTypeService.List(filter);
             return response;
         }
 

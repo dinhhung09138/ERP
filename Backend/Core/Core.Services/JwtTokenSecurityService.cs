@@ -64,7 +64,7 @@ namespace Core.Services
                 // TODO
                 // Save to database;
 
-                var listCache = _memoryCachingService.GetList<JwtTokenModel>(CacheKey);
+                var listCache = _memoryCachingService.List<JwtTokenModel>(CacheKey);
 
                 if (listCache == null)
                 {
@@ -108,7 +108,7 @@ namespace Core.Services
         {
             try
             {
-                var listCache = _memoryCachingService.GetList<JwtTokenModel>(CacheKey);
+                var listCache = _memoryCachingService.List<JwtTokenModel>(CacheKey);
                 if (listCache != null)
                 {
                     listCache = listCache.Where(m => m.UserInfo.Id == token.UserId).ToList();

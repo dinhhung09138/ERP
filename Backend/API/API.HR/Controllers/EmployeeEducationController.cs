@@ -25,10 +25,10 @@ namespace API.HR.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
+        [HttpPost, Route("list")]
+        public async Task<ResponseModel> List([FromBody] FilterModel filter)
         {
-            var response = await _emplEducationService.GetList(filter);
+            var response = await _emplEducationService.List(filter);
             return response;
         }
 

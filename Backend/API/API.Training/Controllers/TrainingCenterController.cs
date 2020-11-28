@@ -17,10 +17,10 @@ namespace API.Training.Controllers
             _trainingCenterService = trainingCenterService;
         }
 
-        [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
+        [HttpPost, Route("list")]
+        public async Task<ResponseModel> List([FromBody] FilterModel filter)
         {
-            var response = await _trainingCenterService.GetList(filter);
+            var response = await _trainingCenterService.List(filter);
             return response;
         }
 

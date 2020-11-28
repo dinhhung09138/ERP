@@ -117,7 +117,7 @@ namespace Database.Sql.ERP.Creation
                     Name = "VIEW",
                     ModuleName = "System",
                     ControllerName = "Role",
-                    ActionName = "GetList",
+                    ActionName = "List",
                     Precedence = 1,
                     IsView = true,
                 },

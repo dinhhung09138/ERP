@@ -29,7 +29,7 @@ namespace Service.HR
             base._httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> List(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
             try

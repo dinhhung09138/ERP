@@ -340,7 +340,7 @@ namespace Database.Sql.ERP
                     Name = "VIEW",
                     ModuleName = "System",
                     ControllerName = "User",
-                    ActionName = "GetList",
+                    ActionName = "List",
                     Precedence = 1,
                     IsView = true,
                 },

@@ -19,10 +19,10 @@ namespace API.HR.Controllers
             _bankService = bankService;
         }
 
-        [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
+        [HttpPost, Route("list")]
+        public async Task<ResponseModel> List([FromBody] FilterModel filter)
         {
-            var response = await _bankService.GetList(filter);
+            var response = await _bankService.List(filter);
             return response;
         }
 

@@ -20,10 +20,10 @@ namespace API.Common.Controllers
             _districtService = districtService;
         }
 
-        [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
+        [HttpPost, Route("list")]
+        public async Task<ResponseModel> List([FromBody] FilterModel filter)
         {
-            var response = await _districtService.GetList(filter);
+            var response = await _districtService.List(filter);
             return response;
         }
 

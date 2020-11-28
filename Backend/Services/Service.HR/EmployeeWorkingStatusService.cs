@@ -36,7 +36,7 @@ namespace Service.HR
             base._httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> List(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
             try
@@ -80,7 +80,7 @@ namespace Service.HR
             ResponseModel response = new ResponseModel();
             try
             {
-                var cacheData = _memoryCachingService.GetList<EmployeeWorkingStatusModel>(CacheKey);
+                var cacheData = _memoryCachingService.List<EmployeeWorkingStatusModel>(CacheKey);
 
                 if (cacheData != null)
                 {

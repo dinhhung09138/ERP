@@ -40,7 +40,7 @@ namespace Service.System
             ResponseModel response = new ResponseModel();
             try
             {
-                var cacheData = _memoryCachingService.GetList<ModuleModel>(CacheKey);
+                var cacheData = _memoryCachingService.List<ModuleModel>(CacheKey);
 
                 if (cacheData != null)
                 {

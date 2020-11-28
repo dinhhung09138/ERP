@@ -72,7 +72,7 @@ namespace API.HR.Filters
             {
                 case "Item":
                 case "ItemByEmployee":
-                    return "GetList";
+                    return "List";
                 default:
                     return action;
             }

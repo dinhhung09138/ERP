@@ -17,10 +17,10 @@ namespace API.Training.Controllers
             _appraiseSectionService = appraiseSectionService;
         }
 
-        [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
+        [HttpPost, Route("list")]
+        public async Task<ResponseModel> List([FromBody] FilterModel filter)
         {
-            var response = await _appraiseSectionService.GetList(filter);
+            var response = await _appraiseSectionService.List(filter);
             return response;
         }
 

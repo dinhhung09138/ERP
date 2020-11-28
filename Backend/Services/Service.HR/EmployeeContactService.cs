@@ -24,7 +24,7 @@ namespace Service.HR
             base._httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> List(FilterModel filter)
         {
             await Task.Delay(0);
             throw new NotImplementedException();

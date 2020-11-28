@@ -44,7 +44,7 @@ namespace Service.Common
         }
 
 
-        public Task<ResponseModel> GetList(FilterModel filter)
+        public Task<ResponseModel> List(FilterModel filter)
         {
             throw new NotImplementedException();
         }

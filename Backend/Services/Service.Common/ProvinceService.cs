@@ -34,7 +34,7 @@ namespace Service.Common
             base._httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> List(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();
             try
@@ -76,7 +76,7 @@ namespace Service.Common
             ResponseModel response = new ResponseModel();
             try
             {
-                var cacheData = _memoryCachingService.GetList<ProvinceModel>(CacheKey);
+                var cacheData = _memoryCachingService.List<ProvinceModel>(CacheKey);
 
                 if (cacheData != null)
                 {

@@ -19,10 +19,10 @@ namespace API.HR.Controllers
             _positionService = positionService;
         }
 
-        [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        [HttpPost, Route("list")]
+        public async Task<ResponseModel> List(FilterModel filter)
         {
-            var response = await _positionService.GetList(filter);
+            var response = await _positionService.List(filter);
             return response;
         }
 

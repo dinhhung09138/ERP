@@ -20,10 +20,10 @@ namespace API.HR.Controllers
             _employeeService = employeeService;
         }
 
-        [HttpPost, Route("get-list")]
-        public async Task<ResponseModel> GetList([FromBody] FilterModel filter)
+        [HttpPost, Route("list")]
+        public async Task<ResponseModel> List([FromBody] FilterModel filter)
         {
-            var response = await _employeeService.GetList(filter);
+            var response = await _employeeService.List(filter);
             return response;
         }
 

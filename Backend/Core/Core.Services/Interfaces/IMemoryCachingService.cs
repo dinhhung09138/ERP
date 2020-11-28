@@ -100,7 +100,7 @@ namespace Core.Services.Interfaces
         /// <typeparam name="T">Object type</typeparam>
         /// <param name="key">key</param>
         /// <returns>List<T></returns>
-        List<T> GetList<T>(string key);
+        List<T> List<T>(string key);
 
         /// <summary>
         /// Remove cache by key

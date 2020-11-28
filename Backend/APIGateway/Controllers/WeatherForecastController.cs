@@ -51,7 +51,7 @@ namespace APIGateway.Controllers
 
             }
 
-            var list = _cachingService.GetList<WeatherForecast>("data");
+            var list = _cachingService.List<WeatherForecast>("data");
 
             if (list == null)
             {
@@ -95,7 +95,7 @@ namespace APIGateway.Controllers
 
             }
 
-            var list = _cachingService.GetList<WeatherForecast>("data");
+            var list = _cachingService.List<WeatherForecast>("data");
 
             if (list == null)
             {
@@ -138,7 +138,7 @@ namespace APIGateway.Controllers
 
             }
 
-            var list = _cachingService.GetList<WeatherForecast>("data");
+            var list = _cachingService.List<WeatherForecast>("data");
 
             if (list == null)
             {

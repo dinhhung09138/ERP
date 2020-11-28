@@ -214,7 +214,7 @@ namespace Core.Services
             return _cache.Get<T>(key);
         }
 
-        public List<T> GetList<T>(string key)
+        public List<T> List<T>(string key)
         {
             return _cache.Get<List<T>>(key);
         }
