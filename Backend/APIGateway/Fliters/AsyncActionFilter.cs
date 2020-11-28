@@ -16,6 +16,7 @@ namespace APIGateway.Fliters
         public async Task OnExceptionAsync(ExceptionContext context)
         {
             // TODO
+            await Task.Delay(0);
         }
     }
 }
