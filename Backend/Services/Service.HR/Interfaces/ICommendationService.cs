@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface ICommendationService : IBaseInterfaceService<CommendationModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

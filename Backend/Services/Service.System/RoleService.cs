@@ -65,7 +65,7 @@ namespace Service.System
             return response;
         }
 
-        public async Task<ResponseModel> DropDownSelection()
+        public async Task<ResponseModel> DropDownData()
         {
             ResponseModel response = new ResponseModel();
             try

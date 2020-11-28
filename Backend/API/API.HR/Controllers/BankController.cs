@@ -30,7 +30,7 @@ namespace API.HR.Controllers
         [AllowAnonymous]
         public async Task<ResponseModel> Dropdown()
         {
-            var response = await _bankService.DropDownSelection();
+            var response = await _bankService.DropDownData();
             return response;
         }
 

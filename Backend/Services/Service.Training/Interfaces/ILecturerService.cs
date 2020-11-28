@@ -7,6 +7,6 @@ namespace Service.Training.Interfaces
 {
     public interface ILecturerService : IBaseInterfaceService<LecturerModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

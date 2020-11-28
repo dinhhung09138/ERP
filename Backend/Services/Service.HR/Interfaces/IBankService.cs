@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IBankService : IBaseInterfaceService<BankModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

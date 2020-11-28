@@ -7,6 +7,6 @@ namespace Service.Common.Interfaces
 {
     public interface IProvinceService : IBaseInterfaceService<ProvinceModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

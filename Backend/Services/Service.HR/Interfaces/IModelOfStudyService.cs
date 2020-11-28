@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IModelOfStudyService : IBaseInterfaceService<ModelOfStudyModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

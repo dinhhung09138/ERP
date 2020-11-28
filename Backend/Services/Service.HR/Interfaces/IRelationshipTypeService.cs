@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IRelationshipTypeService : IBaseInterfaceService<RelationshipTypeModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

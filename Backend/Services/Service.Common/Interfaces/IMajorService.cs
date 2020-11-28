@@ -7,6 +7,6 @@ namespace Service.Common.Interfaces
 {
     public interface IMajorService : IBaseInterfaceService<MajorModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

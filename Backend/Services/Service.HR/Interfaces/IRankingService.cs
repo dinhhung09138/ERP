@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IRankingService : IBaseInterfaceService<RankingModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

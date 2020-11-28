@@ -7,6 +7,6 @@ namespace Service.Common.Interfaces
 {
     public interface ISchoolService : IBaseInterfaceService<SchoolModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

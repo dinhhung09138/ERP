@@ -10,6 +10,6 @@ namespace Service.System.Interfaces
 {
     public interface IRoleService : IBaseInterfaceService<RoleModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IIdentificationTypeService : IBaseInterfaceService<IdentificationTypeModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

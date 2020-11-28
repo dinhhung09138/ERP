@@ -7,6 +7,6 @@ namespace Service.Common.Interfaces
 {
     public interface IDistrictService : IBaseInterfaceService<DistrictModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

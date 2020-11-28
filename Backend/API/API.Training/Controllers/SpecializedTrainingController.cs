@@ -27,7 +27,7 @@ namespace API.Training.Controllers
         [HttpGet, Route("dropdown")]
         public async Task<ResponseModel> Dropdown()
         {
-            var response = await _specializedTrainingService.DropDownSelection();
+            var response = await _specializedTrainingService.DropDownData();
             return response;
         }
 

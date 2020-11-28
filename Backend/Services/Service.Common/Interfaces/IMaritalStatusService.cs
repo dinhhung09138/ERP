@@ -7,6 +7,6 @@ namespace Service.Common.Interfaces
 {
     public interface IMaritalStatusService : IBaseInterfaceService<MaritalStatusModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IReligionService : IBaseInterfaceService<ReligionModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

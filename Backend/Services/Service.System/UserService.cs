@@ -83,7 +83,7 @@ namespace Service.System
             return response;
         }
 
-        public Task<ResponseModel> DropDownSelection()
+        public Task<ResponseModel> DropDownData()
         {
             throw new NotImplementedException();
         }

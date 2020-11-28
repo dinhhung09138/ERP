@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IPositionService : IBaseInterfaceService<PositionModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

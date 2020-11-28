@@ -7,6 +7,6 @@ namespace Service.Common.Interfaces
 {
     public interface IProfessionalQualificationService : IBaseInterfaceService<ProfessionalQualificationModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

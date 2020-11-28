@@ -7,6 +7,6 @@ namespace Service.Common.Interfaces
 {
     public interface ICertificatedService : IBaseInterfaceService<CertificatedModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

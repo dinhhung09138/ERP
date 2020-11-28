@@ -31,7 +31,7 @@ namespace API.Common.Controllers
         [AllowAnonymous]
         public async Task<ResponseModel> Dropdown()
         {
-            var response = await _districtService.DropDownSelection();
+            var response = await _districtService.DropDownData();
             return response;
         }
 

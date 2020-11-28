@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IEmployeeWorkingStatusService : IBaseInterfaceService<EmployeeWorkingStatusModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

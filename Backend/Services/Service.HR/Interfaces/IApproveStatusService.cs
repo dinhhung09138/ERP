@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IApproveStatusService : IBaseInterfaceService<ApproveStatusModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

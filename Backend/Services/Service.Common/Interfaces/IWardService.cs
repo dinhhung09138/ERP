@@ -7,6 +7,6 @@ namespace Service.Common.Interfaces
 {
     public interface IWardService : IBaseInterfaceService<WardModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

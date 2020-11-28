@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IEthnicityService : IBaseInterfaceService<EthnicityModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }

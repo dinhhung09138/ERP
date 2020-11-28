@@ -7,6 +7,6 @@ namespace Service.HR.Interfaces
 {
     public interface IContractTypeService : IBaseInterfaceService<ContractTypeModel>
     {
-        Task<ResponseModel> DropDownSelection();
+        Task<ResponseModel> DropDownData();
     }
 }
