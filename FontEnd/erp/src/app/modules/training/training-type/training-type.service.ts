@@ -11,7 +11,7 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 export class TrainingTypeService {
 
   url = {
-    list: APIUrlConstants.hrApi + 'training-type/get-list',
+    list: APIUrlConstants.hrApi + 'training-type/list',
     dropdown: APIUrlConstants.hrApi + 'training-type/dropdown',
     item: APIUrlConstants.hrApi + 'training-type/item',
     save: APIUrlConstants.hrApi + 'training-type/save',

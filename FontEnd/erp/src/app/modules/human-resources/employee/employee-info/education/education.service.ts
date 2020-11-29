@@ -21,7 +21,7 @@ export class EmployeeEducationService {
   moduleName = 'HR';
   functionCode = 'HR_EMPLOYEE_EDUCATION';
   url = {
-    list: APIUrlConstants.hrApi + 'employee-education/get-list',
+    list: APIUrlConstants.hrApi + 'employee-education/list',
     item: APIUrlConstants.hrApi + 'employee-education/item',
     insert: APIUrlConstants.hrApi + 'employee-education/insert',
     update: APIUrlConstants.hrApi + 'employee-education/update',

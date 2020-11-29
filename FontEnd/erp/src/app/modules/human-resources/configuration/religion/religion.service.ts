@@ -22,7 +22,7 @@ export class ReligionService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_RELIGION';
   url = {
-    list: APIUrlConstants.hrApi + 'religion/get-list',
+    list: APIUrlConstants.hrApi + 'religion/list',
     dropdown: APIUrlConstants.hrApi + 'religion/dropdown',
     item: APIUrlConstants.hrApi + 'religion/item',
     insert: APIUrlConstants.hrApi + 'religion/insert',

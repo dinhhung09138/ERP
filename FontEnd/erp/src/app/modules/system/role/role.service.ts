@@ -28,7 +28,7 @@ export class RoleService {
   moduleName = 'SYSTEM';
   functionCode = 'SYS_ROLE';
   url = {
-      list: APIUrlConstants.systemApi + 'role/get-list',
+      list: APIUrlConstants.systemApi + 'role/list',
       dropdown: APIUrlConstants.systemApi + 'role/dropdown',
       item: APIUrlConstants.systemApi + 'role/item',
       insert: APIUrlConstants.systemApi + 'role/insert',

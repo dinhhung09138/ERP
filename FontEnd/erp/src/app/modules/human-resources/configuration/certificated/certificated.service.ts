@@ -22,7 +22,7 @@ export class CertificatedService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_CERTIFICATED';
   url = {
-    list: APIUrlConstants.commonApi + 'certificated/get-list',
+    list: APIUrlConstants.commonApi + 'certificated/list',
     dropdown: APIUrlConstants.commonApi + 'certificated/dropdown',
     item: APIUrlConstants.commonApi + 'certificated/item',
     insert: APIUrlConstants.commonApi + 'certificated/insert',

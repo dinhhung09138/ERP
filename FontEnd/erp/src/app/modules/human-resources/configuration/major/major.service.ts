@@ -22,7 +22,7 @@ export class MajorService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_MAJOR';
   url = {
-    list: APIUrlConstants.commonApi + 'major/get-list',
+    list: APIUrlConstants.commonApi + 'major/list',
     dropdown: APIUrlConstants.commonApi + 'major/dropdown',
     item: APIUrlConstants.commonApi + 'major/item',
     insert: APIUrlConstants.commonApi + 'major/insert',

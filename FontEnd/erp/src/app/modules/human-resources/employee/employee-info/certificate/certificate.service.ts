@@ -21,7 +21,7 @@ export class EmployeeCertificateService {
   moduleName = 'HR';
   functionCode = 'HR_EMPLOYEE_CERTIFICATE';
   url = {
-    list: APIUrlConstants.hrApi + 'employee-certificate/get-list',
+    list: APIUrlConstants.hrApi + 'employee-certificate/list',
     item: APIUrlConstants.hrApi + 'employee-certificate/item',
     insert: APIUrlConstants.hrApi + 'employee-certificate/insert',
     update: APIUrlConstants.hrApi + 'employee-certificate/update',

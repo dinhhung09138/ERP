@@ -21,7 +21,7 @@ export class ModelOfStudyService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_MODEL_OF_STUDY';
   url = {
-    list: APIUrlConstants.hrApi + 'model-of-study/get-list',
+    list: APIUrlConstants.hrApi + 'model-of-study/list',
     dropdown: APIUrlConstants.hrApi + 'model-of-study/dropdown',
     item: APIUrlConstants.hrApi + 'model-of-study/item',
     insert: APIUrlConstants.hrApi + 'model-of-study/insert',

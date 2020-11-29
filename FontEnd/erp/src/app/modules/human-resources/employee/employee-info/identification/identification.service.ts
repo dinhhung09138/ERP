@@ -21,7 +21,7 @@ export class EmployeeIdentificationService {
   moduleName = 'HR';
   functionCode = 'HR_EMPLOYEE_IDENTIFICATION';
   url = {
-    list: APIUrlConstants.hrApi + 'employee-identification/get-list',
+    list: APIUrlConstants.hrApi + 'employee-identification/list',
     item: APIUrlConstants.hrApi + 'employee-identification/item',
     insert: APIUrlConstants.hrApi + 'employee-identification/insert',
     update: APIUrlConstants.hrApi + 'employee-identification/update',

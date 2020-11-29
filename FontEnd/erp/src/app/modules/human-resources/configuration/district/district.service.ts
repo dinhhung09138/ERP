@@ -26,7 +26,7 @@ export class DistrictService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_DISTRICT';
   url = {
-    list: APIUrlConstants.commonApi + 'district/get-list',
+    list: APIUrlConstants.commonApi + 'district/list',
     dropdown: APIUrlConstants.commonApi + 'district/dropdown',
     item: APIUrlConstants.commonApi + 'district/item',
     insert: APIUrlConstants.commonApi + 'district/insert',

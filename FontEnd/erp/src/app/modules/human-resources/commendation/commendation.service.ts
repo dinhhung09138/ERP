@@ -22,7 +22,7 @@ export class CommendationService {
   moduleName = 'HR';
   functionCode = 'HR_COMMENDATION';
   url = {
-    list: APIUrlConstants.hrApi + 'commendation/get-list',
+    list: APIUrlConstants.hrApi + 'commendation/list',
     dropdown: APIUrlConstants.hrApi + 'commendation/dropdown',
     item: APIUrlConstants.hrApi + 'commendation/item',
     insert: APIUrlConstants.hrApi + 'commendation/insert',

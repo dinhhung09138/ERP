@@ -21,7 +21,7 @@ export class WardService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_WARD';
   url = {
-    list: APIUrlConstants.commonApi + 'ward/get-list',
+    list: APIUrlConstants.commonApi + 'ward/list',
     dropdown: APIUrlConstants.commonApi + 'ward/dropdown',
     item: APIUrlConstants.commonApi + 'ward/item',
     insert: APIUrlConstants.commonApi + 'ward/insert',

@@ -21,7 +21,7 @@ export class AccountService {
   moduleName = 'SYSTEM';
   functionCode = 'SYS_ACCOUNT';
   url = {
-    list: APIUrlConstants.systemApi + 'user/get-list',
+    list: APIUrlConstants.systemApi + 'user/list',
     insert: APIUrlConstants.systemApi + 'user/insert',
   };
 

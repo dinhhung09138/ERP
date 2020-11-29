@@ -22,7 +22,7 @@ export class EducationService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_EDUCATION';
   url = {
-    list: APIUrlConstants.hrApi + 'education/get-list',
+    list: APIUrlConstants.hrApi + 'education/list',
     dropdown: APIUrlConstants.hrApi + 'education/dropdown',
     item: APIUrlConstants.hrApi + 'education/item',
     insert: APIUrlConstants.hrApi + 'education/insert',

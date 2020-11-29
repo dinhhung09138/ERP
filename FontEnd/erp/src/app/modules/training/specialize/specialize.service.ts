@@ -11,7 +11,7 @@ import { FilterModel } from 'src/app/core/models/filter-table.model';
 export class SpecializeService {
 
   url = {
-    list: APIUrlConstants.hrApi + 'specialize/get-list',
+    list: APIUrlConstants.hrApi + 'specialize/list',
     dropdown: APIUrlConstants.hrApi + 'specialize/dropdown',
     item: APIUrlConstants.hrApi + 'specialize/item',
     save: APIUrlConstants.hrApi + 'specialize/save',

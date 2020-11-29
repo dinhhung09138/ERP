@@ -22,7 +22,7 @@ export class ProvinceService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_PROVINCE';
   url = {
-    list: APIUrlConstants.commonApi + 'province/get-list',
+    list: APIUrlConstants.commonApi + 'province/list',
     dropdown: APIUrlConstants.commonApi + 'province/dropdown',
     item: APIUrlConstants.commonApi + 'province/item',
     insert: APIUrlConstants.commonApi + 'province/insert',

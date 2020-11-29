@@ -21,7 +21,7 @@ export class RelationshipTypeService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_RELATIONSHIP';
   url = {
-    list: APIUrlConstants.hrApi + 'relationship-type/get-list',
+    list: APIUrlConstants.hrApi + 'relationship-type/list',
     dropdown: APIUrlConstants.hrApi + 'relationship-type/dropdown',
     item: APIUrlConstants.hrApi + 'relationship-type/item',
     insert: APIUrlConstants.hrApi + 'relationship-type/insert',

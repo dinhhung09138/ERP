@@ -21,7 +21,7 @@ export class PositionService {
   moduleName = 'HR';
   functionCode = 'HR_POSITION';
   url = {
-    list: APIUrlConstants.hrApi + 'position/get-list',
+    list: APIUrlConstants.hrApi + 'position/list',
     dropdown: APIUrlConstants.hrApi + 'position/dropdown',
     item: APIUrlConstants.hrApi + 'position/item',
     insert: APIUrlConstants.hrApi + 'position/insert',

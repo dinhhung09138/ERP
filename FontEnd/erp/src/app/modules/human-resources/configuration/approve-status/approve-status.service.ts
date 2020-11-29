@@ -21,7 +21,7 @@ export class ApproveStatusService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_APPROVE_ST';
   url = {
-    list: APIUrlConstants.hrApi + 'approve-status/get-list',
+    list: APIUrlConstants.hrApi + 'approve-status/list',
     item: APIUrlConstants.hrApi + 'approve-status/item',
     insert: APIUrlConstants.hrApi + 'approve-status/insert',
     update: APIUrlConstants.hrApi + 'approve-status/update',

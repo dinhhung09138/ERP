@@ -21,7 +21,7 @@ export class DisciplineService {
   moduleName = 'HR';
   functionCode = 'HR_DISCIPLINE';
   url = {
-    list: APIUrlConstants.hrApi + 'discipline/get-list',
+    list: APIUrlConstants.hrApi + 'discipline/list',
     dropdown: APIUrlConstants.hrApi + 'discipline/dropdown',
     item: APIUrlConstants.hrApi + 'discipline/item',
     insert: APIUrlConstants.hrApi + 'discipline/insert',

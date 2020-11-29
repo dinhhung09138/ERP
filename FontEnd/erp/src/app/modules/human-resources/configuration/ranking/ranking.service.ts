@@ -21,7 +21,7 @@ export class RankingService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_RANKING';
   url = {
-    list: APIUrlConstants.hrApi + 'ranking/get-list',
+    list: APIUrlConstants.hrApi + 'ranking/list',
     dropdown: APIUrlConstants.hrApi + 'ranking/dropdown',
     item: APIUrlConstants.hrApi + 'ranking/item',
     insert: APIUrlConstants.hrApi + 'ranking/insert',

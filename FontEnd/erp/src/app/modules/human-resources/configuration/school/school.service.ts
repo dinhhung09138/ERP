@@ -22,7 +22,7 @@ export class SchoolService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_SCHOOL';
   url = {
-    list: APIUrlConstants.commonApi + 'school/get-list',
+    list: APIUrlConstants.commonApi + 'school/list',
     dropdown: APIUrlConstants.commonApi + 'school/dropdown',
     item: APIUrlConstants.commonApi + 'school/item',
     insert: APIUrlConstants.commonApi + 'school/insert',

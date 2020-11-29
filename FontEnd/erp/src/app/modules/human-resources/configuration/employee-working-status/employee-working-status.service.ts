@@ -21,7 +21,7 @@ export class EmployeeWorkingStatusService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_WORKING';
   url = {
-    list: APIUrlConstants.hrApi + 'employee-working-status/get-list',
+    list: APIUrlConstants.hrApi + 'employee-working-status/list',
     dropdown: APIUrlConstants.hrApi + 'employee-working-status/dropdown',
     item: APIUrlConstants.hrApi + 'employee-working-status/item',
     insert: APIUrlConstants.hrApi + 'employee-working-status/insert',

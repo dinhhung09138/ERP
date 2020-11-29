@@ -21,7 +21,7 @@ export class IdentificationTypeService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_IDENTIFICATION';
   url = {
-    list: APIUrlConstants.hrApi + 'identification-type/get-list',
+    list: APIUrlConstants.hrApi + 'identification-type/list',
     dropdown: APIUrlConstants.hrApi + 'identification-type/dropdown',
     item: APIUrlConstants.hrApi + 'identification-type/item',
     insert: APIUrlConstants.hrApi + 'identification-type/insert',

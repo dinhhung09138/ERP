@@ -21,7 +21,7 @@ export class EmployeeRelationShipService {
   moduleName = 'HR';
   functionCode = 'HR_EMPLOYEE_RELATIONSHIP';
   url = {
-    list: APIUrlConstants.hrApi + 'employee-relationship/get-list',
+    list: APIUrlConstants.hrApi + 'employee-relationship/list',
     item: APIUrlConstants.hrApi + 'employee-relationship/item',
     insert: APIUrlConstants.hrApi + 'employee-relationship/insert',
     update: APIUrlConstants.hrApi + 'employee-relationship/update',

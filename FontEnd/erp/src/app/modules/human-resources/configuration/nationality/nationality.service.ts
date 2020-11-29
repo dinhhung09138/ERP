@@ -22,7 +22,7 @@ export class NationalityService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_NATIONALITY';
   url = {
-    list: APIUrlConstants.hrApi + 'nationality/get-list',
+    list: APIUrlConstants.hrApi + 'nationality/list',
     dropdown: APIUrlConstants.hrApi + 'nationality/dropdown',
     item: APIUrlConstants.hrApi + 'nationality/item',
     insert: APIUrlConstants.hrApi + 'nationality/insert',

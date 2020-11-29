@@ -22,7 +22,7 @@ export class EthnicityService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_ETHNICITY';
   url = {
-    list: APIUrlConstants.hrApi + 'ethnicity/get-list',
+    list: APIUrlConstants.hrApi + 'ethnicity/list',
     dropdown: APIUrlConstants.hrApi + 'ethnicity/dropdown',
     item: APIUrlConstants.hrApi + 'ethnicity/item',
     insert: APIUrlConstants.hrApi + 'ethnicity/insert',

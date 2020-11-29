@@ -21,7 +21,7 @@ export class ContractTypeService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_CONTRACT';
   url = {
-    list: APIUrlConstants.hrApi + 'contract-type/get-list',
+    list: APIUrlConstants.hrApi + 'contract-type/list',
     dropdown: APIUrlConstants.hrApi + 'contract-type/dropdown',
     item: APIUrlConstants.hrApi + 'contract-type/item',
     insert: APIUrlConstants.hrApi + 'contract-type/insert',

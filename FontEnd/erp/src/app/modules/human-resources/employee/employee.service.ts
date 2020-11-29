@@ -27,7 +27,7 @@ export class EmployeeService {
   certificateFunctionCode = 'HR_EMPLOYEE_CERTIFICATE';
   contactFunctionCode = 'HR_EMPLOYEE_CONTACT';
   url = {
-    list: APIUrlConstants.hrApi + 'employee/get-list',
+    list: APIUrlConstants.hrApi + 'employee/list',
     dropdown: APIUrlConstants.hrApi + 'employee/dropdown',
     dontHaveAccount: APIUrlConstants.hrApi + 'employee/dont-have-account',
     item: APIUrlConstants.hrApi + 'employee/item',

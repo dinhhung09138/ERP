@@ -22,7 +22,7 @@ export class MaritalStatusService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_MARITAL';
   url = {
-    list: APIUrlConstants.commonApi + 'marital-status/get-list',
+    list: APIUrlConstants.commonApi + 'marital-status/list',
     dropdown: APIUrlConstants.commonApi + 'marital-status/dropdown',
     item: APIUrlConstants.commonApi + 'marital-status/item',
     insert: APIUrlConstants.commonApi + 'marital-status/insert',

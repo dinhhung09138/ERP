@@ -21,7 +21,7 @@ export class BankService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_BANK';
   url = {
-    list: APIUrlConstants.hrApi + 'bank/get-list',
+    list: APIUrlConstants.hrApi + 'bank/list',
     item: APIUrlConstants.hrApi + 'bank/item',
     insert: APIUrlConstants.hrApi + 'bank/insert',
     update: APIUrlConstants.hrApi + 'bank/update',

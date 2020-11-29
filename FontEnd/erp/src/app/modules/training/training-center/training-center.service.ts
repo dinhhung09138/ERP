@@ -10,7 +10,7 @@ import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
 @Injectable()
 export class TrainingCenterService {
   url = {
-    list: APIUrlConstants.hrApi + 'training-center/get-list',
+    list: APIUrlConstants.hrApi + 'training-center/list',
     dropdown: APIUrlConstants.hrApi + 'training-center/dropdown',
     item: APIUrlConstants.hrApi + 'training-center/item',
     save: APIUrlConstants.hrApi + 'training-center/save',

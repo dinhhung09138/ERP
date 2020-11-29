@@ -22,7 +22,7 @@ export class ProfessionalQualificationService {
   moduleName = 'HR';
   functionCode = 'HR_CONF_QUALIFICATION';
   url = {
-    list: APIUrlConstants.commonApi + 'professional-qualification/get-list',
+    list: APIUrlConstants.commonApi + 'professional-qualification/list',
     dropdown: APIUrlConstants.commonApi + 'professional-qualification/dropdown',
     item: APIUrlConstants.commonApi + 'professional-qualification/item',
     insert: APIUrlConstants.commonApi + 'professional-qualification/insert',
