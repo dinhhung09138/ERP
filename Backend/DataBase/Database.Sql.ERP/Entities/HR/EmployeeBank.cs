@@ -23,17 +23,17 @@ namespace Database.Sql.ERP.Entities.HR
         [Column(TypeName = "nvarchar(100)")]
         [MaxLength(100)]
         [Required]
-        public int BankAddress { get; set; }
+        public string BankAddress { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         [MaxLength(100)]
         [Required]
-        public int AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         [MaxLength(100)]
         [Required]
-        public int AccountOwner { get; set; }
+        public string AccountOwner { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]
