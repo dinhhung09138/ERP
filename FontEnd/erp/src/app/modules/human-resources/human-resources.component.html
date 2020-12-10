@@ -46,100 +46,17 @@
                   <p> Add Leave </p>
                 </a>
               </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/hr/leave/add-leave">
+                  <p> Leave Type </p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a routerLink="/hr/holiday" class="nav-link">
               <p> Holiday Management</p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a (click)="openSideMenu('configuration')" class="nav-link"
-              [ngClass]="{'menu-open': linkSelected === 'configuration'}">
-              <p>{{ 'SCREEN.HR.CONFIGURATION.TITLE' | translate }} <i class="fa fa-angle-left right"></i></p>
-            </a>
-            <ul class="nav" [ngStyle]="{'display': linkSelected === 'configuration' ? 'block' : 'none'}">
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/province">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.PROVINCE.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/district">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.DISTRICT.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/ward">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.WARD.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/education">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.EDUCATION.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/model-of-study">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.MODEL_OF_STUDY.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/identification">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.IDENTIFICATION.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/qualification">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.QUALIFICATION.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/ranking">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.RANKING.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/contract-type">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.CONTRACT_TYPE.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/employee-status">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.WORKING_STATUS.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/relationship-type">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.RELATIONSHIP_TYPE.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/religion">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.RELIGION.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/ethnicity">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.ETHNICITY.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/nationality">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.NATIONALITY.TITLE' | translate }} </p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/job-title">
-                  <p> Job title</p>
-                </a>
-              </li>
-              <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/hr/configuration/approve-status">
-                  <p> {{ 'SCREEN.HR.CONFIGURATION.APPROVE_STATUS.TITLE' | translate }} </p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a (click)="openSideMenu('contact')" class="nav-link" [ngClass]="{'menu-open': linkSelected === 'contact'}">
@@ -175,12 +92,3 @@
     <app-footer></app-footer>
   </div>
 </div>
-<ng-template #subMenu let-code="code" let-name="name">
-  <a (click)="openSideMenu(code)" class="nav-link" [ngClass]="{'menu-open': linkSelected === code}">
-    <p> {{ 'SCREEN.' + moduleCode + '.' + name + '.TITLE' | translate }} <i class="fa fa-angle-left right"></i></p>
-    <ul class="nav" [ngStyle]="{'display': linkSelected === code ? 'block' : 'none' }">
-
-    </ul>
-
-  </a>
-</ng-template>
