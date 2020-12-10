@@ -50,6 +50,10 @@ import { EmployeeCertificateService } from './certificate/certificate.service';
 import { CertificatedService } from '../../configuration/certificated/certificated.service';
 import { MaritalStatusService } from '../../configuration/marital-status/marital-status.service';
 import { EmployeeContactService } from './contact/contact.service';
+import { EmployeeBankComponent } from './bank/bank.component';
+import { EmployeeBankFormComponent } from './bank/form/form.component';
+import { BankService } from '../../configuration/bank/bank.service';
+import { EmployeeBankService } from './bank/bank.service';
 
 const routes: Routes = [
   {
@@ -73,6 +77,8 @@ const routes: Routes = [
     EmployeeContactComponent,
     EmployeeCertificateComponent,
     EmployeeCertificateFormComponent,
+    EmployeeBankComponent,
+    EmployeeBankFormComponent,
   ],
   imports: [
     SharedModule,
@@ -112,6 +118,8 @@ const routes: Routes = [
     EducationService,
     SchoolService,
     MajorService,
+    BankService,
+    EmployeeBankService,
     MaritalStatusService,
     CertificatedService,
     ProfessionalQualificationService,

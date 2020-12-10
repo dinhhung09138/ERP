@@ -8,17 +8,16 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { FormActionStatus } from '../../../../../../core/enums/form-action-status.enum';
 import { DialogDataViewModel } from '../../../../../../core/models/dialog-data.model';
 import { PermissionViewModel } from '../../../../../../core/models/permission.model';
-import { EmployeeCertificateService } from './../certificate.service';
-import { CertificatedViewModel } from './../../../../configuration/certificated/certificated.model';
-import { EmployeeCertificateViewModel } from './../certificate.model';
-import { SchoolViewModel } from './../../../../configuration/school/school.model';
+import { EmployeeBankService } from './../bank.service';
+import { BankViewModel } from './../../../../configuration/bank/bank.model';
+import { EmployeeBankViewModel } from './../bank.model';
 
 @Component({
-  selector: 'app-hr-employee-certificate-form',
+  selector: 'app-hr-employee-bank-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class EmployeeCertificateFormComponent implements OnInit {
+export class EmployeeBankFormComponent implements OnInit {
 
   @ViewChild(FormGroupDirective, { static: true}) formDirective: FormGroupDirective;
 
@@ -29,41 +28,34 @@ export class EmployeeCertificateFormComponent implements OnInit {
   employeeId = 0;
   form: FormGroup;
   formAction: FormActionStatus;
-  listCertificated: CertificatedViewModel[];
-  listSchool: SchoolViewModel[];
-  listYear: number[] = [];
-  item: EmployeeCertificateViewModel;
+  listBank: BankViewModel[];
+  item: EmployeeBankViewModel;
 
   constructor(
     private elm: ElementRef,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataViewModel,
-    private dialogRef: MatDialogRef<EmployeeCertificateFormComponent>,
+    private dialogRef: MatDialogRef<EmployeeBankFormComponent>,
     private fb: FormBuilder,
-    private employeeCertificateService: EmployeeCertificateService,
+    private employeeBankService: EmployeeBankService,
   ) { }
 
   ngOnInit(): void {
-    this.permission = this.employeeCertificateService.getPermission();
+    this.permission = this.employeeBankService.getPermission();
 
     this.form = this.fb.group({
       id: [0],
       employeeId: [null, Validators.required],
-      certificateId: ['', [Validators.required]],
-      schoolId: ['', [Validators.required]],
-      year: ['', [Validators.required]],
+      bankId: ['', [Validators.required]],
+      bankAddress: ['', [Validators.maxLength(100)]],
+      accountNumber: ['', [Validators.maxLength(100)]],
+      accountOwner: ['', [Validators.maxLength(100)]],
       isActive: [true],
       rowVersion: [null]
     });
 
-    const currentYear = (new Date()).getFullYear();
-    for (let i = currentYear; i > currentYear - 20; i --) {
-      this.listYear.push(i);
-    }
-
     this.formAction = FormActionStatus.Insert;
     if (this.dialogData && this.dialogData.isPopup === true) {
-      this.listCertificated = this.dialogData.listCertificated;
-      this.listSchool = this.dialogData.listSchool;
+      this.listBank = this.dialogData.listBank;
       this.employeeId = this.dialogData.employeeId;
       this.initFormControl(this.formAction);
       if (this.dialogData.itemId !== undefined) {
@@ -79,24 +71,27 @@ export class EmployeeCertificateFormComponent implements OnInit {
     this.formAction = formAction;
     this.form.get('id').setValue(0);
     this.form.get('employeeId').setValue(this.employeeId);
-    this.form.get('certificateId').setValue('');
-    this.form.get('schoolId').setValue('');
-    this.form.get('year').setValue('');
+    this.form.get('bankId').setValue('');
+    this.form.get('bankAddress').setValue('');
+    this.form.get('accountNumber').setValue('');
+    this.form.get('accountOwner').setValue('');
     this.form.get('isActive').reset();
 
     if (formAction === FormActionStatus.UnKnow) {
-      this.form.get('certificateId').disable();
-      this.form.get('schoolId').disable();
-      this.form.get('year').disable();
+      this.form.get('bankId').disable();
+      this.form.get('bankAddress').disable();
+      this.form.get('accountNumber').disable();
+      this.form.get('accountOwner').disable();
       this.form.get('isActive').disable();
     } else {
       this.form.get('isActive').setValue(true);
-      this.form.get('certificateId').enable();
-      this.form.get('schoolId').enable();
-      this.form.get('year').enable();
+      this.form.get('bankId').enable();
+      this.form.get('bankAddress').enable();
+      this.form.get('accountNumber').enable();
+      this.form.get('accountOwner').enable();
       this.form.get('isActive').enable();
     }
-    this.elm.nativeElement.querySelector('#certificateId').focus();
+    this.elm.nativeElement.querySelector('#bankId').focus();
   }
 
   onResetClick() {
@@ -115,7 +110,7 @@ export class EmployeeCertificateFormComponent implements OnInit {
     }
 
     this.isLoading = true;
-    this.employeeCertificateService.save(this.form.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
+    this.employeeBankService.save(this.form.getRawValue(), this.formAction).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.isLoading = false;
         this.dialogRef.close(true);
@@ -125,7 +120,7 @@ export class EmployeeCertificateFormComponent implements OnInit {
 
   private getItem(itemId: number) {
     this.isLoading = true;
-    this.employeeCertificateService.item(itemId).subscribe((response: ResponseModel) => {
+    this.employeeBankService.item(itemId).subscribe((response: ResponseModel) => {
       if (response && response.responseStatus === ResponseStatus.success) {
         this.setDataToForm(response.result);
       }
@@ -133,13 +128,14 @@ export class EmployeeCertificateFormComponent implements OnInit {
     });
   }
 
-  private setDataToForm(data: EmployeeCertificateViewModel) {
+  private setDataToForm(data: EmployeeBankViewModel) {
     if (data) {
       this.form.get('id').setValue(data.id);
       this.form.get('employeeId').setValue(this.employeeId);
-      this.form.get('certificateId').setValue(data.certificateId);
-      this.form.get('schoolId').setValue(data.schoolId);
-      this.form.get('year').setValue(data.year);
+      this.form.get('bankId').setValue(data.bankId);
+      this.form.get('bankAddress').setValue(data.bankAddress);
+      this.form.get('accountNumber').setValue(data.accountNumber);
+      this.form.get('accountOwner').setValue(data.accountOwner);
       this.form.get('rowVersion').setValue(data.rowVersion);
     }
   }

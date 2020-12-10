@@ -25,6 +25,7 @@ import { DialogService } from '../../../../core/services/dialog.service';
 import { PositionViewModel } from '../../position/position.model';
 import { EmployeeCertificateComponent } from './certificate/certificate.component';
 import { EmployeeContactComponent } from './contact/contact.component';
+import { EmployeeBankComponent } from './bank/bank.component';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -71,6 +72,9 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
   contactPermission = new PermissionViewModel();
   initContactTab = false;
   @ViewChild(EmployeeContactComponent) contactTab: EmployeeContactComponent;
+  bankPermission = new PermissionViewModel();
+  initBankTab = false;
+  @ViewChild(EmployeeBankComponent) bankTab: EmployeeBankComponent;
 
   listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
   listPosition: PositionViewModel[] = [];
@@ -100,6 +104,7 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
     this.identificationPermission = this.employeeService.getIdentificationPermission();
     this.certificatePermission = this.employeeService.getCertificatePermission();
     this.contactPermission = this.employeeService.getContactPermission();
+    this.bankPermission = this.employeeService.getBankPermission();
 
     this.activatedRoute.data.subscribe(response => {
       this.listWorkingStatus = response.data?.listWorkingStatus?.result || [];
@@ -305,6 +310,13 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
           this.certificateTab.getList();
           this.certificateTab.getCertificated();
           this.certificateTab.getSchool();
+        }
+        break;
+      case 'bank':
+        if (this.initBankTab === false && this.bankPermission.allowView === true) {
+          this.initBankTab = true;
+          this.bankTab.getList();
+          this.bankTab.getBank();
         }
         break;
     }

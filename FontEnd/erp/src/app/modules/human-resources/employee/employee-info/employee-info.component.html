@@ -282,6 +282,12 @@
                   {{ 'SCREEN.HR.EMPLOYEE.RELATIONSHIP.TITLE' | translate }}
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}" href="#bank"
+                  (click)="onSelectTab('bank')" data-toggle="tab">
+                  {{ 'SCREEN.HR.EMPLOYEE.BANK.TITLE' | translate }}
+                </a>
+              </li>
             </ul>
           </div>
           <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
@@ -303,6 +309,9 @@
               </div>
               <div class="tab-pane" id="relationship" *ngIf="relationshipPermission.allowView === true">
                 <app-hr-employee-relationship [employee]="currentSelectedEmployee"></app-hr-employee-relationship>
+              </div>
+              <div class="tab-pane" id="bank" *ngIf="bankPermission.allowView === true">
+                <app-hr-employee-bank [employee]="currentSelectedEmployee"></app-hr-employee-bank>
               </div>
             </div>
           </div>

@@ -10,6 +10,7 @@ import { ProvinceViewModel } from '../../modules/human-resources/configuration/p
 import { IdentificationTypeViewModel } from '../../modules/human-resources/configuration/identification-type/identification-type.model';
 import { DistrictViewModel } from '../../modules/human-resources/configuration/district/district.model';
 import { WardViewModel } from '../../modules/human-resources/configuration/ward/ward.model';
+import { BankViewModel } from '../../modules/human-resources/configuration/bank/bank.model';
 
 export interface DialogDataViewModel {
   animal: string;
@@ -31,4 +32,5 @@ export interface DialogDataViewModel {
   listDistrict: DistrictViewModel[];
   listWard: WardViewModel[];
   listCertificated: CertificatedViewModel[];
+  listBank: BankViewModel[];
 }

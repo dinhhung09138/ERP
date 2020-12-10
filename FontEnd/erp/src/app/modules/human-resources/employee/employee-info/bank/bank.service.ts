@@ -1,49 +1,50 @@
 import { Injectable } from '@angular/core';
 
-import { switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
-import { SessionContext } from 'src/app/core/session.context';
-import { PermissionViewModel } from './../../../../core/models/permission.model';
-import { DialogService } from './../../../../core/services/dialog.service';
-import { FormActionStatus } from './../../../../core/enums/form-action-status.enum';
-import { PagingModel } from './../../../../core/models/paging.model';
-import { ApiService } from './../../../../core/services/api.service';
-import { APIUrlConstants } from 'src/app/core/constants/api-url.constant';
-import { BankViewModel } from './bank.model';
-import { ResponseModel } from 'src/app/core/models/response.model';
-import { FilterModel } from 'src/app/core/models/filter-table.model';
+import { PermissionViewModel } from '../../../../../core/models/permission.model';
+import { APIUrlConstants } from '../../../../../core/constants/api-url.constant';
+import { ApiService } from '../../../../../core/services/api.service';
+import { DialogService } from '../../../../../core/services/dialog.service';
+import { SessionContext } from '../../../../../core/session.context';
+import { PagingModel } from '../../../../../core/models/paging.model';
+import { FilterModel } from '../../../../../core/models/filter-table.model';
+import { ResponseModel } from '../../../../../core/models/response.model';
+import { FormActionStatus } from '../../../../../core/enums/form-action-status.enum';
+import { EmployeeBankViewModel } from './bank.model';
 
 @Injectable()
-export class BankService {
+export class EmployeeBankService {
 
   permission = new PermissionViewModel();
   moduleName = 'HR';
-  functionCode = 'HR_CONF_BANK';
+  functionCode = 'HR_EMPLOYEE_BANK';
   url = {
-    list: APIUrlConstants.hrApi + 'bank/list',
-    dropdown: APIUrlConstants.hrApi + 'bank/dropdown',
-    item: APIUrlConstants.hrApi + 'bank/item',
-    insert: APIUrlConstants.hrApi + 'bank/insert',
-    update: APIUrlConstants.hrApi + 'bank/update',
-    delete: APIUrlConstants.hrApi + 'bank/delete',
+    list: APIUrlConstants.hrApi + 'employee-bank/list',
+    item: APIUrlConstants.hrApi + 'employee-bank/item',
+    insert: APIUrlConstants.hrApi + 'employee-bank/insert',
+    update: APIUrlConstants.hrApi + 'employee-bank/update',
+    delete: APIUrlConstants.hrApi + 'employee-bank/delete',
   };
 
   constructor(
     private api: ApiService,
     private dialogService: DialogService,
-    private context: SessionContext) { }
+    private context: SessionContext
+  ) {}
 
   getPermission(): PermissionViewModel {
     this.permission = this.context.getPermissionByForm(this.moduleName, this.functionCode);
     return this.permission;
   }
 
-  getList(paging: PagingModel, searchText: string) {
+  getList(paging: PagingModel, searchText: string, employeeId: number): Observable<ResponseModel> {
     const filter = new FilterModel();
     filter.text = searchText;
     filter.paging.pageIndex = paging.pageIndex;
     filter.paging.pageSize = paging.pageSize;
+    filter.employeeId = employeeId;
 
     return this.api.getListDataByFilterModel(this.url.list, filter);
   }
@@ -52,11 +53,7 @@ export class BankService {
     return this.api.getDataById(this.url.item, id);
   }
 
-  getDropdown() {
-    return this.api.getListData(this.url.dropdown);
-  }
-
-  save(model: BankViewModel, action: FormActionStatus): Observable<ResponseModel> {
+  save(model: EmployeeBankViewModel, action: FormActionStatus): Observable<ResponseModel> {
     if (this.permission.allowInsert === false && this.permission.allowUpdate === false) {
       return;
     }
@@ -87,6 +84,7 @@ export class BankService {
     if (this.permission.allowDelete === false) {
       return;
     }
-    return this.api.delete(this.url.delete, {id: itemId, rowVersion: version });
+    return this.api.delete(this.url.delete, {id: itemId, rowVersion: version});
   }
+
 }

@@ -238,6 +238,13 @@
           "PLACE": "Nơi cấp",
           "EXPIRATION": "Ngày hết hạn",
           "NOTES": "Ghi chú"
+        },
+        "BANK": {
+          "TITLE": "Tài khoản ngân hàng",
+          "BANK_NAME": "Tên ngân hàng",
+          "BANK_ADDRESS": "Chi nhánh",
+          "ACCOUNT_NUMBER": "Số tài khoản",
+          "ACCOUNT_OWNER": "Tên chủ tài khoản"
         }
       },
       "CONFIGURATION": {

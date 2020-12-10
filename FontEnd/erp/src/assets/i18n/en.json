@@ -238,6 +238,13 @@
           "PLACE": "Place",
           "EXPIRATION": "Expiration",
           "NOTES": "Notes"
+        },
+        "BANK": {
+          "TITLE": "Bank Accounts",
+          "BANK_NAME": "Bank Name",
+          "BANK_ADDRESS": "bank Address",
+          "ACCOUNT_NUMBER": "Account Number",
+          "ACCOUNT_OWNER": "Owner"
         }
       },
       "CONFIGURATION": {
