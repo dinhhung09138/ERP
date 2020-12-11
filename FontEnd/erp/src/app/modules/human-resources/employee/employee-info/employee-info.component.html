@@ -288,6 +288,21 @@
                   {{ 'SCREEN.HR.EMPLOYEE.BANK.TITLE' | translate }}
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}">
+                  Dependent Relation
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}">
+                  Nghỉ phép
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [class]="{'disabled': currentSelectedEmployee === undefined}">
+                  Kỹ năng
+                </a>
+              </li>
             </ul>
           </div>
           <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
