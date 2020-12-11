@@ -62,6 +62,8 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<EmployeeDiscipline> EmployeeDiscipline { get; set; }
 
+        public virtual DbSet<EmployeeDependency> EmployeeDependency { get; set; }
+
         public virtual DbSet<EmployeeEducation> EmployeeEducation { get; set; }
 
         public virtual DbSet<EmployeeCertificate> EmployeeCertificate { get; set; }
@@ -419,7 +421,7 @@ namespace Database.Sql.ERP
 
             modelBuilder.CreateHumanResourceDefaultCommand();
 
-            //FunctionCommand MaxId = 153
+            //FunctionCommand MaxId = 157
 
             #endregion
         }

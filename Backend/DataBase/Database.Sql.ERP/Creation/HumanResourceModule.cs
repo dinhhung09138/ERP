@@ -122,6 +122,14 @@ namespace Database.Sql.ERP.Creation
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
+            modelBuilder.Entity<EmployeeDependency>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
             modelBuilder.Entity<EmployeeEducation>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -2023,9 +2031,58 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 154,
+                    FunctionCode = "HR_EMPLOYEE_DEPENDENCY",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "EmployeeDependency",
+                    ActionName = "List",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 155,
+                    FunctionCode = "HR_EMPLOYEE_DEPENDENCY",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "EmployeeDependency",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 156,
+                    FunctionCode = "HR_EMPLOYEE_DEPENDENCY",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "EmployeeDependency",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 157,
+                    FunctionCode = "HR_EMPLOYEE_DEPENDENCY",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "EmployeeDependency",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
         }
 
         #endregion
+
+
+        #region "[ Default module ]"
 
         public static void CreateDefaultFunctionModuleHR(this ModelBuilder modelBuilder)
         {
@@ -2453,12 +2510,22 @@ namespace Database.Sql.ERP.Creation
                 },
                 new Function()
                 {
+                    Code = "HR_EMPLOYEE_DEPENDENCY",
+                    Name = "DEPENDENCY",
+                    Url = "#dependency",
+                    Icon = string.Empty,
+                    ParentCode = "HR_EMPLOYEE",
+                    Precedence = 8,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
                     Code = "HR_EMPLOYEE_CONTRACT",
                     Name = "CONTRACT",
                     Url = "#contract",
                     Icon = string.Empty,
                     ParentCode = "HR_EMPLOYEE",
-                    Precedence = 8,
+                    Precedence = 9,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2468,7 +2535,7 @@ namespace Database.Sql.ERP.Creation
                     Url = "#commendation",
                     Icon = string.Empty,
                     ParentCode = "HR_EMPLOYEE",
-                    Precedence = 9,
+                    Precedence = 10,
                     ModuleCode = "HR"
                 },
                 new Function()
@@ -2478,13 +2545,13 @@ namespace Database.Sql.ERP.Creation
                     Url = "#discipline",
                     Icon = string.Empty,
                     ParentCode = "HR_EMPLOYEE",
-                    Precedence = 10,
+                    Precedence = 11,
                     ModuleCode = "HR"
                 }
             );
 
         }
 
-
+        #endregion
     }
 }

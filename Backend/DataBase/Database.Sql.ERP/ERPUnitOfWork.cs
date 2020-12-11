@@ -219,13 +219,22 @@ namespace Database.Sql.ERP
                 return _employeeContractStatusHistoryRepository = _employeeContractStatusHistoryRepository ?? new TableGenericRepository<EmployeeContractStatusHistory>(_context);
             }
         }
-
+        
         private ITableGenericRepository<EmployeeDiscipline> _employeeDisciplineRepository;
         public ITableGenericRepository<EmployeeDiscipline> EmployeeDisciplineRepository
         {
             get
             {
                 return _employeeDisciplineRepository = _employeeDisciplineRepository ?? new TableGenericRepository<EmployeeDiscipline>(_context);
+            }
+        }
+
+        private ITableGenericRepository<EmployeeDependency> _employeeDependencyRepository;
+        public ITableGenericRepository<EmployeeDependency> EmployeeDependencyRepository
+        {
+            get
+            {
+                return _employeeDependencyRepository = _employeeDependencyRepository ?? new TableGenericRepository<EmployeeDependency>(_context);
             }
         }
 
