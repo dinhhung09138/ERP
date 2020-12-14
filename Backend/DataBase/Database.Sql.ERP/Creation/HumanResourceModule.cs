@@ -13,49 +13,14 @@ namespace Database.Sql.ERP.Creation
 
         public static void HRModelCreating(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Bank>(entity =>
-            {
-                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
-                entity.Property(m => m.IsActive).HasDefaultValue(true);
-                entity.Property(m => m.Deleted).HasDefaultValue(false);
-                entity.Property(m => m.Precedence).HasDefaultValue(1);
-                entity.Property(m => m.RowVersion).IsRowVersion();
-            });
-
-            modelBuilder.Entity<Education>(entity =>
-            {
-                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
-                entity.Property(m => m.IsActive).HasDefaultValue(true);
-                entity.Property(m => m.Deleted).HasDefaultValue(false);
-                entity.Property(m => m.Precedence).HasDefaultValue(1);
-                entity.Property(m => m.RowVersion).IsRowVersion();
-            });
-
-            modelBuilder.Entity<ApproveStatus>(entity =>
-            {
-                entity.HasIndex(m => m.Code).IsUnique(true);
-                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
-                entity.Property(m => m.IsActive).HasDefaultValue(true);
-                entity.Property(m => m.Deleted).HasDefaultValue(false);
-                entity.Property(m => m.Precedence).HasDefaultValue(1);
-                entity.Property(m => m.RowVersion).IsRowVersion();
-            });
+            modelBuilder.HRModelCreatingConfiguration();
+            modelBuilder.HRModelCreatingEmployee();
 
             modelBuilder.Entity<Commendation>(entity =>
             {
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
                 entity.Property(m => m.IsActive).HasDefaultValue(true);
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
-                entity.Property(m => m.RowVersion).IsRowVersion();
-            });
-
-            modelBuilder.Entity<ContractType>(entity =>
-            {
-                entity.HasIndex(m => m.Code).IsUnique(true);
-                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
-                entity.Property(m => m.IsActive).HasDefaultValue(true);
-                entity.Property(m => m.Deleted).HasDefaultValue(false);
-                entity.Property(m => m.Precedence).HasDefaultValue(1);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
@@ -66,6 +31,11 @@ namespace Database.Sql.ERP.Creation
                 entity.Property(m => m.Deleted).HasDefaultValue(false);
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
+
+        }
+
+        private static void HRModelCreatingEmployee(this ModelBuilder modelBuilder)
+        {
 
             modelBuilder.Entity<Employee>(entity =>
             {
@@ -171,6 +141,48 @@ namespace Database.Sql.ERP.Creation
             });
 
             modelBuilder.Entity<EmployeeWorkingStatus>(entity =>
+            {
+                entity.HasIndex(m => m.Code).IsUnique(true);
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.Precedence).HasDefaultValue(1);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
+        }
+
+        private static void HRModelCreatingConfiguration(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Bank>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.Precedence).HasDefaultValue(1);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
+            modelBuilder.Entity<Education>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.Precedence).HasDefaultValue(1);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
+            modelBuilder.Entity<ApproveStatus>(entity =>
+            {
+                entity.HasIndex(m => m.Code).IsUnique(true);
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.Precedence).HasDefaultValue(1);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
+            modelBuilder.Entity<ContractType>(entity =>
             {
                 entity.HasIndex(m => m.Code).IsUnique(true);
                 entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
@@ -1545,6 +1557,8 @@ namespace Database.Sql.ERP.Creation
 
         #endregion
 
+        #region " [ Employee ]
+
         private static void CreateDefaultCommandEmployee(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<FunctionCommand>().HasData(
@@ -1593,6 +1607,21 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+            modelBuilder.CreateDefaultCommandEmployeeInfo();
+            modelBuilder.CreateDefaultCommandEmployeeContact();
+            modelBuilder.CreateDefaultCommandEmployeeEducation();
+            modelBuilder.CreateDefaultCommandEmployeeCertificate();
+            modelBuilder.CreateDefaultCommandEmployeeIdentification();
+            modelBuilder.CreateDefaultCommandEmployeeBank();
+            modelBuilder.CreateDefaultCommandEmployeeRelationship();
+            modelBuilder.CreateDefaultCommandEmployeeContract();
+            modelBuilder.CreateDefaultCommandEmployeeCommendation();
+            modelBuilder.CreateDefaultCommandEmployeeDiscipline();
+            modelBuilder.CreateDefaultCommandEmployeeDependency();
+        }
+
+        private static void CreateDefaultCommandEmployeeInfo(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -1617,6 +1646,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeContact(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -1663,6 +1696,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeEducation(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -1709,6 +1746,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeCertificate(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -1755,6 +1796,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeIdentification(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -1801,6 +1846,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeBank(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -1847,6 +1896,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeRelationship(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -1893,6 +1946,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeContract(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -1939,6 +1996,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeCommendation(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -1985,6 +2046,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeDiscipline(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -2031,6 +2096,10 @@ namespace Database.Sql.ERP.Creation
                     IsView = false,
                 }
             );
+        }
+
+        private static void CreateDefaultCommandEmployeeDependency(this ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
@@ -2078,6 +2147,8 @@ namespace Database.Sql.ERP.Creation
                 }
             );
         }
+
+        #endregion
 
         #endregion
 
@@ -2170,46 +2241,6 @@ namespace Database.Sql.ERP.Creation
                 },
                 new Function()
                 {
-                    Code = "HR_LEAVE_CALENDAR",
-                    Name = "CALENDAR",
-                    Url = "/leave-management/calendar",
-                    Icon = string.Empty,
-                    ParentCode = "HR_LEAVE_MNT",
-                    Precedence = 1,
-                    ModuleCode = "HR"
-                },
-                new Function()
-                {
-                    Code = "HR_LEAVE_SUMMARY",
-                    Name = "SUMMARY",
-                    Url = "/leave-management/summary",
-                    Icon = string.Empty,
-                    ParentCode = "HR_LEAVE_MNT",
-                    Precedence = 2,
-                    ModuleCode = "HR"
-                },
-                new Function()
-                {
-                    Code = "HR_LEAVE_NEW",
-                    Name = "NEW",
-                    Url = "/leave-management/new",
-                    Icon = string.Empty,
-                    ParentCode = "HR_LEAVE_MNT",
-                    Precedence = 3,
-                    ModuleCode = "HR"
-                },
-                new Function()
-                {
-                    Code = "HR_LEAVE_APPROVE_ST",
-                    Name = "APPROVE_STATUS",
-                    Url = "/leave-management/approve-status",
-                    Icon = string.Empty,
-                    ParentCode = "HR_LEAVE_MNT",
-                    Precedence = 4,
-                    ModuleCode = "HR"
-                },
-                new Function()
-                {
                     Code = "HR_HOLIDAY",
                     Name = "HOLIDAY",
                     Url = "/holiday",
@@ -2217,7 +2248,17 @@ namespace Database.Sql.ERP.Creation
                     ParentCode = string.Empty,
                     Precedence = 8,
                     ModuleCode = "HR"
-                },
+                }
+            );
+            modelBuilder.CreateDefaultFunctionModuleHRConfiguration();
+            modelBuilder.CreateDefaultFunctionModuleHREmployee();
+            modelBuilder.CreateDefaultFunctionModuleHRLeave();
+
+        }
+
+        private static void CreateDefaultFunctionModuleHRConfiguration(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Function>().HasData(
                 new Function()
                 {
                     Code = "HR_CONFIGURATION",
@@ -2437,7 +2478,12 @@ namespace Database.Sql.ERP.Creation
                     ParentCode = "HR_CONFIGURATION",
                     Precedence = 20,
                     ModuleCode = "HR"
-                },
+                });
+        }
+
+        private static void CreateDefaultFunctionModuleHREmployee(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Function>().HasData(
                 new Function()
                 {
                     Code = "HR_EMPLOYEE_PERSONAL_INFO",
@@ -2547,9 +2593,52 @@ namespace Database.Sql.ERP.Creation
                     ParentCode = "HR_EMPLOYEE",
                     Precedence = 11,
                     ModuleCode = "HR"
-                }
-            );
+                });
+        }
 
+        private static void CreateDefaultFunctionModuleHRLeave(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Function>().HasData(
+                 new Function()
+                 {
+                     Code = "HR_LEAVE_CALENDAR",
+                     Name = "CALENDAR",
+                     Url = "/leave-management/calendar",
+                     Icon = string.Empty,
+                     ParentCode = "HR_LEAVE_MNT",
+                     Precedence = 1,
+                     ModuleCode = "HR"
+                 },
+                new Function()
+                {
+                    Code = "HR_LEAVE_SUMMARY",
+                    Name = "SUMMARY",
+                    Url = "/leave-management/summary",
+                    Icon = string.Empty,
+                    ParentCode = "HR_LEAVE_MNT",
+                    Precedence = 2,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
+                    Code = "HR_LEAVE_NEW",
+                    Name = "NEW",
+                    Url = "/leave-management/new",
+                    Icon = string.Empty,
+                    ParentCode = "HR_LEAVE_MNT",
+                    Precedence = 3,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
+                    Code = "HR_LEAVE_APPROVE_ST",
+                    Name = "APPROVE_STATUS",
+                    Url = "/leave-management/approve-status",
+                    Icon = string.Empty,
+                    ParentCode = "HR_LEAVE_MNT",
+                    Precedence = 4,
+                    ModuleCode = "HR"
+                });
         }
 
         #endregion
