@@ -4,42 +4,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("HR_LeaveType")]
-    public class LeaveType
+    [Table("HR_LeaveStatus")]
+    public class LeaveStatus
     {
         [Key]
         [Column(TypeName = "int")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Column(TypeName = "varchar(10)")]
-        [MaxLength(10)]
-        [Required]
-        public string Code { get; set; }
-
         [Column(TypeName = "nvarchar(100)")]
         [MaxLength(100)]
         [Required]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Link to Code table for getting data.
+        /// </summary>
         [Column(TypeName = "int")]
         [Required]
-        public int NumOfDay { get; set; }
-
-        [Column(TypeName = "bit")]
-        [Required]
-        public bool IsDeductible { get; set; }
-
-        [Column(TypeName = "nvarchar(255)")]
-        [MaxLength(255)]
-        public string Description { get; set; }
-
-        [Column(TypeName = "datetime")]
-        [Required]
-        public DateTime StartDate { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? ExpirationDate { get; set; }
+        public int TypeId { get; set; }
 
         [Column(TypeName = "int")]
         [Required]

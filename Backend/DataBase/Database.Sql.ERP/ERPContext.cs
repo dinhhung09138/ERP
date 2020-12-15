@@ -28,7 +28,9 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<File> File { get; set; }
 
-        public virtual DbSet<CodeType> CodeType { get; set; }
+        public virtual DbSet<CommonCodeType> CodeType { get; set; }
+
+        public virtual DbSet<CommonCode> Code { get; set; }
 
         public virtual DbSet<MaritalStatus> MaritalStatus { get; set; }
 
@@ -72,11 +74,21 @@ namespace Database.Sql.ERP
 
         public virtual DbSet<EmployeeInfo> EmployeeInfo { get; set; }
 
+        public virtual DbSet<EmployeeLeave> EmployeeLeave { get; set; }
+
+        public virtual DbSet<EmployeeLeaveConfiguration> EmployeeLeaveConfiguration { get; set; }
+
+        public virtual DbSet<EmployeeLeaveStatus> EmployeeLeaveStatus { get; set; }
+
         public virtual DbSet<EmployeeRelationship> EmployeeRelationship { get; set; }
 
         public virtual DbSet<EmployeeWorkingStatus> EmployeeWorkingStatus { get; set; }
 
         public virtual DbSet<IdentificationType> IdentificationType { get; set; }
+
+        public virtual DbSet<LeaveStatus> LeaveStatus { get; set; }
+
+        public virtual DbSet<LeaveType> LeaveType { get; set; }
 
         public virtual DbSet<ModelOfStudy> ModelOfStudy { get; set; }
 
@@ -421,7 +433,7 @@ namespace Database.Sql.ERP
 
             modelBuilder.CreateHumanResourceDefaultCommand();
 
-            //FunctionCommand MaxId = 157
+            //FunctionCommand MaxId = 170
 
             #endregion
         }

@@ -4,46 +4,29 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("HR_LeaveType")]
-    public class LeaveType
+    [Table("HR_EmployeeLeaveConfiguration")]
+    public class EmployeeLeaveConfiguration
     {
         [Key]
         [Column(TypeName = "int")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Column(TypeName = "varchar(10)")]
-        [MaxLength(10)]
+        [Column(TypeName = "int")]
         [Required]
-        public string Code { get; set; }
+        public int EmployeeId { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
-        [MaxLength(100)]
+        [Column(TypeName = "int")]
         [Required]
-        public string Name { get; set; }
+        public int Year { get; set; }
 
         [Column(TypeName = "int")]
         [Required]
         public int NumOfDay { get; set; }
 
-        [Column(TypeName = "bit")]
-        [Required]
-        public bool IsDeductible { get; set; }
-
-        [Column(TypeName = "nvarchar(255)")]
-        [MaxLength(255)]
-        public string Description { get; set; }
-
-        [Column(TypeName = "datetime")]
-        [Required]
-        public DateTime StartDate { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? ExpirationDate { get; set; }
-
         [Column(TypeName = "int")]
         [Required]
-        public int Precedence { get; set; }
+        public int DayUsed { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]
@@ -70,5 +53,6 @@ namespace Database.Sql.ERP.Entities.HR
         [Column(TypeName = "timestamp")]
         [Required]
         public byte[] RowVersion { get; set; }
+
     }
 }

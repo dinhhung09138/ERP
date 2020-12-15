@@ -90,12 +90,21 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<CodeType> _codeTypeRepository;
-        public ITableGenericRepository<CodeType> CodeTypeRepository
+        private ITableGenericRepository<CommonCodeType> _codeTypeRepository;
+        public ITableGenericRepository<CommonCodeType> CodeTypeRepository
         {
             get
             {
-                return _codeTypeRepository = _codeTypeRepository ?? new TableGenericRepository<CodeType>(_context);
+                return _codeTypeRepository = _codeTypeRepository ?? new TableGenericRepository<CommonCodeType>(_context);
+            }
+        }
+
+        private ITableGenericRepository<CommonCode> _codeRepository;
+        public ITableGenericRepository<CommonCode> CodeRepository
+        {
+            get
+            {
+                return _codeRepository = _codeRepository ?? new TableGenericRepository<CommonCode>(_context);
             }
         }
 
@@ -274,6 +283,34 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<EmployeeLeave> _employeeLeaveRepository;
+        public ITableGenericRepository<EmployeeLeave> EmployeeLeaveRepository
+        {
+            get
+            {
+                return _employeeLeaveRepository = _employeeLeaveRepository ?? new TableGenericRepository<EmployeeLeave>(_context);
+            }
+        }
+
+
+        private ITableGenericRepository<EmployeeLeaveConfiguration> _employeeLeaveConfigurationRepository;
+        public ITableGenericRepository<EmployeeLeaveConfiguration> EmployeeLeaveConfigurationRepository
+        {
+            get
+            {
+                return _employeeLeaveConfigurationRepository = _employeeLeaveConfigurationRepository ?? new TableGenericRepository<EmployeeLeaveConfiguration>(_context);
+            }
+        }
+
+        private ITableGenericRepository<EmployeeLeaveStatus> _employeeLeaveStatusRepository;
+        public ITableGenericRepository<EmployeeLeaveStatus> EmployeeLeaveStatusRepository
+        {
+            get
+            {
+                return _employeeLeaveStatusRepository = _employeeLeaveStatusRepository ?? new TableGenericRepository<EmployeeLeaveStatus>(_context);
+            }
+        }
+
         private ITableGenericRepository<EmployeeRelationship> _employeeRelationshipRepository;
         public ITableGenericRepository<EmployeeRelationship> EmployeeRelationshipRepository
         {
@@ -298,6 +335,24 @@ namespace Database.Sql.ERP
             get
             {
                 return _identificationTypeRepository = _identificationTypeRepository ?? new TableGenericRepository<IdentificationType>(_context);
+            }
+        }
+
+        private ITableGenericRepository<LeaveStatus> _leaveStatusRepository;
+        public ITableGenericRepository<LeaveStatus> LeaveStatusRepository
+        {
+            get
+            {
+                return _leaveStatusRepository = _leaveStatusRepository ?? new TableGenericRepository<LeaveStatus>(_context);
+            }
+        }
+
+        private ITableGenericRepository<LeaveType> _leaveTypeRepository;
+        public ITableGenericRepository<LeaveType> LeaveTypeRepository
+        {
+            get
+            {
+                return _leaveTypeRepository = _leaveTypeRepository ?? new TableGenericRepository<LeaveType>(_context);
             }
         }
 

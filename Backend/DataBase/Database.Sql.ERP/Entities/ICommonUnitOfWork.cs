@@ -13,7 +13,8 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<School> SchoolRepository { get; }
         ITableGenericRepository<Ward> WardRepository { get; }
         ITableGenericRepository<File> FileRepository { get; }
-        ITableGenericRepository<CodeType> CodeTypeRepository { get; }
+        ITableGenericRepository<CommonCodeType> CodeTypeRepository { get; }
+        ITableGenericRepository<CommonCode> CodeRepository { get; }
         ITableGenericRepository<MaritalStatus> MaritalStatusRepository { get; }
     }
 }

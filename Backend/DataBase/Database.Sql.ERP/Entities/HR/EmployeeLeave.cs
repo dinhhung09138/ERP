@@ -4,46 +4,44 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Sql.ERP.Entities.HR
 {
-    [Table("HR_LeaveType")]
-    public class LeaveType
+    [Table("HR_EmployeeLeave")]
+    public class EmployeeLeave
     {
         [Key]
         [Column(TypeName = "int")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Column(TypeName = "varchar(10)")]
-        [MaxLength(10)]
+        [Column(TypeName = "int")]
         [Required]
-        public string Code { get; set; }
-
-        [Column(TypeName = "nvarchar(100)")]
-        [MaxLength(100)]
-        [Required]
-        public string Name { get; set; }
+        public int EmployeeId { get; set; }
 
         [Column(TypeName = "int")]
         [Required]
-        public int NumOfDay { get; set; }
-
-        [Column(TypeName = "bit")]
-        [Required]
-        public bool IsDeductible { get; set; }
-
-        [Column(TypeName = "nvarchar(255)")]
-        [MaxLength(255)]
-        public string Description { get; set; }
-
-        [Column(TypeName = "datetime")]
-        [Required]
-        public DateTime StartDate { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? ExpirationDate { get; set; }
+        public int LeaveTypeId { get; set; }
 
         [Column(TypeName = "int")]
         [Required]
-        public int Precedence { get; set; }
+        public int LeaveStatusId { get; set; }
+
+        [Column(TypeName = "datetime")]
+        [Required]
+        public DateTime StartTime { get; set; }
+
+        [Column(TypeName = "datetime")]
+        [Required]
+        public DateTime EndTime { get; set; }
+
+        [Column(TypeName = "int")]
+        [Required]
+        public int LineManagerId { get; set; }
+
+        [Column(TypeName = "varchar(250)")]
+        public string CCMember { get; set; }
+
+        [Column(TypeName = "nvarchar(250)")]
+        [MaxLength(250)]
+        public string Reason { get; set; }
 
         [Column(TypeName = "bit")]
         [Required]

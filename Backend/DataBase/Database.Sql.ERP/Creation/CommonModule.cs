@@ -76,11 +76,8 @@ namespace Database.Sql.ERP.Creation
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
-            modelBuilder.Entity<CodeType>(entity =>
-            {
-                entity.Property(m => m.Precedence).HasDefaultValue(1);
-                entity.Property(m => m.RowVersion).IsRowVersion();
-            });
+            modelBuilder.Entity<CommonCodeType>();
+            modelBuilder.Entity<CommonCode>();
 
             modelBuilder.Entity<MaritalStatus>(entity =>
             {

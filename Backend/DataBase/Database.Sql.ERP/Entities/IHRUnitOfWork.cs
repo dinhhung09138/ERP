@@ -23,8 +23,13 @@ namespace Database.Sql.ERP.Entities
         ITableGenericRepository<EmployeeIdentification> EmployeeIdentificationRepository { get; }
         ITableGenericRepository<EmployeeInfo> EmployeeInfoRepository { get; }
         ITableGenericRepository<EmployeeRelationship> EmployeeRelationshipRepository { get; }
+        ITableGenericRepository<EmployeeLeave> EmployeeLeaveRepository { get; }
+        ITableGenericRepository<EmployeeLeaveConfiguration> EmployeeLeaveConfigurationRepository { get; }
+        ITableGenericRepository<EmployeeLeaveStatus> EmployeeLeaveStatusRepository { get; }
         ITableGenericRepository<EmployeeWorkingStatus> EmployeeWorkingStatusRepository { get; }
         ITableGenericRepository<IdentificationType> IdentificationTypeRepository { get; }
+        ITableGenericRepository<LeaveType> LeaveTypeRepository { get; }
+        ITableGenericRepository<LeaveStatus> LeaveStatusRepository { get; }
         ITableGenericRepository<ModelOfStudy> ModelOfStudyRepository { get; }
         ITableGenericRepository<Ethnicity> NationRepository { get; }
         ITableGenericRepository<Nationality> NationalityRepository { get; }

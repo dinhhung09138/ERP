@@ -15,6 +15,8 @@ namespace Database.Sql.ERP.Creation
         {
             modelBuilder.HRModelCreatingConfiguration();
             modelBuilder.HRModelCreatingEmployee();
+            modelBuilder.HRModelCreatingLeave();
+            modelBuilder.CreateDefaultCommandLeave();
 
             modelBuilder.Entity<Commendation>(entity =>
             {
@@ -150,6 +152,25 @@ namespace Database.Sql.ERP.Creation
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
 
+            modelBuilder.Entity<EmployeeLeave>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
+            modelBuilder.Entity<EmployeeLeaveStatus>();
+
+            modelBuilder.Entity<EmployeeLeaveConfiguration>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.DayUsed).HasDefaultValue(0);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+
         }
 
         private static void HRModelCreatingConfiguration(this ModelBuilder modelBuilder)
@@ -264,6 +285,24 @@ namespace Database.Sql.ERP.Creation
                 entity.Property(m => m.RowVersion).IsRowVersion();
             });
         }
+        private static void HRModelCreatingLeave(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<LeaveType>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+            modelBuilder.Entity<LeaveStatus>(entity =>
+            {
+                entity.Property(m => m.CreateDate).HasDefaultValueSql("getdate()");
+                entity.Property(m => m.IsActive).HasDefaultValue(true);
+                entity.Property(m => m.Deleted).HasDefaultValue(false);
+                entity.Property(m => m.RowVersion).IsRowVersion();
+            });
+        }
+
 
         #endregion
 
@@ -1555,6 +1594,181 @@ namespace Database.Sql.ERP.Creation
 
         #region " [ Leave Management ] "
 
+        private static void CreateDefaultCommandLeave(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.CreateDefaultCommandLeaveStatus();
+            modelBuilder.CreateDefaultCommandLeaveType();
+            modelBuilder.CreateDefaultCommandLeaveForm();
+            modelBuilder.CreateDefaultCommandLeaveCalendar();
+        }
+
+        private static void CreateDefaultCommandLeaveStatus(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 159,
+                    FunctionCode = "HR_LEAVE_STATUS",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "LeaveStatus",
+                    ActionName = "List",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 159,
+                    FunctionCode = "HR_LEAVE_STATUS",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "LeaveStatus",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 160,
+                    FunctionCode = "HR_LEAVE_STATUS",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "LeaveStatus",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 161,
+                    FunctionCode = "HR_LEAVE_STATUS",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "LeaveStatus",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
+        private static void CreateDefaultCommandLeaveType(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 162,
+                    FunctionCode = "HR_LEAVE_TYPE",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "LeaveType",
+                    ActionName = "List",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 163,
+                    FunctionCode = "HR_LEAVE_TYPE",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "LeaveType",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 164,
+                    FunctionCode = "HR_LEAVE_TYPE",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "LeaveType",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 165,
+                    FunctionCode = "HR_LEAVE_TYPE",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "LeaveType",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
+        private static void CreateDefaultCommandLeaveForm(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 166,
+                    FunctionCode = "HR_LEAVE_NEW",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Leave",
+                    ActionName = "List",
+                    Precedence = 1,
+                    IsView = true,
+                },
+                new FunctionCommand()
+                {
+                    Id = 167,
+                    FunctionCode = "HR_LEAVE_NEW",
+                    Name = "INSERT",
+                    ModuleName = "HR",
+                    ControllerName = "Leave",
+                    ActionName = "Insert",
+                    Precedence = 2,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 168,
+                    FunctionCode = "HR_LEAVE_NEW",
+                    Name = "UPDATE",
+                    ModuleName = "HR",
+                    ControllerName = "Leave",
+                    ActionName = "Update",
+                    Precedence = 3,
+                    IsView = false,
+                },
+                new FunctionCommand()
+                {
+                    Id = 169,
+                    FunctionCode = "HR_LEAVE_NEW",
+                    Name = "DELETE",
+                    ModuleName = "HR",
+                    ControllerName = "Leave",
+                    ActionName = "Delete",
+                    Precedence = 4,
+                    IsView = false,
+                }
+            );
+        }
+
+        private static void CreateDefaultCommandLeaveCalendar(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+                new FunctionCommand()
+                {
+                    Id = 170,
+                    FunctionCode = "HR_LEAVE_CALENDAR",
+                    Name = "VIEW",
+                    ModuleName = "HR",
+                    ControllerName = "Leave",
+                    ActionName = "Summary",
+                    Precedence = 1,
+                    IsView = true,
+                }
+            );
+        }
+
         #endregion
 
         #region " [ Employee ]
@@ -2611,16 +2825,6 @@ namespace Database.Sql.ERP.Creation
                  },
                 new Function()
                 {
-                    Code = "HR_LEAVE_SUMMARY",
-                    Name = "SUMMARY",
-                    Url = "/leave-management/summary",
-                    Icon = string.Empty,
-                    ParentCode = "HR_LEAVE_MNT",
-                    Precedence = 2,
-                    ModuleCode = "HR"
-                },
-                new Function()
-                {
                     Code = "HR_LEAVE_NEW",
                     Name = "NEW",
                     Url = "/leave-management/new",
@@ -2631,12 +2835,22 @@ namespace Database.Sql.ERP.Creation
                 },
                 new Function()
                 {
-                    Code = "HR_LEAVE_APPROVE_ST",
-                    Name = "APPROVE_STATUS",
-                    Url = "/leave-management/approve-status",
+                    Code = "HR_LEAVE_STATUS",
+                    Name = "LEAVE_STATUS",
+                    Url = "/leave-management/leave-status",
                     Icon = string.Empty,
                     ParentCode = "HR_LEAVE_MNT",
                     Precedence = 4,
+                    ModuleCode = "HR"
+                },
+                new Function()
+                {
+                    Code = "HR_LEAVE_TYPE",
+                    Name = "LEAVE_TYPE",
+                    Url = "/leave-management/leave-type",
+                    Icon = string.Empty,
+                    ParentCode = "HR_LEAVE_MNT",
+                    Precedence = 5,
                     ModuleCode = "HR"
                 });
         }
