@@ -68,7 +68,7 @@ namespace API.System.Filters
             switch (action)
             {
                 case "Item":
-                    return "GetList";
+                    return "List";
                 default:
                     return action;
             }

@@ -69,7 +69,7 @@ namespace API.Common.Filters
             switch (action)
             {
                 case "Item":
-                    return "GetList";
+                    return "List";
                 default:
                     return action;
             }
