@@ -1618,7 +1618,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 159,
+                    Id = 160,
                     FunctionCode = "HR_LEAVE_STATUS",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1629,7 +1629,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 160,
+                    Id = 161,
                     FunctionCode = "HR_LEAVE_STATUS",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1640,7 +1640,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 161,
+                    Id = 162,
                     FunctionCode = "HR_LEAVE_STATUS",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1657,7 +1657,7 @@ namespace Database.Sql.ERP.Creation
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
-                    Id = 162,
+                    Id = 163,
                     FunctionCode = "HR_LEAVE_TYPE",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1668,7 +1668,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 163,
+                    Id = 164,
                     FunctionCode = "HR_LEAVE_TYPE",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1679,7 +1679,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 164,
+                    Id = 165,
                     FunctionCode = "HR_LEAVE_TYPE",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1690,7 +1690,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 165,
+                    Id = 166,
                     FunctionCode = "HR_LEAVE_TYPE",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1707,7 +1707,7 @@ namespace Database.Sql.ERP.Creation
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
-                    Id = 166,
+                    Id = 167,
                     FunctionCode = "HR_LEAVE_NEW",
                     Name = "VIEW",
                     ModuleName = "HR",
@@ -1718,7 +1718,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 167,
+                    Id = 168,
                     FunctionCode = "HR_LEAVE_NEW",
                     Name = "INSERT",
                     ModuleName = "HR",
@@ -1729,7 +1729,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 168,
+                    Id = 169,
                     FunctionCode = "HR_LEAVE_NEW",
                     Name = "UPDATE",
                     ModuleName = "HR",
@@ -1740,7 +1740,7 @@ namespace Database.Sql.ERP.Creation
                 },
                 new FunctionCommand()
                 {
-                    Id = 169,
+                    Id = 170,
                     FunctionCode = "HR_LEAVE_NEW",
                     Name = "DELETE",
                     ModuleName = "HR",
@@ -1757,7 +1757,7 @@ namespace Database.Sql.ERP.Creation
             modelBuilder.Entity<FunctionCommand>().HasData(
                 new FunctionCommand()
                 {
-                    Id = 170,
+                    Id = 171,
                     FunctionCode = "HR_LEAVE_CALENDAR",
                     Name = "VIEW",
                     ModuleName = "HR",
