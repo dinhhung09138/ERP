@@ -112,7 +112,7 @@ export class SessionContext {
       }
     }
 
-    return permission;
+    return permission ?? new PermissionViewModel();
 
   }
 
