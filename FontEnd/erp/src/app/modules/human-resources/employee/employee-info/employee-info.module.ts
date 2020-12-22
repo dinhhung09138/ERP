@@ -54,6 +54,9 @@ import { EmployeeBankComponent } from './bank/bank.component';
 import { EmployeeBankFormComponent } from './bank/form/form.component';
 import { BankService } from '../../configuration/bank/bank.service';
 import { EmployeeBankService } from './bank/bank.service';
+import { EmployeeDependencyComponent } from './dependency/dependency.component';
+import { EmployeeDependencyFormComponent } from './dependency/form/form.component';
+import { EmployeeDependencyService } from './dependency/dependency.service';
 
 const routes: Routes = [
   {
@@ -79,6 +82,8 @@ const routes: Routes = [
     EmployeeCertificateFormComponent,
     EmployeeBankComponent,
     EmployeeBankFormComponent,
+    EmployeeDependencyComponent,
+    EmployeeDependencyFormComponent,
   ],
   imports: [
     SharedModule,
@@ -103,6 +108,7 @@ const routes: Routes = [
     EmployeeRelationShipService,
     EmployeeIdentificationService,
     EmployeeCertificateService,
+    EmployeeDependencyService,
     PersonalInfoService,
     ProvinceService,
     IdentificationTypeService,

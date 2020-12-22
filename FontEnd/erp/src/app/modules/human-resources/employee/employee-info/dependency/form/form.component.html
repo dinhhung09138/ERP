@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-12">{{ 'SCREEN.HR.EMPLOYEE.DEPENDENCY.TITLE' | translate }}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <app-element-loading [show]="isLoading"></app-element-loading>
+            <form [formGroup]="form" (submit)="!isLoading ? onSubmit() : false">
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.DEPENDENCY.RELATIONSHIP_TYPE' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <mat-select id="relationshipTypeId" formControlName="relationshipTypeId" required tabindex="100">
+                      <mat-option value="">{{ 'MESSAGE.SELECT_OPTION' | translate }}</mat-option>
+                      <mat-option *ngFor="let item of listRelationShip" [value]="item.id">{{ item.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['relationshipTypeId'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.DEPENDENCY.FULL_NAME' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input matInput formControlName="fullName" maxlength="100" required tabindex="101" autocomplete="off" />
+                  </mat-form-field>
+                  <mat-error *ngIf="isSubmit && form.controls['fullName'].errors?.required">
+                    {{ 'VALIDATION_MESSAGE.EMPTY' | translate }}
+                  </mat-error>
+                </div>
+                <div class="col-md-6 col-sm-12 form-group">
+                  <label class="label">
+                    {{ 'SCREEN.HR.EMPLOYEE.DEPENDENCY.DATE_OF_BIRTH' | translate }}
+                  </label>
+                  <mat-form-field class="form-control">
+                    <input matInput [matDatepicker]="dateOfBirthPicker" formControlName="dateOfBirth"
+                        tabindex="102" maxlength="10" autocomplete="off" />
+                    <mat-datepicker-toggle matSuffix [for]="dateOfBirthPicker">
+                      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #dateOfBirthPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-12 form-group" *ngIf="formAction !== 0">
+                  <input type="submit" *ngIf="permission.allowInsert === true || permission.allowUpdate === true"
+                    class="btn btn-success" [value]="'BUTTON.SAVE' | translate" tabindex="107">
+                  <button type="button" class="btn btn-warning" (click)="onResetClick()" tabindex="108">
+                    {{ 'BUTTON.RESET' | translate }}
+                  </button>
+                  <button type="button" class="btn btn-secondary" (click)="onCloseClick()" tabindex="109">
+                    {{ 'BUTTON.CLOSE' | translate }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

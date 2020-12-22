@@ -26,6 +26,7 @@ import { PositionViewModel } from '../../position/position.model';
 import { EmployeeCertificateComponent } from './certificate/certificate.component';
 import { EmployeeContactComponent } from './contact/contact.component';
 import { EmployeeBankComponent } from './bank/bank.component';
+import { EmployeeDependencyComponent } from './dependency/dependency.component';
 
 @Component({
   selector: 'app-hr-employee-info',
@@ -75,6 +76,9 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
   bankPermission = new PermissionViewModel();
   initBankTab = false;
   @ViewChild(EmployeeBankComponent) bankTab: EmployeeBankComponent;
+  dependencyPermission = new PermissionViewModel();
+  initDependencyTab = false;
+  @ViewChild(EmployeeDependencyComponent) dependencyTab: EmployeeDependencyComponent;
 
   listWorkingStatus: EmployeeWorkingStatusViewModel[] = [];
   listPosition: PositionViewModel[] = [];
@@ -105,6 +109,7 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
     this.certificatePermission = this.employeeService.getCertificatePermission();
     this.contactPermission = this.employeeService.getContactPermission();
     this.bankPermission = this.employeeService.getBankPermission();
+    this.dependencyPermission = this.employeeService.getDependencyPermission();
 
     this.activatedRoute.data.subscribe(response => {
       this.listWorkingStatus = response.data?.listWorkingStatus?.result || [];
@@ -319,6 +324,13 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
           this.bankTab.getBank();
         }
         break;
+        case 'dependency':
+          if (this.initDependencyTab === false && this.dependencyPermission.allowView === true) {
+            this.initDependencyTab = true;
+            this.dependencyTab.getList();
+            this.dependencyTab.getListRelationshipType();
+          }
+          break;
     }
   }
 

@@ -230,6 +230,13 @@
           "MOBILE": "Điện thoại",
           "RELATIONSHIP_TYPE": "Mối quan hệ"
         },
+        "DEPENDENCY": {
+          "TITLE": "Người phụ thuộc",
+          "FULL_NAME": "Họ Tên",
+          "AGE": "Tuổi",
+          "DATE_OF_BIRTH": "Ngày sinh",
+          "RELATIONSHIP_TYPE": "Mối quan hệ"
+        },
         "IDENTIFICATION": {
           "TITLE": "Giấy tờ tùy thân",
           "TYPE": "Loại",

@@ -230,6 +230,13 @@
           "MOBILE": "Phone",
           "RELATIONSHIP_TYPE": "Type"
         },
+        "DEPENDENCY": {
+          "TITLE": "Dependency Relation",
+          "FULL_NAME": "Full Name",
+          "AGE": "Age",
+          "DATE_OF_BIRTH": "DOB",
+          "RELATIONSHIP_TYPE": "Type"
+        },
         "IDENTIFICATION": {
           "TITLE": "Identification",
           "TYPE": "Type",

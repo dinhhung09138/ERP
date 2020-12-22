@@ -27,6 +27,7 @@ export class EmployeeService {
   certificateFunctionCode = 'HR_EMPLOYEE_CERTIFICATE';
   contactFunctionCode = 'HR_EMPLOYEE_CONTACT';
   bankFunctionCode = 'HR_EMPLOYEE_BANK';
+  dependencyFunctionCode = 'HR_EMPLOYEE_DEPENDENCY';
   url = {
     list: APIUrlConstants.hrApi + 'employee/list',
     dropdown: APIUrlConstants.hrApi + 'employee/dropdown',
@@ -74,6 +75,10 @@ export class EmployeeService {
 
     getBankPermission(): PermissionViewModel {
       return this.context.getPermissionByForm(this.moduleName, this.bankFunctionCode);
+    }
+
+    getDependencyPermission(): PermissionViewModel {
+      return this.context.getPermissionByForm(this.moduleName, this.dependencyFunctionCode);
     }
 
     getList(paging: PagingModel, searchText: string): Observable<ResponseModel> {
