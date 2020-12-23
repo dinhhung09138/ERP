@@ -35,6 +35,7 @@ namespace API.HR
             services.AddScoped<INationalityService, NationalityService>();
             services.AddScoped<IReligionService, ReligionService>();
             services.AddScoped<ILeaveTypeService, LeaveTypeService>();
+            services.AddScoped<ILeaveStatusService, LeaveStatusService>();
             services.AddScoped<AuthorizationFilterAttribute>();
             return services;
         }
