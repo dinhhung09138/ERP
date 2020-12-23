@@ -44,3 +44,8 @@ Backend/API/API.Common/bin/
 Backend/API/API.Common/obj/
 Backend/Services/Service.System/obj/
 Backend/Services/Service.System/bin/
+FontEnd/erp/debug.log
+Backend/APIGateway/.config/dotnet-tools.json
+Backend/APIGateway/Properties/PublishProfiles/
+Backend/DataBase/Database.Sql.ERP/Database.Sql.ERP.csproj.user
+Backend/APIGateway/File/
