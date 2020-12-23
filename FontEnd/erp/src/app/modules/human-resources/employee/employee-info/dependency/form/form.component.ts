@@ -52,7 +52,7 @@ export class EmployeeDependencyFormComponent implements OnInit {
       employeeId: [null, Validators.required],
       fullName: ['', [Validators.required, Validators.maxLength(100)]],
       dateOfBirth: [null, [Validators.required]],
-      age: ['', [Validators.maxLength(20)]],
+      age: ['', [Validators.maxLength(3)]],
       relationshipTypeId: ['', [Validators.required]],
       isActive: [true],
       rowVersion: [null]
