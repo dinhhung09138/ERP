@@ -100,12 +100,13 @@ namespace Database.Sql.ERP.Creation
         }
         #endregion
 
+        #region " [ Default Command ] "
+
         public static void CreateSystemDefaultCommand(this ModelBuilder modelBuilder)
         {
+            modelBuilder.CreateDefaultAccount();
             modelBuilder.CreateDefaultCommandRole();
         }
-
-        #region " [ Default Command ] "
 
         private static void CreateDefaultCommandRole(this ModelBuilder modelBuilder)
         {
@@ -157,7 +158,92 @@ namespace Database.Sql.ERP.Creation
             );
         }
 
+        private static void CreateDefaultAccount(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FunctionCommand>().HasData(
+               new FunctionCommand()
+               {
+                   Id = 1,
+                   FunctionCode = "SYS_ACCOUNT",
+                   Name = "VIEW",
+                   ModuleName = "System",
+                   ControllerName = "User",
+                   ActionName = "List",
+                   Precedence = 1,
+                   IsView = true,
+               },
+               new FunctionCommand()
+               {
+                   Id = 2,
+                   FunctionCode = "SYS_ACCOUNT",
+                   Name = "INSERT",
+                   ModuleName = "System",
+                   ControllerName = "User",
+                   ActionName = "Insert",
+                   Precedence = 2,
+                   IsView = false,
+               },
+               new FunctionCommand()
+               {
+                   Id = 3,
+                   FunctionCode = "SYS_ACCOUNT",
+                   Name = "UPDATE",
+                   ModuleName = "System",
+                   ControllerName = "User",
+                   ActionName = "ChangeRole",
+                   Precedence = 3,
+                   IsView = false,
+               },
+               new FunctionCommand()
+               {
+                   Id = 4,
+                   FunctionCode = "SYS_ACCOUNT",
+                   Name = "ACTIVE_OR_DEACTIVATION",
+                   ModuleName = "System",
+                   ControllerName = "User",
+                   ActionName = "ActiveOrDeactivation",
+                   Precedence = 4,
+                   IsView = false,
+               },
+               new FunctionCommand()
+               {
+                   Id = 5,
+                   FunctionCode = "SYS_ACCOUNT",
+                   Name = "ADMIN_CHANGE_PASSWORD",
+                   ModuleName = "System",
+                   ControllerName = "User",
+                   ActionName = "AdminChangepassword",
+                   Precedence = 5,
+                   IsView = false,
+               },
+               new FunctionCommand()
+               {
+                   Id = 6,
+                   FunctionCode = "SYS_ACCOUNT",
+                   Name = "USER_CHANGE_PASSWORD",
+                   ModuleName = "System",
+                   ControllerName = "User",
+                   ActionName = "UserChangepassword",
+                   Precedence = 6,
+                   IsView = false,
+               },
+               new FunctionCommand()
+               {
+                   Id = 7,
+                   FunctionCode = "SYS_ACCOUNT",
+                   Name = "DELETE",
+                   ModuleName = "System",
+                   ControllerName = "User",
+                   ActionName = "Delete",
+                   Precedence = 7,
+                   IsView = false,
+               }
+           );
+        }
+
         #endregion
+
+        #region "[ Default module ]"
 
         public static void CreateDefaultFunctionModuleSystem(this ModelBuilder modelBuilder)
         {
@@ -194,6 +280,100 @@ namespace Database.Sql.ERP.Creation
                }
            );
         }
+
+        #endregion
+
+        #region " [ Default Data ] "
+
+        public static void CreateDefaultSystemData(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.CreateDefaultRole();
+        }
+
+        private static void CreateDefaultRole(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>().HasData(
+               new Role()
+               {
+                   Id = 1,
+                   Name = "Sys",
+                   IsActive = true,
+                   CreateBy = 1,
+                   CreateDate = DateTime.Now,
+                   Description = "Sys",
+               }
+           );
+            modelBuilder.Entity<RoleDetail>().HasData(
+                new RoleDetail()
+                {
+                    Id = 1,
+                    RoleId = 1,
+                    CommandId = 1
+                },
+                new RoleDetail()
+                {
+                    Id = 2,
+                    RoleId = 1,
+                    CommandId = 2
+                },
+                new RoleDetail()
+                {
+                    Id = 3,
+                    RoleId = 1,
+                    CommandId = 3
+                },
+                new RoleDetail()
+                {
+                    Id = 4,
+                    RoleId = 1,
+                    CommandId = 4
+                },
+                new RoleDetail()
+                {
+                    Id = 5,
+                    RoleId = 1,
+                    CommandId = 5
+                },
+                new RoleDetail()
+                {
+                    Id = 6,
+                    RoleId = 1,
+                    CommandId = 6
+                },
+                new RoleDetail()
+                {
+                    Id = 7,
+                    RoleId = 1,
+                    CommandId = 7
+                },
+                new RoleDetail()
+                {
+                    Id = 8,
+                    RoleId = 1,
+                    CommandId = 8
+                },
+                new RoleDetail()
+                {
+                    Id = 9,
+                    RoleId = 1,
+                    CommandId = 9
+                },
+                new RoleDetail()
+                {
+                    Id = 10,
+                    RoleId = 1,
+                    CommandId = 10
+                },
+                new RoleDetail()
+                {
+                    Id = 11,
+                    RoleId = 1,
+                    CommandId = 11
+                });
+        }
+
+
+        #endregion
 
     }
 }

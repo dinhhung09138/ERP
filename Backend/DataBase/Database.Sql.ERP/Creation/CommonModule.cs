@@ -90,5 +90,9 @@ namespace Database.Sql.ERP.Creation
 
         }
 
+        public static void CreateDefaultCode(this ModelBuilder modelBuilder)
+        {
+
+        }
     }
 }

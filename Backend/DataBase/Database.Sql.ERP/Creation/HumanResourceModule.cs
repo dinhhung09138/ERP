@@ -2856,5 +2856,74 @@ namespace Database.Sql.ERP.Creation
         }
 
         #endregion
+
+        #region " [ Default Data ] "
+
+        public static void CreateDefaultHRData(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.CreateDefaultEmployeeWorkingStatus();
+            modelBuilder.CreateDefaultEmployee();
+            modelBuilder.CreateDefaultUser();
+        }
+
+        private static void CreateDefaultEmployee(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>().HasData(
+                new Employee()
+                {
+                    Id = 1,
+                    EmployeeCode = "SYSTEM",
+                    BadgeCardNumber = string.Empty,
+                    FingerSignNumber = string.Empty,
+                    WorkingEmail = string.Empty,
+                    WorkingPhone = string.Empty
+                }
+            );
+            modelBuilder.Entity<EmployeeInfo>().HasData(
+                new EmployeeInfo()
+                {
+                    Id = 1,
+                    EmployeeId = 1,
+                    FirstName = "Sys",
+                    LastName = "Admin",
+                }
+            );
+        }
+
+        private static void CreateDefaultUser(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(
+                new User()
+                {
+                    Id = 1,
+                    EmployeeId = 1,
+                    UserName = "sysadmin",
+                    Password = "NTZFMjNDNTNCNjVFMjdGMjM3NDIyOTkwRTI5MjJFNzA0RkE2MTJBQzQ3OEE3NjA4NUI5QkQxMTU1OTBDNTgyMw=="
+                }
+            );
+            modelBuilder.Entity<UserRole>().HasData(
+                new UserRole()
+                {
+                    Id = 1,
+                    UserId = 1,
+                    RoleId = 1
+                }
+            );
+        }
+
+        private static void CreateDefaultEmployeeWorkingStatus(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EmployeeWorkingStatus>().HasData(
+                new EmployeeWorkingStatus()
+                {
+                    Id = 1,
+                    Code = "Sys",
+                    Name = "System",
+                }
+            );
+        }
+
+
+        #endregion
     }
 }
