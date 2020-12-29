@@ -138,6 +138,11 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'leave-management/leave-type',
+        loadChildren: () => import('./leave/type/type.module').then(m => m.LeaveTypeModule),
+        pathMatch: 'full'
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       }

@@ -588,6 +588,31 @@
             "DROPDOWN": "Can not get the list of contract type"
           }
         }
+      },
+      "LEAVE_MANAGEMENT": {
+        "TITLE": "Leave Management",
+        "LEAVE_TYPE": {
+          "TITLE": "Leave Type",
+          "LIST_TITLE": "List of Leave Type",
+          "POPUP_TITLE": "Add new Leave Type",
+          "TABLE": {
+            "DESCRIPTION": "Description",
+            "NUM_OF_DAY": "Num of dáy",
+            "DEDUCTIBLE": "DeDuctible",
+            "START_DATE": "Apply Date",
+            "EXPIRATION_DATE": "Expiration Date"
+          },
+          "FORM": {
+            "DESCRIPTION": "Description",
+            "NUM_OF_DAY": "Num of dáy",
+            "DEDUCTIBLE": "DeDuctible",
+            "START_DATE": "Apply Date",
+            "EXPIRATION_DATE": "Expiration Date"
+          },
+          "ERROR": {
+            "DROPDOWN": "Can not get list of leave type"
+          }
+        }
       }
     },
     "SYSTEM":{

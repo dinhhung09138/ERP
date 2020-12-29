@@ -48,6 +48,7 @@ namespace Service.HR
                                 Name = m.Name,
                                 NumOfDay = m.NumOfDay,
                                 Description = m.Description,
+                                StartDate = m.StartDate,
                                 ExpirationDate = m.ExpirationDate,
                                 IsDeductible = m.IsDeductible,
                                 Precedence = m.Precedence,

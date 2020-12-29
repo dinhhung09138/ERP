@@ -587,6 +587,31 @@
             "DROPDOWN": "Không thể lấy danh sách hợp đồng"
           }
         }
+      },
+      "LEAVE_MANAGEMENT": {
+        "TITLE": "Ngày nghỉ",
+        "LEAVE_TYPE": {
+          "TITLE": "Nhóm ngày nghỉ",
+          "LIST_TITLE": "Danh sách nhóm ngày nghỉ",
+          "POPUP_TITLE": "Thêm mới nhóm ngày nghỉ",
+          "TABLE": {
+            "DESCRIPTION": "Mô tả",
+            "NUM_OF_DAY": "Số ngày nghỉ",
+            "DEDUCTIBLE": "Khấu trừ",
+            "START_DATE": "Ngày áp dụng",
+            "EXPIRATION_DATE": "Ngày hết hạn"
+          },
+          "FORM": {
+            "DESCRIPTION": "Mô tả",
+            "NUM_OF_DAY": "Số ngày nghỉ",
+            "DEDUCTIBLE": "Khấu trừ",
+            "START_DATE": "Ngày áp dụng",
+            "EXPIRATION_DATE": "Ngày hết hạn"
+          },
+          "ERROR": {
+            "DROPDOWN": "Không thể lấy danh sách nhóm ngày nghỉ"
+          }
+        }
       }
     },
     "SYSTEM":{
