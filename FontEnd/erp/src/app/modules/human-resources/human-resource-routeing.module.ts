@@ -138,6 +138,11 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'leave-management/leave-status',
+        loadChildren: () => import('./leave/status/status.module').then(m => m.LeaveStatusModule),
+        pathMatch: 'full'
+      },
+      {
         path: 'leave-management/leave-type',
         loadChildren: () => import('./leave/type/type.module').then(m => m.LeaveTypeModule),
         pathMatch: 'full'
