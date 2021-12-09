@@ -49,3 +49,6 @@ Backend/APIGateway/.config/dotnet-tools.json
 Backend/APIGateway/Properties/PublishProfiles/
 Backend/DataBase/Database.Sql.ERP/Database.Sql.ERP.csproj.user
 Backend/APIGateway/File/
+
+ERP/ERPWebUI/bin/
+ERP/ERPWebUI/obj/

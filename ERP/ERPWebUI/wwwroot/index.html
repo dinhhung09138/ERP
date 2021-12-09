@@ -1,0 +1,142 @@
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>ERPWebUI</title>
+    <base href="/" />
+    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/font-awesome.icon.css" />
+    <link rel="stylesheet" href="css/feather.icon.css" />
+    <link rel="stylesheet" href="css/simple-line.icon.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/topnav.css" />
+    <link rel="stylesheet" href="css/card.css" />
+    <link rel="stylesheet" href="css/leftsidebar.css" />
+    <link rel="stylesheet" href="css/rightbarsetting.css" />
+    <link rel="stylesheet" href="css/timeline.css" />
+    <link rel="stylesheet" href="css/usermenu.css" />
+</head>
+
+<body>
+    <div id="app">Loading...</div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="libs/jquery-3.6.0.min.js"></script>
+    <script src="libs/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="libs/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+        var showRightSidebar = true;
+        var showUserInfo = true;
+        var showSidebar = true;
+
+        $(document).ready(function () {
+
+
+
+            $('.settingbar').on('click', function () {
+                onShowRightSidebar();
+            });
+            $('.user_btn').on('click', function () {
+                onShowUserInfo();
+            });
+            $('.menu_toggle').on('click', function () {
+                onShowSidebar();
+            });
+
+            $('.right .nav-pills a.dropdown-toggle').on('click', function (e) {
+                onCloseAllDropdownTopMenu();
+                if ($(e.target).parent().hasClass('show')) {
+                    $(e.target).parent().removeClass('show');
+                    $(e.target).next().removeClass('show');
+                } else {
+                    $(e.target).parent().addClass('show');
+                    $(e.target).next().addClass('show');
+                }
+                e.stopPropagation();
+            });
+
+            $('.user_div > .card > .card-header > .card-options .card-options-collapse').on('click', function (e) {
+                var card = $(e.target).closest('div.card');
+                if ($(card).hasClass('card-collapsed')) {
+                    $(card).removeClass('card-collapsed');
+                } else {
+                    $(card).addClass('card-collapsed');
+                }
+            });
+
+            $('.right > div.notification > div.d-flex > a.nav-link').on('click', function (e) {
+                onCloseAllDropdownTopMenu();
+                var item = $(e.target).closest('div.dropdown');
+                console.log(item);
+                if ($(item).hasClass('show')) {
+                    $(item).removeClass('show');
+                    $($(item).find('div.dropdown-menu')[0]).removeClass('show');
+                    $($(item).find('a.nav-link')[0]).attr('aria-expanded', false);
+                } else {
+                    $(item).addClass('show');
+                    $($(item).find('div.dropdown-menu')[0]).addClass('show');
+                    $($(item).find('a.nav-link')[0]).attr('aria-expanded', true);
+                }
+                e.stopPropagation();
+            });
+
+            $(document).click(function () {
+                onCloseAllDropdownTopMenu();
+            });
+        });
+
+        function onShowRightSidebar() {
+            if (showRightSidebar === true) {
+                $('#rightsidebar').attr('class', 'right_sidebar open');
+            } else {
+                $('#rightsidebar').attr('class', 'right_sidebar');
+            }
+
+            showRightSidebar = !showRightSidebar;
+        }
+
+        function onShowUserInfo() {
+            if (showUserInfo === true) {
+                $('.user_div').attr('class', 'user_div open');
+            } else {
+                $('.user_div').attr('class', 'user_div');
+            }
+
+            showUserInfo = !showUserInfo;
+        }
+
+        function onShowSidebar() {
+            if (showSidebar === true) {
+                $('#root').addClass('offcanvas-active');
+            } else {
+                $('#root').removeClass('offcanvas-active');
+            }
+
+            showSidebar = !showSidebar;
+        }
+
+        function onCloseAllDropdownTopMenu() {
+            $('.right > ul.nav-pills > li.nav-item').each(function (idx, elm) {
+                if ($(elm).hasClass('show')) {
+                    $(elm).removeClass('show');
+                    $($(elm).find('div.dropdown-menu')[0]).removeClass('show');
+                }
+            });
+            $('.right > div.notification > div.d-flex').each(function (idx, elm) {
+                if ($(elm).hasClass('show')) {
+                    $(elm).removeClass('show');
+                    $($(elm).find('div.dropdown-menu')[0]).removeClass('show');
+                }
+            });
+        }
+    </script>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>
