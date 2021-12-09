@@ -1,0 +1,105 @@
+
+.new_timeline {
+	padding: 0 0 0 5px;
+	list-style: none;
+	position: relative;
+	margin: 0px;
+}
+
+.new_timeline>li {
+	padding-left: 20px;
+    padding-bottom: 25px;
+}
+
+.new_timeline>li:last-child {
+	padding-bottom: 0
+}
+
+.new_timeline:before {
+	background-color: #d1d3d4;
+	content: " ";
+	height: 100%;
+	width: 1px;
+	position: absolute;
+	top: 0;
+	left: 10px;
+	z-index: 1
+}
+
+.new_timeline .bullet {
+	border-radius: 10px;
+	background: #fff;
+	left: 5px;
+	width: 10px;
+	height: 10px;
+	z-index: 2;
+	position: absolute;
+	border: 2px solid;
+	margin-top: 5px;
+}
+
+.new_timeline .time {
+	font-size: 12px;
+}
+
+.new_timeline h3 {
+	margin: 0 !important;
+	font-size: 15px;
+}
+
+.new_timeline h4 {
+    font-weight: 400;
+    color: #4d5052;
+	padding-bottom: 10px;
+	font-size: 13px;
+}
+
+.new_timeline .bullet.pink {
+	border-color: #de5d83
+}
+
+.new_timeline .bullet.green {
+	border-color: #21ba45
+}
+
+.new_timeline .bullet.orange {
+	border-color: #f2711c
+}
+
+.new_timeline h3 {
+	font-weight: 600
+}
+
+.new_timeline h4 {
+	font-weight: 400;
+	color: #4d5052
+}
+
+.team-info {
+    margin-top: 5px;
+}
+
+.team-info li {
+	transition: all .3s ease-in-out;
+	display: inline-block
+}
+
+.team-info li+li {
+	margin-left: -10px
+}
+
+.team-info li img {
+	width: 32px;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .2)
+}
+
+.team-info li:hover {
+	transform: translateY(-4px) scale(1.02);
+	z-index: 999
+}
+
+.team-info li:hover img {
+	box-shadow: 0 14px 24px rgba(62, 57, 107, .2)
+}
