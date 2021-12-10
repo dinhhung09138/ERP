@@ -1429,3 +1429,27 @@ a.badge-dark:focus {
 	outline: 0;
 	box-shadow: 0 0 0 .2rem rgba(52, 58, 64, .5)
 }
+
+.offcanvas-active #header_top {
+	background: #fff;
+	border-right: 1px solid rgba(0, 40, 100, .12);
+}
+
+@media screen and (max-width:767px) {
+	.offcanvas-active #header_top {
+		border-right: 0;
+	}
+}
+
+.offcanvas-active .page {
+	left: 60px;
+	width: calc(100% - 60px);
+}
+
+@media screen and (max-width:767px) {
+	.offcanvas-active .page {
+		left: 0;
+		width: 100%;
+	}
+}
+

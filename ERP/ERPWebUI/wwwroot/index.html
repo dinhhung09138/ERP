@@ -11,12 +11,10 @@
     <link rel="stylesheet" href="css/feather.icon.css" />
     <link rel="stylesheet" href="css/simple-line.icon.css" />
     <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/topnav.css" />
     <link rel="stylesheet" href="css/card.css" />
-    <link rel="stylesheet" href="css/leftsidebar.css" />
-    <link rel="stylesheet" href="css/rightbarsetting.css" />
     <link rel="stylesheet" href="css/timeline.css" />
-    <link rel="stylesheet" href="css/usermenu.css" />
+    <link href="ERPWebUI.styles.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -61,7 +59,7 @@
                 e.stopPropagation();
             });
 
-            $('.user_div > .card > .card-header > .card-options .card-options-collapse').on('click', function (e) {
+            $('.user_menu > .card > .card-header > .card-options .card-options-collapse').on('click', function (e) {
                 var card = $(e.target).closest('div.card');
                 if ($(card).hasClass('card-collapsed')) {
                     $(card).removeClass('card-collapsed');
@@ -103,9 +101,9 @@
 
         function onShowUserInfo() {
             if (showUserInfo === true) {
-                $('.user_div').attr('class', 'user_div open');
+                $('.user_menu').attr('class', 'user_menu open');
             } else {
-                $('.user_div').attr('class', 'user_div');
+                $('.user_menu').attr('class', 'user_menu');
             }
 
             showUserInfo = !showUserInfo;
