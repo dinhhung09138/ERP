@@ -12,13 +12,13 @@
         </div>
         <div class="hright">
             <div class="dropdown">
-                <span class="nav-link icon settingbar">
+                <span class="nav-link icon settingbar" @onclick="@(_ => OnShowSidebar("right-sidebar"))">
                     <i class="fa fa-gear fa-spin" data-toggle="tooltip" data-placement="right" title="Settings"></i>
                 </span>
-                <p class="nav-link user_btn">
+                <p class="nav-link user_btn" @onclick="@(_ => OnShowSidebar("user-info"))">
                     <img class="avatar" src="images/user.png" alt="fake_alr" data-toggle="tooltip" data-placement="right" title="User Menu">
                 </p>
-                <p class="nav-link icon menu_toggle"><i class="fa  fa-align-left"></i></p>
+                <p class="nav-link icon menu_toggle" @onclick="@(_ => OnShowSidebar("left-sidebar"))"><i class="fa  fa-align-left"></i></p>
             </div>
         </div>
     </div>

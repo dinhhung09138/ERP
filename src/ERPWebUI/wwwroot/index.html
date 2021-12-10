@@ -35,18 +35,6 @@
 
         $(document).ready(function () {
 
-
-
-            $('.settingbar').on('click', function () {
-                onShowRightSidebar();
-            });
-            $('.user_btn').on('click', function () {
-                onShowUserInfo();
-            });
-            $('.menu_toggle').on('click', function () {
-                onShowSidebar();
-            });
-
             $('.right .nav-pills a.dropdown-toggle').on('click', function (e) {
                 onCloseAllDropdownTopMenu();
                 if ($(e.target).parent().hasClass('show')) {
@@ -88,36 +76,6 @@
                 onCloseAllDropdownTopMenu();
             });
         });
-
-        function onShowRightSidebar() {
-            if (showRightSidebar === true) {
-                $('#rightsidebar').attr('class', 'right_sidebar open');
-            } else {
-                $('#rightsidebar').attr('class', 'right_sidebar');
-            }
-
-            showRightSidebar = !showRightSidebar;
-        }
-
-        function onShowUserInfo() {
-            if (showUserInfo === true) {
-                $('.user_menu').attr('class', 'user_menu open');
-            } else {
-                $('.user_menu').attr('class', 'user_menu');
-            }
-
-            showUserInfo = !showUserInfo;
-        }
-
-        function onShowSidebar() {
-            if (showSidebar === true) {
-                $('#root').addClass('offcanvas-active');
-            } else {
-                $('#root').removeClass('offcanvas-active');
-            }
-
-            showSidebar = !showSidebar;
-        }
 
         function onCloseAllDropdownTopMenu() {
             $('.right > ul.nav-pills > li.nav-item').each(function (idx, elm) {

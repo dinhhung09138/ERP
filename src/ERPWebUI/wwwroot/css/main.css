@@ -1453,3 +1453,72 @@ a.badge-dark:focus {
 	}
 }
 
+
+.right_chat {
+	padding-bottom: 10px;
+}
+
+	.right_chat li {
+		border-radius: 3px;
+		padding: 10px;
+		margin-bottom: 5px;
+		position: relative;
+		background: #f8f9fa;
+	}
+
+		.right_chat li:hover {
+			background: #e8e9e9;
+		}
+
+		.right_chat li.offline .status {
+			background: #fbbd08;
+		}
+
+		.right_chat li.online .status {
+			background: #21ba45;
+		}
+
+		.right_chat li.me .status {
+			background: #17a2b8;
+		}
+
+	.right_chat .media .media-object {
+		transition: all .3s ease-in-out;
+		border-radius: 40px;
+		width: 40px;
+		height: 40px;
+		border: 2px solid transparent;
+		margin-right: 10px;
+	}
+
+	.right_chat .media .name {
+		display: block;
+		color: #292b30;
+		line-height: normal;
+	}
+
+	.right_chat .media .message {
+		color: #808488;
+		font-size: 13px;
+	}
+
+	.right_chat .media .status {
+		border-radius: 40px;
+		display: inline-block;
+		vertical-align: middle;
+		*vertical-align: auto;
+		*zoom: 1;
+		*display: inline;
+		position: absolute;
+		left: 40px;
+		top: 38px;
+		width: 11px;
+		height: 11px;
+		min-width: inherit;
+		border: 3px solid #fff;
+		padding: 0;
+	}
+
+	.right_chat li.online .status {
+		background: #5a5278;
+	}

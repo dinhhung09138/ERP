@@ -1,6 +1,6 @@
 ﻿
-<div id="rightsidebar" class="right_sidebar open">
-    <span class="p-3 settingbar float-right"><i class="fa fa-close"></i></span>
+<div id="rightsidebar" class="right_sidebar @(IsShow ? "open" : "")">
+    <span class="p-3 settingbar float-right" @onclick="OnHide"><i class="fa fa-close"></i></span>
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link " data-toggle="tab" href="#Settings" aria-expanded="true">Settings</a>

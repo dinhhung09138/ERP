@@ -144,3 +144,27 @@
                 width: 80%;
                 color: #4d5052;
             }
+
+.dropdown-menu-email {
+    position: absolute;
+    will-change: transform;
+    top: 0px;
+    left: 0px;
+    transform: translate3d(-206px, 26px, 0px);
+}
+
+.dropdown-menu-alert {
+    position: absolute;
+    will-change: transform;
+    top: 0px;
+    left: 0px;
+    transform: translate3d(-316px, 26px, 0px);
+}
+
+.dropdown-menu-user {
+    position: absolute;
+    will-change: transform;
+    top: 0px;
+    left: 0px;
+    transform: translate3d(-151px, 26px, 0px);
+}
