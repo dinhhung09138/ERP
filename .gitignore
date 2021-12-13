@@ -53,3 +53,5 @@ Backend/APIGateway/File/
 .vs/
 src/ERPWebUI/bin/
 src/ERPWebUI/obj/
+src/Services/Assets/Assets.API/bin/
+src/Services/Assets/Assets.API/obj/
