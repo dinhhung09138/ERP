@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{626759FE-B7D6-461A-B9E6-AA7B43434678}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assets.API", "src\Services\Assets\Assets.API\Assets.API.csproj", "{9B32B084-D43F-4B4F-A1E3-0ED90F4EC26E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assets.API", "src\Services\Assets\Assets.API\Assets.API.csproj", "{9B32B084-D43F-4B4F-A1E3-0ED90F4EC26E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

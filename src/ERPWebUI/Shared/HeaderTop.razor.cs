@@ -11,17 +11,28 @@
         [Parameter]
         public EventCallback OnShowLeftSidebarEvent { get; set; }
 
+        [Parameter]
+        public EventCallback<string> OnModuleChangeEvent { get; set; }
+
+        string moduleSelected = string.Empty;
+
+        private async Task OnModuleChange(string module)
+        {
+            moduleSelected = module;
+            await OnModuleChangeEvent.InvokeAsync(moduleSelected);
+        }
+
         private async Task OnShowSidebar(string menu)
         {
             switch (menu)
             {
-                case "right-sidebar":
+                case Sidebar.RightSidebar:
                     await OnShowRightSidebarClickEvent.InvokeAsync();
                     break;
-                case "user-info":
+                case Sidebar.UserInfo:
                     await OnShowUserInfoClickEvent.InvokeAsync();
                     break;
-                case "left-sidebar":
+                case Sidebar.LeftSidebar:
                     await OnShowLeftSidebarEvent.InvokeAsync();
                     break;
             }
