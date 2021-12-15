@@ -62,31 +62,36 @@
                         <li><span><a class="list-a" href="/internalserver">500 Error</a></span></li>
                     </ul>
                 </li>
-                <li>
-                    <span>
-                        <a aria-current="page" class="list-a active" href="/"><i class="icon-rocket"></i>HRMS<i class="caret-left"></i></a>
-                    </span>
-                    <ul class="in collapse">
-                        <li><span class="active"><a aria-current="page" class="list-c active" href="javascript:{}">Dashboard</a></span></li>
-                        <li><span><a class="list-a" href="javascript:{}">Tai san</a></span></li>
-                        <li><span><a class="list-a" href="javascript:{}">Cap phat - Thu hoi</a></span></li>
-                        <li><span><a class="list-a" href="javascript:{}">Dieu Chuyen</a></span></li>
-                        <li><span><a class="list-a" href="javascript:{}">Sua chua - Bao duong</a></span></li>
-                        <li><span><a class="list-a" href="javascript:{}">May - Huy - Thanh ly</a></span></li>
-                        <li><span><a class="list-a" href="javascript:{}">Kiem ke</a></span></li>
-                        <li><span><a class="list-a" href="javascript:{}">Bao cao</a></span></li>
-                    </ul>
-                </li>
-                <li class="active">
-                    <span>
-                        <a aria-current="page" class="list-a active" href="javascript:{}"><i class="icon-lock"></i>Quan Ly Danh Muc<i class="caret-left"></i></a>
-                    </span>
-                    <ul class="collapse in" wfd-invisible="true">
-                        <li><span><a class="list-a" href="javascript:{}">Danh muc don vi tinh</a></span></li>
-                        <li><span><a class="list-a" href="javascript:{}">Danh muc dac diem</a></span></li>
-                        <li><span><a class="list-a" href="javascript:{}">Danh muc loai tai san</a></span></li>
-                    </ul>
-                </li>
+                @if (Module != Constants.Module.Assets)
+                {
+                    <li>
+                        <span>
+                            <a aria-current="page" class="list-a active" href="/"><i class="icon-rocket"></i>HRMS<i class="caret-left"></i></a>
+                        </span>
+                        <ul class="in collapse">
+                            <li><span class="active"><a aria-current="page" class="list-c active" href="javascript:{}">Dashboard</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">Tai san</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">Cap phat - Thu hoi</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">Dieu Chuyen</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">Sua chua - Bao duong</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">May - Huy - Thanh ly</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">Kiem ke</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">Bao cao</a></span></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <span>
+                            <a aria-current="page" class="list-a active" href="javascript:{}"><i class="icon-lock"></i>Quan Ly Danh Muc<i class="caret-left"></i></a>
+                        </span>
+                        <ul class="in collapse">
+                            <li><span><a class="list-a" href="javascript:{}">Danh muc don vi tinh</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">Danh muc dac diem</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">Danh muc loai tai san</a></span></li>
+                            <li><span><a class="list-a" href="javascript:{}">Danh muc nhom tai san</a></span></li>
+                        </ul>
+                    </li>
+                }
+
                 <li>
                     <span class="g_heading">Ui Elements</span>
                 </li>

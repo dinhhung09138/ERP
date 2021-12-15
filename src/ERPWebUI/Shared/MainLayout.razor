@@ -6,10 +6,11 @@
             <HeaderTop 
                 OnShowRightSidebarClickEvent="OnShowHideRightSidebar" 
                 OnShowUserInfoClickEvent="OnShowHideUserInfo" 
-                OnShowLeftSidebarEvent="OnShowHideLeftSidebar" />
+                OnShowLeftSidebarEvent="OnShowHideLeftSidebar"
+                OnModuleChangeEvent="OnModuleChange"/>
             <RightSidebar IsShow="IsShowRightBar" OnShowChangeEvent="(args => OnShowHideRightSidebar(args))" />
             <UserInfo IsShow="IsShowUserInfo" OnShowChangeEvent="(args => OnShowHideUserInfo(args))"/>
-            <LeftSidebar />
+            <LeftSidebar Module="moduleName" />
         </div>
         <div class="page">
             <TopNav />

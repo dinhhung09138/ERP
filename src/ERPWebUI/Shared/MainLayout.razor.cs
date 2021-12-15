@@ -13,9 +13,19 @@ namespace ERPWebUI.Shared
 
         private bool IsShowUserInfo = false;
 
+        private string moduleName = string.Empty;
+
+        private void OnModuleChange(string module)
+        {
+            moduleName = module;
+            Console.WriteLine(moduleName);
+            StateHasChanged();
+        }
+
         private void OnShowHideRightSidebar(bool isShow)
         {
             IsShowRightBar = isShow;
+            StateHasChanged();
         }
 
         private void OnShowHideRightSidebar()
