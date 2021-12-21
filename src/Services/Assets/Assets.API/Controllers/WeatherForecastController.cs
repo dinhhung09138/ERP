@@ -1,3 +1,4 @@
+using Assets.API.Services.Asset;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Assets.API.Controllers

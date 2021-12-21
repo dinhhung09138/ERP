@@ -55,3 +55,5 @@ src/ERPWebUI/bin/
 src/ERPWebUI/obj/
 src/Services/Assets/Assets.API/bin/
 src/Services/Assets/Assets.API/obj/
+src/Services/Assets/Assets.Models/bin/
+src/Services/Assets/Assets.Models/obj/

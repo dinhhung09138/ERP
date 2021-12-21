@@ -10,13 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetCore.Objects" Version="16.11.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.14.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Assets.Models\Assets.Models.csproj" />
   </ItemGroup>
 
 </Project>

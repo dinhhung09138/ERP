@@ -1,9 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Assets.API.Models
+namespace Assets.API.Entities
 {
-    public class Assets
+    public class Asset
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -18,5 +18,9 @@ namespace Assets.API.Models
         public DateTime DateBy { get; set; }
 
         public DateTime? WantityDate { get; set; }
+
+        public bool Deleted { get; set; }
+
+        public AssetsType AssetsType { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Assets.API.Models
+namespace Assets.API.Entities
 {
     public class AssetsType
     {
